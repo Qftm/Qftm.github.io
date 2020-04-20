@@ -1,0 +1,2081 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+    <meta name="author" content="Qftm">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Qftm">
+    
+    <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    
+    <meta name="description" content="">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>基于BMP图像的信息隐藏与检测 · Qftm&#39;s Blog</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= "/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="stylesheet" href= "/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href= "/assets/favicon.ico" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script" />
+    <link rel="preload" href="/scripts/main.js" as="script" />
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Qftm&#39;s Blog</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">基于BMP图像的信息隐藏与检测</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>Qftm's Blog</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            基于BMP图像的信息隐藏与检测
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "信息隐藏">信息隐藏</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">2.5k</span>Reading time: <span class="post-count reading-time">10 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2019/09/19</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="原理简介"><a href="#原理简介" class="headerlink" title="原理简介"></a>原理简介</h1><p>针对文件结构的信息隐藏方法需详细掌握文件的格式，利用文件结构块之间的关系或根据块数据和块大小之间的关系来隐藏信息。</p>
+<p>BMP（Bitmap-File）图形文件是 Windows 采用的常见图形文件格式，要利用 BMP 位图进行信息隐藏首先需要详细了解 BMP 文件的格式，BMP 图像文件结构比较单一而且固定，BMP 图像由文件头、信息头、调色板区和数据区四个部分组成，而 24 位真彩色图像中没有调色板信息。24 位真彩色 BMP 位图文件包括 3 部分。 第一部分是 BMP 文件头（14个字节）。前 2 个字节是“BM”，是用于识别 BMP文件的标志；第 3、4、5、6 字节存放的是位图文件的大小，以字节为单位；第7、8、9、10 字节是保留的，必须为 0；第 11、12、13、14 字节给出位图阵列相对于文件头的偏移，在 24 位真彩色图像中，这个值固定为 54；第二部分是位图信息头（40个字节）。第19，20，21，22字节表示的是图像文件的宽度，以像素为单位；第23，24，25，26 字节表示的是图像文件的高度，以像素为单位。从第 29个字节开始，第 29、30 字节描述的是像素的位数， 24 位真彩色位图。该位的值为 0x18； 第三部分是数据区。从第 55 个字节开始，每 3 个字节表示一个像素，这 3 个字节依次表示该像素的红、绿、蓝亮度分量值。</p>
+<p>在不影响图像正常显示情况下，可使用以下四种方法在 24 位真彩色 BMP 图像中隐藏信息。</p>
+<ul>
+<li>在图像文件尾部添加任意长度的数据，秘密信息存放在文件尾部可以减少修改文件头的数据量，仅需修改文件头中文件长度的值即可。</li>
+<li>在调色板或者位图信息头和实际的图像数据之间隐藏数据，如果将秘密数据放在文件头与图像数据之间，则至少需要修改文件头中文件长度、数据起始偏移地址这两个域的值。</li>
+<li>修改文件头和信息头中的保留字段隐藏信息。</li>
+<li>在图像像素区利用图像宽度字节必须是 4 的倍数的特点，在补足位处隐藏数据。</li>
+</ul>
+<h1 id="操作环境"><a href="#操作环境" class="headerlink" title="操作环境"></a>操作环境</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Windows 10 操作系统</span><br><span class="line"></span><br><span class="line">MATLAB 2019a 版本软件</span><br><span class="line"></span><br><span class="line">BMP 格式图片文件</span><br><span class="line"></span><br><span class="line">010 编辑工具</span><br></pre></td></tr></table></figure>
+
+<h1 id="技术过程"><a href="#技术过程" class="headerlink" title="技术过程"></a>技术过程</h1><h2 id="在实际的图像数据后隐藏信息"><a href="#在实际的图像数据后隐藏信息" class="headerlink" title="在实际的图像数据后隐藏信息"></a>在实际的图像数据后隐藏信息</h2><p>待隐藏的秘密信息文件名称为 hidden.txt， Qftm.bmp 为载体图像，将载体和秘密信息放置在同一个目录下，在 Windows 的 MS-DOS 方式下执行命令 Copy Qftm.bmp /b + hidden.txt /a QftmModify1.bmp ，其中参数/b 指定以二进制格式复制、合并文件，参数/a 以 ASCII 格式复制、合并文件。执行该命令后，生成一个新的 QftmModify1.bmp 文件，使用图像浏览工具浏览该文件发现与原始载体图像几乎完全相同，信息隐藏在 QftmModify1.bmp 文件的尾部。</p>
+<p>从 BMP 图像的结构中可知，图像的 3、4、5、6 四个字节存放整个 BMP 图像的长度。使用该方法隐藏信息时，未修改图像文件的文件长度字节，通过比较文件的实际长度和文件中保存的文件长度，就可发现该图像是否隐藏秘密信息。</p>
+<p>（1）制作隐藏信息的图片QftmModify1.bmp</p>
+<p>创建Hidden.txt文件</p>
+<p><img src="/2019/09/19/information-hiding-and-detection-based-on-bmp-image/1594459-20190919001638226-2044563141.png" alt="img"></p>
+<p>制作QftmModify1.bmp</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">copy  Qftm.bmp&#x2F;b + hidden.txt&#x2F;a QftmModify1.bmp</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/09/19/information-hiding-and-detection-based-on-bmp-image/1594459-20190919001755012-1389510036.png" alt="img"></p>
+<p>十六进制查看QftmModify1.bmp：</p>
+<p><img src="/2019/09/19/information-hiding-and-detection-based-on-bmp-image/1594459-20200302233901356-716939364.png" alt></p>
+<p>（2）Matlab脚本检测文件是否存在隐藏信息</p>
+<p>检测图片QftmModify1.bmp文件长度</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">clc;</span><br><span class="line">clear;</span><br><span class="line">fid=fopen(<span class="string">'QftmModify1.bmp'</span>,<span class="string">'r'</span>); <span class="comment">%读入载体图像文件</span></span><br><span class="line">[a,<span class="built_in">length</span>]=fread(fid,<span class="built_in">inf</span>,<span class="string">'uint8'</span>);<span class="comment">%length 是文件的实际长度</span></span><br><span class="line">fclose(fid);</span><br><span class="line">fid=fopen(<span class="string">'QftmModify1.bmp'</span>,<span class="string">'r'</span>);</span><br><span class="line">status=fseek(fid,<span class="number">2</span>,<span class="string">'bof'</span>);</span><br><span class="line">fileb=fread(fid,<span class="number">4</span>,<span class="string">'uint8'</span>);</span><br><span class="line">filelength=fileb(<span class="number">1</span>)*<span class="number">1</span>+fileb(<span class="number">2</span>)*<span class="number">256</span>+fileb(<span class="number">3</span>)*<span class="number">256</span>^<span class="number">2</span>+fileb(<span class="number">4</span>)*<span class="number">256</span>^<span class="number">3</span> <span class="comment">%文件图像中保存的文件长度</span></span><br><span class="line">diff=<span class="built_in">length</span>-filelength;</span><br><span class="line"><span class="comment">%diff 表示隐藏的信息长度如果相同，表示图像没有隐藏任何信息。</span></span><br><span class="line">fclose(fid);</span><br></pre></td></tr></table></figure>
+
+<p>运行脚本查看diff结果</p>
+<p> <img src="/2019/09/19/information-hiding-and-detection-based-on-bmp-image/1594459-20190919001845882-391682552.png" alt="img"></p>
+<p> 从结果可以看出来当没有对bmp的文件头文件长度进行修改时，隐藏的图片diff差值不等于0，得到图片存在信息隐藏。</p>
+<h2 id="文件头与图像数据之间隐藏信息"><a href="#文件头与图像数据之间隐藏信息" class="headerlink" title="文件头与图像数据之间隐藏信息"></a>文件头与图像数据之间隐藏信息</h2><p>在数据区开始之前隐藏信息，隐藏的秘密信息从 hidden.txt 文件中读取（隐藏整个文件的数据），此种方法修改图像数据的偏移量和图像数据的文件长度。</p>
+<p>（1）Matlab脚本进行隐藏信息</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">clc;</span><br><span class="line">clear;</span><br><span class="line">wm=randsrc(<span class="number">1</span>,<span class="number">300</span>, [<span class="number">0</span> <span class="number">1</span>]); <span class="comment">%  产生随机水印</span></span><br><span class="line">fid=fopen(<span class="string">'Qftm.bmp'</span>,<span class="string">'r'</span>); <span class="comment">%读入载体图像文件</span></span><br><span class="line">[a,<span class="built_in">length</span>]=fread(fid,<span class="built_in">inf</span>,<span class="string">'uint8'</span>);</span><br><span class="line">fclose(fid);</span><br><span class="line">msgfid=fopen(<span class="string">'hidden.txt'</span>,<span class="string">'r'</span>);<span class="comment">%打开秘密文件</span></span><br><span class="line">[msg,count]=fread(msgfid);</span><br><span class="line">fclose(msgfid);</span><br><span class="line">wa=a;</span><br><span class="line"><span class="built_in">j</span>=<span class="number">1</span>;</span><br><span class="line">wa(<span class="number">11</span>)=<span class="number">54</span>+count;</span><br><span class="line">wa(<span class="number">3</span>)=wa(<span class="number">3</span>)+count;</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">55</span>:<span class="number">54</span>+count</span><br><span class="line">    wa(<span class="built_in">i</span>)=uint8(msg(<span class="built_in">j</span>,<span class="number">1</span>));<span class="comment">%隐藏密码信息</span></span><br><span class="line">    <span class="built_in">j</span>=<span class="built_in">j</span>+<span class="number">1</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">55</span>:<span class="built_in">length</span></span><br><span class="line">    wa(<span class="built_in">i</span>+count)=a(<span class="built_in">i</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">figure</span>;</span><br><span class="line">wa=uint8(wa);</span><br><span class="line">fid=fopen(<span class="string">'watermarked.bmp'</span>, <span class="string">'wb'</span>);</span><br><span class="line">fwrite(fid,wa);</span><br><span class="line">fclose(fid);</span><br><span class="line">I=imread(<span class="string">'Qftm.bmp'</span>);</span><br><span class="line">J=imread(<span class="string">'watermarked.bmp'</span>);</span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>)</span><br><span class="line">imshow(I)</span><br><span class="line">title(<span class="string">'未修改图像'</span>);</span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>)</span><br><span class="line">imshow(J)</span><br><span class="line">title(<span class="string">'修改后图像'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>运行结果查看嵌入前、嵌入后的感官效果</p>
+<p><img src="/2019/09/19/information-hiding-and-detection-based-on-bmp-image/1594459-20190919002234251-88891813.png" alt="img"></p>
+<p> 分析《watermarked.bmp》16进制清晰查看隐藏效果</p>
+<p><img src="/2019/09/19/information-hiding-and-detection-based-on-bmp-image/1594459-20190919002247052-491293492.png" alt="img"></p>
+<h2 id="BMP-图像文件隐藏信息的检测"><a href="#BMP-图像文件隐藏信息的检测" class="headerlink" title="BMP 图像文件隐藏信息的检测"></a>BMP 图像文件隐藏信息的检测</h2><p>在BMP图像中隐藏信息的时候一般都是通过修改文件的偏移量和图像文件中图像的长度来隐藏信息，但在BMP图像文件中，file_length=biwidth<em>biBytecount</em>biHeight+bfoffBits，其中 biwidth,biheight表示</p>
+<p>图像文件的宽度和高度，bfoffBits表示文件头到实际位图图像数据之间的偏移量。</p>
+<p>（1）Matlab脚本对Bmp进行信息隐藏多层Check</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">clc;</span><br><span class="line">clear;</span><br><span class="line">wm=randsrc(<span class="number">1</span>,<span class="number">300</span>, [<span class="number">0</span> <span class="number">1</span>]); <span class="comment">%  产生随机水印信息</span></span><br><span class="line">fid=fopen(<span class="string">'watermarked.bmp'</span>,<span class="string">'r'</span>); <span class="comment">%读入载体图像文件</span></span><br><span class="line">[a,<span class="built_in">length</span>]=fread(fid,<span class="built_in">inf</span>,<span class="string">'uint8'</span>);</span><br><span class="line">status=fseek(fid,<span class="number">2</span>,<span class="string">'bof'</span>);</span><br><span class="line">fileb=fread(fid,<span class="number">4</span>,<span class="string">'uint8'</span>);</span><br><span class="line">filelength=fileb(<span class="number">1</span>)*<span class="number">1</span>+fileb(<span class="number">2</span>)*<span class="number">256</span>+fileb(<span class="number">3</span>)*<span class="number">256</span>^<span class="number">2</span>+fileb(<span class="number">4</span>)*<span class="number">256</span>^<span class="number">3</span> <span class="comment">%文件图像的理论长度</span></span><br><span class="line">status=fseek(fid,<span class="number">10</span>,<span class="string">'bof'</span>);</span><br><span class="line">b=fread(fid,<span class="number">4</span>,<span class="string">'uint8'</span>);</span><br><span class="line">bfoffbitsmodify=b(<span class="number">1</span>)*<span class="number">1</span>+b(<span class="number">2</span>)*<span class="number">256</span>+b(<span class="number">3</span>)*<span class="number">256</span>^<span class="number">2</span>+b(<span class="number">4</span>)*<span class="number">256</span>^<span class="number">3</span> <span class="comment">%读取偏移量</span></span><br><span class="line">status=fseek(fid,<span class="number">18</span>,<span class="string">'bof'</span>);</span><br><span class="line">b=fread(fid,<span class="number">4</span>,<span class="string">'uint8'</span>);</span><br><span class="line">biwidth=b(<span class="number">1</span>)*<span class="number">1</span>+b(<span class="number">2</span>)*<span class="number">256</span>+b(<span class="number">3</span>)*<span class="number">256</span>^<span class="number">2</span>+b(<span class="number">4</span>)*<span class="number">256</span>^<span class="number">3</span></span><br><span class="line">status=fseek(fid,<span class="number">22</span>,<span class="string">'bof'</span>);</span><br><span class="line">b=fread(fid,<span class="number">4</span>,<span class="string">'uint8'</span>);</span><br><span class="line">biHeight=b(<span class="number">1</span>)*<span class="number">1</span>+b(<span class="number">2</span>)*<span class="number">256</span>+b(<span class="number">3</span>)*<span class="number">256</span>^<span class="number">2</span>+b(<span class="number">4</span>)*<span class="number">256</span>^<span class="number">3</span>;</span><br><span class="line">bfoffbits=<span class="number">54</span>;<span class="comment">%偏移量</span></span><br><span class="line">biBytecount=<span class="number">3</span>;<span class="comment">%24 位真彩色图像为 3</span></span><br><span class="line">file<span class="built_in">true</span><span class="built_in">length</span>=biwidth*biBytecount*biHeight+bfoffbits <span class="comment">%图片实际真实长度（固定偏移54）</span></span><br><span class="line">filelengthbfoffbits=biwidth*biBytecount*biHeight+bfoffbitsmodify <span class="comment">%读取偏移计算文件长度</span></span><br><span class="line">fclose(fid);</span><br><span class="line">diff1=<span class="built_in">length</span>-filelength;        <span class="comment">%未修改图片长度时Check1</span></span><br><span class="line">diff2=filelength-file<span class="built_in">true</span><span class="built_in">length</span> <span class="comment">%修改了图片长度时Check2</span></span><br><span class="line">diff3=filelengthbfoffbits-file<span class="built_in">true</span><span class="built_in">length</span> <span class="comment">%修改了图片偏移时Check3</span></span><br><span class="line">diff=diff1+diff2+diff3</span><br></pre></td></tr></table></figure>
+
+<p>对watermarked.bmp（文件长度和文件偏移都被修改了）进行测试，根据diff的值进行判定该图片是否存在信息隐藏，运行结果查看：</p>
+<p><img src="/2019/09/19/information-hiding-and-detection-based-on-bmp-image/1594459-20190919002344210-699576299.png" alt="img"></p>
+<p>从结果diff != 0可以看出来该图片存在信息隐藏。</p>
+<h2 id="在图像文件头和信息头的保留字段中隐藏信息"><a href="#在图像文件头和信息头的保留字段中隐藏信息" class="headerlink" title="在图像文件头和信息头的保留字段中隐藏信息"></a>在图像文件头和信息头的保留字段中隐藏信息</h2><p>BMP 图像文件中有很多从不使用的保留字节，如 7、8、9、10 字节是保留的，必须为 0，可在第 7、8、9、10 字节隐藏秘密信息。</p>
+<p>（1）Matlab脚本对Bmp的保留字段隐藏信息</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">clc;</span><br><span class="line">clear;</span><br><span class="line">fid=fopen(<span class="string">'Qftm.bmp'</span>,<span class="string">'r'</span>); <span class="comment">%读入载体图像文件</span></span><br><span class="line">[a,<span class="built_in">length</span>]=fread(fid,<span class="built_in">inf</span>,<span class="string">'uint8'</span>);</span><br><span class="line">fclose(fid);</span><br><span class="line">wa=a;</span><br><span class="line"><span class="comment">% 在BMP的7、8、9、10保留字中隐藏秘密信息Qftm,ASCII值为0x51 0x66 0x74 0x6d</span></span><br><span class="line">wa(<span class="number">7</span>)=<span class="number">81</span>;</span><br><span class="line">wa(<span class="number">8</span>)=<span class="number">102</span>;</span><br><span class="line">wa(<span class="number">9</span>)=<span class="number">116</span>;</span><br><span class="line">wa(<span class="number">10</span>)=<span class="number">109</span>;</span><br><span class="line"><span class="built_in">figure</span>;</span><br><span class="line">wa=uint8(wa);</span><br><span class="line">fid=fopen(<span class="string">'watermarkedReserve.bmp'</span>, <span class="string">'wb'</span>);</span><br><span class="line">fwrite(fid,wa);</span><br><span class="line">fclose(fid);</span><br><span class="line">I=imread(<span class="string">'Qftm.bmp'</span>);</span><br><span class="line">J=imread(<span class="string">'watermarkedReserve.bmp'</span>);</span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>)</span><br><span class="line">imshow(I)</span><br><span class="line">title(<span class="string">'未修改图像'</span>);</span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>)</span><br><span class="line">imshow(J)</span><br><span class="line">title(<span class="string">'修改后图像'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>运行结果查看嵌入前、嵌入后的感官效果</p>
+<p><img src="/2019/09/19/information-hiding-and-detection-based-on-bmp-image/1594459-20190919002430279-601024819.png" alt="img"></p>
+<p> 分析《watermarkedReserve.bmp》16进制清晰查看隐藏效果</p>
+<p><img src="/2019/09/19/information-hiding-and-detection-based-on-bmp-image/1594459-20190919002449555-1396830744.png" alt="img"></p>
+<h2 id="利用LSB进行信息隐藏"><a href="#利用LSB进行信息隐藏" class="headerlink" title="利用LSB进行信息隐藏"></a>利用LSB进行信息隐藏</h2><p>准备隐藏的数据文件（message.txt）和载体图像（Qftm.bmp）</p>
+<p><img src="/2019/09/19/information-hiding-and-detection-based-on-bmp-image/1594459-20200302231620999-1120587221.png" alt></p>
+<p><img src="/2019/09/19/information-hiding-and-detection-based-on-bmp-image/1594459-20200302231811432-673645437.png" alt></p>
+<p>（1）Matlab脚本对Bmp图像进行LSB隐藏信息</p>
+<p>Bmp_LSB_embed.m</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">P&#x3D;imread(&#39;Qftm.bmp&#39;);</span><br><span class="line">A&#x3D;P(:,:,1);</span><br><span class="line">P_g&#x3D;P(:,:,2);</span><br><span class="line">P_b&#x3D;P(:,:,3);</span><br><span class="line">[m,n]&#x3D;size(A); </span><br><span class="line">a&#x3D;A(:);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">allpath &#x3D; &#39;message.txt&#39;;</span><br><span class="line">fid &#x3D; fopen(allpath);</span><br><span class="line">data &#x3D; textscan(fid,&#39;%s&#39;);   </span><br><span class="line">d&#x3D;vertcat(data&#123;:&#125;);  </span><br><span class="line">q&#x3D;cell2mat(d);        %cell转化为数组</span><br><span class="line">p&#x3D;dec2bin(q,8);       %10进制转8位2进制</span><br><span class="line">pp&#x3D;p&#39;;                %转置</span><br><span class="line">msg&#x3D;pp(:);            %变成一维的</span><br><span class="line">fclose(fid);</span><br><span class="line">msg_len&#x3D;length(msg);</span><br><span class="line"></span><br><span class="line">water&#x3D;a;</span><br><span class="line">lsb&#x3D;A;</span><br><span class="line">for i&#x3D;1:length(a)</span><br><span class="line">    water(i)&#x3D;bitset(water(i),1,0);</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">start&#x3D;randi(floor(length(a)&#x2F;(msg_len+1)),1,1)</span><br><span class="line">water(start)&#x3D;1;</span><br><span class="line">for i&#x3D;1:msg_len</span><br><span class="line">    water((i+1)*start)&#x3D;bitset(water((i+1)*start),1,str2double(msg(i)));</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">for i&#x3D;1:m</span><br><span class="line">    for j&#x3D;1:n</span><br><span class="line">        lsb(j,i)&#x3D;water((i-1)*n+j);</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">W&#x3D;cat(3,lsb,P_g,P_b);</span><br><span class="line">figure;</span><br><span class="line">subplot(1,2,1);imshow(P);title(&#39;normal&#39;);</span><br><span class="line">subplot(1,2,2);imshow(W);title(&#39;serect&#39;);</span><br><span class="line">imwrite(W,&#39;Qftm_lsb.bmp&#39;,&#39;bmp&#39;);</span><br></pre></td></tr></table></figure>
+
+<p>Runing：</p>
+<p><img src="/2019/09/19/information-hiding-and-detection-based-on-bmp-image/1594459-20200302233031030-994356679.png" alt></p>
+<p>运行结果查看嵌入前（Qftm.bmp）、嵌入后（Qftm_lsb.bmp）的感官效果</p>
+<p><img src="/2019/09/19/information-hiding-and-detection-based-on-bmp-image/1594459-20200302232224819-1404767767.png" alt></p>
+<p>可以看到，人眼看起来没有多大区别</p>
+<p>Qftm.bmp与Qftm_lsb.bmp的十六进制对比</p>
+<p><img src="/2019/09/19/information-hiding-and-detection-based-on-bmp-image/1594459-20200302233657195-2142942761.png" alt></p>
+<p>（2）Matlab脚本对嵌入后（Qftm_lsb.bmp）的图像进行LSB隐藏信息提取</p>
+<p>Bmp_LSB_extract.m</p>
+ <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">W=imread(<span class="string">'Qftm_lsb.bmp'</span>);</span><br><span class="line">B=W(:,:,<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:m*n</span><br><span class="line">   re2(<span class="built_in">i</span>)=bitget(B(<span class="built_in">i</span>),<span class="number">1</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:m*n</span><br><span class="line">    <span class="keyword">if</span> re2(<span class="built_in">i</span>)==<span class="number">1</span></span><br><span class="line">         start2=<span class="built_in">i</span></span><br><span class="line">         <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:m*n/start2<span class="number">-1</span></span><br><span class="line">     se(<span class="built_in">i</span>)=re2(start2*(<span class="built_in">i</span>+<span class="number">1</span>));</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">fid=fopen(<span class="string">'serect.txt'</span>,<span class="string">'wt'</span>);</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:<span class="built_in">length</span>(se)/<span class="number">8</span></span><br><span class="line">    b=num2str(se(<span class="number">1</span>+(<span class="built_in">i</span><span class="number">-1</span>)*<span class="number">8</span>:<span class="number">8</span>+(<span class="built_in">i</span><span class="number">-1</span>)*<span class="number">8</span>));</span><br><span class="line">    c=bin2dec(b);</span><br><span class="line">    d=char(c);</span><br><span class="line">   fprintf(fid,<span class="string">'%s'</span>,d);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">fclose(fid);</span><br></pre></td></tr></table></figure>
+
+<p>Runing：</p>
+<p><img src="/2019/09/19/information-hiding-and-detection-based-on-bmp-image/1594459-20200302233303243-1204478661.png" alt></p>
+<p>提取得到隐藏的信息数据</p>
+<p> <img src="/2019/09/19/information-hiding-and-detection-based-on-bmp-image/1594459-20200302232833490-346862147.png" alt></p>
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>Author：<a href="http://Qftm.github.io">Qftm</a>
+            <p>原文链接：<a href="http://qftm.github.io/2019/09/19/information-hiding-and-detection-based-on-bmp-image/">http://qftm.github.io/2019/09/19/information-hiding-and-detection-based-on-bmp-image/</a>
+            <p>发表日期：<a href="http://qftm.github.io/2019/09/19/information-hiding-and-detection-based-on-bmp-image/">September 19th 2019, 12:26:00 am</a>
+            <p>更新日期：<a href="http://qftm.github.io/2019/09/19/information-hiding-and-detection-based-on-bmp-image/">April 20th 2020, 10:04:01 am</a>
+            <p>版权声明：本文采用<a rel="license noopener" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2019/09/30/pe-structure/" title= "初识PE文件结构">
+                    <div class="nextTitle">初识PE文件结构</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2019/09/14/matlab-image-and-audio-signal-processing/" title= "MATLAB之图像与音频信号处理">
+                    <div class="prevTitle">MATLAB之图像与音频信号处理</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:Qftmbin@gmail.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/Qftm" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+            
+                <span class="iconfont-archer wechat" title=wechat>
+                  
+                  <img class="profile-qr" src="/assets/example_qr.png" />
+                </span>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="//twitter.com/Qftmer" class="iconfont-archer twitter" target="_blank" title=twitter></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#原理简介"><span class="toc-number">1.</span> <span class="toc-text">原理简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#操作环境"><span class="toc-number">2.</span> <span class="toc-text">操作环境</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#技术过程"><span class="toc-number">3.</span> <span class="toc-text">技术过程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#在实际的图像数据后隐藏信息"><span class="toc-number">3.1.</span> <span class="toc-text">在实际的图像数据后隐藏信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件头与图像数据之间隐藏信息"><span class="toc-number">3.2.</span> <span class="toc-text">文件头与图像数据之间隐藏信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BMP-图像文件隐藏信息的检测"><span class="toc-number">3.3.</span> <span class="toc-text">BMP 图像文件隐藏信息的检测</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在图像文件头和信息头的保留字段中隐藏信息"><span class="toc-number">3.4.</span> <span class="toc-text">在图像文件头和信息头的保留字段中隐藏信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#利用LSB进行信息隐藏"><span class="toc-number">3.5.</span> <span class="toc-text">利用LSB进行信息隐藏</span></a></li></ol></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 62
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/19</span><a class="archive-post-title" href= "/2020/04/19/bypass-nodejs-jwt/" >探索Node.js中JWT认证缺陷的绕过</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/03</span><a class="archive-post-title" href= "/2020/04/03/php-filter-tricks/" >探索php://filter在实战当中的奇技淫巧</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/25</span><a class="archive-post-title" href= "/2020/03/25/Linux-Network-Protocol-Stack/" >Linux Network Protocol Stack</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/23</span><a class="archive-post-title" href= "/2020/03/23/Software-Engineering-Learning-Handbook/" >Software Engineering Learning Handbook</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/22</span><a class="archive-post-title" href= "/2020/03/22/Socket-Learning-Handbook/" >Socket Programming Learning Handbook</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/18</span><a class="archive-post-title" href= "/2020/03/18/PHP-File-Inclusion-Exploiting-and-Bypass/" >PHP File Inclusion Bug Exploiting and Bypass Handbook</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/15</span><a class="archive-post-title" href= "/2020/03/15/LFI-PHPINFO-OR-PHP7-Segment-Fault/" >LFI PHPINFO OR PHP7 Segment Fault Getshell</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/12</span><a class="archive-post-title" href= "/2020/03/12/LFI-Bypass-Session-Restriction-Getshell/" >LFI Bypass Session Restriction Getshell</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/10</span><a class="archive-post-title" href= "/2020/03/10/Linux-Electronic-Forensics/" >Linux Electronic Forensics Learning Handbook</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/06</span><a class="archive-post-title" href= "/2020/03/06/bypass-rfi-by-webdav/" >RFI巧用WebDAV绕过URL包含限制Getshell</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/01</span><a class="archive-post-title" href= "/2020/03/01/apple-icloud-credential-stealing/" >Apple iCloud 凭证的窃取分析 -【CVE-2020-3841】</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/12</span><a class="archive-post-title" href= "/2020/02/12/Hackintosh-Of-Lenovo-R720-15IKBN/" >Hackintosh Of Lenovo R720 15IKBN</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/18</span><a class="archive-post-title" href= "/2020/01/18/Information-Collection-Handbook/" >Information Collection Handbook</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/03</span><a class="archive-post-title" href= "/2020/01/03/small-and-medium-sized-enterprise-ips-deployment/" >中小型企业级 IPS 部署</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/01</span><a class="archive-post-title" href= "/2020/01/01/small-and-medium-sized-enterprise-firewall-deployment/" >中小型企业级防火墙部署</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2019 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/31</span><a class="archive-post-title" href= "/2019/12/31/Docker-Learning-Handbook/" >Docker Learning Handbook</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/22</span><a class="archive-post-title" href= "/2019/11/22/PhpStudyBackDoor2019/" >PhpStudy BackDoor2019 深度分析</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/27</span><a class="archive-post-title" href= "/2019/10/27/Kali-Rolling-2019/" >Kali Rolling 2019 系统配置总结（Updateing）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/27</span><a class="archive-post-title" href= "/2019/10/27/RoarCTF2019-Writeup/" >楼上请让路 RoarCTF2019 Writeup</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/26</span><a class="archive-post-title" href= "/2019/10/26/Joomla3.4.6-RCE-analyze/" >Joomla3.4.6 RCE漏洞深度分析</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/30</span><a class="archive-post-title" href= "/2019/09/30/pe-structure/" >初识PE文件结构</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/19</span><a class="archive-post-title" href= "/2019/09/19/information-hiding-and-detection-based-on-bmp-image/" >基于BMP图像的信息隐藏与检测</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/14</span><a class="archive-post-title" href= "/2019/09/14/matlab-image-and-audio-signal-processing/" >MATLAB之图像与音频信号处理</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/12</span><a class="archive-post-title" href= "/2019/09/12/matlab-basic-syntax-and-functions/" >MATLAB之基本语法与基础函数</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/11</span><a class="archive-post-title" href= "/2019/09/11/CVE-2018-14418-shines-a-new-spark/" >CVE-2018-14418 擦出新火花</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/05</span><a class="archive-post-title" href= "/2019/09/05/Electronic-Forensics-1/" >浅谈电子数字取证技术</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/03</span><a class="archive-post-title" href= "/2019/08/03/Linux-Reverse-Shell/" >Linux 反弹 Shell</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/03</span><a class="archive-post-title" href= "/2019/08/03/Windows-Reverse-Shell/" >Windows 反弹 Shell</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/03</span><a class="archive-post-title" href= "/2019/08/03/AWD-Bugs-Fix/" >AWD攻防赛之各类漏洞FIX方案</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/01</span><a class="archive-post-title" href= "/2019/08/01/ISCC2019-Finals-Writeup/" >第16届(2019)全国大学生信息安全与对抗技术竞赛全国线下总决赛 Writeup</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/31</span><a class="archive-post-title" href= "/2019/07/31/Hack-The-Box-Web-Pentest-2017/" >Hack The Box Web Pentest 2017</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/30</span><a class="archive-post-title" href= "/2019/07/30/Hack-The-Box-Web-Pentest-2019/" >Hack The Box Web Pentest 2019</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/15</span><a class="archive-post-title" href= "/2019/05/15/bypass-rfi-by-samba/" >RFI巧用Samba绕过URL包含限制Getshell</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/12</span><a class="archive-post-title" href= "/2019/05/12/Linux-DNS-server-configuration-and-management/" >Linux DNS 服务器配置与管理</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/12</span><a class="archive-post-title" href= "/2019/05/12/Linux-DHCP-server-configuration-and-management/" >Linux DHCP 服务器配置与管理</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/26</span><a class="archive-post-title" href= "/2019/04/26/Symmetric-Key-Encryption-DES/" >Symmetric Key Encryption DES</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/26</span><a class="archive-post-title" href= "/2019/03/26/cbc-byte-reverse-attack/" >针对 CBC 字节反转攻击的研究与漏洞复现</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/24</span><a class="archive-post-title" href= "/2019/03/24/symmetric-and-asymmetric-crypto-system/" >对称密码体制和非对称密码体制</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2019/03/08/routing-protocol-and-switching-technology/" >路由协议与交换技术合集</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/28</span><a class="archive-post-title" href= "/2019/02/28/CentOS7-minimal-installation-simple-configuration/" >CentOS 7 最小化安装简单配置</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/16</span><a class="archive-post-title" href= "/2019/02/16/BugkuCTF-Writeup/" >Bugku CTF WriteUp 合集</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/13</span><a class="archive-post-title" href= "/2019/02/13/android-personal-mobile-phone-address-book-development/" >Android 个人手机通讯录开发</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/13</span><a class="archive-post-title" href= "/2019/02/13/Android-SQLite-database-learning/" >Android SQLite 数据库学习</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/27</span><a class="archive-post-title" href= "/2019/01/27/android-program-structure/" >Android 程序结构</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/22</span><a class="archive-post-title" href= "/2018/12/22/xss-bypass-technology/" >XSS 绕过技术</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/22</span><a class="archive-post-title" href= "/2018/12/22/2018-The-3rd-nnctf-writeup/" >2018第三届南宁市网络安全技术大赛 nnctf WriteUp</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/21</span><a class="archive-post-title" href= "/2018/12/21/sql-injection-mysql-topic/" >SQL 注入~MySQL专题</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/25</span><a class="archive-post-title" href= "/2018/11/25/CDateStructLearning/" >C Programming Language Data Structure Learning</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/25</span><a class="archive-post-title" href= "/2018/11/25/Web-front-end-security/" >Web 前端安全</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/07</span><a class="archive-post-title" href= "/2018/11/07/CSRF-Bug-Test/" >CSRF 漏洞分析与测试</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/04</span><a class="archive-post-title" href= "/2018/11/04/XSS-DOM-test/" >XSS DOM 漏洞分析与测试</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/04</span><a class="archive-post-title" href= "/2018/11/04/XSS-Stored-test/" >XSS Stored 漏洞分析与测试</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/04</span><a class="archive-post-title" href= "/2018/11/04/XSS-Reflected-test/" >XSS Reflected 漏洞分析与测试</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/13</span><a class="archive-post-title" href= "/2018/10/13/arp-spoofing-attack/" >ARP protocol spoofing attack</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/11</span><a class="archive-post-title" href= "/2018/10/11/arp-protocol-analysis/" >ARP protocol analysis</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/04</span><a class="archive-post-title" href= "/2018/07/04/Kali-Rolling-2018/" >Kali Rolling 2018 系统配置</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/13</span><a class="archive-post-title" href= "/2018/05/13/shiyanba-writeup/" >实验吧 CTF WriteUp 合集</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/29</span><a class="archive-post-title" href= "/2018/04/29/file-header-of-various-files/" >各类文件的文件头标志</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/30</span><a class="archive-post-title" href= "/2018/01/30/Browser-User-Agent/" >认识浏览器请求头User-Agent</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/30</span><a class="archive-post-title" href= "/2018/01/30/Cryptography-Learning/" >CTF中那些脑洞大开的编码和加密</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/25</span><a class="archive-post-title" href= "/2018/01/25/TmuxTerminal/" >Tmux 终端利器</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/25</span><a class="archive-post-title" href= "/2018/01/25/VimTerminal/" >Vim(Vi) 终端利器</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="CTF"><span class="iconfont-archer">&#xe606;</span>CTF</span>
+    
+        <span class="sidebar-tag-name" data-tags="SQLite"><span class="iconfont-archer">&#xe606;</span>SQLite</span>
+    
+        <span class="sidebar-tag-name" data-tags="安卓开发"><span class="iconfont-archer">&#xe606;</span>安卓开发</span>
+    
+        <span class="sidebar-tag-name" data-tags="HTTP"><span class="iconfont-archer">&#xe606;</span>HTTP</span>
+    
+        <span class="sidebar-tag-name" data-tags="AWD"><span class="iconfont-archer">&#xe606;</span>AWD</span>
+    
+        <span class="sidebar-tag-name" data-tags="数据结构"><span class="iconfont-archer">&#xe606;</span>数据结构</span>
+    
+        <span class="sidebar-tag-name" data-tags="CSRF"><span class="iconfont-archer">&#xe606;</span>CSRF</span>
+    
+        <span class="sidebar-tag-name" data-tags="CMS"><span class="iconfont-archer">&#xe606;</span>CMS</span>
+    
+        <span class="sidebar-tag-name" data-tags="漏洞挖掘"><span class="iconfont-archer">&#xe606;</span>漏洞挖掘</span>
+    
+        <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
+    
+        <span class="sidebar-tag-name" data-tags="密码研究"><span class="iconfont-archer">&#xe606;</span>密码研究</span>
+    
+        <span class="sidebar-tag-name" data-tags="电子取证"><span class="iconfont-archer">&#xe606;</span>电子取证</span>
+    
+        <span class="sidebar-tag-name" data-tags="MacOS"><span class="iconfont-archer">&#xe606;</span>MacOS</span>
+    
+        <span class="sidebar-tag-name" data-tags="攻防渗透"><span class="iconfont-archer">&#xe606;</span>攻防渗透</span>
+    
+        <span class="sidebar-tag-name" data-tags="Handbook"><span class="iconfont-archer">&#xe606;</span>Handbook</span>
+    
+        <span class="sidebar-tag-name" data-tags="漏洞分析"><span class="iconfont-archer">&#xe606;</span>漏洞分析</span>
+    
+        <span class="sidebar-tag-name" data-tags="LFI"><span class="iconfont-archer">&#xe606;</span>LFI</span>
+    
+        <span class="sidebar-tag-name" data-tags="Bypass"><span class="iconfont-archer">&#xe606;</span>Bypass</span>
+    
+        <span class="sidebar-tag-name" data-tags="协议"><span class="iconfont-archer">&#xe606;</span>协议</span>
+    
+        <span class="sidebar-tag-name" data-tags="木马后门"><span class="iconfont-archer">&#xe606;</span>木马后门</span>
+    
+        <span class="sidebar-tag-name" data-tags="后门分析"><span class="iconfont-archer">&#xe606;</span>后门分析</span>
+    
+        <span class="sidebar-tag-name" data-tags="DES"><span class="iconfont-archer">&#xe606;</span>DES</span>
+    
+        <span class="sidebar-tag-name" data-tags="神兵利器"><span class="iconfont-archer">&#xe606;</span>神兵利器</span>
+    
+        <span class="sidebar-tag-name" data-tags="PowerShell"><span class="iconfont-archer">&#xe606;</span>PowerShell</span>
+    
+        <span class="sidebar-tag-name" data-tags="Web"><span class="iconfont-archer">&#xe606;</span>Web</span>
+    
+        <span class="sidebar-tag-name" data-tags="XSS"><span class="iconfont-archer">&#xe606;</span>XSS</span>
+    
+        <span class="sidebar-tag-name" data-tags="ARP"><span class="iconfont-archer">&#xe606;</span>ARP</span>
+    
+        <span class="sidebar-tag-name" data-tags="JWT"><span class="iconfont-archer">&#xe606;</span>JWT</span>
+    
+        <span class="sidebar-tag-name" data-tags="RFI"><span class="iconfont-archer">&#xe606;</span>RFI</span>
+    
+        <span class="sidebar-tag-name" data-tags="信息隐藏"><span class="iconfont-archer">&#xe606;</span>信息隐藏</span>
+    
+        <span class="sidebar-tag-name" data-tags="CBC"><span class="iconfont-archer">&#xe606;</span>CBC</span>
+    
+        <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
+    
+        <span class="sidebar-tag-name" data-tags="PE"><span class="iconfont-archer">&#xe606;</span>PE</span>
+    
+        <span class="sidebar-tag-name" data-tags="二进制"><span class="iconfont-archer">&#xe606;</span>二进制</span>
+    
+        <span class="sidebar-tag-name" data-tags="文件结构"><span class="iconfont-archer">&#xe606;</span>文件结构</span>
+    
+        <span class="sidebar-tag-name" data-tags="PHP"><span class="iconfont-archer">&#xe606;</span>PHP</span>
+    
+        <span class="sidebar-tag-name" data-tags="Firewalld"><span class="iconfont-archer">&#xe606;</span>Firewalld</span>
+    
+        <span class="sidebar-tag-name" data-tags="路由协议"><span class="iconfont-archer">&#xe606;</span>路由协议</span>
+    
+        <span class="sidebar-tag-name" data-tags="IPS"><span class="iconfont-archer">&#xe606;</span>IPS</span>
+    
+        <span class="sidebar-tag-name" data-tags="MySQL"><span class="iconfont-archer">&#xe606;</span>MySQL</span>
+    
+        <span class="sidebar-tag-name" data-tags="SQLInjection"><span class="iconfont-archer">&#xe606;</span>SQLInjection</span>
+    
+        <span class="sidebar-tag-name" data-tags="Docker"><span class="iconfont-archer">&#xe606;</span>Docker</span>
+    
+        <span class="sidebar-tag-name" data-tags="Socket"><span class="iconfont-archer">&#xe606;</span>Socket</span>
+    
+        <span class="sidebar-tag-name" data-tags="开发"><span class="iconfont-archer">&#xe606;</span>开发</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="CTF"><span class="iconfont-archer">&#xe60a;</span>CTF</span>
+    
+        <span class="sidebar-category-name" data-categories="移动开发"><span class="iconfont-archer">&#xe60a;</span>移动开发</span>
+    
+        <span class="sidebar-category-name" data-categories="网络安全"><span class="iconfont-archer">&#xe60a;</span>网络安全</span>
+    
+        <span class="sidebar-category-name" data-categories="算法艺术"><span class="iconfont-archer">&#xe60a;</span>算法艺术</span>
+    
+        <span class="sidebar-category-name" data-categories="WebSecurity"><span class="iconfont-archer">&#xe60a;</span>WebSecurity</span>
+    
+        <span class="sidebar-category-name" data-categories="漏洞挖掘"><span class="iconfont-archer">&#xe60a;</span>漏洞挖掘</span>
+    
+        <span class="sidebar-category-name" data-categories="运维"><span class="iconfont-archer">&#xe60a;</span>运维</span>
+    
+        <span class="sidebar-category-name" data-categories="取证艺术"><span class="iconfont-archer">&#xe60a;</span>取证艺术</span>
+    
+        <span class="sidebar-category-name" data-categories="Hackintosh"><span class="iconfont-archer">&#xe60a;</span>Hackintosh</span>
+    
+        <span class="sidebar-category-name" data-categories="漏洞分析"><span class="iconfont-archer">&#xe60a;</span>漏洞分析</span>
+    
+        <span class="sidebar-category-name" data-categories="木马后门"><span class="iconfont-archer">&#xe60a;</span>木马后门</span>
+    
+        <span class="sidebar-category-name" data-categories="后门分析"><span class="iconfont-archer">&#xe60a;</span>后门分析</span>
+    
+        <span class="sidebar-category-name" data-categories="神兵利器"><span class="iconfont-archer">&#xe60a;</span>神兵利器</span>
+    
+        <span class="sidebar-category-name" data-categories="信息隐藏"><span class="iconfont-archer">&#xe60a;</span>信息隐藏</span>
+    
+        <span class="sidebar-category-name" data-categories="逆向工程"><span class="iconfont-archer">&#xe60a;</span>逆向工程</span>
+    
+        <span class="sidebar-category-name" data-categories="路由协议"><span class="iconfont-archer">&#xe60a;</span>路由协议</span>
+    
+        <span class="sidebar-category-name" data-categories="密码研究"><span class="iconfont-archer">&#xe60a;</span>密码研究</span>
+    
+        <span class="sidebar-category-name" data-categories="云计算"><span class="iconfont-archer">&#xe60a;</span>云计算</span>
+    
+        <span class="sidebar-category-name" data-categories="软件工程"><span class="iconfont-archer">&#xe60a;</span>软件工程</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "Qftm"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+

