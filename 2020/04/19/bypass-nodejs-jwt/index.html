@@ -504,7 +504,7 @@ height:50vh;
 <p>既然这样，我们就可以通过传入不存在的secretid，导致algorithm为none，由于algorithm=none所以在构造JWT时就不需要提供密钥，然后就可以通过伪造jwt来成为admin。</p>
 <p>但是，我们可以看到实际的Node.js代码中做了限制，当sid不满足<code>if(sid === undefined || sid === null || !(sid &lt; global.secrets.length &amp;&amp; sid &gt;= 0))</code>条件时就会错误<code>APIError(&#39;login error&#39;, &#39;no such secret id&#39;);</code>，所以要想构造管理员权限的JWT，就要绕过这个sid限制。</p>
 <p>分析sid限制绕过：</p>
-<p>根据if条件可知，<code>sid === undefined || sid === null</code>这部分逻辑很容易绕过，主要是<code>!(sid &lt; global.secrets.length &amp;&amp; sid &gt;= 0)</code>这部分。要绕过这部分，既要构造sid不存在又要满足<code>0-global.secrets.length</code>这个范围，所以这里可以利用Node.js的弱类型特性来绕过限制，比如十六进制字符串进行绕过：<code>&quot;0x0&quot;</code></p>
+<p>根据if条件可知，<code>sid === undefined || sid === null</code>这部分逻辑很容易绕过，主要是<code>!(sid &lt; global.secrets.length &amp;&amp; sid &gt;= 0)</code>这部分。要绕过这部分，既要构造sid不存在又要满足<code>0-global.secrets.length</code>这个范围，所以这里可以利用Node.js的弱类型特性来绕过限制，比如十六进制字符串进行绕过：<code>&quot;0x0&quot;</code>（或者使用小数绕过<code>0.11</code>等）</p>
 <p>Console控制台测试</p>
 <p><img src="/2020/04/19/bypass-nodejs-jwt/image-20200419214315213.png" alt="image-20200419214315213"></p>
 <p>测试结果可以看到其能够绕过if逻辑，但是需要注意一点，这个十六进制字符串<code>&quot;0x0&quot;</code>要想在JWT攻击载荷里面生效，前提是必须注册的用户需要大于0，不然这一步通过不了<code>sid &lt; global.secrets.length</code>，因为前面已经注册了一个普通用户所以这里不在注册，直接构造利用。</p>
@@ -533,7 +533,7 @@ height:50vh;
             <p>Author：<a href="http://Qftm.github.io">Qftm</a>
             <p>原文链接：<a href="http://qftm.github.io/2020/04/19/bypass-nodejs-jwt/">http://qftm.github.io/2020/04/19/bypass-nodejs-jwt/</a>
             <p>发表日期：<a href="http://qftm.github.io/2020/04/19/bypass-nodejs-jwt/">April 19th 2020, 5:20:00 am</a>
-            <p>更新日期：<a href="http://qftm.github.io/2020/04/19/bypass-nodejs-jwt/">April 20th 2020, 2:30:00 pm</a>
+            <p>更新日期：<a href="http://qftm.github.io/2020/04/19/bypass-nodejs-jwt/">April 20th 2020, 7:23:13 pm</a>
             <p>版权声明：本文采用<a rel="license noopener" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     

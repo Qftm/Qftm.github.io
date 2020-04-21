@@ -1514,7 +1514,7 @@ height:50vh;
 <p>LXC 为 Linux Container 的简写，内部采用了Linux内核Namespace和Cgroups两个特性，可以提供轻量级的虚拟化，以便隔离进程和资源，而且不需要提供指令解释机制以及全虚拟化的其他复杂性。</p>
 <p>Docker基于Linux kernel的Namespace，CGroups，UnionFileSystem等技术封装成一种自定义的容器格式，用于提供一整套虚拟运行环境。</p>
 <p>使用容器可以有效地将由单个操作系统管理的资源划分到孤立的组中，以更好地在孤立的组之间平衡有冲突的资源使用需求。</p>
-<h2 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h2><p>命名空间是 Linux 内核一个强大的特性，从Linux内核2.6.27版本开始已经支持LXC。每个容器都有自己单独的命名空间，运行在其中的应用都像是在独立的操作系统中运行一样。命名空间保证了容器之间彼此互不影响，提供了对UTS、IPC、mount、PID、network、User等的隔离机制。</p>
+<h2 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h2><p>命名空间（<a href="https://en.wikipedia.org/wiki/Linux_namespaces" target="_blank" rel="noopener">Namespace</a>、<a href="http://man7.org/linux/man-pages/man7/namespaces.7.html" target="_blank" rel="noopener">Linux man</a>）是 Linux 内核一个强大的特性，从Linux内核2.6.27版本开始已经支持LXC。每个容器都有自己单独的命名空间，运行在其中的应用都像是在独立的操作系统中运行一样。命名空间保证了容器之间彼此互不影响，提供了对UTS、IPC、mount、PID、network、User等的隔离机制。</p>
 <ul>
 <li>pid 命名空间</li>
 </ul>
@@ -1539,7 +1539,7 @@ height:50vh;
 <li>user 命名空间</li>
 </ul>
 <p>每个容器可以有不同的用户和组 id， 也就是说可以在容器内用容器内部的用户执行程序而非主机上的用户。</p>
-<h2 id="控制组"><a href="#控制组" class="headerlink" title="控制组"></a>控制组</h2><p>控制组（<a href="https://en.wikipedia.org/wiki/Cgroups" target="_blank" rel="noopener">cgroups</a>）是 Linux 内核的一个特性，主要用来对共享资源进行隔离、限制、审计等。只有能控制分配到容器的资源，才能避免当多个容器同时运行时的对系统资源的竞争。</p>
+<h2 id="控制组"><a href="#控制组" class="headerlink" title="控制组"></a>控制组</h2><p>控制组（<a href="https://en.wikipedia.org/wiki/Cgroups" target="_blank" rel="noopener">cgroups</a>、<a href="http://man7.org/linux/man-pages/man7/cgroups.7.html" target="_blank" rel="noopener">Linux man</a>）是 Linux 内核的一个特性，主要用来对共享资源进行隔离、限制、审计等。只有能控制分配到容器的资源，才能避免当多个容器同时运行时的对系统资源的竞争。</p>
 <p>控制组技术最早是由 Google 的程序员在 2006 年提出，Linux 内核自 2.6.24 开始支持。</p>
 <p>控制组可以提供对容器的内存、CPU、磁盘 IO 等资源的限制和审计管理。</p>
 <h2 id="联合文件系统"><a href="#联合文件系统" class="headerlink" title="联合文件系统"></a>联合文件系统</h2><p>联合文件系统（<a href="https://en.wikipedia.org/wiki/UnionFS" target="_blank" rel="noopener">UnionFS</a>）是一种分层、轻量级并且高性能的文件系统，它支持对文件系统的修改作为一次提交来一层层的叠加，同时可以将不同目录挂载到同一个虚拟文件系统下(unite several directories into a single virtual filesystem)。</p>
@@ -1573,7 +1573,7 @@ height:50vh;
 </tr>
 </tbody></table>
 <p>在可能的情况下，<a href="https://docs.docker.com/storage/storagedriver/select-storage-driver/" target="_blank" rel="noopener">推荐</a> 使用 <code>overlay2</code> 存储驱动，<code>overlay2</code> 是目前 Docker 默认的存储驱动，以前则是 <code>aufs</code>。你可以通过配置来使用以上提到的其他类型的存储驱动。</p>
-<h1 id="Docker-安全机制"><a href="#Docker-安全机制" class="headerlink" title="Docker 安全机制"></a>Docker 安全机制</h1><p>Docker的安全机制有很多种：Linux Capability、AppArmor、SELinux、Seccomp等等</p>
+<h1 id="Docker-安全机制"><a href="#Docker-安全机制" class="headerlink" title="Docker 安全机制"></a>Docker 安全机制</h1><p>Docker的安全机制有很多种：<a href="http://man7.org/linux/man-pages/man7/capabilities.7.html" target="_blank" rel="noopener">Linux Capability</a>、AppArmor、SELinux、Seccomp等等</p>
 <h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;docs.docker.com&#x2F;</span><br><span class="line"></span><br><span class="line">https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1pW411G7r3</span><br><span class="line"></span><br><span class="line">https:&#x2F;&#x2F;www.runoob.com&#x2F;docker&#x2F;docker-tutorial.html</span><br><span class="line"></span><br><span class="line">https:&#x2F;&#x2F;yeasy.gitbooks.io&#x2F;docker_practice&#x2F;introduction&#x2F;what.html</span><br><span class="line"></span><br><span class="line">https:&#x2F;&#x2F;docs.docker.com&#x2F;engine&#x2F;reference&#x2F;builder&#x2F;</span><br><span class="line"></span><br><span class="line">https:&#x2F;&#x2F;docs.docker.com&#x2F;develop&#x2F;develop-images&#x2F;dockerfile_best-practices&#x2F;</span><br><span class="line"></span><br><span class="line">https:&#x2F;&#x2F;github.com&#x2F;docker-library&#x2F;docs</span><br></pre></td></tr></table></figure>
 
 
@@ -1586,7 +1586,7 @@ height:50vh;
             <p>Author：<a href="http://Qftm.github.io">Qftm</a>
             <p>原文链接：<a href="http://qftm.github.io/2019/12/31/Docker-Learning-Handbook/">http://qftm.github.io/2019/12/31/Docker-Learning-Handbook/</a>
             <p>发表日期：<a href="http://qftm.github.io/2019/12/31/Docker-Learning-Handbook/">December 31st 2019, 5:20:00 am</a>
-            <p>更新日期：<a href="http://qftm.github.io/2019/12/31/Docker-Learning-Handbook/">April 19th 2020, 12:19:58 am</a>
+            <p>更新日期：<a href="http://qftm.github.io/2019/12/31/Docker-Learning-Handbook/">April 21st 2020, 12:25:21 pm</a>
             <p>版权声明：本文采用<a rel="license noopener" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
