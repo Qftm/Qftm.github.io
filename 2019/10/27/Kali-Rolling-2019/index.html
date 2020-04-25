@@ -272,7 +272,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">3.2k</span>Reading time: <span class="post-count reading-time">14 min</span></span>
+                        <span>Word count: <span class="post-count word-count">3.5k</span>Reading time: <span class="post-count reading-time">15 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -425,9 +425,29 @@ height:50vh;
 <p>递归更改目录/文件拥有者：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chown 用户名 -R MyDocuments&#x2F;</span><br></pre></td></tr></table></figure>
 
-<h1 id="软件升级与系统更新"><a href="#软件升级与系统更新" class="headerlink" title="软件升级与系统更新"></a>软件升级与系统更新</h1><h2 id="添加源"><a href="#添加源" class="headerlink" title="添加源"></a>添加源</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vi &#x2F;etc&#x2F;apt&#x2F;sources.list，比较好用的kali源</span><br><span class="line">deb http:&#x2F;&#x2F;http.kali.org&#x2F;kali kali-rolling main non-free contrib</span><br><span class="line">deb http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;debian stable main contrib non-free</span><br><span class="line">deb http:&#x2F;&#x2F;mirrors.ustc.edu.cn&#x2F;kali kali-rolling main non-free contrib</span><br><span class="line"></span><br><span class="line">如果是其他系统导入kali源，比如ubuntu，需要导入kali公钥</span><br><span class="line">apt-key adv --recv ED444FF07D8D0BF6</span><br></pre></td></tr></table></figure>
+<h1 id="软件升级与系统更新"><a href="#软件升级与系统更新" class="headerlink" title="软件升级与系统更新"></a>软件升级与系统更新</h1><h2 id="添加源"><a href="#添加源" class="headerlink" title="添加源"></a>添加源</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">vi &#x2F;etc&#x2F;apt&#x2F;sources.list，比较好用的kali源</span><br><span class="line">#官方源</span><br><span class="line">deb http:&#x2F;&#x2F;http.kali.org&#x2F;kali kali-rolling main non-free contrib</span><br><span class="line">deb-src http:&#x2F;&#x2F;http.kali.org&#x2F;kali kali-rolling main non-free contrib</span><br><span class="line"></span><br><span class="line">#浙大</span><br><span class="line">deb http:&#x2F;&#x2F;mirrors.zju.edu.cn&#x2F;kali kali-rolling main contrib non-free</span><br><span class="line">deb-src http:&#x2F;&#x2F;mirrors.zju.edu.cn&#x2F;kali kali-rolling main contrib non-free</span><br><span class="line"></span><br><span class="line">#中科大</span><br><span class="line">deb http:&#x2F;&#x2F;mirrors.ustc.edu.cn&#x2F;kali kali-rolling main non-free contrib</span><br><span class="line">deb-src http:&#x2F;&#x2F;mirrors.ustc.edu.cn&#x2F;kali kali-rolling main non-free contrib</span><br><span class="line"></span><br><span class="line">#阿里Debian</span><br><span class="line">deb http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;debian stable main contrib non-free</span><br></pre></td></tr></table></figure>
 
-<h2 id="更新软件列表并更新软件"><a href="#更新软件列表并更新软件" class="headerlink" title="更新软件列表并更新软件"></a>更新软件列表并更新软件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get update &amp; apt-get upgrade -y</span><br></pre></td></tr></table></figure>
+<h2 id="更新软件列表并更新软件"><a href="#更新软件列表并更新软件" class="headerlink" title="更新软件列表并更新软件"></a>更新软件列表并更新软件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">apt-get update &amp; apt-get upgrade -y</span><br><span class="line"></span><br><span class="line"># 检测某个软件是否有更新</span><br><span class="line">apt list --upgradable|grep xxx</span><br><span class="line"></span><br><span class="line"># 更新软件</span><br><span class="line">apt install xxx</span><br><span class="line"></span><br><span class="line"># 升级所有软件</span><br><span class="line">apt-get upgrade</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>解决安装进程占用</strong></li>
+</ul>
+<p>在apt安装软件的时候可能会出现以下问题：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">无法获得锁 &#x2F;var&#x2F;lib&#x2F;apt&#x2F;lists&#x2F;lock - open (11: 资源暂时不可用)</span><br></pre></td></tr></table></figure>
+
+<p>这是因为apt进程被占用了，解决方法也比较简单粗暴，直接删除掉lock锁文件即可：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rm /var/cache/apt/archives/lock</span><br><span class="line">rm /var/lib/dpkg/lock</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>解决系统中文乱码</strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">apt update</span><br><span class="line"></span><br><span class="line"># 设置编码字体为：zh_CN.UTF-8 UTF-8</span><br><span class="line">dpkg-reconfigure locales</span><br><span class="line"></span><br><span class="line"># 安装中文字体</span><br><span class="line">apt install xfonts-intl-chinese</span><br><span class="line">apt install ttf-wqy-microhei</span><br><span class="line"></span><br><span class="line"># 重启</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>解决VMware安装Kali Linux扩展桌面</strong></li>
+</ul>
+<p>Vmware安装的Kali Linux的话，得安装open-vm-tools，来优化使用体验:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">apt update</span><br><span class="line">apt install open-vm-tools-desktop fuse</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装完重启一下生效</span></span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
 
 <h2 id="升级操作系统"><a href="#升级操作系统" class="headerlink" title="升级操作系统"></a>升级操作系统</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get dist-upgrade -y</span><br></pre></td></tr></table></figure>
 
@@ -632,7 +652,7 @@ height:50vh;
             <p>Author：<a href="http://Qftm.github.io">Qftm</a>
             <p>原文链接：<a href="http://qftm.github.io/2019/10/27/Kali-Rolling-2019/">http://qftm.github.io/2019/10/27/Kali-Rolling-2019/</a>
             <p>发表日期：<a href="http://qftm.github.io/2019/10/27/Kali-Rolling-2019/">October 27th 2019, 12:08:00 am</a>
-            <p>更新日期：<a href="http://qftm.github.io/2019/10/27/Kali-Rolling-2019/">April 7th 2020, 11:46:06 pm</a>
+            <p>更新日期：<a href="http://qftm.github.io/2019/10/27/Kali-Rolling-2019/">April 24th 2020, 9:58:23 am</a>
             <p>版权声明：本文采用<a rel="license noopener" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
