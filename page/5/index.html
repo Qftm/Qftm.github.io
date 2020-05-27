@@ -359,6 +359,58 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2019/02/28/CentOS7-minimal-installation-simple-configuration/" >
+            
+                <span>CentOS 7 最小化安装简单配置</span>
+        </a>
+        <div class="abstract-content">
+            环境介绍
+运行软件
+
+1VMware Workstation Pro 14
+
+
+系统环境
+
+1CentOS-7-x86_64-1810
+
+
+系统网络运行模式
+
+1NAT模式
+
+系统配置配置动态获取IP1、修改配置文件
+1vi &#x2F;etc&#x2F;sysconfig&#x2F;network-scripts&#x2F;ifcfg-eno33 &#x2F;&#x2F;eno33是你的网卡名字
+
+2、修改选项ONBOOT  //默认ONBOOT处于关闭状态
+
+ONBOOT = no ==&gt;&gt; ONBOOT = yes
+
+3、重启服务
+1systemctl restart ...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/02/28</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Linux">Linux</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2019/02/16/BugkuCTF-Writeup/" >
             
                 <span>Bugku CTF WriteUp 合集</span>
@@ -680,35 +732,6 @@ Ascii...
             <div class= abstract-tags >
     
         <a class="post-tag" href="javascript:void(0);" data-tags = "Web">Web</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/11/07/CSRF-Bug-Test/" >
-            
-                <span>CSRF 漏洞分析与测试</span>
-        </a>
-        <div class="abstract-content">
-            CSRF简介CSRF中文名：跨站请求伪造，英文译为：Cross-site request forgery，CSRF攻击就是attacker（攻击者）利用victim（受害者）尚未失效的身份认证信息(cookie、session等)，以某种方式诱骗victim点击attacker精心制作的恶意链接或者访问包含恶意攻击代码的页面，当victim触发成功之后，恶意代码会被执行，浏览器默默的向目标service发出请求加载着victim尚未失效的身份认证信息，导致victim替attacker完成了非法操作比如：在某些论坛上发布大量的恶意言论、网站用户密码被恶意篡改、账户金额被盗取、删除网站个人...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/07</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "CSRF">CSRF</a>
     
 </div>
             
@@ -1815,9 +1838,26 @@ Ascii...
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 62
+        Total : 63
         </div>
         <!-- search  -->
         
@@ -1830,6 +1870,11 @@ Ascii...
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/26</span><a class="archive-post-title" href= "/2020/05/26/ISCC_2020_Web_WriteUp/" >ISCC 2020 Web WriteUp</a>
+        </li>
     
     
         <li class="archive-post-item">
