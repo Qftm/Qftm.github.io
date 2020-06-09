@@ -346,6 +346,58 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2019/10/27/RoarCTF2019-Writeup/" >
+            
+                <span>楼上请让路 RoarCTF2019 Writeup</span>
+        </a>
+        <div class="abstract-content">
+            Misc签到题RoarCTF{签到！！！}
+黄金六年
+文件尾部有一段base64，解码为16进制可以看到是一个压缩包
+
+
+打开压缩包需要密码
+
+使用pr抽帧
+
+
+
+
+可以看到部分帧中有二维码，依次扫码即可得到key iwantplayctf
+
+forensic直接上volatility
+
+建议profile，直接用Win7SP1x86就可以。
+查看进程
+volatility -f mem.raw pslist –profile=Win7SP1x86
+可以看到存在以下几个值得注意的进程：
+
+Dumpit.exe 一款内存镜像提取工具。
+TrueCrypt.exe 一款磁盘加密工具。
+Not...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/10/27</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "CTF">CTF</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2019/10/26/Joomla3.4.6-RCE-analyze/" >
             
                 <span>Joomla3.4.6 RCE漏洞深度分析</span>
@@ -679,37 +731,6 @@ ps：先在攻击机上进行监听，然后在肉鸡上给Attacker...
         <a class="post-tag" href="javascript:void(0);" data-tags = "木马后门">木马后门</a>
     
         <a class="post-tag" href="javascript:void(0);" data-tags = "PowerShell">PowerShell</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/08/03/AWD-Bugs-Fix/" >
-            
-                <span>AWD攻防赛之各类漏洞FIX方案</span>
-        </a>
-        <div class="abstract-content">
-            Background0x01 Introduction1、CTF中的线下赛又被称为AWD（Attack With Defence）。AWD对于选手的攻击能力，防御能力以及团队合作能力都有着很高的考验。比赛中有多支队伍，每个队伍维护多台服务器，服务器中存在多个漏洞，利用漏洞攻击其他队伍的服务器可以进行得分，修补漏洞可以避免被其他队伍攻击失分。
-2、WEB安全中常见漏洞包括SQL注入、反序列化、文件上传、文件包含、代码执行、XXE、XXS、CSRF等。大家熟知的AWD攻防赛中常常是把某几个漏洞点结合起来进行考察。在AWD赛制中，攻与防是相对的，针对服务器上不同漏洞所采用的修补方案也不一样。
-...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/08/03</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "AWD">AWD</a>
     
 </div>
             
@@ -1736,9 +1757,36 @@ ps：先在攻击机上进行监听，然后在肉鸡上给Attacker...
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 63
+        Total : 64
         </div>
         <!-- search  -->
         
@@ -1751,6 +1799,11 @@ ps：先在攻击机上进行监听，然后在肉鸡上给Attacker...
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/06</span><a class="archive-post-title" href= "/2020/06/06/big-data-hadoop/" >Big Data Hadoop</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -2178,6 +2231,8 @@ ps：先在攻击机上进行监听，然后在肉鸡上给Attacker...
     
         <span class="sidebar-tag-name" data-tags="开发"><span class="iconfont-archer">&#xe606;</span>开发</span>
     
+        <span class="sidebar-tag-name" data-tags="Hadoop"><span class="iconfont-archer">&#xe606;</span>Hadoop</span>
+    
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
     <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
@@ -2248,6 +2303,8 @@ jsonContent:
         <span class="sidebar-category-name" data-categories="云计算"><span class="iconfont-archer">&#xe60a;</span>云计算</span>
     
         <span class="sidebar-category-name" data-categories="软件工程"><span class="iconfont-archer">&#xe60a;</span>软件工程</span>
+    
+        <span class="sidebar-category-name" data-categories="大数据"><span class="iconfont-archer">&#xe60a;</span>大数据</span>
     
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
