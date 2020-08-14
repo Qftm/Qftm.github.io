@@ -1,413 +1,416 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html lang="en">
-    <!-- title -->
-
-
-
-
-<!-- keywords -->
-
-
 
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
-    <meta name="author" content="Qftm">
-    <meta name="renderer" content="webkit">
-    <meta name="copyright" content="Qftm">
-    
-    <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
-    
-    <meta name="description" content="">
-    <meta http-equiv="Cache-control" content="no-cache">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>Linux Network Protocol Stack · Qftm&#39;s Blog</title>
-    <style type="text/css">
-    @font-face {
-        font-family: 'Oswald-Regular';
-        src: url("/font/Oswald-Regular.ttf");
-    }
-
-    body {
-        margin: 0;
-    }
-
-    header,
-    footer,
-    .back-top,
-    .sidebar,
-    .container,
-    .site-intro-meta,
-    .toc-wrapper {
-        display: none;
-    }
-
-    .site-intro {
-        position: relative;
-        z-index: 3;
-        width: 100%;
-        /* height: 50vh; */
-        overflow: hidden;
-    }
-
-    .site-intro-placeholder {
-        position: absolute;
-        z-index: -2;
-        top: 0;
-        left: 0;
-        width: calc(100% + 300px);
-        height: 100%;
-        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
-        background-position: center center;
-        transform: translate3d(-226px, 0, 0);
-        animation: gradient-move 2.5s ease-out 0s infinite;
-    }
-
-    @keyframes gradient-move {
-        0% {
-            transform: translate3d(-226px, 0, 0);
-        }
-        100% {
-            transform: translate3d(0, 0, 0);
-        }
-    }
-
-</style>
-
-    <link rel="preload" href= "/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <link rel="stylesheet" href= "/css/mobile.css?v=20180824" media="(max-width: 980px)">
-    
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    
-    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
-/* This file is meant as a standalone workflow for
-- testing support for link[rel=preload]
-- enabling async CSS loading in browsers that do not support rel=preload
-- applying rel preload css once loaded, whether supported or not.
-*/ -->
-<script>
-(function( w ){
-	"use strict";
-	// rel=preload support test
-	if( !w.loadCSS ){
-		w.loadCSS = function(){};
-	}
-	// define on the loadCSS obj
-	var rp = loadCSS.relpreload = {};
-	// rel=preload feature support test
-	// runs once and returns a function for compat purposes
-	rp.support = (function(){
-		var ret;
-		try {
-			ret = w.document.createElement( "link" ).relList.supports( "preload" );
-		} catch (e) {
-			ret = false;
-		}
-		return function(){
-			return ret;
-		};
-	})();
-
-	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
-	// then change that media back to its intended value on load
-	rp.bindMediaToggle = function( link ){
-		// remember existing media attr for ultimate state, or default to 'all'
-		var finalMedia = link.media || "all";
-
-		function enableStylesheet(){
-			link.media = finalMedia;
-		}
-
-		// bind load handlers to enable media
-		if( link.addEventListener ){
-			link.addEventListener( "load", enableStylesheet );
-		} else if( link.attachEvent ){
-			link.attachEvent( "onload", enableStylesheet );
-		}
-
-		// Set rel and non-applicable media type to start an async request
-		// note: timeout allows this to happen async to let rendering continue in IE
-		setTimeout(function(){
-			link.rel = "stylesheet";
-			link.media = "only x";
-		});
-		// also enable media after 3 seconds,
-		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
-		setTimeout( enableStylesheet, 3000 );
-	};
-
-	// loop through link elements in DOM
-	rp.poly = function(){
-		// double check this to prevent external calls from running
-		if( rp.support() ){
-			return;
-		}
-		var links = w.document.getElementsByTagName( "link" );
-		for( var i = 0; i < links.length; i++ ){
-			var link = links[ i ];
-			// qualify links to those with rel=preload and as=style attrs
-			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
-				// prevent rerunning on link
-				link.setAttribute( "data-loadcss", true );
-				// bind listeners to toggle media back
-				rp.bindMediaToggle( link );
-			}
-		}
-	};
-
-	// if unsupported, run the polyfill
-	if( !rp.support() ){
-		// run once at least
-		rp.poly();
-
-		// rerun poly on an interval until onload
-		var run = w.setInterval( rp.poly, 500 );
-		if( w.addEventListener ){
-			w.addEventListener( "load", function(){
-				rp.poly();
-				w.clearInterval( run );
-			} );
-		} else if( w.attachEvent ){
-			w.attachEvent( "onload", function(){
-				rp.poly();
-				w.clearInterval( run );
-			} );
-		}
-	}
+    <meta name="keywords" content="Linux Network Protocol Stack, Qftm">
+    <meta name="description" content="Maybe a hacker">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-	// commonjs
-	if( typeof exports !== "undefined" ){
-		exports.loadCSS = loadCSS;
-	}
-	else {
-		w.loadCSS = loadCSS;
-	}
-}( typeof global !== "undefined" ? global : this ) );
-</script>
+    <title>Linux Network Protocol Stack | Qftm</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
 
-    <link rel="icon" href= "/assets/favicon.ico" />
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script" />
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script" />
-    <link rel="preload" href="/scripts/main.js" as="script" />
-    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
-    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
-    
-    <!-- fancybox -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
-    <!-- 百度统计  -->
-    
-    <!-- 谷歌统计  -->
-    
-<meta name="generator" content="Hexo 4.2.0"></head>
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
 
-    
-        <body class="post-body">
-    
-    
-<header class="header">
+    <script src="/libs/jquery/jquery.min.js"></script>
 
-    <div class="read-progress"></div>
-    <div class="header-sidebar-menu">&#xe775;</div>
-    <!-- post页的toggle banner  -->
-    
-    <div class="banner">
-            <div class="blog-title">
-                <a href="/" >Qftm&#39;s Blog</a>
+<meta name="generator" content="Hexo 4.2.1"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Qftm</span>
+                </a>
             </div>
-            <div class="post-title">
-                <a href="#" class="post-name">Linux Network Protocol Stack</a>
-            </div>
-    </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
     
-    <a class="home-link" href=/>Qftm's Blog</a>
-</header>
-    <div class="wrapper">
-        <div class="site-intro" style="
-
-
-
-
-
-
-
-height:50vh;
-">
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>Index</span>
+    </a>
     
-    <!-- 主页  -->
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
     
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>Tags</span>
+    </a>
     
-    <!-- 404页  -->
-            
-    <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
-    <div class="site-intro-meta">
-        <!-- 标题  -->
-        <h1 class="intro-title">
-            <!-- 主页  -->
-            
-            Linux Network Protocol Stack
-            <!-- 404 -->
-            
-        </h1>
-        <!-- 副标题 -->
-        <p class="intro-subtitle">
-            <!-- 主页副标题  -->
-            
-            
-            <!-- 404 -->
-            
-        </p>
-        <!-- 文章页meta -->
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>Categories</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>Archives</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-heartbeat" style="zoom: 0.6;"></i>
+      
+      <span>About</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>Friends</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="Search" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
         
-            <div class="post-intros">
-                <!-- 文章页标签  -->
-                
-                    <div class= post-intro-tags >
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Qftm</div>
+        <div class="logo-desc">
+            
+            Maybe a hacker
+            
+        </div>
+    </div>
+
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Linux">Linux</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "协议">协议</a>
-    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			Index
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			Tags
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			Categories
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			Archives
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-heartbeat"></i>
+			
+			About
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			Friends
+		</a>
+          
+        </li>
+        
+        
+    </ul>
 </div>
-                
-                
-                    <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">5.1k</span>Reading time: <span class="post-count reading-time">17 min</span></span>
-                    </div>
-                
-                <div class="post-intro-meta">
-                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2020/03/25</span>
-                    
-                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
-                        <span class="iconfont-archer">&#xe602;</span>
-                        <span id="busuanzi_value_page_pv"></span>
-                    </span>
-                    
-                    <span class="shareWrapper">
-                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
-                        <span class="shareText">Share</span>
-                        <ul class="shareList">
-                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
-                                <div class="share-qrcode"></div>
-                            </li>
-                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
-                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
-                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
-                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
-                        </ul>
-                    </span>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Linux Network Protocol Stack</h1>
                 </div>
             </div>
-        
+        </div>
     </div>
 </div>
-        <script>
- 
-  // get user agent
-  var browser = {
-    versions: function () {
-      var u = window.navigator.userAgent;
-      return {
-        userAgent: u,
-        trident: u.indexOf('Trident') > -1, //IE内核
-        presto: u.indexOf('Presto') > -1, //opera内核
-        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
-        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
-        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
-        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
-        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
-        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
-        iPad: u.indexOf('iPad') > -1, //是否为iPad
-        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
-        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
-        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
-      };
-    }()
-  }
-  console.log("userAgent:" + browser.versions.userAgent);
 
-  // callback
-  function fontLoaded() {
-    console.log('font loaded');
-    if (document.getElementsByClassName('site-intro-meta')) {
-      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
-      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
-      var postIntros = document.getElementsByClassName('post-intros')[0]
-      if (postIntros) {
-        postIntros.classList.add('post-fade-in');
-      }
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
     }
-  }
 
-  // UC不支持跨域，所以直接显示
-  function asyncCb(){
-    if (browser.versions.uc) {
-      console.log("UCBrowser");
-      fontLoaded();
-    } else {
-      WebFont.load({
-        custom: {
-          families: ['Oswald-Regular']
-        },
-        loading: function () {  //所有字体开始加载
-          // console.log('loading');
-        },
-        active: function () {  //所有字体已渲染
-          fontLoaded();
-        },
-        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
-          console.log('inactive: timeout');
-          fontLoaded();
-        },
-        timeout: 5000 // Set the timeout to two seconds
-      });
+    #articleContent :focus {
+        outline: none;
     }
-  }
 
-  function asyncErr(){
-    console.warn('script load from CDN failed, will load local script')
-  }
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
 
-  // load webfont-loader async, and add callback function
-  function async(u, cb, err) {
-    var d = document, t = 'script',
-      o = d.createElement(t),
-      s = d.getElementsByTagName(t)[0];
-    o.src = u;
-    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
-    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
-    s.parentNode.insertBefore(o, s);
-  }
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
 
-  var asyncLoadWithFallBack = function(arr, success, reject) {
-      var currReject = function(){
-        reject()
-        arr.shift()
-        if(arr.length)
-          async(arr[0], success, currReject)
-        }
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
 
-      async(arr[0], success, currReject)
-  }
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
 
-  asyncLoadWithFallBack([
-    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
-    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
-    "/lib/webfontloader.min.js"
-  ], asyncCb, asyncErr)
-</script>        
-        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
-        <div class="container container-unloaded">
-            <main class="main post-page">
-    <article class="article-entry">
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近，发现网络协议栈这部分有缺陷，底层基础知识一点要熟练掌握。于是，打算开始深入学习理解Linux网络协议栈 23333！！！一切事物只有熟悉其底层原理，那么所有的问题都会迎刃而解。</p>
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Linux/">
+                                <span class="chip bg-color">Linux</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%8D%8F%E8%AE%AE/">
+                                <span class="chip bg-color">协议</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E5%AE%89%E5%85%A8%E5%BB%BA%E8%AE%BE/" class="post-category">
+                                安全建设
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    2020-03-25
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
+                    2020-08-14
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    5.1k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    17 Min
+                </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近，发现网络协议栈这部分有缺陷，底层基础知识一点要熟练掌握。于是，打算开始深入学习理解Linux网络协议栈 23333！！！一切事物只有熟悉其底层原理，那么所有的问题都会迎刃而解。</p>
 <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>Linux网络协议栈源码是Linux内核源码的重要组成部分,它不仅支持TCP/IP协议，还支持Ethernet透明网桥协议,提供IP防火墙、IP服务质量(QoS)管理及其他的安全特性。配置好的Linux系统所能提供的这些功能可以与目前使用的中档路由器、网桥等网络设备相媲美。Linux 系统还支持多种不同的网络协议，如ATM、蓝牙协议等。下面将重点讨论基于Ethernet的TCP/IP协议的设计和实现技术。</p>
 <h1 id="设计特点"><a href="#设计特点" class="headerlink" title="设计特点"></a>设计特点</h1><p>Linux网络协议栈在设计和实现思路上体现了以下3个重要特点</p>
 <h2 id="层次化"><a href="#层次化" class="headerlink" title="层次化"></a>层次化</h2><p>网络系统在设计上采用了层次化的体系结构。这种层次结构为网络协议的设计与实现提供了很大方便，上层协议可以通过相邻层之间预先定义的服务接口直接使用下层协议提供的功能,从而保证任何一-层协议实现技术的改变不会影响整个网络系统的正常运行。由于操作系统不仅要考虑网络子系统如何与其他子系统(如文件子系统和调度子系统)协调工作,还要支持各种不同的网络设备，让系统中的各个部分协调工作，所以必须采用层次化的设计方法。Linux网络协议栈的层次结构如图所示。</p>
-<p><img src="/2020/03/25/Linux-Network-Protocol-Stack/image-20200320092829021.png" alt="image-20200320092829021"></p>
+<p><img src="/2020/03/25/linux-network-protocol-stack/image-20200320092829021.png" alt="image-20200320092829021"></p>
 <h3 id="网络编程接口层"><a href="#网络编程接口层" class="headerlink" title="网络编程接口层"></a>网络编程接口层</h3><p>位于层次结构最高层的是网络编程接口层，它主要提供符合BSD socket API规范的接口函数，这部分就是编写网络应用程序时经常采用的socket函数，例如socket、bind、accept等,它们是应用程序使用网络服务的主要途径。</p>
 <h3 id="系统调用接口层"><a href="#系统调用接口层" class="headerlink" title="系统调用接口层"></a>系统调用接口层</h3><p>在网络编程接口层之下的是系统调用接口层,它可以实现通过虚拟文件系统的接口访问网络的功能，如在报文发送和接收流程中使用的read和write函数。</p>
 <h3 id="硬件设备层"><a href="#硬件设备层" class="headerlink" title="硬件设备层"></a>硬件设备层</h3><p>位于层次结构最底层的是由各种具体硬件设备组成的硬件设备层,各种设备通过硬件厂商自己提供的驱动程序来完成工作。</p>
@@ -415,7 +418,7 @@ height:50vh;
 <h3 id="网络协议实现层"><a href="#网络协议实现层" class="headerlink" title="网络协议实现层"></a>网络协议实现层</h3><p>虚拟网络设备层之上是网络协议实现层，其中实现各种网络协议，如TCP、IP、ARP协议等。</p>
 <h3 id="通用网络接口层"><a href="#通用网络接口层" class="headerlink" title="通用网络接口层"></a>通用网络接口层</h3><p>Linux网络协议栈在网络协议实现层之上增加了一个通用网络接口层。设置通用网络接口层的目的与虚拟网络设备层十分类似，它为各种网络协议提供了一个服务接口。这样系统中的其他子系统就可以直接使用网络服务,而无需依赖特定的协议或硬件。</p>
 <h2 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h2><p>一方面，层次化设计本身就要求把每一层作为一个独立的模块来实现；另一方面，由于Linux网络协议栈支持的网络协议和实现的网络功能比较多，所以通常情况下这些功能或协议不会同时被使用，这就要求网络协议栈能够根据实际情况，采取“按需加载”的方法，选择所要求的功能与协议。通过采用模块化的实现方式，不仅能够提高系统的工作效率，而且便于以后增加新的功能或协议。下图给出Linux中TCP/IP协议栈中的各个主要功能模块之间的关系示意图。</p>
-<p><img src="/2020/03/25/Linux-Network-Protocol-Stack/image-20200320094302966.png" alt="image-20200320094302966"></p>
+<p><img src="/2020/03/25/linux-network-protocol-stack/image-20200320094302966.png" alt="image-20200320094302966"></p>
 <p>每个模块的设计目标都很明确，一个模块只用来完成一项任务，如IPv4 模块只完成IPv4分组的接收、发送、合法性判断、分片重组等任务，而路由选择功能则交给IP路由模块来完成。为降低模块之间的耦合度，减小相互之间的影响，模块与模块之间的界面多采用函数指针作为接口。这样，当一个模块的实现方式发生变化时，不影响另一个模块的正常工作。</p>
 <h2 id="面向对象的设计"><a href="#面向对象的设计" class="headerlink" title="面向对象的设计"></a>面向对象的设计</h2><p>Linux内核里很多子系统都采用了面向对象的设计方法，最典型的例子就是虚拟文件系统(virtual file system, VFS)。Linux 内核支持很多种文件系统,比如VFAT、EXT2、JFS等。但是在内核里面，采用一个抽象的基类VFS来表示所有的文件系统，并且定义了文件系统的操作界面(接口函数)，然后每一种文件系统再根据VFS进行实例化。</p>
 <p>网络协议栈部分也有多处采用了面向对象的设计方法，典型的例子有以下两个</p>
@@ -431,7 +434,7 @@ height:50vh;
 <h1 id="TCP-IP协议栈中主要模块简介"><a href="#TCP-IP协议栈中主要模块简介" class="headerlink" title="TCP/IP协议栈中主要模块简介"></a>TCP/IP协议栈中主要模块简介</h1><p>下面按照从上层到下层的顺序来对网络协议栈的各个子模块进行介绍。</p>
 <h2 id="路由子系统"><a href="#路由子系统" class="headerlink" title="路由子系统"></a>路由子系统</h2><p>路由是IP层的主要任务之一，也是IP层最复杂的模块。当主机向外发送IP分组时，要根据IP分组的目的地址查询它的路由。Linux网络协议栈将与IP路由有关的信息集中存放在转发信息块(Forwarding Information Block，FIB)中，转发路由信息库包括路由规则(Routing Rules)和路由表( Routing Tables) 两个部分。路由规则用来实现基于规则的路由，又称为策略路由，即对满足某些条件的报文，应用特定的路由表来决定路由信息。系统中最多可以定义255张路由表，在不启用策略路由的情况下只使用其中两张:主路由表(main_table)用于描述主机间路由规则;局部路由表(local_table)只用于记录本地地址信息。如果分组的路由决策来自局部路由表，则说明这是发给本机的分组。通过这样一个特殊的路由表，路由子系统能够以统一的方式来处理所有IP分组。</p>
 <p>路由表本身不是一个单一的结构，而是由多个结构组合而成，并且采用层次结构来组织和管理这些实现路由表的结构。这些数据结构之间的关系如下图所示</p>
-<p><img src="/2020/03/25/Linux-Network-Protocol-Stack/image-20200325093657873.png" alt="image-20200325093657873"></p>
+<p><img src="/2020/03/25/linux-network-protocol-stack/image-20200325093657873.png" alt="image-20200325093657873"></p>
 <h2 id="组播模块"><a href="#组播模块" class="headerlink" title="组播模块"></a>组播模块</h2><p>Internet上的大多数网络应用都属于单播通信，即将分组从一台主机发送到另一台主机。但有些应用(如视频会议)要求同时有多个发送主机和多个接收主机，这样的通信方式称为组播(或多播)。上面介绍的IP路由子系统主要是针对单播模式，但Linux网络协议栈同样也支持组播模式。要实现组播通信，网络协议栈必须实现两种功能：管理组播通信的成员、高效地把数据分发给组播成员。</p>
 <p>对于第一种功能，Linux协议栈实现了标准的IGMP协议，具体的代码在net/ipv4/igmp.c中。IGMP协议数据必须作为IP分组的负载，在IP报头中会指明负载类型，进而调用接收IGMP报文的处理函数igmp_rev。</p>
 <p>对于第二种功能，通常在组成员之间建立一棵组播树，发送主机作为树的根节点，把分组发送给作为树的叶子节点的接收主机，这个过程称为组播路由算法。树的中间节点只负责转发而不需要接收组播分组，因此网络协议栈也必须区分接收和转发的情况。目前常用的组播路由算法包括DVMRP，MOSPF等。组播路由算法大多以守护程序的形式在用户空间实现。但转发和接收组播报文的处理必须在内核协议栈中完成，这部分代码在net/<br>ipv4/ipmr.c中。</p>
@@ -455,7 +458,7 @@ height:50vh;
 </ul>
 <p>Linux中所有报文过滤和NAT等功能都基于该框架。目前Netfilter 框架已在IPv4和IPv6协议栈中实现了。</p>
 <p>下图显示了Netfilter框架中钩子函数在协议栈中的位置，从图中可以看到IPv4共有5个钩子函数点</p>
-<p><img src="/2020/03/25/Linux-Network-Protocol-Stack/image-20200325095747404.png" alt="image-20200325095747404"></p>
+<p><img src="/2020/03/25/linux-network-protocol-stack/image-20200325095747404.png" alt="image-20200325095747404"></p>
 <p>Iptables是一个基于Netfilter框架的报文过滤和修改工具。Iptables模块可以创建规则表(table) ，并要求报文流经指定的规则表。在Iptables 中，预先定义了3张规则表，分别实现3种不同的概念：报文过滤(filter表)、网络地址转换(nat表)及报文处理(mangle表)。</p>
 <ul>
 <li>报文过滤（filter表） </li>
@@ -509,1641 +512,502 @@ height:50vh;
 </li>
 </ul>
 
-    </article>
-    <!-- license  -->
-    
-        <div class="license-wrapper">
-            <p>Author：<a href="http://Qftm.github.io">Qftm</a>
-            <p>原文链接：<a href="http://qftm.github.io/2020/03/25/Linux-Network-Protocol-Stack/">http://qftm.github.io/2020/03/25/Linux-Network-Protocol-Stack/</a>
-            <p>发表日期：<a href="http://qftm.github.io/2020/03/25/Linux-Network-Protocol-Stack/">March 25th 2020, 5:21:00 am</a>
-            <p>更新日期：<a href="http://qftm.github.io/2020/03/25/Linux-Network-Protocol-Stack/">March 25th 2020, 3:15:53 pm</a>
-            <p>版权声明：本文采用<a rel="license noopener" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
-        </div>
-    
-    <!-- paginator  -->
-    <ul class="post-paginator">
-        <li class="next">
-            
-                <div class="nextSlogan">Next Post</div>
-                <a href= "/2020/04/03/php-filter-tricks/" title= "探索php://filter在实战当中的奇技淫巧">
-                    <div class="nextTitle">探索php://filter在实战当中的奇技淫巧</div>
-                </a>
-            
-        </li>
-        <li class="previous">
-            
-                <div class="prevSlogan">Previous Post</div>
-                <a href= "/2020/03/23/Software-Engineering-Learning-Handbook/" title= "Software Engineering Learning Handbook">
-                    <div class="prevTitle">Software Engineering Learning Handbook</div>
-                </a>
-            
-        </li>
-    </ul>
-    <!-- 评论插件 -->
-    <!-- 来必力City版安装代码 -->
+            </div>
+            <hr/>
 
-<!-- City版安装代码已完成 -->
-    
-    
-    <!-- partial('_partial/comment/changyan') -->
-    <!--PC版-->
+            
 
-
-    
-    
-
-    <!-- 评论 -->
-</main>
-            <!-- profile -->
-            
-        </div>
-        <footer class="footer footer-unloaded">
-    <!-- social  -->
-    
-    <div class="social">
+    <div class="reprint" id="reprint-statement">
         
-    
-        
-            
-                <a href="mailto:Qftmbin@gmail.com" class="iconfont-archer email" title=email ></a>
-            
-        
-    
-        
-            
-                <a href="//github.com/Qftm" class="iconfont-archer github" target="_blank" title=github></a>
-            
-        
-    
-        
-            
-                <span class="iconfont-archer wechat" title=wechat>
-                  
-                  <img class="profile-qr" src="/assets/example_qr.png" />
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        Author:
+                    </i>
                 </span>
-            
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Qftm</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        Link:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://Qftm.github.io/2020/03/25/linux-network-protocol-stack/">http://Qftm.github.io/2020/03/25/linux-network-protocol-stack/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        Reprint policy:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    All articles in this blog are used except for special statements
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    reprint polocy. If reproduced, please indicate source
+                    <a href="/about" target="_blank">Qftm</a>
+                    !
+                </span>
+            </div>
         
-    
-        
-    
-        
-    
-        
-            
-                <a href="//weibo.com/QftmEr" class="iconfont-archer weibo" target="_blank" title=weibo></a>
-            
-        
-    
-        
-    
-        
-    
-        
-    
-        
-            
-                <a href="//twitter.com/Qftmer" class="iconfont-archer twitter" target="_blank" title=twitter></a>
-            
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
+    </div>
 
-    </div>
-    
-    <!-- powered by Hexo  -->
-    <div class="copyright">
-        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
-    </div>
-    <!-- 不蒜子  -->
-    
-    <div class="busuanzi-container">
-    
-     
-    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
-    
-    </div>
-    
-</footer>
-    </div>
-    <!-- toc -->
-    
-    <div class="toc-wrapper" style=
-    
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        M.toast({html: toastHTML})
+      });
 
-
-
-
-
-
-
-top:50vh;
-
-    >
-        <div class="toc-catalog">
-            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
-        </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#概述"><span class="toc-number">2.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#设计特点"><span class="toc-number">3.</span> <span class="toc-text">设计特点</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#层次化"><span class="toc-number">3.1.</span> <span class="toc-text">层次化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#网络编程接口层"><span class="toc-number">3.1.1.</span> <span class="toc-text">网络编程接口层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#系统调用接口层"><span class="toc-number">3.1.2.</span> <span class="toc-text">系统调用接口层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#硬件设备层"><span class="toc-number">3.1.3.</span> <span class="toc-text">硬件设备层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#虚拟设备接口层"><span class="toc-number">3.1.4.</span> <span class="toc-text">虚拟设备接口层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#网络协议实现层"><span class="toc-number">3.1.5.</span> <span class="toc-text">网络协议实现层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#通用网络接口层"><span class="toc-number">3.1.6.</span> <span class="toc-text">通用网络接口层</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模块化"><span class="toc-number">3.2.</span> <span class="toc-text">模块化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#面向对象的设计"><span class="toc-number">3.3.</span> <span class="toc-text">面向对象的设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#邻居表"><span class="toc-number">3.3.1.</span> <span class="toc-text">邻居表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#socket接口"><span class="toc-number">3.3.2.</span> <span class="toc-text">socket接口</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#固定实现模式"><span class="toc-number">4.</span> <span class="toc-text">固定实现模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#缓存"><span class="toc-number">4.1.</span> <span class="toc-text">缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#引用计数"><span class="toc-number">4.2.</span> <span class="toc-text">引用计数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数指针"><span class="toc-number">4.3.</span> <span class="toc-text">函数指针</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TCP-IP协议栈中主要模块简介"><span class="toc-number">5.</span> <span class="toc-text">TCP&#x2F;IP协议栈中主要模块简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#路由子系统"><span class="toc-number">5.1.</span> <span class="toc-text">路由子系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#组播模块"><span class="toc-number">5.2.</span> <span class="toc-text">组播模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IPv6模块"><span class="toc-number">5.3.</span> <span class="toc-text">IPv6模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#报文过滤和防火墙模块"><span class="toc-number">5.4.</span> <span class="toc-text">报文过滤和防火墙模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#邻居子系统"><span class="toc-number">5.5.</span> <span class="toc-text">邻居子系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网桥模块"><span class="toc-number">5.6.</span> <span class="toc-text">网桥模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#流量控制管理"><span class="toc-number">5.7.</span> <span class="toc-text">流量控制管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原始套接字和PACKET协议族"><span class="toc-number">5.8.</span> <span class="toc-text">原始套接字和PACKET协议族</span></a></li></ol></li></ol>
-    </div>
-    
-    <div class="back-top iconfont-archer">&#xe639;</div>
-    <div class="sidebar sidebar-hide">
-    <ul class="sidebar-tabs sidebar-tabs-active-0">
-        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
-        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
-        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
-    </ul>
-    <div class="sidebar-content sidebar-content-show-archive">
-          <div class="sidebar-panel-archives">
-    <!-- 在ejs中将archive按照时间排序 -->
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <div class="total-and-search">
-        <div class="total-archive">
-        Total : 63
-        </div>
-        <!-- search  -->
-        
-    </div>
-    
-    <div class="post-archive">
-    
-    
-    
-    
-    <div class="archive-year"> 2020 </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">06/22</span><a class="archive-post-title" href= "/2020/06/22/pentesting1/" >从0到1学会搭建小型企业拓扑到由外向内的渗透测试</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">06/20</span><a class="archive-post-title" href= "/2020/06/20/metasploit-framework/" >Metasploit Framework Handbook</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">06/06</span><a class="archive-post-title" href= "/2020/06/06/big-data-hadoop/" >Big Data Hadoop</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">05/26</span><a class="archive-post-title" href= "/2020/05/26/ISCC_2020_Web_WriteUp/" >ISCC 2020 Web WriteUp</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">04/19</span><a class="archive-post-title" href= "/2020/04/19/bypass-nodejs-jwt/" >探索Node.js中JWT认证缺陷的绕过</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">04/03</span><a class="archive-post-title" href= "/2020/04/03/php-filter-tricks/" >探索php://filter在实战当中的奇技淫巧</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/25</span><a class="archive-post-title" href= "/2020/03/25/Linux-Network-Protocol-Stack/" >Linux Network Protocol Stack</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/23</span><a class="archive-post-title" href= "/2020/03/23/Software-Engineering-Learning-Handbook/" >Software Engineering Learning Handbook</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/22</span><a class="archive-post-title" href= "/2020/03/22/Socket-Learning-Handbook/" >Socket Programming Learning Handbook</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/18</span><a class="archive-post-title" href= "/2020/03/18/PHP-File-Inclusion-Exploiting-and-Bypass/" >PHP File Inclusion Bug Exploiting and Bypass Handbook</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/15</span><a class="archive-post-title" href= "/2020/03/15/LFI-PHPINFO-OR-PHP7-Segment-Fault/" >LFI PHPINFO OR PHP7 Segment Fault Getshell</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/12</span><a class="archive-post-title" href= "/2020/03/12/LFI-Bypass-Session-Restriction-Getshell/" >LFI Bypass Session Restriction Getshell</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/10</span><a class="archive-post-title" href= "/2020/03/10/Linux-Electronic-Forensics/" >Linux Electronic Forensics Learning Handbook</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/06</span><a class="archive-post-title" href= "/2020/03/06/bypass-rfi-by-webdav/" >RFI巧用WebDAV绕过URL包含限制Getshell</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">02/12</span><a class="archive-post-title" href= "/2020/02/12/Hackintosh-Of-Lenovo-R720-15IKBN/" >Hackintosh Of Lenovo R720 15IKBN</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">01/18</span><a class="archive-post-title" href= "/2020/01/18/Information-Collection-Handbook/" >Information Collection Handbook</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">01/03</span><a class="archive-post-title" href= "/2020/01/03/small-and-medium-sized-enterprise-ips-deployment/" >中小型企业级 IPS 部署</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">01/01</span><a class="archive-post-title" href= "/2020/01/01/small-and-medium-sized-enterprise-firewall-deployment/" >中小型企业级防火墙部署</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> 2019 </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/31</span><a class="archive-post-title" href= "/2019/12/31/Docker-Learning-Handbook/" >Docker Learning Handbook</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/22</span><a class="archive-post-title" href= "/2019/11/22/PhpStudyBackDoor2019/" >PhpStudy BackDoor2019 深度分析</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">10/27</span><a class="archive-post-title" href= "/2019/10/27/Kali-Rolling-2019/" >Kali Rolling 2019 系统配置总结（Updateing）</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">10/26</span><a class="archive-post-title" href= "/2019/10/26/Joomla3.4.6-RCE-analyze/" >Joomla3.4.6 RCE漏洞深度分析</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">09/30</span><a class="archive-post-title" href= "/2019/09/30/pe-structure/" >初识PE文件结构</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">09/19</span><a class="archive-post-title" href= "/2019/09/19/information-hiding-and-detection-based-on-bmp-image/" >基于BMP图像的信息隐藏与检测</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">09/14</span><a class="archive-post-title" href= "/2019/09/14/matlab-image-and-audio-signal-processing/" >MATLAB之图像与音频信号处理</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">09/12</span><a class="archive-post-title" href= "/2019/09/12/matlab-basic-syntax-and-functions/" >MATLAB之基本语法与基础函数</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">09/11</span><a class="archive-post-title" href= "/2019/09/11/CVE-2018-14418-shines-a-new-spark/" >CVE-2018-14418 擦出新火花</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">09/05</span><a class="archive-post-title" href= "/2019/09/05/Electronic-Forensics-1/" >浅谈电子数字取证技术</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">08/03</span><a class="archive-post-title" href= "/2019/08/03/Linux-Reverse-Shell/" >Linux 反弹 Shell</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">08/03</span><a class="archive-post-title" href= "/2019/08/03/Windows-Reverse-Shell/" >Windows 反弹 Shell</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">08/03</span><a class="archive-post-title" href= "/2019/08/03/AWD-Bugs-Fix/" >AWD攻防赛之各类漏洞FIX方案</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">08/01</span><a class="archive-post-title" href= "/2019/08/01/ISCC2019-Finals-Writeup/" >第16届(2019)全国大学生信息安全与对抗技术竞赛全国线下总决赛 Writeup</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">07/31</span><a class="archive-post-title" href= "/2019/07/31/Hack-The-Box-Web-Pentest-2017/" >Hack The Box Web Pentest 2017</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">07/30</span><a class="archive-post-title" href= "/2019/07/30/Hack-The-Box-Web-Pentest-2019/" >Hack The Box Web Pentest 2019</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">05/12</span><a class="archive-post-title" href= "/2019/05/12/Linux-DHCP-server-configuration-and-management/" >Linux DHCP 服务器配置与管理</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">05/12</span><a class="archive-post-title" href= "/2019/05/12/Linux-DNS-server-configuration-and-management/" >Linux DNS 服务器配置与管理</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">04/26</span><a class="archive-post-title" href= "/2019/04/26/Symmetric-Key-Encryption-DES/" >Symmetric Key Encryption DES</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/26</span><a class="archive-post-title" href= "/2019/03/26/cbc-byte-reverse-attack/" >针对 CBC 字节反转攻击的研究与漏洞复现</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/24</span><a class="archive-post-title" href= "/2019/03/24/symmetric-and-asymmetric-crypto-system/" >对称密码体制和非对称密码体制</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2019/03/08/routing-protocol-and-switching-technology/" >路由协议与交换技术合集</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">02/28</span><a class="archive-post-title" href= "/2019/02/28/CentOS7-minimal-installation-simple-configuration/" >CentOS 7 最小化安装简单配置</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">02/16</span><a class="archive-post-title" href= "/2019/02/16/BugkuCTF-Writeup/" >Bugku CTF WriteUp 合集</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">02/13</span><a class="archive-post-title" href= "/2019/02/13/android-personal-mobile-phone-address-book-development/" >Android 个人手机通讯录开发</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">02/13</span><a class="archive-post-title" href= "/2019/02/13/Android-SQLite-database-learning/" >Android SQLite 数据库学习</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">01/27</span><a class="archive-post-title" href= "/2019/01/27/android-program-structure/" >Android 程序结构</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> 2018 </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/22</span><a class="archive-post-title" href= "/2018/12/22/xss-bypass-technology/" >XSS 绕过技术</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/22</span><a class="archive-post-title" href= "/2018/12/22/2018-The-3rd-nnctf-writeup/" >2018第三届南宁市网络安全技术大赛 nnctf WriteUp</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/21</span><a class="archive-post-title" href= "/2018/12/21/sql-injection-mysql-topic/" >SQL 注入~MySQL专题</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/25</span><a class="archive-post-title" href= "/2018/11/25/CDateStructLearning/" >C Programming Language Data Structure Learning</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/25</span><a class="archive-post-title" href= "/2018/11/25/Web-front-end-security/" >Web 前端安全</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/07</span><a class="archive-post-title" href= "/2018/11/07/CSRF-Bug-Test/" >CSRF 漏洞分析与测试</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/04</span><a class="archive-post-title" href= "/2018/11/04/XSS-DOM-test/" >XSS DOM 漏洞分析与测试</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/04</span><a class="archive-post-title" href= "/2018/11/04/XSS-Stored-test/" >XSS Stored 漏洞分析与测试</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/04</span><a class="archive-post-title" href= "/2018/11/04/XSS-Reflected-test/" >XSS Reflected 漏洞分析与测试</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">10/13</span><a class="archive-post-title" href= "/2018/10/13/arp-spoofing-attack/" >ARP protocol spoofing attack</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">10/11</span><a class="archive-post-title" href= "/2018/10/11/arp-protocol-analysis/" >ARP protocol analysis</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">07/04</span><a class="archive-post-title" href= "/2018/07/04/Kali-Rolling-2018/" >Kali Rolling 2018 系统配置</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">05/13</span><a class="archive-post-title" href= "/2018/05/13/shiyanba-writeup/" >实验吧 CTF WriteUp 合集</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">04/29</span><a class="archive-post-title" href= "/2018/04/29/file-header-of-various-files/" >各类文件的文件头标志</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">01/30</span><a class="archive-post-title" href= "/2018/01/30/Browser-User-Agent/" >认识浏览器请求头User-Agent</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">01/30</span><a class="archive-post-title" href= "/2018/01/30/Cryptography-Learning/" >CTF中那些脑洞大开的编码和加密</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">01/25</span><a class="archive-post-title" href= "/2018/01/25/TmuxTerminal/" >Tmux 终端利器</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">01/25</span><a class="archive-post-title" href= "/2018/01/25/VimTerminal/" >Vim(Vi) 终端利器</a>
-        </li>
-    
-    </div>
-  </div>
-        <div class="sidebar-panel-tags">
-    <div class="sidebar-tags-name">
-    
-        <span class="sidebar-tag-name" data-tags="CTF"><span class="iconfont-archer">&#xe606;</span>CTF</span>
-    
-        <span class="sidebar-tag-name" data-tags="SQLite"><span class="iconfont-archer">&#xe606;</span>SQLite</span>
-    
-        <span class="sidebar-tag-name" data-tags="安卓开发"><span class="iconfont-archer">&#xe606;</span>安卓开发</span>
-    
-        <span class="sidebar-tag-name" data-tags="HTTP"><span class="iconfont-archer">&#xe606;</span>HTTP</span>
-    
-        <span class="sidebar-tag-name" data-tags="AWD"><span class="iconfont-archer">&#xe606;</span>AWD</span>
-    
-        <span class="sidebar-tag-name" data-tags="CSRF"><span class="iconfont-archer">&#xe606;</span>CSRF</span>
-    
-        <span class="sidebar-tag-name" data-tags="CMS"><span class="iconfont-archer">&#xe606;</span>CMS</span>
-    
-        <span class="sidebar-tag-name" data-tags="漏洞挖掘"><span class="iconfont-archer">&#xe606;</span>漏洞挖掘</span>
-    
-        <span class="sidebar-tag-name" data-tags="数据结构"><span class="iconfont-archer">&#xe606;</span>数据结构</span>
-    
-        <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
-    
-        <span class="sidebar-tag-name" data-tags="电子取证"><span class="iconfont-archer">&#xe606;</span>电子取证</span>
-    
-        <span class="sidebar-tag-name" data-tags="密码研究"><span class="iconfont-archer">&#xe606;</span>密码研究</span>
-    
-        <span class="sidebar-tag-name" data-tags="MacOS"><span class="iconfont-archer">&#xe606;</span>MacOS</span>
-    
-        <span class="sidebar-tag-name" data-tags="攻防渗透"><span class="iconfont-archer">&#xe606;</span>攻防渗透</span>
-    
-        <span class="sidebar-tag-name" data-tags="Handbook"><span class="iconfont-archer">&#xe606;</span>Handbook</span>
-    
-        <span class="sidebar-tag-name" data-tags="漏洞分析"><span class="iconfont-archer">&#xe606;</span>漏洞分析</span>
-    
-        <span class="sidebar-tag-name" data-tags="LFI"><span class="iconfont-archer">&#xe606;</span>LFI</span>
-    
-        <span class="sidebar-tag-name" data-tags="Bypass"><span class="iconfont-archer">&#xe606;</span>Bypass</span>
-    
-        <span class="sidebar-tag-name" data-tags="协议"><span class="iconfont-archer">&#xe606;</span>协议</span>
-    
-        <span class="sidebar-tag-name" data-tags="后门分析"><span class="iconfont-archer">&#xe606;</span>后门分析</span>
-    
-        <span class="sidebar-tag-name" data-tags="木马后门"><span class="iconfont-archer">&#xe606;</span>木马后门</span>
-    
-        <span class="sidebar-tag-name" data-tags="DES"><span class="iconfont-archer">&#xe606;</span>DES</span>
-    
-        <span class="sidebar-tag-name" data-tags="神兵利器"><span class="iconfont-archer">&#xe606;</span>神兵利器</span>
-    
-        <span class="sidebar-tag-name" data-tags="Web"><span class="iconfont-archer">&#xe606;</span>Web</span>
-    
-        <span class="sidebar-tag-name" data-tags="PowerShell"><span class="iconfont-archer">&#xe606;</span>PowerShell</span>
-    
-        <span class="sidebar-tag-name" data-tags="XSS"><span class="iconfont-archer">&#xe606;</span>XSS</span>
-    
-        <span class="sidebar-tag-name" data-tags="ARP"><span class="iconfont-archer">&#xe606;</span>ARP</span>
-    
-        <span class="sidebar-tag-name" data-tags="JWT"><span class="iconfont-archer">&#xe606;</span>JWT</span>
-    
-        <span class="sidebar-tag-name" data-tags="RFI"><span class="iconfont-archer">&#xe606;</span>RFI</span>
-    
-        <span class="sidebar-tag-name" data-tags="CBC"><span class="iconfont-archer">&#xe606;</span>CBC</span>
-    
-        <span class="sidebar-tag-name" data-tags="信息隐藏"><span class="iconfont-archer">&#xe606;</span>信息隐藏</span>
-    
-        <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
-    
-        <span class="sidebar-tag-name" data-tags="PE"><span class="iconfont-archer">&#xe606;</span>PE</span>
-    
-        <span class="sidebar-tag-name" data-tags="二进制"><span class="iconfont-archer">&#xe606;</span>二进制</span>
-    
-        <span class="sidebar-tag-name" data-tags="文件结构"><span class="iconfont-archer">&#xe606;</span>文件结构</span>
-    
-        <span class="sidebar-tag-name" data-tags="PHP"><span class="iconfont-archer">&#xe606;</span>PHP</span>
-    
-        <span class="sidebar-tag-name" data-tags="路由协议"><span class="iconfont-archer">&#xe606;</span>路由协议</span>
-    
-        <span class="sidebar-tag-name" data-tags="Firewalld"><span class="iconfont-archer">&#xe606;</span>Firewalld</span>
-    
-        <span class="sidebar-tag-name" data-tags="IPS"><span class="iconfont-archer">&#xe606;</span>IPS</span>
-    
-        <span class="sidebar-tag-name" data-tags="MySQL"><span class="iconfont-archer">&#xe606;</span>MySQL</span>
-    
-        <span class="sidebar-tag-name" data-tags="SQLInjection"><span class="iconfont-archer">&#xe606;</span>SQLInjection</span>
-    
-        <span class="sidebar-tag-name" data-tags="Docker"><span class="iconfont-archer">&#xe606;</span>Docker</span>
-    
-        <span class="sidebar-tag-name" data-tags="Socket"><span class="iconfont-archer">&#xe606;</span>Socket</span>
-    
-        <span class="sidebar-tag-name" data-tags="开发"><span class="iconfont-archer">&#xe606;</span>开发</span>
-    
-        <span class="sidebar-tag-name" data-tags="Hadoop"><span class="iconfont-archer">&#xe606;</span>Hadoop</span>
-    
-        <span class="sidebar-tag-name" data-tags="Metasploit"><span class="iconfont-archer">&#xe606;</span>Metasploit</span>
-    
-    </div>
-    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
-    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
-    缺失模块。<br/>
-    1、请确保node版本大于6.2<br/>
-    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
-    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
-    3、在根目录_config.yml里添加配置：
-    <pre style="color: #787878; font-size: 0.6rem;">
-jsonContent:
-  meta: false
-  pages: false
-  posts:
-    title: true
-    date: true
-    path: true
-    text: false
-    raw: false
-    content: false
-    slug: false
-    updated: false
-    comments: false
-    link: false
-    permalink: false
-    excerpt: false
-    categories: true
-    tags: true</pre>
-    </div> 
-    <div class="sidebar-tags-list"></div>
-</div>
-        <div class="sidebar-panel-categories">
-    <div class="sidebar-categories-name">
-    
-        <span class="sidebar-category-name" data-categories="CTF"><span class="iconfont-archer">&#xe60a;</span>CTF</span>
-    
-        <span class="sidebar-category-name" data-categories="移动开发"><span class="iconfont-archer">&#xe60a;</span>移动开发</span>
-    
-        <span class="sidebar-category-name" data-categories="网络安全"><span class="iconfont-archer">&#xe60a;</span>网络安全</span>
-    
-        <span class="sidebar-category-name" data-categories="WebSecurity"><span class="iconfont-archer">&#xe60a;</span>WebSecurity</span>
-    
-        <span class="sidebar-category-name" data-categories="漏洞挖掘"><span class="iconfont-archer">&#xe60a;</span>漏洞挖掘</span>
-    
-        <span class="sidebar-category-name" data-categories="算法艺术"><span class="iconfont-archer">&#xe60a;</span>算法艺术</span>
-    
-        <span class="sidebar-category-name" data-categories="运维"><span class="iconfont-archer">&#xe60a;</span>运维</span>
-    
-        <span class="sidebar-category-name" data-categories="取证艺术"><span class="iconfont-archer">&#xe60a;</span>取证艺术</span>
-    
-        <span class="sidebar-category-name" data-categories="Hackintosh"><span class="iconfont-archer">&#xe60a;</span>Hackintosh</span>
-    
-        <span class="sidebar-category-name" data-categories="漏洞分析"><span class="iconfont-archer">&#xe60a;</span>漏洞分析</span>
-    
-        <span class="sidebar-category-name" data-categories="后门分析"><span class="iconfont-archer">&#xe60a;</span>后门分析</span>
-    
-        <span class="sidebar-category-name" data-categories="木马后门"><span class="iconfont-archer">&#xe60a;</span>木马后门</span>
-    
-        <span class="sidebar-category-name" data-categories="神兵利器"><span class="iconfont-archer">&#xe60a;</span>神兵利器</span>
-    
-        <span class="sidebar-category-name" data-categories="信息隐藏"><span class="iconfont-archer">&#xe60a;</span>信息隐藏</span>
-    
-        <span class="sidebar-category-name" data-categories="逆向工程"><span class="iconfont-archer">&#xe60a;</span>逆向工程</span>
-    
-        <span class="sidebar-category-name" data-categories="渗透测试"><span class="iconfont-archer">&#xe60a;</span>渗透测试</span>
-    
-        <span class="sidebar-category-name" data-categories="路由协议"><span class="iconfont-archer">&#xe60a;</span>路由协议</span>
-    
-        <span class="sidebar-category-name" data-categories="密码研究"><span class="iconfont-archer">&#xe60a;</span>密码研究</span>
-    
-        <span class="sidebar-category-name" data-categories="云计算"><span class="iconfont-archer">&#xe60a;</span>云计算</span>
-    
-        <span class="sidebar-category-name" data-categories="软件工程"><span class="iconfont-archer">&#xe60a;</span>软件工程</span>
-    
-        <span class="sidebar-category-name" data-categories="大数据"><span class="iconfont-archer">&#xe60a;</span>大数据</span>
-    
-    </div>
-    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
-    <div class="sidebar-categories-list"></div>
-</div>
-    </div>
-</div> 
-    <script>
-    var siteMeta = {
-        root: "/",
-        author: "Qftm"
-    }
-</script>
-    <!-- CDN failover -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
-    <script type="text/javascript">
-        if (typeof window.$ === 'undefined')
-        {
-            console.warn('jquery load from jsdelivr failed, will load local script')
-            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
-        }
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
     </script>
-    <script src="/scripts/main.js"></script>
-    <!-- algolia -->
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Linux/">
+                                    <span class="chip bg-color">Linux</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%8D%8F%E8%AE%AE/">
+                                    <span class="chip bg-color">协议</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
     
-    <!-- busuanzi  -->
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
     
-    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
     
-    <!-- CNZZ  -->
-    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
     </div>
-    <!-- async load share.js -->
+
     
-        <script src="/scripts/share.js" async></script>    
-     
-    </body>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+            <div class="card">
+                <a href="/2020/04/03/php-filter-tricks/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="探索php://filter在实战当中的奇技淫巧">
+                        
+                        <span class="card-title">探索php://filter在实战当中的奇技淫巧</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            前言在渗透测试或漏洞挖掘的过程中，我们经常会遇到php://filter结合其它漏洞比如文件包含、文件读取、反序列化、XXE等进行组合利用，以达到一定的攻击效果，拿到相应的服务器权限。
+最近看到php://filter在ThinkPHP反序
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-03
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Web/" class="post-category">
+                                    Web
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/PHP/">
+                        <span class="chip bg-color">PHP</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/03/23/software-engineering-learning-handbook/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="Software Engineering Learning Handbook">
+                        
+                        <span class="card-title">Software Engineering Learning Handbook</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Software Engineering Learning Handbook声明 Author：Qftm
+ Data：2020/03/23
+ Blog：https://qftm.github.io/正文无论是学习安全还是开发，软件工程都是必
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-23
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" class="post-category">
+                                    编程开发
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Handbook/">
+                        <span class="chip bg-color">Handbook</span>
+                    </a>
+                    
+                    <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">
+                        <span class="chip bg-color">软件工程</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + 'From: Qftm<br />'
+            + 'Author: Qftm<br />'
+            + 'Link: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2018</span>
+            <a href="/about" target="_blank">Qftm</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">309.4k</span>&nbsp;字
+            
+            
+            
+            
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+    <a href="https://github.com/Qftm" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:Qftmbin@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+    <a href="https://twitter.com/Qftmer" class="tooltipped" target="_blank" data-tooltip="关注我的Twitter: https://twitter.com/Qftmer" data-position="top" data-delay="50">
+        <i class="fab fa-twitter"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;Search</span>
+            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
 </html>
-
-

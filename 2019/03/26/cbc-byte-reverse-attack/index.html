@@ -1,409 +1,408 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html lang="en">
-    <!-- title -->
-
-
-
-
-<!-- keywords -->
-
-
 
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
-    <meta name="author" content="Qftm">
-    <meta name="renderer" content="webkit">
-    <meta name="copyright" content="Qftm">
-    
-    <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
-    
-    <meta name="description" content="">
-    <meta http-equiv="Cache-control" content="no-cache">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>针对 CBC 字节反转攻击的研究与漏洞复现 · Qftm&#39;s Blog</title>
-    <style type="text/css">
-    @font-face {
-        font-family: 'Oswald-Regular';
-        src: url("/font/Oswald-Regular.ttf");
-    }
-
-    body {
-        margin: 0;
-    }
-
-    header,
-    footer,
-    .back-top,
-    .sidebar,
-    .container,
-    .site-intro-meta,
-    .toc-wrapper {
-        display: none;
-    }
-
-    .site-intro {
-        position: relative;
-        z-index: 3;
-        width: 100%;
-        /* height: 50vh; */
-        overflow: hidden;
-    }
-
-    .site-intro-placeholder {
-        position: absolute;
-        z-index: -2;
-        top: 0;
-        left: 0;
-        width: calc(100% + 300px);
-        height: 100%;
-        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
-        background-position: center center;
-        transform: translate3d(-226px, 0, 0);
-        animation: gradient-move 2.5s ease-out 0s infinite;
-    }
-
-    @keyframes gradient-move {
-        0% {
-            transform: translate3d(-226px, 0, 0);
-        }
-        100% {
-            transform: translate3d(0, 0, 0);
-        }
-    }
-
-</style>
-
-    <link rel="preload" href= "/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <link rel="stylesheet" href= "/css/mobile.css?v=20180824" media="(max-width: 980px)">
-    
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    
-    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
-/* This file is meant as a standalone workflow for
-- testing support for link[rel=preload]
-- enabling async CSS loading in browsers that do not support rel=preload
-- applying rel preload css once loaded, whether supported or not.
-*/ -->
-<script>
-(function( w ){
-	"use strict";
-	// rel=preload support test
-	if( !w.loadCSS ){
-		w.loadCSS = function(){};
-	}
-	// define on the loadCSS obj
-	var rp = loadCSS.relpreload = {};
-	// rel=preload feature support test
-	// runs once and returns a function for compat purposes
-	rp.support = (function(){
-		var ret;
-		try {
-			ret = w.document.createElement( "link" ).relList.supports( "preload" );
-		} catch (e) {
-			ret = false;
-		}
-		return function(){
-			return ret;
-		};
-	})();
-
-	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
-	// then change that media back to its intended value on load
-	rp.bindMediaToggle = function( link ){
-		// remember existing media attr for ultimate state, or default to 'all'
-		var finalMedia = link.media || "all";
-
-		function enableStylesheet(){
-			link.media = finalMedia;
-		}
-
-		// bind load handlers to enable media
-		if( link.addEventListener ){
-			link.addEventListener( "load", enableStylesheet );
-		} else if( link.attachEvent ){
-			link.attachEvent( "onload", enableStylesheet );
-		}
-
-		// Set rel and non-applicable media type to start an async request
-		// note: timeout allows this to happen async to let rendering continue in IE
-		setTimeout(function(){
-			link.rel = "stylesheet";
-			link.media = "only x";
-		});
-		// also enable media after 3 seconds,
-		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
-		setTimeout( enableStylesheet, 3000 );
-	};
-
-	// loop through link elements in DOM
-	rp.poly = function(){
-		// double check this to prevent external calls from running
-		if( rp.support() ){
-			return;
-		}
-		var links = w.document.getElementsByTagName( "link" );
-		for( var i = 0; i < links.length; i++ ){
-			var link = links[ i ];
-			// qualify links to those with rel=preload and as=style attrs
-			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
-				// prevent rerunning on link
-				link.setAttribute( "data-loadcss", true );
-				// bind listeners to toggle media back
-				rp.bindMediaToggle( link );
-			}
-		}
-	};
-
-	// if unsupported, run the polyfill
-	if( !rp.support() ){
-		// run once at least
-		rp.poly();
-
-		// rerun poly on an interval until onload
-		var run = w.setInterval( rp.poly, 500 );
-		if( w.addEventListener ){
-			w.addEventListener( "load", function(){
-				rp.poly();
-				w.clearInterval( run );
-			} );
-		} else if( w.attachEvent ){
-			w.attachEvent( "onload", function(){
-				rp.poly();
-				w.clearInterval( run );
-			} );
-		}
-	}
+    <meta name="keywords" content="针对 CBC 字节反转攻击的研究与漏洞复现, Qftm">
+    <meta name="description" content="Maybe a hacker">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-	// commonjs
-	if( typeof exports !== "undefined" ){
-		exports.loadCSS = loadCSS;
-	}
-	else {
-		w.loadCSS = loadCSS;
-	}
-}( typeof global !== "undefined" ? global : this ) );
-</script>
+    <title>针对 CBC 字节反转攻击的研究与漏洞复现 | Qftm</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
 
-    <link rel="icon" href= "/assets/favicon.ico" />
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script" />
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script" />
-    <link rel="preload" href="/scripts/main.js" as="script" />
-    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
-    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
-    
-    <!-- fancybox -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
-    <!-- 百度统计  -->
-    
-    <!-- 谷歌统计  -->
-    
-<meta name="generator" content="Hexo 4.2.0"></head>
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
 
-    
-        <body class="post-body">
-    
-    
-<header class="header">
+    <script src="/libs/jquery/jquery.min.js"></script>
 
-    <div class="read-progress"></div>
-    <div class="header-sidebar-menu">&#xe775;</div>
-    <!-- post页的toggle banner  -->
-    
-    <div class="banner">
-            <div class="blog-title">
-                <a href="/" >Qftm&#39;s Blog</a>
+<meta name="generator" content="Hexo 4.2.1"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Qftm</span>
+                </a>
             </div>
-            <div class="post-title">
-                <a href="#" class="post-name">针对 CBC 字节反转攻击的研究与漏洞复现</a>
-            </div>
-    </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
     
-    <a class="home-link" href=/>Qftm's Blog</a>
-</header>
-    <div class="wrapper">
-        <div class="site-intro" style="
-
-
-
-
-
-
-
-height:50vh;
-">
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>Index</span>
+    </a>
     
-    <!-- 主页  -->
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
     
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>Tags</span>
+    </a>
     
-    <!-- 404页  -->
-            
-    <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
-    <div class="site-intro-meta">
-        <!-- 标题  -->
-        <h1 class="intro-title">
-            <!-- 主页  -->
-            
-            针对 CBC 字节反转攻击的研究与漏洞复现
-            <!-- 404 -->
-            
-        </h1>
-        <!-- 副标题 -->
-        <p class="intro-subtitle">
-            <!-- 主页副标题  -->
-            
-            
-            <!-- 404 -->
-            
-        </p>
-        <!-- 文章页meta -->
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>Categories</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>Archives</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-heartbeat" style="zoom: 0.6;"></i>
+      
+      <span>About</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>Friends</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="Search" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
         
-            <div class="post-intros">
-                <!-- 文章页标签  -->
-                
-                    <div class= post-intro-tags >
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Qftm</div>
+        <div class="logo-desc">
+            
+            Maybe a hacker
+            
+        </div>
+    </div>
+
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "密码研究">密码研究</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "CBC">CBC</a>
-    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			Index
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			Tags
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			Categories
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			Archives
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-heartbeat"></i>
+			
+			About
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			Friends
+		</a>
+          
+        </li>
+        
+        
+    </ul>
 </div>
-                
-                
-                    <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">3.2k</span>Reading time: <span class="post-count reading-time">14 min</span></span>
-                    </div>
-                
-                <div class="post-intro-meta">
-                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2019/03/26</span>
-                    
-                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
-                        <span class="iconfont-archer">&#xe602;</span>
-                        <span id="busuanzi_value_page_pv"></span>
-                    </span>
-                    
-                    <span class="shareWrapper">
-                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
-                        <span class="shareText">Share</span>
-                        <ul class="shareList">
-                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
-                                <div class="share-qrcode"></div>
-                            </li>
-                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
-                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
-                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
-                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
-                        </ul>
-                    </span>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">针对 CBC 字节反转攻击的研究与漏洞复现</h1>
                 </div>
             </div>
-        
+        </div>
     </div>
 </div>
-        <script>
- 
-  // get user agent
-  var browser = {
-    versions: function () {
-      var u = window.navigator.userAgent;
-      return {
-        userAgent: u,
-        trident: u.indexOf('Trident') > -1, //IE内核
-        presto: u.indexOf('Presto') > -1, //opera内核
-        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
-        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
-        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
-        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
-        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
-        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
-        iPad: u.indexOf('iPad') > -1, //是否为iPad
-        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
-        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
-        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
-      };
-    }()
-  }
-  console.log("userAgent:" + browser.versions.userAgent);
 
-  // callback
-  function fontLoaded() {
-    console.log('font loaded');
-    if (document.getElementsByClassName('site-intro-meta')) {
-      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
-      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
-      var postIntros = document.getElementsByClassName('post-intros')[0]
-      if (postIntros) {
-        postIntros.classList.add('post-fade-in');
-      }
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
     }
-  }
 
-  // UC不支持跨域，所以直接显示
-  function asyncCb(){
-    if (browser.versions.uc) {
-      console.log("UCBrowser");
-      fontLoaded();
-    } else {
-      WebFont.load({
-        custom: {
-          families: ['Oswald-Regular']
-        },
-        loading: function () {  //所有字体开始加载
-          // console.log('loading');
-        },
-        active: function () {  //所有字体已渲染
-          fontLoaded();
-        },
-        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
-          console.log('inactive: timeout');
-          fontLoaded();
-        },
-        timeout: 5000 // Set the timeout to two seconds
-      });
+    #articleContent :focus {
+        outline: none;
     }
-  }
 
-  function asyncErr(){
-    console.warn('script load from CDN failed, will load local script')
-  }
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
 
-  // load webfont-loader async, and add callback function
-  function async(u, cb, err) {
-    var d = document, t = 'script',
-      o = d.createElement(t),
-      s = d.getElementsByTagName(t)[0];
-    o.src = u;
-    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
-    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
-    s.parentNode.insertBefore(o, s);
-  }
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
 
-  var asyncLoadWithFallBack = function(arr, success, reject) {
-      var currReject = function(){
-        reject()
-        arr.shift()
-        if(arr.length)
-          async(arr[0], success, currReject)
-        }
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
 
-      async(arr[0], success, currReject)
-  }
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
 
-  asyncLoadWithFallBack([
-    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
-    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
-    "/lib/webfontloader.min.js"
-  ], asyncCb, asyncErr)
-</script>        
-        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
-        <div class="container container-unloaded">
-            <main class="main post-page">
-    <article class="article-entry">
-        <h1 id="CBC-简介"><a href="#CBC-简介" class="headerlink" title="CBC 简介"></a>CBC 简介</h1><h2 id="现代密码体制"><a href="#现代密码体制" class="headerlink" title="现代密码体制"></a>现代密码体制</h2><p>现代密码中的加密体制一般分为对称加密体制(Symmetric Key Encryption)和非对称加密体制(Asymmetric Key Encryption)。对称加密又分为分组加密和序列密码。</p>
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/CBC/">
+                                <span class="chip bg-color">CBC</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Web/" class="post-category">
+                                Web
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    2019-03-26
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
+                    2020-08-13
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    3k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    13 Min
+                </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="CBC-简介"><a href="#CBC-简介" class="headerlink" title="CBC 简介"></a>CBC 简介</h1><h2 id="现代密码体制"><a href="#现代密码体制" class="headerlink" title="现代密码体制"></a>现代密码体制</h2><p>现代密码中的加密体制一般分为对称加密体制(Symmetric Key Encryption)和非对称加密体制(Asymmetric Key Encryption)。对称加密又分为分组加密和序列密码。</p>
 <p><strong>分组密码</strong></p>
 <p>分组密码：也叫块加密(block cyphers)，一次加密明文中的一个块。是将明文按一定的位长分组，明文组经过加密运算得到密文组，密文组经过解密运算（加密运算的逆运算），还原成明文组，有 ECB、CBC、CFB、OFB 四种工作模式。</p>
 <p><strong>序列密码</strong></p>
@@ -421,66 +420,253 @@ height:50vh;
 <p>固定分组：CBC在一个固定长度的位组上工作，称为块。这里使用每个16字节的块进行讲解。</p>
 <h3 id="Encryption-process"><a href="#Encryption-process" class="headerlink" title="Encryption process"></a>Encryption process</h3><p><strong>1、文字流程</strong></p>
 <p>Main：上一组密文块用来产生下一组密文块。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">1、首先将明文分组(常见的以16字节为一组)，位数不足的使用特殊字符填充。</span><br><span class="line"></span><br><span class="line">2、生成一个随机的初始化向量(IV)和一个密钥。</span><br><span class="line"></span><br><span class="line">3、将IV和第一组明文异或产生初步密文，再用密钥对初步密文加密生成最终密文块。</span><br><span class="line"></span><br><span class="line">4、用3中产生的密文块对第二组明文进行xor操作产生初步密文，再用密钥对初步密文加密生成最终密文块。</span><br><span class="line"></span><br><span class="line">5、重复4，到最后一组明文。</span><br><span class="line"></span><br><span class="line">6、将IV和加密后的每个密文块拼接在一起，得到最终的密文。</span><br></pre></td></tr></table></figure>
+<pre><code>1、首先将明文分组(常见的以16字节为一组)，位数不足的使用特殊字符填充。
 
-<p>从第一块 Plaintext 开始，首先与一个初始向量iv异或（iv只在第一处起作用），然后把异或的结果经过key进行加密，得到第一块的密文，并且把加密的结果与下一块的明文进行异或，一直这样进行下去。</p>
+2、生成一个随机的初始化向量(IV)和一个密钥。
+
+3、将IV和第一组明文异或产生初步密文，再用密钥对初步密文加密生成最终密文块。
+
+4、用3中产生的密文块对第二组明文进行xor操作产生初步密文，再用密钥对初步密文加密生成最终密文块。
+
+5、重复4，到最后一组明文。
+
+6、将IV和加密后的每个密文块拼接在一起，得到最终的密文。</code></pre><p>从第一块 Plaintext 开始，首先与一个初始向量iv异或（iv只在第一处起作用），然后把异或的结果经过key进行加密，得到第一块的密文，并且把加密的结果与下一块的明文进行异或，一直这样进行下去。</p>
 <p><strong>2、公式描述：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Ciphertext-0 &#x3D; Encrypt(Plaintext XOR IV)—只用于第一个组块</span><br><span class="line"></span><br><span class="line">Ciphertext-N &#x3D; Encrypt(Plaintext XOR Ciphertext-(N-1))—用于第二及剩下的组块  # N &gt; 1</span><br></pre></td></tr></table></figure>
+<pre><code>Ciphertext-0 = Encrypt(Plaintext XOR IV)—只用于第一个组块
 
-<h2 id="Decryption"><a href="#Decryption" class="headerlink" title="Decryption"></a>Decryption</h2><p><img src="/2019/03/26/cbc-byte-reverse-attack/1594459-20190324172054602-1165374815.png" alt="img"></p>
+Ciphertext-N = Encrypt(Plaintext XOR Ciphertext-(N-1))—用于第二及剩下的组块  # N &gt; 1</code></pre><h2 id="Decryption"><a href="#Decryption" class="headerlink" title="Decryption"></a>Decryption</h2><p><img src="/2019/03/26/cbc-byte-reverse-attack/1594459-20190324172054602-1165374815.png" alt="img"></p>
 <h3 id="Decryption-process"><a href="#Decryption-process" class="headerlink" title="Decryption process"></a>Decryption process</h3><p><strong>1、文字流程</strong></p>
 <p>Main：上一组密文块影响下一组密文块的还原。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1、从密文中提取出IV，然后将密文分组。</span><br><span class="line"></span><br><span class="line">2、使用密钥对第一组的密文解密，然后和IV进行xor得到明文。</span><br><span class="line"></span><br><span class="line">3、使用密钥对第二组密文解密，然后和2中的密文xor得到明文。</span><br><span class="line"></span><br><span class="line">4、重复2-3，直到最后一组密文。</span><br></pre></td></tr></table></figure>
+<pre><code>1、从密文中提取出IV，然后将密文分组。
 
-<p>解密和加密的原理是一样的，都是</p>
+2、使用密钥对第一组的密文解密，然后和IV进行xor得到明文。
+
+3、使用密钥对第二组密文解密，然后和2中的密文xor得到明文。
+
+4、重复2-3，直到最后一组密文。</code></pre><p>解密和加密的原理是一样的，都是</p>
 <p><strong>2、公式描述：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Plaintext-0 &#x3D; Decrypt(Ciphertext) XOR IV—只用于第一个组块</span><br><span class="line"></span><br><span class="line">Plaintext-N &#x3D; Decrypt(Ciphertext) XOR Ciphertext-(N-1)—用于第二及剩下的组块   # N &gt; 1</span><br></pre></td></tr></table></figure>
+<pre><code>Plaintext-0 = Decrypt(Ciphertext) XOR IV—只用于第一个组块
 
-<h1 id="CBC-字节反转攻击原理"><a href="#CBC-字节反转攻击原理" class="headerlink" title="CBC 字节反转攻击原理"></a>CBC 字节反转攻击原理</h1><h2 id="Attack-原理"><a href="#Attack-原理" class="headerlink" title="Attack 原理"></a>Attack 原理</h2><p>1、在 CBC 解密的公式中可以注意到Ciphertext-(N-1)用来产生下一块明文，这就是字节翻转攻击发挥作用的地方。如果我们改变Ciphertext-N-1中的一个字节，然后和下一块解密后的密文xor，就可以得到一个不同的明文，而这个明文是我们可以控制的。</p>
+Plaintext-N = Decrypt(Ciphertext) XOR Ciphertext-(N-1)—用于第二及剩下的组块   # N &gt; 1</code></pre><h1 id="CBC-字节反转攻击原理"><a href="#CBC-字节反转攻击原理" class="headerlink" title="CBC 字节反转攻击原理"></a>CBC 字节反转攻击原理</h1><h2 id="Attack-原理"><a href="#Attack-原理" class="headerlink" title="Attack 原理"></a>Attack 原理</h2><p>1、在 CBC 解密的公式中可以注意到Ciphertext-(N-1)用来产生下一块明文，这就是字节翻转攻击发挥作用的地方。如果我们改变Ciphertext-N-1中的一个字节，然后和下一块解密后的密文xor，就可以得到一个不同的明文，而这个明文是我们可以控制的。</p>
 <p>2、在1中的基础上，通过破坏密文中的字节来改变明文中的字节，由此在破坏的密文中添加单引号等恶意字符来绕过过滤器，或通过将用户ID更改为admin来提升权限，或者更改应用程序所需的明文造成其他后果。</p>
 <h2 id="Attack-process"><a href="#Attack-process" class="headerlink" title="Attack process"></a>Attack process</h2><p><img src="/2019/03/26/cbc-byte-reverse-attack/1594459-20190325184205372-1328277298.png" alt="img"></p>
 <p>通过修改第一组的密文块字节，来构造自己想要的第二组明文块，当第一组密文块字节发生改变时会影响第一组明文块和第二组明文块。</p>
 <h1 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h1><h2 id="漏洞源码"><a href="#漏洞源码" class="headerlink" title="漏洞源码"></a>漏洞源码</h2><p>漏洞复现过程以 CTF 模式为例</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span> <span class="string">'sqlwaf.php'</span>;</span><br><span class="line">define(<span class="string">"SECRET_KEY"</span>, <span class="string">"Dfa5cUiJb2Xquhgv"</span>);</span><br><span class="line">define(<span class="string">"METHOD"</span>, <span class="string">"aes-128-cbc"</span>);</span><br><span class="line">session_start();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">get_random_iv</span><span class="params">()</span></span>&#123;</span><br><span class="line">    $iv=<span class="string">''</span>;</span><br><span class="line">    <span class="keyword">for</span>($i=<span class="number">0</span>;$i&lt;<span class="number">16</span>;$i++)&#123;</span><br><span class="line">        $iv.=chr(rand(<span class="number">1</span>,<span class="number">255</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> $iv;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">login</span><span class="params">($info)</span></span>&#123;</span><br><span class="line">    $iv=get_random_iv();</span><br><span class="line">    $plain = serialize($info);</span><br><span class="line">    $cipher = openssl_encrypt($plain, METHOD, SECRET_KEY, OPENSSL_RAW_DATA, $iv);</span><br><span class="line">    $_SESSION[<span class="string">'username'</span>] = $info[<span class="string">'username'</span>];</span><br><span class="line">    setcookie(<span class="string">"iv"</span>, base64_encode($iv));</span><br><span class="line">    setcookie(<span class="string">"cipher"</span>, base64_encode($cipher));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">show_homepage</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> ($_SESSION[<span class="string">"username"</span>]===<span class="string">'admin'</span>)&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'&lt;p&gt;Hello admin&lt;/p&gt;'</span>;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'&lt;p&gt;Flag is ***************************&lt;/p&gt;'</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'&lt;p&gt;hello '</span>.$_SESSION[<span class="string">'username'</span>].<span class="string">'&lt;/p&gt;'</span>;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'&lt;p&gt;Only admin can see flag&lt;/p&gt;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">'&lt;p&gt;&lt;a href="loginout.php"&gt;Log out&lt;/a&gt;&lt;/p&gt;'</span>;</span><br><span class="line">    <span class="keyword">die</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">check_login</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">isset</span>($_COOKIE[<span class="string">'cipher'</span>]) &amp;&amp; <span class="keyword">isset</span>($_COOKIE[<span class="string">'iv'</span>]))&#123;</span><br><span class="line">        $cipher = base64_decode($_COOKIE[<span class="string">'cipher'</span>]);</span><br><span class="line">        $iv = base64_decode($_COOKIE[<span class="string">"iv"</span>]);</span><br><span class="line">        <span class="keyword">if</span>($plain = openssl_decrypt($cipher, METHOD, SECRET_KEY, OPENSSL_RAW_DATA, $iv))&#123;</span><br><span class="line">            $info = unserialize($plain) <span class="keyword">or</span> <span class="keyword">die</span>(<span class="string">"&lt;p&gt;base64_decode('"</span>.base64_encode($plain).<span class="string">"') can't unserialize&lt;/p&gt;"</span>);</span><br><span class="line">            $_SESSION[<span class="string">'username'</span>] = $info[<span class="string">'username'</span>];</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">die</span>(<span class="string">"ERROR!"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_POST[<span class="string">'username'</span>])&amp;&amp;<span class="keyword">isset</span>($_POST[<span class="string">'password'</span>])) &#123;</span><br><span class="line">  $username=waf((string)$_POST[<span class="string">'username'</span>]);</span><br><span class="line">  $password=waf((string)$_POST[<span class="string">'password'</span>]);</span><br><span class="line">  <span class="keyword">if</span>($username === <span class="string">'admin'</span>)&#123;</span><br><span class="line">        <span class="keyword">exit</span>(<span class="string">'&lt;p&gt;You are not real admin!&lt;/p&gt;'</span>);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        $info = <span class="keyword">array</span>(<span class="string">'username'</span>=&gt;$username,<span class="string">'password'</span>=&gt;$password);</span><br><span class="line">        login($info);</span><br><span class="line">        show_homepage();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">isset</span>($_SESSION[<span class="string">"username"</span>]))&#123;</span><br><span class="line">        check_login();</span><br><span class="line">        show_homepage();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span> &gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">  &lt;title&gt;Paper login form&lt;/title&gt;</span><br><span class="line">      &lt;link rel=<span class="string">"stylesheet"</span> href=<span class="string">"css/style.css"</span>&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;div id=<span class="string">"login"</span>&gt;</span><br><span class="line">  &lt;form action=<span class="string">""</span> method=<span class="string">"post"</span>&gt;</span><br><span class="line">    &lt;h1&gt;Sign In&lt;/h1&gt;</span><br><span class="line">    &lt;input name=<span class="string">'username'</span> type=<span class="string">"text"</span> placeholder=<span class="string">"Username"</span>&gt;</span><br><span class="line">    &lt;input name=<span class="string">'password'</span> type=<span class="string">"password"</span> placeholder=<span class="string">"Password"</span>&gt;</span><br><span class="line">    &lt;button&gt;Sign in&lt;/button&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token keyword">include</span> <span class="token string">'sqlwaf.php'</span><span class="token punctuation">;</span>
+<span class="token function">define</span><span class="token punctuation">(</span><span class="token string">"SECRET_KEY"</span><span class="token punctuation">,</span> <span class="token string">"Dfa5cUiJb2Xquhgv"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">define</span><span class="token punctuation">(</span><span class="token string">"METHOD"</span><span class="token punctuation">,</span> <span class="token string">"aes-128-cbc"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">session_start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<h3 id="waf-源码"><a href="#waf-源码" class="headerlink" title="waf 源码"></a>waf 源码</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">waf</span><span class="params">($str)</span></span>&#123;</span><br><span class="line">$array=<span class="keyword">array</span>(<span class="string">"'"</span>,<span class="string">"\""</span>,<span class="string">" "</span>,<span class="string">"or"</span>,<span class="string">"and"</span>,<span class="string">"("</span>,<span class="string">")"</span>,<span class="string">"&lt;"</span>,<span class="string">"?"</span>);</span><br><span class="line"><span class="keyword">for</span> ($i=<span class="number">0</span>; $i &lt; sizeof($array); $i++) &#123;</span><br><span class="line">    <span class="keyword">if</span>(strpos($str,$array[$i]))&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"&lt;script&gt;alert('too young too simple,do not hack')&lt;/script&gt;"</span>;</span><br><span class="line">        <span class="keyword">die</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> $str;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<span class="token keyword">function</span> <span class="token function">get_random_iv</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token variable">$iv</span><span class="token operator">=</span><span class="token string">''</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token variable">$i</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span><span class="token variable">$i</span><span class="token operator">&lt;</span><span class="token number">16</span><span class="token punctuation">;</span><span class="token variable">$i</span><span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token variable">$iv</span><span class="token punctuation">.</span><span class="token operator">=</span><span class="token function">chr</span><span class="token punctuation">(</span><span class="token function">rand</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">255</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token variable">$iv</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">function</span> <span class="token function">login</span><span class="token punctuation">(</span><span class="token variable">$info</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token variable">$iv</span><span class="token operator">=</span><span class="token function">get_random_iv</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$plain</span> <span class="token operator">=</span> <span class="token function">serialize</span><span class="token punctuation">(</span><span class="token variable">$info</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$cipher</span> <span class="token operator">=</span> <span class="token function">openssl_encrypt</span><span class="token punctuation">(</span><span class="token variable">$plain</span><span class="token punctuation">,</span> <span class="token constant">METHOD</span><span class="token punctuation">,</span> <span class="token constant">SECRET_KEY</span><span class="token punctuation">,</span> <span class="token constant">OPENSSL_RAW_DATA</span><span class="token punctuation">,</span> <span class="token variable">$iv</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$_SESSION</span><span class="token punctuation">[</span><span class="token string">'username'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token variable">$info</span><span class="token punctuation">[</span><span class="token string">'username'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token function">setcookie</span><span class="token punctuation">(</span><span class="token string">"iv"</span><span class="token punctuation">,</span> <span class="token function">base64_encode</span><span class="token punctuation">(</span><span class="token variable">$iv</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">setcookie</span><span class="token punctuation">(</span><span class="token string">"cipher"</span><span class="token punctuation">,</span> <span class="token function">base64_encode</span><span class="token punctuation">(</span><span class="token variable">$cipher</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">function</span> <span class="token function">show_homepage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$_SESSION</span><span class="token punctuation">[</span><span class="token string">"username"</span><span class="token punctuation">]</span><span class="token operator">===</span><span class="token string">'admin'</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">echo</span> <span class="token string">'&lt;p>Hello admin&lt;/p>'</span><span class="token punctuation">;</span>
+        <span class="token keyword">echo</span> <span class="token string">'&lt;p>Flag is ***************************&lt;/p>'</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+        <span class="token keyword">echo</span> <span class="token string">'&lt;p>hello '</span><span class="token punctuation">.</span><span class="token variable">$_SESSION</span><span class="token punctuation">[</span><span class="token string">'username'</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token string">'&lt;/p>'</span><span class="token punctuation">;</span>
+        <span class="token keyword">echo</span> <span class="token string">'&lt;p>Only admin can see flag&lt;/p>'</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">echo</span> <span class="token string">'&lt;p>&lt;a href="loginout.php">Log out&lt;/a>&lt;/p>'</span><span class="token punctuation">;</span>
+    <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">function</span> <span class="token function">check_login</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$_COOKIE</span><span class="token punctuation">[</span><span class="token string">'cipher'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$_COOKIE</span><span class="token punctuation">[</span><span class="token string">'iv'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token variable">$cipher</span> <span class="token operator">=</span> <span class="token function">base64_decode</span><span class="token punctuation">(</span><span class="token variable">$_COOKIE</span><span class="token punctuation">[</span><span class="token string">'cipher'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token variable">$iv</span> <span class="token operator">=</span> <span class="token function">base64_decode</span><span class="token punctuation">(</span><span class="token variable">$_COOKIE</span><span class="token punctuation">[</span><span class="token string">"iv"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token variable">$plain</span> <span class="token operator">=</span> <span class="token function">openssl_decrypt</span><span class="token punctuation">(</span><span class="token variable">$cipher</span><span class="token punctuation">,</span> <span class="token constant">METHOD</span><span class="token punctuation">,</span> <span class="token constant">SECRET_KEY</span><span class="token punctuation">,</span> <span class="token constant">OPENSSL_RAW_DATA</span><span class="token punctuation">,</span> <span class="token variable">$iv</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token variable">$info</span> <span class="token operator">=</span> <span class="token function">unserialize</span><span class="token punctuation">(</span><span class="token variable">$plain</span><span class="token punctuation">)</span> <span class="token keyword">or</span> <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token string">"&lt;p>base64_decode('"</span><span class="token punctuation">.</span><span class="token function">base64_encode</span><span class="token punctuation">(</span><span class="token variable">$plain</span><span class="token punctuation">)</span><span class="token punctuation">.</span>"<span class="token string">') can'</span>t unserialize<span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span></span>"<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token variable">$_SESSION</span><span class="token punctuation">[</span><span class="token string">'username'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token variable">$info</span><span class="token punctuation">[</span><span class="token string">'username'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+            <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token string">"ERROR!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string">'username'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">&amp;&amp;</span><span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string">'password'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token variable">$username</span><span class="token operator">=</span><span class="token function">waf</span><span class="token punctuation">(</span><span class="token punctuation">(</span>string<span class="token punctuation">)</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string">'username'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token variable">$password</span><span class="token operator">=</span><span class="token function">waf</span><span class="token punctuation">(</span><span class="token punctuation">(</span>string<span class="token punctuation">)</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string">'password'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token variable">$username</span> <span class="token operator">===</span> <span class="token string">'admin'</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token function">exit</span><span class="token punctuation">(</span><span class="token string">'&lt;p>You are not real admin!&lt;/p>'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+        <span class="token variable">$info</span> <span class="token operator">=</span> <span class="token keyword">array</span><span class="token punctuation">(</span><span class="token string">'username'</span><span class="token operator">=</span><span class="token operator">></span><span class="token variable">$username</span><span class="token punctuation">,</span><span class="token string">'password'</span><span class="token operator">=</span><span class="token operator">></span><span class="token variable">$password</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">login</span><span class="token punctuation">(</span><span class="token variable">$info</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">show_homepage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">else</span><span class="token punctuation">{</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$_SESSION</span><span class="token punctuation">[</span><span class="token string">"username"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token function">check_login</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">show_homepage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token delimiter">?></span>
+<span class="token markup"><span class="token doctype">&lt;!DOCTYPE html></span></span>
+<span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>en<span class="token punctuation">"</span></span> <span class="token punctuation">></span></span></span>
+<span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span></span>
+  <span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>UTF-8<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
+  <span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span></span>Paper login form<span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span></span>
+      <span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>css/style.css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
+<span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span></span>
+<span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span></span>
+  <span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>login<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
+  <span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span> <span class="token attr-name">action</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span> <span class="token attr-name">method</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>post<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
+    <span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">></span></span></span>Sign In<span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">></span></span></span>
+    <span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>username<span class="token punctuation">'</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token attr-name">placeholder</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Username<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
+    <span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>password<span class="token punctuation">'</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>password<span class="token punctuation">"</span></span> <span class="token attr-name">placeholder</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Password<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
+    <span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span><span class="token punctuation">></span></span></span>Sign in<span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span></span>
+<span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></span>
+<span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span></span>
+<span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="waf-源码"><a href="#waf-源码" class="headerlink" title="waf 源码"></a>waf 源码</h3><pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token keyword">function</span> <span class="token function">waf</span><span class="token punctuation">(</span><span class="token variable">$str</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+<span class="token variable">$array</span><span class="token operator">=</span><span class="token keyword">array</span><span class="token punctuation">(</span><span class="token string">"'"</span><span class="token punctuation">,</span><span class="token string">"\""</span><span class="token punctuation">,</span><span class="token string">" "</span><span class="token punctuation">,</span><span class="token string">"or"</span><span class="token punctuation">,</span><span class="token string">"and"</span><span class="token punctuation">,</span><span class="token string">"("</span><span class="token punctuation">,</span><span class="token string">")"</span><span class="token punctuation">,</span><span class="token string">"&lt;"</span><span class="token punctuation">,</span><span class="token string">"?"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token variable">$i</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> <span class="token variable">$i</span> <span class="token operator">&lt;</span> <span class="token function">sizeof</span><span class="token punctuation">(</span><span class="token variable">$array</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token variable">$i</span><span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">strpos</span><span class="token punctuation">(</span><span class="token variable">$str</span><span class="token punctuation">,</span><span class="token variable">$array</span><span class="token punctuation">[</span><span class="token variable">$i</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">echo</span> <span class="token string">"&lt;script>alert('too young too simple,do not hack')&lt;/script>"</span><span class="token punctuation">;</span>
+        <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">return</span> <span class="token variable">$str</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token delimiter">?></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="题目Hint"><a href="#题目Hint" class="headerlink" title="题目Hint"></a>题目Hint</h2><p><strong>题目Hint</strong>：Only admin can see flag！ </p>
 <h2 id="漏洞利用与复现过程"><a href="#漏洞利用与复现过程" class="headerlink" title="漏洞利用与复现过程"></a>漏洞利用与复现过程</h2><p>初始页面显示</p>
 <p><img src="/2019/03/26/cbc-byte-reverse-attack/1594459-20190325211839751-96093024.png" alt="img"></p>
 <h3 id="Injection-测试"><a href="#Injection-测试" class="headerlink" title="Injection 测试"></a>Injection 测试</h3><p>测试</p>
 <p>username：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">admin&#39; or &#39;1&#39;&#x3D;&#39;1</span><br></pre></td></tr></table></figure>
-
-<p>password：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Random：**********</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2019/03/26/cbc-byte-reverse-attack/1594459-20190325213626054-1612811775.png" alt="img"></p>
+<pre><code>admin&#39; or &#39;1&#39;=&#39;1</code></pre><p>password：</p>
+<pre><code>Random：**********</code></pre><p><img src="/2019/03/26/cbc-byte-reverse-attack/1594459-20190325213626054-1612811775.png" alt="img"></p>
 <p>Result </p>
 <p><img src="/2019/03/26/cbc-byte-reverse-attack/1594459-20190325214045540-405707759.png" alt="img"></p>
 <p>通过测试发现存在 Injection 拦截，先不要管，接着往下走</p>
 <h3 id="网站敏感信息扫描"><a href="#网站敏感信息扫描" class="headerlink" title="网站敏感信息扫描"></a>网站敏感信息扫描</h3><p>通过扫描网站意外发现存在网页Bak文件</p>
 <p><img src="/2019/03/26/cbc-byte-reverse-attack/1594459-20190325214458539-918281947.png" alt="img"></p>
 <p>将Bak文件Down下来，进行代码审计</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span> <span class="string">'sqlwaf.php'</span>;</span><br><span class="line">define(<span class="string">"SECRET_KEY"</span>, <span class="string">"Dfa5cUiJb2Xquhgv"</span>);  <span class="comment">//密钥key</span></span><br><span class="line">define(<span class="string">"METHOD"</span>, <span class="string">"aes-128-cbc"</span>);   <span class="comment">//使用AES算法128bit固定分组</span></span><br><span class="line">session_start();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">get_random_iv</span><span class="params">()</span></span>&#123;    <span class="comment">//初始化向量IV</span></span><br><span class="line">    $iv=<span class="string">''</span>;</span><br><span class="line">    <span class="keyword">for</span>($i=<span class="number">0</span>;$i&lt;<span class="number">16</span>;$i++)&#123;   <span class="comment">//随机生成16字节长度的IV</span></span><br><span class="line">        $iv.=chr(rand(<span class="number">1</span>,<span class="number">255</span>));  </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> $iv;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">login</span><span class="params">($info)</span></span>&#123;   </span><br><span class="line">    $iv=get_random_iv();       <span class="comment">//获取经过初始化的向量IV</span></span><br><span class="line">    $plain = serialize($info);  <span class="comment">//将用户提交的信息进行序列化</span></span><br><span class="line">    $cipher = openssl_encrypt($plain, METHOD, SECRET_KEY, OPENSSL_RAW_DATA, $iv);  <span class="comment">//将变量$plain的值进行加密</span></span><br><span class="line">    $_SESSION[<span class="string">'username'</span>] = $info[<span class="string">'username'</span>];  <span class="comment">//获取用户提交的用户名</span></span><br><span class="line">    setcookie(<span class="string">"iv"</span>, base64_encode($iv));    <span class="comment">//设置cookie:iv、cipher并将其值进行base64编码</span></span><br><span class="line">    setcookie(<span class="string">"cipher"</span>, base64_encode($cipher));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">show_homepage</span><span class="params">()</span></span>&#123;      <span class="comment">//判断网页提交的用户是否是"admin"</span></span><br><span class="line">    <span class="keyword">if</span> ($_SESSION[<span class="string">"username"</span>]===<span class="string">'admin'</span>)&#123;  <span class="comment">//只有admin用户才能查看Flag</span></span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'&lt;p&gt;Hello admin&lt;/p&gt;'</span>;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'&lt;p&gt;Flag is *******************************&lt;/p&gt;'</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'&lt;p&gt;hello '</span>.$_SESSION[<span class="string">'username'</span>].<span class="string">'&lt;/p&gt;'</span>;  <span class="comment">//如果不是admin用户，网页则会显示"hello &lt;username&gt;" </span></span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'&lt;p&gt;Only admin can see flag&lt;/p&gt;'</span>;  <span class="comment">//查询失败</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">'&lt;p&gt;&lt;a href="loginout.php"&gt;Log out&lt;/a&gt;&lt;/p&gt;'</span>;</span><br><span class="line">    <span class="keyword">die</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">check_login</span><span class="params">()</span></span>&#123;    <span class="comment">//检查cookie：iv、cipher并将其值进行base64解码</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">isset</span>($_COOKIE[<span class="string">'cipher'</span>]) &amp;&amp; <span class="keyword">isset</span>($_COOKIE[<span class="string">'iv'</span>]))&#123;</span><br><span class="line">        $cipher = base64_decode($_COOKIE[<span class="string">'cipher'</span>]);</span><br><span class="line">        $iv = base64_decode($_COOKIE[<span class="string">"iv"</span>]);</span><br><span class="line">        <span class="keyword">if</span>($plain = openssl_decrypt($cipher, METHOD, SECRET_KEY, OPENSSL_RAW_DATA, $iv))&#123;  <span class="comment">//将cipher进行解密</span></span><br><span class="line">            $info = unserialize($plain) <span class="keyword">or</span> <span class="keyword">die</span>(<span class="string">"&lt;p&gt;base64_decode('"</span>.base64_encode($plain).<span class="string">"') can't  unserialize&lt;/p&gt;"</span>); <span class="comment">//如果对变量$plain的值反序列化失败则会退出整个程序的执行</span></span><br><span class="line">            $_SESSION[<span class="string">'username'</span>] = $info[<span class="string">'username'</span>];  <span class="comment">////获取用户名</span></span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">die</span>(<span class="string">"ERROR!"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_POST[<span class="string">'username'</span>])&amp;&amp;<span class="keyword">isset</span>($_POST[<span class="string">'password'</span>])) &#123;   <span class="comment">//判断用户的输入</span></span><br><span class="line">  $username=waf((string)$_POST[<span class="string">'username'</span>]);   <span class="comment">//对用户名进行安全检测</span></span><br><span class="line">  $password=waf((string)$_POST[<span class="string">'password'</span>]);   <span class="comment">//对用户密码进行安全检测</span></span><br><span class="line">  <span class="keyword">if</span>($username === <span class="string">'admin'</span>)&#123;   <span class="comment">//判断网页提交的用户是否是真实的"admin"</span></span><br><span class="line">        <span class="keyword">exit</span>(<span class="string">'&lt;p&gt;You are not real admin!&lt;/p&gt;'</span>);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        $info = <span class="keyword">array</span>(<span class="string">'username'</span>=&gt;$username,<span class="string">'password'</span>=&gt;$password);</span><br><span class="line">        login($info);</span><br><span class="line">        show_homepage();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">isset</span>($_SESSION[<span class="string">"username"</span>]))&#123;</span><br><span class="line">        check_login();</span><br><span class="line">        show_homepage();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span> &gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">  &lt;title&gt;Paper login form&lt;/title&gt;</span><br><span class="line">      &lt;link rel=<span class="string">"stylesheet"</span> href=<span class="string">"css/style.css"</span>&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;div id=<span class="string">"login"</span>&gt;</span><br><span class="line">  &lt;form action=<span class="string">""</span> method=<span class="string">"post"</span>&gt;</span><br><span class="line">    &lt;h1&gt;Sign In&lt;/h1&gt;</span><br><span class="line">    &lt;input name=<span class="string">'username'</span> type=<span class="string">"text"</span> placeholder=<span class="string">"Username"</span>&gt;</span><br><span class="line">    &lt;input name=<span class="string">'password'</span> type=<span class="string">"password"</span> placeholder=<span class="string">"Password"</span>&gt;</span><br><span class="line">    &lt;button&gt;Sign in&lt;/button&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token keyword">include</span> <span class="token string">'sqlwaf.php'</span><span class="token punctuation">;</span>
+<span class="token function">define</span><span class="token punctuation">(</span><span class="token string">"SECRET_KEY"</span><span class="token punctuation">,</span> <span class="token string">"Dfa5cUiJb2Xquhgv"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//密钥key</span>
+<span class="token function">define</span><span class="token punctuation">(</span><span class="token string">"METHOD"</span><span class="token punctuation">,</span> <span class="token string">"aes-128-cbc"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//使用AES算法128bit固定分组</span>
+<span class="token function">session_start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
+<span class="token keyword">function</span> <span class="token function">get_random_iv</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>    <span class="token comment" spellcheck="true">//初始化向量IV</span>
+    <span class="token variable">$iv</span><span class="token operator">=</span><span class="token string">''</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token variable">$i</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span><span class="token variable">$i</span><span class="token operator">&lt;</span><span class="token number">16</span><span class="token punctuation">;</span><span class="token variable">$i</span><span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>   <span class="token comment" spellcheck="true">//随机生成16字节长度的IV</span>
+        <span class="token variable">$iv</span><span class="token punctuation">.</span><span class="token operator">=</span><span class="token function">chr</span><span class="token punctuation">(</span><span class="token function">rand</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">255</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token variable">$iv</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">function</span> <span class="token function">login</span><span class="token punctuation">(</span><span class="token variable">$info</span><span class="token punctuation">)</span><span class="token punctuation">{</span>   
+    <span class="token variable">$iv</span><span class="token operator">=</span><span class="token function">get_random_iv</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>       <span class="token comment" spellcheck="true">//获取经过初始化的向量IV</span>
+    <span class="token variable">$plain</span> <span class="token operator">=</span> <span class="token function">serialize</span><span class="token punctuation">(</span><span class="token variable">$info</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//将用户提交的信息进行序列化</span>
+    <span class="token variable">$cipher</span> <span class="token operator">=</span> <span class="token function">openssl_encrypt</span><span class="token punctuation">(</span><span class="token variable">$plain</span><span class="token punctuation">,</span> <span class="token constant">METHOD</span><span class="token punctuation">,</span> <span class="token constant">SECRET_KEY</span><span class="token punctuation">,</span> <span class="token constant">OPENSSL_RAW_DATA</span><span class="token punctuation">,</span> <span class="token variable">$iv</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//将变量$plain的值进行加密</span>
+    <span class="token variable">$_SESSION</span><span class="token punctuation">[</span><span class="token string">'username'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token variable">$info</span><span class="token punctuation">[</span><span class="token string">'username'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//获取用户提交的用户名</span>
+    <span class="token function">setcookie</span><span class="token punctuation">(</span><span class="token string">"iv"</span><span class="token punctuation">,</span> <span class="token function">base64_encode</span><span class="token punctuation">(</span><span class="token variable">$iv</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//设置cookie:iv、cipher并将其值进行base64编码</span>
+    <span class="token function">setcookie</span><span class="token punctuation">(</span><span class="token string">"cipher"</span><span class="token punctuation">,</span> <span class="token function">base64_encode</span><span class="token punctuation">(</span><span class="token variable">$cipher</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">function</span> <span class="token function">show_homepage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>      <span class="token comment" spellcheck="true">//判断网页提交的用户是否是"admin"</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$_SESSION</span><span class="token punctuation">[</span><span class="token string">"username"</span><span class="token punctuation">]</span><span class="token operator">===</span><span class="token string">'admin'</span><span class="token punctuation">)</span><span class="token punctuation">{</span>  <span class="token comment" spellcheck="true">//只有admin用户才能查看Flag</span>
+        <span class="token keyword">echo</span> <span class="token string">'&lt;p>Hello admin&lt;/p>'</span><span class="token punctuation">;</span>
+        <span class="token keyword">echo</span> <span class="token string">'&lt;p>Flag is *******************************&lt;/p>'</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+        <span class="token keyword">echo</span> <span class="token string">'&lt;p>hello '</span><span class="token punctuation">.</span><span class="token variable">$_SESSION</span><span class="token punctuation">[</span><span class="token string">'username'</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token string">'&lt;/p>'</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//如果不是admin用户，网页则会显示"hello &lt;username>" </span>
+        <span class="token keyword">echo</span> <span class="token string">'&lt;p>Only admin can see flag&lt;/p>'</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//查询失败</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">echo</span> <span class="token string">'&lt;p>&lt;a href="loginout.php">Log out&lt;/a>&lt;/p>'</span><span class="token punctuation">;</span>
+    <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">function</span> <span class="token function">check_login</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>    <span class="token comment" spellcheck="true">//检查cookie：iv、cipher并将其值进行base64解码</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$_COOKIE</span><span class="token punctuation">[</span><span class="token string">'cipher'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$_COOKIE</span><span class="token punctuation">[</span><span class="token string">'iv'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token variable">$cipher</span> <span class="token operator">=</span> <span class="token function">base64_decode</span><span class="token punctuation">(</span><span class="token variable">$_COOKIE</span><span class="token punctuation">[</span><span class="token string">'cipher'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token variable">$iv</span> <span class="token operator">=</span> <span class="token function">base64_decode</span><span class="token punctuation">(</span><span class="token variable">$_COOKIE</span><span class="token punctuation">[</span><span class="token string">"iv"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token variable">$plain</span> <span class="token operator">=</span> <span class="token function">openssl_decrypt</span><span class="token punctuation">(</span><span class="token variable">$cipher</span><span class="token punctuation">,</span> <span class="token constant">METHOD</span><span class="token punctuation">,</span> <span class="token constant">SECRET_KEY</span><span class="token punctuation">,</span> <span class="token constant">OPENSSL_RAW_DATA</span><span class="token punctuation">,</span> <span class="token variable">$iv</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>  <span class="token comment" spellcheck="true">//将cipher进行解密</span>
+            <span class="token variable">$info</span> <span class="token operator">=</span> <span class="token function">unserialize</span><span class="token punctuation">(</span><span class="token variable">$plain</span><span class="token punctuation">)</span> <span class="token keyword">or</span> <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token string">"&lt;p>base64_decode('"</span><span class="token punctuation">.</span><span class="token function">base64_encode</span><span class="token punctuation">(</span><span class="token variable">$plain</span><span class="token punctuation">)</span><span class="token punctuation">.</span>"<span class="token string">') can'</span>t  unserialize<span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span></span>"<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//如果对变量$plain的值反序列化失败则会退出整个程序的执行</span>
+            <span class="token variable">$_SESSION</span><span class="token punctuation">[</span><span class="token string">'username'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token variable">$info</span><span class="token punctuation">[</span><span class="token string">'username'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">////获取用户名</span>
+        <span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+            <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token string">"ERROR!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string">'username'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">&amp;&amp;</span><span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string">'password'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>   <span class="token comment" spellcheck="true">//判断用户的输入</span>
+  <span class="token variable">$username</span><span class="token operator">=</span><span class="token function">waf</span><span class="token punctuation">(</span><span class="token punctuation">(</span>string<span class="token punctuation">)</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string">'username'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//对用户名进行安全检测</span>
+  <span class="token variable">$password</span><span class="token operator">=</span><span class="token function">waf</span><span class="token punctuation">(</span><span class="token punctuation">(</span>string<span class="token punctuation">)</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string">'password'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//对用户密码进行安全检测</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token variable">$username</span> <span class="token operator">===</span> <span class="token string">'admin'</span><span class="token punctuation">)</span><span class="token punctuation">{</span>   <span class="token comment" spellcheck="true">//判断网页提交的用户是否是真实的"admin"</span>
+        <span class="token function">exit</span><span class="token punctuation">(</span><span class="token string">'&lt;p>You are not real admin!&lt;/p>'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+        <span class="token variable">$info</span> <span class="token operator">=</span> <span class="token keyword">array</span><span class="token punctuation">(</span><span class="token string">'username'</span><span class="token operator">=</span><span class="token operator">></span><span class="token variable">$username</span><span class="token punctuation">,</span><span class="token string">'password'</span><span class="token operator">=</span><span class="token operator">></span><span class="token variable">$password</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">login</span><span class="token punctuation">(</span><span class="token variable">$info</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">show_homepage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">else</span><span class="token punctuation">{</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$_SESSION</span><span class="token punctuation">[</span><span class="token string">"username"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token function">check_login</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">show_homepage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token delimiter">?></span>
+<span class="token markup"><span class="token doctype">&lt;!DOCTYPE html></span></span>
+<span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>en<span class="token punctuation">"</span></span> <span class="token punctuation">></span></span></span>
+<span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span></span>
+  <span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>UTF-8<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
+  <span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span></span>Paper login form<span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span></span>
+      <span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>css/style.css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
+<span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span></span>
+<span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span></span>
+  <span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>login<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
+  <span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span> <span class="token attr-name">action</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span> <span class="token attr-name">method</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>post<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
+    <span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">></span></span></span>Sign In<span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">></span></span></span>
+    <span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>username<span class="token punctuation">'</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token attr-name">placeholder</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Username<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
+    <span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>password<span class="token punctuation">'</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>password<span class="token punctuation">"</span></span> <span class="token attr-name">placeholder</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Password<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
+    <span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span><span class="token punctuation">></span></span></span>Sign in<span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span></span>
+<span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></span>
+<span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span></span>
+<span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>代码审计发现用户只能够使用admin进行查询Flag，但是代码会检测出你不是真实的admin，所以需要利用网页代理对抓取的网页数据包进行两次不同的利用。</p>
 <h3 id="第一次数据包的利用"><a href="#第一次数据包的利用" class="headerlink" title="第一次数据包的利用"></a>第一次数据包的利用</h3><p> <img src="/2019/03/26/cbc-byte-reverse-attack/1594459-20190325222438220-123360533.png" alt="img"></p>
 <p>由于刚开始用户的输入不能是admin所以提交用户名为”ddmin”，但是只有是admin用户才能查看Flag，所以只能利用代码上的提示：define(“METHOD”, “aes-128-cbc”); 利用 CBC 字节反转攻击构造admin。</p>
 <p>分析构造admin，明文分组16字节一组</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">原明文</span><br><span class="line">a:2:&#123;s:8:&quot;username&quot;;s:5:&quot;ddmin&quot;;s:8:&quot;password&quot;;s:5:&quot;12345&quot;&#125;</span><br><span class="line"></span><br><span class="line">明文分组</span><br><span class="line">第一组：a:2:&#123;s:8:&quot;userna</span><br><span class="line">第二组：me&quot;;s:5:&quot;ddmin&quot;;</span><br><span class="line">第三组：s:8:&quot;password&quot;;s</span><br><span class="line">第四组：:5:&quot;12345&quot;;&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>原明文
+a:2:{s:8:&quot;username&quot;;s:5:&quot;ddmin&quot;;s:8:&quot;password&quot;;s:5:&quot;12345&quot;}
 
-<p>依据上述分组，通过修改第一组明文对应密文中的第10个字节来间接性修改第二组密文解密产生的明文，以此将”ddmin”修改为”admin”</p>
+明文分组
+第一组：a:2:{s:8:&quot;userna
+第二组：me&quot;;s:5:&quot;ddmin&quot;;
+第三组：s:8:&quot;password&quot;;s
+第四组：:5:&quot;12345&quot;;}</code></pre><p>依据上述分组，通过修改第一组明文对应密文中的第10个字节来间接性修改第二组密文解密产生的明文，以此将”ddmin”修改为”admin”</p>
 <p><strong>python 脚本~1</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> urllib.parse</span><br><span class="line"></span><br><span class="line">cipher = base64.b64decode(urllib.parse.unquote(<span class="string">'mqyAyGTAv4dfyqwuz0mIu7HOBhqf9xStbNQgj4XKnnlIRBEc68i%2BV8hTS6IvQxYsEjzMBpMJO1s%2BFFmbw8jYxw%3D%3D'</span>))  //这里放burp放回的base64的cipher数据</span><br><span class="line">x = cipher[<span class="number">0</span>:<span class="number">9</span>]+bytes([ord(chr(cipher[<span class="number">9</span>]))^ord(<span class="string">'d'</span>)^ord(<span class="string">'a'</span>)])+cipher[<span class="number">10</span>:]</span><br><span class="line">x = urllib.parse.quote(base64.b64encode(x))</span><br><span class="line">print(x)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> base64
+<span class="token keyword">import</span> urllib<span class="token punctuation">.</span>parse
 
+cipher <span class="token operator">=</span> base64<span class="token punctuation">.</span>b64decode<span class="token punctuation">(</span>urllib<span class="token punctuation">.</span>parse<span class="token punctuation">.</span>unquote<span class="token punctuation">(</span><span class="token string">'mqyAyGTAv4dfyqwuz0mIu7HOBhqf9xStbNQgj4XKnnlIRBEc68i%2BV8hTS6IvQxYsEjzMBpMJO1s%2BFFmbw8jYxw%3D%3D'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token operator">//</span>这里放burp放回的base64的cipher数据
+x <span class="token operator">=</span> cipher<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">:</span><span class="token number">9</span><span class="token punctuation">]</span><span class="token operator">+</span>bytes<span class="token punctuation">(</span><span class="token punctuation">[</span>ord<span class="token punctuation">(</span>chr<span class="token punctuation">(</span>cipher<span class="token punctuation">[</span><span class="token number">9</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">^</span>ord<span class="token punctuation">(</span><span class="token string">'d'</span><span class="token punctuation">)</span><span class="token operator">^</span>ord<span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">+</span>cipher<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">:</span><span class="token punctuation">]</span>
+x <span class="token operator">=</span> urllib<span class="token punctuation">.</span>parse<span class="token punctuation">.</span>quote<span class="token punctuation">(</span>base64<span class="token punctuation">.</span>b64encode<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>php 脚本~1</strong></p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">header(<span class="string">"Content-Type: text/html;charset=utf-8"</span>);</span><br><span class="line">    $cipher = base64_decode(urldecode(<span class="string">'mqyAyGTAv4dfyqwuz0mIu7HOBhqf9xStbNQgj4XKnnlIRBEc68i%2BV8hTS6IvQxYsEjzMBpMJO1s%2BFFmbw8jYxw%3D%3D'</span>));  <span class="comment">//这里放burp放回的base64的cipher数据</span></span><br><span class="line">    $temp = $cipher;</span><br><span class="line">    $cipher[<span class="number">9</span>] = chr(ord($cipher[<span class="number">9</span>]) ^ ord(<span class="string">'d'</span>) ^ ord(<span class="string">'a'</span>));</span><br><span class="line">    <span class="keyword">echo</span> urlencode(base64_encode($cipher));</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token function">header</span><span class="token punctuation">(</span><span class="token string">"Content-Type: text/html;charset=utf-8"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$cipher</span> <span class="token operator">=</span> <span class="token function">base64_decode</span><span class="token punctuation">(</span><span class="token function">urldecode</span><span class="token punctuation">(</span><span class="token string">'mqyAyGTAv4dfyqwuz0mIu7HOBhqf9xStbNQgj4XKnnlIRBEc68i%2BV8hTS6IvQxYsEjzMBpMJO1s%2BFFmbw8jYxw%3D%3D'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//这里放burp放回的base64的cipher数据</span>
+    <span class="token variable">$temp</span> <span class="token operator">=</span> <span class="token variable">$cipher</span><span class="token punctuation">;</span>
+    <span class="token variable">$cipher</span><span class="token punctuation">[</span><span class="token number">9</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">chr</span><span class="token punctuation">(</span><span class="token function">ord</span><span class="token punctuation">(</span><span class="token variable">$cipher</span><span class="token punctuation">[</span><span class="token number">9</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">^</span> <span class="token function">ord</span><span class="token punctuation">(</span><span class="token string">'d'</span><span class="token punctuation">)</span> <span class="token operator">^</span> <span class="token function">ord</span><span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">echo</span> <span class="token function">urlencode</span><span class="token punctuation">(</span><span class="token function">base64_encode</span><span class="token punctuation">(</span><span class="token variable">$cipher</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token delimiter">?></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>运行结果</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mqyAyGTAv4dfz6wuz0mIu7HOBhqf9xStbNQgj4XKnnlIRBEc68i%2BV8hTS6IvQxYsEjzMBpMJO1s%2BFFmbw8jYxw%3D%3D</span><br></pre></td></tr></table></figure>
-
-<h3 id="第二次数据包的利用"><a href="#第二次数据包的利用" class="headerlink" title="第二次数据包的利用"></a>第二次数据包的利用</h3><p><img src="/2019/03/26/cbc-byte-reverse-attack/1594459-20190325234018246-1560459954.png" alt="img"></p>
+<pre><code>mqyAyGTAv4dfz6wuz0mIu7HOBhqf9xStbNQgj4XKnnlIRBEc68i%2BV8hTS6IvQxYsEjzMBpMJO1s%2BFFmbw8jYxw%3D%3D</code></pre><h3 id="第二次数据包的利用"><a href="#第二次数据包的利用" class="headerlink" title="第二次数据包的利用"></a>第二次数据包的利用</h3><p><img src="/2019/03/26/cbc-byte-reverse-attack/1594459-20190325234018246-1560459954.png" alt="img"></p>
 <p>将username和password提交的数据清空，并且将之前的 iv 和 修改过的cipher 添加到cookie字段中。 此处利用的主要代码如下</p>
 <p><img src="/2019/03/26/cbc-byte-reverse-attack/1594459-20190325234521257-1657095812.png" alt="img"></p>
 <p><img src="/2019/03/26/cbc-byte-reverse-attack/1594459-20190325234614696-323702687.png" alt="img"></p>
@@ -488,1657 +674,521 @@ height:50vh;
 <p><img src="/2019/03/26/cbc-byte-reverse-attack/1594459-20190325235027028-115000003.png" alt="img"></p>
 <p>从图中发现第一组的明文出现了问题，用户已经从”ddmin”成功修改为”admin”，由于”第一次数据包利用”中修改了第一组密文，所以第一组和第二组的明文都会受到影响。要想第一组明文恢复正常，就要在”第一次数据包利用”中的基础上修改IV使之产生正确的明文。</p>
 <p><strong>python 脚本~2</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf8 -*-</span></span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> urllib.parse</span><br><span class="line"></span><br><span class="line">cipher = base64.b64decode(<span class="string">'+g9Uzo1waJpEYbdiV+DYOm1lIjtzOjU6ImFkbWluIjtzOjg6InBhc3N3b3JkIjtzOjU6IjEyMzQ1Ijt9'</span>)  //这里放burp放回的base64数据</span><br><span class="line">iv = base64.b64decode(urllib.parse.unquote(<span class="string">'tWgzNB61rHp%2BzFZCLB6KQA%3D%3D'</span>))   //这里放cookie中的iv</span><br><span class="line">newiv = <span class="string">''</span></span><br><span class="line">right = <span class="string">'a:2:&#123;s:8:"userna'</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">16</span>):</span><br><span class="line">    newiv += chr(ord(right[i]) ^ ord(chr(iv[i])) ^ ord(chr(cipher[i])))      //产生新的向量IV</span><br><span class="line"></span><br><span class="line">newiv = newiv.encode(encoding=<span class="string">"utf8"</span>)</span><br><span class="line">print(urllib.parse.quote(base64.b64encode(newiv)))</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># -*- coding:utf8 -*-</span>
+<span class="token keyword">import</span> base64
+<span class="token keyword">import</span> urllib<span class="token punctuation">.</span>parse
 
+cipher <span class="token operator">=</span> base64<span class="token punctuation">.</span>b64decode<span class="token punctuation">(</span><span class="token string">'+g9Uzo1waJpEYbdiV+DYOm1lIjtzOjU6ImFkbWluIjtzOjg6InBhc3N3b3JkIjtzOjU6IjEyMzQ1Ijt9'</span><span class="token punctuation">)</span>  <span class="token operator">//</span>这里放burp放回的base64数据
+iv <span class="token operator">=</span> base64<span class="token punctuation">.</span>b64decode<span class="token punctuation">(</span>urllib<span class="token punctuation">.</span>parse<span class="token punctuation">.</span>unquote<span class="token punctuation">(</span><span class="token string">'tWgzNB61rHp%2BzFZCLB6KQA%3D%3D'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>   <span class="token operator">//</span>这里放cookie中的iv
+newiv <span class="token operator">=</span> <span class="token string">''</span>
+right <span class="token operator">=</span> <span class="token string">'a:2:{s:8:"userna'</span>
+<span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    newiv <span class="token operator">+=</span> chr<span class="token punctuation">(</span>ord<span class="token punctuation">(</span>right<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">^</span> ord<span class="token punctuation">(</span>chr<span class="token punctuation">(</span>iv<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">^</span> ord<span class="token punctuation">(</span>chr<span class="token punctuation">(</span>cipher<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>      <span class="token operator">//</span>产生新的向量IV
+
+newiv <span class="token operator">=</span> newiv<span class="token punctuation">.</span>encode<span class="token punctuation">(</span>encoding<span class="token operator">=</span><span class="token string">"utf8"</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>urllib<span class="token punctuation">.</span>parse<span class="token punctuation">.</span>quote<span class="token punctuation">(</span>base64<span class="token punctuation">.</span>b64encode<span class="token punctuation">(</span>newiv<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>php 脚本~2</strong></p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="comment">#计算iv</span></span><br><span class="line">    $res = base64_decode(<span class="string">'+g9Uzo1waJpEYbdiV+DYOm1lIjtzOjU6ImFkbWluIjtzOjg6InBhc3N3b3JkIjtzOjU6IjEyMzQ1Ijt9'</span>);    <span class="comment">//这里放burp放回的base64数据</span></span><br><span class="line">    $iv = base64_decode(urldecode(<span class="string">'tWgzNB61rHp%2BzFZCLB6KQA%3D%3D'</span>)); <span class="comment">//这里放cookie中的iv</span></span><br><span class="line">    $plaintext = <span class="string">'a:2:&#123;s:8:"userna'</span>;</span><br><span class="line">    $new_iv = <span class="string">''</span>;</span><br><span class="line">    <span class="keyword">for</span> ($i = <span class="number">0</span>; $i &lt; <span class="number">16</span>; $i ++)&#123;</span><br><span class="line">        $new_iv = $new_iv . chr(ord($iv[$i]) ^ ord($res[$i]) ^ ord($plaintext[$i]));  <span class="comment">//产生新的向量IV</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">echo</span> urlencode(base64_encode($new_iv));</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+    <span class="token shell-comment comment">#计算iv</span>
+    <span class="token variable">$res</span> <span class="token operator">=</span> <span class="token function">base64_decode</span><span class="token punctuation">(</span><span class="token string">'+g9Uzo1waJpEYbdiV+DYOm1lIjtzOjU6ImFkbWluIjtzOjg6InBhc3N3b3JkIjtzOjU6IjEyMzQ1Ijt9'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//这里放burp放回的base64数据</span>
+    <span class="token variable">$iv</span> <span class="token operator">=</span> <span class="token function">base64_decode</span><span class="token punctuation">(</span><span class="token function">urldecode</span><span class="token punctuation">(</span><span class="token string">'tWgzNB61rHp%2BzFZCLB6KQA%3D%3D'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//这里放cookie中的iv</span>
+    <span class="token variable">$plaintext</span> <span class="token operator">=</span> <span class="token string">'a:2:{s:8:"userna'</span><span class="token punctuation">;</span>
+    <span class="token variable">$new_iv</span> <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token variable">$i</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token variable">$i</span> <span class="token operator">&lt;</span> <span class="token number">16</span><span class="token punctuation">;</span> <span class="token variable">$i</span> <span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token variable">$new_iv</span> <span class="token operator">=</span> <span class="token variable">$new_iv</span> <span class="token punctuation">.</span> <span class="token function">chr</span><span class="token punctuation">(</span><span class="token function">ord</span><span class="token punctuation">(</span><span class="token variable">$iv</span><span class="token punctuation">[</span><span class="token variable">$i</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">^</span> <span class="token function">ord</span><span class="token punctuation">(</span><span class="token variable">$res</span><span class="token punctuation">[</span><span class="token variable">$i</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">^</span> <span class="token function">ord</span><span class="token punctuation">(</span><span class="token variable">$plaintext</span><span class="token punctuation">[</span><span class="token variable">$i</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//产生新的向量IV</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">echo</span> <span class="token function">urlencode</span><span class="token punctuation">(</span><span class="token function">base64_encode</span><span class="token punctuation">(</span><span class="token variable">$new_iv</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token delimiter">?></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>运行结果</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Ll1VwOi2%2FtgAj5RTHow8Gw%3D%3D</span><br></pre></td></tr></table></figure>
-
-<p>重新发送第二次请求</p>
+<pre><code>Ll1VwOi2%2FtgAj5RTHow8Gw%3D%3D</code></pre><p>重新发送第二次请求</p>
 <p><img src="/2019/03/26/cbc-byte-reverse-attack/1594459-20190326010543408-1707341522.jpg" alt="img"></p>
 <p><strong>get flag</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Flag is CBC&#123;CBC is a good thing&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>Flag is CBC{CBC is a good thing}</code></pre>
+            </div>
+            <hr/>
 
-
-
-
-    </article>
-    <!-- license  -->
-    
-        <div class="license-wrapper">
-            <p>Author：<a href="http://Qftm.github.io">Qftm</a>
-            <p>原文链接：<a href="http://qftm.github.io/2019/03/26/cbc-byte-reverse-attack/">http://qftm.github.io/2019/03/26/cbc-byte-reverse-attack/</a>
-            <p>发表日期：<a href="http://qftm.github.io/2019/03/26/cbc-byte-reverse-attack/">March 26th 2019, 3:24:00 pm</a>
-            <p>更新日期：<a href="http://qftm.github.io/2019/03/26/cbc-byte-reverse-attack/">April 19th 2020, 11:36:33 pm</a>
-            <p>版权声明：本文采用<a rel="license noopener" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
-        </div>
-    
-    <!-- paginator  -->
-    <ul class="post-paginator">
-        <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href= "/2019/04/26/Symmetric-Key-Encryption-DES/" title= "Symmetric Key Encryption DES">
-                    <div class="nextTitle">Symmetric Key Encryption DES</div>
-                </a>
-            
-        </li>
-        <li class="previous">
-            
-                <div class="prevSlogan">Previous Post</div>
-                <a href= "/2019/03/24/symmetric-and-asymmetric-crypto-system/" title= "对称密码体制和非对称密码体制">
-                    <div class="prevTitle">对称密码体制和非对称密码体制</div>
-                </a>
-            
-        </li>
-    </ul>
-    <!-- 评论插件 -->
-    <!-- 来必力City版安装代码 -->
 
-<!-- City版安装代码已完成 -->
-    
-    
-    <!-- partial('_partial/comment/changyan') -->
-    <!--PC版-->
-
-
-    
-    
-
-    <!-- 评论 -->
-</main>
-            <!-- profile -->
-            
-        </div>
-        <footer class="footer footer-unloaded">
-    <!-- social  -->
-    
-    <div class="social">
+    <div class="reprint" id="reprint-statement">
         
-    
-        
-            
-                <a href="mailto:Qftmbin@gmail.com" class="iconfont-archer email" title=email ></a>
-            
-        
-    
-        
-            
-                <a href="//github.com/Qftm" class="iconfont-archer github" target="_blank" title=github></a>
-            
-        
-    
-        
-            
-                <span class="iconfont-archer wechat" title=wechat>
-                  
-                  <img class="profile-qr" src="/assets/example_qr.png" />
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        Author:
+                    </i>
                 </span>
-            
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Qftm</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        Link:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://Qftm.github.io/2019/03/26/cbc-byte-reverse-attack/">http://Qftm.github.io/2019/03/26/cbc-byte-reverse-attack/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        Reprint policy:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    All articles in this blog are used except for special statements
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    reprint polocy. If reproduced, please indicate source
+                    <a href="/about" target="_blank">Qftm</a>
+                    !
+                </span>
+            </div>
         
-    
-        
-    
-        
-    
-        
-            
-                <a href="//weibo.com/QftmEr" class="iconfont-archer weibo" target="_blank" title=weibo></a>
-            
-        
-    
-        
-    
-        
-    
-        
-    
-        
-            
-                <a href="//twitter.com/Qftmer" class="iconfont-archer twitter" target="_blank" title=twitter></a>
-            
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
+    </div>
 
-    </div>
-    
-    <!-- powered by Hexo  -->
-    <div class="copyright">
-        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
-    </div>
-    <!-- 不蒜子  -->
-    
-    <div class="busuanzi-container">
-    
-     
-    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
-    
-    </div>
-    
-</footer>
-    </div>
-    <!-- toc -->
-    
-    <div class="toc-wrapper" style=
-    
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        M.toast({html: toastHTML})
+      });
 
-
-
-
-
-
-
-top:50vh;
-
-    >
-        <div class="toc-catalog">
-            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
-        </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CBC-简介"><span class="toc-number">1.</span> <span class="toc-text">CBC 简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#现代密码体制"><span class="toc-number">1.1.</span> <span class="toc-text">现代密码体制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CBC-模式"><span class="toc-number">1.2.</span> <span class="toc-text">CBC 模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CBC-模式的优缺点"><span class="toc-number">1.3.</span> <span class="toc-text">CBC 模式的优缺点</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CBC-工作模式"><span class="toc-number">2.</span> <span class="toc-text">CBC 工作模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Encryption"><span class="toc-number">2.1.</span> <span class="toc-text">Encryption</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#特殊名词"><span class="toc-number">2.1.1.</span> <span class="toc-text">特殊名词</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Encryption-process"><span class="toc-number">2.1.2.</span> <span class="toc-text">Encryption process</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Decryption"><span class="toc-number">2.2.</span> <span class="toc-text">Decryption</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Decryption-process"><span class="toc-number">2.2.1.</span> <span class="toc-text">Decryption process</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CBC-字节反转攻击原理"><span class="toc-number">3.</span> <span class="toc-text">CBC 字节反转攻击原理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Attack-原理"><span class="toc-number">3.1.</span> <span class="toc-text">Attack 原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Attack-process"><span class="toc-number">3.2.</span> <span class="toc-text">Attack process</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#漏洞复现"><span class="toc-number">4.</span> <span class="toc-text">漏洞复现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#漏洞源码"><span class="toc-number">4.1.</span> <span class="toc-text">漏洞源码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#waf-源码"><span class="toc-number">4.1.1.</span> <span class="toc-text">waf 源码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#题目Hint"><span class="toc-number">4.2.</span> <span class="toc-text">题目Hint</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#漏洞利用与复现过程"><span class="toc-number">4.3.</span> <span class="toc-text">漏洞利用与复现过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Injection-测试"><span class="toc-number">4.3.1.</span> <span class="toc-text">Injection 测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#网站敏感信息扫描"><span class="toc-number">4.3.2.</span> <span class="toc-text">网站敏感信息扫描</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第一次数据包的利用"><span class="toc-number">4.3.3.</span> <span class="toc-text">第一次数据包的利用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第二次数据包的利用"><span class="toc-number">4.3.4.</span> <span class="toc-text">第二次数据包的利用</span></a></li></ol></li></ol></li></ol>
-    </div>
-    
-    <div class="back-top iconfont-archer">&#xe639;</div>
-    <div class="sidebar sidebar-hide">
-    <ul class="sidebar-tabs sidebar-tabs-active-0">
-        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
-        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
-        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
-    </ul>
-    <div class="sidebar-content sidebar-content-show-archive">
-          <div class="sidebar-panel-archives">
-    <!-- 在ejs中将archive按照时间排序 -->
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <div class="total-and-search">
-        <div class="total-archive">
-        Total : 63
-        </div>
-        <!-- search  -->
-        
-    </div>
-    
-    <div class="post-archive">
-    
-    
-    
-    
-    <div class="archive-year"> 2020 </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">06/22</span><a class="archive-post-title" href= "/2020/06/22/pentesting1/" >从0到1学会搭建小型企业拓扑到由外向内的渗透测试</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">06/20</span><a class="archive-post-title" href= "/2020/06/20/metasploit-framework/" >Metasploit Framework Handbook</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">06/06</span><a class="archive-post-title" href= "/2020/06/06/big-data-hadoop/" >Big Data Hadoop</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">05/26</span><a class="archive-post-title" href= "/2020/05/26/ISCC_2020_Web_WriteUp/" >ISCC 2020 Web WriteUp</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">04/19</span><a class="archive-post-title" href= "/2020/04/19/bypass-nodejs-jwt/" >探索Node.js中JWT认证缺陷的绕过</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">04/03</span><a class="archive-post-title" href= "/2020/04/03/php-filter-tricks/" >探索php://filter在实战当中的奇技淫巧</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/25</span><a class="archive-post-title" href= "/2020/03/25/Linux-Network-Protocol-Stack/" >Linux Network Protocol Stack</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/23</span><a class="archive-post-title" href= "/2020/03/23/Software-Engineering-Learning-Handbook/" >Software Engineering Learning Handbook</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/22</span><a class="archive-post-title" href= "/2020/03/22/Socket-Learning-Handbook/" >Socket Programming Learning Handbook</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/18</span><a class="archive-post-title" href= "/2020/03/18/PHP-File-Inclusion-Exploiting-and-Bypass/" >PHP File Inclusion Bug Exploiting and Bypass Handbook</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/15</span><a class="archive-post-title" href= "/2020/03/15/LFI-PHPINFO-OR-PHP7-Segment-Fault/" >LFI PHPINFO OR PHP7 Segment Fault Getshell</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/12</span><a class="archive-post-title" href= "/2020/03/12/LFI-Bypass-Session-Restriction-Getshell/" >LFI Bypass Session Restriction Getshell</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/10</span><a class="archive-post-title" href= "/2020/03/10/Linux-Electronic-Forensics/" >Linux Electronic Forensics Learning Handbook</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/06</span><a class="archive-post-title" href= "/2020/03/06/bypass-rfi-by-webdav/" >RFI巧用WebDAV绕过URL包含限制Getshell</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">02/12</span><a class="archive-post-title" href= "/2020/02/12/Hackintosh-Of-Lenovo-R720-15IKBN/" >Hackintosh Of Lenovo R720 15IKBN</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">01/18</span><a class="archive-post-title" href= "/2020/01/18/Information-Collection-Handbook/" >Information Collection Handbook</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">01/03</span><a class="archive-post-title" href= "/2020/01/03/small-and-medium-sized-enterprise-ips-deployment/" >中小型企业级 IPS 部署</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">01/01</span><a class="archive-post-title" href= "/2020/01/01/small-and-medium-sized-enterprise-firewall-deployment/" >中小型企业级防火墙部署</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> 2019 </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/31</span><a class="archive-post-title" href= "/2019/12/31/Docker-Learning-Handbook/" >Docker Learning Handbook</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/22</span><a class="archive-post-title" href= "/2019/11/22/PhpStudyBackDoor2019/" >PhpStudy BackDoor2019 深度分析</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">10/27</span><a class="archive-post-title" href= "/2019/10/27/Kali-Rolling-2019/" >Kali Rolling 2019 系统配置总结（Updateing）</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">10/26</span><a class="archive-post-title" href= "/2019/10/26/Joomla3.4.6-RCE-analyze/" >Joomla3.4.6 RCE漏洞深度分析</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">09/30</span><a class="archive-post-title" href= "/2019/09/30/pe-structure/" >初识PE文件结构</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">09/19</span><a class="archive-post-title" href= "/2019/09/19/information-hiding-and-detection-based-on-bmp-image/" >基于BMP图像的信息隐藏与检测</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">09/14</span><a class="archive-post-title" href= "/2019/09/14/matlab-image-and-audio-signal-processing/" >MATLAB之图像与音频信号处理</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">09/12</span><a class="archive-post-title" href= "/2019/09/12/matlab-basic-syntax-and-functions/" >MATLAB之基本语法与基础函数</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">09/11</span><a class="archive-post-title" href= "/2019/09/11/CVE-2018-14418-shines-a-new-spark/" >CVE-2018-14418 擦出新火花</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">09/05</span><a class="archive-post-title" href= "/2019/09/05/Electronic-Forensics-1/" >浅谈电子数字取证技术</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">08/03</span><a class="archive-post-title" href= "/2019/08/03/Linux-Reverse-Shell/" >Linux 反弹 Shell</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">08/03</span><a class="archive-post-title" href= "/2019/08/03/Windows-Reverse-Shell/" >Windows 反弹 Shell</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">08/03</span><a class="archive-post-title" href= "/2019/08/03/AWD-Bugs-Fix/" >AWD攻防赛之各类漏洞FIX方案</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">08/01</span><a class="archive-post-title" href= "/2019/08/01/ISCC2019-Finals-Writeup/" >第16届(2019)全国大学生信息安全与对抗技术竞赛全国线下总决赛 Writeup</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">07/31</span><a class="archive-post-title" href= "/2019/07/31/Hack-The-Box-Web-Pentest-2017/" >Hack The Box Web Pentest 2017</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">07/30</span><a class="archive-post-title" href= "/2019/07/30/Hack-The-Box-Web-Pentest-2019/" >Hack The Box Web Pentest 2019</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">05/12</span><a class="archive-post-title" href= "/2019/05/12/Linux-DHCP-server-configuration-and-management/" >Linux DHCP 服务器配置与管理</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">05/12</span><a class="archive-post-title" href= "/2019/05/12/Linux-DNS-server-configuration-and-management/" >Linux DNS 服务器配置与管理</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">04/26</span><a class="archive-post-title" href= "/2019/04/26/Symmetric-Key-Encryption-DES/" >Symmetric Key Encryption DES</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/26</span><a class="archive-post-title" href= "/2019/03/26/cbc-byte-reverse-attack/" >针对 CBC 字节反转攻击的研究与漏洞复现</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/24</span><a class="archive-post-title" href= "/2019/03/24/symmetric-and-asymmetric-crypto-system/" >对称密码体制和非对称密码体制</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2019/03/08/routing-protocol-and-switching-technology/" >路由协议与交换技术合集</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">02/28</span><a class="archive-post-title" href= "/2019/02/28/CentOS7-minimal-installation-simple-configuration/" >CentOS 7 最小化安装简单配置</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">02/16</span><a class="archive-post-title" href= "/2019/02/16/BugkuCTF-Writeup/" >Bugku CTF WriteUp 合集</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">02/13</span><a class="archive-post-title" href= "/2019/02/13/android-personal-mobile-phone-address-book-development/" >Android 个人手机通讯录开发</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">02/13</span><a class="archive-post-title" href= "/2019/02/13/Android-SQLite-database-learning/" >Android SQLite 数据库学习</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">01/27</span><a class="archive-post-title" href= "/2019/01/27/android-program-structure/" >Android 程序结构</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> 2018 </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/22</span><a class="archive-post-title" href= "/2018/12/22/xss-bypass-technology/" >XSS 绕过技术</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/22</span><a class="archive-post-title" href= "/2018/12/22/2018-The-3rd-nnctf-writeup/" >2018第三届南宁市网络安全技术大赛 nnctf WriteUp</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/21</span><a class="archive-post-title" href= "/2018/12/21/sql-injection-mysql-topic/" >SQL 注入~MySQL专题</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/25</span><a class="archive-post-title" href= "/2018/11/25/CDateStructLearning/" >C Programming Language Data Structure Learning</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/25</span><a class="archive-post-title" href= "/2018/11/25/Web-front-end-security/" >Web 前端安全</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/07</span><a class="archive-post-title" href= "/2018/11/07/CSRF-Bug-Test/" >CSRF 漏洞分析与测试</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/04</span><a class="archive-post-title" href= "/2018/11/04/XSS-DOM-test/" >XSS DOM 漏洞分析与测试</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/04</span><a class="archive-post-title" href= "/2018/11/04/XSS-Stored-test/" >XSS Stored 漏洞分析与测试</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/04</span><a class="archive-post-title" href= "/2018/11/04/XSS-Reflected-test/" >XSS Reflected 漏洞分析与测试</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">10/13</span><a class="archive-post-title" href= "/2018/10/13/arp-spoofing-attack/" >ARP protocol spoofing attack</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">10/11</span><a class="archive-post-title" href= "/2018/10/11/arp-protocol-analysis/" >ARP protocol analysis</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">07/04</span><a class="archive-post-title" href= "/2018/07/04/Kali-Rolling-2018/" >Kali Rolling 2018 系统配置</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">05/13</span><a class="archive-post-title" href= "/2018/05/13/shiyanba-writeup/" >实验吧 CTF WriteUp 合集</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">04/29</span><a class="archive-post-title" href= "/2018/04/29/file-header-of-various-files/" >各类文件的文件头标志</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">01/30</span><a class="archive-post-title" href= "/2018/01/30/Browser-User-Agent/" >认识浏览器请求头User-Agent</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">01/30</span><a class="archive-post-title" href= "/2018/01/30/Cryptography-Learning/" >CTF中那些脑洞大开的编码和加密</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">01/25</span><a class="archive-post-title" href= "/2018/01/25/TmuxTerminal/" >Tmux 终端利器</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">01/25</span><a class="archive-post-title" href= "/2018/01/25/VimTerminal/" >Vim(Vi) 终端利器</a>
-        </li>
-    
-    </div>
-  </div>
-        <div class="sidebar-panel-tags">
-    <div class="sidebar-tags-name">
-    
-        <span class="sidebar-tag-name" data-tags="CTF"><span class="iconfont-archer">&#xe606;</span>CTF</span>
-    
-        <span class="sidebar-tag-name" data-tags="SQLite"><span class="iconfont-archer">&#xe606;</span>SQLite</span>
-    
-        <span class="sidebar-tag-name" data-tags="安卓开发"><span class="iconfont-archer">&#xe606;</span>安卓开发</span>
-    
-        <span class="sidebar-tag-name" data-tags="HTTP"><span class="iconfont-archer">&#xe606;</span>HTTP</span>
-    
-        <span class="sidebar-tag-name" data-tags="AWD"><span class="iconfont-archer">&#xe606;</span>AWD</span>
-    
-        <span class="sidebar-tag-name" data-tags="CSRF"><span class="iconfont-archer">&#xe606;</span>CSRF</span>
-    
-        <span class="sidebar-tag-name" data-tags="CMS"><span class="iconfont-archer">&#xe606;</span>CMS</span>
-    
-        <span class="sidebar-tag-name" data-tags="漏洞挖掘"><span class="iconfont-archer">&#xe606;</span>漏洞挖掘</span>
-    
-        <span class="sidebar-tag-name" data-tags="数据结构"><span class="iconfont-archer">&#xe606;</span>数据结构</span>
-    
-        <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
-    
-        <span class="sidebar-tag-name" data-tags="电子取证"><span class="iconfont-archer">&#xe606;</span>电子取证</span>
-    
-        <span class="sidebar-tag-name" data-tags="密码研究"><span class="iconfont-archer">&#xe606;</span>密码研究</span>
-    
-        <span class="sidebar-tag-name" data-tags="MacOS"><span class="iconfont-archer">&#xe606;</span>MacOS</span>
-    
-        <span class="sidebar-tag-name" data-tags="攻防渗透"><span class="iconfont-archer">&#xe606;</span>攻防渗透</span>
-    
-        <span class="sidebar-tag-name" data-tags="Handbook"><span class="iconfont-archer">&#xe606;</span>Handbook</span>
-    
-        <span class="sidebar-tag-name" data-tags="漏洞分析"><span class="iconfont-archer">&#xe606;</span>漏洞分析</span>
-    
-        <span class="sidebar-tag-name" data-tags="LFI"><span class="iconfont-archer">&#xe606;</span>LFI</span>
-    
-        <span class="sidebar-tag-name" data-tags="Bypass"><span class="iconfont-archer">&#xe606;</span>Bypass</span>
-    
-        <span class="sidebar-tag-name" data-tags="协议"><span class="iconfont-archer">&#xe606;</span>协议</span>
-    
-        <span class="sidebar-tag-name" data-tags="后门分析"><span class="iconfont-archer">&#xe606;</span>后门分析</span>
-    
-        <span class="sidebar-tag-name" data-tags="木马后门"><span class="iconfont-archer">&#xe606;</span>木马后门</span>
-    
-        <span class="sidebar-tag-name" data-tags="DES"><span class="iconfont-archer">&#xe606;</span>DES</span>
-    
-        <span class="sidebar-tag-name" data-tags="神兵利器"><span class="iconfont-archer">&#xe606;</span>神兵利器</span>
-    
-        <span class="sidebar-tag-name" data-tags="Web"><span class="iconfont-archer">&#xe606;</span>Web</span>
-    
-        <span class="sidebar-tag-name" data-tags="PowerShell"><span class="iconfont-archer">&#xe606;</span>PowerShell</span>
-    
-        <span class="sidebar-tag-name" data-tags="XSS"><span class="iconfont-archer">&#xe606;</span>XSS</span>
-    
-        <span class="sidebar-tag-name" data-tags="ARP"><span class="iconfont-archer">&#xe606;</span>ARP</span>
-    
-        <span class="sidebar-tag-name" data-tags="JWT"><span class="iconfont-archer">&#xe606;</span>JWT</span>
-    
-        <span class="sidebar-tag-name" data-tags="RFI"><span class="iconfont-archer">&#xe606;</span>RFI</span>
-    
-        <span class="sidebar-tag-name" data-tags="CBC"><span class="iconfont-archer">&#xe606;</span>CBC</span>
-    
-        <span class="sidebar-tag-name" data-tags="信息隐藏"><span class="iconfont-archer">&#xe606;</span>信息隐藏</span>
-    
-        <span class="sidebar-tag-name" data-tags="MATLAB"><span class="iconfont-archer">&#xe606;</span>MATLAB</span>
-    
-        <span class="sidebar-tag-name" data-tags="PE"><span class="iconfont-archer">&#xe606;</span>PE</span>
-    
-        <span class="sidebar-tag-name" data-tags="二进制"><span class="iconfont-archer">&#xe606;</span>二进制</span>
-    
-        <span class="sidebar-tag-name" data-tags="文件结构"><span class="iconfont-archer">&#xe606;</span>文件结构</span>
-    
-        <span class="sidebar-tag-name" data-tags="PHP"><span class="iconfont-archer">&#xe606;</span>PHP</span>
-    
-        <span class="sidebar-tag-name" data-tags="路由协议"><span class="iconfont-archer">&#xe606;</span>路由协议</span>
-    
-        <span class="sidebar-tag-name" data-tags="Firewalld"><span class="iconfont-archer">&#xe606;</span>Firewalld</span>
-    
-        <span class="sidebar-tag-name" data-tags="IPS"><span class="iconfont-archer">&#xe606;</span>IPS</span>
-    
-        <span class="sidebar-tag-name" data-tags="MySQL"><span class="iconfont-archer">&#xe606;</span>MySQL</span>
-    
-        <span class="sidebar-tag-name" data-tags="SQLInjection"><span class="iconfont-archer">&#xe606;</span>SQLInjection</span>
-    
-        <span class="sidebar-tag-name" data-tags="Docker"><span class="iconfont-archer">&#xe606;</span>Docker</span>
-    
-        <span class="sidebar-tag-name" data-tags="Socket"><span class="iconfont-archer">&#xe606;</span>Socket</span>
-    
-        <span class="sidebar-tag-name" data-tags="开发"><span class="iconfont-archer">&#xe606;</span>开发</span>
-    
-        <span class="sidebar-tag-name" data-tags="Hadoop"><span class="iconfont-archer">&#xe606;</span>Hadoop</span>
-    
-        <span class="sidebar-tag-name" data-tags="Metasploit"><span class="iconfont-archer">&#xe606;</span>Metasploit</span>
-    
-    </div>
-    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
-    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
-    缺失模块。<br/>
-    1、请确保node版本大于6.2<br/>
-    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
-    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
-    3、在根目录_config.yml里添加配置：
-    <pre style="color: #787878; font-size: 0.6rem;">
-jsonContent:
-  meta: false
-  pages: false
-  posts:
-    title: true
-    date: true
-    path: true
-    text: false
-    raw: false
-    content: false
-    slug: false
-    updated: false
-    comments: false
-    link: false
-    permalink: false
-    excerpt: false
-    categories: true
-    tags: true</pre>
-    </div> 
-    <div class="sidebar-tags-list"></div>
-</div>
-        <div class="sidebar-panel-categories">
-    <div class="sidebar-categories-name">
-    
-        <span class="sidebar-category-name" data-categories="CTF"><span class="iconfont-archer">&#xe60a;</span>CTF</span>
-    
-        <span class="sidebar-category-name" data-categories="移动开发"><span class="iconfont-archer">&#xe60a;</span>移动开发</span>
-    
-        <span class="sidebar-category-name" data-categories="网络安全"><span class="iconfont-archer">&#xe60a;</span>网络安全</span>
-    
-        <span class="sidebar-category-name" data-categories="WebSecurity"><span class="iconfont-archer">&#xe60a;</span>WebSecurity</span>
-    
-        <span class="sidebar-category-name" data-categories="漏洞挖掘"><span class="iconfont-archer">&#xe60a;</span>漏洞挖掘</span>
-    
-        <span class="sidebar-category-name" data-categories="算法艺术"><span class="iconfont-archer">&#xe60a;</span>算法艺术</span>
-    
-        <span class="sidebar-category-name" data-categories="运维"><span class="iconfont-archer">&#xe60a;</span>运维</span>
-    
-        <span class="sidebar-category-name" data-categories="取证艺术"><span class="iconfont-archer">&#xe60a;</span>取证艺术</span>
-    
-        <span class="sidebar-category-name" data-categories="Hackintosh"><span class="iconfont-archer">&#xe60a;</span>Hackintosh</span>
-    
-        <span class="sidebar-category-name" data-categories="漏洞分析"><span class="iconfont-archer">&#xe60a;</span>漏洞分析</span>
-    
-        <span class="sidebar-category-name" data-categories="后门分析"><span class="iconfont-archer">&#xe60a;</span>后门分析</span>
-    
-        <span class="sidebar-category-name" data-categories="木马后门"><span class="iconfont-archer">&#xe60a;</span>木马后门</span>
-    
-        <span class="sidebar-category-name" data-categories="神兵利器"><span class="iconfont-archer">&#xe60a;</span>神兵利器</span>
-    
-        <span class="sidebar-category-name" data-categories="信息隐藏"><span class="iconfont-archer">&#xe60a;</span>信息隐藏</span>
-    
-        <span class="sidebar-category-name" data-categories="逆向工程"><span class="iconfont-archer">&#xe60a;</span>逆向工程</span>
-    
-        <span class="sidebar-category-name" data-categories="渗透测试"><span class="iconfont-archer">&#xe60a;</span>渗透测试</span>
-    
-        <span class="sidebar-category-name" data-categories="路由协议"><span class="iconfont-archer">&#xe60a;</span>路由协议</span>
-    
-        <span class="sidebar-category-name" data-categories="密码研究"><span class="iconfont-archer">&#xe60a;</span>密码研究</span>
-    
-        <span class="sidebar-category-name" data-categories="云计算"><span class="iconfont-archer">&#xe60a;</span>云计算</span>
-    
-        <span class="sidebar-category-name" data-categories="软件工程"><span class="iconfont-archer">&#xe60a;</span>软件工程</span>
-    
-        <span class="sidebar-category-name" data-categories="大数据"><span class="iconfont-archer">&#xe60a;</span>大数据</span>
-    
-    </div>
-    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
-    <div class="sidebar-categories-list"></div>
-</div>
-    </div>
-</div> 
-    <script>
-    var siteMeta = {
-        root: "/",
-        author: "Qftm"
-    }
-</script>
-    <!-- CDN failover -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
-    <script type="text/javascript">
-        if (typeof window.$ === 'undefined')
-        {
-            console.warn('jquery load from jsdelivr failed, will load local script')
-            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
-        }
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
     </script>
-    <script src="/scripts/main.js"></script>
-    <!-- algolia -->
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/CBC/">
+                                    <span class="chip bg-color">CBC</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
     
-    <!-- busuanzi  -->
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
     
-    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
     
-    <!-- CNZZ  -->
-    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
     </div>
-    <!-- async load share.js -->
+
     
-        <script src="/scripts/share.js" async></script>    
-     
-    </body>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+            <div class="card">
+                <a href="/2019/04/26/symmetric-key-encryption-des/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="Symmetric Key Encryption DES">
+                        
+                        <span class="card-title">Symmetric Key Encryption DES</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            对称加密 (Symmetric Key Encryption)对称加密是最快速、最简单的一种加密方式，加密（encryption）与解密（decryption）用的是同样的密钥（secret key）。对称加密有很多种算法，由于它效率很高，
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-04-26
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" class="post-category">
+                                    编程开发
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/DES/">
+                        <span class="chip bg-color">DES</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/03/24/symmetric-and-asymmetric-crypto-system/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="对称密码体制和非对称密码体制">
+                        
+                        <span class="card-title">对称密码体制和非对称密码体制</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            对称加密 (Symmetric Key Encryption)对称加密是最快速、最简单的一种加密方式，加密（encryption）与解密（decryption）用的是同样的密钥（secret key）。对称加密有很多种算法，由于它效率很高，
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-03-24
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%AE%89%E5%85%A8%E5%BB%BA%E8%AE%BE/" class="post-category">
+                                    安全建设
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/">
+                        <span class="chip bg-color">密码学</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + 'From: Qftm<br />'
+            + 'Author: Qftm<br />'
+            + 'Link: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2018</span>
+            <a href="/about" target="_blank">Qftm</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">309.4k</span>&nbsp;字
+            
+            
+            
+            
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+    <a href="https://github.com/Qftm" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:Qftmbin@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+    <a href="https://twitter.com/Qftmer" class="tooltipped" target="_blank" data-tooltip="关注我的Twitter: https://twitter.com/Qftmer" data-position="top" data-delay="50">
+        <i class="fab fa-twitter"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;Search</span>
+            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
 </html>
-
-
