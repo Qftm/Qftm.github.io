@@ -411,7 +411,7 @@
 <p>XSS也是一种注入攻击，长期以来被列为客户端web安全中的头号大敌，当web应用对用户输入过滤不严格，攻击者写入恶意的脚本代码（HTML、JavaScript）到网页中时，如果用户访问了含有恶意代码的页面，恶意脚本就会被浏览器解析执行导致用户被攻击。</p>
 <p>OWASP TOP 10 威胁多次把XSS列在榜首，常见的危害有：cookie窃取、session劫持、钓鱼攻击、蠕虫、ddos、获取用户真实IP、识别用户浏览器 ··········</p>
 <h1 id="dvwa反射型xss"><a href="#dvwa反射型xss" class="headerlink" title="dvwa反射型xss"></a>dvwa反射型xss</h1><p>反射型XSS：只是简单地把用户输入的数据反射给浏览器，一般出现在URL参数中及网站搜索栏中，只有用户点击恶意链接触发恶意代码的URL，才能受到攻击，只能触发一次，也被称为“非持久型XSS(Non-persistent XSS)”。</p>
-<h1 id="漏洞测试"><a href="#漏洞测试" class="headerlink" title="漏洞测试"></a>漏洞测试</h1><h2 id="low级别"><a href="#low级别" class="headerlink" title="low级别"></a>low级别</h2><p><img src="/2018/11/04/xss-reflected-test/20181103164816413.png" alt="img">)<img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h1 id="漏洞测试"><a href="#漏洞测试" class="headerlink" title="漏洞测试"></a>漏洞测试</h1><h2 id="low级别"><a href="#low级别" class="headerlink" title="low级别"></a>low级别</h2><p><img src="/2018/11/04/XSS-Reflected-test/20181103164816413.png" alt="img">)<img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p>在输入框里面随便输入一个String(admin)，发现显示：Hello admin这句话，同时可以知道数据提交是以GET请求的方式</p>
 <p>查看源码：并没有什么Protect，这是最危险的</p>
 <pre><code>&lt;?php
@@ -426,7 +426,7 @@ if( array_key_exists( &quot;name&quot;, $_GET ) &amp;&amp; $_GET[ &#39;name&#39;
 
 ?&gt; </code></pre><p>构造payload，执行最简单的XSS攻击</p>
 <pre><code>http://192.168.43.146/dvwa/vulnerabilities/xss_r/?name=%3Cscript%3Ealert%28%22_XSS_%22%29%3C/script%3E</code></pre><p>当用户触发该URL时就会受到XSS攻击，有弹框出现</p>
-<p><img src="/2018/11/04/xss-reflected-test/20181103205844455.png" alt="img"></p>
+<p><img src="/2018/11/04/XSS-Reflected-test/20181103205844455.png" alt="img"></p>
 <p>后续测试，利用此漏洞，你也可以尝试去获得用户登陆的Cookie，在这里就不多说了，很容易实现的</p>
 <h2 id="medium-级别"><a href="#medium-级别" class="headerlink" title="medium 级别"></a>medium 级别</h2><pre><code>&lt;?php
 
@@ -536,7 +536,7 @@ ENT_NOQUOTES - 不编码任何引号。
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://Qftm.github.io/2018/11/04/xss-reflected-test/">http://Qftm.github.io/2018/11/04/xss-reflected-test/</a>
+                    <a href="http://Qftm.github.io/2018/11/04/XSS-Reflected-test/">http://Qftm.github.io/2018/11/04/XSS-Reflected-test/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -625,7 +625,7 @@ ENT_NOQUOTES - 不编码任何引号。
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2018/11/04/xss-stored-test/">
+                <a href="/2018/11/04/XSS-Stored-test/">
                     <div class="card-image">
                         
                         

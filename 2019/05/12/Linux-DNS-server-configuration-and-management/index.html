@@ -406,7 +406,7 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="环境介绍"><a href="#环境介绍" class="headerlink" title="环境介绍"></a>环境介绍</h1><h2 id="运行软件"><a href="#运行软件" class="headerlink" title="运行软件"></a>运行软件</h2><pre><code>VMware Workstation Pro 14</code></pre><h2 id="系统环境"><a href="#系统环境" class="headerlink" title="系统环境"></a>系统环境</h2><pre><code>CentOS-7-x86_64-1810</code></pre><h1 id="操作配置"><a href="#操作配置" class="headerlink" title="操作配置"></a>操作配置</h1><h2 id="基础知识简介"><a href="#基础知识简介" class="headerlink" title="基础知识简介"></a>基础知识简介</h2><h3 id="域名空间"><a href="#域名空间" class="headerlink" title="域名空间"></a>域名空间</h3><p><img src="/2019/05/12/linux-dns-server-configuration-and-management/1594459-20190512101153767-26386953.png" alt="img"></p>
+                <h1 id="环境介绍"><a href="#环境介绍" class="headerlink" title="环境介绍"></a>环境介绍</h1><h2 id="运行软件"><a href="#运行软件" class="headerlink" title="运行软件"></a>运行软件</h2><pre><code>VMware Workstation Pro 14</code></pre><h2 id="系统环境"><a href="#系统环境" class="headerlink" title="系统环境"></a>系统环境</h2><pre><code>CentOS-7-x86_64-1810</code></pre><h1 id="操作配置"><a href="#操作配置" class="headerlink" title="操作配置"></a>操作配置</h1><h2 id="基础知识简介"><a href="#基础知识简介" class="headerlink" title="基础知识简介"></a>基础知识简介</h2><h3 id="域名空间"><a href="#域名空间" class="headerlink" title="域名空间"></a>域名空间</h3><p><img src="/2019/05/12/Linux-DNS-server-configuration-and-management/1594459-20190512101153767-26386953.png" alt="img"></p>
 <ul>
 <li>域和域名</li>
 </ul>
@@ -436,7 +436,7 @@
 <p>DNS 客户端送出查询后，如果DNS服务器内没有需要的数据，则返给客户机另一个DNS服务器地址，将客户机转向另一个DNS服务器。</p>
 <h3 id="域名解析过程"><a href="#域名解析过程" class="headerlink" title="域名解析过程"></a>域名解析过程</h3><ul>
 <li><p>DNS 域名解析的工作原理</p>
-<p><img src="/2019/05/12/linux-dns-server-configuration-and-management/1594459-20190512105549648-1585478240.png" alt="img"></p>
+<p><img src="/2019/05/12/Linux-DNS-server-configuration-and-management/1594459-20190512105549648-1585478240.png" alt="img"></p>
 </li>
 <li><p>DNS 域名解析的工作过程</p>
 </li>
@@ -455,7 +455,7 @@
 <p>正向解析：正向解析是指域名到IP地址的解析过程。</p>
 <p>反向解析：反向解析是从IP地址到域名的解析过程。反向解析的作用为服务器的身份验证。</p>
 <h2 id="主-DNS-服务器配置"><a href="#主-DNS-服务器配置" class="headerlink" title="主 DNS 服务器配置"></a>主 DNS 服务器配置</h2><p>（0）DNS 服务器IP地址配置</p>
-<p><img src="/2019/05/12/linux-dns-server-configuration-and-management/1594459-20190512113158754-79588431.png" alt="img"></p>
+<p><img src="/2019/05/12/Linux-DNS-server-configuration-and-management/1594459-20190512113158754-79588431.png" alt="img"></p>
 <p>（1）安装 DNS 服务</p>
 <ul>
 <li>认识 BIND</li>
@@ -470,11 +470,11 @@
 yum install bind* -y
 
 rpm -qa|grep bind</code></pre><p>（2）配置主配置文件 named.conf</p>
-<pre><code>[root@localhost ~]# vim /etc/named.conf</code></pre><p><img src="/2019/05/12/linux-dns-server-configuration-and-management/1594459-20190512111950920-852893.png" alt="img"></p>
+<pre><code>[root@localhost ~]# vim /etc/named.conf</code></pre><p><img src="/2019/05/12/Linux-DNS-server-configuration-and-management/1594459-20190512111950920-852893.png" alt="img"></p>
 <p>（3）配置正向解析区域 qftm.com.zone</p>
-<pre><code>[root@localhost ~]# vim /var/named/qftm.com.zone</code></pre><p><img src="/2019/05/12/linux-dns-server-configuration-and-management/1594459-20190512111227425-1646921362.png" alt="img"></p>
+<pre><code>[root@localhost ~]# vim /var/named/qftm.com.zone</code></pre><p><img src="/2019/05/12/Linux-DNS-server-configuration-and-management/1594459-20190512111227425-1646921362.png" alt="img"></p>
 <p>（4）配置反向解析区域 2.168.192.in-addr.arpa.zone</p>
-<pre><code>[root@localhost ~]# vim /var/named/2.168.192.in-addr.arpa.zone</code></pre><p><img src="/2019/05/12/linux-dns-server-configuration-and-management/1594459-20190512111438841-1071431217.png" alt="img"></p>
+<pre><code>[root@localhost ~]# vim /var/named/2.168.192.in-addr.arpa.zone</code></pre><p><img src="/2019/05/12/Linux-DNS-server-configuration-and-management/1594459-20190512111438841-1071431217.png" alt="img"></p>
 <p>（5）将 /etc/named.comf、正反向区域文件属组有root改为named</p>
 <pre><code>[root@localhost ~]# chgrp named /etc/named.conf
 [root@localhost ~]# chgrp named /var/named/qftm.com.zone
@@ -482,15 +482,15 @@ rpm -qa|grep bind</code></pre><p>（2）配置主配置文件 named.conf</p>
 <ul>
 <li>检查主配置文件 named.conf</li>
 </ul>
-<pre><code>[root@localhost ~]# named-checkconf</code></pre><p><img src="/2019/05/12/linux-dns-server-configuration-and-management/1594459-20190512112513529-1088323882.png" alt="img"></p>
+<pre><code>[root@localhost ~]# named-checkconf</code></pre><p><img src="/2019/05/12/Linux-DNS-server-configuration-and-management/1594459-20190512112513529-1088323882.png" alt="img"></p>
 <ul>
 <li>检查正向解析区域 qftm.com.zone</li>
 </ul>
-<pre><code>[root@localhost ~]# named-checkzone &quot;qftm.com&quot; /var/named/qftm.com.zone</code></pre><p><img src="/2019/05/12/linux-dns-server-configuration-and-management/1594459-20190512112718603-42926129.png" alt="img"></p>
+<pre><code>[root@localhost ~]# named-checkzone &quot;qftm.com&quot; /var/named/qftm.com.zone</code></pre><p><img src="/2019/05/12/Linux-DNS-server-configuration-and-management/1594459-20190512112718603-42926129.png" alt="img"></p>
 <ul>
 <li>检查反向解析区域 2.168.192.in-addr.arpa.zone</li>
 </ul>
-<p><img src="/2019/05/12/linux-dns-server-configuration-and-management/1594459-20190512112822575-1742075346.png" alt="img"></p>
+<p><img src="/2019/05/12/Linux-DNS-server-configuration-and-management/1594459-20190512112822575-1742075346.png" alt="img"></p>
 <p>（7）重启 DNS 服务</p>
 <pre><code>[root@localhost ~]# systemctl restart named</code></pre><p>（8）在Linux客户端测试配置效果</p>
 <pre><code>[root@localhost ~]# nslookup
@@ -533,7 +533,7 @@ Address:        192.168.2.129#53
 <ul>
 <li>区域传输过程</li>
 </ul>
-<p><img src="/2019/05/12/linux-dns-server-configuration-and-management/1594459-20190512154924325-1109140824.png" alt="img"></p>
+<p><img src="/2019/05/12/Linux-DNS-server-configuration-and-management/1594459-20190512154924325-1109140824.png" alt="img"></p>
 <p>① 区域传输初始阶段，辅助服务器向主DNS服务器发送完全区域传输(AXFR)请求。</p>
 <p>② 主服务器做出响应，并将此区域完全传输到辅助服务器。该区域传输时会一并发送SOA资源记录。SOA中“序列号”(serial) 字段表示区域数据的版本，“刷新时间”(refresh)指出辅助服务器下一次发送查询请求的时间间隔。</p>
 <p>③ 刷新间隔到期时，辅助服务器使用SOA查询来请求从主服务器续订此区域。</p>
@@ -544,7 +544,7 @@ Address:        192.168.2.129#53
 <ul>
 <li>DNS 服务器IP地址配置</li>
 </ul>
-<p><img src="/2019/05/12/linux-dns-server-configuration-and-management/1594459-20190512161210114-1139305421.png" alt="img"></p>
+<p><img src="/2019/05/12/Linux-DNS-server-configuration-and-management/1594459-20190512161210114-1139305421.png" alt="img"></p>
 <ul>
 <li>安装 bind 软件包</li>
 </ul>
@@ -556,15 +556,15 @@ yum install bind* -y
 rpm -qa|grep bind</code></pre><ul>
 <li>配置主配置文件 named.conf</li>
 </ul>
-<pre><code>[root@localhost ~]# vim /etc/named.conf</code></pre><p><img src="/2019/05/12/linux-dns-server-configuration-and-management/1594459-20190512160448547-1948217749.png" alt="img"></p>
+<pre><code>[root@localhost ~]# vim /etc/named.conf</code></pre><p><img src="/2019/05/12/Linux-DNS-server-configuration-and-management/1594459-20190512160448547-1948217749.png" alt="img"></p>
 <p>PS：辅助DNS服务器只需要设置主配置文件，正反向区域解析文件会在辅助DNS服务器设置完成主配置文件重启DNS服务时又主DNS服务器同步到辅助DNS服务器。只不过路径是/var/named/slaves而已。</p>
 <ul>
 <li>数据同步测试</li>
 </ul>
 <p>① 重启辅助服务器named服务，使其与主域名服务器数据同步，然后我们在主域名服务器上执行tail命令查看系统日志，辅助域名服务器通过完整无缺区域复制（AXFR）获取qftm.com区域数据。</p>
-<p><img src="/2019/05/12/linux-dns-server-configuration-and-management/1594459-20190512161617079-1670587508.png" alt="img"></p>
+<p><img src="/2019/05/12/Linux-DNS-server-configuration-and-management/1594459-20190512161617079-1670587508.png" alt="img"></p>
 <p>② 通过ls命令查看辅助域名服务器/var/named/slaves目录下是否存在qftm.com区域文件，若存在说明复制成功。</p>
-<p><img src="/2019/05/12/linux-dns-server-configuration-and-management/1594459-20190512161856838-1320960938.png" alt="img"></p>
+<p><img src="/2019/05/12/Linux-DNS-server-configuration-and-management/1594459-20190512161856838-1320960938.png" alt="img"></p>
 <p>PS：配置区域复制时主DNS服务器和辅助DNS服务器一定要关闭防火墙</p>
 <p>③ 在客户端测试辅助DNS服务器</p>
 <pre><code>[root@localhost ~]# nslookup
@@ -620,7 +620,7 @@ Address:        192.168.2.128#53
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://Qftm.github.io/2019/05/12/linux-dns-server-configuration-and-management/">http://Qftm.github.io/2019/05/12/linux-dns-server-configuration-and-management/</a>
+                    <a href="http://Qftm.github.io/2019/05/12/Linux-DNS-server-configuration-and-management/">http://Qftm.github.io/2019/05/12/Linux-DNS-server-configuration-and-management/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -709,7 +709,7 @@ Address:        192.168.2.128#53
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2019/05/12/linux-dhcp-server-configuration-and-management/">
+                <a href="/2019/05/12/Linux-DHCP-server-configuration-and-management/">
                     <div class="card-image">
                         
                         
@@ -763,7 +763,7 @@ Address:        192.168.2.128#53
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/04/26/symmetric-key-encryption-des/">
+                <a href="/2019/04/26/Symmetric-Key-Encryption-DES/">
                     <div class="card-image">
                         
                         

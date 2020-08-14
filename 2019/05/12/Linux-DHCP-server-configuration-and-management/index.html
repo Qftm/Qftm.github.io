@@ -408,62 +408,62 @@
             <div id="articleContent">
                 <h1 id="环境介绍"><a href="#环境介绍" class="headerlink" title="环境介绍"></a>环境介绍</h1><h2 id="运行软件"><a href="#运行软件" class="headerlink" title="运行软件"></a>运行软件</h2><pre><code>VMware Workstation Pro 14</code></pre><h2 id="系统环境"><a href="#系统环境" class="headerlink" title="系统环境"></a>系统环境</h2><pre><code>CentOS-7-x86_64-1810</code></pre><h1 id="操作配置"><a href="#操作配置" class="headerlink" title="操作配置"></a>操作配置</h1><h2 id="DHCP-服务器搭建"><a href="#DHCP-服务器搭建" class="headerlink" title="DHCP 服务器搭建"></a>DHCP 服务器搭建</h2><p>1)安装DHCP</p>
 <pre><code> yum install dhcp </code></pre><p>2) 设置虚拟机为仅主机模式、关闭虚拟机依靠主机的 DHCP 服务</p>
-<p><img src="/2019/05/12/linux-dhcp-server-configuration-and-management/1594459-20190418170314357-19197234.png" alt="img"></p>
+<p><img src="/2019/05/12/Linux-DHCP-server-configuration-and-management/1594459-20190418170314357-19197234.png" alt="img"></p>
 <p>3) 配置dhcpd.conf (动态获取IP)</p>
-<p><img src="/2019/05/12/linux-dhcp-server-configuration-and-management/1594459-20190418170517426-151786762.png" alt="img"></p>
+<p><img src="/2019/05/12/Linux-DHCP-server-configuration-and-management/1594459-20190418170517426-151786762.png" alt="img"></p>
 <p>4) 重启dhcpd服务</p>
 <pre><code>systemctl restart dhcpd</code></pre><p>5) 重启网卡</p>
 <pre><code>systemctl restart network</code></pre><p>6) 查看客户端 IP</p>
-<p><img src="/2019/05/12/linux-dhcp-server-configuration-and-management/1594459-20190418170751847-222601932.png" alt="img"></p>
+<p><img src="/2019/05/12/Linux-DHCP-server-configuration-and-management/1594459-20190418170751847-222601932.png" alt="img"></p>
 <p>7) 配置dhcpd.conf (固定获取IP)</p>
-<p> <img src="/2019/05/12/linux-dhcp-server-configuration-and-management/1594459-20190418170948362-805154613.png" alt="img"></p>
+<p> <img src="/2019/05/12/Linux-DHCP-server-configuration-and-management/1594459-20190418170948362-805154613.png" alt="img"></p>
 <p>8) 重启dhcpd服务</p>
 <pre><code>systemctl restart dhcpd</code></pre><p>9) 重启网卡</p>
 <pre><code>systemctl restart network</code></pre><p>10) 查看客户端 Client1 IP</p>
-<p> <img src="/2019/05/12/linux-dhcp-server-configuration-and-management/1594459-20190418171203821-2115358415.png" alt="img"></p>
+<p> <img src="/2019/05/12/Linux-DHCP-server-configuration-and-management/1594459-20190418171203821-2115358415.png" alt="img"></p>
 <p>11) 问题解决</p>
 <p>DHCP 服务不能重启，执行命令进行检查dhcpd.conf配置文件是否出错</p>
 <pre><code>[root@localhost ~]#dhcpd</code></pre><h2 id="配置-DHCP-中继代理"><a href="#配置-DHCP-中继代理" class="headerlink" title="配置 DHCP 中继代理"></a>配置 DHCP 中继代理</h2><p>1) 网络拓扑</p>
 <p>其中每台虚拟机的网络设置如图：</p>
-<p><img src="/2019/05/12/linux-dhcp-server-configuration-and-management/1594459-20190429232909517-792255608.png" alt="img"></p>
+<p><img src="/2019/05/12/Linux-DHCP-server-configuration-and-management/1594459-20190429232909517-792255608.png" alt="img"></p>
 <p>2) dhcp服务器的IP 地址配置</p>
-<p><img src="/2019/05/12/linux-dhcp-server-configuration-and-management/1594459-20190429232942835-1877506597.png" alt="img"></p>
+<p><img src="/2019/05/12/Linux-DHCP-server-configuration-and-management/1594459-20190429232942835-1877506597.png" alt="img"></p>
 <p>3) dhcp服务器上配置dhcp服务</p>
-<p><img src="/2019/05/12/linux-dhcp-server-configuration-and-management/1594459-20190429233127485-603486278.png" alt="img"></p>
+<p><img src="/2019/05/12/Linux-DHCP-server-configuration-and-management/1594459-20190429233127485-603486278.png" alt="img"></p>
 <p>4) 在dhcp服务器上启动dhcp服务，并查看运行状态 </p>
-<p><img src="/2019/05/12/linux-dhcp-server-configuration-and-management/1594459-20190429175955625-1025953093.png" alt="img"></p>
+<p><img src="/2019/05/12/Linux-DHCP-server-configuration-and-management/1594459-20190429175955625-1025953093.png" alt="img"></p>
 <p>5) 模拟路由器的服务器上(DHCP 中继代理)需要两块网卡，通过手工进行添加</p>
-<p><img src="/2019/05/12/linux-dhcp-server-configuration-and-management/1594459-20190429233234436-1462172864.png" alt="img"></p>
+<p><img src="/2019/05/12/Linux-DHCP-server-configuration-and-management/1594459-20190429233234436-1462172864.png" alt="img"></p>
 <p>6) 启动该虚拟机，首先查看下当前网卡情况 </p>
-<p><img src="/2019/05/12/linux-dhcp-server-configuration-and-management/1594459-20190429204450509-2054349184.png" alt="img"></p>
+<p><img src="/2019/05/12/Linux-DHCP-server-configuration-and-management/1594459-20190429204450509-2054349184.png" alt="img"></p>
 <p>可以看到一共有两块网卡，这里把网卡的名字和网卡的MAC地址记下来 查看网络配置文件夹，发现只有一个网卡配置文件，这里我们复制该文件，并创建一个新的网络配置文件，文件名和上图中所示的网卡名称“ens37”一致，这里注意你们的新网卡名称可能不是这个名字，按自己系统上查询到的名字填写</p>
-<p><img src="/2019/05/12/linux-dhcp-server-configuration-and-management/1594459-20190429200733216-363633606.png" alt="img"></p>
+<p><img src="/2019/05/12/Linux-DHCP-server-configuration-and-management/1594459-20190429200733216-363633606.png" alt="img"></p>
 <p>7) 配置另一个网卡ens37</p>
 <pre><code>[root@localhost ~]# cp  /etc/sysconfig/network-scripts/ifcfg-ens33  /etc/sysconfig/network-scripts/ifcfg-ens37</code></pre><p>使用命令查看网卡的uuid </p>
-<p><img src="/2019/05/12/linux-dhcp-server-configuration-and-management/1594459-20190429201739301-1504922715.png" alt="img"></p>
+<p><img src="/2019/05/12/Linux-DHCP-server-configuration-and-management/1594459-20190429201739301-1504922715.png" alt="img"></p>
 <p>分别编辑两块网卡，注意网卡的mac地址和uuid以及name需要修改正确</p>
 <p>网卡 ifcfg-ens33 的配置文件如下</p>
-<p><img src="/2019/05/12/linux-dhcp-server-configuration-and-management/1594459-20190429233431851-296317918.png" alt="img"></p>
+<p><img src="/2019/05/12/Linux-DHCP-server-configuration-and-management/1594459-20190429233431851-296317918.png" alt="img"></p>
 <p>网卡 ifcfg-ens37 的配置文件如下</p>
-<p><img src="/2019/05/12/linux-dhcp-server-configuration-and-management/1594459-20190429233504115-1828901677.png" alt="img"></p>
+<p><img src="/2019/05/12/Linux-DHCP-server-configuration-and-management/1594459-20190429233504115-1828901677.png" alt="img"></p>
 <p>8) 重启网络</p>
-<p><img src="/2019/05/12/linux-dhcp-server-configuration-and-management/1594459-20190429205725959-678835005.png" alt="img"></p>
+<p><img src="/2019/05/12/Linux-DHCP-server-configuration-and-management/1594459-20190429205725959-678835005.png" alt="img"></p>
 <p>9) 设置 DHCP 服务器返回中继客户端的路由</p>
-<p><img src="/2019/05/12/linux-dhcp-server-configuration-and-management/1594459-20190429205516781-815441192.png" alt="img"></p>
+<p><img src="/2019/05/12/Linux-DHCP-server-configuration-and-management/1594459-20190429205516781-815441192.png" alt="img"></p>
 <p>10) 在 DHCP 中继代理上启用IPv4的转发功能</p>
 <pre><code>[root@localhost ~]# vim /etc/sysctl.conf  //配置
-[root@localhost ~]# sysctl -p  //加载</code></pre><p><img src="/2019/05/12/linux-dhcp-server-configuration-and-management/1594459-20190429205215339-517803974.png" alt="img"></p>
+[root@localhost ~]# sysctl -p  //加载</code></pre><p><img src="/2019/05/12/Linux-DHCP-server-configuration-and-management/1594459-20190429205215339-517803974.png" alt="img"></p>
 <p>11) 在 DHCP 中继代理上启用中继代理</p>
-<p><img src="/2019/05/12/linux-dhcp-server-configuration-and-management/1594459-20190429233648181-1082147580.png" alt="img"></p>
+<p><img src="/2019/05/12/Linux-DHCP-server-configuration-and-management/1594459-20190429233648181-1082147580.png" alt="img"></p>
 <p>12) 查看 ens33 网络的 Client1 获取的固定 IP</p>
-<p><img src="/2019/05/12/linux-dhcp-server-configuration-and-management/1594459-20190429233825871-977882130.png" alt="img"></p>
+<p><img src="/2019/05/12/Linux-DHCP-server-configuration-and-management/1594459-20190429233825871-977882130.png" alt="img"></p>
 <p>13) 查看 ens37 网络的 Client2 获取的动态 IP</p>
-<p><img src="/2019/05/12/linux-dhcp-server-configuration-and-management/1594459-20190429234057070-100122280.png" alt="img"></p>
+<p><img src="/2019/05/12/Linux-DHCP-server-configuration-and-management/1594459-20190429234057070-100122280.png" alt="img"></p>
 <p>14) 检测不同网络的连通性</p>
 <p>DHCP 服务器 &lt; ping &gt; ens37 网络的Client2</p>
-<p><img src="/2019/05/12/linux-dhcp-server-configuration-and-management/1594459-20190429234307923-445721166.png" alt="img"></p>
+<p><img src="/2019/05/12/Linux-DHCP-server-configuration-and-management/1594459-20190429234307923-445721166.png" alt="img"></p>
 <p>ens37 网络的Client2 &lt; ping &gt; ens33 网络的Client1</p>
-<p><img src="/2019/05/12/linux-dhcp-server-configuration-and-management/1594459-20190429234433202-1460370179.png" alt="img"></p>
+<p><img src="/2019/05/12/Linux-DHCP-server-configuration-and-management/1594459-20190429234433202-1460370179.png" alt="img"></p>
 
             </div>
             <hr/>
@@ -489,7 +489,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://Qftm.github.io/2019/05/12/linux-dhcp-server-configuration-and-management/">http://Qftm.github.io/2019/05/12/linux-dhcp-server-configuration-and-management/</a>
+                    <a href="http://Qftm.github.io/2019/05/12/Linux-DHCP-server-configuration-and-management/">http://Qftm.github.io/2019/05/12/Linux-DHCP-server-configuration-and-management/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -578,7 +578,7 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2019/07/30/hack-the-box-web-pentest-2019/">
+                <a href="/2019/07/30/Hack-The-Box-Web-Pentest-2019/">
                     <div class="card-image">
                         
                         
@@ -631,7 +631,7 @@
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/05/12/linux-dns-server-configuration-and-management/">
+                <a href="/2019/05/12/Linux-DNS-server-configuration-and-management/">
                     <div class="card-image">
                         
                         

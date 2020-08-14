@@ -559,12 +559,12 @@
 </ul>
 <p>允许对底层协议进行访问。用于实现自己定制协议或者对数据报做底层的控制。</p>
 <p>socket 的原意是“插座”，在计算机通信领域，socket 被翻译为“套接字”，它是计算机之间进行通信的一种约定或一种方式。通过 socket 这种约定，一台计算机可以接收其他计算机的数据，也可以向其他计算机发送数据。</p>
-<p><img src="/2020/03/22/socket-learning-handbook/image-20200321191125161.png" alt="image-20200321191125161"></p>
+<p><img src="/2020/03/22/Socket-Learning-Handbook/image-20200321191125161.png" alt="image-20200321191125161"></p>
 <p>socket 的典型应用就是 Web 服务器和浏览器：浏览器获取用户输入的 URL，向服务器发起请求，服务器分析接收到的 URL，将对应的网页内容返回给浏览器，浏览器再经过解析和渲染，就将文字、图片、视频等元素呈现给用户。</p>
 <h2 id="主机间通信"><a href="#主机间通信" class="headerlink" title="主机间通信"></a>主机间通信</h2><p> 在早期的单机系统中，各进程都是运行在自己的地址空间里面，进程之间互不干扰。操作系统为了解决进程之间可以相互通信并且又不互相干扰，为进程之间提供了多种通信机制，比如说管道、命名管道、消息队列、共享内存和信号量等。但是这些机制都仅限于本机的进程通信，如果要解决网络间的进程通信怎么做呢？</p>
 <p>在单机上面，两个进程之间只要知道进程id就好办，但是在网络间知道进程的id是没有用的。举个例子，必须要让对方进程知道，我（进程）现在在哪个地址（ip）、哪个地方见面（端口）以及见面要遵循哪样的方式（协议）。也就是说网络间的通信离不开ip、协议、端口这三个要素，这三要素就可以标识网络的一个进程了。而这个协议现在用的最多的就是tcp/ip协议了，使用tcp/ip协议的应用程序通常采用的编程接口有socket和tci来实现进程的通信，就目前而言，tci已经被淘汰了，所以几乎所有的应用程序都是采用socket来编程了。</p>
 <p>socket可以看成是用户进程与内核网络协议栈的编程接口。socket不仅可以用于单机进程之间的通信，也可以用在网络进程之间的通信。socket作为一个编程接口在网络中所处的位置如下图：</p>
-<p><img src="/2020/03/22/socket-learning-handbook/image-20200322000857642.png" alt="image-20200322000857642"></p>
+<p><img src="/2020/03/22/Socket-Learning-Handbook/image-20200322000857642.png" alt="image-20200322000857642"></p>
 <h2 id="UNIX-Linux"><a href="#UNIX-Linux" class="headerlink" title="UNIX/Linux"></a>UNIX/Linux</h2><p>在Linux中，一切都是文件，除了文本文件、源文件、二进制文件等，一个硬件设备也可以被映射为一个虚拟的文件，称为设备文件。例如，stdin 称为标准输入文件，它对应的硬件设备一般是键盘，stdout 称为标准输出文件，它对应的硬件设备一般是显示器。对于所有的文件，都可以使用 read() 函数读取数据，使用 write() 函数写入数据。</p>
 <p>在 UNIX/Linux 系统中，为了统一对各种硬件的操作，简化接口，不同的硬件设备也都被看成一个文件。对这些文件的操作，等同于对磁盘上普通文件的操作。</p>
 <p>为了表示和区分已经打开的文件，UNIX/Linux 会给每个文件分配一个 ID，这个 ID 就是一个整数，被称为文件描述符（File Descriptor）。例如：</p>
@@ -583,7 +583,7 @@
 </ul>
 <h2 id="Window"><a href="#Window" class="headerlink" title="Window"></a>Window</h2><p>Windows 也有类似“文件描述符”的概念，但通常被称为“文件句柄”。与 UNIX/Linux 不同的是，Windows 会区分 socket 和文件，Windows 就把 socket 当做一个网络连接来对待，因此需要调用专门针对 socket 而设计的数据传输函数，针对普通文件的输入输出函数就无效了。</p>
 <h1 id="Socket-API-编程模型"><a href="#Socket-API-编程模型" class="headerlink" title="Socket API 编程模型"></a>Socket API 编程模型</h1><p>SOCK_STREAM协议域(TCP)模型</p>
-<p><img src="/2020/03/22/socket-learning-handbook/image-20200322001227152.png" alt="image-20200322001227152"></p>
+<p><img src="/2020/03/22/Socket-Learning-Handbook/image-20200322001227152.png" alt="image-20200322001227152"></p>
 <p>socket之间的连接可以分为三个步骤：服务端监听、客户端请求、连接确认，从上面的模型中我们可以看到，通信主要是依靠“write-read / read-write ”这种模型来进行数据的读写。</p>
 <h2 id="数据传输方式"><a href="#数据传输方式" class="headerlink" title="数据传输方式"></a>数据传输方式</h2><p>计算机之间有很多数据传输方式，各有优缺点，常用的有两种：SOCK_STREAM 和 SOCK_DGRAM。</p>
 <p>（1）SOCK_STREAM 表示面向连接的数据传输方式。数据可以准确无误地到达另一台计算机，如果损坏或丢失，可以重新发送，但效率相对较慢。常见的 http 协议就使用 SOCK_STREAM 传输数据，因为要确保数据的正确性，否则网页不能正常解析。</p>
@@ -592,7 +592,7 @@
 <p>下面介绍Socket API的编程模型会以SOCK_STREAM（TCP）方式去讲述，环境为Linux下socket编程。</p>
 <h2 id="TCP协议"><a href="#TCP协议" class="headerlink" title="TCP协议"></a>TCP协议</h2><p>TCP协议是一种面向连接、面向字节流的可靠传输层协议。两台采用TCP协议通信的计算机首先要建立TCP连接。TCP协议以它自己的方式缓存数据，缓存过程对程序员和用户是透明的。TCP协议采用“捎带确认(piggybacking ACK)”的方法，允许双方同时发送数据。TCP规定了报文段的最大报文段长度(MSS)，默认的MSS值为536个字节。</p>
 <p>TCP报头的固定长度是20个字节，如果使用一些选项，TCP报头的最大长度为60个字节。TCP报头的结构如下图所示。</p>
-<p><img src="/2020/03/22/socket-learning-handbook/image-20200325190121032.png" alt="image-20200325190121032"></p>
+<p><img src="/2020/03/22/Socket-Learning-Handbook/image-20200325190121032.png" alt="image-20200325190121032"></p>
 <p>TCP报头的各字段依次为:</p>
 <p>（1）源端口: 16位，本地TCP端口号。</p>
 <p>（2）目的地端口：16位，目的TCP端口号。</p>
@@ -621,7 +621,7 @@
 <p>（11）选项：长度可变，最长可达40字节（320位）。当没有使用option字段的时候TCP报文首部长度为20字节。</p>
 <p>（12）填充：为了使整个首部长度是 4 字节的整数倍。</p>
 <h2 id="TCP三次握手"><a href="#TCP三次握手" class="headerlink" title="TCP三次握手"></a>TCP三次握手</h2><p>所谓三次握手（Three-Way Handshake）即建立TCP连接，就是指建立一个TCP连接时，需要客户端和服务端总共发送3个包以确认连接的建立。在socket编程中，这一过程由客户端执行connect来触发，整个流程如下图所示：</p>
-<p><img src="/2020/03/22/socket-learning-handbook/image-20200322014540635.png" alt="image-20200322014540635"></p>
+<p><img src="/2020/03/22/Socket-Learning-Handbook/image-20200322014540635.png" alt="image-20200322014540635"></p>
 <p><strong>TCP三次握手：</strong></p>
 <p>（1）客户端主动打开，发送连接请求报文段，将SYN标识位置为1，Sequence Number置为x（TCP规定SYN=1时不能携带数据，x为随机产生的一个值），然后进入SYN_SEND状态</p>
 <p>（2）服务器收到SYN报文段进行确认，将SYN标识位置为1，ACK置为1，Sequence Number置为y，Acknowledgment Number置为x+1，然后进入SYN_RECV状态，这个状态被称为半连接状态<br>（3）客户端再进行一次确认，将ACK置为1（此时不用SYN），Sequence Number置为x+1，Acknowledgment Number置为y+1发向服务器，最后客户端与服务器都进入ESTABLISHED状态</p>
@@ -706,7 +706,7 @@ protocol 指定使用的协议</code></pre><p>（1）domain：常用的协议族
         <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Big-Endian\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="/2020/03/22/socket-learning-handbook/image-20200322004745891.png" alt="image-20200322004745891"></p>
+<p><img src="/2020/03/22/Socket-Learning-Handbook/image-20200322004745891.png" alt="image-20200322004745891"></p>
 <p>当我们知道主机的字节序类型之后，如何把主机字节序转化成网络字节序呢？这个时候可以参考我们的下列转化函数：</p>
 <pre><code>htons 把unsigned short类型从主机序转换到网络序
 htonl 把unsigned long类型从主机序转换到网络序
@@ -797,7 +797,7 @@ len：该缓存的最大长度。
 flags：和send函数一致。 </code></pre><h3 id="socket关闭"><a href="#socket关闭" class="headerlink" title="socket关闭"></a>socket关闭</h3><h4 id="close"><a href="#close" class="headerlink" title="close()"></a>close()</h4><p>通过调用close函数终止服务器和客户端上的套接字连接。当客户端与服务端不再需要通信时候，可以调用close函数断开连接。</p>
 <pre><code>int close(int fd);</code></pre><p>close一个TCP socket的缺省行为时把该socket标记为以关闭，然后立即返回到调用进程。该描述字不能再由调用进程使用，也就是说不能再作为read或write的第一个参数。close操作只是使相应socket描述字的引用计数-1，只有当引用计数为0的时候，才会触发TCP客户端向服务器发送终止连接请求。</p>
 <h2 id="TCP四次握手"><a href="#TCP四次握手" class="headerlink" title="TCP四次握手"></a>TCP四次握手</h2><p>所谓四次挥手（Four-Way Wavehand）即终止TCP连接，就是指断开一个TCP连接时，需要客户端和服务端总共发送4个包以确认连接的断开。在socket编程中，这一过程由客户端或服务端任一方执行close来触发，整个流程如下图所示：</p>
-<p><img src="/2020/03/22/socket-learning-handbook/image-20200322014823928.png" alt="image-20200322014823928"></p>
+<p><img src="/2020/03/22/Socket-Learning-Handbook/image-20200322014823928.png" alt="image-20200322014823928"></p>
 <p><strong>TCP四次握手：</strong></p>
 <p>（1）客户端进程发出连接释放报文，并且停止发送数据。释放数据报文首部，FIN=1，其序列号为seq=u（等于前面已经传送过来的数据的最后一个字节的序号加1），此时，客户端进入FIN-WAIT-1（终止等待1）状态。 TCP规定，FIN报文段即使不携带数据，也要消耗一个序号。</p>
 <p>（2）服务器收到连接释放报文，发出确认报文，ACK=1，ack=u+1，并且带上自己的序列号seq=v，此时，服务端就进入了CLOSE-WAIT（关闭等待）状态。TCP服务器通知高层的应用进程，客户端向服务器的方向就释放了，这时候处于半关闭状态，即客户端已经没有数据要发送了，但是服务器若发送数据，客户端依然要接受。这个状态还要持续一段时间，也就是整个CLOSE-WAIT状态持续的时间。</p>
@@ -903,7 +903,7 @@ flags：和send函数一致。 </code></pre><h3 id="socket关闭"><a href="#sock
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>编译写好的server.c程序代码</p>
-<pre><code>gcc serve.c -o serve -w</code></pre><p><img src="/2020/03/22/socket-learning-handbook/image-20200322020242448.png" alt="image-20200322020242448"></p>
+<pre><code>gcc serve.c -o serve -w</code></pre><p><img src="/2020/03/22/Socket-Learning-Handbook/image-20200322020242448.png" alt="image-20200322020242448"></p>
 <h3 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h3><h4 id="Client-c"><a href="#Client-c" class="headerlink" title="Client.c"></a>Client.c</h4><p>编写客户端程序代码</p>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;sys/types.h></span></span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;sys/socket.h></span></span>
@@ -972,18 +972,18 @@ flags：和send函数一致。 </code></pre><h3 id="socket关闭"><a href="#sock
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>编译写好的client.c程序代码</p>
-<pre><code>gcc client.c -o client -w</code></pre><p><img src="/2020/03/22/socket-learning-handbook/image-20200322020700650.png" alt="image-20200322020700650"></p>
+<pre><code>gcc client.c -o client -w</code></pre><p><img src="/2020/03/22/Socket-Learning-Handbook/image-20200322020700650.png" alt="image-20200322020700650"></p>
 <h3 id="网络通信"><a href="#网络通信" class="headerlink" title="网络通信"></a>网络通信</h3><p>（1）先启动服务端程序，启动服务开始监听</p>
-<p><img src="/2020/03/22/socket-learning-handbook/image-20200322020952927.png" alt="image-20200322020952927"></p>
+<p><img src="/2020/03/22/Socket-Learning-Handbook/image-20200322020952927.png" alt="image-20200322020952927"></p>
 <p>（2）启动客户端程序，向服务端发起建立连接请求</p>
-<p><img src="/2020/03/22/socket-learning-handbook/image-20200322021044325.png" alt="image-20200322021044325"></p>
+<p><img src="/2020/03/22/Socket-Learning-Handbook/image-20200322021044325.png" alt="image-20200322021044325"></p>
 <p>（3）服务端接收到客户端的连接请求，建立连接</p>
-<p><img src="/2020/03/22/socket-learning-handbook/image-20200322021153517.png" alt="image-20200322021153517"></p>
+<p><img src="/2020/03/22/Socket-Learning-Handbook/image-20200322021153517.png" alt="image-20200322021153517"></p>
 <p>（4）客户端和服务端之间通信</p>
 <p>客户端</p>
-<p><img src="/2020/03/22/socket-learning-handbook/image-20200322021358381.png" alt="image-20200322021358381"></p>
+<p><img src="/2020/03/22/Socket-Learning-Handbook/image-20200322021358381.png" alt="image-20200322021358381"></p>
 <p>服务端</p>
-<p><img src="/2020/03/22/socket-learning-handbook/image-20200322021412340.png" alt="image-20200322021412340"></p>
+<p><img src="/2020/03/22/Socket-Learning-Handbook/image-20200322021412340.png" alt="image-20200322021412340"></p>
 <h2 id="Socket-UDP"><a href="#Socket-UDP" class="headerlink" title="Socket UDP"></a>Socket UDP</h2><p>UDP不像TCP，无需在连接状态下交换数据，因此基于UDP的服务器端和客户端也无需经过连接过程。也就是说，不必调用 listen() 和 accept() 函数。UDP中只有创建套接字的过程和数据交换的过程。</p>
 <p>TCP中，套接字是一对一的关系。如要向10个客户端提供服务，那么除了负责监听的套接字外，还需要创建10套接字。但在UDP中，不管是服务器端还是客户端都只需要1个套接字。之前解释UDP原理的时候举了邮寄包裹的例子，负责邮寄包裹的快递公司可以比喻为UDP套接字，只要有1个快递公司，就可以通过它向任意地址邮寄包裹。同样，只需1个UDP套接字就可以向任意主机传送数据。</p>
 <h3 id="R-W"><a href="#R-W" class="headerlink" title="R/W"></a>R/W</h3><p>创建好TCP套接字后，传输数据时无需再添加地址信息，因为TCP套接字将保持与对方套接字的连接。换言之，TCP套接字知道目标地址信息。但UDP套接字不会保持连接状态，每次传输数据都要添加目标地址信息，这相当于在邮寄包裹前填写收件人地址。</p>
@@ -1132,14 +1132,14 @@ int recvfrom(SOCKET sock, char *buf, int nbytes, int flags, const struct sockadd
 <p>编译写好的client.c程序代码</p>
 <pre><code>gcc client.c -o client -w</code></pre><h3 id="网络通信-1"><a href="#网络通信-1" class="headerlink" title="网络通信"></a>网络通信</h3><p>客户端和服务端之间的通信测试和TCP的一样，不测试</p>
 <p>（1）先启动服务端程序</p>
-<p><img src="/2020/03/22/socket-learning-handbook/image-20200322023140366.png" alt="image-20200322023140366"></p>
+<p><img src="/2020/03/22/Socket-Learning-Handbook/image-20200322023140366.png" alt="image-20200322023140366"></p>
 <p>（2）启动客户端程序</p>
-<p><img src="/2020/03/22/socket-learning-handbook/image-20200322023113960.png" alt="image-20200322023113960"></p>
+<p><img src="/2020/03/22/Socket-Learning-Handbook/image-20200322023113960.png" alt="image-20200322023113960"></p>
 <p>（3）客户端和服务端之间通信</p>
 <p>客户端</p>
-<p><img src="/2020/03/22/socket-learning-handbook/image-20200322023225363.png" alt="image-20200322023225363"></p>
+<p><img src="/2020/03/22/Socket-Learning-Handbook/image-20200322023225363.png" alt="image-20200322023225363"></p>
 <p>服务端</p>
-<p><img src="/2020/03/22/socket-learning-handbook/image-20200322023242029.png" alt="image-20200322023242029"></p>
+<p><img src="/2020/03/22/Socket-Learning-Handbook/image-20200322023242029.png" alt="image-20200322023242029"></p>
 <h1 id="HTTP-Socket编程"><a href="#HTTP-Socket编程" class="headerlink" title="HTTP Socket编程"></a>HTTP Socket编程</h1><p>在Linux下使用C语言编写简单HTTP Socket客户端，实现HTTP请求访问，服务端为WWW服务器自动处理用户的Socket连接请求（TCP建立连接、数据传输）。</p>
 <h2 id="服务端-2"><a href="#服务端-2" class="headerlink" title="服务端"></a>服务端</h2><p>任意一台WWW服务器</p>
 <h2 id="客户端-2"><a href="#客户端-2" class="headerlink" title="客户端"></a>客户端</h2><h3 id="http-c"><a href="#http-c" class="headerlink" title="http.c"></a>http.c</h3><p>编写客户端程序代码</p>
@@ -1205,7 +1205,7 @@ int recvfrom(SOCKET sock, char *buf, int nbytes, int flags, const struct sockadd
     <span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>编译运行（运行的时候需要输入服务器IP地址，用于Socket建立连接）</p>
-<p><img src="/2020/03/22/socket-learning-handbook/image-20200322151305017.png" alt="image-20200322151305017"></p>
+<p><img src="/2020/03/22/Socket-Learning-Handbook/image-20200322151305017.png" alt="image-20200322151305017"></p>
 <h1 id="Python-Socket编程"><a href="#Python-Socket编程" class="headerlink" title="Python Socket编程"></a>Python Socket编程</h1><h2 id="Socket-TCP-1"><a href="#Socket-TCP-1" class="headerlink" title="Socket TCP"></a>Socket TCP</h2><h3 id="服务端-3"><a href="#服务端-3" class="headerlink" title="服务端"></a>服务端</h3><h4 id="server-py"><a href="#server-py" class="headerlink" title="server.py"></a>server.py</h4><p>编写服务端服务脚本</p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># -*- coding: utf-8 -*-</span>
 <span class="token triple-quoted-string string">"""
@@ -1304,14 +1304,14 @@ int recvfrom(SOCKET sock, char *buf, int nbytes, int flags, const struct sockadd
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="网络通信-2"><a href="#网络通信-2" class="headerlink" title="网络通信"></a>网络通信</h3><p>（1）启动服务器服务</p>
 <p>服务器IP：192.168.68.119</p>
-<p><img src="/2020/03/22/socket-learning-handbook/image-20200322184636016.png" alt="image-20200322184636016"></p>
+<p><img src="/2020/03/22/Socket-Learning-Handbook/image-20200322184636016.png" alt="image-20200322184636016"></p>
 <p>（2）启动客户端</p>
-<p><img src="/2020/03/22/socket-learning-handbook/image-20200322184658326.png" alt="image-20200322184658326"></p>
+<p><img src="/2020/03/22/Socket-Learning-Handbook/image-20200322184658326.png" alt="image-20200322184658326"></p>
 <p>（3）客户端与服务端进行通信</p>
 <p>客户端（客户端的请求与响应）</p>
-<p><img src="/2020/03/22/socket-learning-handbook/image-20200322185822468.png" alt="image-20200322185822468"></p>
+<p><img src="/2020/03/22/Socket-Learning-Handbook/image-20200322185822468.png" alt="image-20200322185822468"></p>
 <p>服务端（响应客户端的请求）</p>
-<p><img src="/2020/03/22/socket-learning-handbook/image-20200322185836115.png" alt="image-20200322185836115"></p>
+<p><img src="/2020/03/22/Socket-Learning-Handbook/image-20200322185836115.png" alt="image-20200322185836115"></p>
 <h2 id="Socket-UDP-1"><a href="#Socket-UDP-1" class="headerlink" title="Socket UDP"></a>Socket UDP</h2><h3 id="服务端-4"><a href="#服务端-4" class="headerlink" title="服务端"></a>服务端</h3><h4 id="server-py-1"><a href="#server-py-1" class="headerlink" title="server.py"></a>server.py</h4><p>编写服务端服务脚本</p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># -*- coding: utf-8 -*-</span>
 <span class="token triple-quoted-string string">"""
@@ -1377,14 +1377,14 @@ sock <span class="token operator">=</span> socket<span class="token punctuation"
 sock<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="网络通信-3"><a href="#网络通信-3" class="headerlink" title="网络通信"></a>网络通信</h3><p>（1）启动服务器服务</p>
 <p>服务器IP：192.168.68.119</p>
-<p><img src="/2020/03/22/socket-learning-handbook/image-20200322162947073.png" alt="image-20200322162947073"></p>
+<p><img src="/2020/03/22/Socket-Learning-Handbook/image-20200322162947073.png" alt="image-20200322162947073"></p>
 <p>（2）启动客户端</p>
-<p><img src="/2020/03/22/socket-learning-handbook/image-20200322164928804.png" alt="image-20200322164928804"></p>
+<p><img src="/2020/03/22/Socket-Learning-Handbook/image-20200322164928804.png" alt="image-20200322164928804"></p>
 <p>（3）客户端与服务端进行通信</p>
 <p>客户端（客户端的请求与响应）</p>
-<p><img src="/2020/03/22/socket-learning-handbook/image-20200322165006421.png" alt="image-20200322165006421"></p>
+<p><img src="/2020/03/22/Socket-Learning-Handbook/image-20200322165006421.png" alt="image-20200322165006421"></p>
 <p>服务端（响应客户端的请求）</p>
-<p><img src="/2020/03/22/socket-learning-handbook/image-20200322164957451.png" alt="image-20200322164957451"></p>
+<p><img src="/2020/03/22/Socket-Learning-Handbook/image-20200322164957451.png" alt="image-20200322164957451"></p>
 <h2 id="Python-Advanced-API"><a href="#Python-Advanced-API" class="headerlink" title="Python Advanced API"></a>Python Advanced API</h2><p>在这里，大家可能会发现，最原始的socket编程虽然比较简单（按照固定的流程），但是代码量是不是稍微多了点，为了提高socket编程效率，可不可以将这些使用API封装一下呢，答案是可以的（python提供有），下面以socket http请求看一下。</p>
 <h3 id="服务端-5"><a href="#服务端-5" class="headerlink" title="服务端"></a>服务端</h3><p>任意一台WWW服务器</p>
 <h3 id="客户端-5"><a href="#客户端-5" class="headerlink" title="客户端"></a>客户端</h3><h4 id="http-py"><a href="#http-py" class="headerlink" title="http.py"></a>http.py</h4><p>编写客户端脚本，使用<code>socket.create_connection()</code>方法直接进行socket建立连接，可以看作两步合为一步，代码量减少提高编程效率。</p>
@@ -1406,7 +1406,7 @@ Host: www.baidu.com
     conn<span class="token punctuation">.</span>send<span class="token punctuation">(</span>r<span class="token punctuation">)</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span>conn<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">10240</span><span class="token punctuation">)</span><span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>客户端运行脚本发起http请求</p>
-<p><img src="/2020/03/22/socket-learning-handbook/image-20200323000530549.png" alt="image-20200323000530549"></p>
+<p><img src="/2020/03/22/Socket-Learning-Handbook/image-20200323000530549.png" alt="image-20200323000530549"></p>
 <p>从运行结果可以看到，socket正常建立连接，http请求响应正常。</p>
 <h4 id="https-py"><a href="#https-py" class="headerlink" title="https.py"></a>https.py</h4><p>上面讲的都是<code>http 80</code>请求响应，那么如何实现<code>https 443</code>请求响应呢，其实也很简单，HTTPS实际上就是原生socket外面套一层TLS，所以我们改改代码就可以</p>
 <p>编写代码结合<code>ssl.create_default_context()</code>在原始socket上进行连接的请求响应</p>
@@ -1433,7 +1433,7 @@ Host: www.baidu.com
         <span class="token keyword">print</span><span class="token punctuation">(</span>sconn<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">10240</span><span class="token punctuation">)</span><span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>客户端运行脚本发起https请求</p>
-<p><img src="/2020/03/22/socket-learning-handbook/image-20200323001839976.png" alt="image-20200323001839976"></p>
+<p><img src="/2020/03/22/Socket-Learning-Handbook/image-20200323001839976.png" alt="image-20200323001839976"></p>
 <p>从运行结果可以看到，<code>https 443</code>请求响应正常。</p>
 <h1 id="Linux-Raw-Socket编程"><a href="#Linux-Raw-Socket编程" class="headerlink" title="Linux Raw Socket编程"></a>Linux Raw Socket编程</h1><h2 id="原始套接字"><a href="#原始套接字" class="headerlink" title="原始套接字"></a>原始套接字</h2><p>从应用开发的角度看，SOCK_STREAM、SOCK_DGRAM 这两类套接字似乎已经足够了。因为基于 TCP/IP 的应用，在传输层的确只可能建立于 TCP 或 UDP 协议之上，而这两种套接字SOCK_STREAM、SOCK_DGRAM 又分别对应于 TCP 和 UDP，所以几乎所有所有的应用都可以使用这两种套接字来实现。但是，从另外的角度，这两种套接字有一些局限：</p>
 <pre><code>怎样发送一个 ICMP 协议包？
@@ -1453,7 +1453,7 @@ Host: www.baidu.com
 <p>下面通过编写icmp的通信过程来了解原始套接字。</p>
 <h2 id="Linux-ICMP-Socket编程"><a href="#Linux-ICMP-Socket编程" class="headerlink" title="Linux ICMP Socket编程"></a>Linux ICMP Socket编程</h2><p>首先，确定我们要使用的socket的类型，ping是ICMP协议，目前不需要篡改IP地址，所以，我们的参数可以使用：</p>
 <pre><code>sockfd = socket(AF_INET,SOCK_RAW,IPPROTO_ICMP);</code></pre><p>再构造icmp数据包时需要先了解其结构</p>
-<p><img src="/2020/03/22/socket-learning-handbook/image-20200401114500413.png" alt="image-20200401114500413"></p>
+<p><img src="/2020/03/22/Socket-Learning-Handbook/image-20200401114500413.png" alt="image-20200401114500413"></p>
 <p>然后，查看一下ICMP的结构体（/usr/include/netinet/ip_icmp.h）</p>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">struct</span> icmp
 <span class="token punctuation">{</span>
@@ -1576,7 +1576,7 @@ Host: www.baidu.com
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>编译运行</p>
-<p><img src="/2020/03/22/socket-learning-handbook/image-20200401114926696.png" alt="image-20200401114926696"></p>
+<p><img src="/2020/03/22/Socket-Learning-Handbook/image-20200401114926696.png" alt="image-20200401114926696"></p>
 
             </div>
             <hr/>
@@ -1602,7 +1602,7 @@ Host: www.baidu.com
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://Qftm.github.io/2020/03/22/socket-learning-handbook/">http://Qftm.github.io/2020/03/22/socket-learning-handbook/</a>
+                    <a href="http://Qftm.github.io/2020/03/22/Socket-Learning-Handbook/">http://Qftm.github.io/2020/03/22/Socket-Learning-Handbook/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -1691,7 +1691,7 @@ Host: www.baidu.com
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2020/03/23/software-engineering-learning-handbook/">
+                <a href="/2020/03/23/Software-Engineering-Learning-Handbook/">
                     <div class="card-image">
                         
                         
@@ -1746,7 +1746,7 @@ Host: www.baidu.com
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/03/18/php-file-inclusion-exploiting-and-bypass/">
+                <a href="/2020/03/18/PHP-File-Inclusion-Exploiting-and-Bypass/">
                     <div class="card-image">
                         
                         

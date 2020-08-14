@@ -403,13 +403,13 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="0x00-Begin"><a href="#0x00-Begin" class="headerlink" title="0x00 Begin"></a>0x00 Begin</h1><p>关于 ISCC 2019 北理工总决赛，这一次比赛体验感总体差不多，最后我们战队荣获第一名，在这里非常感谢我的团队以及我的队友。</p>
-<p><img src="/2019/08/01/iscc2019-finals-writeup/201907311553VEQ6H5SdWk-1580291058611.png" alt="image"></p>
+<p><img src="/2019/08/01/ISCC2019-Finals-Writeup/201907311553VEQ6H5SdWk-1580291058611.png" alt="image"></p>
 <h1 id="0x01-Reverse"><a href="#0x01-Reverse" class="headerlink" title="0x01 Reverse"></a>0x01 Reverse</h1><p>下载题目：elf</p>
 <p>先用 DIE_090_win 查看信息，64位elf文件，然后拖入 ida 分析。</p>
 <p>看到fgets函数，并且没有对输入进行限制，存在数组越界漏洞。</p>
-<p><img src="/2019/08/01/iscc2019-finals-writeup/201907311554ORIPWJl6BH-1580291058536.png" alt="image"></p>
+<p><img src="/2019/08/01/ISCC2019-Finals-Writeup/201907311554ORIPWJl6BH-1580291058536.png" alt="image"></p>
 <p>而且数组是连续的</p>
-<p><img src="/2019/08/01/iscc2019-finals-writeup/2019073115549fSwyrRqJA-1580291058424.png" alt="image"></p>
+<p><img src="/2019/08/01/ISCC2019-Finals-Writeup/2019073115549fSwyrRqJA-1580291058424.png" alt="image"></p>
 <p>所以根据流程写出相应的脚本</p>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
 <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
@@ -467,7 +467,7 @@ v27 <span class="token operator">=</span> <span class="token punctuation">(</spa
 <span class="token punctuation">}</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>GetFlag</p>
 <pre><code>ISCC{aha_simple_reverse}</code></pre><h1 id="0x02-Mobile"><a href="#0x02-Mobile" class="headerlink" title="0x02 Mobile"></a>0x02 Mobile</h1><p>下载题目：app-release.apk</p>
-<p><img src="/2019/08/01/iscc2019-finals-writeup/201907311556c5fpngjqvA-1580291058654.png" alt="image"></p>
+<p><img src="/2019/08/01/ISCC2019-Finals-Writeup/201907311556c5fpngjqvA-1580291058654.png" alt="image"></p>
 <p>通过提示发现flag由两部分组成</p>
 <p>由于该apk缺少签名所以无法安装，不过不影响做题</p>
 <p>第一部分：</p>
@@ -618,14 +618,14 @@ v27 <span class="token operator">=</span> <span class="token punctuation">(</spa
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>审计主类Java代码发现第二部分存在于check函数中，下来分析check函数功能：</p>
-<p><img src="/2019/08/01/iscc2019-finals-writeup/201907311559dhKgMPrFp9-1580291058533.png" alt="image"></p>
+<p><img src="/2019/08/01/ISCC2019-Finals-Writeup/201907311559dhKgMPrFp9-1580291058533.png" alt="image"></p>
 <p>首先将输入的奇数位赋给数组arrayOfInt1,偶数位赋给arrayOfInt2，然后判断输入的字符串ASCII的要小于800。</p>
-<p><img src="/2019/08/01/iscc2019-finals-writeup/201907311559PBpbj2vxw9-1580291058584.png" alt="image"></p>
+<p><img src="/2019/08/01/ISCC2019-Finals-Writeup/201907311559PBpbj2vxw9-1580291058584.png" alt="image"></p>
 <p>这部分将数组arrayOfInt2的最后一位和第一位替换位置；并要求arrayOfInt1要小于等于91，arrayOfInt2要大于等于96。</p>
-<p><img src="/2019/08/01/iscc2019-finals-writeup/201907311600YxdhJnSgXt-1580291059598.png" alt="image"></p>
-<p><img src="/2019/08/01/iscc2019-finals-writeup/201907311600XAf1GUnz5V-1580291059383.png" alt="image"></p>
+<p><img src="/2019/08/01/ISCC2019-Finals-Writeup/201907311600YxdhJnSgXt-1580291059598.png" alt="image"></p>
+<p><img src="/2019/08/01/ISCC2019-Finals-Writeup/201907311600XAf1GUnz5V-1580291059383.png" alt="image"></p>
 <p>最后两部分就是对两个数组的值的判断即约束条件。</p>
-<p><img src="/2019/08/01/iscc2019-finals-writeup/201907311601rC2JAFpx3g-1580291059570.png" alt="image"></p>
+<p><img src="/2019/08/01/ISCC2019-Finals-Writeup/201907311601rC2JAFpx3g-1580291059570.png" alt="image"></p>
 <p>最终，满足所有条件才能返回1即返回true。</p>
 <p>根据上面列出的约束条件(为了阅读方便将数组设为 arrayOfInt1-&gt;arr1 arrayOfInt2-&gt;arr2)</p>
 <p>然后设</p>
@@ -687,24 +687,24 @@ y0 = 125 y1 =121 y_2 = 121 y_1 = 110</code></pre><p>整理：</p>
 
 </code></pre><p>PS：<code>感谢我们团队的逆向大佬帮我分析算法(二进制大佬)。</code></p>
 <h1 id="0x03-私地-Web"><a href="#0x03-私地-Web" class="headerlink" title="0x03 私地 Web"></a>0x03 私地 Web</h1><p>拿到一个站，先对该站点进行端口探测，目录扫描，发现存在登陆页面，首先想的是注入，但是注入无果，于是立马进行isccadmin爆破。</p>
-<p><img src="/2019/08/01/iscc2019-finals-writeup/201907311610dGPvqBT7ne-1580291059688.png" alt="image"></p>
-<p><img src="/2019/08/01/iscc2019-finals-writeup/201907311614F9X56HElIV-1580291059710.png" alt="image"></p>
+<p><img src="/2019/08/01/ISCC2019-Finals-Writeup/201907311610dGPvqBT7ne-1580291059688.png" alt="image"></p>
+<p><img src="/2019/08/01/ISCC2019-Finals-Writeup/201907311614F9X56HElIV-1580291059710.png" alt="image"></p>
 <p>登陆之后，先修改自己账户密码，防止被登录。</p>
 <p>漏洞利用，修改附件上传限制</p>
-<p><img src="/2019/08/01/iscc2019-finals-writeup/20190731161664DUhnJXWM-1580291059916.png" alt="image"></p>
+<p><img src="/2019/08/01/ISCC2019-Finals-Writeup/20190731161664DUhnJXWM-1580291059916.png" alt="image"></p>
 <p>在文章哪里上传木马111.pht</p>
-<p><img src="/2019/08/01/iscc2019-finals-writeup/201907311617IhvHrxaUGC-1580291060026.png" alt="image"></p>
+<p><img src="/2019/08/01/ISCC2019-Finals-Writeup/201907311617IhvHrxaUGC-1580291060026.png" alt="image"></p>
 <p>PS：服务器存在漏洞(主办方文件权限设置出现问题)，一直上传不上去，耽误了一个小时（T_T）,最后向主办方反应才解决了该问题。</p>
 <p>最后蚁剑成功连接shell</p>
-<p><img src="/2019/08/01/iscc2019-finals-writeup/201907311617HaOkCByze1-1580291060025.png" alt="image"></p>
+<p><img src="/2019/08/01/ISCC2019-Finals-Writeup/201907311617HaOkCByze1-1580291060025.png" alt="image"></p>
 <p>Getflag向主办方要取ssh账号</p>
 <p>连接ssh之后，备份源码，分析站点文件，发现根目录下的一个文件(xmlrpc.php)存在任意命令执行漏洞。</p>
-<p><img src="/2019/08/01/iscc2019-finals-writeup/201907311617vut23SbEzT-1580291060282.png" alt="image"></p>
+<p><img src="/2019/08/01/ISCC2019-Finals-Writeup/201907311617vut23SbEzT-1580291060282.png" alt="image"></p>
 <p>构造payload，getflag</p>
 <pre><code>http://192.168.37.71/xmlrpc.php?rsd=getflag
 
 </code></pre><h1 id="0x04-Pwn-高地2"><a href="#0x04-Pwn-高地2" class="headerlink" title="0x04 Pwn 高地2"></a>0x04 Pwn 高地2</h1><p>放入ida分析，发现scanf存在栈溢出漏洞，并且题目还给出了system函数</p>
-<p><img src="/2019/08/01/iscc2019-finals-writeup/201907311619SU5ifWdCvq-1580291060366.png" alt="image"></p>
+<p><img src="/2019/08/01/ISCC2019-Finals-Writeup/201907311619SU5ifWdCvq-1580291060366.png" alt="image"></p>
 <p>根据漏洞编写相应的Exp</p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">from</span> pwn <span class="token keyword">import</span> <span class="token operator">*</span>
 context<span class="token punctuation">.</span>log_level <span class="token operator">=</span> <span class="token string">"debug"</span>
@@ -751,7 +751,7 @@ sh<span class="token punctuation">.</span>interactive<span class="token punctuat
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://Qftm.github.io/2019/08/01/iscc2019-finals-writeup/">http://Qftm.github.io/2019/08/01/iscc2019-finals-writeup/</a>
+                    <a href="http://Qftm.github.io/2019/08/01/ISCC2019-Finals-Writeup/">http://Qftm.github.io/2019/08/01/ISCC2019-Finals-Writeup/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -836,7 +836,7 @@ sh<span class="token punctuation">.</span>interactive<span class="token punctuat
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2019/08/03/awd-bugs-fix/">
+                <a href="/2019/08/03/AWD-Bugs-Fix/">
                     <div class="card-image">
                         
                         
@@ -885,7 +885,7 @@ sh<span class="token punctuation">.</span>interactive<span class="token punctuat
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/07/31/hack-the-box-web-pentest-2017/">
+                <a href="/2019/07/31/Hack-The-Box-Web-Pentest-2017/">
                     <div class="card-image">
                         
                         

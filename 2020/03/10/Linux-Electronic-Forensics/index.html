@@ -465,7 +465,7 @@
  → Qftm ← :~# rm -rf /*<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <h2 id="Linux-Inode"><a href="#Linux-Inode" class="headerlink" title="Linux Inode"></a>Linux Inode</h2><h3 id="Inode"><a href="#Inode" class="headerlink" title="Inode"></a>Inode</h3><p>Linux 文件系统的最基本单元：<code>inode</code>。<code>inode</code> 译成中文就是索引节点，每个存储设备（例如硬盘）或存储设备的分区被格式化为文件系统后，应该有两部份，一部份是<code>inode</code>，另一部份是<code>block</code>，block 是用来存储数据用的。而 inode 呢，就是用来存储这些数据的信息，这些信息包括文件大小、属主、归属的用户组、读写权限等。inode 为每个文件进行信息索引，所以就有了 inode 的数值。</p>
 <p>linux 操作系统下可以使用 <code>ls –id</code>命令来查看文件或者目录的 inode 值。</p>
-<p><img src="/2020/03/10/linux-electronic-forensics/image-20200310152033787.png" alt="image-20200310152033787"></p>
+<p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200310152033787.png" alt="image-20200310152033787"></p>
 <h3 id="Inode内容"><a href="#Inode内容" class="headerlink" title="Inode内容"></a>Inode内容</h3><p>（1）inode包含文件的元信息，具体来说有以下内容</p>
 <ul>
 <li><p>文件的字节数</p>
@@ -484,39 +484,39 @@
 </li>
 </ul>
 <p>（2）可以用stat命令，查看某个文件的inode信息</p>
-<pre><code>stat filename</code></pre><p><img src="/2020/03/10/linux-electronic-forensics/image-20200310151804513.png" alt="image-20200310151804513"></p>
+<pre><code>stat filename</code></pre><p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200310151804513.png" alt="image-20200310151804513"></p>
 <p>PS：除了文件名以外的所有文件信息，都存在inode之中。至于为什么没有文件名，是因为，文件名和其节点会存放在相应的目录块里面。</p>
 <h3 id="Inode大小"><a href="#Inode大小" class="headerlink" title="Inode大小"></a>Inode大小</h3><p>inode也会消耗硬盘空间，所以硬盘格式化的时候，操作系统自动将硬盘分成两个区域。一个是数据区，存放文件数据；另一个是inode区（inode table），存放inode所包含的信息。</p>
 <p>每个inode节点的大小，一般是128字节或256字节。inode节点的总数，在格式化时就给定，一般是每1KB或每2KB就设置一个inode。假定在一块1GB的硬盘中，每个inode节点的大小为128字节，每1KB就设置一个inode，那么inode table的大小就会达到128MB，占整块硬盘的12.8%。</p>
 <p>查看每个硬盘分区的inode总数和已经使用的数量，可以使用df命令。</p>
-<pre><code>df -i</code></pre><p><img src="/2020/03/10/linux-electronic-forensics/image-20200310152712387.png" alt="image-20200310152712387"></p>
+<pre><code>df -i</code></pre><p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200310152712387.png" alt="image-20200310152712387"></p>
 <p>查看每个inode节点的大小，可以用如下命令：</p>
-<pre><code>dumpe2fs -h /dev/sdb1 | grep &quot;Inode size&quot;  </code></pre><p><img src="/2020/03/10/linux-electronic-forensics/image-20200310152919399.png" alt="image-20200310152919399"></p>
+<pre><code>dumpe2fs -h /dev/sdb1 | grep &quot;Inode size&quot;  </code></pre><p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200310152919399.png" alt="image-20200310152919399"></p>
 <p>由于每个文件都必须有一个inode，因此有可能发生inode已经用光，但是硬盘还未存满的情况。这时，就无法在硬盘上创建新文件。</p>
 <h3 id="目录文件"><a href="#目录文件" class="headerlink" title="目录文件"></a>目录文件</h3><p>Unix/Linux系统中，目录（directory）也是一种文件。打开目录，实际上就是打开目录文件。</p>
 <p>目录文件的结构非常简单，就是一系列目录项（dirent）的列表。每个目录项，由两部分组成：所包含文件的文件名，以及该文件名对应的inode号码。</p>
 <p><code>ls</code>命令只列出目录文件中的所有文件名</p>
 <p><code>ls -i</code>命令列出整个目录文件，即文件名和inode号码</p>
-<p><img src="/2020/03/10/linux-electronic-forensics/image-20200310153216666.png" alt="image-20200310153216666"></p>
+<p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200310153216666.png" alt="image-20200310153216666"></p>
 <h3 id="硬链接"><a href="#硬链接" class="headerlink" title="硬链接"></a>硬链接</h3><p>一般情况下，文件名和inode号码是”一一对应”关系，每个inode号码对应一个文件名。但是，Unix/Linux系统允许，多个文件名指向同一个inode号码。</p>
 <p>这意味着，可以用不同的文件名访问同样的内容；对文件内容进行修改，会影响到所有文件名；但是，删除一个文件名，不影响另一个文件名的访问。这种情况就被称为”硬链接”（hard link）。</p>
 <p><code>ln</code>命令可以创建硬链接：</p>
-<pre><code>ln 源文件 目标文件</code></pre><p><img src="/2020/03/10/linux-electronic-forensics/image-20200310153603911.png" alt="image-20200310153603911"></p>
+<pre><code>ln 源文件 目标文件</code></pre><p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200310153603911.png" alt="image-20200310153603911"></p>
 <p>运行上面条命令以后，源文件与目标文件的inode号码相同，都指向同一个inode。inode信息中有一项叫做”链接数”，记录指向该inode的文件名总数，这时就会增加1。</p>
-<p><img src="/2020/03/10/linux-electronic-forensics/image-20200310153657837.png" alt="image-20200310153657837"></p>
+<p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200310153657837.png" alt="image-20200310153657837"></p>
 <p>反过来，删除一个文件名，就会使得inode节点中的”链接数”减1。当这个值减到0，表明没有文件名指向这个inode，系统就会回收这个inode号码，以及其所对应block区域。</p>
-<p><img src="/2020/03/10/linux-electronic-forensics/image-20200310153754818.png" alt="image-20200310153754818"></p>
+<p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200310153754818.png" alt="image-20200310153754818"></p>
 <p>这里顺便说一下目录文件的”链接数”。</p>
 <p>创建目录时，默认会生成两个目录项：”.”和”..”。前者的inode号码就是当前目录的inode号码，等同于当前目录的”硬链接”；后者的inode号码就是当前目录的父目录的inode号码，等同于父目录的”硬链接”。所以，任何一个目录的”硬链接”总数，总是等于2加上它的子目录总数（含隐藏目录）。</p>
 <h3 id="软链接"><a href="#软链接" class="headerlink" title="软链接"></a>软链接</h3><p>除了硬链接以外，还有一种特殊情况。</p>
 <p>文件A和文件B的inode号码虽然不一样，但是文件A的内容是文件B的路径。读取文件A时，系统会自动将访问者导向文件B。因此，无论打开哪一个文件，最终读取的都是文件B。这时，文件A就称为文件B的”软链接”（soft link）或者”符号链接（symbolic link）。</p>
 <p>这意味着，文件A依赖于文件B而存在，如果删除了文件B，打开文件A就会报错：”No such file or directory”。这是软链接与硬链接最大的不同：文件A指向文件B的文件名，而不是文件B的inode号码，文件B的inode”链接数”不会因此发生变化。</p>
 <p><code>ln -s</code>命令可以创建软链接:</p>
-<pre><code>ln -s 源文文件或目录 目标文件或目录  </code></pre><p><img src="/2020/03/10/linux-electronic-forensics/image-20200310154047013.png" alt="image-20200310154047013"></p>
+<pre><code>ln -s 源文文件或目录 目标文件或目录  </code></pre><p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200310154047013.png" alt="image-20200310154047013"></p>
 <p>查看file1.txt链接数</p>
-<p><img src="/2020/03/10/linux-electronic-forensics/image-20200310154208656.png" alt="image-20200310154208656"></p>
+<p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200310154208656.png" alt="image-20200310154208656"></p>
 <p>查看file2.txt信息</p>
-<p><img src="/2020/03/10/linux-electronic-forensics/image-20200310154237038.png" alt="image-20200310154237038"></p>
+<p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200310154237038.png" alt="image-20200310154237038"></p>
 <h2 id="文件恢复"><a href="#文件恢复" class="headerlink" title="文件恢复"></a>文件恢复</h2><h3 id="数据恢复"><a href="#数据恢复" class="headerlink" title="数据恢复"></a>数据恢复</h3><p>在Linux文件系统中，每个文件都是通过 inode 来描述其数据存放的具体位置，当文件被删除以后，文件的inode会被标记为删除，但是文件的数据块还在，这个时候还可以将删除的文件恢复，但是，如果在你删除文件之后没有将相应的设备卸载或者只读挂载，同时进行反复的磁盘读写操作，这样以前被删除的文件数据块很有可能被覆盖，导致删除文件无法恢复。</p>
 <p>在电子取证当中首先做的就是尽可能少的对取证对象进行操作，一般以只读的方式对内存数据和磁盘数据进行镜像克隆，然后在镜像上进行取证分析。</p>
 <p>对取证镜像进行数据恢复时要以只读的方式或者卸载设备的方式进行数据的恢复，以免因操纵不当覆盖了原始数据块，导致原始数据无法恢复的损失。</p>
@@ -530,19 +530,19 @@ FinalData
 FixRAR
 、、、、</code></pre><p>这里主要介绍一下这几个工具：<code>debugfs</code>、<code>extundelete</code>、<code>PhotoRec</code></p>
 <h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><p>操作系统：<code>Kali Linux</code></p>
-<p><img src="/2020/03/10/linux-electronic-forensics/image-20200310162315917.png" alt="image-20200310162315917"></p>
+<p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200310162315917.png" alt="image-20200310162315917"></p>
 <p>操作设备：<code>1G sdb</code>、<code>sdb1-&gt;ext2</code>、<code>sdb2-&gt;ext3</code>、<code>sdb3-&gt;ext4</code></p>
-<p><img src="/2020/03/10/linux-electronic-forensics/image-20200310162410587.png" alt="image-20200310162410587"></p>
+<p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200310162410587.png" alt="image-20200310162410587"></p>
 <p>操作软件：<code>debugfs</code>、<code>extundelete</code>、<code>PhotoRec</code></p>
 <h3 id="使用debugfs恢复文件"><a href="#使用debugfs恢复文件" class="headerlink" title="使用debugfs恢复文件"></a>使用debugfs恢复文件</h3><p>Linux下自带debugfs，支持处理ext2的文件系统格式，对于现在的ext3/4文件系统格式不能恢复成功，但仍然可以查看inode等信息。</p>
 <ul>
 <li>操作分区sdb1</li>
 </ul>
-<p><img src="/2020/03/10/linux-electronic-forensics/image-20200310162945491.png" alt="image-20200310162945491"></p>
+<p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200310162945491.png" alt="image-20200310162945491"></p>
 <ul>
 <li>在分区sdb1中制造删除文件的动作</li>
 </ul>
-<p><img src="/2020/03/10/linux-electronic-forensics/image-20200310163635709.png" alt="image-20200310163635709"></p>
+<p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200310163635709.png" alt="image-20200310163635709"></p>
 <ul>
 <li>查看被删除的文件</li>
 </ul>
@@ -551,24 +551,24 @@ FixRAR
 umount /dev/sdb1
 或者
 mount -r -n -o remount /media/root/fe20b1ad-3acb-4ceb-80c3-32a1e6c93c15/</code></pre><p>使用debugfs 打开设备</p>
-<p><img src="/2020/03/10/linux-electronic-forensics/image-20200310163824063.png" alt="image-20200310163824063"></p>
+<p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200310163824063.png" alt="image-20200310163824063"></p>
 <p>用ls 加-d参数显示刚刚删除文件所在的目录</p>
-<p><img src="/2020/03/10/linux-electronic-forensics/image-20200310163901198.png" alt="image-20200310163901198"></p>
+<p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200310163901198.png" alt="image-20200310163901198"></p>
 <p>尝试进入HidHack1目录查看：</p>
-<pre><code>debugfs: ls -d HidHack1</code></pre><p><img src="/2020/03/10/linux-electronic-forensics/image-20200310163942048.png" alt="image-20200310163942048"></p>
+<pre><code>debugfs: ls -d HidHack1</code></pre><p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200310163942048.png" alt="image-20200310163942048"></p>
 <p>显示有&lt;&gt;尖括号(被删除的文件)的就是我们要找的文件Inode 号，使用<code>logdump -i &lt;inode&gt;</code>，查看inode详细信息</p>
-<p><img src="/2020/03/10/linux-electronic-forensics/image-20200310164118101.png" alt="image-20200310164118101"></p>
+<p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200310164118101.png" alt="image-20200310164118101"></p>
 <p>记下block=74、offset=256等关键信息，然后退出debugfs(按q退出)</p>
 <ul>
 <li>使用dd进行文件恢复</li>
 </ul>
 <pre><code>dd if=/dev/sdb1 of=/tmp/ReQftm1.txt bs=384 count=1 skip=122883</code></pre><p>bs值为offset、skip值为block</p>
-<p><img src="/2020/03/10/linux-electronic-forensics/image-20200310164357998.png" alt="image-20200310164357998"></p>
+<p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200310164357998.png" alt="image-20200310164357998"></p>
 <h3 id="使用extundelete恢复文件"><a href="#使用extundelete恢复文件" class="headerlink" title="使用extundelete恢复文件"></a>使用extundelete恢复文件</h3><p>extundelete 是一个开源的数据恢复工具，支持 ext3、ext4 文件系统。</p>
 <ul>
 <li>安装extundelete</li>
 </ul>
-<pre><code>apt-get install extundelete</code></pre><p><img src="/2020/03/10/linux-electronic-forensics/image-20200310164729608.png" alt="image-20200310164729608"></p>
+<pre><code>apt-get install extundelete</code></pre><p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200310164729608.png" alt="image-20200310164729608"></p>
 <ul>
 <li>extundelete用法</li>
 </ul>
@@ -595,11 +595,11 @@ mount -r -n -o remount /media/root/fe20b1ad-3acb-4ceb-80c3-32a1e6c93c15/</code><
 -B blocksize，表示使用数据块大小来打开文件系统，一般用于查看已经知道大小的文件。</code></pre><ul>
 <li>操作分区sdb2</li>
 </ul>
-<p><img src="/2020/03/10/linux-electronic-forensics/image-20200310165133630.png" alt="image-20200310165133630"></p>
+<p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200310165133630.png" alt="image-20200310165133630"></p>
 <ul>
 <li>在分区sdb2中制造删除文件的动作</li>
 </ul>
-<p><img src="/2020/03/10/linux-electronic-forensics/image-20200310165305951.png" alt="image-20200310165305951"></p>
+<p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200310165305951.png" alt="image-20200310165305951"></p>
 <ul>
 <li>恢复被删除文件</li>
 </ul>
@@ -607,7 +607,7 @@ mount -r -n -o remount /media/root/fe20b1ad-3acb-4ceb-80c3-32a1e6c93c15/</code><
 <pre><code>cd ~
 umount /dev/sdb2
 或者
-mount -r -n -o remount /media/root/8d949467-112b-4e35-ac7c-f4f04f6a2beb/</code></pre><p><img src="/2020/03/10/linux-electronic-forensics/image-20200310165539651.png" alt="image-20200310165539651"></p>
+mount -r -n -o remount /media/root/8d949467-112b-4e35-ac7c-f4f04f6a2beb/</code></pre><p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200310165539651.png" alt="image-20200310165539651"></p>
 <p>查看哪些文件被删除</p>
 <p>虽说<code>debugfs</code>不能作用与ext3/4等文件系统格式，但是它还是能帮助我们查看文件的inode信息，然后结合<code>extundelete</code>进行恢复数据。</p>
 <p>如果是删除的单个文件，也可以查看该文件所在目录的inode，然后通过该inode号，查看删除的文件。</p>
@@ -661,18 +661,18 @@ see.txt~                                          12             Deleted
 </ul>
 <p>恢复文件<code>see.txt</code></p>
 <pre><code>extundelete /dev/sdb2 --restore-inode 14
-extundelete /dev/sdb2 --restore-file see.txt</code></pre><p><img src="/2020/03/10/linux-electronic-forensics/image-20200310170123866.png" alt="image-20200310170123866"></p>
+extundelete /dev/sdb2 --restore-file see.txt</code></pre><p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200310170123866.png" alt="image-20200310170123866"></p>
 <p>查看恢复后的<code>see.txt</code></p>
 <p>在文件恢复成功后，extundelete命令默认会在执行命令的当前目录下创建一个RECOVERED_FILES目录，此目录用于存放恢复出来的文件，所以执行extundelete命令的当前目录必须是可写的。</p>
-<p><img src="/2020/03/10/linux-electronic-forensics/image-20200310170707131.png" alt="image-20200310170707131"></p>
+<p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200310170707131.png" alt="image-20200310170707131"></p>
 <p>从上面可以看到通过Inode号恢复的文件命名后缀是该文件的inode号</p>
 <ul>
 <li>恢复目录</li>
 </ul>
 <pre><code>extundelete /dev/sdb2 --restore-inode 20241
-extundelete /dev/sdb2 --restore-directory HidHack2</code></pre><p><img src="/2020/03/10/linux-electronic-forensics/image-20200310172042573.png" alt="image-20200310172042573"></p>
+extundelete /dev/sdb2 --restore-directory HidHack2</code></pre><p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200310172042573.png" alt="image-20200310172042573"></p>
 <p>查看恢复的目录<code>HidHack2</code></p>
-<p><img src="/2020/03/10/linux-electronic-forensics/image-20200310172306790.png" alt="image-20200310172306790"></p>
+<p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200310172306790.png" alt="image-20200310172306790"></p>
 <p>从上面可以看到通过<code>--restore-directory</code>恢复的目录文件和原来的一样</p>
 <p>PS：使用<code>extundelete</code>恢复后的文件MD5值和原来的一样，这里不在测试</p>
 <h3 id="使用PhotoRec恢复文件"><a href="#使用PhotoRec恢复文件" class="headerlink" title="使用PhotoRec恢复文件"></a>使用PhotoRec恢复文件</h3><p>PhotoRec是一款用于恢复硬盘、光盘中丢失的视频、文档、压缩包等文件，或从数码相机存储卡中恢复丢失图片的数据恢复软件（因此，该软件命名为Photo Recovery这个名字)。 PhotoRec忽略文件系统，能直接从介质底层恢复数据，因此，在介质的文件系统严重破坏或被重新格式化后，它也能进行数据恢复。</p>
@@ -691,15 +691,15 @@ $ sudo dnf install testdisk
 ------- On Arch Linux ------- 
 $ pacman -S testdisk             
 ------- On Gentoo ------- 
-$ emerge testdisk</code></pre><p><img src="/2020/03/10/linux-electronic-forensics/image-20200310180751711.png" alt="image-20200310180751711"></p>
+$ emerge testdisk</code></pre><p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200310180751711.png" alt="image-20200310180751711"></p>
 <ul>
 <li>操作分区sdb3</li>
 </ul>
-<p><img src="/2020/03/10/linux-electronic-forensics/image-20200310180703660.png" alt="image-20200310180703660"></p>
+<p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200310180703660.png" alt="image-20200310180703660"></p>
 <ul>
 <li>在分区sdb3中制造删除文件的动作</li>
 </ul>
-<p><img src="/2020/03/10/linux-electronic-forensics/image-20200310185807751.png" alt="image-20200310185807751"></p>
+<p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200310185807751.png" alt="image-20200310185807751"></p>
 <ul>
 <li>恢复被删除文件</li>
 </ul>
@@ -707,23 +707,23 @@ $ emerge testdisk</code></pre><p><img src="/2020/03/10/linux-electronic-forensic
 <pre><code>cd ~
 umount /dev/sdb3
 或者
-mount -r -n -o remount /media/root/7dbab1c1-21b7-4cae-bb6c-3b42c6b23e55/</code></pre><p><img src="/2020/03/10/linux-electronic-forensics/image-20200310181453152.png" alt="image-20200310181453152"></p>
+mount -r -n -o remount /media/root/7dbab1c1-21b7-4cae-bb6c-3b42c6b23e55/</code></pre><p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200310181453152.png" alt="image-20200310181453152"></p>
 <p>运行PhotoRec，进入相应分区/dev/sdb</p>
-<p><img src="/2020/03/10/linux-electronic-forensics/image-20200310184507622.png" alt="image-20200310184507622"></p>
+<p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200310184507622.png" alt="image-20200310184507622"></p>
 <p>选择分区/dev/sdb3进行恢复</p>
-<p><img src="/2020/03/10/linux-electronic-forensics/image-20200310184536022.png" alt="image-20200310184536022"></p>
+<p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200310184536022.png" alt="image-20200310184536022"></p>
 <p>可以在<code>FIle opt</code> 中设置恢复规则（恢复的文件类型），根据相应需求进行设置，默认是全选。</p>
-<p><img src="/2020/03/10/linux-electronic-forensics/image-20200310184619784.png" alt="image-20200310184619784"></p>
+<p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200310184619784.png" alt="image-20200310184619784"></p>
 <p>规则设置之后，退出，在search中进入<code>/dev/sdb3</code>，选择ext文件系统格式</p>
-<p><img src="/2020/03/10/linux-electronic-forensics/image-20200310184650967.png" alt="image-20200310184650967"></p>
+<p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200310184650967.png" alt="image-20200310184650967"></p>
 <p>选择whole进行恢复</p>
-<p><img src="/2020/03/10/linux-electronic-forensics/image-20200310184714947.png" alt="image-20200310184714947"></p>
+<p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200310184714947.png" alt="image-20200310184714947"></p>
 <p>确定之后，选择文件恢复到/root目录中</p>
-<p><img src="/2020/03/10/linux-electronic-forensics/image-20200310184758303.png" alt="image-20200310184758303"></p>
+<p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200310184758303.png" alt="image-20200310184758303"></p>
 <p>选择好目录之后，按C开始恢复</p>
-<p><img src="/2020/03/10/linux-electronic-forensics/image-20200310184356665.png" alt="image-20200310184356665"></p>
+<p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200310184356665.png" alt="image-20200310184356665"></p>
 <p>查看恢复的文件</p>
-<p><img src="/2020/03/10/linux-electronic-forensics/image-20200310185336012.png" alt="image-20200310185336012"></p>
+<p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200310185336012.png" alt="image-20200310185336012"></p>
 <p>report.xml存放的是恢复信息。其他文件是恢复的数据文件，恢复的文件不是原来的文件名，但是文件内容不变，MD5值也是一样的。</p>
 <h1 id="Linux-内存取证艺术"><a href="#Linux-内存取证艺术" class="headerlink" title="Linux 内存取证艺术"></a>Linux 内存取证艺术</h1><h2 id="内存简介"><a href="#内存简介" class="headerlink" title="内存简介"></a>内存简介</h2><p>内存取证主要通过对内存数据及其缓存硬盘数据进行分析，提取那些对案件侦破可能有重要意义的易失性数据，这些易失性数据的特点是存在于正在运行的计算机或网络设备的内存中，关机或重启后这些数据将不再存在。</p>
 <p>成功获取物理内存以后，接下来的工作就是要对镜像文件进行分析，从中提取有用的入侵证据。一般来说，我们可以从镜像文件中提取以下信息 ( 这些信息是指在生成镜像文件那个时刻的信息) :</p>
@@ -802,27 +802,27 @@ insmod ./lime-5.2.0-kali2-amd64.ko &quot;path=/root/Mem/kali.lime format=lime&qu
 <pre><code>./vol.py --info | grep -i linux （列出所有linux插件）</code></pre><p>从扩展目录加载插件：</p>
 <pre><code>./vol.py --plugins=[path][plugin]</code></pre><p>检查结果输出：</p>
 <pre><code>./vol.py --output-file=[file]</code></pre><p>查看profile文件：</p>
-<pre><code>./vol.py --info | grep -i profile</code></pre><h3 id="内存镜像分析"><a href="#内存镜像分析" class="headerlink" title="内存镜像分析"></a>内存镜像分析</h3><p>使用Volatility对LiME抓取Centos7的一个内存镜像进行分析：<code>Centos7.lime</code><br><img src="/2020/03/10/linux-electronic-forensics/image-20200414135309931.png" alt="image-20200414135309931"></p>
+<pre><code>./vol.py --info | grep -i profile</code></pre><h3 id="内存镜像分析"><a href="#内存镜像分析" class="headerlink" title="内存镜像分析"></a>内存镜像分析</h3><p>使用Volatility对LiME抓取Centos7的一个内存镜像进行分析：<code>Centos7.lime</code><br><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200414135309931.png" alt="image-20200414135309931"></p>
 <p>查看制作好的profile</p>
-<p><img src="/2020/03/10/linux-electronic-forensics/image-20200414140143484.png" alt="image-20200414140143484"></p>
+<p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200414140143484.png" alt="image-20200414140143484"></p>
 <p>查看Linux插件</p>
-<p><img src="/2020/03/10/linux-electronic-forensics/image-20200414140232651.png" alt="image-20200414140232651"></p>
+<p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200414140232651.png" alt="image-20200414140232651"></p>
 <ul>
 <li>通过Volatility利用内存镜像和profile还有Linux插件进行内存取证分析</li>
 </ul>
 <p>查看系统ARP表</p>
-<pre><code>vol.py -f /root/centos7.lime --profile=Linuxcentos7x64 linux_arp</code></pre><p><img src="/2020/03/10/linux-electronic-forensics/image-20200414140826554.png" alt="image-20200414140826554"></p>
+<pre><code>vol.py -f /root/centos7.lime --profile=Linuxcentos7x64 linux_arp</code></pre><p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200414140826554.png" alt="image-20200414140826554"></p>
 <p>查看系统信息</p>
-<pre><code>vol.py -f /root/centos7.lime --profile=Linuxcentos7x64 linux_banner</code></pre><p><img src="/2020/03/10/linux-electronic-forensics/image-20200414140950274.png" alt="image-20200414140950274"></p>
+<pre><code>vol.py -f /root/centos7.lime --profile=Linuxcentos7x64 linux_banner</code></pre><p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200414140950274.png" alt="image-20200414140950274"></p>
 <p>检查系统进程信息</p>
-<pre><code>vol.py -f /root/centos7.lime --profile=Linuxcentos7x64 linux_psaux</code></pre><p><img src="/2020/03/10/linux-electronic-forensics/image-20200414141041992.png" alt="image-20200414141041992"></p>
+<pre><code>vol.py -f /root/centos7.lime --profile=Linuxcentos7x64 linux_psaux</code></pre><p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200414141041992.png" alt="image-20200414141041992"></p>
 <p>查看系统隐藏进程</p>
-<pre><code>vol.py -f /root/centos7.lime --profile=Linuxcentos7x64 linux_pidhashtable</code></pre><p><img src="/2020/03/10/linux-electronic-forensics/image-20200414141205401.png" alt="image-20200414141205401"></p>
+<pre><code>vol.py -f /root/centos7.lime --profile=Linuxcentos7x64 linux_pidhashtable</code></pre><p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200414141205401.png" alt="image-20200414141205401"></p>
 <p>查看某具体进程的情况</p>
 <p>检查某具体进程的情况可以使用 linux_proc_maps 子命令</p>
-<pre><code>vol.py -f /root/centos7.lime --profile=Linuxcentos7x64 linux_proc_maps | grep httpd</code></pre><p><img src="/2020/03/10/linux-electronic-forensics/image-20200414141432807.png" alt="image-20200414141432807"></p>
+<pre><code>vol.py -f /root/centos7.lime --profile=Linuxcentos7x64 linux_proc_maps | grep httpd</code></pre><p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200414141432807.png" alt="image-20200414141432807"></p>
 <p>查看网络链接情况</p>
-<pre><code>vol.py -f /root/centos7.lime --profile=Linuxcentos7x64 linux_netstat</code></pre><p><img src="/2020/03/10/linux-electronic-forensics/image-20200414141524368.png" alt="image-20200414141524368"></p>
+<pre><code>vol.py -f /root/centos7.lime --profile=Linuxcentos7x64 linux_netstat</code></pre><p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200414141524368.png" alt="image-20200414141524368"></p>
 <p>还有很多用法，就不一 一举例说明了，对于内存取证主要的步骤还是在于内存镜像的提取与profile文件。</p>
 <p>获取系统进程信息相关命令:</p>
 <pre><code>   linux_pstree：进程树列表
@@ -877,11 +877,11 @@ insmod ./lime-5.2.0-kali2-amd64.ko &quot;path=/root/Mem/kali.lime format=lime&qu
 <pre><code>   lsof -u user_name
    例如：lsof -u root
 
-   lsof -u ^root查看非root用户的文件使用情况</code></pre><p><img src="/2020/03/10/linux-electronic-forensics/image-20200414145115666.png" alt="image-20200414145115666"></p>
+   lsof -u ^root查看非root用户的文件使用情况</code></pre><p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200414145115666.png" alt="image-20200414145115666"></p>
 <p>列出在某个端口运行的进程</p>
 <pre><code>   lsof -i :port_number
 
-   例如lsof -i:22， lsof -i:100-1000， lsof -i:22,23,80</code></pre><p><img src="/2020/03/10/linux-electronic-forensics/image-20200414145239835.png" alt="image-20200414145239835"></p>
+   例如lsof -i:22， lsof -i:100-1000， lsof -i:22,23,80</code></pre><p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200414145239835.png" alt="image-20200414145239835"></p>
 <p>查看所有网络情况</p>
 <pre><code>   lsof -i
 
@@ -891,18 +891,18 @@ insmod ./lime-5.2.0-kali2-amd64.ko &quot;path=/root/Mem/kali.lime format=lime&qu
    hostname --&gt; Internet host name
    hostaddr --&gt; IPv4地址
    service --&gt; service name (可以不只一个)
-   port --&gt; 端口号 (可以不只一个)，例如lsof -i 4 10.1.1.1@server</code></pre><p><img src="/2020/03/10/linux-electronic-forensics/image-20200414145502509.png" alt="image-20200414145502509"></p>
+   port --&gt; 端口号 (可以不只一个)，例如lsof -i 4 10.1.1.1@server</code></pre><p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200414145502509.png" alt="image-20200414145502509"></p>
 <p>查找进程id来列出打开的文件</p>
 <pre><code>  lsof -p PID
 
   例如 lsof -p 717
 
   lsof -i -a -p 717
-  lsof `which sshd` （哪个进程在使用openssh的可执行文件）</code></pre><p><img src="/2020/03/10/linux-electronic-forensics/image-20200414145735590.png" alt="image-20200414145735590"></p>
+  lsof `which sshd` （哪个进程在使用openssh的可执行文件）</code></pre><p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200414145735590.png" alt="image-20200414145735590"></p>
 <p>根据某个目录列出被打开的文件</p>
 <pre><code>   lsof +D directory
 
-   如：lsof +D /var/log/</code></pre><p><img src="/2020/03/10/linux-electronic-forensics/image-20200414145856494.png" alt="image-20200414145856494"></p>
+   如：lsof +D /var/log/</code></pre><p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200414145856494.png" alt="image-20200414145856494"></p>
 <p>杀死某个用户所有活动进程</p>
 <pre><code>   killall -9 `lsof -t -u user_name`
 
@@ -1365,14 +1365,14 @@ Victim：192.33.6.144</code></pre><ul>
 <li>Attacker</li>
 </ul>
 <p>攻击者收集目标信息得到受害者开放的有22端口服务，尝试进行爆破以获得系统权限</p>
-<p><img src="/2020/03/10/linux-electronic-forensics/image-20200413234608171.png" alt="image-20200413234608171"></p>
+<p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200413234608171.png" alt="image-20200413234608171"></p>
 <ul>
 <li>Victim</li>
 </ul>
 <p>受害者查看系统登录用户情况并分析安全日志文件发现自己的ssh服务被攻击者爆破攻击，并成功入侵系统</p>
 <p>查看日志文件secure、btmp发现来自非自己IP主机一直在访问ssh并尝试爆破登录</p>
-<p><img src="/2020/03/10/linux-electronic-forensics/image-20200413234845637.png" alt="image-20200413234845637"></p>
-<p><img src="/2020/03/10/linux-electronic-forensics/image-20200413235103656.png" alt="image-20200413235103656"></p>
+<p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200413234845637.png" alt="image-20200413234845637"></p>
+<p><img src="/2020/03/10/Linux-Electronic-Forensics/image-20200413235103656.png" alt="image-20200413235103656"></p>
 <p>查看系统登录用户，发现192.33.6.146恶意主机已入侵系统</p>
 <pre><code>[root@localhost log]# who
 root     tty1         2020-04-13 22:51
@@ -1403,7 +1403,7 @@ root     pts/1        2020-04-13 23:44 (192.33.6.146)
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://Qftm.github.io/2020/03/10/linux-electronic-forensics/">http://Qftm.github.io/2020/03/10/linux-electronic-forensics/</a>
+                    <a href="http://Qftm.github.io/2020/03/10/Linux-Electronic-Forensics/">http://Qftm.github.io/2020/03/10/Linux-Electronic-Forensics/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -1492,7 +1492,7 @@ root     pts/1        2020-04-13 23:44 (192.33.6.146)
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2020/03/12/lfi-bypass-session-restriction-getshell/">
+                <a href="/2020/03/12/LFI-Bypass-Session-Restriction-Getshell/">
                     <div class="card-image">
                         
                         

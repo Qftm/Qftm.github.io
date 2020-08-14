@@ -424,7 +424,7 @@
 </li>
 </ul>
 <h1 id="对称加密算法-Des"><a href="#对称加密算法-Des" class="headerlink" title="对称加密算法 Des"></a>对称加密算法 Des</h1><h2 id="数据加密标准-Des"><a href="#数据加密标准-Des" class="headerlink" title="数据加密标准 Des"></a>数据加密标准 Des</h2><h3 id="Des-设计理念"><a href="#Des-设计理念" class="headerlink" title="Des 设计理念"></a>Des 设计理念</h3><p>Des 设计中使用了分组密码设计的两个原则：混淆(confusion)和扩散(diffusion)，其目的是抗击敌手对密码系统的统计分析。混淆是使密文的统计特性与密钥的取值之间的关系 尽可能复杂化，以使密钥和明文以及密文之间的依赖性对密码分析者来说是无法利用的。扩散的作用就是将每一位明文的影响尽可能迅速地作用到较多的输出密文位中，以便在大量的 密文中消除明文的统计结构，并且使每一位密钥的影响尽可能迅速地扩展到较多的密文位中，以防对密钥进行逐段破译。</p>
-<h2 id="Des-加密算法结构流程"><a href="#Des-加密算法结构流程" class="headerlink" title="Des 加密算法结构流程"></a>Des 加密算法结构流程</h2><p><img src="/2019/04/26/symmetric-key-encryption-des/1594459-20190423201119413-927572400.png" alt="img"></p>
+<h2 id="Des-加密算法结构流程"><a href="#Des-加密算法结构流程" class="headerlink" title="Des 加密算法结构流程"></a>Des 加密算法结构流程</h2><p><img src="/2019/04/26/Symmetric-Key-Encryption-DES/1594459-20190423201119413-927572400.png" alt="img"></p>
 <h2 id="Des-加密算法电子编码本ECB模式流程"><a href="#Des-加密算法电子编码本ECB模式流程" class="headerlink" title="Des 加密算法电子编码本ECB模式流程"></a>Des 加密算法电子编码本ECB模式流程</h2><h3 id="ECB-模式-amp-性能"><a href="#ECB-模式-amp-性能" class="headerlink" title="ECB 模式 &amp; 性能"></a>ECB 模式 &amp; 性能</h3><p>ECB 模式是最简单的加密模式，明文消息被分成固定大小的块（分组），并且每个块被单独加密。每个块的加密和解密都是独立的，且使用相同的方法进行加密，所以可以进行并行计算，但是这种方法一旦有一个块被破解，使用相同的方法可以解密所有的明文数据，安全性比较差。适用于数据较少的情形，加密前需要把明文数据填充到块大小的整倍数。</p>
 <p><strong>ECB算法优点</strong>：</p>
 <p>简单、孤立，每个块单独运算。适合并行运算。传输错误一般只影响当前块。</p>
@@ -433,11 +433,11 @@
 <h3 id="ECB-加密-amp-解密流程"><a href="#ECB-加密-amp-解密流程" class="headerlink" title="ECB 加密 &amp; 解密流程"></a>ECB 加密 &amp; 解密流程</h3><ul>
 <li>Encryption：</li>
 </ul>
-<p><img src="/2019/04/26/symmetric-key-encryption-des/1594459-20190324171614581-366182122.png" alt="img"></p>
+<p><img src="/2019/04/26/Symmetric-Key-Encryption-DES/1594459-20190324171614581-366182122.png" alt="img"></p>
 <ul>
 <li>Decryption：</li>
 </ul>
-<p><img src="/2019/04/26/symmetric-key-encryption-des/1594459-20190324171618967-605244121.png" alt="img"></p>
+<p><img src="/2019/04/26/Symmetric-Key-Encryption-DES/1594459-20190324171618967-605244121.png" alt="img"></p>
 <h2 id="Des-分组加密所需参数"><a href="#Des-分组加密所需参数" class="headerlink" title="Des 分组加密所需参数"></a>Des 分组加密所需参数</h2><p>（1）Key：64位主密钥</p>
 <p>（2）明文：64位的倍数</p>
 <p>（3）密文：64位的倍数</p>
@@ -446,10 +446,10 @@
 <h2 id="Des-加密过程"><a href="#Des-加密过程" class="headerlink" title="Des 加密过程"></a>Des 加密过程</h2><p>（1）初始置换（IP）</p>
 <p>根据初始置换表，对相应明文位置上的二进制进行置换操作，即把64 位的数据块的原第 58 位换到第一位，原第 50 位换到第二位.依此类推。目的在于打乱明文中各位的次序。</p>
 <p>（2）子密钥生成</p>
-<p>​              <img src="/2019/04/26/symmetric-key-encryption-des/1594459-20190423203317310-1372520822.png" alt="img"></p>
+<p>​              <img src="/2019/04/26/Symmetric-Key-Encryption-DES/1594459-20190423203317310-1372520822.png" alt="img"></p>
 <p>从用户处取得一个 64 位长的密钥key ，去除 64 位密钥中作为奇偶校验位的第 8、16、24、32、40、48、56、64 位，剩下的 56 位作为有效输入密钥。使用置换选择 1 对剩下的 56 位打乱，输出左 28 位 C 和右 28 位 D。两个部分都进行向左移位，移位后的两部分数据有两个作用。第一输出子密钥，每 i 轮两部分合在一起进行进行置换选择 2 得到迭代运算的第 i 个子密钥，第二作为下一轮子密钥运算。总共 16 轮运算（i=1,2,9,6 左移 1 位，其余 2 位）。</p>
 <p>（3）16 轮迭代运算 (Des 核心)</p>
-<p>​           <img src="/2019/04/26/symmetric-key-encryption-des/1594459-20190423203644459-1832859717.png" alt="img"></p>
+<p>​           <img src="/2019/04/26/Symmetric-Key-Encryption-DES/1594459-20190423203644459-1832859717.png" alt="img"></p>
 <p>首先将二进制分为两个 32 位的部分：left 和 right。保持 left 不变，根据扩展置换表把 right 由 32 位扩展成 48 位。把扩展后的 48 位 right 与第 i 次迭代生成的 48 位子密钥按位异或运算，形成一个新的 48 位的 right。然后与主密钥生成的 48 位子密钥异或操作，然后进行 S 盒代换，得到一个 32 位的二进制数据，将数据进行 P 盒置换后，与 left 进行异或操作，结果作为下一轮迭代运算的 right 部分。上一轮 right 部分作为下一轮运算的 left 部分。第 16 次迭代不交换两者的数值。</p>
 <p>（4）初始逆置换</p>
 <p>16轮迭代运算后，依据初始逆置换表，对相应位置的二进制数进行置换操作。最后得到密文。</p>
@@ -612,15 +612,15 @@ Python工具：PyCharm Professional</code></pre><h2 id="操作流程"><a href="#
 &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; 
 
 </code></pre><h2 id="数据测试"><a href="#数据测试" class="headerlink" title="数据测试"></a>数据测试</h2><p>（1）测试结果</p>
-<p><img src="/2019/04/26/symmetric-key-encryption-des/1594459-20190426082415156-1784556582.png" alt="img"></p>
+<p><img src="/2019/04/26/Symmetric-Key-Encryption-DES/1594459-20190426082415156-1784556582.png" alt="img"></p>
 <p>（2）在 &lt; text.txt &gt; 文件中读取需要加密的文本</p>
-<p><img src="/2019/04/26/symmetric-key-encryption-des/1594459-20190426083228358-1170023298.png" alt="img"></p>
+<p><img src="/2019/04/26/Symmetric-Key-Encryption-DES/1594459-20190426083228358-1170023298.png" alt="img"></p>
 <p>（3）在 &lt; key.txt &gt; 文件中写入随机产生固定长度的Key</p>
-<p><img src="/2019/04/26/symmetric-key-encryption-des/1594459-20190426083344644-175946763.png" alt="img"></p>
+<p><img src="/2019/04/26/Symmetric-Key-Encryption-DES/1594459-20190426083344644-175946763.png" alt="img"></p>
 <p>（4）在 &lt; ciphertext.txt &gt; 文件中写入DES加密、Base64编码后的数据</p>
-<p><img src="/2019/04/26/symmetric-key-encryption-des/1594459-20190426083510282-1870252925.png" alt="img"></p>
+<p><img src="/2019/04/26/Symmetric-Key-Encryption-DES/1594459-20190426083510282-1870252925.png" alt="img"></p>
 <p>（5）在 &lt; plaintext.txt &gt; 文件中写入Base64解码、DES解密后的数据</p>
-<p><img src="/2019/04/26/symmetric-key-encryption-des/1594459-20190426083620887-185547111.png" alt="img"></p>
+<p><img src="/2019/04/26/Symmetric-Key-Encryption-DES/1594459-20190426083620887-185547111.png" alt="img"></p>
 <h2 id="项目地址"><a href="#项目地址" class="headerlink" title="项目地址"></a>项目地址</h2><p><strong>项目地址</strong></p>
 <pre><code>https://github.com/Qftm/Symmetric_Key_Encryption_DES</code></pre>
             </div>
@@ -647,7 +647,7 @@ Python工具：PyCharm Professional</code></pre><h2 id="操作流程"><a href="#
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://Qftm.github.io/2019/04/26/symmetric-key-encryption-des/">http://Qftm.github.io/2019/04/26/symmetric-key-encryption-des/</a>
+                    <a href="http://Qftm.github.io/2019/04/26/Symmetric-Key-Encryption-DES/">http://Qftm.github.io/2019/04/26/Symmetric-Key-Encryption-DES/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -732,7 +732,7 @@ Python工具：PyCharm Professional</code></pre><h2 id="操作流程"><a href="#
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2019/05/12/linux-dns-server-configuration-and-management/">
+                <a href="/2019/05/12/Linux-DNS-server-configuration-and-management/">
                     <div class="card-image">
                         
                         

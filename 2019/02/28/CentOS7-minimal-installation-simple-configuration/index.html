@@ -413,12 +413,12 @@
 </ul>
 <pre><code>NAT模式</code></pre><h1 id="系统配置"><a href="#系统配置" class="headerlink" title="系统配置"></a>系统配置</h1><h2 id="配置动态获取IP"><a href="#配置动态获取IP" class="headerlink" title="配置动态获取IP"></a>配置动态获取IP</h2><p>1、修改配置文件</p>
 <pre><code>vi /etc/sysconfig/network-scripts/ifcfg-eno33 //eno33是你的网卡名字</code></pre><p>2、修改选项ONBOOT  //默认ONBOOT处于关闭状态</p>
-<p><img src="/2019/02/28/centos7-minimal-installation-simple-configuration/1594459-20190228161840074-1465497193.png" alt="img"></p>
+<p><img src="/2019/02/28/CentOS7-minimal-installation-simple-configuration/1594459-20190228161840074-1465497193.png" alt="img"></p>
 <p>ONBOOT = no ==&gt;&gt; ONBOOT = yes</p>
-<p><img src="/2019/02/28/centos7-minimal-installation-simple-configuration/1594459-20190228162600646-1932820420.png" alt="img"></p>
+<p><img src="/2019/02/28/CentOS7-minimal-installation-simple-configuration/1594459-20190228162600646-1932820420.png" alt="img"></p>
 <p>3、重启服务</p>
 <pre><code>systemctl restart network</code></pre><p>4、查看IP信息</p>
-<pre><code>ip addr</code></pre><p><img src="/2019/02/28/centos7-minimal-installation-simple-configuration/1594459-20190228162426453-1555730944.png" alt="img"></p>
+<pre><code>ip addr</code></pre><p><img src="/2019/02/28/CentOS7-minimal-installation-simple-configuration/1594459-20190228162426453-1555730944.png" alt="img"></p>
 <h2 id="配置静态IP"><a href="#配置静态IP" class="headerlink" title="配置静态IP"></a>配置静态IP</h2><p>1、修改配置文件</p>
 <pre><code>vi /etc/sysconfig/network-scripts/ifcfg-eno33 //eno33是你的网卡名字</code></pre><p>2、添加配置</p>
 <pre><code>ONBOOT=yes             #设置启动
@@ -427,15 +427,15 @@ IPADDR=192.168.2.11    #设置静态IP
 NETMASK=255.255.255.0  #设置掩码
 GATEWAY=192.168.2.1    #设置网关IP
 DNS1=8.8.8.8           #设置DNS</code></pre><p>初始配置：</p>
-<p><img src="/2019/02/28/centos7-minimal-installation-simple-configuration/1594459-20190307111535707-643453707.png" alt="img"></p>
+<p><img src="/2019/02/28/CentOS7-minimal-installation-simple-configuration/1594459-20190307111535707-643453707.png" alt="img"></p>
 <p>修改配置：</p>
-<p><img src="/2019/02/28/centos7-minimal-installation-simple-configuration/1594459-20190307112803713-764433583.png" alt="img"></p>
+<p><img src="/2019/02/28/CentOS7-minimal-installation-simple-configuration/1594459-20190307112803713-764433583.png" alt="img"></p>
 <p>3、重启服务</p>
 <pre><code>systemctl restart network</code></pre><p>4、查看IP，测试连通性</p>
 <p>查看IP</p>
-<p><img src="/2019/02/28/centos7-minimal-installation-simple-configuration/1594459-20190307112951505-392526640.png" alt="img"></p>
+<p><img src="/2019/02/28/CentOS7-minimal-installation-simple-configuration/1594459-20190307112951505-392526640.png" alt="img"></p>
 <p>测试连通性</p>
-<p><img src="/2019/02/28/centos7-minimal-installation-simple-configuration/1594459-20190307113044875-2141764296.png" alt="img"></p>
+<p><img src="/2019/02/28/CentOS7-minimal-installation-simple-configuration/1594459-20190307113044875-2141764296.png" alt="img"></p>
 <h2 id="安装ifconfig命令"><a href="#安装ifconfig命令" class="headerlink" title="安装ifconfig命令"></a>安装ifconfig命令</h2><p>1、默认没有安装ifconfig命令</p>
 <p>2、安装</p>
 <pre><code>查看包含ifconfig命令的组件
@@ -445,20 +445,20 @@ yum whatprovides ifconfig
 
 安装
 yum install -y net-tools</code></pre><p>3、检测ifconfig命令</p>
-<p><img src="/2019/02/28/centos7-minimal-installation-simple-configuration/1594459-20190228163622883-2103151735.png" alt="img"></p>
+<p><img src="/2019/02/28/CentOS7-minimal-installation-simple-configuration/1594459-20190228163622883-2103151735.png" alt="img"></p>
 <h2 id="vim的安装"><a href="#vim的安装" class="headerlink" title="vim的安装"></a>vim的安装</h2><p><strong>vim是vi的增强版</strong></p>
 <p>1、默认只有vi编辑器</p>
-<p><img src="/2019/02/28/centos7-minimal-installation-simple-configuration/1594459-20190228164830704-2106121973.png" alt="img"></p>
+<p><img src="/2019/02/28/CentOS7-minimal-installation-simple-configuration/1594459-20190228164830704-2106121973.png" alt="img"></p>
 <p>2、安装</p>
 <pre><code>查看vim安装组件
-yum provides vim</code></pre><p><img src="/2019/02/28/centos7-minimal-installation-simple-configuration/1594459-20190228165155927-387219025.png" alt="img"></p>
+yum provides vim</code></pre><p><img src="/2019/02/28/CentOS7-minimal-installation-simple-configuration/1594459-20190228165155927-387219025.png" alt="img"></p>
 <pre><code>安装
-yum install -y vim-enhanced</code></pre><p><img src="/2019/02/28/centos7-minimal-installation-simple-configuration/1594459-20190228165417566-1341426510.png" alt="img"></p>
+yum install -y vim-enhanced</code></pre><p><img src="/2019/02/28/CentOS7-minimal-installation-simple-configuration/1594459-20190228165417566-1341426510.png" alt="img"></p>
 <h2 id="wget的安装"><a href="#wget的安装" class="headerlink" title="wget的安装"></a>wget的安装</h2><p><strong>Wget主要用于下载文件，在安装软件时会经常用到</strong></p>
 <p>1、查看wget安装组件 </p>
-<pre><code>yum provides wget</code></pre><p><img src="/2019/02/28/centos7-minimal-installation-simple-configuration/1594459-20190228170144483-871710138.png" alt="img"></p>
+<pre><code>yum provides wget</code></pre><p><img src="/2019/02/28/CentOS7-minimal-installation-simple-configuration/1594459-20190228170144483-871710138.png" alt="img"></p>
 <p>2、安装wget</p>
-<pre><code>yum install -y wget</code></pre><p><img src="/2019/02/28/centos7-minimal-installation-simple-configuration/1594459-20190228170347853-208541720.png" alt="img"></p>
+<pre><code>yum install -y wget</code></pre><p><img src="/2019/02/28/CentOS7-minimal-installation-simple-configuration/1594459-20190228170347853-208541720.png" alt="img"></p>
 <p><strong>update + ing</strong> </p>
 
             </div>
@@ -485,7 +485,7 @@ yum install -y vim-enhanced</code></pre><p><img src="/2019/02/28/centos7-minimal
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://Qftm.github.io/2019/02/28/centos7-minimal-installation-simple-configuration/">http://Qftm.github.io/2019/02/28/centos7-minimal-installation-simple-configuration/</a>
+                    <a href="http://Qftm.github.io/2019/02/28/CentOS7-minimal-installation-simple-configuration/">http://Qftm.github.io/2019/02/28/CentOS7-minimal-installation-simple-configuration/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -619,7 +619,7 @@ yum install -y vim-enhanced</code></pre><p><img src="/2019/02/28/centos7-minimal
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/02/16/bugkuctf-writeup/">
+                <a href="/2019/02/16/BugkuCTF-Writeup/">
                     <div class="card-image">
                         
                         

