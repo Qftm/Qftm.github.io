@@ -224,7 +224,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/bg.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -382,7 +382,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
-                    2020-08-14
+                    2020-08-16
                 </div>
                 
 
@@ -410,7 +410,7 @@
 <p>ARP(Address Resolution Protocol)协议简单来说就是：地址解析协议，是根据IP地址获取物理地址的一个TCP/IP协议。在以太网中，一台主机要把数据帧发送到同一局域网上的另一台主机时，设备驱动程序必须知道以太网地址(MAC地址)才能发送数据。而我们只知道IP地址，这时就需要采用ARP协议将IP地址映射为以太网地址(MAC地址)。计算机之间的通信最终还是要依靠MAC地址（每一个MAC地址确定一台计算机，相当于每个人的身份证一样进行唯一标识）</p>
 <p>对于大部分人来说要注意一点IP地址和MAC地址是不一样的，（1）IP地址是逻辑地址作用于软件上，而MAC地址是实际地址作用于硬件上；（2）IP地址（IPV4）长度为4Byte(32bit)，MAC地址长度为6Byte(48bit)；</p>
 <p>相关协议有RARP、代理ARP。NDP用于在IPv6中代替地址解析协议。</p>
-<h1 id="ARP报文格式"><a href="#ARP报文格式" class="headerlink" title="ARP报文格式"></a>ARP报文格式</h1><p><img src="/2018/10/11/arp-protocol-analysis/20181010221223145.png" alt="img">)<img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h1 id="ARP报文格式"><a href="#ARP报文格式" class="headerlink" title="ARP报文格式"></a>ARP报文格式</h1><p><img src="/2018/10/11/arp-protocol-analysis/20181010221223145.png" alt="img"></p>
 <h2 id="各字段意义"><a href="#各字段意义" class="headerlink" title="各字段意义"></a>各字段意义</h2><h3 id="以太网首部"><a href="#以太网首部" class="headerlink" title="以太网首部"></a>以太网首部</h3><p>以太网目的地址：广播时：ff-ff-ff-ff-ff-ff</p>
 <p>以太网源地址：源MAC地址</p>
 <p>帧类型： 0x0806  (0x0806是ARP帧的类型值 ; 0x0800网际协议IP数据报)</p>
@@ -423,18 +423,18 @@
 <p>发送端IP地址：发送方设备的IP地址</p>
 <p>目标MAC地址：接收方设备的硬件地址</p>
 <p>目标IP地址：接收方设备的IP地址</p>
-<h2 id="WireShark-amp-amp-ARP报文结合分析"><a href="#WireShark-amp-amp-ARP报文结合分析" class="headerlink" title="WireShark&amp;&amp;ARP报文结合分析"></a>WireShark&amp;&amp;ARP报文结合分析</h2><p><img src="/2018/10/11/arp-protocol-analysis/20181011174027422.png" alt="img">)<img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<h1 id="ARP原理之广播请求-amp-单播回应"><a href="#ARP原理之广播请求-amp-单播回应" class="headerlink" title="ARP原理之广播请求&amp;单播回应"></a>ARP原理之广播请求&amp;单播回应</h1><h2 id="了解简单网络拓扑"><a href="#了解简单网络拓扑" class="headerlink" title="了解简单网络拓扑"></a>了解简单网络拓扑</h2><p><img src="/2018/10/11/arp-protocol-analysis/20181011013118451.png" alt="img">)<img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h2 id="WireShark-amp-amp-ARP报文结合分析"><a href="#WireShark-amp-amp-ARP报文结合分析" class="headerlink" title="WireShark&amp;&amp;ARP报文结合分析"></a>WireShark&amp;&amp;ARP报文结合分析</h2><p><img src="/2018/10/11/arp-protocol-analysis/20181011174027422.png" alt="img"></p>
+<h1 id="ARP原理之广播请求-amp-单播回应"><a href="#ARP原理之广播请求-amp-单播回应" class="headerlink" title="ARP原理之广播请求&amp;单播回应"></a>ARP原理之广播请求&amp;单播回应</h1><h2 id="了解简单网络拓扑"><a href="#了解简单网络拓扑" class="headerlink" title="了解简单网络拓扑"></a>了解简单网络拓扑</h2><p><img src="/2018/10/11/arp-protocol-analysis/20181011013118451.png" alt="img"></p>
 <h2 id="实验条件：PC1-ping-PC2-进行简单通信"><a href="#实验条件：PC1-ping-PC2-进行简单通信" class="headerlink" title="实验条件：PC1 ping PC2 进行简单通信"></a>实验条件：PC1 ping PC2 进行简单通信</h2><p>但是，PC1此时的ARP表中没有PC2的MAC地址映射，PC1只知道PC2的IP地址(IP2)并不知道PC2的MAC地址，这个时候就要用到ARP协议，通过IP地址解析出MAC地址（这个过程由PC1广播，PC2单播使PC1获取PC2的MAC地址）</p>
-<p><img src="/2018/10/11/arp-protocol-analysis/20181011013916963.png" alt="img">)<img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<h2 id="PC1广播-amp-PC2单播更新ARP表"><a href="#PC1广播-amp-PC2单播更新ARP表" class="headerlink" title="PC1广播&amp;PC2单播更新ARP表"></a>PC1广播&amp;PC2单播更新ARP表</h2><p><img src="/2018/10/11/arp-protocol-analysis/20181011014519878.png" alt="img">)<img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p><img src="/2018/10/11/arp-protocol-analysis/20181011013916963.png" alt="img"></p>
+<h2 id="PC1广播-amp-PC2单播更新ARP表"><a href="#PC1广播-amp-PC2单播更新ARP表" class="headerlink" title="PC1广播&amp;PC2单播更新ARP表"></a>PC1广播&amp;PC2单播更新ARP表</h2><p><img src="/2018/10/11/arp-protocol-analysis/20181011014519878.png" alt="img"></p>
 <p>PC1为了与PC2通信，获取PC2的MAC地址，开始在同一内网中进行广播在交换机处进行广播的请求转发，（广播请求包的内容包含：谁的IP地址是IP2(谁是PC2)、我的IP地址是IP1，MAC地址是MAC1、）当每一台主机收到这个广播请求包的时候，会根据 “谁的IP地址是IP2” 进行判断该请求包是否是对自己的请求，假如其它主机发现不是对自己做出的请求，那么其它主机就会直接丢掉这个请求包，真正接收到这个请求包的主机会发出回应包（Reply(2)）进行回应（回应包里的内容包含：PC2与PC1的IP地址和MAC地址）此时PC2也会根据这个请求包来更新自己的ARP表，方便以后通信，当PC2的响应包到达PC1时，PC1会根据响应包里面PC2的IP地址和MAC地址信息进行更新自己的ARP表，如果广播和单播都没有什么问题，现在PC1和PC2之间就可以正常通信了。</p>
 <h1 id="ARP广播-amp-单播通信数据包解读"><a href="#ARP广播-amp-单播通信数据包解读" class="headerlink" title="ARP广播&amp;单播通信数据包解读"></a>ARP广播&amp;单播通信数据包解读</h1><p>通过上面的概述，到这里相信你应该对ARP协议、ARP广播、ARP单播有了大概的认识，为了进一步了解它们，我们用WireShark在真是网络中进行流量抓包分析ARP协议过程。</p>
 <p>真实环境中还是利用上面的拓扑结构，还原第三部分中的过程</p>
 <p>   PC1：IP1 192.168.43.146   MAC1 c8:3d:d4:81:86:49</p>
 <p>   PC2：IP2 192.168.43.200   MAC2 00:0c:29:3b:8e:bc</p>
-<h2 id="ARP请求包（request）PC1广播"><a href="#ARP请求包（request）PC1广播" class="headerlink" title="ARP请求包（request）PC1广播"></a>ARP请求包（request）PC1广播</h2><p><img src="/2018/10/11/arp-protocol-analysis/20181011173029511.png" alt="img">)<img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<h2 id="ARP响应包（reply）PC2单播"><a href="#ARP响应包（reply）PC2单播" class="headerlink" title="ARP响应包（reply）PC2单播"></a>ARP响应包（reply）PC2单播</h2><p><img src="/2018/10/11/arp-protocol-analysis/20181011172358934.png" alt="img">)<img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h2 id="ARP请求包（request）PC1广播"><a href="#ARP请求包（request）PC1广播" class="headerlink" title="ARP请求包（request）PC1广播"></a>ARP请求包（request）PC1广播</h2><p><img src="/2018/10/11/arp-protocol-analysis/20181011173029511.png" alt="img"></p>
+<h2 id="ARP响应包（reply）PC2单播"><a href="#ARP响应包（reply）PC2单播" class="headerlink" title="ARP响应包（reply）PC2单播"></a>ARP响应包（reply）PC2单播</h2><p><img src="/2018/10/11/arp-protocol-analysis/20181011172358934.png" alt="img"></p>
 
             </div>
             <hr/>
@@ -552,8 +552,7 @@
                 <a href="/2018/10/13/arp-spoofing-attack/">
                     <div class="card-image">
                         
-                        
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="ARP Protocol Spoofing Attack">
+                        <img src="/medias/featureimages/arp-2.png" class="responsive-img" alt="ARP Protocol Spoofing Attack">
                         
                         <span class="card-title">ARP Protocol Spoofing Attack</span>
                     </div>
@@ -601,8 +600,7 @@
                 <a href="/2018/07/04/Kali-Rolling-2018/">
                     <div class="card-image">
                         
-                        
-                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="Kali Rolling 2018 系统配置">
+                        <img src="/medias/featureimages/kali-2.jpg" class="responsive-img" alt="Kali Rolling 2018 系统配置">
                         
                         <span class="card-title">Kali Rolling 2018 系统配置</span>
                     </div>
@@ -820,11 +818,11 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <span id="year">2018</span>
             <a href="/about" target="_blank">Qftm</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
-            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">309.4k</span>&nbsp;字
+                class="white-color">308.9k</span>&nbsp;字
             
             
             
@@ -836,13 +834,13 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             
         </div>
         <div class="col s12 m4 l4 social-link ">
-    <a href="https://github.com/Qftm" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+    <a href="https://github.com/Qftm" 
         <i class="fab fa-github"></i>
     </a>
 
 
 
-    <a href="mailto:Qftmbin@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:Qftmbin@gmail.com" 
         <i class="fas fa-envelope-open"></i>
     </a>
 
@@ -850,7 +848,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 
 
-    <a href="https://twitter.com/Qftmer" class="tooltipped" target="_blank" data-tooltip="关注我的Twitter: https://twitter.com/Qftmer" data-position="top" data-delay="50">
+    <a href="https://twitter.com/Qftmer" 
         <i class="fab fa-twitter"></i>
     </a>
 

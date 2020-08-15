@@ -224,7 +224,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/bg.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -382,14 +382,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
-                    2020-08-14
+                    2020-08-16
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                    800
+                    776
                 </div>
                 
 
@@ -407,31 +407,34 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="dvwa-DOM-XSS"><a href="#dvwa-DOM-XSS" class="headerlink" title="dvwa DOM XSS"></a>dvwa DOM XSS</h1><p>DOM Based XSS：是基于DOM文档对象模型的操作，通过前端脚本修改页面的DOM节点形成的XSS，该操作不与服务器端进行交互，而且代码是可见的，从前端获取到DOM中的数据在本地执行，从效果上来说也是反射型XSS。</p>
-<h1 id="漏洞测试"><a href="#漏洞测试" class="headerlink" title="漏洞测试"></a>漏洞测试</h1><h2 id="low-级别"><a href="#low-级别" class="headerlink" title="low 级别"></a>low 级别</h2><p><img src="/2018/11/04/XSS-DOM-test/20181104195658834.png" alt="img">)<img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h1 id="漏洞测试"><a href="#漏洞测试" class="headerlink" title="漏洞测试"></a>漏洞测试</h1><h2 id="low-级别"><a href="#low-级别" class="headerlink" title="low 级别"></a>low 级别</h2><p><img src="/2018/11/04/XSS-DOM-test/20181104195658834.png" alt="img"></p>
 <p>可知Select按钮选择参数，数据提交是以GET请求的方式</p>
-<pre><code>&lt;?php
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
 
-# No protections, anything goes
+<span class="token shell-comment comment"># No protections, anything goes</span>
 
-?&gt;</code></pre><p>low 级别不存在Protect，可以非常简单的造成XSS攻击</p>
+<span class="token delimiter">?></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>low 级别不存在Protect，可以非常简单的造成XSS攻击</p>
 <p>构造payload</p>
-<pre><code>http://192.168.43.146/dvwa/vulnerabilities/xss_d/?default=%3Cscript%3Ealert%28%22XSS%22%29%3C/script%3E</code></pre><p>当用户触发该URL时就会受到XSS攻击，有弹框出现</p>
+<pre class="line-numbers language-http"><code class="language-http"><span class="token header-name keyword">http:</span>//192.168.43.146/dvwa/vulnerabilities/xss_d/?default=%3Cscript%3Ealert%28%22XSS%22%29%3C/script%3E<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>当用户触发该URL时就会受到XSS攻击，有弹框出现</p>
 <p><img src="/2018/11/04/XSS-DOM-test/20181104200616674.png" alt="img"></p>
-<h2 id="medium-级别"><a href="#medium-级别" class="headerlink" title="medium 级别"></a>medium 级别</h2><pre><code>&lt;?php
+<h2 id="medium-级别"><a href="#medium-级别" class="headerlink" title="medium 级别"></a>medium 级别</h2><pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
 
-// Is there any input?
-if ( array_key_exists( &quot;default&quot;, $_GET ) &amp;&amp; !is_null ($_GET[ &#39;default&#39; ]) ) {
-    $default = $_GET[&#39;default&#39;];
+<span class="token comment" spellcheck="true">// Is there any input?</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token function">array_key_exists</span><span class="token punctuation">(</span> <span class="token string">"default"</span><span class="token punctuation">,</span> <span class="token variable">$_GET</span> <span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span><span class="token function">is_null</span> <span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span> <span class="token string">'default'</span> <span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token variable">$default</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'default'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 
-    # Do not allow script tags
-    if (stripos ($default, &quot;&lt;script&quot;) !== false) {
-        header (&quot;location: ?default=English&quot;);
-        exit;
-    }
-}
+    <span class="token shell-comment comment"># Do not allow script tags</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">stripos</span> <span class="token punctuation">(</span><span class="token variable">$default</span><span class="token punctuation">,</span> <span class="token string">"&lt;script"</span><span class="token punctuation">)</span> <span class="token operator">!==</span> <span class="token boolean">false</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">header</span> <span class="token punctuation">(</span><span class="token string">"location: ?default=English"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        exit<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-?&gt; </code></pre><p>经过代码审计之后可知：array_key_exists检查数组里是否有指定的键名或索引，并且default值不为null，传递的数据中如果存在<script>标签，则会进入if条件，default默认赋值为“English”</p>
-<pre><code>stripos(string,find,start)  函数查找字符串在另一字符串中第一次出现的位置（不区分大小写）。
+<span class="token delimiter">?></span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>经过代码审计之后可知：array_key_exists检查数组里是否有指定的键名或索引，并且default值不为null，传递的数据中如果存在<code>&lt;script&gt;</code>标签，则会进入if条件，default默认赋值为“English”</p>
+<pre class="line-numbers language-txt"><code class="language-txt">stripos(string,find,start)  函数查找字符串在另一字符串中第一次出现的位置（不区分大小写）。
 
 参数    描述
 string    必需。规定要搜索的字符串。
@@ -441,43 +444,49 @@ start    可选。规定开始搜索的位置。
 相关函数：
 strpos()    - 查找字符串在另一字符串中第一次出现的位置（区分大小写）
 strripos()  - 查找字符串在另一字符串中最后一次出现的位置（不区分大小写）
-strrpos()   - 查找字符串在另一字符串中最后一次出现的位置（区分大小写）</code></pre><p>由于stripos函数的作用所以不能使用<script>标签，但是真的就不能使用该标签吗，答案是可以的，此处要利用到URL中的一个特殊字符‘#’，该字符后的数据不会发送到服务器端，从而绕过服务端过滤</p>
+strrpos()   - 查找字符串在另一字符串中最后一次出现的位置（区分大小写）<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>由于stripos函数的作用所以不能使用<code>&lt;script&gt;</code>标签，但是真的就不能使用该标签吗，答案是可以的，此处要利用到URL中的一个特殊字符‘#’，该字符后的数据不会发送到服务器端，从而绕过服务端过滤</p>
 <p>构造payload</p>
-<pre><code>http://192.168.43.146/dvwa/vulnerabilities/xss_d/?#default=%3Cscript%3Ealert%28%22XSS%22%29%3C/script%3E</code></pre><p>触发该URL，成功绕过服务端的过滤</p>
-<p><img src="XSS-DOM-test/20181104202906815.png" alt="img"></p>
-<p>假如真的不能使用<script>标签，也有另一种方法进行绕过服务端的检测</p>
+<pre class="line-numbers language-http"><code class="language-http"><span class="token header-name keyword">http:</span>//192.168.43.146/dvwa/vulnerabilities/xss_d/?#default=%3Cscript%3Ealert%28%22XSS%22%29%3C/script%3E<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>触发该URL，成功绕过服务端的过滤</p>
+<p><img src="/2018/11/04/XSS-DOM-test/20181104202906815.png" alt="img"></p>
+<p>假如真的不能使用<code>&lt;script&gt;</code>标签，也有另一种方法进行绕过服务端的检测</p>
 <p>用img标签或其他标签的特性去执行js代码，比如img标签的onerror事件</p>
 <p>构造payload</p>
-<pre><code>http://192.168.43.146/dvwa/vulnerabilities/xss_d/?default=&lt;/option&gt;&lt;/select&gt;&lt;img src=# onerror=alert(&quot;xss&quot;)&gt;</code></pre><p>触发该URL，成功绕过服务端的过滤</p>
-<p><img src="XSS-DOM-test/20181104204204443.png" alt="img"></p>
-<h2 id="high-级别"><a href="#high-级别" class="headerlink" title="high 级别"></a>high 级别</h2><pre><code>&lt;?php
+<pre class="line-numbers language-http"><code class="language-http"><span class="token header-name keyword">http:</span>//192.168.43.146/dvwa/vulnerabilities/xss_d/?default=&lt;/option>&lt;/select>&lt;img src=# onerror=alert("xss")><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>触发该URL，成功绕过服务端的过滤</p>
+<p><img src="/2018/11/04/XSS-DOM-test/20181104204204443.png" alt="img"></p>
+<h2 id="high-级别"><a href="#high-级别" class="headerlink" title="high 级别"></a>high 级别</h2><pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
 
-// Is there any input?
-if ( array_key_exists( &quot;default&quot;, $_GET ) &amp;&amp; !is_null ($_GET[ &#39;default&#39; ]) ) {
+<span class="token comment" spellcheck="true">// Is there any input?</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token function">array_key_exists</span><span class="token punctuation">(</span> <span class="token string">"default"</span><span class="token punctuation">,</span> <span class="token variable">$_GET</span> <span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span><span class="token function">is_null</span> <span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span> <span class="token string">'default'</span> <span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
-    # White list the allowable languages
-    switch ($_GET[&#39;default&#39;]) {
-        case &quot;French&quot;:
-        case &quot;English&quot;:
-        case &quot;German&quot;:
-        case &quot;Spanish&quot;:
-            # ok
-            break;
-        default:
-            header (&quot;location: ?default=English&quot;);
-            exit;
-    }
-}
+    <span class="token shell-comment comment"># White list the allowable languages</span>
+    <span class="token keyword">switch</span> <span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'default'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">case</span> <span class="token string">"French"</span><span class="token punctuation">:</span>
+        <span class="token keyword">case</span> <span class="token string">"English"</span><span class="token punctuation">:</span>
+        <span class="token keyword">case</span> <span class="token string">"German"</span><span class="token punctuation">:</span>
+        <span class="token keyword">case</span> <span class="token string">"Spanish"</span><span class="token punctuation">:</span>
+            <span class="token shell-comment comment"># ok</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">default</span><span class="token punctuation">:</span>
+            <span class="token function">header</span> <span class="token punctuation">(</span><span class="token string">"location: ?default=English"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            exit<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-?&gt; </code></pre><p>代码审计之后可知：在服务器后端判断，要求default的值必须为select选择菜单中的值，这里继续用上面的#符号绕过即可，构造payload</p>
-<pre><code>http://192.168.43.146/dvwa/vulnerabilities/xss_d/?#default=%3Cscript%3Ealert%28%22XSS%22%29%3C/script%3E</code></pre><p>成功绕过后端switch的限制</p>
-<p><img src="XSS-DOM-test/20181104204746811.png" alt="img"></p>
+<span class="token delimiter">?></span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>代码审计之后可知：在服务器后端判断，要求default的值必须为select选择菜单中的值，这里继续用上面的#符号绕过即可，构造payload</p>
+<pre class="line-numbers language-http"><code class="language-http"><span class="token header-name keyword">http:</span>//192.168.43.146/dvwa/vulnerabilities/xss_d/?#default=%3Cscript%3Ealert%28%22XSS%22%29%3C/script%3E<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>成功绕过后端switch的限制</p>
+<p><img src="/2018/11/04/XSS-DOM-test/20181104204746811.png" alt="img"></p>
 <h2 id="impossible-级别"><a href="#impossible-级别" class="headerlink" title="impossible 级别"></a>impossible 级别</h2><p>Security level set to impossible</p>
-<pre><code>&lt;?php
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
 
-# Don&#39;t need to do anything, protction handled on the client side
+<span class="token shell-comment comment"># Don't need to do anything, protction handled on the client side</span>
 
-?&gt; </code></pre></script></p>
+<span class="token delimiter">?></span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
             </div>
             <hr/>
 
@@ -594,8 +603,7 @@ if ( array_key_exists( &quot;default&quot;, $_GET ) &amp;&amp; !is_null ($_GET[ 
                 <a href="/2018/11/07/CSRF-Bug-Test/">
                     <div class="card-image">
                         
-                        
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="CSRF 漏洞分析与测试">
+                        <img src="/medias/featureimages/csrf-1.png" class="responsive-img" alt="CSRF 漏洞分析与测试">
                         
                         <span class="card-title">CSRF 漏洞分析与测试</span>
                     </div>
@@ -647,8 +655,7 @@ if ( array_key_exists( &quot;default&quot;, $_GET ) &amp;&amp; !is_null ($_GET[ 
                 <a href="/2018/11/04/XSS-Stored-test/">
                     <div class="card-image">
                         
-                        
-                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="XSS Stored 漏洞分析与测试">
+                        <img src="/medias/featureimages/dvwa-xss-2.png" class="responsive-img" alt="XSS Stored 漏洞分析与测试">
                         
                         <span class="card-title">XSS Stored 漏洞分析与测试</span>
                     </div>
@@ -869,11 +876,11 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <span id="year">2018</span>
             <a href="/about" target="_blank">Qftm</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
-            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">309.4k</span>&nbsp;字
+                class="white-color">308.9k</span>&nbsp;字
             
             
             
@@ -885,13 +892,13 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             
         </div>
         <div class="col s12 m4 l4 social-link ">
-    <a href="https://github.com/Qftm" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+    <a href="https://github.com/Qftm" 
         <i class="fab fa-github"></i>
     </a>
 
 
 
-    <a href="mailto:Qftmbin@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:Qftmbin@gmail.com" 
         <i class="fas fa-envelope-open"></i>
     </a>
 
@@ -899,7 +906,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 
 
-    <a href="https://twitter.com/Qftmer" class="tooltipped" target="_blank" data-tooltip="关注我的Twitter: https://twitter.com/Qftmer" data-position="top" data-delay="50">
+    <a href="https://twitter.com/Qftmer" 
         <i class="fab fa-twitter"></i>
     </a>
 

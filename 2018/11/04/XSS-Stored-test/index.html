@@ -224,7 +224,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/bg.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -382,21 +382,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
-                    2020-08-14
+                    2020-08-16
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                    2.2k
+                    2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
-                    10 Min
+                    8 Min
                 </div>
                 
 
@@ -407,43 +407,44 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="dvwa存储型XSS"><a href="#dvwa存储型XSS" class="headerlink" title="dvwa存储型XSS"></a>dvwa存储型XSS</h1><p>存储型XSS：会把用户输入的数据“存储”在服务器端，一般出现在需要用户可以输入数据的地方，比如网站的留言板、评论等地方，当网站这些地方过滤不严格的时候，就会被黑客注入恶意攻击代码，存储在服务器端，每当用户加载该页面时，都会受到攻击，所以这种攻击行为也称为“持久型XSS(Persistent XSS)”。</p>
-<h1 id="漏洞测试"><a href="#漏洞测试" class="headerlink" title="漏洞测试"></a>漏洞测试</h1><h2 id="low级别"><a href="#low级别" class="headerlink" title="low级别"></a>low级别</h2><p><img src="/2018/11/04/XSS-Stored-test/20181104100832585.png" alt="img">)<img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h1 id="漏洞测试"><a href="#漏洞测试" class="headerlink" title="漏洞测试"></a>漏洞测试</h1><h2 id="low级别"><a href="#low级别" class="headerlink" title="low级别"></a>low级别</h2><p><img src="/2018/11/04/XSS-Stored-test/20181104100832585.png" alt="img"></p>
 <p>在Name和Message输入框中分别输入一个String（admin）发现输入的数据会显示在当前页面中，同时可以知道数据提交是以POST请求的方式</p>
 <p>查看源码：</p>
-<pre><code>&lt;?php
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
 
-if( isset( $_POST[ &#39;btnSign&#39; ] ) ) {
-    // Get input
-    $message = trim( $_POST[ &#39;mtxMessage&#39; ] );
-    $name    = trim( $_POST[ &#39;txtName&#39; ] );
+<span class="token keyword">if</span><span class="token punctuation">(</span> <span class="token function">isset</span><span class="token punctuation">(</span> <span class="token variable">$_POST</span><span class="token punctuation">[</span> <span class="token string">'btnSign'</span> <span class="token punctuation">]</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// Get input</span>
+    <span class="token variable">$message</span> <span class="token operator">=</span> <span class="token function">trim</span><span class="token punctuation">(</span> <span class="token variable">$_POST</span><span class="token punctuation">[</span> <span class="token string">'mtxMessage'</span> <span class="token punctuation">]</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$name</span>    <span class="token operator">=</span> <span class="token function">trim</span><span class="token punctuation">(</span> <span class="token variable">$_POST</span><span class="token punctuation">[</span> <span class="token string">'txtName'</span> <span class="token punctuation">]</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    // Sanitize message input
-    $message = stripslashes( $message );
-    $message = ((isset($GLOBALS[&quot;___mysqli_ston&quot;]) &amp;&amp; is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_real_escape_string($GLOBALS[&quot;___mysqli_ston&quot;],  $message ) : ((trigger_error(&quot;[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.&quot;, E_USER_ERROR)) ? &quot;&quot; : &quot;&quot;));
+    <span class="token comment" spellcheck="true">// Sanitize message input</span>
+    <span class="token variable">$message</span> <span class="token operator">=</span> <span class="token function">stripslashes</span><span class="token punctuation">(</span> <span class="token variable">$message</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$message</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">is_object</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token function">mysqli_real_escape_string</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>  <span class="token variable">$message</span> <span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">trigger_error</span><span class="token punctuation">(</span><span class="token string">"[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work."</span><span class="token punctuation">,</span> <span class="token constant">E_USER_ERROR</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token string">""</span> <span class="token punctuation">:</span> <span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    // Sanitize name input
-    $name = ((isset($GLOBALS[&quot;___mysqli_ston&quot;]) &amp;&amp; is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_real_escape_string($GLOBALS[&quot;___mysqli_ston&quot;],  $name ) : ((trigger_error(&quot;[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.&quot;, E_USER_ERROR)) ? &quot;&quot; : &quot;&quot;));
+    <span class="token comment" spellcheck="true">// Sanitize name input</span>
+    <span class="token variable">$name</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">is_object</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token function">mysqli_real_escape_string</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>  <span class="token variable">$name</span> <span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">trigger_error</span><span class="token punctuation">(</span><span class="token string">"[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work."</span><span class="token punctuation">,</span> <span class="token constant">E_USER_ERROR</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token string">""</span> <span class="token punctuation">:</span> <span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    // Update database
-    $query  = &quot;INSERT INTO guestbook ( comment, name ) VALUES ( &#39;$message&#39;, &#39;$name&#39; );&quot;;
-    $result = mysqli_query($GLOBALS[&quot;___mysqli_ston&quot;],  $query ) or die( &#39;&lt;pre&gt;&#39; . ((is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_error($GLOBALS[&quot;___mysqli_ston&quot;]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)) . &#39;&lt;/pre&gt;&#39; );
+    <span class="token comment" spellcheck="true">// Update database</span>
+    <span class="token variable">$query</span>  <span class="token operator">=</span> <span class="token string">"INSERT INTO guestbook ( comment, name ) VALUES ( '$message', '$name' );"</span><span class="token punctuation">;</span>
+    <span class="token variable">$result</span> <span class="token operator">=</span> <span class="token function">mysqli_query</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>  <span class="token variable">$query</span> <span class="token punctuation">)</span> <span class="token keyword">or</span> <span class="token keyword">die</span><span class="token punctuation">(</span> <span class="token string">'&lt;pre>'</span> <span class="token punctuation">.</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">is_object</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token function">mysqli_error</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token variable">$___mysqli_res</span> <span class="token operator">=</span> <span class="token function">mysqli_connect_error</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token variable">$___mysqli_res</span> <span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">.</span> <span class="token string">'&lt;/pre>'</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    //mysql_close();
-}
+    <span class="token comment" spellcheck="true">//mysql_close();</span>
+<span class="token punctuation">}</span>
 
-?&gt; </code></pre><p>代码审计发现，并不存在Protect，trim()函数、stripslashes()函数、<code>mysqli_real_escape_string()</code>函数等不会对JS代码进行过滤</p>
-<pre><code>trim(string,charlist) 函数移除字符串两侧的空白字符或其他预定义字符。
+<span class="token delimiter">?></span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>代码审计发现，并不存在Protect，trim()函数、stripslashes()函数、<code>mysqli_real_escape_string()</code>函数等不会对JS代码进行过滤</p>
+<pre class="line-numbers language-txt"><code class="language-txt">trim(string,charlist) 函数移除字符串两侧的空白字符或其他预定义字符。
 
     string    必需。规定要检查的字符串。
 
     charlist  可选。规定从字符串中删除哪些字符。如果被省略，则移除以下所有字符：    
 
-        &quot;\0&quot; - NULL
-        &quot;\t&quot; - 制表符
-        &quot;\n&quot; - 换行
-        &quot;\x0B&quot; - 垂直制表符
-        &quot;\r&quot; - 回车
-        &quot; &quot; - 空格
+        "\0" - NULL
+        "\t" - 制表符
+        "\n" - 换行
+        "\x0B" - 垂直制表符
+        "\r" - 回车
+        " " - 空格
 
 ########################################################################################
 
@@ -459,8 +460,8 @@ addslashes(string) 函数返回在预定义字符之前添加反斜杠的字符�
 
     预定义字符是：
 
-        单引号（&#39;）
-        双引号（&quot;）
+        单引号（'）
+        双引号（"）
         反斜杠（\）
         NULL
     string    必需。规定要转义的字符串。
@@ -477,48 +478,51 @@ mysql_real_escape_string(string,connection) 函数转义 SQL 语句中使用的�
         \n
         \r
         \
-        &#39;
-        &quot;
+        '
+        "
         \x1a
     如果成功，则该函数返回被转义的字符串。如果失败，则返回 false。
 
     string    必需。规定要转义的字符串。
     connection    可选。规定 MySQL 连接。如果未规定，则使用上一个连接。
 
-    提示：可使用本函数来预防数据库攻击。</code></pre><p>构造payload，执行最简单的XSS攻击</p>
-<pre><code>POST data
-txtName=admin&amp;mtxMessage=&lt;script&gt;alert(&quot;_XSS_&quot;)&lt;/script&gt;&amp;btnSign=Sign+Guestbook</code></pre><p>恶意代码被存入服务端，每当用户打开该网页都会受到攻击</p>
+    提示：可使用本函数来预防数据库攻击。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>构造payload，执行最简单的XSS攻击</p>
+<pre class="line-numbers language-http"><code class="language-http">POST data
+txtName=admin&amp;mtxMessage=&lt;script>alert("_XSS_")&lt;/script>&amp;btnSign=Sign+Guestbook<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>恶意代码被存入服务端，每当用户打开该网页都会受到攻击</p>
 <p>服务端数据库文件已存入攻击者的恶意代码</p>
 <p><img src="/2018/11/04/XSS-Stored-test/20181104104221679.png" alt="img"></p>
 <p>进入该网页，触发恶意攻击</p>
 <p><img src="/2018/11/04/XSS-Stored-test/20181104103826575.png" alt="img"></p>
-<h2 id="medium-级别"><a href="#medium-级别" class="headerlink" title="medium 级别"></a>medium 级别</h2><pre><code>&lt;?php
+<h2 id="medium-级别"><a href="#medium-级别" class="headerlink" title="medium 级别"></a>medium 级别</h2><pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
 
-if( isset( $_POST[ &#39;btnSign&#39; ] ) ) {
-    // Get input
-    $message = trim( $_POST[ &#39;mtxMessage&#39; ] );
-    $name    = trim( $_POST[ &#39;txtName&#39; ] );
+<span class="token keyword">if</span><span class="token punctuation">(</span> <span class="token function">isset</span><span class="token punctuation">(</span> <span class="token variable">$_POST</span><span class="token punctuation">[</span> <span class="token string">'btnSign'</span> <span class="token punctuation">]</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// Get input</span>
+    <span class="token variable">$message</span> <span class="token operator">=</span> <span class="token function">trim</span><span class="token punctuation">(</span> <span class="token variable">$_POST</span><span class="token punctuation">[</span> <span class="token string">'mtxMessage'</span> <span class="token punctuation">]</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$name</span>    <span class="token operator">=</span> <span class="token function">trim</span><span class="token punctuation">(</span> <span class="token variable">$_POST</span><span class="token punctuation">[</span> <span class="token string">'txtName'</span> <span class="token punctuation">]</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    // Sanitize message input
-    $message = strip_tags( addslashes( $message ) );
-    $message = ((isset($GLOBALS[&quot;___mysqli_ston&quot;]) &amp;&amp; is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_real_escape_string($GLOBALS[&quot;___mysqli_ston&quot;],  $message ) : ((trigger_error(&quot;[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.&quot;, E_USER_ERROR)) ? &quot;&quot; : &quot;&quot;));
-    $message = htmlspecialchars( $message );
+    <span class="token comment" spellcheck="true">// Sanitize message input</span>
+    <span class="token variable">$message</span> <span class="token operator">=</span> <span class="token function">strip_tags</span><span class="token punctuation">(</span> <span class="token function">addslashes</span><span class="token punctuation">(</span> <span class="token variable">$message</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$message</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">is_object</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token function">mysqli_real_escape_string</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>  <span class="token variable">$message</span> <span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">trigger_error</span><span class="token punctuation">(</span><span class="token string">"[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work."</span><span class="token punctuation">,</span> <span class="token constant">E_USER_ERROR</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token string">""</span> <span class="token punctuation">:</span> <span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$message</span> <span class="token operator">=</span> <span class="token function">htmlspecialchars</span><span class="token punctuation">(</span> <span class="token variable">$message</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    // Sanitize name input
-    $name = str_replace( &#39;&lt;script&gt;&#39;, &#39;&#39;, $name );
-    $name = ((isset($GLOBALS[&quot;___mysqli_ston&quot;]) &amp;&amp; is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_real_escape_string($GLOBALS[&quot;___mysqli_ston&quot;],  $name ) : ((trigger_error(&quot;[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.&quot;, E_USER_ERROR)) ? &quot;&quot; : &quot;&quot;));
+    <span class="token comment" spellcheck="true">// Sanitize name input</span>
+    <span class="token variable">$name</span> <span class="token operator">=</span> <span class="token function">str_replace</span><span class="token punctuation">(</span> <span class="token string">'&lt;script>'</span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">,</span> <span class="token variable">$name</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$name</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">is_object</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token function">mysqli_real_escape_string</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>  <span class="token variable">$name</span> <span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">trigger_error</span><span class="token punctuation">(</span><span class="token string">"[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work."</span><span class="token punctuation">,</span> <span class="token constant">E_USER_ERROR</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token string">""</span> <span class="token punctuation">:</span> <span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    // Update database
-    $query  = &quot;INSERT INTO guestbook ( comment, name ) VALUES ( &#39;$message&#39;, &#39;$name&#39; );&quot;;
-    $result = mysqli_query($GLOBALS[&quot;___mysqli_ston&quot;],  $query ) or die( &#39;&lt;pre&gt;&#39; . ((is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_error($GLOBALS[&quot;___mysqli_ston&quot;]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)) . &#39;&lt;/pre&gt;&#39; );
+    <span class="token comment" spellcheck="true">// Update database</span>
+    <span class="token variable">$query</span>  <span class="token operator">=</span> <span class="token string">"INSERT INTO guestbook ( comment, name ) VALUES ( '$message', '$name' );"</span><span class="token punctuation">;</span>
+    <span class="token variable">$result</span> <span class="token operator">=</span> <span class="token function">mysqli_query</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>  <span class="token variable">$query</span> <span class="token punctuation">)</span> <span class="token keyword">or</span> <span class="token keyword">die</span><span class="token punctuation">(</span> <span class="token string">'&lt;pre>'</span> <span class="token punctuation">.</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">is_object</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token function">mysqli_error</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token variable">$___mysqli_res</span> <span class="token operator">=</span> <span class="token function">mysqli_connect_error</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token variable">$___mysqli_res</span> <span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">.</span> <span class="token string">'&lt;/pre>'</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    //mysql_close();
-}
+    <span class="token comment" spellcheck="true">//mysql_close();</span>
+<span class="token punctuation">}</span>
 
-?&gt; </code></pre><p>经过代码审计，可以发现medium级别进行了Protect，对POST请求到的的内容进行过滤：</p>
-<p>str_replace()函数 对 Name data进行<script>标签匹配置空</p>
+<span class="token delimiter">?></span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>经过代码审计，可以发现medium级别进行了Protect，对POST请求到的的内容进行过滤：</p>
+<p>str_replace()函数 对 Name data进行<code>&lt;script&gt;</code>标签匹配置空</p>
 <p>strip_tags()函数 对 message data进行标签匹配删除</p>
-<pre><code>str_replace(find,replace,string,count) 函数以其他字符替换字符串中的一些字符（区分大小写）。
+<pre class="line-numbers language-txt"><code class="language-txt">str_replace(find,replace,string,count) 函数以其他字符替换字符串中的一些字符（区分大小写）。
 
 该函数必须遵循下列规则：
 
@@ -542,87 +546,92 @@ strip_tags(string,allow) 函数剥去字符串中的 HTML、XML 以及 PHP 的�
 
 参数    描述
 string    必需。规定要检查的字符串。
-allow    可选。规定允许的标签。这些标签不会被删除。</code></pre><p>分析可知要想利用XSS攻击，只有对Name data进行注入，利用<script>标签大小写进行绕过，但你会发现Name data length=10 受到限制</p>
-<p><img src="XSS-Stored-test/20181104110405624.png" alt="img"></p>
+allow    可选。规定允许的标签。这些标签不会被删除。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>分析可知要想利用XSS攻击，只有对Name data进行注入，利用<code>&lt;script&gt;</code>标签大小写进行绕过，但你会发现Name data length=10 受到限制</p>
+<p><img src="/2018/11/04/XSS-Stored-test/20181104110405624.png" alt="img"></p>
 <p>篡改数据，绕过length限制</p>
-<p><img src="XSS-Stored-test/20181104110752555.png" alt="img"></p>
+<p><img src="/2018/11/04/XSS-Stored-test/20181104110752555.png" alt="img"></p>
 <p>构造payload</p>
-<pre><code>POST Name data
-txtName=%3CScript%3Ealert%281111%29%3C%2FscriPt%3E&amp;mtxMessage=admin&amp;btnSign=Sign+Guestbook</code></pre><p>Name data的绕过</p>
-<p><img src="XSS-Stored-test/20181104111233555.png" alt="img"></p>
+<pre class="line-numbers language-http"><code class="language-http">POST Name data
+txtName=%3CScript%3Ealert%281111%29%3C%2FscriPt%3E&amp;mtxMessage=admin&amp;btnSign=Sign+Guestbook<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>Name data的绕过</p>
+<p><img src="/2018/11/04/XSS-Stored-test/20181104111233555.png" alt="img"></p>
 <p>服务端数据库文件已存入攻击者的恶意代码</p>
-<p><img src="XSS-Stored-test/20181104111557718.png" alt="img"></p>
-<p>在这里也可以使用<img>标签进行绕过：<img src=# onerror=alert("<em>XSS</em>")></p>
-<h2 id="high-级别"><a href="#high-级别" class="headerlink" title="high 级别"></a>high 级别</h2><pre><code>&lt;?php
+<p><img src="/2018/11/04/XSS-Stored-test/20181104111557718.png" alt="img"></p>
+<p>在这里也可以使用<code>&lt;img&gt;</code>标签进行绕过：<code>&lt;img src=# onerror=alert(&quot;_XSS_&quot;)&gt;</code></p>
+<h2 id="high-级别"><a href="#high-级别" class="headerlink" title="high 级别"></a>high 级别</h2><pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
 
-if( isset( $_POST[ &#39;btnSign&#39; ] ) ) {
-    // Get input
-    $message = trim( $_POST[ &#39;mtxMessage&#39; ] );
-    $name    = trim( $_POST[ &#39;txtName&#39; ] );
+<span class="token keyword">if</span><span class="token punctuation">(</span> <span class="token function">isset</span><span class="token punctuation">(</span> <span class="token variable">$_POST</span><span class="token punctuation">[</span> <span class="token string">'btnSign'</span> <span class="token punctuation">]</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// Get input</span>
+    <span class="token variable">$message</span> <span class="token operator">=</span> <span class="token function">trim</span><span class="token punctuation">(</span> <span class="token variable">$_POST</span><span class="token punctuation">[</span> <span class="token string">'mtxMessage'</span> <span class="token punctuation">]</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$name</span>    <span class="token operator">=</span> <span class="token function">trim</span><span class="token punctuation">(</span> <span class="token variable">$_POST</span><span class="token punctuation">[</span> <span class="token string">'txtName'</span> <span class="token punctuation">]</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    // Sanitize message input
-    $message = strip_tags( addslashes( $message ) );
-    $message = ((isset($GLOBALS[&quot;___mysqli_ston&quot;]) &amp;&amp; is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_real_escape_string($GLOBALS[&quot;___mysqli_ston&quot;],  $message ) : ((trigger_error(&quot;[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.&quot;, E_USER_ERROR)) ? &quot;&quot; : &quot;&quot;));
-    $message = htmlspecialchars( $message );
+    <span class="token comment" spellcheck="true">// Sanitize message input</span>
+    <span class="token variable">$message</span> <span class="token operator">=</span> <span class="token function">strip_tags</span><span class="token punctuation">(</span> <span class="token function">addslashes</span><span class="token punctuation">(</span> <span class="token variable">$message</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$message</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">is_object</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token function">mysqli_real_escape_string</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>  <span class="token variable">$message</span> <span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">trigger_error</span><span class="token punctuation">(</span><span class="token string">"[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work."</span><span class="token punctuation">,</span> <span class="token constant">E_USER_ERROR</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token string">""</span> <span class="token punctuation">:</span> <span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$message</span> <span class="token operator">=</span> <span class="token function">htmlspecialchars</span><span class="token punctuation">(</span> <span class="token variable">$message</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    // Sanitize name input
-    $name = preg_replace( &#39;/&lt;(.*)s(.*)c(.*)r(.*)i(.*)p(.*)t/i&#39;, &#39;&#39;, $name );
-    $name = ((isset($GLOBALS[&quot;___mysqli_ston&quot;]) &amp;&amp; is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_real_escape_string($GLOBALS[&quot;___mysqli_ston&quot;],  $name ) : ((trigger_error(&quot;[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.&quot;, E_USER_ERROR)) ? &quot;&quot; : &quot;&quot;));
+    <span class="token comment" spellcheck="true">// Sanitize name input</span>
+    <span class="token variable">$name</span> <span class="token operator">=</span> <span class="token function">preg_replace</span><span class="token punctuation">(</span> <span class="token string">'/&lt;(.*)s(.*)c(.*)r(.*)i(.*)p(.*)t/i'</span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">,</span> <span class="token variable">$name</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$name</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">is_object</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token function">mysqli_real_escape_string</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>  <span class="token variable">$name</span> <span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">trigger_error</span><span class="token punctuation">(</span><span class="token string">"[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work."</span><span class="token punctuation">,</span> <span class="token constant">E_USER_ERROR</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token string">""</span> <span class="token punctuation">:</span> <span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    // Update database
-    $query  = &quot;INSERT INTO guestbook ( comment, name ) VALUES ( &#39;$message&#39;, &#39;$name&#39; );&quot;;
-    $result = mysqli_query($GLOBALS[&quot;___mysqli_ston&quot;],  $query ) or die( &#39;&lt;pre&gt;&#39; . ((is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_error($GLOBALS[&quot;___mysqli_ston&quot;]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)) . &#39;&lt;/pre&gt;&#39; );
+    <span class="token comment" spellcheck="true">// Update database</span>
+    <span class="token variable">$query</span>  <span class="token operator">=</span> <span class="token string">"INSERT INTO guestbook ( comment, name ) VALUES ( '$message', '$name' );"</span><span class="token punctuation">;</span>
+    <span class="token variable">$result</span> <span class="token operator">=</span> <span class="token function">mysqli_query</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>  <span class="token variable">$query</span> <span class="token punctuation">)</span> <span class="token keyword">or</span> <span class="token keyword">die</span><span class="token punctuation">(</span> <span class="token string">'&lt;pre>'</span> <span class="token punctuation">.</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">is_object</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token function">mysqli_error</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token variable">$___mysqli_res</span> <span class="token operator">=</span> <span class="token function">mysqli_connect_error</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token variable">$___mysqli_res</span> <span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">.</span> <span class="token string">'&lt;/pre>'</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    //mysql_close();
-}
+    <span class="token comment" spellcheck="true">//mysql_close();</span>
+<span class="token punctuation">}</span>
 
-?&gt; </code></pre><p>代码审计之后，发现high级别的Name data存在另外一种的Protect，利用preg_replace()函数进行匹配“< s r i p t”等字符，将其置为空，此时Name data里面的<script>标签是不能使用的，不管是大小进行区分写都不可以进行绕过</p>
-<p>所以，就需要利用其它标签进行XSS攻击，此处可以利用 medium 级别 中提到的<img>标签进行绕过preg_replace()函数的Protect</p>
+<span class="token delimiter">?></span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>代码审计之后，发现high级别的Name data存在另外一种的Protect，利用preg_replace()函数进行匹配“&lt; s r i p t”等字符，将其置为空，此时Name data里面的<code>&lt;script&gt;</code>标签是不能使用的，不管是大小进行区分写都不可以进行绕过</p>
+<p>所以，就需要利用其它标签进行XSS攻击，此处可以利用 medium 级别 中提到的<code>&lt;img&gt;</code>标签进行绕过preg_replace()函数的Protect</p>
 <p>构造payload</p>
-<pre><code>POST Name data
-txtName=%3Cimg+src%3D%23+onerror%3Dalert%28%22_XSS_%22%29%3E&amp;mtxMessage=Hello+admin&amp;btnSign=Sign+Guestbook</code></pre><p><img>标签成功绕过preg_replace()</p>
-<p><img src="XSS-Stored-test/20181104114808446.png" alt="img"></p>
+<pre class="line-numbers language-http"><code class="language-http">POST Name data
+txtName=%3Cimg+src%3D%23+onerror%3Dalert%28%22_XSS_%22%29%3E&amp;mtxMessage=Hello+admin&amp;btnSign=Sign+Guestbook<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><code>&lt;img&gt;</code>标签成功绕过preg_replace()</p>
+<p><img src="/2018/11/04/XSS-Stored-test/20181104114808446.png" alt="img"></p>
 <p>服务端数据库文件已存入攻击者的恶意代码</p>
-<p><img src="XSS-Stored-test/20181104114917233.png" alt="img"></p>
-<h2 id="impossible-级别"><a href="#impossible-级别" class="headerlink" title="impossible 级别"></a>impossible 级别</h2><pre><code>&lt;?php
+<p><img src="/2018/11/04/XSS-Stored-test/20181104114917233.png" alt="img"></p>
+<h2 id="impossible-级别"><a href="#impossible-级别" class="headerlink" title="impossible 级别"></a>impossible 级别</h2><pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
 
-if( isset( $_POST[ &#39;btnSign&#39; ] ) ) {
-    // Check Anti-CSRF token
-    checkToken( $_REQUEST[ &#39;user_token&#39; ], $_SESSION[ &#39;session_token&#39; ], &#39;index.php&#39; );
+<span class="token keyword">if</span><span class="token punctuation">(</span> <span class="token function">isset</span><span class="token punctuation">(</span> <span class="token variable">$_POST</span><span class="token punctuation">[</span> <span class="token string">'btnSign'</span> <span class="token punctuation">]</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// Check Anti-CSRF token</span>
+    <span class="token function">checkToken</span><span class="token punctuation">(</span> <span class="token variable">$_REQUEST</span><span class="token punctuation">[</span> <span class="token string">'user_token'</span> <span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token variable">$_SESSION</span><span class="token punctuation">[</span> <span class="token string">'session_token'</span> <span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">'index.php'</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    // Get input
-    $message = trim( $_POST[ &#39;mtxMessage&#39; ] );
-    $name    = trim( $_POST[ &#39;txtName&#39; ] );
+    <span class="token comment" spellcheck="true">// Get input</span>
+    <span class="token variable">$message</span> <span class="token operator">=</span> <span class="token function">trim</span><span class="token punctuation">(</span> <span class="token variable">$_POST</span><span class="token punctuation">[</span> <span class="token string">'mtxMessage'</span> <span class="token punctuation">]</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$name</span>    <span class="token operator">=</span> <span class="token function">trim</span><span class="token punctuation">(</span> <span class="token variable">$_POST</span><span class="token punctuation">[</span> <span class="token string">'txtName'</span> <span class="token punctuation">]</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    // Sanitize message input
-    $message = stripslashes( $message );
-    $message = ((isset($GLOBALS[&quot;___mysqli_ston&quot;]) &amp;&amp; is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_real_escape_string($GLOBALS[&quot;___mysqli_ston&quot;],  $message ) : ((trigger_error(&quot;[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.&quot;, E_USER_ERROR)) ? &quot;&quot; : &quot;&quot;));
-    $message = htmlspecialchars( $message );
+    <span class="token comment" spellcheck="true">// Sanitize message input</span>
+    <span class="token variable">$message</span> <span class="token operator">=</span> <span class="token function">stripslashes</span><span class="token punctuation">(</span> <span class="token variable">$message</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$message</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">is_object</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token function">mysqli_real_escape_string</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>  <span class="token variable">$message</span> <span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">trigger_error</span><span class="token punctuation">(</span><span class="token string">"[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work."</span><span class="token punctuation">,</span> <span class="token constant">E_USER_ERROR</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token string">""</span> <span class="token punctuation">:</span> <span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$message</span> <span class="token operator">=</span> <span class="token function">htmlspecialchars</span><span class="token punctuation">(</span> <span class="token variable">$message</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    // Sanitize name input
-    $name = stripslashes( $name );
-    $name = ((isset($GLOBALS[&quot;___mysqli_ston&quot;]) &amp;&amp; is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_real_escape_string($GLOBALS[&quot;___mysqli_ston&quot;],  $name ) : ((trigger_error(&quot;[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.&quot;, E_USER_ERROR)) ? &quot;&quot; : &quot;&quot;));
-    $name = htmlspecialchars( $name );
+    <span class="token comment" spellcheck="true">// Sanitize name input</span>
+    <span class="token variable">$name</span> <span class="token operator">=</span> <span class="token function">stripslashes</span><span class="token punctuation">(</span> <span class="token variable">$name</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$name</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">is_object</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token function">mysqli_real_escape_string</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>  <span class="token variable">$name</span> <span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">trigger_error</span><span class="token punctuation">(</span><span class="token string">"[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work."</span><span class="token punctuation">,</span> <span class="token constant">E_USER_ERROR</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token string">""</span> <span class="token punctuation">:</span> <span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$name</span> <span class="token operator">=</span> <span class="token function">htmlspecialchars</span><span class="token punctuation">(</span> <span class="token variable">$name</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    // Update database
-    $data = $db-&gt;prepare( &#39;INSERT INTO guestbook ( comment, name ) VALUES ( :message, :name );&#39; );
-    $data-&gt;bindParam( &#39;:message&#39;, $message, PDO::PARAM_STR );
-    $data-&gt;bindParam( &#39;:name&#39;, $name, PDO::PARAM_STR );
-    $data-&gt;execute();
-}
+    <span class="token comment" spellcheck="true">// Update database</span>
+    <span class="token variable">$data</span> <span class="token operator">=</span> <span class="token variable">$db</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">prepare</span><span class="token punctuation">(</span> <span class="token string">'INSERT INTO guestbook ( comment, name ) VALUES ( :message, :name );'</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$data</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">bindParam</span><span class="token punctuation">(</span> <span class="token string">':message'</span><span class="token punctuation">,</span> <span class="token variable">$message</span><span class="token punctuation">,</span> <span class="token constant">PDO</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token constant">PARAM_STR</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$data</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">bindParam</span><span class="token punctuation">(</span> <span class="token string">':name'</span><span class="token punctuation">,</span> <span class="token variable">$name</span><span class="token punctuation">,</span> <span class="token constant">PDO</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token constant">PARAM_STR</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$data</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-// Generate Anti-CSRF token
-generateSessionToken();
+<span class="token comment" spellcheck="true">// Generate Anti-CSRF token</span>
+<span class="token function">generateSessionToken</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-?&gt; </code></pre><p>impossible 级别的Protect不能被绕过，由于Name data和Message data都受到htmlspecialchars()函数的保护作用</p>
-<pre><code>htmlspecialchars() 函数把预定义的字符转换为 HTML 实体。
+<span class="token delimiter">?></span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>impossible 级别的Protect不能被绕过，由于Name data和Message data都受到htmlspecialchars()函数的保护作用</p>
+<pre class="line-numbers language-txt"><code class="language-txt">htmlspecialchars() 函数把预定义的字符转换为 HTML 实体。
 预定义的字符是：
 
-&amp; （和号）成为 &amp;
-&quot; （双引号）成为 &quot;
-&#39; （单引号）成为 &#39;
-&lt; （小于）成为 &lt;
-&gt; （大于）成为 &gt;
+& （和号）成为 &
+" （双引号）成为 "
+' （单引号）成为 '
+< （小于）成为 <
+> （大于）成为 >
 
 它的语法如下：
 htmlspecialchars(string,flags,character-set,double_encode)
@@ -633,8 +642,9 @@ htmlspecialchars(string,flags,character-set,double_encode)
 ENT_COMPAT - 默认。仅编码双引号。
 ENT_QUOTES - 编码双引号和单引号。
 ENT_NOQUOTES - 不编码任何引号。
-默认是只编码双引号的</code></pre><p>因为输入的所有标签都被转义，所以此处不存在XSS攻击，但是要注意flags属性，使用不当过滤XSS时就会被绕过</p>
-</script></p>
+默认是只编码双引号的<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>因为输入的所有标签都被转义，所以此处不存在XSS攻击，但是要注意flags属性，使用不当过滤XSS时就会被绕过。</p>
+
             </div>
             <hr/>
 
@@ -751,8 +761,7 @@ ENT_NOQUOTES - 不编码任何引号。
                 <a href="/2018/11/04/XSS-DOM-test/">
                     <div class="card-image">
                         
-                        
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="XSS DOM 漏洞分析与测试">
+                        <img src="/medias/featureimages/dvwa-xss-1.png" class="responsive-img" alt="XSS DOM 漏洞分析与测试">
                         
                         <span class="card-title">XSS DOM 漏洞分析与测试</span>
                     </div>
@@ -804,8 +813,7 @@ ENT_NOQUOTES - 不编码任何引号。
                 <a href="/2018/11/04/XSS-Reflected-test/">
                     <div class="card-image">
                         
-                        
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="XSS Reflected 漏洞分析与测试">
+                        <img src="/medias/featureimages/dvwa-xss-3.png" class="responsive-img" alt="XSS Reflected 漏洞分析与测试">
                         
                         <span class="card-title">XSS Reflected 漏洞分析与测试</span>
                     </div>
@@ -1026,11 +1034,11 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <span id="year">2018</span>
             <a href="/about" target="_blank">Qftm</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
-            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">309.4k</span>&nbsp;字
+                class="white-color">308.9k</span>&nbsp;字
             
             
             
@@ -1042,13 +1050,13 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             
         </div>
         <div class="col s12 m4 l4 social-link ">
-    <a href="https://github.com/Qftm" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+    <a href="https://github.com/Qftm" 
         <i class="fab fa-github"></i>
     </a>
 
 
 
-    <a href="mailto:Qftmbin@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:Qftmbin@gmail.com" 
         <i class="fas fa-envelope-open"></i>
     </a>
 
@@ -1056,7 +1064,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 
 
-    <a href="https://twitter.com/Qftmer" class="tooltipped" target="_blank" data-tooltip="关注我的Twitter: https://twitter.com/Qftmer" data-position="top" data-delay="50">
+    <a href="https://twitter.com/Qftmer" 
         <i class="fab fa-twitter"></i>
     </a>
 
