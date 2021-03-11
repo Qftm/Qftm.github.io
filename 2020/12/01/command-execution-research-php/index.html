@@ -399,14 +399,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
-                    2021-01-03
+                    2021-03-11
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                    25.9k
+                    26k
                 </div>
                 
 
@@ -883,6 +883,11 @@ shell.txt
 <p><img src="/2020/12/01/command-execution-research-php/image-20201222013620743.png" alt="image-20201222013620743"></p>
 <p>运行PHP执行指令后，程序可到断点处，然后通过调用栈可知：底层通过<code>CreateProcessW</code>系统API调用来启动相关进程、然后通过<code>cmd</code>进程来执行相关指令（此处<code>echo</code>为<code>cmd</code>内置指令）（注意：这里也可查看到PHP程序的完整调用链）</p>
 <p><img src="/2020/12/01/command-execution-research-php/image-20201221233232148.png" alt="image-20201221233232148"></p>
+<ul>
+<li>进程信息跟踪执行：<code>For Windows</code></li>
+</ul>
+<p>利用微软官方提供的<code>Process Explorer</code>工具进行跟踪分析：发现底层调用<code>cmd.exe /c xxx</code>来执行</p>
+<p><img src="/2020/12/01/command-execution-research-php/BWSWXW1GO103UI.png" alt="img"></p>
 <h3 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h3><pre class="line-numbers language-txt"><code class="language-txt">Java - 底层不调用系统终端，自己启动传入的可执行程序    Mode => Window：Command || Linux：Command<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>但是在<code>Java</code>语言里面，针对Linux平台，系统命令<code>echo 111 &gt; shell.txt</code>传入<code>CommandExecFunc</code>函数，最终在底层相当于执行<code>/bin/echo 111 &gt; shell.txt</code>成功打印一个字符串<code>&quot;111 &gt; shell.txt&quot;</code>并没有创建文件<code>shell.txt</code>。【执行过程相当于：运行可执行程序<code>/bin/echo</code>并传入参数<code>111 &gt; shell.txt</code>进行打印输出，这里的特殊字符<code>&gt;</code>被当作普通字符串被echo程序打印。这里的<code>echo</code>作为可执行程序出现，而不是终端中的命令】【进程相关：一个进程<code>/bin/echo</code>，在<code>/bin/echo</code>进程中传入字符串参数<code>111 &gt; shell.txt</code>进行打印输出】【有关可执行程序怎么查询：从环境变量中进行查询】</p>
 <p>测试代码如下</p>
@@ -964,6 +969,11 @@ D:\QSec\Code-Audit\Tools\Java\Kits\RCE>java RuntimeRCE
 java.io.IOException: Cannot run program "echo": CreateProcess error=2, The system cannot find the file specified
 
 D:\QSec\Code-Audit\Tools\Java\Kits\RCE><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li>进程信息跟踪执行：<code>For Windows</code></li>
+</ul>
+<p>进程分析可知底层直接创建了<code>notepad.exe</code>进程</p>
+<p><img src="/2020/12/01/command-execution-research-php/BWSWXW1GO103UI7.png" alt="img"></p>
 <h3 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h3><pre class="line-numbers language-txt"><code class="language-txt">Python - 底层调用系统终端，执行命令     Mode => Window：cmd.exe /c Command || Linux：sh -c Command<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>而<code>Python</code>语言，命令执行函数底层原理实现同<code>PHP</code>语言。</p>
 <p>总结起来，也就是，命令执行函数执行分为两类，一类：传入的命令仅仅作为可执行终端中的命令执行；另一类：传入的命令仅仅是运行传入的命令中的可执行程序。对象不同，一类：是底层语言系统终端帮我们执行传入的命令；另一类：是自己启动传入的可执行程序。</p>
