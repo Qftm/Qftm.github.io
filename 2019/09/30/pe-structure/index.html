@@ -1,0 +1,1101 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="初识PE文件结构, Qftm">
+    <meta name="description" content="Maybe a hacker">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>初识PE文件结构 | Qftm</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.1"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Qftm</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>Index</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>Tags</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>Categories</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>Archives</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-heartbeat" style="zoom: 0.6;"></i>
+      
+      <span>About</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>Friends</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="Search" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Qftm</div>
+        <div class="logo-desc">
+            
+            Maybe a hacker
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			Index
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			Tags
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			Categories
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			Archives
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-heartbeat"></i>
+			
+			About
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			Friends
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/bg.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">初识PE文件结构</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/PE/">
+                                <span class="chip bg-color">PE</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/">
+                                <span class="chip bg-color">文件结构</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/" class="post-category">
+                                攻防渗透
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    2019-09-30
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
+                    2020-08-15
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    3.5k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    13 Min
+                </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>目前网络上有关PE文件结构说明的文章太多了，自己的这篇文章只是单纯的记录自己对PE文件结构的学习、理解和总结。</p>
+<h1 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h1><p>PE（Portable Executable：可移植的执行体）是Win32环境自身所带的可执行文件格式。它的一些特性继承自Unix的Coff(Common Object File Format)文件格式。可移植的执行体意味着此文件格式是跨win32平台的，即使Windows运行在非Intel的CPU上，任何win32平台的PE装载器都能识别和使用该文件格式。当然，移植到不同的CPU上PE执行体必然得有一些改变。除VxD和16位的Dll外，所有 win32执行文件都使用PE文件格式。因此，研究PE文件格式是我们洞悉Windows结构的良机。</p>
+<h1 id="文件结构"><a href="#文件结构" class="headerlink" title="文件结构"></a>文件结构</h1><p>图表结构：</p>
+<p><img src="/2019/09/30/pe-structure/1594459-20190930085608173-373026399.png" alt="img"></p>
+<p>DOS头是用来兼容MS-DOS操作系统的<br>NT头包含windows PE文件的主要信息<br>节表：是PE文件后续节的描述<br>节：每个节实际上是一个容器，可以包含代码、数据等等，每个节可以有独立的内存权限，比如代码节默认有读/执行权限，节的名字和数量可以自己定义</p>
+<h1 id="文件地址"><a href="#文件地址" class="headerlink" title="文件地址"></a>文件地址</h1><p>1、PE文件在硬盘上和在内存里是不完全一样的，被加载到内存以后其占用的虚拟地址空间要比在硬盘上占用的空间大一些，这是因为各个节在硬盘上是连续的，而在内存中是按页对齐的。</p>
+<p>2、PE结构内部，表示某个位置的地址采用了两种方式，针对在硬盘上存储文件中的地址，称为原始存储地址或物理地址表示距离文件头的偏移；另外一种是针对加载到内存以后映象中的地址，称为相对虚拟地址（RVA），表示相对内存映象头的偏移。</p>
+<p>3、CPU的某些指令是需要使用绝对地址的，比如取全局变量的地址，传递函数的地址编译以后的汇编指令中肯定需要用到绝对地址而不是相对映象头的偏移，因此PE文件会建议操作系统将其加载到某个内存地址（这个叫基地址），这种表示方式叫做虚拟地址（VA）</p>
+<p>4、PE文件无法加载到预期的地址，那么系统会帮他重新选择一个合适的基地址将他加载到此处，这时原有的VA就全部失效了，NT头保存了PE文件加载所需的信息，在不知道PE会加载到哪个基地址之前，VA是无效的，所以在PE文件头中大部分是使用RVA来表示地址的</p>
+<h1 id="可执行文件头"><a href="#可执行文件头" class="headerlink" title="可执行文件头"></a>可执行文件头</h1><p>1、PE文件可以导出函数让其他的PE文件使用，也可以从其他PE文件导入函数</p>
+<p>2、PE文件通过导出表指明自己导出那些函数，通过导入表指明需要从哪些模块导入哪些函数。</p>
+<p>3、DOS头和NT头就是PE文件中两个重要的文件头</p>
+<h1 id="DOS头"><a href="#DOS头" class="headerlink" title="DOS头"></a>DOS头</h1><pre><code>typedef struct _IMAGE_DOS_HEADER {      // DOS .EXE header
+    WORD   e_magic;                     // Magic number
+    WORD   e_cblp;                      // Bytes on last page of file
+    WORD   e_cp;                        // Pages in file
+    WORD   e_crlc;                      // Relocations
+    WORD   e_cparhdr;                   // Size of header in paragraphs
+    WORD   e_minalloc;                  // Minimum extra paragraphs needed
+    WORD   e_maxalloc;                  // Maximum extra paragraphs needed
+    WORD   e_ss;                        // Initial (relative) SS value
+    WORD   e_sp;                        // Initial SP value
+    WORD   e_csum;                      // Checksum
+    WORD   e_ip;                        // Initial IP value
+    WORD   e_cs;                        // Initial (relative) CS value
+    WORD   e_lfarlc;                    // File address of relocation table
+    WORD   e_ovno;                      // Overlay number
+    WORD   e_res[4];                    // Reserved words
+    WORD   e_oemid;                     // OEM identifier (for e_oeminfo)
+    WORD   e_oeminfo;                   // OEM information; e_oemid specific
+    WORD   e_res2[10];                  // Reserved words
+    LONG   e_lfanew;                    // File address of new exe header
+  } IMAGE_DOS_HEADER, *PIMAGE_DOS_HEADER;</code></pre><p><strong><img src="/2019/09/30/pe-structure/1594459-20190930091823779-437488753.png" alt="img"></strong></p>
+<p><strong>重点关注字段</strong></p>
+<p>e_magic：一个WORD类型，值是一个常数0x4D5A，用文本编辑器查看该值位‘MZ’，可执行文件必须都是’MZ’开头。</p>
+<p>e_lfanew：为32位可执行文件扩展的域，用来表示DOS头之后的NT头相对文件起始地址的偏移。</p>
+<h2 id="NT头"><a href="#NT头" class="headerlink" title="NT头"></a>NT头</h2><pre><code>typedef struct _IMAGE_NT_HEADERS {
+    DWORD Signature;
+    IMAGE_FILE_HEADER FileHeader;
+    IMAGE_OPTIONAL_HEADER32 OptionalHeader;
+} IMAGE_NT_HEADERS32, *PIMAGE_NT_HEADERS32;</code></pre><p><img src="/2019/09/30/pe-structure/1594459-20190930091743943-719931093.png" alt="img"></p>
+<p>Signature：类似于DOS头中的e_magic，其高16位是0，低16是0x4550，用字符表示是’PE‘。</p>
+<p>IMAGE_FILE_HEADER是PE文件头</p>
+<pre><code>typedef struct _IMAGE_FILE_HEADER {
+    WORD    Machine;
+    WORD    NumberOfSections;
+    DWORD   TimeDateStamp;
+    DWORD   PointerToSymbolTable;
+    DWORD   NumberOfSymbols;
+    WORD    SizeOfOptionalHeader;
+    WORD    Characteristics;
+} IMAGE_FILE_HEADER, *PIMAGE_FILE_HEADER;</code></pre><h1 id="PE文件头"><a href="#PE文件头" class="headerlink" title="PE文件头"></a>PE文件头</h1><p><img src="/2019/09/30/pe-structure/1594459-20190930091710057-1839462940.png" alt="img"></p>
+<p>Machine：该文件的运行平台，是x86、x64还是I64</p>
+<p>NumberOfSections：该PE文件中有多少个节，也就是节表中的项数。</p>
+<p>TimeDateStamp：PE文件的创建时间，一般有连接器填写。</p>
+<p>PointerToSymbolTable：COFF文件符号表在文件中的偏移。</p>
+<p>NumberOfSymbols：符号表的数量。</p>
+<p>SizeOfOptionalHeader：紧随其后的可选头的大小。</p>
+<p>Characteristics：可执行文件的属性，可以是下面这些值按位相或。</p>
+<h1 id="PE可选头"><a href="#PE可选头" class="headerlink" title="PE可选头"></a>PE可选头</h1><pre><code>typedef struct _IMAGE_OPTIONAL_HEADER {
+    WORD    Magic;
+    BYTE    MajorLinkerVersion;
+    BYTE    MinorLinkerVersion;
+    DWORD   SizeOfCode;
+    DWORD   SizeOfInitializedData;
+    DWORD   SizeOfUninitializedData;
+    DWORD   AddressOfEntryPoint;
+    DWORD   BaseOfCode;
+    DWORD   BaseOfData;
+    DWORD   ImageBase;
+    DWORD   SectionAlignment;
+    DWORD   FileAlignment;
+    WORD    MajorOperatingSystemVersion;
+    WORD    MinorOperatingSystemVersion;
+    WORD    MajorImageVersion;
+    WORD    MinorImageVersion;
+    WORD    MajorSubsystemVersion;
+    WORD    MinorSubsystemVersion;
+    DWORD   Win32VersionValue;
+    DWORD   SizeOfImage;
+    DWORD   SizeOfHeaders;
+    DWORD   CheckSum;
+    WORD    Subsystem;
+    WORD    DllCharacteristics;
+    DWORD   SizeOfStackReserve;
+    DWORD   SizeOfStackCommit;
+    DWORD   SizeOfHeapReserve;
+    DWORD   SizeOfHeapCommit;
+    DWORD   LoaderFlags;
+    DWORD   NumberOfRvaAndSizes;
+    IMAGE_DATA_DIRECTORY DataDirectory[IMAGE_NUMBEROF_DIRECTORY_ENTRIES];
+} IMAGE_OPTIONAL_HEADER32, *PIMAGE_OPTIONAL_HEADER32;</code></pre><p><img src="/2019/09/30/pe-structure/1594459-20190930091636220-541165662.png" alt="img"></p>
+<p>AddressOfEntryPoint：程序入口的RVA，对于exe这个地址可以理解为WinMain的RVA。对于DLL，这个地址可以理解为DllMain的RVA，如果是驱动程序，可以理解为DriverEntry的RVA。当然，实际上入口点并非是WinMain，DllMain和DriverEntry，在这些函数之前还有一系列初始化要完成，当然，这些不是本文的重点。</p>
+<p>BaseOfCode：代码段起始地址的RVA。</p>
+<p>BaseOfData：数据段起始地址的RVA。</p>
+<p>ImageBase：映象（加载到内存中的PE文件）的基地址，这个基地址是建议，对于DLL来说，如果无法加载到这个地址，系统会自动为其选择地址。</p>
+<p>SectionAlignment：节对齐，PE中的节被加载到内存时会按照这个域指定的值来对齐，比如这个值是0x1000，那么每个节的起始地址的低12位都为0。</p>
+<p>FileAlignment：节在文件中按此值对齐，SectionAlignment必须大于或等于FileAlignment。</p>
+<p>SizeOfImage：映象的大小，PE文件加载到内存中空间是连续的，这个值指定占用虚拟空间的大小。<br>SizeOfHeaders：所有文件头（包括节表）的大小，这个值是以FileAlignment对齐的。</p>
+<p>CheckSum：映象文件的校验和。</p>
+<p>SizeOfStackReserve：运行时为每个线程栈保留内存的大小。</p>
+<p>SizeOfStackCommit：运行时每个线程栈初始占用内存大小。</p>
+<p>SizeOfHeapReserve：运行时为进程堆保留内存大小。</p>
+<p>SizeOfHeapCommit：运行时进程堆初始占用内存大小。</p>
+<p>NumberOfRvaAndSizes：数据目录的项数，即下面这个数组的项数</p>
+<p>DataDirectory：数据目录，这是一个数组，数组的项定义如下：</p>
+<pre><code>typedef struct _IMAGE_DATA_DIRECTORY {
+DWORD VirtualAddress;
+DWORD Size;
+} IMAGE_DATA_DIRECTORY, *PIMAGE_DATA_DIRECTORY;</code></pre><p>DataDirectory数据目录</p>
+<pre><code>#define IMAGE_DIRECTORY_ENTRY_EXPORT          0   // Export Directory
+#define IMAGE_DIRECTORY_ENTRY_IMPORT          1   // Import Directory
+#define IMAGE_DIRECTORY_ENTRY_RESOURCE        2   // Resource Directory
+#define IMAGE_DIRECTORY_ENTRY_EXCEPTION       3   // Exception Directory
+#define IMAGE_DIRECTORY_ENTRY_SECURITY        4   // Security Directory
+#define IMAGE_DIRECTORY_ENTRY_BASERELOC       5   // Base Relocation Table
+#define IMAGE_DIRECTORY_ENTRY_DEBUG           6   // Debug Directory
+//      IMAGE_DIRECTORY_ENTRY_COPYRIGHT       7   // (X86 usage)
+#define IMAGE_DIRECTORY_ENTRY_ARCHITECTURE    7   // Architecture Specific Data
+#define IMAGE_DIRECTORY_ENTRY_GLOBALPTR       8   // RVA of GP
+#define IMAGE_DIRECTORY_ENTRY_TLS             9   // TLS Directory
+#define IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG    10   // Load Configuration Directory
+#define IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT   11   // Bound Import Directory in headers
+#define IMAGE_DIRECTORY_ENTRY_IAT            12   // Import Address Table
+#define IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT   13   // Delay Load Import Descriptors
+#define IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR 14   // COM Runtime descriptor</code></pre><h1 id="PE导出表"><a href="#PE导出表" class="headerlink" title="PE导出表"></a>PE导出表</h1><p>导出表是用来描述模块中的导出函数的结构，如果一个模块导出了函数，那么这个函数会被记录在导出表中，这样通过GetProcAddress函数就能动态获取到函数的地址。函数导出的方式有两种，一种是按名字导出，一种是按序号导出。这两种导出方式在导出表中的描述方式也不相同。</p>
+<p>导出表定义：</p>
+<pre><code>typedef struct _IMAGE_EXPORT_DIRECTORY {
+    DWORD   Characteristics;
+    DWORD   TimeDateStamp;
+    WORD    MajorVersion;
+    WORD    MinorVersion;
+    DWORD   Name;
+    DWORD   Base;
+    DWORD   NumberOfFunctions;
+    DWORD   NumberOfNames;
+    DWORD   AddressOfFunctions;     // RVA from base of image
+    DWORD   AddressOfNames;         // RVA from base of image
+    DWORD   AddressOfNameOrdinals;  // RVA from base of image
+} IMAGE_EXPORT_DIRECTORY, *PIMAGE_EXPORT_DIRECTORY;</code></pre><p>图表：</p>
+<p><img src="/2019/09/30/pe-structure/1594459-20190930092221192-1253724569.png" alt="img"></p>
+<h1 id="PE导入表"><a href="#PE导入表" class="headerlink" title="PE导入表"></a>PE导入表</h1><p>IMAGE_DIRECTORY_ENTRY_IMPORT就是导入表，在PE文件加载时，会根据这个表里的内容加载依赖的DLL，并填充所需函数的地址</p>
+<p>IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT叫做绑定导入表，在第一种导入表导入地址的修正是在PE加载时完成，如果一个PE文件导入的DLL或者函数多那么加载起来就会略显的慢一些，所以出现了绑定导入，在加载以前就修正了导入表，这样就会快一些。</p>
+<p>IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT叫做延迟导入表，一个PE文件也许提供了很多功能，也导入了很多其他DLL，但是并非每次加载都会用到它提供的所有功能，也不一定会用到它需要导入的所有DLL，因此延迟导入就出现了，只有在一个PE文件真正用到需要的DLL，这个DLL才会被加载，甚至于只有真正使用某个导入函数，这个函数地址才会被修正。</p>
+<p>IMAGE_DIRECTORY_ENTRY_IAT是导入地址表，前面的三个表其实是导入函数的描述，真正的函数地址是被填充在导入地址表中的。</p>
+<h1 id="重定位"><a href="#重定位" class="headerlink" title="重定位"></a>重定位</h1><p>Windows使用重定位机制保证代码无论模块加载到哪个基址都能正确被调用。</p>
+<p>编译的时候由编译器识别出哪些项使用了模块内的直接VA，比如push一个全局变量、函数地址，这些指令的操作数在模块加载的时候就需要被重定位。</p>
+<p>链接器生成PE文件的时候将编译器识别的重定位的项纪录在一张表里，这张表就是重定位表，保存在DataDirectory中，序号是 IMAGE_DIRECTORY_ENTRY_BASERELOC。</p>
+<p>PE文件加载时，PE 加载器分析重定位表，将其中每一项按照现在的模块基址进行重定位。</p>
+<p>每个重定位项应该是一个DWORD，里面保存需要重定位的RVA，这样只需要简单操作便能找到需要重定位的项。</p>
+<p>然而，Windows并没有这样设计，原因是这样存放太占用空间了，试想一下，加入一个文件有n个重定位项，那么就需要占用4*n个字节。</p>
+<p>所以Windows采用了分组的方式，按照重定位项所在的页面分组，每组保存一个页面起始地址的RVA，页内的每项重定位项使用一个WORD保存重定位项在页内的偏移，这样就大大缩小了重定位表的大小。</p>
+<p>定义：</p>
+<pre><code>typedef struct _IMAGE_BASE_RELOCATION {
+    DWORD   VirtualAddress;
+    DWORD   SizeOfBlock;
+//  WORD    TypeOffset[1];
+} IMAGE_BASE_RELOCATION;
+typedef IMAGE_BASE_RELOCATION UNALIGNED * PIMAGE_BASE_RELOCATION;</code></pre><p>VirtualAddress：页起始地址RVA。</p>
+<p>SizeOfBlock：表示该分组保存了几项重定位项。</p>
+<p>TypeOffset：这个域有两个含义，页内偏移用12位就可以表示，剩下的高4位用来表示重定位的类型。而事实上，Windows只用了一种类型IMAGE_REL_BASED_HIGHLOW数值是 3。</p>
+<p>哪些项目需要被重定位呢？？</p>
+<p>1.代码中使用全局变量的指令，因为全局变量一定是模块内的地址，而且使用全局变量的语句在编译后会产生一条引用全局变量基地址的指令。</p>
+<p>2.将模块函数指针赋值给变量或作为参数传递，因为赋值或传递参数是会产生mov和push指令，这些指令需要直接地址。</p>
+<p>3.C++中的构造函数和析构函数赋值虚函数表指针，虚函数表中的每一项本身就是重定位项</p>
+<h1 id="区段名及其含义"><a href="#区段名及其含义" class="headerlink" title="区段名及其含义"></a>区段名及其含义</h1><p><img src="/2019/09/30/pe-structure/1594459-20190930092940285-1669878957.png" alt="img"></p>
+<p>.text默认的代码区块,它的内容全是指令代码,链接器把所有目标文件的text块连接成一个大的.text块，</p>
+<p>.data默认的读/写数据块,全局变量,静态变量一般放在这个区段</p>
+<p>.rdata默认只读数据区块,但程序中很少用到该块中的数据，一般两种情况用到,一是MS 的链接器产生EXE文件中用于存放调试目录，二是用于存放说明字符串，如果程序的DEF文件中指定了DESCRIPTION，字符串就会出现在rdata中</p>
+<p>.idata包含其他外来的DLL的函数及数据信息,即输入表，将.idata区块合并成另一个区块已成为一种惯例</p>
+<p>.edata输出表，当创建一个输出API或数据的可执行文件时，连接器会创建一个.EXP文件，这个.EXP文件包含一个.edata区块，其会被加载到可执行文件中，经常被合并到.text或.rdata 区块中</p>
+<p>.rsrc资源,包括模块的全部资源，如图标，菜单，位图等，这个区块是只读的，无论如何不应该把它命名为.rsrc以外的名字，也不能合并到其他的区块里</p>
+<p>.bss未初始化的数据,很少在用，取而代之的是执行文件的.data区块的的VirtualSize被扩展大的空间里用来装未初始化的数据.</p>
+<p>.crt用于C++ 运行时(CRT)所添加的数据</p>
+<p>.tlsTLS的意思是线程局部存储器，用于支持通过_declspec(thread)声明的线程局部存储变量的数据，这包括数据的初始化值，也包括运行时所需要的额外变量</p>
+<p>.reloc可执行文件的基址重定位，基址重定位一般仅Dll需要的</p>
+<p>.sdata相对于全局指针的可被定位的 短的读写数据</p>
+<p>.pdata异常表,包含CPU特定的IAMGE_RUNTIME_FUNTION_ENTRY结构数组，DataDirectory中的IMAGE_DIRECTORY_ENTRY_EXCEPTION指向它.</p>
+<p>.didat延迟装入输入数据，在非Release模式下可以找到</p>
+<h1 id="装载PE文件的主要步骤"><a href="#装载PE文件的主要步骤" class="headerlink" title="装载PE文件的主要步骤"></a>装载PE文件的主要步骤</h1><p>第一：当PE文件被执行，PE装载器检查DOS MZ header里的PE header偏移量。如果找到，则跳转到PE header。</p>
+<p>第二：PE装载器检查PE header的有效性。如果有效，就跳转到PE header的尾部。</p>
+<p>第三：紧跟PE header的是节表。PE装载器读取其中的节索引信息，并采用文件映射方法将这些节映射到内存，同时附上节表里指定的节属性。</p>
+<p>第四：PE文件映射入内存后，PE装载器将处理PE文件中类似import table（引入表）逻辑部分。</p>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        Author:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Qftm</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        Link:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://Qftm.github.io/2019/09/30/pe-structure/">http://Qftm.github.io/2019/09/30/pe-structure/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        Reprint policy:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    All articles in this blog are used except for special statements
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    reprint polocy. If reproduced, please indicate source
+                    <a href="/about" target="_blank">Qftm</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/PE/">
+                                    <span class="chip bg-color">PE</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/">
+                                    <span class="chip bg-color">文件结构</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+            <div class="card">
+                <a href="/2019/10/26/Joomla3.4.6-RCE-analyze/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/joomla-1.jpg" class="responsive-img" alt="Joomla3.4.6 RCE漏洞深度分析">
+                        
+                        <span class="card-title">Joomla3.4.6 RCE漏洞深度分析</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            0×00 背景10月9号国内几家安全媒体公布了Joomla RCE的漏洞预警，并且网上已公布漏洞利用EXP，影响版本包括Joomla 3.0.0 – 3.4.6。
+0×01 环境搭建Joomla是一套全球知名的内容管理系统。Joomla是使
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-10-26
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/" class="post-category">
+                                    代码审计
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/PHP/">
+                        <span class="chip bg-color">PHP</span>
+                    </a>
+                    
+                    <a href="/tags/Joomla/">
+                        <span class="chip bg-color">Joomla</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/09/19/information-hiding-and-detection-based-on-bmp-image/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/bmp-1.png" class="responsive-img" alt="基于BMP图像的信息隐藏与检测">
+                        
+                        <span class="card-title">基于BMP图像的信息隐藏与检测</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            原理简介针对文件结构的信息隐藏方法需详细掌握文件的格式，利用文件结构块之间的关系或根据块数据和块大小之间的关系来隐藏信息。
+BMP（Bitmap-File）图形文件是 Windows 采用的常见图形文件格式，要利用 BMP 位图进行信息隐藏
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-09-19
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/" class="post-category">
+                                    攻防渗透
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E4%BF%A1%E6%81%AF%E9%9A%90%E8%97%8F/">
+                        <span class="chip bg-color">信息隐藏</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + 'From: Qftm<br />'
+            + 'Author: Qftm<br />'
+            + 'Link: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2018</span>
+            <a href="/about" target="_blank">Qftm</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">370.8k</span>&nbsp;字
+            
+            
+            
+            
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+    <a href="https://github.com/Qftm" 
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:Qftmbin@gmail.com" 
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+    <a href="https://twitter.com/Qftmer" 
+        <i class="fab fa-twitter"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;Search</span>
+            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

@@ -1,0 +1,1021 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Linux Network Protocol Stack, Qftm">
+    <meta name="description" content="Maybe a hacker">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Linux Network Protocol Stack | Qftm</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.1"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Qftm</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>Index</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>Tags</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>Categories</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>Archives</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-heartbeat" style="zoom: 0.6;"></i>
+      
+      <span>About</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>Friends</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="Search" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Qftm</div>
+        <div class="logo-desc">
+            
+            Maybe a hacker
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			Index
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			Tags
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			Categories
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			Archives
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-heartbeat"></i>
+			
+			About
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			Friends
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/bg.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Linux Network Protocol Stack</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Linux/">
+                                <span class="chip bg-color">Linux</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%8D%8F%E8%AE%AE/">
+                                <span class="chip bg-color">协议</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E5%AE%89%E5%85%A8%E5%BB%BA%E8%AE%BE/" class="post-category">
+                                安全建设
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    2020-03-25
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
+                    2020-12-22
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    5.1k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    17 Min
+                </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近，发现网络协议栈这部分有缺陷，底层基础知识一点要熟练掌握。于是，打算开始深入学习理解Linux网络协议栈 23333！！！一切事物只有熟悉其底层原理，那么所有的问题都会迎刃而解。</p>
+<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>Linux网络协议栈源码是Linux内核源码的重要组成部分,它不仅支持TCP/IP协议，还支持Ethernet透明网桥协议,提供IP防火墙、IP服务质量(QoS)管理及其他的安全特性。配置好的Linux系统所能提供的这些功能可以与目前使用的中档路由器、网桥等网络设备相媲美。Linux 系统还支持多种不同的网络协议，如ATM、蓝牙协议等。下面将重点讨论基于Ethernet的TCP/IP协议的设计和实现技术。</p>
+<h1 id="设计特点"><a href="#设计特点" class="headerlink" title="设计特点"></a>设计特点</h1><p>Linux网络协议栈在设计和实现思路上体现了以下3个重要特点</p>
+<h2 id="层次化"><a href="#层次化" class="headerlink" title="层次化"></a>层次化</h2><p>网络系统在设计上采用了层次化的体系结构。这种层次结构为网络协议的设计与实现提供了很大方便，上层协议可以通过相邻层之间预先定义的服务接口直接使用下层协议提供的功能,从而保证任何一-层协议实现技术的改变不会影响整个网络系统的正常运行。由于操作系统不仅要考虑网络子系统如何与其他子系统(如文件子系统和调度子系统)协调工作,还要支持各种不同的网络设备，让系统中的各个部分协调工作，所以必须采用层次化的设计方法。Linux网络协议栈的层次结构如图所示。</p>
+<p><img src="/2020/03/25/Linux-Network-Protocol-Stack/image-20200320092829021.png" alt="image-20200320092829021"></p>
+<h3 id="网络编程接口层"><a href="#网络编程接口层" class="headerlink" title="网络编程接口层"></a>网络编程接口层</h3><p>位于层次结构最高层的是网络编程接口层，它主要提供符合BSD socket API规范的接口函数，这部分就是编写网络应用程序时经常采用的socket函数，例如socket、bind、accept等,它们是应用程序使用网络服务的主要途径。</p>
+<h3 id="系统调用接口层"><a href="#系统调用接口层" class="headerlink" title="系统调用接口层"></a>系统调用接口层</h3><p>在网络编程接口层之下的是系统调用接口层,它可以实现通过虚拟文件系统的接口访问网络的功能，如在报文发送和接收流程中使用的read和write函数。</p>
+<h3 id="硬件设备层"><a href="#硬件设备层" class="headerlink" title="硬件设备层"></a>硬件设备层</h3><p>位于层次结构最底层的是由各种具体硬件设备组成的硬件设备层,各种设备通过硬件厂商自己提供的驱动程序来完成工作。</p>
+<h3 id="虚拟设备接口层"><a href="#虚拟设备接口层" class="headerlink" title="虚拟设备接口层"></a>虚拟设备接口层</h3><p>位于硬件设备层之上的是虚拟网络设备层，Linux中采用net_device 结构来抽象地表示系统中的每一个网络硬件设备。struct net_device中定义了所有网络设备都必须保存的信息和必须支持的操作。虚拟网络设备层还可以看做是一个适配层，其作用类似于面向对象设计中的接口,它可以屏蔽底层各种硬件本身的差异，使得上层可以通过一个统一的接口来操作各种网络设备，完成报文接收与发送任务。</p>
+<h3 id="网络协议实现层"><a href="#网络协议实现层" class="headerlink" title="网络协议实现层"></a>网络协议实现层</h3><p>虚拟网络设备层之上是网络协议实现层，其中实现各种网络协议，如TCP、IP、ARP协议等。</p>
+<h3 id="通用网络接口层"><a href="#通用网络接口层" class="headerlink" title="通用网络接口层"></a>通用网络接口层</h3><p>Linux网络协议栈在网络协议实现层之上增加了一个通用网络接口层。设置通用网络接口层的目的与虚拟网络设备层十分类似，它为各种网络协议提供了一个服务接口。这样系统中的其他子系统就可以直接使用网络服务,而无需依赖特定的协议或硬件。</p>
+<h2 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h2><p>一方面，层次化设计本身就要求把每一层作为一个独立的模块来实现；另一方面，由于Linux网络协议栈支持的网络协议和实现的网络功能比较多，所以通常情况下这些功能或协议不会同时被使用，这就要求网络协议栈能够根据实际情况，采取“按需加载”的方法，选择所要求的功能与协议。通过采用模块化的实现方式，不仅能够提高系统的工作效率，而且便于以后增加新的功能或协议。下图给出Linux中TCP/IP协议栈中的各个主要功能模块之间的关系示意图。</p>
+<p><img src="/2020/03/25/Linux-Network-Protocol-Stack/image-20200320094302966.png" alt="image-20200320094302966"></p>
+<p>每个模块的设计目标都很明确，一个模块只用来完成一项任务，如IPv4 模块只完成IPv4分组的接收、发送、合法性判断、分片重组等任务，而路由选择功能则交给IP路由模块来完成。为降低模块之间的耦合度，减小相互之间的影响，模块与模块之间的界面多采用函数指针作为接口。这样，当一个模块的实现方式发生变化时，不影响另一个模块的正常工作。</p>
+<h2 id="面向对象的设计"><a href="#面向对象的设计" class="headerlink" title="面向对象的设计"></a>面向对象的设计</h2><p>Linux内核里很多子系统都采用了面向对象的设计方法，最典型的例子就是虚拟文件系统(virtual file system, VFS)。Linux 内核支持很多种文件系统,比如VFAT、EXT2、JFS等。但是在内核里面，采用一个抽象的基类VFS来表示所有的文件系统，并且定义了文件系统的操作界面(接口函数)，然后每一种文件系统再根据VFS进行实例化。</p>
+<p>网络协议栈部分也有多处采用了面向对象的设计方法，典型的例子有以下两个</p>
+<h3 id="邻居表"><a href="#邻居表" class="headerlink" title="邻居表"></a>邻居表</h3><p>ARP协议是获取网络结点IP地址与MAC地址映射关系的协议。但在其他协议族(如ATM、X25)中还存在另外几种不同的地址映射关系。Linux 网络协议栈对此进行了适当的抽象，采用“邻居”的概念来管理相邻的计算机，这样不同协议族都采用相同的接口来管理邻居。</p>
+<h3 id="socket接口"><a href="#socket接口" class="headerlink" title="socket接口"></a>socket接口</h3><p>由于Linux网络协议栈支持20多种协议，因此它在内核中采取向用户层提供一个统一的BSD socket接口的方法。这样做的最大优点是允许应用程序在利用不同的网络协议通信时，能够采用相同的函数完成数据的发送与接收。</p>
+<p>采用面向对象设计方法的主要目的是能够获得多态特性。这种设计在实现上采用函数指针，同样一个调用形式，被执行时会根据指针赋值情况的不同而调用不同的函数，从而表现出不同的行为。当需要支持新的协议时，只需要提供实现了所需功能的处理函数，然后让函数指针指向新协议的处理函数即可,这样便可以在不需要修改调用函数代码的情况下，动态增加对新协议的支持。这种设计方式极大地提高了代码的可扩展性和<br>灵活性。</p>
+<p>需要注意的是：灵活性与复杂性总是相伴而生的。采用函数指针作为函数调用的形式之后，会给阅读源代码、追踪和分析程序的处理流程带来很大困难，即无法从调用语句本身确定被调用的函数。因此，在本章分析报文发送和接收流程时，会特别强调代码执行过程中对函数指针的处理情况。</p>
+<h1 id="固定实现模式"><a href="#固定实现模式" class="headerlink" title="固定实现模式"></a>固定实现模式</h1><p>除了上面介绍的3个设计特点之外，Linux网络协议栈的代码中还使用了很多固定的实现模式，下面会介绍几个模式。</p>
+<h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><p>网络协议栈为了提高处理效率而使用缓存，具体的实例包括保存路由结果的struct rtable结构和ARP缓存等。通常使用哈希表来实现缓存，内核中提供了用于实现哈希表的基本数据结构：数组、单向和双向链表。具体的哈希函数要根据缓存对象的特征来进行选择，有些情况下会在键值中加人一些随机特征来防止针对哈希表的拒绝服务(Denial of Service，DoS)攻击。</p>
+<h2 id="引用计数"><a href="#引用计数" class="headerlink" title="引用计数"></a>引用计数</h2><p>内核中的很多数据结构都可能被不同CPU上的不同进程所共享，这里就涉及如何进行垃圾收集的问题，即只有不被任何进程使用的数据结构才能被释放，否则就会引起空指针等严重的问题。因此网络协议栈中的很多数据结构都使用了一个引用计数字段。使用该结构的用户在使用之前增加引用计数的值，在使用之后再减少计数值。当引用计数值减少到0时，就表明这块数据已经不再有用户使用,应该释放其占用的内存。在Linux内核源代码中包含引用计数字段的数据结构往往会同时提供两个专门的函数来增加和减少计数值，这类函数的名称通常为: xxx_ hold 和xxx_ relcase(或xxx_ put, 例如net_ device 结构提供的dev_ put 函数)。如果在释放数据结构时忘记调用xxx_ release 函数减少计数值，则可能造成数据永远得不到释放，导致内存泄露；如果在使用数据结构时忘记调用xxx_hold函数来增加计数值，则可能导致当前使用的数据被提前释放，造成空指针问题。特别需要指出的是，在使用哈希表或链表提供的查询函数获取其中元素时，查询函数往往会自动增加该元素：的计数值，所以在使用完之后不能忘记手工减少计数值。</p>
+<h2 id="函数指针"><a href="#函数指针" class="headerlink" title="函数指针"></a>函数指针</h2><p>通过在结构体中定义函数指针成员，C语言也可以编写出具有面向对象特性的程序。使用函数指针的最大优点是可以根据情况将指针初始化为不同的函数，从而做到同一种静态调用形式具有不同动态行为的能力，即多态性。在Linux网络协议栈中使用函数指针的情况主要有3种。第一，作为层与层之间的接口实现一对多的映射关系，如BSD socket层和具体协议族的socket实现之间就借助于一组函数指针(定义在proto_ ops 结构中)，获得接口和多态的特性；第二，根据状态或其他模块的处理结果来选择具体的处理函数，如ARP模块的发送函数指针output会根据ARP缓存的状态来决定采用哪一种发送丽数；第三，实现一些自定义的处理，例如在net_ device 中定义的函数指针init 就可以执行设备提供的自定义初始化函数来完成特殊处理，无需特殊处理时函数指针为空。</p>
+<p>函数指针的最大缺点是会给阅读源代码带来困难。当在某条代码执行路径上遇到函数指针时，必须首先找出对该指针的初始化情况。常见的初始化条件包括某些报文首部字段或状态，例如，在将报文投递给上层处理函数时，会根据报头中上层协议字段的值来初始化函数指针；在ARP模块中则会根据缓存状态让函数指针指向合适的处理函数。</p>
+<h1 id="TCP-IP协议栈中主要模块简介"><a href="#TCP-IP协议栈中主要模块简介" class="headerlink" title="TCP/IP协议栈中主要模块简介"></a>TCP/IP协议栈中主要模块简介</h1><p>下面按照从上层到下层的顺序来对网络协议栈的各个子模块进行介绍。</p>
+<h2 id="路由子系统"><a href="#路由子系统" class="headerlink" title="路由子系统"></a>路由子系统</h2><p>路由是IP层的主要任务之一，也是IP层最复杂的模块。当主机向外发送IP分组时，要根据IP分组的目的地址查询它的路由。Linux网络协议栈将与IP路由有关的信息集中存放在转发信息块(Forwarding Information Block，FIB)中，转发路由信息库包括路由规则(Routing Rules)和路由表( Routing Tables) 两个部分。路由规则用来实现基于规则的路由，又称为策略路由，即对满足某些条件的报文，应用特定的路由表来决定路由信息。系统中最多可以定义255张路由表，在不启用策略路由的情况下只使用其中两张:主路由表(main_table)用于描述主机间路由规则;局部路由表(local_table)只用于记录本地地址信息。如果分组的路由决策来自局部路由表，则说明这是发给本机的分组。通过这样一个特殊的路由表，路由子系统能够以统一的方式来处理所有IP分组。</p>
+<p>路由表本身不是一个单一的结构，而是由多个结构组合而成，并且采用层次结构来组织和管理这些实现路由表的结构。这些数据结构之间的关系如下图所示</p>
+<p><img src="/2020/03/25/Linux-Network-Protocol-Stack/image-20200325093657873.png" alt="image-20200325093657873"></p>
+<h2 id="组播模块"><a href="#组播模块" class="headerlink" title="组播模块"></a>组播模块</h2><p>Internet上的大多数网络应用都属于单播通信，即将分组从一台主机发送到另一台主机。但有些应用(如视频会议)要求同时有多个发送主机和多个接收主机，这样的通信方式称为组播(或多播)。上面介绍的IP路由子系统主要是针对单播模式，但Linux网络协议栈同样也支持组播模式。要实现组播通信，网络协议栈必须实现两种功能：管理组播通信的成员、高效地把数据分发给组播成员。</p>
+<p>对于第一种功能，Linux协议栈实现了标准的IGMP协议，具体的代码在net/ipv4/igmp.c中。IGMP协议数据必须作为IP分组的负载，在IP报头中会指明负载类型，进而调用接收IGMP报文的处理函数igmp_rev。</p>
+<p>对于第二种功能，通常在组成员之间建立一棵组播树，发送主机作为树的根节点，把分组发送给作为树的叶子节点的接收主机，这个过程称为组播路由算法。树的中间节点只负责转发而不需要接收组播分组，因此网络协议栈也必须区分接收和转发的情况。目前常用的组播路由算法包括DVMRP，MOSPF等。组播路由算法大多以守护程序的形式在用户空间实现。但转发和接收组播报文的处理必须在内核协议栈中完成，这部分代码在net/<br>ipv4/ipmr.c中。</p>
+<h2 id="IPv6模块"><a href="#IPv6模块" class="headerlink" title="IPv6模块"></a>IPv6模块</h2><p>IPv6将地址长度从32bit扩展为128bit，同时其在报头格式、报头扩展选项等方面与IPv4存在差异。Linux 网络协议栈中实现IPv6的代码保存在net/ipv6 目录下及头文件include/net/ipv6.h中。IPv6协议的代码以IPv4的实现为基础，尽可能复用一些与具体IP协议版本无关的处理代码。</p>
+<ul>
+<li><p>处理数据链路层报头时，发现网络层使用IPv6协议， 调用函数ipv6_rcv来接收并处理该报文</p>
+</li>
+<li><p>当上层协议发送报文时，调用IPv6的发送函数 ip6_xmit</p>
+</li>
+<li><p>通过IPv6来发送ICMP报文时调用icmpv6_send函数</p>
+</li>
+</ul>
+<h2 id="报文过滤和防火墙模块"><a href="#报文过滤和防火墙模块" class="headerlink" title="报文过滤和防火墙模块"></a>报文过滤和防火墙模块</h2><p>Linux使用Netfilter框架来实现防火墙的功能。从Linux2. 4内核开始，内核设计者在网络协议栈中预留出若干函数接口，开发人员可以通过这些接口实现报文过滤、报文处理、NAT等功能，这套函数接口构成了Netfilter 框架。Netfilter 框架包含以下3个部分:</p>
+<ul>
+<li><p>为每种网络协议（IPv4/v6）定义一套钩子函数，钩子函数在报文流过协议栈的几个关键点调用。在这几个钩子函数点上，协议栈将把报文及钩子函数标号作为参数传递给Netfilter框架。</p>
+</li>
+<li><p>内核中的任何模块都可以在每种协议的一个或多个钩子点 上注册，实现挂接。 </p>
+</li>
+<li><p>用户进程可以采用异步方式处理传递到用户空间的报文。</p>
+</li>
+</ul>
+<p>Linux中所有报文过滤和NAT等功能都基于该框架。目前Netfilter 框架已在IPv4和IPv6协议栈中实现了。</p>
+<p>下图显示了Netfilter框架中钩子函数在协议栈中的位置，从图中可以看到IPv4共有5个钩子函数点</p>
+<p><img src="/2020/03/25/Linux-Network-Protocol-Stack/image-20200325095747404.png" alt="image-20200325095747404"></p>
+<p>Iptables是一个基于Netfilter框架的报文过滤和修改工具。Iptables模块可以创建规则表(table) ，并要求报文流经指定的规则表。在Iptables 中，预先定义了3张规则表，分别实现3种不同的概念：报文过滤(filter表)、网络地址转换(nat表)及报文处理(mangle表)。</p>
+<ul>
+<li>报文过滤（filter表） </li>
+</ul>
+<p>NF_IP_LOCAL_IN、NF_IP_FORWARD、NF_IP_LOCAL_OUT </p>
+<ul>
+<li>网络地址转换（nat表） </li>
+</ul>
+<p>NF_IP_PRE_ROUTING、NF_IP_POST_ROUTING、NF_IP_LOCAL_OUT</p>
+<ul>
+<li>报文处理（mangle表）</li>
+</ul>
+<p>NF_IP_PRE_ROUTING、NF_IP_LOCAL_OUT</p>
+<p>Netfilter是表的容器，表是链的容器，链是规则的容器（规则定义形式为“如果报头符合某个条件，就按照某种方法处理这个报文” ）</p>
+<p>Linux网络协议栈中实现的防火墙不仅可以实现报文过滤，还可以跟踪会话状态。</p>
+<h2 id="邻居子系统"><a href="#邻居子系统" class="headerlink" title="邻居子系统"></a>邻居子系统</h2><p>网络转发分组过程中，需要将分组转发给相邻主机，需要知道相邻主机的第2层和第3层地址间的映射关系。IPv4的ARP协议，IPv6的邻居发现协议。</p>
+<p>不同的协议有不同的方法解决地址映射问题，linux 邻居子系统把公用部分抽象出来，形成一个与具体协议无关的服务接口，主要功能：缓存机制和超时机制。 </p>
+<ul>
+<li><p>3层和2层地址映射关系，2层帧头</p>
+</li>
+<li><p>老化和超时机制维护映射关系</p>
+</li>
+</ul>
+<h2 id="网桥模块"><a href="#网桥模块" class="headerlink" title="网桥模块"></a>网桥模块</h2><ul>
+<li><p>网桥是一种工作在第2层的网络互联设备，用于数据链路层上将两个或多个物理上独立的局域网连接成 一个网段。</p>
+</li>
+<li><p>网桥和交换机本质上相同，前者是描述第2层连接设备和说明生成树（STP）算法，而后者多指实际的网络设备。 </p>
+</li>
+<li><p>Linux网络协议栈中实现了透明网桥的功能。</p>
+</li>
+<li><p>通过和Netfilter/Iptables和Ebtables框架结合，构建网桥式防火墙。</p>
+</li>
+</ul>
+<h2 id="流量控制管理"><a href="#流量控制管理" class="headerlink" title="流量控制管理"></a>流量控制管理</h2><ul>
+<li><p>Linux网络协议栈既可以控制向外的流量，也可以控制向内的流量。</p>
+</li>
+<li><p>流量控制通过3种对象实现，Qdisc（排队规则）、Class（分类）和Filter（过滤器）。</p>
+</li>
+</ul>
+<h2 id="原始套接字和PACKET协议族"><a href="#原始套接字和PACKET协议族" class="headerlink" title="原始套接字和PACKET协议族"></a>原始套接字和PACKET协议族</h2><p>在Linux中实现的TCP/IP网络协议栈源码不仅能够完成TCP和UDP协议的发送和接收流程，还支持两类比较特殊的报文处理方法: INET协议族的原始套接字(RAW socket)和PACKET协议族。</p>
+<p>INET协议族的原始套接字 </p>
+<ul>
+<li>发送：用户空间构造协议报文，利用RAW Socket将数据传 给内核，内核增加合法的IP报头发送。 </li>
+<li>接收：程序中创建了一个SOCK_RAW类型的socket，并制定 目标协议之后，系统使用raw_v4_htable对网卡收到数据包 匹配，将ip报头中指定的协议类型和socket指定的协议类型 相同、socket绑定的本地地址和IP报头目的地址相同、 socket绑定的目的地址和IP报头的源地址相同，可能有多个 socket同时满足条件。</li>
+</ul>
+<p>PF_PACKET类型的socket </p>
+<ul>
+<li><p>是一种允许应用程序不经过网络协议栈而直接读写网络设备的接口。</p>
+</li>
+<li><p>应用程序创建的PF_PACKET报文直接交给网络接口设备发送，接收到报文，直接投递给相应的socket。</p>
+</li>
+</ul>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        Author:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Qftm</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        Link:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://Qftm.github.io/2020/03/25/Linux-Network-Protocol-Stack/">http://Qftm.github.io/2020/03/25/Linux-Network-Protocol-Stack/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        Reprint policy:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    All articles in this blog are used except for special statements
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    reprint polocy. If reproduced, please indicate source
+                    <a href="/about" target="_blank">Qftm</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Linux/">
+                                    <span class="chip bg-color">Linux</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%8D%8F%E8%AE%AE/">
+                                    <span class="chip bg-color">协议</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+            <div class="card">
+                <a href="/2020/04/03/php-filter-tricks/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/code-1.jpg" class="responsive-img" alt="探索php://filter在实战当中的奇技淫巧">
+                        
+                        <span class="card-title">探索php://filter在实战当中的奇技淫巧</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            在渗透测试或漏洞挖掘的过程中，我们经常会遇到php://filter结合其它漏洞比如文件包含、文件读取、反序列化、XXE等进行组合利用，以达到一定的攻击效果，拿到相应的服务器权限。
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-03
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Web%E5%AE%89%E5%85%A8/" class="post-category">
+                                    Web安全
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/PHP/">
+                        <span class="chip bg-color">PHP</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/03/23/Software-Engineering-Learning-Handbook/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/code-3.jpg" class="responsive-img" alt="Software Engineering Learning Handbook">
+                        
+                        <span class="card-title">Software Engineering Learning Handbook</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            无论是学习安全还是开发，软件工程都是必须要学习掌握的一项技能，于是就总结了这个学习手册。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-23
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" class="post-category">
+                                    编程开发
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Handbook/">
+                        <span class="chip bg-color">Handbook</span>
+                    </a>
+                    
+                    <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">
+                        <span class="chip bg-color">软件工程</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + 'From: Qftm<br />'
+            + 'Author: Qftm<br />'
+            + 'Link: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2018</span>
+            <a href="/about" target="_blank">Qftm</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">370.8k</span>&nbsp;字
+            
+            
+            
+            
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+    <a href="https://github.com/Qftm" 
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:Qftmbin@gmail.com" 
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+    <a href="https://twitter.com/Qftmer" 
+        <i class="fab fa-twitter"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;Search</span>
+            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

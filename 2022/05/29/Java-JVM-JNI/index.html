@@ -1,0 +1,1700 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Java安全详谈-JNI 底层分析, Qftm">
+    <meta name="description" content="Maybe a hacker">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Java安全详谈-JNI 底层分析 | Qftm</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.1"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Qftm</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>Index</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>Tags</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>Categories</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>Archives</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-heartbeat" style="zoom: 0.6;"></i>
+      
+      <span>About</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>Friends</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="Search" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Qftm</div>
+        <div class="logo-desc">
+            
+            Maybe a hacker
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			Index
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			Tags
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			Categories
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			Archives
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-heartbeat"></i>
+			
+			About
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			Friends
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/bg.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Java安全详谈-JNI 底层分析</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Java/">
+                                <span class="chip bg-color">Java</span>
+                            </a>
+                        
+                            <a href="/tags/JNI/">
+                                <span class="chip bg-color">JNI</span>
+                            </a>
+                        
+                            <a href="/tags/JVM/">
+                                <span class="chip bg-color">JVM</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Java%E5%AE%89%E5%85%A8/" class="post-category">
+                                Java安全
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    2022-05-29
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
+                    2022-06-22
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    5.5k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    23 Min
+                </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>JNI (<code>Java Native Interface</code>，JAVA 本地接口) 允许 Java 代码和其它编程语言编写的代码进行交互，主要为Java和Native层（C/C++）相互调用的接口规范，但是并不妨碍扩展其他语言。 JNI 在 Java1.1 中正式推出，在 Java1.2 中加入了<code>JNI_OnLoad</code>和<code>JNI_OnUnload</code>方法。</p>
+<p>JNI 设计交互 Native层 C/C++ 代码的主要优点为：特定功能场景下，提升应用性能；代码层保护，增加反编译难度；Native库文件，可重复使用及不同项目间扩展移植。说完优点那么唯一的一个缺点就是C/C++代码编译生成的动态链接库不可跨平台使用。</p>
+<p>正常情况下编写的Java代码是不能直接调用C/C++代码，需要通过JNI标准接口进行间接调用访问。Java代码要想使用JNI调用Native层C/C++代码就需要先向JVM注册Native函数，其注册主要分为静态注册和动态注册两大类，通过注册可实现 Java Native 方法与 C/C++ 方法的对应关系。静态和动态注册主要区别在于查找效率：静态注册，首次调用Java Native方法时，会按照JNI命名规则去寻找；而动态注册，由于存在一张映射表JNINativeMethod，因此查找效率高。另外，静态注册多用于NDK开发，而动态注册多用于Framework开发。最终，无论静态注册方法，还是动态注册方法，都需要将相应的C/C++文件编译成平台所需要的动态库。</p>
+<h2 id="静态注册"><a href="#静态注册" class="headerlink" title="静态注册"></a>静态注册</h2><blockquote>
+<p>JNI静态注册在Java代码首次调用 Java Native 函数时完成</p>
+</blockquote>
+<p>通过编写Java程序，调用native层的整数求和函数来了解JNI静态注册实现过程。Java代码调用静态Native函数，需要在类中加载相应动态链接库文件，并声明要调用的Java Native函数</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">package</span> org<span class="token punctuation">.</span>qftm<span class="token punctuation">.</span>learn<span class="token punctuation">.</span>jni<span class="token punctuation">.</span>demo1<span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">/**
+ * Created by IntelliJ IDEA.
+ * User: Qftm
+ * Date: 2022/5/11
+ * Time: 17:36
+ */</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">IntSum</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 声明 native 本地函数</span>
+    <span class="token keyword">public</span> <span class="token keyword">native</span> <span class="token keyword">int</span> <span class="token function">sums</span><span class="token punctuation">(</span><span class="token keyword">int</span> num1<span class="token punctuation">,</span> <span class="token keyword">int</span> num2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 静态代码块，加载动态链接库</span>
+    <span class="token keyword">static</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span><span class="token function">loadLibrary</span><span class="token punctuation">(</span><span class="token string">"IntSum"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 实例化调用 native 本地函数</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">IntSum</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">sums</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>编译Java程序</p>
+<pre><code>λ Qftm &gt;&gt;&gt;: javac org\qftm\learn\jni\demo1\IntSum.java</code></pre><p>利用 javah 生成编译native库所需的相应 <code>.h</code> 头文件，javah 会自动识别 class 文件里声明的 java native 本地方法并进行解析处理生成相应 <code>.h</code> 头文件 (也可以根据JNI静态注册规则手动编写头文件)</p>
+<pre><code>λ Qftm &gt;&gt;&gt;: javah -o IntSum.h org.qftm.learn.jni.demo1.IntSum</code></pre><p>查看 javah 处理生成的 <code>IntSum.h</code> 头文件并进行分析，其中定义了一个JNI Native调用的 C/C++方法<code>Java_org_qftm_learn_jni_demo1_IntSum_sums</code>，可以看到方法结构与Java方法类似，同样包含方法名、参数、返回类型、修饰符</p>
+<pre class="line-numbers language-c++"><code class="language-c++">/* DO NOT EDIT THIS FILE - it is machine generated */
+#include <jni.h>
+/* Header for class org_qftm_learn_jni_demo1_IntSum */
+
+#ifndef _Included_org_qftm_learn_jni_demo1_IntSum
+#define _Included_org_qftm_learn_jni_demo1_IntSum
+#ifdef __cplusplus
+extern "C" {
+#endif
+/*
+ * Class:     org_qftm_learn_jni_demo1_IntSum
+ * Method:    sums
+ * Signature: (II)D
+ */
+JNIEXPORT jdouble JNICALL Java_org_qftm_learn_jni_demo1_IntSum_sums (JNIEnv *, jobject, jint, jint);
+
+#ifdef __cplusplus
+}
+#endif
+#endif<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>默认javah解析生成的JNI头文件中，C/C++ 函数都为JNI Native对应的静态注册函数，其通过 JNIEXPORT 和 JNICALL 两个宏定义声明。除了两个宏定义外，函数还存在返回类型和方法名及函数参数，其中静态注册函数名遵循特定JNI命名规范，即为<code>Java_&lt;PackageName&gt;_&lt;ClassName&gt;_&lt;MethodName&gt;</code>，这里需要注意下，如果Java代码声明的本地方法名称中本来就包含下划线，那么该部分将使用下划线加数字替换。另外会发现函数多了两个类型参数<code>JNIEnv *</code>和<code>jobject</code>，这两个参数由<code>javah</code>自动添加，并且其参数值由虚拟机自动传入。</p>
+<ul>
+<li>jni.h</li>
+</ul>
+<p><code>#include &lt;jni.h&gt;</code> 引入了JVM所声明的所有JNI接口规范，<code>jni.h</code> 位于<code>$JAVA_HOME/include</code>目录内，这是JNI中所有的类型、函数、宏等定义的地方。</p>
+<ul>
+<li>extern</li>
+</ul>
+<p><code>extern &quot;C&quot;</code> 声明是为了避免编绎器按照C++的方式去编绎C函数，也就是告诉编译器这部分代码使用C语言的规则进行编译和链接，这样处理的原因主要是涉及到C和C++的函数编译差异。C不支持函数的重载，编译之后函数名不变；而C++支持函数的重载，无论函数是否同名，编译之后函数名会发生改变，即被编译成函数名+参数类型的特殊修饰格式，Windows下修饰格式为：<code>? + 函数名 + @ + 类名/名称空间 + @ + YG/YA/YI(__stdcall、__cdecl、__fastcall) + 函数返回值类型 + 参数类型表(X-void、D-char、E-unsigned char、F-short、H-int、I-unsigned int、J-long、K-unsigned long、M-float、N-double、_N-bool、PA+指针类型-指针) + @Z</code>；Linux下修饰格式为：<code>函数名 + 参数类型表(d-double、P+指针类型、i-int)</code>。</p>
+<p>举例在 Windows 下测试代码如下</p>
+<pre class="line-numbers language-c++"><code class="language-c++">// define1.h 定义自定义函数
+extern "C" {
+    int add1(int num1, int num2);
+    void info1(char* name, int age);
+}
+
+int add2(int num1, int num2);
+void info2(char* name, int age);
+
+
+// dllmain.cpp : 定义 DLL 应用程序的入口点。
+#include "pch.h"
+#include "stdio.h"
+#include "define1.h"
+
+int add1(int num1, int num2) {
+    return num1 + num2;
+}
+
+void info1(char* name, int age) {
+    printf("");
+}
+
+int add2(int num1, int num2) {
+    return num1 + num2;
+}
+
+void info2(char* name, int age) {
+    printf("");
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>查看<code>extern &quot;C&quot;</code>使用C编译方式的函数，可以看到函数被编译后，函数名未发生改变</p>
+<p><img src="/2022/05/29/Java-JVM-JNI/image-20220516231618958.png" alt="image-20220516231618958"></p>
+<p>而，使用C++编译方式的函数，可以看到函数被编译后，函数名发生改变</p>
+<pre class="line-numbers language-c++"><code class="language-c++">int add2(int num1, int num2)      ->    ?add2@@YAHHH@Z
+void info2(char* name, int age)   ->    ?info2@@YAXPADH@Z<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><img src="/2022/05/29/Java-JVM-JNI/image-20220516232740093.png" alt="image-20220516232740093"></p>
+<p>那么JNI静态注册调用的C/C++函数必须要使用<code>extern &quot;C&quot;</code>声明，否则JNI静态查找规则调用Native时会抛出<code>Exception in thread &quot;main&quot; java.lang.UnsatisfiedLinkError</code>异常。</p>
+<ul>
+<li>函数注释</li>
+</ul>
+<pre class="line-numbers language-c++"><code class="language-c++">/*
+ * Class:     org_qftm_learn_jni_demo1_IntSum
+ * Method:    sums
+ * Signature: (II)D
+ */
+JNIEXPORT jdouble JNICALL Java_org_qftm_learn_jni_demo1_IntSum_sums (JNIEnv *, jobject, jint, jint);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>函数的注释分为三部分，解释如下</p>
+<pre><code>Class:     对应的Java层Class完整类
+Method:    对应的Java层Native方法
+Signature: 对应的Java层Native方法的签名</code></pre><ul>
+<li>JNIEXPORT、JNICALL</li>
+</ul>
+<p>后续的分析，在 Windows 平台下生成特定的 dll 动态链接库，使用 VS2019 创建生成 DLL  动态链接库项目（Linux 下使用 <code>gcc -fPIC -shared xxx.c -o yyy.so</code> 编译生成特定的 so 动态链接库）</p>
+<p><img src="/2022/05/29/Java-JVM-JNI/image-20220506173143258.png" alt="image-20220506173143258"></p>
+<p>DLL项目最初结构如下</p>
+<p><img src="/2022/05/29/Java-JVM-JNI/image-20220506201020978.png" alt="image-20220506201020978"></p>
+<p>点击左侧头文件， 选择添加新建项， 新建头文件命名 <code>intsum.h</code> 进行添加，添加后打开该头文件并复制上面 <code>IntSum.h</code>头文件内容，复制完毕会发现报错找不到 <code>jni.h</code> 头文件</p>
+<p><img src="/2022/05/29/Java-JVM-JNI/image-20220519100609787.png" alt="image-20220519100609787"></p>
+<p> <code>jni.h</code> 头文件位于 JDK 项目 include 目录下，该目录下的所有 <code>.h</code> 文件主要为编译本地代码时使用的 <code>C/C++</code> 头文件，所以需要引入 <code>&lt;JDK_HOME&gt;/include</code> 和 <code>&lt;JDK_HOME&gt;/include/win32</code> 目录作为附加包含目录（导航栏依次选择 项目 =&gt; 属性 =&gt; C/C++ =&gt; 常规 =&gt; 附加包含目录），</p>
+<p><img src="/2022/05/29/Java-JVM-JNI/image-20220506204135391.png" alt="image-20220506204135391"></p>
+<p>附加包含目录引入后可以在项目结构的外部依赖项中查看到所有的 <code>.h</code> 头文件依赖</p>
+<p>定位关键字JNIEXPORT、JNICALL定义在 <code>jni_md.h</code> 宏定义中，不同平台下JDK所定义的宏定义内容有所不同，如下</p>
+<pre class="line-numbers language-c++"><code class="language-c++">// Windows JDK 1.8
+#define JNIEXPORT __declspec(dllexport)
+#define JNIIMPORT __declspec(dllimport)
+#define JNICALL __stdcall
+
+// Linux JDK 1.8
+#if (defined(__GNUC__) && ((__GNUC__ > 4) || (__GNUC__ == 4) && (__GNUC_MINOR__ > 2))) || __has_attribute(visibility)
+  #define JNIEXPORT     __attribute__((visibility("default")))
+  #define JNIIMPORT     __attribute__((visibility("default")))
+#else
+  #define JNIEXPORT
+  #define JNIIMPORT
+#endif
+
+#define JNICALL<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>宏定义代表的是define常量右边定义的内容，JNIEXPORT 用来表示函数是否可导出（即：方法的可见性），Linux下<code>__attribute__((visibility(&quot;default&quot;)))</code>描述的是”可见性”属性 <code>visibility</code>，取值如下</p>
+<pre><code>default：表示外部可见，类似于public修饰符，可以被外部发现调用
+hidden ：表示隐藏，类似于private修饰符，只能被内部发现调用</code></pre><p>如果JNIEXPORT由hidden属性描述，则被JNIEXPORT修饰的C/C++函数 <code>__attribute__((visibility(&quot;hidden&quot;))) jdouble JNICALL Java_org_qftm_learn_jni_demo1_IntSum_sums(JNIEnv*, jobject, jint, jint);</code> 将不会出现在导出表里面，那么JNI静态注册的Native函数被JNI静态调用规则调用时就无法在相应动态链接库的导出表内找到对应的C/C++函数，导致JNI静态规则调用失败；另外，如果Java Native函数对应的C/C++函数没有通过正常的JNIEXPORT修饰（即：去掉JNIEXPORT关键字），那么该C/C++函数同样不会出现在导出表里面，也就无法被JNI静态注册调用规则正常调用，但是可以利用JNI动态注册调用。</p>
+<p>JNICALL 用来表示C/C++函数的调用规范（如：<code>__stdcall、__cdecl、__fastcall</code>），Linux下JNICALL右边是空的，说明只是个空定义，库文件代码可以直接使用右边的内容（空）替换调JNICALL（即：去掉JNICALL关键字）</p>
+<ul>
+<li>JNI 静态调用 Native</li>
+</ul>
+<p>编辑 <code>dllmain.cpp</code> 实现<code>intsum.h</code>头文件定义的C/C++函数，代码如下</p>
+<pre class="line-numbers language-c++"><code class="language-c++">// dllmain.cpp : 定义 DLL 应用程序的入口点。
+#include "pch.h"
+#include <stdio.h>
+#include "intsum.h"
+
+// JNIEnv *env 为JVM环境指针, 用于和JVM交互、jobject obj 表示当前操作的对象
+JNIEXPORT jdouble JNICALL Java_org_qftm_learn_jni_demo1_IntSum_sums(JNIEnv* env, jobject obj, jint num1, jint num2) {
+   return num1+num2;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>点击导航栏的生成 =&gt; 生成解决方案，即可生成所需的 dll 动态链接库，将 Windows DLL 项目生成的 dll 拷贝到 Java JNI 项目下，并测试通过 Java JNI 调用静态 Native 函数</p>
+<p><img src="/2022/05/29/Java-JVM-JNI/image-20220527103833860.png" alt="image-20220527103833860"></p>
+<p>通过上面可以发现，java代码native函数和dll代码里面c/c++函数声明的差异</p>
+<pre><code>// java
+public native double sums(int num1, int num2);
+
+// c++
+JNIEXPORT jdouble JNICALL Java_org_qftm_learn_jni_demo1_IntSum_sums(JNIEnv*, jobject, jint, jint);</code></pre><p>通过对比可以发现java native sums函数名在c++中变得很长，这跟JNI native函数注册方式有关，这里使用的是JNI Native静态函数注册，而JNI Native静态注册在编写动态链接库C++代码中必须按照JNI接口规范的命名规则注册，即java native函数对应的C/C++函数名为<code>Java_&lt;PackageName&gt;_&lt;ClassName&gt;_&lt;MethodName&gt;</code>。那么，当我们在Java中调用静态Native方法时，JVM 就会根据JNI命名规则来查找相应dll库的导出表，即调用Java静态Native方法所对应的 C/C++ 方法。</p>
+<ul>
+<li>JNIENV</li>
+</ul>
+<p><code>JNIENV</code> 直译为 JNI 环境，和具体线程相关。函数默认的第一个参数<code>JNIEnv *env</code>由虚拟机自动传入，通过<code>JNIEnv *</code> 指针可以对 Java 层代码进行操作，如：获取Java类/父类Class对象、创建Java对象、调用Java对象的方法等。</p>
+<p>定位<code>JNIEnv</code>实现在<code>jni.h</code>中：<code>Windows JDK 1.8</code></p>
+<pre class="line-numbers language-c++"><code class="language-c++">/*
+ * JNI Native Method Interface.
+ */
+
+struct JNINativeInterface_;
+
+struct JNIEnv_;
+
+#ifdef __cplusplus   // C++
+typedef JNIEnv_ JNIEnv;
+#else                // C
+typedef const struct JNINativeInterface_ *JNIEnv;
+#endif<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><code>C++</code>中<code>JNIEnv</code>宏定义为一个<code>JNIEnv_</code>结构体，<code>JNIEnv_</code>结构体定义如下</p>
+<pre class="line-numbers language-c++"><code class="language-c++">/*
+ * We use inlined functions for C++ so that programmers can write:
+ *
+ *    env->FindClass("java/lang/String")
+ *
+ * in C++ rather than:
+ *
+ *    (*env)->FindClass(env, "java/lang/String")
+ *
+ * in C.
+ */
+
+struct JNIEnv_ {
+    const struct JNINativeInterface_ *functions;
+#ifdef __cplusplus
+
+    jint GetVersion() {
+        return functions->GetVersion(this);
+    }
+    jclass DefineClass(const char *name, jobject loader, const jbyte *buf,
+                       jsize len) {
+        return functions->DefineClass(this, name, loader, buf, len);
+    }
+    jclass FindClass(const char *name) {
+        return functions->FindClass(this, name);
+    }
+    jmethodID FromReflectedMethod(jobject method) {
+        return functions->FromReflectedMethod(this,method);
+    }
+    jfieldID FromReflectedField(jobject field) {
+        return functions->FromReflectedField(this,field);
+    }
+
+    jobject ToReflectedMethod(jclass cls, jmethodID methodID, jboolean isStatic) {
+        return functions->ToReflectedMethod(this, cls, methodID, isStatic);
+    }
+    .......<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>从上述声明可以看出，函数由结构体指针<code>JNINativeInterface</code>定义，其定义了JNI函数调用的接口</p>
+<pre class="line-numbers language-c++"><code class="language-c++">/*
+ * JNI Invocation Interface.
+ */
+
+struct JNIInvokeInterface_;
+
+struct JavaVM_;
+
+#ifdef __cplusplus
+typedef JavaVM_ JavaVM;
+#else
+typedef const struct JNIInvokeInterface_ *JavaVM;
+#endif
+
+struct JNINativeInterface_ {
+    void *reserved0;
+    void *reserved1;
+    void *reserved2;
+
+    void *reserved3;
+    jint (JNICALL *GetVersion)(JNIEnv *env);
+
+    jclass (JNICALL *DefineClass)
+      (JNIEnv *env, const char *name, jobject loader, const jbyte *buf,
+       jsize len);
+    jclass (JNICALL *FindClass)
+      (JNIEnv *env, const char *name);
+
+    jmethodID (JNICALL *FromReflectedMethod)
+      (JNIEnv *env, jobject method);
+    jfieldID (JNICALL *FromReflectedField)
+      (JNIEnv *env, jobject field);
+
+    jobject (JNICALL *ToReflectedMethod)
+      (JNIEnv *env, jclass cls, jmethodID methodID, jboolean isStatic);
+     .....<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>从定义的函数接口可以看出结构体<code>JNINativeInterface_</code>是操作 <code>Java</code> 层的入口，那么相应<code>C/C++</code>函数代码通过<code>JNIEnv</code> 指针就可对<code>Java</code>层进行操作</p>
+<ul>
+<li>jclass、jobject</li>
+</ul>
+<p><code>jclass</code>表示Java层静态native函数对应Java类的Class对象</p>
+<p><code>jobject</code> 表示Java层非静态native函数对应Java类的实例对象，相当于Java中的<code>this</code></p>
+<ul>
+<li>Java、JNI、C/C++ 数据类型映射关系</li>
+</ul>
+<p><code>javah</code>生成的头文件里使用的类型都是<code>jni.h</code>所定义规范的，目的是为了做到与平台无关，比如：在所有平台上都能保证<code>jint</code>是32位的有符号整型。</p>
+<p>通过定位查看<code>jni.h</code>等源码，可以得出 Java、JNI、C/C++ 中基本数据类型和引用数据类型的映射关系表，核心源码如下位于<code>jni.h</code>中</p>
+<pre class="line-numbers language-c++"><code class="language-c++">// Windows JDK 1.8
+/*
+ * JNI Types
+ */
+
+#ifndef JNI_TYPES_ALREADY_DEFINED_IN_JNI_MD_H
+
+typedef unsigned char   jboolean;
+typedef unsigned short  jchar;
+typedef short           jshort;
+typedef float           jfloat;
+typedef double          jdouble;
+
+typedef jint            jsize;
+
+#ifdef __cplusplus
+
+class _jobject {};
+class _jclass : public _jobject {};
+class _jthrowable : public _jobject {};
+class _jstring : public _jobject {};
+class _jarray : public _jobject {};
+class _jbooleanArray : public _jarray {};
+class _jbyteArray : public _jarray {};
+class _jcharArray : public _jarray {};
+class _jshortArray : public _jarray {};
+class _jintArray : public _jarray {};
+class _jlongArray : public _jarray {};
+class _jfloatArray : public _jarray {};
+class _jdoubleArray : public _jarray {};
+class _jobjectArray : public _jarray {};
+
+typedef _jobject *jobject;
+typedef _jclass *jclass;
+typedef _jthrowable *jthrowable;
+typedef _jstring *jstring;
+typedef _jarray *jarray;
+typedef _jbooleanArray *jbooleanArray;
+typedef _jbyteArray *jbyteArray;
+typedef _jcharArray *jcharArray;
+typedef _jshortArray *jshortArray;
+typedef _jintArray *jintArray;
+typedef _jlongArray *jlongArray;
+typedef _jfloatArray *jfloatArray;
+typedef _jdoubleArray *jdoubleArray;
+typedef _jobjectArray *jobjectArray;
+
+#else
+
+struct _jobject;
+
+typedef struct _jobject *jobject;
+typedef jobject jclass;
+typedef jobject jthrowable;
+typedef jobject jstring;
+typedef jobject jarray;
+typedef jarray jbooleanArray;
+typedef jarray jbyteArray;
+typedef jarray jcharArray;
+typedef jarray jshortArray;
+typedef jarray jintArray;
+typedef jarray jlongArray;
+typedef jarray jfloatArray;
+typedef jarray jdoubleArray;
+typedef jarray jobjectArray;
+
+#endif
+
+typedef jobject jweak;
+
+typedef union jvalue {
+    jboolean z;
+    jbyte    b;
+    jchar    c;
+    jshort   s;
+    jint     i;
+    jlong    j;
+    jfloat   f;
+    jdouble  d;
+    jobject  l;
+} jvalue;
+
+struct _jfieldID;
+typedef struct _jfieldID *jfieldID;
+
+struct _jmethodID;
+typedef struct _jmethodID *jmethodID;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>（1）基本数据类型关系表</p>
+<table>
+<thead>
+<tr>
+<th align="center">JNI 类型</th>
+<th align="center">Java 类型</th>
+<th align="center">C/C++ 类型</th>
+<th align="center">本地类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">jsize/jint</td>
+<td align="center">int</td>
+<td align="center">int</td>
+<td align="center">int32_t</td>
+</tr>
+<tr>
+<td align="center">jshort</td>
+<td align="center">short</td>
+<td align="center">short</td>
+<td align="center">int16_t</td>
+</tr>
+<tr>
+<td align="center">jlong</td>
+<td align="center">long</td>
+<td align="center">long/__int64</td>
+<td align="center">int64_t</td>
+</tr>
+<tr>
+<td align="center">jbyte</td>
+<td align="center">byte</td>
+<td align="center">signed char</td>
+<td align="center">char</td>
+</tr>
+<tr>
+<td align="center">jboolean</td>
+<td align="center">boolean</td>
+<td align="center">unsigned char</td>
+<td align="center">uint8_t</td>
+</tr>
+<tr>
+<td align="center">jchar</td>
+<td align="center">char</td>
+<td align="center">unsigned short</td>
+<td align="center">uint16_t</td>
+</tr>
+<tr>
+<td align="center">jfloat</td>
+<td align="center">float</td>
+<td align="center">float</td>
+<td align="center">float</td>
+</tr>
+<tr>
+<td align="center">jdouble</td>
+<td align="center">double</td>
+<td align="center">double</td>
+<td align="center">double</td>
+</tr>
+</tbody></table>
+<p>（2）引用数据类型关系表</p>
+<table>
+<thead>
+<tr>
+<th align="center">JNI 类型</th>
+<th align="center">Java 类型</th>
+<th align="center">C 类型</th>
+<th align="center">C++ 类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">jobject</td>
+<td align="center">类实例化对象</td>
+<td align="center">_jobject*</td>
+<td align="center">_jobject*</td>
+</tr>
+<tr>
+<td align="center">jclass</td>
+<td align="center">类</td>
+<td align="center">_jobject*</td>
+<td align="center">_jclass*</td>
+</tr>
+<tr>
+<td align="center">jstring</td>
+<td align="center">java.lang.String</td>
+<td align="center">_jobject*</td>
+<td align="center">_jstring*</td>
+</tr>
+<tr>
+<td align="center">jthrowable</td>
+<td align="center">java.lang.Throwable</td>
+<td align="center">_jobject*</td>
+<td align="center">_jthrowable*</td>
+</tr>
+<tr>
+<td align="center">jintArray</td>
+<td align="center">int[]</td>
+<td align="center">_jobject*</td>
+<td align="center">_jintArray*</td>
+</tr>
+</tbody></table>
+<p>注意，除了上面定义的<code>String</code>，<code>Class</code>，<code>Throwable</code>、<code>数组</code>，其它的类都是以<code>jobject</code>的形式出现。</p>
+<p>在面向对象的程序语言中一切皆对象，如果JNI对应的Ｃ/C++函数使用C编译器进行编译是没有对象继承的概念，则此时<code>jstring</code>、<code>jclass</code>、<code>数组</code>等皆为<code>jobject</code></p>
+<ul>
+<li>JNI 签名（描述符）</li>
+</ul>
+<p><code>signature</code> 译为签名，用于Java里面成员的描述符，其概念如下</p>
+<pre><code>(1) 如果是字段，表示字段类型的描述符
+(2) 如果是函数，表示函数结构的描述符，即：(每个参数类型描述符) + 返回值类型描述符</code></pre><p>（1）Java 数据类型描述符关系表</p>
+<table>
+<thead>
+<tr>
+<th align="center">Java 类型</th>
+<th align="center">字段描述符(签名)</th>
+<th align="center">备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">int</td>
+<td align="center">I</td>
+<td align="center">int 首字母大写</td>
+</tr>
+<tr>
+<td align="center">float</td>
+<td align="center">F</td>
+<td align="center">float 首字母大写</td>
+</tr>
+<tr>
+<td align="center">double</td>
+<td align="center">D</td>
+<td align="center">double 首字母大写</td>
+</tr>
+<tr>
+<td align="center">short</td>
+<td align="center">S</td>
+<td align="center">short 首字母大写</td>
+</tr>
+<tr>
+<td align="center">long</td>
+<td align="center">L</td>
+<td align="center">long 首字母大写</td>
+</tr>
+<tr>
+<td align="center">char</td>
+<td align="center">C</td>
+<td align="center">char 首字母大写</td>
+</tr>
+<tr>
+<td align="center">byte</td>
+<td align="center">B</td>
+<td align="center">byte 首字母大写</td>
+</tr>
+<tr>
+<td align="center">boolean</td>
+<td align="center">Z</td>
+<td align="center">Z (因为 B 已被 byte 使用)</td>
+</tr>
+<tr>
+<td align="center">object</td>
+<td align="center">L + /分隔完整类名</td>
+<td align="center">java.lang.String 如: Ljava/lang/String</td>
+</tr>
+<tr>
+<td align="center">array</td>
+<td align="center">[ + 类型描述符</td>
+<td align="center">int[] 如：[I</td>
+</tr>
+</tbody></table>
+<p>（2）Java 函数结构描述符关系表</p>
+<table>
+<thead>
+<tr>
+<th align="center">Java 函数</th>
+<th align="center">函数描述符(签名)</th>
+<th align="center">备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">void</td>
+<td align="center">V</td>
+<td align="center">无返回值类型</td>
+</tr>
+<tr>
+<td align="center">Method</td>
+<td align="center">(每个参数字段描述符)函数返回值字段描述符</td>
+<td align="center">double sums(int num1, int num2) =&gt; (II)D</td>
+</tr>
+</tbody></table>
+<p>举例 Java Native 函数<code>sums</code>的签名解读</p>
+<pre class="line-numbers language-c++"><code class="language-c++">// Signature: (II)D
+public native double sums(int num1, int num2);
+
+// int 类型描述符：I
+// double 类型描述符：D
+// 参数字段类型描述符：II
+// 函数结构描述符：(II)D<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="动态注册"><a href="#动态注册" class="headerlink" title="动态注册"></a>动态注册</h2><p>动态注册相比静态注册查找效率高、函数名任意。</p>
+<p>通过JNI下接口<code>RegisterNatives()</code>可动态实现JNI中Native函数的注册，即动态将JVM中某个类调用的Native方法与动态链接库中的特定方法做绑定和映射，这样JNI可直接利用<code>JNINativeMethod</code>映射表来搜索调用Java Native函数对应的C/C++函数。</p>
+<p>针对动态注册的核心<code>RegisterNatives()</code>接口，可通过<code>Java JNI 化静为动</code>或<code>Native层 JNI_OnLoad()</code>两种方式进行调用实现</p>
+<h3 id="Java-JNI-化静为动"><a href="#Java-JNI-化静为动" class="headerlink" title="Java JNI 化静为动"></a>Java JNI 化静为动</h3><p>以<code>Windows JDK 1.8</code>源码为例，通过<code>java.lang.Object</code>类来了解Java静态块中自定义的JNI静态方法<code>registerNatives()</code>如何调用JNI下<code>RegisterNatives()</code>接口动态注册特定Java Native函数。</p>
+<p><code>Object</code>类中首先声明了JNI静态注册函数<code>registerNatives()</code>，然后通过静态块进行调用</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Object</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">native</span> <span class="token keyword">void</span> <span class="token function">registerNatives</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">static</span> <span class="token punctuation">{</span>
+        <span class="token function">registerNatives</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>查看Java Native函数<code>registerNatives()</code>对应的JNI静态注册规则下的C/C++函数：<code>Java_java_lang_Object_registerNatives(JNIEnv *env, jclass cls)</code></p>
+<pre class="line-numbers language-c++"><code class="language-c++">// openjdk\jdk\src\share\native\java\lang\Object.c
+
+static JNINativeMethod methods[] = {
+    {"hashCode",    "()I",                    (void *)&JVM_IHashCode},
+    {"wait",        "(J)V",                   (void *)&JVM_MonitorWait},
+    {"notify",      "()V",                    (void *)&JVM_MonitorNotify},
+    {"notifyAll",   "()V",                    (void *)&JVM_MonitorNotifyAll},
+    {"clone",       "()Ljava/lang/Object;",   (void *)&JVM_Clone},
+};
+
+JNIEXPORT void JNICALL
+Java_java_lang_Object_registerNatives(JNIEnv *env, jclass cls)
+{
+    (*env)->RegisterNatives(env, cls,
+                            methods, sizeof(methods)/sizeof(methods[0]));
+}
+
+JNIEXPORT jclass JNICALL
+Java_java_lang_Object_getClass(JNIEnv *env, jobject this)
+{
+    if (this == NULL) {
+        JNU_ThrowNullPointerException(env, NULL);
+        return 0;
+    } else {
+        return (*env)->GetObjectClass(env, this);
+    }
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><code>Java_java_lang_Object_registerNatives</code>函数内通过JNIEnv调用JNI接口下的RegisterNatives()函数进行Java Native函数和C/C++函数的动态注册绑定。</p>
+<p>其中<code>methods</code>结构体数组定义了某个类下Java Native方法与动态链接库中C/C++特定函数的映射关系，而<code>JNINativeMethod</code>结构体代码定义如下</p>
+<pre class="line-numbers language-c++"><code class="language-c++">/*
+ * used in RegisterNatives to describe native method name, signature,
+ * and function pointer.
+ */
+
+typedef struct {
+    char *name;
+    char *signature;
+    void *fnPtr;
+} JNINativeMethod;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><code>JNINativeMethod</code>结构体成员字段如下表</p>
+<table>
+<thead>
+<tr>
+<th align="center">字段</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">char *name</td>
+<td align="center">Java Native 方法名</td>
+</tr>
+<tr>
+<td align="center">char *signature</td>
+<td align="center">Java Native 方法签名</td>
+</tr>
+<tr>
+<td align="center">void *fnPtr</td>
+<td align="center">C/C++ 方法的函数指针</td>
+</tr>
+</tbody></table>
+<p>通过上面<code>Object</code>类JNI动态注册流程的简单分析，可总结出如下流程：核心在于先注册一个JNI静态命名规则方法，然后再利用该方法去调用JNI接口<code>RegisterNatives()</code>实现JNI动态注册</p>
+<pre><code>(1) Java 类中声明一个 registerNatives() 静态Java Native方法
+(2) 动态链接库中定义一个JNI动态注册的映射表，JNINativeMethod 类型的结构体数组
+(3) 动态链接库中定义并实现一个符合JNI静态注册规则的 Java_&lt;PackageName&gt;_&lt;ClassName&gt;_registerNatives C/C++方法
+(4) Java 类中通过静态块加载相应动态链接库
+(5) Java 类中通过静态块调用 registerNatives() 静态Java Native方法
+(6) JNI 动态注册开始，Java_&lt;PackageName&gt;_&lt;ClassName&gt;_registerNatives C/C++方法调用JNI动态注册接口 RegisterNatives()
+(7) JNI 动态注册完成，Java 类中可调用相应JNI动态注册的Native方法</code></pre><p>有了JNI静态注册间接实现JNI动态注册的流程，那么我们就可以很方便的编写属于自己的JNI动态注册项目，这里编写一个乘法运算的JNI动态注册调用案例</p>
+<p><code>Multi.java</code>文件，Java Native方法的声明与调用</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">package</span> org<span class="token punctuation">.</span>qftm<span class="token punctuation">.</span>learn<span class="token punctuation">.</span>jni<span class="token punctuation">.</span>demo2<span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">/**
+ * Created by IntelliJ IDEA.
+ * User: Qftm
+ * Date: 2022/6/6
+ * Time: 21:34
+ */</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Multi</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 声明 registerNatives() 静态Java Native方法</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">native</span> <span class="token keyword">void</span> <span class="token function">registerNatives</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 声明 multi 静态Java Native方法</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">native</span> <span class="token keyword">double</span> <span class="token function">multi</span><span class="token punctuation">(</span><span class="token keyword">int</span> num1<span class="token punctuation">,</span> <span class="token keyword">double</span> num2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">static</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 静态块加载动态链接库</span>
+        System<span class="token punctuation">.</span><span class="token function">loadLibrary</span><span class="token punctuation">(</span><span class="token string">"demo2"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 通过JNI静态命名规则进行查找调用</span>
+        <span class="token function">registerNatives</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 通过JNI动态注册映射表进行查找调用</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token function">multi</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3.3</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><code>multi.h</code>头文件，声明JNI静态命名规则C/C++函数</p>
+<pre class="line-numbers language-c++"><code class="language-c++">/* DO NOT EDIT THIS FILE - it is machine generated */
+#include <jni.h>
+/* Header for class org_qftm_learn_jni_demo2_Multi */
+
+#ifndef _Included_org_qftm_learn_jni_demo2_Multi
+#define _Included_org_qftm_learn_jni_demo2_Multi
+#ifdef __cplusplus
+extern "C" {
+#endif
+    /*
+     * Class:     org_qftm_learn_jni_demo2_Multi
+     * Method:    registerNatives
+     * Signature: ()V
+     */
+    JNIEXPORT void JNICALL Java_org_qftm_learn_jni_demo2_Multi_registerNatives (JNIEnv*, jclass);
+
+#ifdef __cplusplus
+}
+#endif
+#endif<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><code>dllmain.cpp</code>文件，具体C/C++函数的实现</p>
+<pre class="line-numbers language-c++"><code class="language-c++">// dllmain.cpp : 定义 DLL 应用程序的入口点。
+#include "pch.h"
+#include <stdio.h>
+#include "multi.h"
+
+jdouble MultiNumber(JNIEnv* env, jclass cls, jint num1, jdouble num2) {
+    return num1 * num2;
+}
+
+// typedef struct { char *name; char *signature; void *fnPtr;} JNINativeMethod;
+static JNINativeMethod methods[] = {
+    {(char*)"multi", (char*)"(ID)D", (void*)MultiNumber},
+};
+
+// C: env->FindClass("java/lang/String")、C++: (*env)->FindClass(env, "java/lang/String")
+// jint RegisterNatives(jclass clazz, const JNINativeMethod *methods, jint nMethods)
+// jclass clazz: Java Native 层对应的类
+// const JNINativeMethod *methods: 结构体数组，数组的元素是JNI定义的一个结构体 JNINativeMethod
+// jint nMethods: methods 结构体数组的大小
+JNIEXPORT void JNICALL Java_org_qftm_learn_jni_demo2_Multi_registerNatives(JNIEnv* env, jclass cls) {
+    env->RegisterNatives(cls, methods, sizeof(methods) / sizeof(methods[0]));
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="Native-JNI-OnLoad"><a href="#Native-JNI-OnLoad" class="headerlink" title="Native JNI_OnLoad()"></a>Native JNI_OnLoad()</h3><p>JVM在执行<code>System.loadLibrary()</code>加载动态链接库时，底层会调用到<code>JNI_OnLoad()</code>，其主要有两个作用：指定JNI版本、资源初始化。</p>
+<p>由于<code>JNI_OnLoad()</code>执行了初始化资源的操作，所以可以在该方法中调用JNI接口下<code>RegisterNatives()</code>方法动态注册Java Native函数，则无需在Java类中声明<code>registerNatives()</code>静态Java Native方法进行操作。</p>
+<p>与上面<code>Java JNI 化静为动</code>的实现流程相比，Native层<code>JNI_OnLoad()</code>实现JNI动态注册流程，如下</p>
+<pre><code>(1) 动态链接库中定义一个JNI动态注册的映射表，JNINativeMethod 类型的结构体数组
+(2) 动态链接库中重写 JNI_OnLoad() 方法
+(3) Java 类中通过静态块加载相应动态链接库
+(4) JNI 动态注册开始，JNI_OnLoad() 方法调用JNI动态注册接口 RegisterNatives()
+(5) JNI 动态注册完成，Java 类中可调用相应JNI动态注册的Native方法</code></pre><p>下面以编写一个减法运算的JNI动态注册调用案例来了解<code>JNI_OnLoad()</code>，具体实现代码如下所示</p>
+<p><code>Sub.java</code>，Java Native方法的声明与调用</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">package</span> org<span class="token punctuation">.</span>qftm<span class="token punctuation">.</span>learn<span class="token punctuation">.</span>jni<span class="token punctuation">.</span>demo3<span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">/**
+ * Created by IntelliJ IDEA.
+ * User: Qftm
+ * Date: 2022/6/7
+ * Time: 7:54
+ */</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Sub</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 声明 sub 静态Java Native方法</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">native</span> <span class="token keyword">double</span> <span class="token function">sub</span><span class="token punctuation">(</span><span class="token keyword">int</span> num1<span class="token punctuation">,</span> <span class="token keyword">double</span> num2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">static</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 静态块加载动态链接库</span>
+        System<span class="token punctuation">.</span><span class="token function">loadLibrary</span><span class="token punctuation">(</span><span class="token string">"demo3"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 通过JNI动态注册映射表进行查找调用</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token function">sub</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">3.4</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><code>dllmain.cpp</code>文件，具体C/C++函数的实现</p>
+<pre class="line-numbers language-c++"><code class="language-c++">// dllmain.cpp : 定义 DLL 应用程序的入口点。
+#include "pch.h"
+#include <jni.h>
+
+jdouble SubNumber(JNIEnv* env, jclass cls, jint num1, jdouble num2) {
+    return num1 - num2;
+}
+
+// typedef struct { char *name; char *signature; void *fnPtr;} JNINativeMethod;
+static JNINativeMethod methods[] = {
+    {(char*)"sub", (char*)"(ID)D", (void*)SubNumber},
+};
+
+JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* reserved) {
+    JNIEnv* env = NULL;
+
+    // 获取 JNIENV
+    if (vm->GetEnv(reinterpret_cast<void**>(&env), JNI_VERSION_1_6) != JNI_OK)
+    {
+        return -1;
+    }
+
+    // 获取 Java Native 对应的 Class
+    jclass jClassName = env->FindClass("org/qftm/learn/jni/demo3/Sub");
+
+    // C: env->FindClass("java/lang/String")、C++: (*env)->FindClass(env, "java/lang/String")
+    // jint RegisterNatives(jclass clazz, const JNINativeMethod *methods, jint nMethods)
+    // jclass clazz: Java Native 层对应的类
+    // const JNINativeMethod *methods: 结构体数组，数组的元素是JNI定义的一个结构体 JNINativeMethod
+    // jint nMethods: methods 结构体数组的大小
+    jint ret = env->RegisterNatives(jClassName, methods, sizeof(methods)/sizeof(methods[0]));
+
+    return JNI_VERSION_1_6;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre><code>文章首发于跳跳糖：https://tttang.com/archive/1622/</code></pre>
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        Author:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Qftm</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        Link:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://Qftm.github.io/2022/05/29/Java-JVM-JNI/">http://Qftm.github.io/2022/05/29/Java-JVM-JNI/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        Reprint policy:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    All articles in this blog are used except for special statements
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    reprint polocy. If reproduced, please indicate source
+                    <a href="/about" target="_blank">Qftm</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Java/">
+                                    <span class="chip bg-color">Java</span>
+                                </a>
+                            
+                                <a href="/tags/JNI/">
+                                    <span class="chip bg-color">JNI</span>
+                                </a>
+                            
+                                <a href="/tags/JVM/">
+                                    <span class="chip bg-color">JVM</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+            <div class="card">
+                <a href="/2022/12/10/frp-modify/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/frp-1.png" class="responsive-img" alt="FRP 分析与改造">
+                        
+                        <span class="card-title">FRP 分析与改造</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            FRP 因其功能丰富，红队攻击者常将其用在内网渗透中，但是 FRP 在实际红蓝对抗中存在很多特征，导致被蓝队发现并溯源。
+下面通过对 FRP 0.45.0 版本进行分析，提取特征并进行规避。
+客户端执行流程分析客户端入口：cmd/frpc/
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-12-10
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/" class="post-category">
+                                    攻防渗透
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E4%BB%A3%E7%90%86%E8%BD%AC%E5%8F%91/">
+                        <span class="chip bg-color">代理转发</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/">
+                        <span class="chip bg-color">内网渗透</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/08/15/Kubernetes-Security/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/Kubernetes.jfif" class="responsive-img" alt="云原生安全-Kubernetes Security">
+                        
+                        <span class="card-title">云原生安全-Kubernetes Security</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Kubernetes Learning (Core Architecture、Components)、Security (Attack Kube、Kubelet、Etcd、Kube-proxy、Docker)
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-08-15
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E4%BA%91%E5%AE%89%E5%85%A8/" class="post-category">
+                                    云安全
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Cloud/">
+                        <span class="chip bg-color">Cloud</span>
+                    </a>
+                    
+                    <a href="/tags/Kubernetes/">
+                        <span class="chip bg-color">Kubernetes</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + 'From: Qftm<br />'
+            + 'Author: Qftm<br />'
+            + 'Link: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2018</span>
+            <a href="/about" target="_blank">Qftm</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">370.8k</span>&nbsp;字
+            
+            
+            
+            
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+    <a href="https://github.com/Qftm" 
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:Qftmbin@gmail.com" 
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+    <a href="https://twitter.com/Qftmer" 
+        <i class="fab fa-twitter"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;Search</span>
+            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

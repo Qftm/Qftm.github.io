@@ -1,0 +1,962 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="ARP Protocol Spoofing Attack, Qftm">
+    <meta name="description" content="Maybe a hacker">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>ARP Protocol Spoofing Attack | Qftm</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.1"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Qftm</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>Index</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>Tags</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>Categories</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>Archives</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-heartbeat" style="zoom: 0.6;"></i>
+      
+      <span>About</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>Friends</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="Search" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Qftm</div>
+        <div class="logo-desc">
+            
+            Maybe a hacker
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			Index
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			Tags
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			Categories
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			Archives
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-heartbeat"></i>
+			
+			About
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			Friends
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/bg.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">ARP Protocol Spoofing Attack</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/ARP/">
+                                <span class="chip bg-color">ARP</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/" class="post-category">
+                                攻防渗透
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    2018-10-13
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
+                    2020-08-16
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    1.5k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    5 Min
+                </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="ARP攻击概述"><a href="#ARP攻击概述" class="headerlink" title="ARP攻击概述"></a>ARP攻击概述</h1><p>ARP攻击主要是存在于局域网中，通过伪造IP地址和MAC地址实现ARP欺骗，能够在网络中产生大量的ARP通信量使网络阻塞，攻击者只要持续不断的发出伪造的ARP响应包就能更改目标主机ARP缓存中的IP-MAC条目，造成网络中断或中间人攻击。</p>
+<h1 id="ARP攻击原理"><a href="#ARP攻击原理" class="headerlink" title="ARP攻击原理"></a>ARP攻击原理</h1><h2 id="了解简单网络拓扑"><a href="#了解简单网络拓扑" class="headerlink" title="了解简单网络拓扑"></a>了解简单网络拓扑</h2><p><img src="/2018/10/13/arp-spoofing-attack/20181012220025463.png" alt="img"></p>
+<h2 id="实验条件：PC1-ping-PC2-进行简单通信"><a href="#实验条件：PC1-ping-PC2-进行简单通信" class="headerlink" title="实验条件：PC1 ping PC2 进行简单通信"></a>实验条件：PC1 ping PC2 进行简单通信</h2><p><strong>网络正常条件下</strong>PC1与PC2之间通信的ARP包正常，简单的拓扑结构如下，详细分析请参考上一篇文章<strong>《ARP Protocol Analysis》</strong></p>
+<p><img src="/2018/10/13/arp-spoofing-attack/20181013004508956.png" alt="img"></p>
+<p>那么当<strong>网络不正常的情况下</strong>又会出现什么情况呢，假设PC3这台主机安装了ARP攻击软件或遭受ARP病毒，成为这个网络的攻击者（hacker），接下来，PC3是如何攻击的？</p>
+<p>一般在正常情况下，若主机收到的ARP请求不是给自己的，则直接丢弃；而这里PC3（Hacker）在监听之后，发起了ARP回应包：我就是PC2并把自己的MAC地址封装在MAC帧里面（IP2—MAC3）。</p>
+<p>从上面的拓扑中可以看出，PC3明明是IP3对应MAC3，很显然这就是一个ARP欺骗行为。于此同时，PC2正常的ARP回应包也交到了PC1手中，由于PC2、PC3的响应包都回到了PC1，接下来我们来看看PC1是如何处理这种问题的</p>
+<p><img src="/2018/10/13/arp-spoofing-attack/20181013013117428.png" alt="img"></p>
+<p>PC1广播之后收到的两个ARP回应包，内容分别如下：</p>
+<p>​      PC2包：我是PC2，我的IP地址是IP2，我的MAC地址是MAC2；</p>
+<p>​      PC3包：我是PC2，我的IP地址是IP2，我的MAC地址是MAC3；</p>
+<p>由于PC2是两个MAC，那么PC1该怎么选择呢：是接受先来的响应包 (遵循先到先得原则)、还是接受后来的响应包 (遵循后到优先原则)</p>
+<p>为了解决这些问题，这里给大家介绍一下网络协议里各种表在处理缓存信息的方式：</p>
+<p>​     ARP表 ：后到优先原则</p>
+<p>​     CAM表 ：后到优先原则</p>
+<p>​     DHCP表：先到先得原则</p>
+<p>那么问题来了，上面两个ARP回应包到底哪个先到哪个后到呢？其实不用去管这些东西，只要PC3不断的向PC1发送欺骗包(利用稳健的ARP嗅探/渗透工具)就一定可以覆盖掉PC2的正常回应包，最后PC1的ARP表中一定存放的是IP2和MAC3的映射关系</p>
+<p><img src="/2018/10/13/arp-spoofing-attack/20181013020537236.png" alt="img"></p>
+<p>为了方便下面的讲解，这里介绍一下拓扑中的SW(交换机)特点：</p>
+<p>​    交换机通信需要查找CAM表（路由器则查找Route表）</p>
+<p>​    CAM表：mac&lt;-&gt;port  （Route表：route&lt;-&gt;port）</p>
+<p>​    交换机基于源MAC地址学习，基于目的MAC地址转发</p>
+<p>当拓扑结构中的三台主机相互之间通信经过交换机时，由于交换机具有学习功能（不同于早期的集线器hub），所以在交换机上会生成一CAM表（记录MAC地址与接口对应信息），如下拓扑：</p>
+<p><img src="/2018/10/13/arp-spoofing-attack/20181013023456572.png" alt="img"></p>
+<p>在这里，根据数据封装规则，当PC1要跟PC2进行通信时，无论是发生PING包还是发送其他数据，首先要查找ARP表，然后在网络层打上源目IP，在链路层打上源目MAC，然后将数据包发送给交换机。交换机收到之后对数据进行解封装，并且查看CAM表(基于目的MAC转发），由于目标MAC3对应Port3，所以交换机将其转发给PC3，就这样，PC1本来要发给PC2的数据包，落到了PC3手里，这就完成了一次完整的ARP攻击。反过来，如果PC2要将数据包发送给PC1，PC3仍然可以以同样的ARP欺骗实现攻击。当PC2与PC1通信也受到PC3的攻击时，那么PC1与PC2这间所通信的数据都经过PC3，再由PC3进行转发出去。</p>
+<p>这种ARP攻击(中间人投毒)在局域网内的危害也是很大的，如：断网攻击，个人账号密码的窃取（在这里指出：任何基于明文传输的应用，都可以被窃取，除了http（web应用），常见的还有telnet、ftp、pop3/smtp/imap（邮箱）等应用，都很容易泄露密码）··············</p>
+<h1 id="真实环境下的ARP攻击"><a href="#真实环境下的ARP攻击" class="headerlink" title="真实环境下的ARP攻击"></a>真实环境下的ARP攻击</h1><p><strong>注：下面画的路由器Route相当于WiFi形成的是局域网，PC1和PC2接入WiFi，在同一个内网下，并不是存在于两个网络中</strong></p>
+<h2 id="正常网络环境下的拓扑"><a href="#正常网络环境下的拓扑" class="headerlink" title="正常网络环境下的拓扑"></a>正常网络环境下的拓扑</h2><p><img src="/2018/10/13/arp-spoofing-attack/20181013132250130.png" alt="img"></p>
+<h2 id="非正常网络下，潜伏在内网中的hacker-PC2-发起ARP攻击"><a href="#非正常网络下，潜伏在内网中的hacker-PC2-发起ARP攻击" class="headerlink" title="非正常网络下，潜伏在内网中的hacker(PC2)发起ARP攻击"></a>非正常网络下，潜伏在内网中的hacker(PC2)发起ARP攻击</h2><p><img src="/2018/10/13/arp-spoofing-attack/20181013134230611.png" alt="img"></p>
+<p>hacker发出的欺骗包有两种：</p>
+<p>  (1) PC1：PC2不断的向PC1发送欺骗包，欺骗其为网关路由，最后导致PC1的ARP表遭到攻击；</p>
+<p>  (2) Route：PC2不断的向Route(网关路由)发送欺骗包，欺骗其为PC1；</p>
+<p>最终PC1&amp;网关路由都受到hacker(PC2)的欺骗，导致PC1与网关路由的交互、通信流量都会经过PC2(PC1也就相当于是在裸奔上网)，这个时候PC1会受到hacker的许多攻击：断网攻击、个人账号密码被窃取、上网浏览信息泄露················，简单拓扑如下：</p>
+<p><img src="/2018/10/13/arp-spoofing-attack/20181013144508439.png" alt="img"></p>
+<h2 id="结合wireshark在真实网络环境下进行分析，此处hacker利用-arpspoof-ARP攻击工具进行攻击"><a href="#结合wireshark在真实网络环境下进行分析，此处hacker利用-arpspoof-ARP攻击工具进行攻击" class="headerlink" title="结合wireshark在真实网络环境下进行分析，此处hacker利用(arpspoof)ARP攻击工具进行攻击"></a>结合wireshark在真实网络环境下进行分析，此处hacker利用(arpspoof)ARP攻击工具进行攻击</h2><p>PC1：IP1  192.168.43.95   MAC1 00-0C-29-02-AC-6F</p>
+<p>PC2：IP2  192.168.43.150  MAC2 00-0c-29-3b-8e-bc</p>
+<p>Route：IP3 192.168.43.1</p>
+<p><strong>PC2对PC1的欺骗：arpspoof -i eth0 -t 192.168.43.95 192.168.43.1</strong></p>
+<p><img src="/2018/10/13/arp-spoofing-attack/20181013140037323.png" alt="img"></p>
+<p><strong>PC2对Route的欺骗：arpspoof -i eth0 -t 192.168.43.1 192.168.43.95</strong></p>
+<p><img src="/2018/10/13/arp-spoofing-attack/20181013140326682.png" alt="img"></p>
+<p><strong>此时毫无察觉的PC1正在享受来自hacker的攻击：</strong></p>
+<p><strong>@@@@</strong> PC1正在高兴的登陆一个网站，殊不知自己的个人账号密码已经被hacker(PC2)窃取</p>
+<p><img src="/2018/10/13/arp-spoofing-attack/20181013140629325.png" alt="img"></p>
+<p>hacker通过流量分析窃取PC1的个人账号密码</p>
+<p><img src="/2018/10/13/arp-spoofing-attack/20181013140849588.png" alt="img"></p>
+<p><strong>@@@@</strong> 登陆网站之后，PC1开始舒适的去浏览自己喜欢图片，当自己越看越开心的时候，却不知道自己早已经被hacker所监视</p>
+<p><img src="/2018/10/13/arp-spoofing-attack/20181013141256529.png" alt="img"></p>
+<p>hacker通过分析&amp;提取PC1上网的图片流量就可以得到PC1正在浏览那些图片，这里hacker借助工具(driftnet)</p>
+<p><img src="/2018/10/13/arp-spoofing-attack/20181013142818526.png" alt="img"></p>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        Author:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Qftm</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        Link:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://Qftm.github.io/2018/10/13/arp-spoofing-attack/">http://Qftm.github.io/2018/10/13/arp-spoofing-attack/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        Reprint policy:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    All articles in this blog are used except for special statements
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    reprint polocy. If reproduced, please indicate source
+                    <a href="/about" target="_blank">Qftm</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/ARP/">
+                                    <span class="chip bg-color">ARP</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+            <div class="card">
+                <a href="/2018/11/04/XSS-Reflected-test/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/dvwa-xss-3.png" class="responsive-img" alt="XSS Reflected 漏洞分析与测试">
+                        
+                        <span class="card-title">XSS Reflected 漏洞分析与测试</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            前言由于最近在做XSS方面的测试，于是找到了DVWA平台进行实验测试，通过这三篇文章让大家了解XSS方面的大概内容，这三篇文章只是把你领进XSS的大门，要想真正深入的学习XSS，你还需要去学习很多东西来提升自己。网站测试分为黑盒测试和白盒测
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2018-11-04
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Web%E5%AE%89%E5%85%A8/" class="post-category">
+                                    Web安全
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/DVWA/">
+                        <span class="chip bg-color">DVWA</span>
+                    </a>
+                    
+                    <a href="/tags/XSS/">
+                        <span class="chip bg-color">XSS</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2018/10/11/arp-protocol-analysis/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/arp-1.png" class="responsive-img" alt="ARP Protocol Analysis">
+                        
+                        <span class="card-title">ARP Protocol Analysis</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            ARP概述网络中所有的协议（HTTP、URL、FTP、TELNET、TCP、UDP、ARP ······）都包含在TCP/IP协议栈中，从使用上来看：其中大部分协议都是大家平常上网所接触到的，不知道你们是否留意过；从安全上来看：其中最不安全
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2018-10-11
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/" class="post-category">
+                                    攻防渗透
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%8D%8F%E8%AE%AE/">
+                        <span class="chip bg-color">协议</span>
+                    </a>
+                    
+                    <a href="/tags/ARP/">
+                        <span class="chip bg-color">ARP</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + 'From: Qftm<br />'
+            + 'Author: Qftm<br />'
+            + 'Link: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2018</span>
+            <a href="/about" target="_blank">Qftm</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">370.8k</span>&nbsp;字
+            
+            
+            
+            
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+    <a href="https://github.com/Qftm" 
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:Qftmbin@gmail.com" 
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+    <a href="https://twitter.com/Qftmer" 
+        <i class="fab fa-twitter"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;Search</span>
+            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

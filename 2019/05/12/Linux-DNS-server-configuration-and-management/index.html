@@ -1,0 +1,1155 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Linux DNS 服务器配置与管理, Qftm">
+    <meta name="description" content="Maybe a hacker">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Linux DNS 服务器配置与管理 | Qftm</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.1"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Qftm</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>Index</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>Tags</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>Categories</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>Archives</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-heartbeat" style="zoom: 0.6;"></i>
+      
+      <span>About</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>Friends</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="Search" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Qftm</div>
+        <div class="logo-desc">
+            
+            Maybe a hacker
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			Index
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			Tags
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			Categories
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			Archives
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-heartbeat"></i>
+			
+			About
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			Friends
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/bg.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Linux DNS 服务器配置与管理</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Linux/">
+                                <span class="chip bg-color">Linux</span>
+                            </a>
+                        
+                            <a href="/tags/DNS/">
+                                <span class="chip bg-color">DNS</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E5%AE%89%E5%85%A8%E5%BB%BA%E8%AE%BE/" class="post-category">
+                                安全建设
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    2019-05-12
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
+                    2022-01-17
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    4.8k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    18 Min
+                </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="环境介绍"><a href="#环境介绍" class="headerlink" title="环境介绍"></a>环境介绍</h1><h2 id="运行软件"><a href="#运行软件" class="headerlink" title="运行软件"></a>运行软件</h2><pre><code>VMware Workstation Pro 14</code></pre><h2 id="系统环境"><a href="#系统环境" class="headerlink" title="系统环境"></a>系统环境</h2><pre><code>CentOS-7-x86_64-1810</code></pre><h1 id="操作配置"><a href="#操作配置" class="headerlink" title="操作配置"></a>操作配置</h1><h2 id="基础知识简介"><a href="#基础知识简介" class="headerlink" title="基础知识简介"></a>基础知识简介</h2><p>域名系统（英文：Domain Name System，缩写：DNS）是互联网的一项服务。它作为将域名和IP地址相互映射的一个分布式数据库，能够使人更方便地访问互联网。DNS使用UDP端口53。当前，对于每一级域名长度的限制是63个字符，域名总长度则不能超过253个字符。</p>
+<h3 id="域名空间"><a href="#域名空间" class="headerlink" title="域名空间"></a>域名空间</h3><p><img src="/2019/05/12/Linux-DNS-server-configuration-and-management/image-20220116143648717.png" alt="image-20220116143648717"></p>
+<ul>
+<li>域和域名</li>
+</ul>
+<p>DNS树的每个节点代表一个域，通过这些节点，对整个域名空间进行划分，成为一个层次结构。域名空间的每个域的名字通过域名进行表示。域名通常由一个完全正式域名（FQDN）标识。</p>
+<ul>
+<li>根域名服务器</li>
+</ul>
+<p>根域名服务器（Root Name Server）主要用来管理互联网的主目录，全球共有13台根域名服务器（这13台根域名服务器名字分别为”A”至”M”），1个为主根服务器在美国；其余12个均为辅根服务器，其中9个在美国，欧洲2个，位于英国和瑞典，亚洲1个位于日本。</p>
+<pre><code>h.root-servers.net.
+m.root-servers.net.
+l.root-servers.net.
+i.root-servers.net.
+j.root-servers.net.
+b.root-servers.net.
+k.root-servers.net.
+a.root-servers.net.
+g.root-servers.net.
+e.root-servers.net.
+c.root-servers.net.
+f.root-servers.net.
+d.root-servers.net.</code></pre><p>注1，为什么只有13台根DNS：由于UDP报文可携带的数据包大小限制，导致只能包含13台DNS根服务器，且每个服务器要使用字母表中的单个字母命名。</p>
+<p>注2，为什么不使用TCP通信：由于TCP通信比UDP开销大（一次UDP名字服务器交换可以短到两个包：一个查询包、一个响应包；一次TCP交换则至少包含7个包：三次握手初始化TCP会话、一个查询包、一个响应包以及最后一次握手来关闭连接）。</p>
+<ul>
+<li>顶级域名服务器</li>
+</ul>
+<p>DNS根域下面是顶级域，也由Internet域名注册授权机构管理，顶级域名服务器（top-level domains）负责解析本身顶级域名的下一级域名对应的权威DNS服务器地址。共有3种类型的顶级域 (组织域、地址域、反向域)。</p>
+<p>域名由两组或两组以上的ASCII或各国语言字符构成，各组字符间由点号分隔开，最右边的字符组称为顶级域名或一级域名、倒数第二组称为二级域名、倒数第三组称为三级域名、以此类推。</p>
+<p>顶级域名又分为三类：</p>
+<p>一是国家和地区顶级域名（country code top-level domains，简称ccTLDs），200多个国家都按照ISO3166国家代码分配了顶级域名，例如中国是<code>.cn</code>，日本是<code>.jp</code>等；</p>
+<p>二是通用顶级域名（generic top-level domains，简称gTLDs），例如表示工商企业的<code>.com</code>，表示网络提供商的 <code>.net</code>，表示非盈利组织的 <code>.org</code>等；</p>
+<p>三是新顶级域名（New gTLD）如通用的<code>.xyz</code>、代表”高端”的<code>.top</code>、代表”红色”的<code>.red</code>、代表”人”的<code>.ren</code>等一千多种。</p>
+<ul>
+<li>区（Zone）</li>
+</ul>
+<p>区是DNS名称空间的一个连续部分，其包含了一组存储在DNS服务器上的资源记录。</p>
+<ul>
+<li>域名解析</li>
+</ul>
+<p>首先，根据域名系统域名空间的层次结构将其按子树划分为不同的区域，每个区域可看作是负责层次结构中这一部分节点的可管理的权力实体。例如，整个域的顶层区域由ICANN负责管理，一些国家域名及其下属的那些节点又构成了各自的区域，像<code>.cn</code>域就由CNNIC负责管理。而<code>.cn</code>域下又被划分为一些更小的区域，例如<code>.xxx.edu.cn</code>由xxx大学网络中心负责管理。</p>
+<p>其次，每个区域必须有对应的域名服务器，每个区域中包含的信息存储在域名服务器上。一个区域中可有两个或多个域名服务器，这样即使其中一个域名服务器出了故障，另一个域名服务器仍然可以正常提供信息。一个域名服务器也可以同时管辖多个区域。域名服务器在接到用户发出的请求后查询自身的资源记录集合，返回用户想要得到的最终答案，或者当自身的资源记录集合中查不到所需要的答案时，返回指向另外一个域名服务器的指针，用户将继续向那个域名服务器发出请求。所以说，域名服务器不需要记录所有下属域名和主机的信息，对于其中的子域(如果存在)，只需要知道子域的域名服务器即可。</p>
+<p>资源记录是一个域名到值的绑定，它包括以下字段：域名、值、类型、分类和生命期。域名字段和值字段分别用来表示解析的内容和解析返回的结果。类型字段代表了值的种类：</p>
+<pre><code>类型为 A 代表值字段是一个IP地址，即用户所要的最终答案；
+类型为 NS 代表值字段是另一个域名服务器的域名，该域名服务器能够知道如何解析域名字段所指定的域名；
+类型为 CNAME 代表值字段是由域名所指定的主机的一个别名；
+类型为 MX 代表值字段是一个邮件服务器的域名，该邮件服务器接收由域名字段所指定的域的邮件；
+类型为 PTR 用于域名反解等。</code></pre><p>分类字段允许指定其他的记录类型。生命期字段用于指出该资源记录的有效期是多少。为减少域名解析时间，域名服务器会缓存一些曾经查询过的、来自其他域名服务器的资源记录。由于这些资源记录会因为更改而失效，因此域名服务器设置了生命期，到期的资源记录会被清除出缓存。</p>
+<p>根域名服务器知道所有顶级域名的域名服务器，对应于每个顶级域名，它都有两条资源记录：一条是NS资源记录，域名字段是该顶级域名，值字段是该顶级域名解析的域名服务器的域名；另一条是A资源记录，用来指明该域名服务器的域名对应的IP地址。综合使用这两条记录，就可以知道对该域下的某个域名解析，应该继续去哪个IP地址的域名服务器寻找。第二层的域名服务器类似地存放各个第三层域名服务器的指针。第三层的域名服务器会出现A、CNAME、MX等类型的资源记录。每个域名服务器都有根域名服务器的地址记录。</p>
+<p>最后，一个需要域名解析的用户先将该解析请求发往本地的域名服务器。如果本地的域名服务器能够解析，则直接得到结果，否则本地的域名服务器将向根域名服务器发送请求。依据根域名服务器返回的指针再查询下一层的域名服务器，依此类推，最后得到所要解析域名的IP地址。</p>
+<ul>
+<li>域名反解析</li>
+</ul>
+<p>域名反解是指给出一个IP地址，找出其对应的域名，这也是利用DNS来实现的。举个例子，假设一个要反解的IP地址为202.120.225.9，系统将其改写为9.225.120.202. in-addr.arpa，然后按域名解析的方式查询。这需要在被查询主机的本地域名服务器上有一条对应于9.225.120.202.in-addr.arpa的资源记录，类型是PTR，值是其域名。</p>
+<h3 id="DNS-服务器分类"><a href="#DNS-服务器分类" class="headerlink" title="DNS 服务器分类"></a>DNS 服务器分类</h3><p>DNS服务器分为4类：</p>
+<pre><code>主DNS服务器（Master或Primary）
+
+辅助DNS服务器（Slave或Secondary）
+
+转发DNS服务器
+
+唯高速缓存DNS服务器（Caching-only DNS server）</code></pre><h3 id="DNS-查询模式"><a href="#DNS-查询模式" class="headerlink" title="DNS 查询模式"></a>DNS 查询模式</h3><ul>
+<li>递归查询</li>
+</ul>
+<p>DNS 客户端送出查询要求后，如果DNS服务器内没有需要的数据，则DNS服务器会代替客户端向其他的DNS服务器查询，客户机只需接触一次DNS服务器。</p>
+<ul>
+<li>迭代查询</li>
+</ul>
+<p>DNS 客户端送出查询后，如果DNS服务器内没有需要的数据，则返给客户机另一个DNS服务器地址，将客户机转向另一个DNS服务器。</p>
+<h3 id="域名解析过程"><a href="#域名解析过程" class="headerlink" title="域名解析过程"></a>域名解析过程</h3><p><img src="/2019/05/12/Linux-DNS-server-configuration-and-management/image-20220117003805440.png" alt="image-20220117003805440"></p>
+<p>注：浏览器和本地Host、本地DNS域名服务器之间为迭代查询；本地DNS域名服务器和根域名服务器、顶级域名服务器、权威域名服务器之间为迭代查询。（若存在路由器，则浏览器和路由器、本地DNS域名服务器之间为递归查询）</p>
+<p>这里使用<code>dig</code>域信息搜索器对<code>www.baidu.com</code>域名进行查询解析跟踪：实际模拟用户浏览器访问域名后的重要场景</p>
+<pre><code>λ Qftm &gt;&gt;&gt;: dig www.baidu.com @114.114.114.114 +trace</code></pre><p>1、浏览器访问<code>www.baidu.com</code>域名，先查询本地host是否有记录，有则直接返回IP地址给浏览器，没有则进一步查询</p>
+<p>2、向运营商本地域名服务器（Local DNS，114.114.114.114）发起请求，若本地域名服务器的缓存中有记录，则直接返回给用户，若没有则进行迭代查询</p>
+<p>3、本地域名服务器内部记录了全球13台根域名服务器的地址，其会向13台根域名服务器（Root DNS）发起请求，询问<code>.com</code>的顶级域名服务器地址，这里最先回复的根域名服务器是<code>192.203.230.10#53(e.root-servers.net)</code>，其返回了13台<code>.com</code>顶级域名服务器的域名和地址</p>
+<p><img src="/2019/05/12/Linux-DNS-server-configuration-and-management/image-20220116224335056.png" alt="image-20220116224335056"></p>
+<p>4、本地域名服务器继续向返回的13台<code>.com</code>顶级域名服务器请求查询<code>baidu.com</code>的权威域名服务器地址，最先回复的<code>.com</code>顶级域名服务器是<code>2001:503:eea3::30#53(g.gtld-servers.net)</code>，其返回了5台<code>baidu.com</code>权威域名服务器的域名和地址</p>
+<p><img src="/2019/05/12/Linux-DNS-server-configuration-and-management/image-20220116225524109.png" alt="image-20220116225524109"></p>
+<p>5、本地域名服务器继续向返回的5台<code>baidu.com</code>权威域名服务器请求查询<code>www.baidu.com</code>的三级域名服务器地址，最先回复的<code>baidu.com</code>权威域名服务器是<code>14.215.178.80#53(ns4.baidu.com)</code>，其返回了5台三级域名服务器NS记录和一台<code>www.baidu.com</code>三级域名的CNAME记录<code>www.a.shifen.com</code></p>
+<p><img src="/2019/05/12/Linux-DNS-server-configuration-and-management/image-20220116230446865.png" alt="image-20220116230446865"></p>
+<p>6、本地域名服务器将查询到包含<code>www.baidu.com</code>的6台三级域名服务器记录返回给浏览器</p>
+<p><img src="/2019/05/12/Linux-DNS-server-configuration-and-management/image-20220116231347596.png" alt="image-20220116231347596"></p>
+<p>7、由于这里查询到的<code>www.baidu.com</code>域名服务器地址为CNAME记录（存在别名服务器，多用于CDN域名加速服务），所以还需要循环重复以上<code>1 =&gt; 6</code>步的查询操作，直到查询到目标域名服务器的A记录为止（A记录为最终的解析地址=&gt;IP地址）</p>
+<p><img src="/2019/05/12/Linux-DNS-server-configuration-and-management/image-20220116232202673.png" alt="image-20220116232202673"></p>
+<p>最后，<code>www.baidu.com</code>三级域名最终解析的地址为<code>39.156.66.14</code> 或 <code>39.156.66.18</code>。</p>
+<p>8、使用ping进行测试，解析路径为：<a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a> =&gt; <a href="http://www.a.shifen.com" target="_blank" rel="noopener">www.a.shifen.com</a> =&gt; 39.156.66.14</p>
+<pre><code>λ Qftm &gt;&gt;&gt;: ping www.baidu.com
+
+Pinging www.a.shifen.com [39.156.66.14] with 32 bytes of data:
+Reply from 39.156.66.14: bytes=32 time=6ms TTL=55
+Reply from 39.156.66.14: bytes=32 time=7ms TTL=55
+Reply from 39.156.66.14: bytes=32 time=7ms TTL=55
+Reply from 39.156.66.14: bytes=32 time=8ms TTL=55
+
+Ping statistics for 39.156.66.14:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 6ms, Maximum = 8ms, Average = 7ms</code></pre><h2 id="主-DNS-服务器配置"><a href="#主-DNS-服务器配置" class="headerlink" title="主 DNS 服务器配置"></a>主 DNS 服务器配置</h2><p>（0）DNS 服务器IP地址配置</p>
+<p><img src="/2019/05/12/Linux-DNS-server-configuration-and-management/1594459-20190512113158754-79588431.png" alt="img"></p>
+<p>（1）安装 DNS 服务</p>
+<ul>
+<li>认识 BIND</li>
+</ul>
+<p>BIND 是一款实现DNS服务器的开放源码软件。BIND经历了第4版、第8版和最新的第9版，第9版修正了以前版本的许多错误，并提升了执行时的效能，BIND能够运行在当前大多数的操作系统平台之上。目前BIND软件由Internet软件联合会（Internet Software Consortium，ISC）这个非营利性机构负责开发和维护。</p>
+<ul>
+<li>安装 bind 软件包</li>
+</ul>
+<p>使用yum命令安装bind服务</p>
+<pre><code>yum clean all //安装前先清除缓存
+
+yum install bind* -y
+
+rpm -qa|grep bind</code></pre><p>（2）配置主配置文件 named.conf</p>
+<pre><code>[root@localhost ~]# vim /etc/named.conf</code></pre><p><img src="/2019/05/12/Linux-DNS-server-configuration-and-management/1594459-20190512111950920-852893.png" alt="img"></p>
+<p>（3）配置正向解析区域 qftm.com.zone</p>
+<pre><code>[root@localhost ~]# vim /var/named/qftm.com.zone</code></pre><p><img src="/2019/05/12/Linux-DNS-server-configuration-and-management/1594459-20190512111227425-1646921362.png" alt="img"></p>
+<p>（4）配置反向解析区域 2.168.192.in-addr.arpa.zone</p>
+<pre><code>[root@localhost ~]# vim /var/named/2.168.192.in-addr.arpa.zone</code></pre><p><img src="/2019/05/12/Linux-DNS-server-configuration-and-management/1594459-20190512111438841-1071431217.png" alt="img"></p>
+<p>（5）将 /etc/named.comf、正反向区域文件属组有root改为named</p>
+<pre><code>[root@localhost ~]# chgrp named /etc/named.conf
+[root@localhost ~]# chgrp named /var/named/qftm.com.zone
+[root@localhost ~]# chgrp named /var/named/2.168.192.in-addr.arpa.zone</code></pre><p>（6）检查各个配置文件是否正确</p>
+<ul>
+<li>检查主配置文件 named.conf</li>
+</ul>
+<pre><code>[root@localhost ~]# named-checkconf</code></pre><p><img src="/2019/05/12/Linux-DNS-server-configuration-and-management/1594459-20190512112513529-1088323882.png" alt="img"></p>
+<ul>
+<li>检查正向解析区域 qftm.com.zone</li>
+</ul>
+<pre><code>[root@localhost ~]# named-checkzone &quot;qftm.com&quot; /var/named/qftm.com.zone</code></pre><p><img src="/2019/05/12/Linux-DNS-server-configuration-and-management/1594459-20190512112718603-42926129.png" alt="img"></p>
+<ul>
+<li>检查反向解析区域 2.168.192.in-addr.arpa.zone</li>
+</ul>
+<p><img src="/2019/05/12/Linux-DNS-server-configuration-and-management/1594459-20190512112822575-1742075346.png" alt="img"></p>
+<p>（7）重启 DNS 服务</p>
+<pre><code>[root@localhost ~]# systemctl restart named</code></pre><p>（8）在Linux客户端测试配置效果</p>
+<pre><code>[root@localhost ~]# nslookup
+&gt; server                                         //查询DNS服务器地址
+Default server: 192.168.2.129
+Address: 192.168.2.129#53
+&gt; dns.qftm.com                              //解析dns.qftm.com
+Server:         192.168.2.129
+Address:        192.168.2.129#53
+
+Name:   dns.qftm.com
+Address: 192.168.2.129
+&gt; blog.qftm.com                            //解析blog.qftm.com
+Server:         192.168.2.129
+Address:        192.168.2.129#53
+
+Name:   blog.qftm.com
+Address: 192.168.2.111
+&gt; 192.168.2.129                           //反向解析192.168.2.129
+Server:         192.168.2.129
+Address:        192.168.2.129#53
+
+129.2.168.192.in-addr.arpa      name = dns.qftm.com.
+&gt; 192.168.2.111                         //反向解析192.168.2.111
+Server:         192.168.2.129
+Address:        192.168.2.129#53
+
+111.2.168.192.in-addr.arpa      name = blog.qftm.com.
+&gt; exit                                        //退出测试
+
+[root@localhost ~]#</code></pre><h2 id="辅助-DNS-服务器配置"><a href="#辅助-DNS-服务器配置" class="headerlink" title="辅助 DNS 服务器配置"></a>辅助 DNS 服务器配置</h2><p>（1）辅助域名服务器</p>
+<p>DNS划分若干区域进行管理，每个区域由一个或多个域名服务器负责解析。对于存在多个域名服务器的区域，必须选择一台主域名服务器（master），保存并管理整个区域的信息，其他服务器称为辅助域名服务器（slave）。</p>
+<p>管理区域时，使用辅助域名服务器有如下几点好处：</p>
+<pre><code>1、辅助DNS服务器提供区域冗余，能够在该区域的主服务器停止响应时为客户端解析该区域的DNS名称。
+2、创建辅助DNS服务器可以减少DNS网络通信量。采用分布式结构，在低速广域网链路中添加DNS服务器能有效地管理和减少网络通信量。
+3、辅助服务器可以用于减少区域的主服务器的负载。</code></pre><p>（2）区域传输</p>
+<p>为了保证DNS数据相同，所有服务器必须进行数据同步，辅助域名服务器从主域名服务器获得区域副本，这个过程称为区域传输。</p>
+<p>区域传输存在两种方式：完全区域传输（AXFR）和增量区域传输（IXFR）。</p>
+<p>满足发生区域传输的条件时，辅助域名服务器向主服务器发送查询请求，更新其区域文件。  </p>
+<ul>
+<li>区域传输过程</li>
+</ul>
+<p><img src="/2019/05/12/Linux-DNS-server-configuration-and-management/1594459-20190512154924325-1109140824.png" alt="img"></p>
+<p>① 区域传输初始阶段，辅助服务器向主DNS服务器发送完全区域传输(AXFR)请求。</p>
+<p>② 主服务器做出响应，并将此区域完全传输到辅助服务器。该区域传输时会一并发送SOA资源记录。SOA中“序列号”(serial) 字段表示区域数据的版本，“刷新时间”(refresh)指出辅助服务器下一次发送查询请求的时间间隔。</p>
+<p>③ 刷新间隔到期时，辅助服务器使用SOA查询来请求从主服务器续订此区域。</p>
+<p>④ 主域名服务器应答其SOA记录的查询。该响应包括主服务器中该区域的当前序列号版本。</p>
+<p>⑤ 辅助服务器检查响应中的SOA记录的序列号，并确定续订该区域的方法，如果辅助服务器确认区域文件已经更改，则它会把IXFR查询发送到主服务器。若SOA响应中的序列号等于其当前的本地序列号，那么两个服务器区域数据都相同，并且不需要区域传输。然后，辅助服务器根据主服务器SOA响应中的该字段值重新设置其刷新时间，续订该区域。如果SOA响应中的序列号值比其当前本地序列号要高，则可以确定此区域己更新并需要传输。</p>
+<p>⑥ 主服务器通过区域的增量传输或完全传输做出响应。如果主服务器可以保存修改的资源记录的历史记录，则它可以通过增量区域传输(IXFR) 做出应答。如果主服务器不支持增量传输或没有区域变化的历史记录，则它可以通过完全区域传输(AXFR)做出应答。</p>
+<p>（3）配置辅助域名服务器</p>
+<ul>
+<li>DNS 服务器IP地址配置</li>
+</ul>
+<p><img src="/2019/05/12/Linux-DNS-server-configuration-and-management/1594459-20190512161210114-1139305421.png" alt="img"></p>
+<ul>
+<li>安装 bind 软件包</li>
+</ul>
+<p>使用yum命令安装bind服务</p>
+<pre><code>yum clean all //安装前先清除缓存
+
+yum install bind* -y
+
+rpm -qa|grep bind</code></pre><ul>
+<li>配置主配置文件 named.conf</li>
+</ul>
+<pre><code>[root@localhost ~]# vim /etc/named.conf</code></pre><p><img src="/2019/05/12/Linux-DNS-server-configuration-and-management/1594459-20190512160448547-1948217749.png" alt="img"></p>
+<p>PS：辅助DNS服务器只需要设置主配置文件，正反向区域解析文件会在辅助DNS服务器设置完成主配置文件重启DNS服务时又主DNS服务器同步到辅助DNS服务器。只不过路径是/var/named/slaves而已。</p>
+<ul>
+<li>数据同步测试</li>
+</ul>
+<p>① 重启辅助服务器named服务，使其与主域名服务器数据同步，然后我们在主域名服务器上执行tail命令查看系统日志，辅助域名服务器通过完整无缺区域复制（AXFR）获取qftm.com区域数据。</p>
+<p><img src="/2019/05/12/Linux-DNS-server-configuration-and-management/1594459-20190512161617079-1670587508.png" alt="img"></p>
+<p>② 通过ls命令查看辅助域名服务器/var/named/slaves目录下是否存在qftm.com区域文件，若存在说明复制成功。</p>
+<p><img src="/2019/05/12/Linux-DNS-server-configuration-and-management/1594459-20190512161856838-1320960938.png" alt="img"></p>
+<p>PS：配置区域复制时主DNS服务器和辅助DNS服务器一定要关闭防火墙</p>
+<p>③ 在客户端测试辅助DNS服务器</p>
+<pre><code>[root@localhost ~]# nslookup
+&gt; server
+Default server: 192.168.2.128
+Address: 192.168.2.128#53
+&gt; www.qftm.com
+Server:         192.168.2.128
+Address:        192.168.2.128#53
+
+Name:   www.qftm.com
+Address: 192.168.2.100
+&gt; dns.qftm.com
+Server:         192.168.2.128
+Address:        192.168.2.128#53
+
+Name:   dns.qftm.com
+Address: 192.168.2.129
+&gt; 192.168.2.100
+Server:         192.168.2.128
+Address:        192.168.2.128#53
+
+100.2.168.192.in-addr.arpa      name = www.qftm.com.
+&gt; 192.168.2.129
+Server:         192.168.2.128
+Address:        192.168.2.128#53
+
+129.2.168.192.in-addr.arpa      name = dns.qftm.com.
+&gt; exit
+
+[root@localhost ~]#</code></pre>
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        Author:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Qftm</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        Link:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://Qftm.github.io/2019/05/12/Linux-DNS-server-configuration-and-management/">http://Qftm.github.io/2019/05/12/Linux-DNS-server-configuration-and-management/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        Reprint policy:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    All articles in this blog are used except for special statements
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    reprint polocy. If reproduced, please indicate source
+                    <a href="/about" target="_blank">Qftm</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Linux/">
+                                    <span class="chip bg-color">Linux</span>
+                                </a>
+                            
+                                <a href="/tags/DNS/">
+                                    <span class="chip bg-color">DNS</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+            <div class="card">
+                <a href="/2019/05/12/Linux-DHCP-server-configuration-and-management/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/dhcp-1.png" class="responsive-img" alt="Linux DHCP 服务器配置与管理">
+                        
+                        <span class="card-title">Linux DHCP 服务器配置与管理</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            环境介绍运行软件VMware Workstation Pro 14系统环境CentOS-7-x86_64-1810操作配置DHCP 服务器搭建1)安装DHCP
+ yum install dhcp 2) 设置虚拟机为仅主机模式、关闭虚拟机依靠
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-05-12
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%AE%89%E5%85%A8%E5%BB%BA%E8%AE%BE/" class="post-category">
+                                    安全建设
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Linux/">
+                        <span class="chip bg-color">Linux</span>
+                    </a>
+                    
+                    <a href="/tags/DHCP/">
+                        <span class="chip bg-color">DHCP</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/04/26/Symmetric-Key-Encryption-DES/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/des-1.jpg" class="responsive-img" alt="Symmetric Key Encryption DES">
+                        
+                        <span class="card-title">Symmetric Key Encryption DES</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            对称加密 (Symmetric Key Encryption)对称加密是最快速、最简单的一种加密方式，加密（encryption）与解密（decryption）用的是同样的密钥（secret key）。对称加密有很多种算法，由于它效率很高，
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-04-26
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" class="post-category">
+                                    编程开发
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/DES/">
+                        <span class="chip bg-color">DES</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + 'From: Qftm<br />'
+            + 'Author: Qftm<br />'
+            + 'Link: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2018</span>
+            <a href="/about" target="_blank">Qftm</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">370.8k</span>&nbsp;字
+            
+            
+            
+            
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+    <a href="https://github.com/Qftm" 
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:Qftmbin@gmail.com" 
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+    <a href="https://twitter.com/Qftmer" 
+        <i class="fab fa-twitter"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;Search</span>
+            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

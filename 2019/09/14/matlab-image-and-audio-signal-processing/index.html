@@ -1,0 +1,1135 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="MATLAB之图像与音频信号处理, Qftm">
+    <meta name="description" content="Maybe a hacker">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>MATLAB之图像与音频信号处理 | Qftm</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.1"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Qftm</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>Index</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>Tags</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>Categories</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>Archives</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-heartbeat" style="zoom: 0.6;"></i>
+      
+      <span>About</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>Friends</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="Search" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Qftm</div>
+        <div class="logo-desc">
+            
+            Maybe a hacker
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			Index
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			Tags
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			Categories
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			Archives
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-heartbeat"></i>
+			
+			About
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			Friends
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/bg.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">MATLAB之图像与音频信号处理</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/MATLAB/">
+                                <span class="chip bg-color">MATLAB</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" class="post-category">
+                                编程开发
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    2019-09-14
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
+                    2020-08-15
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    2.9k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    11 Min
+                </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="原理简介"><a href="#原理简介" class="headerlink" title="原理简介"></a>原理简介</h2><p>离散傅立叶、离散余弦和离散小波变换是图像、音频信号常用基础操作，时域信号转换到不同变换域以后，会导致不同程度的能量集中，信息隐藏利用这个原理在变换域选择适当位置系数进行修改，嵌入信息，并确保图像、音频信号经处理后感官质量无明显变化。</p>
+<h2 id="变换定义"><a href="#变换定义" class="headerlink" title="变换定义"></a>变换定义</h2><h3 id="一维离散傅立叶变换对定义："><a href="#一维离散傅立叶变换对定义：" class="headerlink" title="一维离散傅立叶变换对定义："></a>一维离散傅立叶变换对定义：</h3><p><img src="/2019/09/14/matlab-image-and-audio-signal-processing/1594459-20190914162727532-1908815119.png" alt="img"></p>
+<h3 id="一维离散余弦变换对定义："><a href="#一维离散余弦变换对定义：" class="headerlink" title="一维离散余弦变换对定义："></a>一维离散余弦变换对定义：</h3><p><img src="/2019/09/14/matlab-image-and-audio-signal-processing/1594459-20190914162852327-1931007020.png" alt="img"></p>
+<h3 id="一维连续小波变换对定义："><a href="#一维连续小波变换对定义：" class="headerlink" title="一维连续小波变换对定义："></a>一维连续小波变换对定义：</h3><p><img src="/2019/09/14/matlab-image-and-audio-signal-processing/1594459-20190914163031735-688012833.png" alt="img"></p>
+<h3 id="二维离散傅立叶变换对定义："><a href="#二维离散傅立叶变换对定义：" class="headerlink" title="二维离散傅立叶变换对定义："></a>二维离散傅立叶变换对定义：</h3><p><img src="/2019/09/14/matlab-image-and-audio-signal-processing/1594459-20190914163059508-2003880495.png" alt="img"></p>
+<h3 id="二维离散余弦变换对定义："><a href="#二维离散余弦变换对定义：" class="headerlink" title="二维离散余弦变换对定义："></a>二维离散余弦变换对定义：</h3><p><img src="/2019/09/14/matlab-image-and-audio-signal-processing/1594459-20190914163143003-628372491.png" alt="img"></p>
+<h2 id="用离散傅立叶变换分析合成音频和图像"><a href="#用离散傅立叶变换分析合成音频和图像" class="headerlink" title="用离散傅立叶变换分析合成音频和图像"></a>用离散傅立叶变换分析合成音频和图像</h2><h3 id="分析合成音频文件包括以下步骤："><a href="#分析合成音频文件包括以下步骤：" class="headerlink" title="分析合成音频文件包括以下步骤："></a>分析合成音频文件包括以下步骤：</h3><pre><code>读取音频文件数据
+
+ 一维离散傅立叶变换
+
+一维离散傅立叶逆变换
+
+观察结果</code></pre><h4 id="第一步：读取音频文件数据"><a href="#第一步：读取音频文件数据" class="headerlink" title="第一步：读取音频文件数据"></a>第一步：读取音频文件数据</h4><p>新建一个 m 文件，另存为 example11.m，输入以下命令：</p>
+<pre><code>clc;
+
+clear;
+
+l = [1, 40000];
+
+[fn, pn] = uigetfile(&#39;*.wav&#39;, &#39;请选择音频文件&#39;);
+
+[x, fs] = audioread(strcat(pn, fn),l);
+
+len = length(x)</code></pre><p>uigetfile 是文件对话框函数，提供图形界面供用户选择所需文件，返回目标的目录名和文件名。</p>
+<p>函数原型：y= audioread (FILE)</p>
+<p>功能：读取音频格式文件内容</p>
+<p>输入参数：file 表示音频文件名，字符串</p>
+<p>返回参数：y 表示音频样点，浮点型</p>
+<h4 id="第二步：一维离散傅立叶变换"><a href="#第二步：一维离散傅立叶变换" class="headerlink" title="第二步：一维离散傅立叶变换"></a>第二步：一维离散傅立叶变换</h4><p>新建一个 m 文件，另存为 example12.m，输入以下命令：</p>
+<pre><code>xf = fft(x);
+
+f1 = [0:len-1] * fs / len;
+
+xff = fftshift(xf);
+
+hl = floor(len / 2);
+
+f2 = [-hl:hl] * fs / len;</code></pre><p>fft 函数对输入参数进行一维离散傅立叶变换并返回其系数，对应频率从 0 到 fs（采样频率），使用 fftshift 将零频对应系数移至中央。上述代码还计算了离散样点对应的频率值，以便更好地观察频谱。</p>
+<h4 id="第三步：一维离散傅立叶逆变换"><a href="#第三步：一维离散傅立叶逆变换" class="headerlink" title="第三步：一维离散傅立叶逆变换"></a>第三步：一维离散傅立叶逆变换</h4><p>新建一个 m 文件，另存为 example13.m，输入以下命令：</p>
+<pre><code>xsync = ifft(xf);</code></pre><p>ifft 函数对输入参数进行一维离散傅立叶逆变换并返回其系数。</p>
+<h4 id="第四步：观察结果"><a href="#第四步：观察结果" class="headerlink" title="第四步：观察结果"></a>第四步：观察结果</h4><p>新建一个 m 文件，另存为 example14.m，输入以下命令：</p>
+<pre><code>figure;
+
+subplot(2, 2, 1);plot(x);title(&#39;original audio&#39;);
+
+subplot(2, 2, 2);plot(xsync);title(&#39;synthesize audio&#39;);
+
+subplot(2, 2, 3);plot(f1, abs(xf));title(&#39;fft coef. of audio&#39;);subplot(2, 2, 4);plot(f2(1:len), abs(xff));title(&#39;fftshift coef. of auio&#39;);</code></pre><p>figure(n)表示创建第 n 个图形窗。</p>
+<p>subplot 是子绘图函数，第一、二个参数指明子图像布局方式，例如，若参数为 2，3 则表示画面共分为 2 行，每行有 3 个子图像。第三个参数表明子图像序号，排序顺序为从左至右，从上至下。</p>
+<p>plot 是绘图函数，默认使用方式为 plot(y)，参数 y 是要绘制的数据；如果需要指明图像横轴显示序列，则命令行为 plot(x, y)，默认方式等同于 plot([0..len-1], y)，len 为序列 y 的长度。</p>
+<p><img src="/2019/09/14/matlab-image-and-audio-signal-processing/1594459-20190915152656271-131667088.png" alt="img"></p>
+<h3 id="分析合成图像文件包括以下步骤："><a href="#分析合成图像文件包括以下步骤：" class="headerlink" title="分析合成图像文件包括以下步骤："></a>分析合成图像文件包括以下步骤：</h3><pre><code>读取图像文件数据
+
+二维离散傅立叶变换
+
+二维离散傅立叶逆变换
+
+观察结果</code></pre><h4 id="第一步：读取图像文件数据"><a href="#第一步：读取图像文件数据" class="headerlink" title="第一步：读取图像文件数据"></a>第一步：读取图像文件数据</h4><p>新建一个 m 文件，另存为 example21.m，输入以下命令：</p>
+<pre><code>[fn, pn] = uigetfile(&#39;*.png&#39;, &#39;请选择图像文件&#39;);
+
+[x, map] = imread(strcat(pn, fn), &#39;png&#39;);
+
+I = rgb2gray(x);</code></pre><p>函数原型：A = imread(filename,fmt)</p>
+<p>功能：读取 fmt 指定格式的图像文件内容</p>
+<p>输入参数：filename 表示图像文件名，字符串 Fmt 表示图像文件格式名，字符串，函数支持的图像格式包括：JPEG，TIFF，GIF，BMP 等等，当参数中不包括文件格式名时，函数尝试推断出文件格式。 </p>
+<p>返回参数：A 表示图像数据内容，整型 rgb2gray 将 RGB 图像转换为灰度图。</p>
+<h4 id="第二步：二维离散傅立叶变换"><a href="#第二步：二维离散傅立叶变换" class="headerlink" title="第二步：二维离散傅立叶变换"></a>第二步：二维离散傅立叶变换</h4><p>新建一个 m 文件，另存为 example22.m，输入以下命令：</p>
+<pre><code>xf = fft2(I);
+
+xff = fftshift(xf);</code></pre><p>fft2 函数对输入参数进行二维离散傅立叶变换并返回其系数，使用 fftshift 将零频对应系数移至中央。</p>
+<h4 id="第三步：二维离散傅立叶逆变换"><a href="#第三步：二维离散傅立叶逆变换" class="headerlink" title="第三步：二维离散傅立叶逆变换"></a>第三步：二维离散傅立叶逆变换</h4><p>新建一个 m 文件，另存为 example23.m，输入以下命令：</p>
+<pre><code>xsync = ifft2(xf);</code></pre><p>ifft2 函数对输入参数进行二维离散傅立叶逆变换并返回其系数。</p>
+<h4 id="第四步：观察结果-1"><a href="#第四步：观察结果-1" class="headerlink" title="第四步：观察结果"></a>第四步：观察结果</h4><p>新建一个 m 文件，另存为 example24.m，输入以下命令：</p>
+<pre><code>figure;
+
+subplot(2, 2, 1);imshow(x);title(&#39;original image&#39;);
+
+subplot(2, 2, 2);imshow(uint8(abs(xsync)));title(&#39;synthesize image&#39;);
+
+subplot(2, 2, 3);mesh(abs(xf));title(&#39;fft coef. of image&#39;);
+
+subplot(2, 2, 4);mesh(abs(xff));title(&#39;fftshift coef. of image&#39;);</code></pre><p>imshow 是二维数据绘图函数，mesh 通过三维平面显示数据。</p>
+<p><img src="/2019/09/14/matlab-image-and-audio-signal-processing/1594459-20190915154235384-1879265457.png" alt="img"></p>
+<h2 id="用离散余弦变换分析合成音频和图像"><a href="#用离散余弦变换分析合成音频和图像" class="headerlink" title="用离散余弦变换分析合成音频和图像"></a>用离散余弦变换分析合成音频和图像</h2><h3 id="分析合成音频文件包括以下步骤：-1"><a href="#分析合成音频文件包括以下步骤：-1" class="headerlink" title="分析合成音频文件包括以下步骤："></a>分析合成音频文件包括以下步骤：</h3><pre><code>读取音频文件数据
+
+一维离散余弦变换
+
+一维离散余弦逆变换
+
+观察结果</code></pre><h4 id="第一步：一维离散余弦变换"><a href="#第一步：一维离散余弦变换" class="headerlink" title="第一步：一维离散余弦变换"></a>第一步：一维离散余弦变换</h4><p>新建一个 m 文件，另存为 example31.m，输入以下命令：</p>
+<pre><code>xf = dct(x);</code></pre><p>dct 函数对输入参数进行一维离散余弦变换并返回其系数，对应频率从 0 到 fs（采样频率）。</p>
+<h4 id="第二步：一维离散余弦逆变换"><a href="#第二步：一维离散余弦逆变换" class="headerlink" title="第二步：一维离散余弦逆变换"></a>第二步：一维离散余弦逆变换</h4><p>新建一个 m 文件，另存为 example32.m，输入以下命令：</p>
+<pre><code>xsync = idct(xf);
+
+[row,col]=size(x);
+
+xff=zeros(row,col);
+
+xff(1:row,1:col)=xf(1:row,1:col);
+
+y=idct(xff);
+</code></pre><p>idct 函数对输入参数进行一维离散余弦逆变换并返回其系数。离散余弦变换常用于图像压缩，可以尝试只使用部分系数重构语言，通过观察可发现，原始音频和合成后音频两者差别不大。</p>
+<h4 id="第三步：观察结果"><a href="#第三步：观察结果" class="headerlink" title="第三步：观察结果"></a>第三步：观察结果</h4><p>新建一个 m 文件，另存为 example33.m，输入以下命令：</p>
+<pre><code>figure;
+
+subplot(2, 2, 1);plot(x);title(&#39;original audio&#39;);
+
+subplot(2, 2, 2);plot(xsync);title(&#39;synthesize audio&#39;);
+
+subplot(2, 2, 3);plot(f1, abs(xf));title(&#39;fft coef. of audio&#39;);
+
+subplot(2, 2, 4);plot(f2(1:len), abs(xff));title(&#39;fftshift coef. of auio&#39;);
+</code></pre><p><img src="/2019/09/14/matlab-image-and-audio-signal-processing/1594459-20190915154534930-288034271.png" alt="img"></p>
+<h3 id="分析合成图像文件包括以下步骤：-1"><a href="#分析合成图像文件包括以下步骤：-1" class="headerlink" title="分析合成图像文件包括以下步骤："></a>分析合成图像文件包括以下步骤：</h3><pre><code>读取图像文件数据
+
+二维离散余弦变换
+
+二维离散余弦逆变换
+
+观察结果</code></pre><h4 id="第一步：二维离散余弦变换"><a href="#第一步：二维离散余弦变换" class="headerlink" title="第一步：二维离散余弦变换"></a>第一步：二维离散余弦变换</h4><p>新建一个 m 文件，另存为 example41.m，输入以下命令：</p>
+<pre><code>xf = dct2(I);
+</code></pre><p>dct2 函数对输入参数进行二维离散余弦变换并返回其系数。</p>
+<h4 id="第二步：二维离散余弦逆变换"><a href="#第二步：二维离散余弦逆变换" class="headerlink" title="第二步：二维离散余弦逆变换"></a>第二步：二维离散余弦逆变换</h4><p>新建一个 m 文件，另存为 example42.m，输入以下命令：</p>
+<pre><code>xsync = uint8(idct2(xf));
+
+[row, col] = size(I);
+
+lenr = round(row * 4 / 5);
+
+lenc = round(col * 4 / 5);
+
+xff = zeros(row, col);
+
+xff(1:lenr, 1:lenc) = xf(1:lenr, 1:lenc);
+
+y = uint8(idct2(xff));
+</code></pre><p>idct2 函数对输入参数进行二维离散余弦逆变换并返回其系数。可以尝试使用部分系数重构图像，本例中使用了系数矩阵中 4/5 的数据，其它部分置零。为了保证图像能正确显示，使用 uint8 对重构图像原始数据进行了数据类型转换，确保其取值范围在 0 到 255 之间。</p>
+<h4 id="第三步：观察结果-1"><a href="#第三步：观察结果-1" class="headerlink" title="第三步：观察结果"></a>第三步：观察结果</h4><p>请输入命令显示四个子图，分别是原始图像、使用全部系数恢复的图像，使用部分系数恢复的图像和用三维立体图方式显示系数。</p>
+<p>新建一个 m 文件，另存为 example43.m，输入以下命令：</p>
+<pre><code>figure;
+
+subplot(2, 2, 1);imshow(x);title(&#39;original image&#39;);
+
+subplot(2, 2, 2);imshow(uint8(abs(xsync)));title(&#39;synthesize image&#39;);
+
+subplot(2, 2, 3);imshow(uint8(abs(y)));title(&#39;part synthesize image&#39;);
+
+subplot(2, 2, 4);mesh(abs(xff));title(&#39;fftshift coef. of image&#39;);
+</code></pre><p><img src="/2019/09/14/matlab-image-and-audio-signal-processing/1594459-20190915154818532-1531826659.png" alt="img"></p>
+<h2 id="用离散小波变换分析合成音频和图像"><a href="#用离散小波变换分析合成音频和图像" class="headerlink" title="用离散小波变换分析合成音频和图像"></a>用离散小波变换分析合成音频和图像</h2><h3 id="分析合成音频文件包括以下步骤：-2"><a href="#分析合成音频文件包括以下步骤：-2" class="headerlink" title="分析合成音频文件包括以下步骤："></a>分析合成音频文件包括以下步骤：</h3><pre><code>读取音频文件数据
+
+一维离散小波变换
+
+一维离散小波逆变换
+
+观察结果</code></pre><p>详细操作步骤为：</p>
+<h4 id="第一步：一维离散小波变换"><a href="#第一步：一维离散小波变换" class="headerlink" title="第一步：一维离散小波变换"></a>第一步：一维离散小波变换</h4><p>新建一个 m 文件，另存为 example51.m，输入以下命令：</p>
+<pre><code>[C, L] = wavedec(x, 2, &#39;db4&#39;);
+</code></pre><p>wavedec 函数对输入参数进行一维离散小波变换并返回其系数 C 和各级系数长度L。第二个参数指明小波变换的级数，第三个参数指明小波变换使用的小波基名<em>称。</em></p>
+<h4 id="第二步：一维离散小波逆变换"><a href="#第二步：一维离散小波逆变换" class="headerlink" title="第二步：一维离散小波逆变换"></a>第二步：一维离散小波逆变换</h4><p>新建一个 m 文件，另存为 example52.m，输入以下命令：</p>
+<pre><code>xsync = waverec(C, L, &#39;db4&#39;);
+
+cA2 = appcoef(C, L, &#39;db4&#39;, 2);
+
+cD2 = detcoef(C, L, 2);
+
+cD1 = detcoef(C, L, 1);
+</code></pre><p>waverec 函数对输入参数进行一维离散小波逆变换并返回其系数。</p>
+<p>appcoef 返回小波系数近似分量，第一个参数 C、第二个参数 L 是 wavedec 的返回参数，为各级小波系数和其长度，第三个参数指明小波基名称，第四个参数指明级。</p>
+<p>detcoef 返回小波系数细节分量，第一个参数 C、第二个参数 L 是 wavedec 的返回参数，为各级小波系数和其长度，第三个参数指明级数。</p>
+<h4 id="第三步：观察结果-2"><a href="#第三步：观察结果-2" class="headerlink" title="第三步：观察结果"></a>第三步：观察结果</h4><p>新建一个 m 文件，另存为 example53.m，输入以下命令：</p>
+<pre><code>figure;
+
+subplot(2, 3, 1);plot(x);title(&#39;original audio&#39;);
+
+subplot(2, 3, 2);plot(xsync);title(&#39;synthesize audio&#39;);
+
+subplot(2, 3, 4);plot(cA2);title(&#39;app coef. of audio&#39;);
+
+subplot(2, 3, 5);plot(cD2);title(&#39;det coef. of auio&#39;);
+
+subplot(2, 3, 6);plot(cD1);title(&#39;det coef. of auio&#39;);
+</code></pre><p> <img src="/2019/09/14/matlab-image-and-audio-signal-processing/1594459-20190915161156453-556804911.png" alt="img"></p>
+<h3 id="分析合成图像文件包括以下步骤：-2"><a href="#分析合成图像文件包括以下步骤：-2" class="headerlink" title="分析合成图像文件包括以下步骤："></a>分析合成图像文件包括以下步骤：</h3><pre><code>读取图像文件数据
+
+二维离散小波变换
+
+二维离散小波逆变换
+
+观察结果</code></pre><h4 id="第一步：二维离散小波变换"><a href="#第一步：二维离散小波变换" class="headerlink" title="第一步：二维离散小波变换"></a>第一步：二维离散小波变换</h4><p>新建一个 m 文件，另存为 example61.m，输入以下命令：</p>
+<pre><code>sx = size(I);
+
+[cA1, cH1, cV1, cD1] = dwt2(I, &#39;bior3.7&#39;);
+</code></pre><p>dwt2 函数对输入参数进行二维一级离散小波变换并返回近似分量，水平细节分量，垂直细节分量和对角线细节分量。</p>
+<p>如果要对图像进行多级小波分解，使用 wavedec2 函数。</p>
+<h4 id="第二步：二维离散小波逆变换"><a href="#第二步：二维离散小波逆变换" class="headerlink" title="第二步：二维离散小波逆变换"></a>第二步：二维离散小波逆变换</h4><p>新建一个 m 文件，另存为 example62.m，输入以下命令：</p>
+<pre><code>xsync = uint8(idwt2(cA1, cH1, cV1, cD1, &#39;bior3.7&#39;, sx));
+
+A1 = uint8(idwt2(cA1, [], [], [], &#39;bior3.7&#39;, sx));
+
+H1 = uint8(idwt2([], cH1, [], [], &#39;bior3.7&#39;, sx));
+
+V1 = uint8(idwt2([], [], cV1, [], &#39;bior3.7&#39;, sx));
+
+D1 = uint8(idwt2([], [], [], cD1, &#39;bior3.7&#39;, sx));
+</code></pre><p>idwt2 函数对输入参数进行二维离散小波逆变换并返回其系数。可以尝试仅使用近似分量、水平细节分量、垂直细节分量或对角线细节分量重构图像。</p>
+<h4 id="第三步：观察结果-3"><a href="#第三步：观察结果-3" class="headerlink" title="第三步：观察结果"></a>第三步：观察结果</h4><p>输入命令显示六个子图，分别是原始图像、使用全部系数恢复的图像、小波系数近似分量、水平细节分量、垂直细节分量和对角线细节分量。</p>
+<p>新建一个 m 文件，另存为 example63.m，输入以下命令：</p>
+<pre><code>figure;
+
+subplot(2, 3, 1);imshow(x);title(&#39;original image&#39;);
+
+subplot(2, 3, 2);imshow(uint8(abs(xsync)));title(&#39;synthesize image&#39;);
+
+subplot(2, 3, 3);mesh(A1);title(&#39;app coef. of image &#39;);
+
+subplot(2, 3, 4);mesh(H1);title(&#39;hor coef. of image &#39;);
+
+subplot(2, 3, 5);mesh(V1);title(&#39;ver coef. of image &#39;);
+
+subplot(2, 3, 6);mesh(D1);title(&#39;dia coef. of image &#39;);
+</code></pre><p><img src="/2019/09/14/matlab-image-and-audio-signal-processing/1594459-20190915161441428-2040043280.png" alt="img"></p>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        Author:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Qftm</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        Link:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://Qftm.github.io/2019/09/14/matlab-image-and-audio-signal-processing/">http://Qftm.github.io/2019/09/14/matlab-image-and-audio-signal-processing/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        Reprint policy:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    All articles in this blog are used except for special statements
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    reprint polocy. If reproduced, please indicate source
+                    <a href="/about" target="_blank">Qftm</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/MATLAB/">
+                                    <span class="chip bg-color">MATLAB</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+            <div class="card">
+                <a href="/2019/09/19/information-hiding-and-detection-based-on-bmp-image/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/bmp-1.png" class="responsive-img" alt="基于BMP图像的信息隐藏与检测">
+                        
+                        <span class="card-title">基于BMP图像的信息隐藏与检测</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            原理简介针对文件结构的信息隐藏方法需详细掌握文件的格式，利用文件结构块之间的关系或根据块数据和块大小之间的关系来隐藏信息。
+BMP（Bitmap-File）图形文件是 Windows 采用的常见图形文件格式，要利用 BMP 位图进行信息隐藏
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-09-19
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/" class="post-category">
+                                    攻防渗透
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E4%BF%A1%E6%81%AF%E9%9A%90%E8%97%8F/">
+                        <span class="chip bg-color">信息隐藏</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/09/12/matlab-basic-syntax-and-functions/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/matlab-2.png" class="responsive-img" alt="MATLAB之基本语法与基础函数">
+                        
+                        <span class="card-title">MATLAB之基本语法与基础函数</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            常用命令dir：列出当MATLAB之基本语法与基础函数前目录下的所有文件
+
+clc：清除命令窗
+
+clear all：清除环境（从内存中清除所有变量）
+
+who：将内存中的当前变量以简单形式列出
+
+close all: 关闭所有的 Figu
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-09-12
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" class="post-category">
+                                    编程开发
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/MATLAB/">
+                        <span class="chip bg-color">MATLAB</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + 'From: Qftm<br />'
+            + 'Author: Qftm<br />'
+            + 'Link: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2018</span>
+            <a href="/about" target="_blank">Qftm</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">370.8k</span>&nbsp;字
+            
+            
+            
+            
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+    <a href="https://github.com/Qftm" 
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:Qftmbin@gmail.com" 
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+    <a href="https://twitter.com/Qftmer" 
+        <i class="fab fa-twitter"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;Search</span>
+            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

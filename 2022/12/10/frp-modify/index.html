@@ -1,0 +1,1077 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="FRP 分析与改造, Qftm">
+    <meta name="description" content="Maybe a hacker">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>FRP 分析与改造 | Qftm</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.1"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Qftm</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>Index</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>Tags</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>Categories</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>Archives</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-heartbeat" style="zoom: 0.6;"></i>
+      
+      <span>About</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>Friends</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="Search" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Qftm</div>
+        <div class="logo-desc">
+            
+            Maybe a hacker
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			Index
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			Tags
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			Categories
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			Archives
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-heartbeat"></i>
+			
+			About
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			Friends
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/bg.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">FRP 分析与改造</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E4%BB%A3%E7%90%86%E8%BD%AC%E5%8F%91/">
+                                <span class="chip bg-color">代理转发</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/">
+                                <span class="chip bg-color">内网渗透</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/" class="post-category">
+                                攻防渗透
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    2022-12-10
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
+                    2022-12-20
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    1.7k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    6 Min
+                </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>FRP 因其功能丰富，红队攻击者常将其用在内网渗透中，但是 FRP 在实际红蓝对抗中存在很多特征，导致被蓝队发现并溯源。</p>
+<p>下面通过对 <a href="https://github.com/fatedier/frp/releases/tag/v0.45.0" target="_blank" rel="noopener">FRP 0.45.0</a> 版本进行分析，提取特征并进行规避。</p>
+<h2 id="客户端执行流程分析"><a href="#客户端执行流程分析" class="headerlink" title="客户端执行流程分析"></a>客户端执行流程分析</h2><p>客户端入口：cmd/frpc/main.go</p>
+<p><img src="/2022/12/10/frp-modify/image-20221130010957529.png" alt="image-20221130010957529"></p>
+<p>命令行参数处理使用的是 cobra 库，初始化，其中cfgFile默认值是./frpc.ini</p>
+<p><img src="/2022/12/10/frp-modify/image-20221130011153892.png" alt="image-20221130011153892"></p>
+<p>rootCmd，判断cfgDir，进入runClient(cfgFile)</p>
+<p>加载配置文件</p>
+<p><img src="/2022/12/10/frp-modify/image-20221130012344726.png" alt="image-20221130012344726"></p>
+<p>解析配置文件，读取配置文件内容给content，UnmarshalClientConfFromIni进行第一次解析赋值给cfg、content备份的buffer给LoadAllProxyConfsFromIni进行第二次解析</p>
+<p><img src="/2022/12/10/frp-modify/image-20221130012546011.png" alt="image-20221130012546011"></p>
+<p>UnmarshalClientConfFromIni主要解析ini文件common项</p>
+<p><img src="/2022/12/10/frp-modify/image-20221130012848030.png" alt="image-20221130012848030"></p>
+<p>LoadAllProxyConfsFromIni主要解析ini文件所有的proxy代理项</p>
+<p><img src="/2022/12/10/frp-modify/image-20221130013534950.png" alt="image-20221130013534950"></p>
+<p>解析完所有的ini文件配置，开始真正启动服务 startService(cfg, pxyCfgs, visitorCfgs, cfgFilePath)</p>
+<p><img src="/2022/12/10/frp-modify/image-20221130012344726.png" alt="image-20221130012344726"></p>
+<p>跟进startService，NewService建立服务，svr.Run开始运行</p>
+<p><img src="/2022/12/10/frp-modify/image-20221130014456833.png" alt="image-20221130014456833"></p>
+<p>Run()函数内svr.login()尝试登陆到frps服务端，返回conn和session</p>
+<p><img src="/2022/12/10/frp-modify/image-20221130014709324.png" alt="image-20221130014709324"></p>
+<p>login()函数，首先检测TLSEnable是否开启，后面开始建立TCP连接，用建立好的连接，发了个0x17的字符，代表等下要建立tls加密传输</p>
+<p><img src="/2022/12/10/frp-modify/image-20221130020153107.png" alt="image-20221130020153107"></p>
+<p>最后发送登录信息给服务端</p>
+<p><img src="/2022/12/10/frp-modify/image-20221130020838762.png" alt="image-20221130020838762"></p>
+<h2 id="流量特征修改"><a href="#流量特征修改" class="headerlink" title="流量特征修改"></a>流量特征修改</h2><h3 id="基础通信分析"><a href="#基础通信分析" class="headerlink" title="基础通信分析"></a>基础通信分析</h3><p>客户端frpc common基础配置</p>
+<pre class="line-numbers language-ini"><code class="language-ini"><span class="token selector">[common]</span>
+<span class="token constant">server_addr</span> <span class="token attr-value"><span class="token punctuation">=</span> 8.219.248.226</span>
+<span class="token constant">server_port</span> <span class="token attr-value"><span class="token punctuation">=</span> 2086</span>
+
+<span class="token selector">[plugin_socks5]</span>
+<span class="token constant">type</span> <span class="token attr-value"><span class="token punctuation">=</span> tcp</span>
+<span class="token constant">remote_port</span> <span class="token attr-value"><span class="token punctuation">=</span> 7070</span>
+<span class="token constant">plugin</span> <span class="token attr-value"><span class="token punctuation">=</span> socks5</span>
+<span class="token constant">plugin_user</span> <span class="token attr-value"><span class="token punctuation">=</span> admin</span>
+<span class="token constant">plugin_passwd</span> <span class="token attr-value"><span class="token punctuation">=</span> 123456</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>frpc启动时，如果客户端<code>[common]</code>未指定协议<code>protocol</code>，则默认使用TCP协议</p>
+<p><img src="/2022/12/10/frp-modify/image-20221219103457696.png" alt="image-20221219103457696"></p>
+<p>TCP三次握手建立连接后，开始向服务端发送认证信息</p>
+<pre><code>o{&quot;version&quot;:&quot;0.45.0&quot;,&quot;os&quot;:&quot;darwin&quot;,&quot;arch&quot;:&quot;arm64&quot;,&quot;privilege_key&quot;:&quot;cacaf2489774a4c69abe80dc57ac5486&quot;,&quot;timestamp&quot;:1671416534,&quot;pool_count&quot;:1}</code></pre><p><img src="/2022/12/10/frp-modify/image-20221219104546417.png" alt="image-20221219104546417"></p>
+<p>服务端frps接收客户端认证信息，并启动代理插件监听</p>
+<p><img src="/2022/12/10/frp-modify/image-20221219110753318.png" alt="image-20221219110753318"></p>
+<p>服务端也会通过TCP协议返回一些信息 version、run_id</p>
+<pre><code>10{&quot;version&quot;:&quot;0.45.0&quot;,&quot;run_id&quot;:&quot;0fa0b38623bbd1bc&quot;}</code></pre><p><img src="/2022/12/10/frp-modify/image-20221219110139262.png" alt="image-20221219110139262"></p>
+<p>客户端显示认证成功的信息和代理情况</p>
+<p><img src="/2022/12/10/frp-modify/image-20221219113122184.png" alt="image-20221219113122184"></p>
+<p>在其他主机上配置代理测试访问，当frps收到代理转发请求后，frps服务端会将代理信息（代理插件名、地址、端口、认证等）及代理转发请求数据传送给frpc客户端</p>
+<p><img src="/2022/12/10/frp-modify/image-20221219151504432.png" alt="image-20221219151504432"></p>
+<h3 id="基础流量特征"><a href="#基础流量特征" class="headerlink" title="基础流量特征"></a>基础流量特征</h3><p>上面客户端连接认证及代理转发过程分析，通过在frpc客户端抓包分析，其中流量特征主要包括两点</p>
+<ul>
+<li>客户端连接认证时，双方三次握手建立TCP通信后传递的一些特定格式的登陆信息</li>
+<li>客户端代理转发请求时，收到服务端传递的一些特定格式的代理信息</li>
+</ul>
+<p>上述特征清理，可开启TLS加密TCP通信内容。</p>
+<p>从 v0.25.0 版本开始，frpc 和 frps 之间支持通过 TLS 协议加密传输。通过在 frpc.ini 的 common 中配置 <code>tls_enable = true</code> 来启用此功能。</p>
+<pre class="line-numbers language-ini"><code class="language-ini"><span class="token selector">[common]</span>
+<span class="token constant">server_addr</span> <span class="token attr-value"><span class="token punctuation">=</span> 8.219.248.226</span>
+<span class="token constant">server_port</span> <span class="token attr-value"><span class="token punctuation">=</span> 2086</span>
+<span class="token constant">tls_enbale</span> <span class="token attr-value"><span class="token punctuation">=</span> true</span>
+
+<span class="token selector">[plugin_socks5]</span>
+<span class="token constant">type</span> <span class="token attr-value"><span class="token punctuation">=</span> tcp</span>
+<span class="token constant">remote_port</span> <span class="token attr-value"><span class="token punctuation">=</span> 7070</span>
+<span class="token constant">plugin</span> <span class="token attr-value"><span class="token punctuation">=</span> socks5</span>
+<span class="token constant">plugin_user</span> <span class="token attr-value"><span class="token punctuation">=</span> admin</span>
+<span class="token constant">plugin_passwd</span> <span class="token attr-value"><span class="token punctuation">=</span> 123456</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>重新启动frpc客户端，此时双方建立连接后的通信TCP数据流内容已加密</p>
+<p><img src="/2022/12/10/frp-modify/image-20221219161108174.png" alt="image-20221219161108174"></p>
+<p>测试frpc客户端代理转发服务端代理请求情况，可看到TCP数据流内容已加密</p>
+<p><img src="/2022/12/10/frp-modify/image-20221219162117382.png" alt="image-20221219162117382"></p>
+<p>除了使用<code>tls_enable = true</code>外，还可继续使用<code>use_encryption = true</code>、<code>use_compression = true</code>进行二次处理。</p>
+<h3 id="TLS特征"><a href="#TLS特征" class="headerlink" title="TLS特征"></a>TLS特征</h3><p>当开启TLS加密通信内容时，由于 frp 为了端口复用，建立 TLS 连接的第一个字节默认为 0x17，导致开启TLS流量特征明显。</p>
+<p>客户端建立TLS发起第一个数据包<code>Client Hello</code>之前，默认会发送一个一字节大小的TCP通信数据</p>
+<p><img src="/2022/12/10/frp-modify/image-20221219164510545.png" alt="image-20221219164510545"></p>
+<p>修改TLS默认字节，定位源码<code>pkg/util/net/tls.go</code>、<code>pkg/util/net/dial.go</code>，修改如下5处</p>
+<p><img src="/2022/12/10/frp-modify/image-20221219234426393.png" alt="image-20221219234426393"></p>
+<p><img src="/2022/12/10/frp-modify/image-20221219234451534.png" alt="image-20221219234451534"></p>
+<p>测试效果，默认一字节<code>0x17</code>变为自定义五字节<code>0x11 0x23 0x66 0x46 0x15</code></p>
+<p><img src="/2022/12/10/frp-modify/image-20221219234546161.png" alt="image-20221219234546161"></p>
+<h2 id="配置文件优化"><a href="#配置文件优化" class="headerlink" title="配置文件优化"></a>配置文件优化</h2><p>frpc客户端启动需要指定frpc.ini配置文件，默认frpc配置文件为frpc.ini，同时frpc启动后frpc.ini会保留在目标机子上。</p>
+<p>那么，针对frpc配置文件的优化主要包含两点</p>
+<ul>
+<li>配置文件的文件名及后缀可自定义</li>
+<li>frpc运行自删除配置文件</li>
+</ul>
+<p>针对frpc运行自删除配置文件，在cmd/frpc/sub/root.go里面进行修改，第一步，在init()函数中添加frpc启动参数</p>
+<pre class="line-numbers language-go"><code class="language-go">rootCmd<span class="token punctuation">.</span><span class="token function">PersistentFlags</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">BoolVarP</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>delCfgFile<span class="token punctuation">,</span> <span class="token string">"delete"</span><span class="token punctuation">,</span> <span class="token string">"d"</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token string">"delete config file of frpc"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="/2022/12/10/frp-modify/image-20221201004716813.png" alt="image-20221201004716813"></p>
+<p>第二步，在startService()函数中添加判断delCfgFile参数是否开启，如果开启则删除frpc配置文件</p>
+<pre class="line-numbers language-go"><code class="language-go">    <span class="token keyword">if</span> delCfgFile <span class="token punctuation">{</span>
+        errs <span class="token operator">:=</span> os<span class="token punctuation">.</span><span class="token function">Remove</span><span class="token punctuation">(</span>cfgFile<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> errs <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+            log<span class="token punctuation">.</span><span class="token function">Warn</span><span class="token punctuation">(</span><span class="token string">"delete config file of frpc fail\n"</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            log<span class="token punctuation">.</span><span class="token function">Info</span><span class="token punctuation">(</span><span class="token string">"delete config file of frpc success\n"</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="/2022/12/10/frp-modify/image-20221207160929309.png" alt="image-20221207160929309"></p>
+<p>效果</p>
+<p><img src="/2022/12/10/frp-modify/image-20221207225840162.png" alt="image-20221207225840162"></p>
+<h2 id="CDN域前置"><a href="#CDN域前置" class="headerlink" title="CDN域前置"></a>CDN域前置</h2><p>frpc域前置CDN一般结合websocket协议使用，自frp0.21.0及之后支持websocket协议（仅支持ws协议，不支持wss协议）。</p>
+<h3 id="WebSocket"><a href="#WebSocket" class="headerlink" title="WebSocket"></a>WebSocket</h3><p>测试域前置，客户端frpc common配置</p>
+<pre class="line-numbers language-ini"><code class="language-ini"><span class="token selector">[common]</span>
+<span class="token constant">server_addr</span> <span class="token attr-value"><span class="token punctuation">=</span> 101.42.233.208</span>
+<span class="token constant">server_port</span> <span class="token attr-value"><span class="token punctuation">=</span> 2086</span>
+<span class="token constant">protocol</span> <span class="token attr-value"><span class="token punctuation">=</span> websocket</span>
+
+<span class="token selector">[plugin_socks5]</span>
+<span class="token constant">type</span> <span class="token attr-value"><span class="token punctuation">=</span> tcp</span>
+<span class="token constant">remote_port</span> <span class="token attr-value"><span class="token punctuation">=</span> 7070</span>
+<span class="token constant">plugin</span> <span class="token attr-value"><span class="token punctuation">=</span> socks5</span>
+<span class="token constant">plugin_user</span> <span class="token attr-value"><span class="token punctuation">=</span> admin</span>
+<span class="token constant">plugin_passwd</span> <span class="token attr-value"><span class="token punctuation">=</span> 123456</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>frpc启动时，如果客户端协议为websocket则会通过先发送http请求进行ws协议切换</p>
+<p><img src="/2022/12/10/frp-modify/image-20221130121210383.png" alt="image-20221130121210383"></p>
+<p>然后通过websocket协议向服务端发送认证信息</p>
+<pre><code>o\000\000\000\000\000\000\000�{&quot;version&quot;:&quot;0.45.0&quot;,&quot;os&quot;:&quot;darwin&quot;,&quot;arch&quot;:&quot;arm64&quot;,&quot;privilege_key&quot;:&quot;aa879aa8dbec993816aa42a498c19069&quot;,&quot;timestamp&quot;:1669782153,&quot;pool_count&quot;:1}</code></pre><p>wireshark字符串搜索<code>Display filter</code>可以搜索Websocket内的字符串，搜索语句为 <code>data-text-lines contains &quot;darwin&quot;</code></p>
+<p><img src="/2022/12/10/frp-modify/image-20221130120211485.png" alt="image-20221130120211485"></p>
+<p>服务端frps接收客户端认证信息</p>
+<p><img src="/2022/12/10/frp-modify/image-20221130120407556.png" alt="image-20221130120407556"></p>
+<p>服务端也会通过ws协议返回一些信息 version、run_id</p>
+<pre><code>1\000\000\000\000\000\000\0000{&quot;version&quot;:&quot;0.45.0&quot;,&quot;run_id&quot;:&quot;a7bca8b1e7386bdb&quot;}</code></pre><p><img src="/2022/12/10/frp-modify/image-20221130122735133.png" alt="image-20221130122735133"></p>
+<p>客户端显示认证成功的信息</p>
+<p><img src="/2022/12/10/frp-modify/image-20221130122903800.png" alt="image-20221130122903800"></p>
+<p>上面客户端连接认证过程分析，通过在frpc客户端抓包分析，其中流量特征主要包括两点</p>
+<ul>
+<li>客户端连接认证服务端时ws协议切换发起的特定http uri请求（/~!frp）</li>
+<li>双方建立WebsSocket通信后传递的一些特定格式的登陆信息</li>
+</ul>
+<p>第一处特征清理，修改frp建立WebSocket时请求的路径</p>
+<p><img src="/2022/12/10/frp-modify/image-20221130172142520.png" alt="image-20221130172142520"></p>
+<p>修改常量FrpWebsocketPath，重新编译</p>
+<p><img src="/2022/12/10/frp-modify/image-20221130175456231.png" alt="image-20221130175456231"></p>
+<p>第二处特征清理，开启TLS加密WebSocket通信内容</p>
+<p><img src="/2022/12/10/frp-modify/image-20221130181047095.png" alt="image-20221130181047095"></p>
+<p>网上有人改版frp websocket适配CDN，新增配置 websocket_domain 为了满足在国内云厂商CDN上抢注的可信域名（server_addr=api.baidu.com.dnsv1cdn.cn、websocket_domain=api.baidu.com，websocket_domain为Http包内的Host头），目前国内云厂商都需要验证域名所属和备案已无法抢注。</p>
+<h3 id="WebSocket-Secure"><a href="#WebSocket-Secure" class="headerlink" title="WebSocket Secure"></a>WebSocket Secure</h3><p>Web Socket 使用 TLS 即可实现等同 Web Socket Secure 效果。</p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ul>
+<li><p><a href="https://github.com/fatedier/frp" target="_blank" rel="noopener">FRP</a></p>
+</li>
+<li><p><a href="https://gofrp.org/docs/" target="_blank" rel="noopener">FRP Doc</a></p>
+</li>
+<li><p><a href="https://uknowsec.cn/posts/notes/FRP%E6%94%B9%E9%80%A0%E8%AE%A1%E5%88%92.html" target="_blank" rel="noopener">FRP改造计划</a></p>
+</li>
+<li><p><a href="https://uknowsec.cn/posts/notes/FRP%E6%94%B9%E9%80%A0%E8%AE%A1%E5%88%92%E7%BB%AD.html" target="_blank" rel="noopener">FRP改造计划续</a></p>
+</li>
+<li><p><a href="https://atsud0.me/2022/01/20/FRP%E6%94%B9%E9%80%A0%E7%AC%94%E8%AE%B0/" target="_blank" rel="noopener">FRP改造笔记</a></p>
+</li>
+</ul>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        Author:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Qftm</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        Link:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://Qftm.github.io/2022/12/10/frp-modify/">http://Qftm.github.io/2022/12/10/frp-modify/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        Reprint policy:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    All articles in this blog are used except for special statements
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    reprint polocy. If reproduced, please indicate source
+                    <a href="/about" target="_blank">Qftm</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E4%BB%A3%E7%90%86%E8%BD%AC%E5%8F%91/">
+                                    <span class="chip bg-color">代理转发</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/">
+                                    <span class="chip bg-color">内网渗透</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;Current
+            </div>
+            <div class="card">
+                <a href="/2022/12/10/frp-modify/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/frp-1.png" class="responsive-img" alt="FRP 分析与改造">
+                        
+                        <span class="card-title">FRP 分析与改造</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            FRP 因其功能丰富，红队攻击者常将其用在内网渗透中，但是 FRP 在实际红蓝对抗中存在很多特征，导致被蓝队发现并溯源。
+下面通过对 FRP 0.45.0 版本进行分析，提取特征并进行规避。
+客户端执行流程分析客户端入口：cmd/frpc/
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-12-10
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/" class="post-category">
+                                    攻防渗透
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E4%BB%A3%E7%90%86%E8%BD%AC%E5%8F%91/">
+                        <span class="chip bg-color">代理转发</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/">
+                        <span class="chip bg-color">内网渗透</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/05/29/Java-JVM-JNI/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/JNI.jpg" class="responsive-img" alt="Java安全详谈-JNI 底层分析">
+                        
+                        <span class="card-title">Java安全详谈-JNI 底层分析</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            JNI (Java Native Interface，JAVA 本地接口) 允许 Java 代码和其它编程语言编写的代码进行交互，主要为Java和Native层（C/C++）相互调用的接口规范
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-29
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Java%E5%AE%89%E5%85%A8/" class="post-category">
+                                    Java安全
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
+                    </a>
+                    
+                    <a href="/tags/JNI/">
+                        <span class="chip bg-color">JNI</span>
+                    </a>
+                    
+                    <a href="/tags/JVM/">
+                        <span class="chip bg-color">JVM</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + 'From: Qftm<br />'
+            + 'Author: Qftm<br />'
+            + 'Link: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2018</span>
+            <a href="/about" target="_blank">Qftm</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">370.8k</span>&nbsp;字
+            
+            
+            
+            
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+    <a href="https://github.com/Qftm" 
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:Qftmbin@gmail.com" 
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+    <a href="https://twitter.com/Qftmer" 
+        <i class="fab fa-twitter"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;Search</span>
+            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

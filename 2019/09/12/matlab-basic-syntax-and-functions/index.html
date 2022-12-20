@@ -1,0 +1,1111 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="MATLAB之基本语法与基础函数, Qftm">
+    <meta name="description" content="Maybe a hacker">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>MATLAB之基本语法与基础函数 | Qftm</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.1"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Qftm</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>Index</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>Tags</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>Categories</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>Archives</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-heartbeat" style="zoom: 0.6;"></i>
+      
+      <span>About</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>Friends</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="Search" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Qftm</div>
+        <div class="logo-desc">
+            
+            Maybe a hacker
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			Index
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			Tags
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			Categories
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			Archives
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-heartbeat"></i>
+			
+			About
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			Friends
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/bg.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">MATLAB之基本语法与基础函数</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/MATLAB/">
+                                <span class="chip bg-color">MATLAB</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" class="post-category">
+                                编程开发
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    2019-09-12
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
+                    2020-08-15
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    2.9k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    11 Min
+                </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><pre><code>dir：列出当MATLAB之基本语法与基础函数前目录下的所有文件
+
+clc：清除命令窗
+
+clear all：清除环境（从内存中清除所有变量）
+
+who：将内存中的当前变量以简单形式列出
+
+close all: 关闭所有的 Figure 窗口</code></pre><h2 id="变量设置"><a href="#变量设置" class="headerlink" title="变量设置"></a>变量设置</h2><p>(1)变量命名</p>
+<p>MATLAB 的变量名以字母打头，后最多可跟 19 个字母或数字，如 x,y,ae3 和 d3er45 等都是合法的变量名，不能使用内部函数或命令名作为变量名。</p>
+<p>MATLAB 中的变量名区分大小，ab 与 Ab 表示两个不同的变量。</p>
+<p>(2)变量赋值</p>
+<ul>
+<li>表达式赋值</li>
+</ul>
+<pre><code>&gt;&gt;a=(100*0.02)/4.0
+
+　　a=0.0500</code></pre><ul>
+<li>矩阵赋值</li>
+</ul>
+<p>数值通常按行输入，行之间用分号隔开。</p>
+<pre><code>&gt;&gt; C=[-1,0,0;1,-1,0;0,0,2]；(省略最后的分号，MATLAB 会回显矩阵值)</code></pre><ul>
+<li>通过引用特定的位置可以单独改变某个矩阵元素</li>
+</ul>
+<p>如 S=[5, 6, 4]，用命令 S(2)=8 把矩阵 S 的第二个元素值由 6 改成 8。</p>
+<ul>
+<li>可以引用已定义的矩阵，重新定义一个新矩阵。</li>
+</ul>
+<p>如 S=[5,6,4]，可定义一个新矩阵。</p>
+<pre><code>&gt;&gt;B=[3 S 2]
+
+　　B=35642</code></pre><h2 id="整数操作"><a href="#整数操作" class="headerlink" title="整数操作"></a>整数操作</h2><ul>
+<li>fix(x)：截尾取整</li>
+</ul>
+<pre><code>&gt;&gt; fix( [3.12 -3.12])
+
+　　ans =3 -3</code></pre><ul>
+<li>floor(x)：不超过 x 的最大整数(高斯取整)</li>
+</ul>
+<pre><code>&gt;&gt; floor( [3.12 -3.12])
+
+　　ans =3 -4</code></pre><ul>
+<li>ceil(x) ：大于 x 的最小整数</li>
+</ul>
+<pre><code>&gt;&gt; ceil( [3.12 -3.12])
+
+　　ans =4 -3</code></pre><h2 id="随机序列常用命令"><a href="#随机序列常用命令" class="headerlink" title="随机序列常用命令"></a>随机序列常用命令</h2><ul>
+<li>rand：均匀分布随机矩阵</li>
+</ul>
+<pre><code>rand                  %无变量输入时只产生一个随机数
+
+y= rand(n)             %生成 n×n 随机矩阵，其元素在（0，1）内
+
+y = rand(m,n)          %生成 m×n 随机矩阵，其元素在（0，1）内</code></pre><p>例 1.1：产生一个 3×4 随机矩阵，MATLAB 命令为：R=rand(3,4)</p>
+<ul>
+<li>randn:正态分布随机矩阵</li>
+</ul>
+<pre><code>randn                  %无变量输入时只产生一个正态分布随机数
+
+y = randn(n)             %生成 n×n 正态分布随机矩阵
+
+y = randn(m,n)           %生成 m×n 正态分布随机矩阵</code></pre><p>例 1.2：产生均值为 0.6，方差为 0.1 的 4 阶矩阵</p>
+<pre><code>MATLAB 命令为：&gt;&gt; mu=0.6；sigma=0.1；&gt;&gt; x=mu+sqrt(sigma)*randn(4)。</code></pre><ul>
+<li>randsrc：产生均匀分布数组</li>
+</ul>
+<pre><code>randsrc                 %无变量输入时只产生一个随机数 1 或者-1
+
+y= randsrc(n)             %生成 n×n 随机数组，其元素为 1 或者-1
+
+y = randsrc(m,n)          %生成 m×n 随机数组，其元素为 1 或者-1</code></pre><p>例1.3：产生一个 2*3 随机矩阵，MATLAB 命令为：R=randsrc(2,3)</p>
+<h2 id="矩阵常用操作命令"><a href="#矩阵常用操作命令" class="headerlink" title="矩阵常用操作命令"></a>矩阵常用操作命令</h2><p>MATLAB 的基本单位是矩阵，掌握矩阵的输入、各种数值运算以及矩阵函</p>
+<p>数是学好 MATLAB 的关键。</p>
+<p>(1)矩阵的输入</p>
+<ul>
+<li>直接输入创建矩阵</li>
+</ul>
+<p>以“[”和“ ]”作为首尾，同行的元素用“，”或空格隔开，不同行的元素用“；” 或按 Enter 键来分隔；矩阵的元素可以是数字也可以是表达式，如果是数值计算，表达式中不可包含未知变量。</p>
+<p><img src="/2019/09/12/matlab-basic-syntax-and-functions/1594459-20190912005658354-297901850.png" alt="img"></p>
+<ul>
+<li>用矩阵函数来生成矩阵</li>
+</ul>
+<p>MATLAB 提供了大量的函数来创建特殊矩阵，表 1.1 给出 MATLAB 常用的矩阵函数。</p>
+<p><img src="/2019/09/12/matlab-basic-syntax-and-functions/1594459-20190912001158326-989047298.png" alt="img"></p>
+<p><img src="/2019/09/12/matlab-basic-syntax-and-functions/1594459-20190912005528338-1065227530.png" alt="img"></p>
+<p><img src="/2019/09/12/matlab-basic-syntax-and-functions/1594459-20190912005604900-1258355909.png" alt="img"></p>
+<p>(2)操作符“：”的说明</p>
+<p>j:k表示步长为 1 的等差数列构成的数组：[j, j+1, j+2,…, k]。</p>
+<p>j:i:k表示步长为 i 的等差数列构成的数组：[j,j+i,j+2*i,…, k]。</p>
+<p>A(i:j)表示 A(i)，A(i+1)，…，A(j)。</p>
+<p>(3)对矩阵元素的操作</p>
+<p>设 A 是一个矩阵,则在 MATLAB 中用如下符号表示它的元素:</p>
+<pre><code>A(i,j)表示矩阵 A 的第 i 行第 j 列元素。
+
+A(:,j)表示矩阵 A 的第 j 列。
+
+A(i,:)表示矩阵 A 的第 i 行。
+
+A(:,:)表示 A 的所有元素构造 2 维矩阵
+
+A(:)表示以矩阵 A 的所有元素按列构成的一个列矩阵。
+
+A(i)表示矩阵 A(:)的第 i 个元素。
+
+[]表示空矩阵。</code></pre><p>(4)矩阵的运算</p>
+<p><img src="/2019/09/12/matlab-basic-syntax-and-functions/1594459-20190912001538182-1583038119.png" alt="img"></p>
+<p>(5)数组</p>
+<p>在 MATLAB 中数组是一行或者一列的矩阵，对矩阵输入、修改和保存都适用于数组，同时 MATLAB 还提供了一些创建数组的特殊指令。</p>
+<ul>
+<li>特殊数组的创建</li>
+</ul>
+<p>linspace(a,b,n) 给出区间[a,b]的 n 个等分点数据</p>
+<p>例 1.7：给出区间[0,1] 的 6 个等分点数据。</p>
+<pre><code>MATLAB 命令为：&gt;&gt; linspace(0,1,6)</code></pre><ul>
+<li>数组运算</li>
+</ul>
+<p><img src="/2019/09/12/matlab-basic-syntax-and-functions/1594459-20190912001826807-1248513082.png" alt="img"></p>
+<h2 id="位操作"><a href="#位操作" class="headerlink" title="位操作"></a>位操作</h2><ul>
+<li>bitand：按位与</li>
+</ul>
+<p>C=bitand(A,B)命令将返回两个非负整数数组 A 和 B 的相应元素按位与操作的结果。为了确保 A 和 B 的元素都是整数，可以使用 ceil、fix、floor 和 round函数来生成 A 和 B。</p>
+<pre><code>例 1.9：&gt;&gt;C=bitand(1,2)
+
+结果为：C=0</code></pre><ul>
+<li>bitor：按位或</li>
+</ul>
+<p>C=bitor(A,B)命令将返回两个非负整数数组 A 和 B 的相应元素按位或操作的结果。为了确保 A 和 B 的元素都是整数，可以使用 ceil、fix、floor 和 round 函数来生成 A 和 B。</p>
+<pre><code>例 1.10：&gt;&gt;C=bitor(1,2)
+
+结果为：C=3</code></pre><ul>
+<li>bitxor：按位异或</li>
+</ul>
+<p>C=bitxor(A,B)返回两个非负整数数组 A 和 B 的相应元素进行按位异或的结果，为了确保 A 和 B 的元素都是整数，可以使用 ceil、fix、floor 和 round 函数来生成 A 和 B。</p>
+<pre><code>例 1.11：&gt;&gt;C=bitxor(1,2)
+
+结果为：C=3</code></pre><ul>
+<li>bitset：设置指定位的值</li>
+</ul>
+<p>C=bitset(A,bit,v)命令将 A 中元素第 bit 位设为 v，其中 v 必须为 0 或 1，A 中的元素必须为非负整数，bit 必须为 1 到 A 中元素浮点整数表示法的位数之间的一个数字。</p>
+<pre><code>例 1.12：&gt;&gt;C=bitset(1,2,1)
+
+结果为：C=3</code></pre><ul>
+<li>bitget：获取指定位的值</li>
+</ul>
+<p>C=bitget(A,bit)命令将返回 A 中元素用 bit 指定位的值，A 中的元素必须为非负整数，bit 必须为 1 到 A 中元素浮点整数表示法位数之间的一个数字。</p>
+<pre><code>例 1.12：
+
+&gt;&gt;C=bitget(1,2)
+
+结果为：C= 0</code></pre><h2 id="绘图操作"><a href="#绘图操作" class="headerlink" title="绘图操作"></a>绘图操作</h2><p>（1）图形标注</p>
+<pre><code>title(‘string’,’属性名’,’属性值’,…) —— 给图形加标题
+
+xlabel (‘string’,’属性名’,’属性值’,…) —— 给 x 轴加标注
+
+ylabel (‘string’,’属性名’,’属性值’,…) —— 给 y 轴加标注
+
+legend (‘string1’,’string2’,…)—— 添加图例，其顺序对应于绘图指令中的顺序
+
+axis ([xmin,xmax,ymin,ymax])—— 控制坐标轴的刻度范围</code></pre><p>（2）二维图形</p>
+<ul>
+<li>plot(x,y)</li>
+</ul>
+<p>功能：以向量 x,y 为轴，绘制曲线。 </p>
+<p>注: plot(x,y)命令可用来绘制函数 f(x)图形, 此时可通过向量 x 常用命令 x=a:h:b的形式获得 f(x)函数在绘图区间[a,b]上的自变量点向量数据,对应的函数向量值取为 y= f(x)。步长 h 可以任意选取，一般步长越小,曲线越光滑,但是步长太小,会增加计算量,运算速度也要降低。通常步长 h 取值 0.1 可达到较好的绘图效果。</p>
+<p><img src="/2019/09/12/matlab-basic-syntax-and-functions/1594459-20190912002738498-1718801496.png" alt="img"></p>
+<ul>
+<li>plot(x1,y1,x2,y2,x3,y3…)</li>
+</ul>
+<p>功能:在同一图形窗口绘制多条不同颜色曲线，曲线关系为</p>
+<pre><code>y1=f(x1),y2=f(x2),y3=f(x3)</code></pre><p><img src="/2019/09/12/matlab-basic-syntax-and-functions/1594459-20190912003004954-484475169.png" alt="img"></p>
+<p><img src="/2019/09/12/matlab-basic-syntax-and-functions/1594459-20190912003044196-1494326868.png" alt="img"></p>
+<p> (3)二维特殊图形</p>
+<ul>
+<li>bar</li>
+</ul>
+<p>例 1.15：</p>
+<pre><code>&gt;&gt; x=1:5;
+&gt;&gt; bar(x),title(&#39;直方图&#39;)</code></pre><p> <img src="/2019/09/12/matlab-basic-syntax-and-functions/1594459-20190912003254116-234377137.png" alt="img"></p>
+<ul>
+<li>Hist 表示生成直方图</li>
+</ul>
+<p>M=hist(N)表示将 N 中的最大最小值找出来，然后，平均取十个等间隔点，看以每个间隔点为中心，向两边各扩展 1/2 间隔的范围内，包括 N 的元素个数，因此 M 返回值都是 1*10 大小。<br>例 1.16:&gt;&gt; b1=[0,1,2,3,4,5,6,7,8,9];b2=[4,5,7];</p>
+<pre><code>&gt;&gt;M=hist(b2)
+&gt;&gt;M=hist(b1)</code></pre><h2 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h2><p>（1）<strong>fopen</strong> 打开文件</p>
+<p>fopen 函数的调用格式为：fid= fopen(文件名，打开方式)</p>
+<p>其中文件名用字符串形式，表示待打开的数据文件。常见的打开方式有：‘r’表示对打开的文件读数据，‘w’表示对打开的文件写数据，‘a’表示在打开的文件末尾添加数据。fid 用于存储文件句柄值，句柄值用来标识该数据文件，其他函数可利用它对该数据文件进行操作。文件数据格式有两种形式，一种是二进制文件，另一种是文本文件。在打开文件时需要进一步指定文件格式类型，即指定是二进制文件还是文本文件。</p>
+<p>（2） <strong>fclose</strong> 关闭文件</p>
+<p>文件读、写等操作完成后，应及时关闭。关闭文件用 fclose 函数，调用格式为：sta=fclose(fid)，该函数关闭 fid 所表示的文件。sta 表示关闭文件操作的返回代码，若关闭成功，返回 0，否则返回–1。</p>
+<p>（3） 二进制文件的读写操作</p>
+<ul>
+<li><strong>fread</strong> 读二进制文件</li>
+</ul>
+<p>fread 函数可以读取二进制文件的数据，并将数据存入矩阵。其调用格式为：[A,COUNT]=fread(fid,size, precision)。</p>
+<p>其中 A 用于存放读取的数据，COUNT 返回所读取的数据元素个数。fid 为文件句柄，size 为可选项，若不选用则表示读取整个文件内容，若选用则它的值可为以下选项：N 表示读取 N 个元素到一个列向量；Inf 表示读取整个文件；[M,N]表示读数据到 M×N 的矩阵中，数据按列存放。precision 代表读写数据的类型。</p>
+<ul>
+<li><strong>fwrite</strong> 写二进制文件</li>
+</ul>
+<p>fwrite 函数按照指定的数据类型将矩阵中的元素写入到文件中。其调用格式为：COUNT=fwrite (fid, A, precision)，其中 COUNT 返回所写的数据元素个数，fid为文件句柄，A 用来存放写入文件的数据，precision 用于控制所写数据的类型，其形式与 fread 函数相同。</p>
+<h2 id="M-文件的建立与使用"><a href="#M-文件的建立与使用" class="headerlink" title="M 文件的建立与使用"></a>M 文件的建立与使用</h2><p>M 文件有命令文件和函数文件两种形式，这两种文件的扩展名相同，都是.m。当用户要运行的命令较多时，直接从键盘上逐条输入较为繁琐，可利用命令文件来解决多行输入问题。用户可将一组相关命令编辑在同一个命令文件中，运行时只需输入文件名字，MATLAB 就会自动按顺序执行文件中的命令。函数文件是另一种形式的 M 文件，它的第一句可执行语句是以 function 引导的定义语句，在函数文件中的变量都是局部变量。</p>
+<p>（1）命令文件</p>
+<p>命令文件的一般形式为：&lt;M 文件名&gt;.m  如 a1.m, pp.m 等都是合法的 M 文件名。M 文件有两种运行方式：一是在命令窗口直接输入文件名，按 Enter 键; 二是在编辑窗口打开菜单 Tools，再单击 Run。M 文件保存的路径一定要在搜索路径上,否则 M 文件不能运行。</p>
+<p>例 1.17：用 M 命令文件绘制 lena.bmp 图像。</p>
+<p><img src="/2019/09/12/matlab-basic-syntax-and-functions/1594459-20190912004109615-1587856609.png" alt="img"></p>
+<p>（2）函数文件</p>
+<p>M 函数文件的一般形式为：function &lt;因变量&gt;=&lt;函数名&gt;(&lt;自变量&gt;)</p>
+<p>M 函数文件可以有多个因变量和多个自变量，当有多个因变量时用[]括起来。</p>
+<p><img src="/2019/09/12/matlab-basic-syntax-and-functions/1594459-20190912004242357-636727612.png" alt="img"></p>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        Author:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Qftm</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        Link:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://Qftm.github.io/2019/09/12/matlab-basic-syntax-and-functions/">http://Qftm.github.io/2019/09/12/matlab-basic-syntax-and-functions/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        Reprint policy:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    All articles in this blog are used except for special statements
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    reprint polocy. If reproduced, please indicate source
+                    <a href="/about" target="_blank">Qftm</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/MATLAB/">
+                                    <span class="chip bg-color">MATLAB</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+            <div class="card">
+                <a href="/2019/09/14/matlab-image-and-audio-signal-processing/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/matlab-1.png" class="responsive-img" alt="MATLAB之图像与音频信号处理">
+                        
+                        <span class="card-title">MATLAB之图像与音频信号处理</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            原理简介离散傅立叶、离散余弦和离散小波变换是图像、音频信号常用基础操作，时域信号转换到不同变换域以后，会导致不同程度的能量集中，信息隐藏利用这个原理在变换域选择适当位置系数进行修改，嵌入信息，并确保图像、音频信号经处理后感官质量无明显变化。
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-09-14
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" class="post-category">
+                                    编程开发
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/MATLAB/">
+                        <span class="chip bg-color">MATLAB</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/09/11/CVE-2018-14418-shines-a-new-spark/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/cve-1.png" class="responsive-img" alt="CVE-2018-14418 擦出新火花">
+                        
+                        <span class="card-title">CVE-2018-14418 擦出新火花</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            0x00 前言最近，一次授权的渗透测试项目意外的撞出了(CVE-2018-14418)新的火花，在这里分享给大家，同时简单记录一下自己的渗透测试过程，一些敏感信息已打码，相关漏洞已报送厂商修复。
+0x01 Msvod Cms SQL注入漏洞
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-09-11
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/" class="post-category">
+                                    攻防渗透
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/">
+                        <span class="chip bg-color">漏洞挖掘</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + 'From: Qftm<br />'
+            + 'Author: Qftm<br />'
+            + 'Link: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2018</span>
+            <a href="/about" target="_blank">Qftm</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">370.8k</span>&nbsp;字
+            
+            
+            
+            
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+    <a href="https://github.com/Qftm" 
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:Qftmbin@gmail.com" 
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+    <a href="https://twitter.com/Qftmer" 
+        <i class="fab fa-twitter"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;Search</span>
+            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

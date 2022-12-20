@@ -1,0 +1,995 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="中小型企业级 IPS 部署, Qftm">
+    <meta name="description" content="Maybe a hacker">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>中小型企业级 IPS 部署 | Qftm</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.1"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Qftm</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>Index</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>Tags</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>Categories</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>Archives</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-heartbeat" style="zoom: 0.6;"></i>
+      
+      <span>About</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>Friends</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="Search" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Qftm</div>
+        <div class="logo-desc">
+            
+            Maybe a hacker
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			Index
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			Tags
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			Categories
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			Archives
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-heartbeat"></i>
+			
+			About
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			Friends
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/bg.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">中小型企业级 IPS 部署</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/IPS/">
+                                <span class="chip bg-color">IPS</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E5%AE%89%E5%85%A8%E5%BB%BA%E8%AE%BE/" class="post-category">
+                                安全建设
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    2020-01-03
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
+                    2020-08-15
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    1.6k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    6 Min
+                </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="《构建基于Snort-Guardian-Iptables的IPS》"><a href="#《构建基于Snort-Guardian-Iptables的IPS》" class="headerlink" title="《构建基于Snort+Guardian+Iptables的IPS》"></a>《构建基于Snort+Guardian+Iptables的IPS》</h1><p>2020年的第三天，依旧如往常写文章，分享最近做的项目继<a href="https://qftm.github.io/2020/01/01/small-and-medium-sized-enterprise-firewall-deployment/">《中小型企业级防火墙部署》</a>之后的另一部分<a href="https://qftm.github.io/2020/01/03/small-and-medium-sized-enterprise-ips-deployment/">《构建基于Snort+Guardian+Iptables的IPS》</a>，后面会将整个完整项目开源分享出来，欢迎大家一起交流分享</p>
+<h1 id="IPS"><a href="#IPS" class="headerlink" title="IPS"></a>IPS</h1><h2 id="IPS简介"><a href="#IPS简介" class="headerlink" title="IPS简介"></a>IPS简介</h2><p>IPS是英文“Intrusion Prevention System”的缩写，中文意思是“入侵防御系统”，是一种网络安全设备或应用软件，除了具有IDS的监控检测功能之外，还具有深度感知检测数据流量，对恶意报文进行丢弃，实现实时告警和阻断的入侵防御系统。</p>
+<h2 id="IPS功能组成"><a href="#IPS功能组成" class="headerlink" title="IPS功能组成"></a>IPS功能组成</h2><pre><code>数据采集：采集和捕获流量数据
+入侵检测：分析流量和日志数据，发现安全异常行为并发出警报,常见的有Snort、Suricata、Bro
+结果展示：用于分析IDS警报并进行友好展示,常见的IDS警报分析工具有Snorby、Sguil、Base
+安全防御：主动响应安全事件，阻断攻击者入侵行为，常用iptables</code></pre><h1 id="IDS"><a href="#IDS" class="headerlink" title="IDS"></a>IDS</h1><p>IDS是英文“Intrusion Detection Systems”的缩写，中文意思是“入侵检测系统”，是一种网络安全设备或应用软件，可以依照一定的安全策略，对网络、系统的运行状况进行监视，尽可能发现各种攻击企图、攻击行为或者攻击结果，并发出安全警报。</p>
+<h2 id="IDS通用系统模型"><a href="#IDS通用系统模型" class="headerlink" title="IDS通用系统模型"></a>IDS通用系统模型</h2><p>（1）数据收集器(又称探测器)：主要负责收集数据。探测器的输入数据流包括任何可能包含入侵行为线索的系统数据，如各种网络协议数据包、系统日志文件和系统调用记录等。探测器将这些数据收集起来，然后再发送到检测器进行处理。<br>（2）检测器(又称分析器或检测引擎)：负责分析和检测入侵的任务，并向控制器发出警报信号。<br>（3）知识库：为检测器和控制器提供必需的数据信息支持。这些信息包括:用户历史活动档案或检测规则集合等。<br>（4）控制器：根据从检测器发来的警报信号，人工或自动地对入侵行为做出响应。</p>
+<h2 id="IDS分类"><a href="#IDS分类" class="headerlink" title="IDS分类"></a>IDS分类</h2><p>IDS根据两种方法进行分类：按照数据来源、按照入侵检测策略。</p>
+<h3 id="按照数据来源分类"><a href="#按照数据来源分类" class="headerlink" title="按照数据来源分类"></a>按照数据来源分类</h3><pre><code>基于网络的入侵检测系统（NIDS）
+基于主机的入侵监测系统（HIDS）
+分布式入侵检测系统（DIDS）</code></pre><h3 id="按照入侵检测策略分类"><a href="#按照入侵检测策略分类" class="headerlink" title="按照入侵检测策略分类"></a>按照入侵检测策略分类</h3><pre><code>滥用检测
+异常检测
+完整性分析</code></pre><h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><h2 id="企业拓扑"><a href="#企业拓扑" class="headerlink" title="企业拓扑"></a>企业拓扑</h2><p><img src="/2020/01/03/small-and-medium-sized-enterprise-ips-deployment/1594459-20200101170109084-630725488.png" alt></p>
+<h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><pre><code>DMZ区：CentOS7 --- IP:192.168.9.100 Gateway:192.168.9.254
+防火墙：kali --- ip1:211.67.93.254；ip2:192.168.9.254；ip3:192.168.33.254；
+外网主机：win2003 --- IP:211.67.93.100  Gateway:211.67.93.254
+内网主机：win2003 --- IP:192.168.33.100 Gateway:192.168.33.254</code></pre><h1 id="IDS-Snort"><a href="#IDS-Snort" class="headerlink" title="IDS Snort"></a>IDS Snort</h1><h2 id="Snort简介"><a href="#Snort简介" class="headerlink" title="Snort简介"></a>Snort简介</h2><p>在1998年，Martin Roesch用C语言开发了开放源代码(Open Source)的入侵检测系统Snort。直至今天，Snort已发展成为一个具有多平台(Multi-Platform)、实时(Real-Time)流量分析、网络IP数据包(Pocket)记录等特性的强大的网络入侵检测/防御系统(Network Intrusion Detection/Prevention System)，即NIDS/NIPS。Snort符合通用公共许可(GPL——GNU General Pubic License)，在网上可以通过免费下载获得Snort，并且只需要几分钟就可以安装并开始使用。<br>Snort有三种工作模式：嗅探器、数据包记录器、网络入侵检测系统。嗅探器模式仅仅是从网络上读取数据包并作为连续不断的流显示在终端上。数据包记录器模式把数据包记录到硬盘上。网络入侵检测模式是最复杂的，而且是可配置的。我们可以让snort分析网络数据流以匹配用户定义的一些规则，并根据检测结果采取一定的动作。</p>
+<h2 id="Snort安装"><a href="#Snort安装" class="headerlink" title="Snort安装"></a>Snort安装</h2><p>安装系统Kali<br>Snort安装方式一般分为源码编译安装与包管理器安装两种方式。使用源码下载会比较复杂，但是文档齐全，debug方便一些；而包管理器安装非常方便，一条命令解决所有问题</p>
+<pre><code>apt-get install snort</code></pre><h2 id="Snort配置"><a href="#Snort配置" class="headerlink" title="Snort配置"></a>Snort配置</h2><h3 id="设置规则路径"><a href="#设置规则路径" class="headerlink" title="设置规则路径"></a>设置规则路径</h3><p>修改配置文件</p>
+<pre><code>/etc/snort/snort.conf</code></pre><p><img src="/2020/01/03/small-and-medium-sized-enterprise-ips-deployment/1594459-20200103001359222-634554585.png" alt></p>
+<p>查看规则</p>
+<p><img src="/2020/01/03/small-and-medium-sized-enterprise-ips-deployment/1594459-20200103001528221-1825888212.png" alt></p>
+<p>PS：Linux默认安装之后Snort日志路径等都会默认配置好，无需麻烦配置</p>
+<h2 id="Snort启动"><a href="#Snort启动" class="headerlink" title="Snort启动"></a>Snort启动</h2><pre><code>snort -i eth1 -c /etc/snort/snort.conf -A fast -l /var/log/snort</code></pre><p><img src="/2020/01/03/small-and-medium-sized-enterprise-ips-deployment/1594459-20200103003016355-95081633.png" alt></p>
+<h2 id="Snort测试"><a href="#Snort测试" class="headerlink" title="Snort测试"></a>Snort测试</h2><p>查看默认Snort ICMP规则</p>
+<p><img src="/2020/01/03/small-and-medium-sized-enterprise-ips-deployment/1594459-20200103001826871-184765482.png" alt></p>
+<p>测试外网ping DMZ区域Web服务器</p>
+<p><img src="/2020/01/03/small-and-medium-sized-enterprise-ips-deployment/1594459-20200103001846632-640918529.png" alt></p>
+<p>查看IDS日志记录</p>
+<p><img src="/2020/01/03/small-and-medium-sized-enterprise-ips-deployment/1594459-20200103001920260-423564396.png" alt></p>
+<p>分析日志可知，Snort允许ICMP通过，并且记录了ICMP的相关数据。</p>
+<h1 id="Guardian"><a href="#Guardian" class="headerlink" title="Guardian"></a>Guardian</h1><p>Guardian实现Snort+Iptables联动效应</p>
+<h2 id="Guardian下载"><a href="#Guardian下载" class="headerlink" title="Guardian下载"></a>Guardian下载</h2><p>Guardian需要去官网下载</p>
+<pre><code>http://www.chaotic.org/guardian/</code></pre><h2 id="Guardian安装"><a href="#Guardian安装" class="headerlink" title="Guardian安装"></a>Guardian安装</h2><h3 id="下载之后解压"><a href="#下载之后解压" class="headerlink" title="下载之后解压"></a>下载之后解压</h3><pre><code>tar -zxvf guardian-1.7.tar.gz
+
+
+</code></pre><p><img src="/2020/01/03/small-and-medium-sized-enterprise-ips-deployment/1594459-20200103003349041-1963222133.png" alt></p>
+<h3 id="移动guardian到snort下-amp-amp-创建名单-amp-amp-日志"><a href="#移动guardian到snort下-amp-amp-创建名单-amp-amp-日志" class="headerlink" title="移动guardian到snort下 &amp;&amp; 创建名单 &amp;&amp; 日志"></a>移动guardian到snort下 &amp;&amp; 创建名单 &amp;&amp; 日志</h3><pre><code>→ Qftm ← :~/桌面# mv guardian-1.7 /etc/snort/
+→ Qftm ← :~/桌面# touch /etc/snort/guardian-1.7/guardian.ignore 创建白名单
+→ Qftm ← :~/桌面# touch /etc/snort/guardian-1.7/guardian.target  创建黑名单
+→ Qftm ← :~/桌面# touch /var/log/snort/guardian.log    guardian的日志
+
+
+</code></pre><p><img src="/2020/01/03/small-and-medium-sized-enterprise-ips-deployment/1594459-20200103003525492-1982396014.png" alt></p>
+<h3 id="复制block脚本"><a href="#复制block脚本" class="headerlink" title="复制block脚本"></a>复制block脚本</h3><pre><code>→ Qftm ← :/etc/snort/guardian-1.7# cp scripts/iptables_block.sh /usr/local/bin/guardian_block.sh
+→ Qftm ← :/etc/snort/guardian-1.7# cp scripts/iptables_unblock.sh /usr/local/bin/guardian_unblock.sh
+
+
+</code></pre><p><img src="/2020/01/03/small-and-medium-sized-enterprise-ips-deployment/1594459-20200103003627399-836275045.png" alt></p>
+<p>此操作是为了满足在guardian.pl中设置的$blockpath和$unblockpath路径</p>
+<p><img src="/2020/01/03/small-and-medium-sized-enterprise-ips-deployment/1594459-20200103003702107-758695107.png" alt></p>
+<p>PS:</p>
+<pre><code>(1)Guardian的执行文件 guardian.pl 
+(2)Guardian封锁IP所要调用的外部程序 scripts/iptalbes_block.sh 
+(3)Guardian解除对某一IP封锁时，所需要调用的外部程序scripts/iptalbes_unblock.sh
+
+
+</code></pre><h2 id="Guardian配置"><a href="#Guardian配置" class="headerlink" title="Guardian配置"></a>Guardian配置</h2><h3 id="配置guardian-conf"><a href="#配置guardian-conf" class="headerlink" title="配置guardian.conf"></a>配置guardian.conf</h3><pre><code>Interface       eth1
+HostGatewayByte  1
+LogFile         /var/log/snort/guardian.log
+AlertFile       /var/log/snort/alert              
+IgnoreFile      /etc/snort/guardian-1.7/guardian.ignore
+TargetFile      /etc/snort/guardian-1.7/guardian.target
+TimeLimit    86400
+
+
+</code></pre><p><img src="/2020/01/03/small-and-medium-sized-enterprise-ips-deployment/1594459-20200103003843813-133085564.png" alt></p>
+<p>PS:</p>
+<pre><code>TimeLimit：在多少秒后解除对IP的封锁，86400秒也就是24小时之后解除对IP的封锁。
+AlertFile：警报信息，前提是snort以alert_fast输出报警信息
+
+
+</code></pre><h3 id="配置guardian-block-sh和guardian-unblock-sh规则"><a href="#配置guardian-block-sh和guardian-unblock-sh规则" class="headerlink" title="配置guardian_block.sh和guardian_unblock.sh规则"></a>配置guardian_block.sh和guardian_unblock.sh规则</h3><p>编写策略文件，配置对外来入侵者进行拦截和解除的策略</p>
+<p><img src="/2020/01/03/small-and-medium-sized-enterprise-ips-deployment/1594459-20200103004246830-856641688.png" alt><br><img src="/2020/01/03/small-and-medium-sized-enterprise-ips-deployment/1594459-20200103004256847-1077381214.png" alt></p>
+<h2 id="Guardian启动"><a href="#Guardian启动" class="headerlink" title="Guardian启动"></a>Guardian启动</h2><pre><code>→ Qftm ← :/etc/snort/guardian-1.7# perl guardian.pl -c guardian.conf
+
+
+</code></pre><p><img src="/2020/01/03/small-and-medium-sized-enterprise-ips-deployment/1594459-20200103004338484-1803852373.png" alt></p>
+<h2 id="Guardian启动失败解决"><a href="#Guardian启动失败解决" class="headerlink" title="Guardian启动失败解决"></a>Guardian启动失败解决</h2><h3 id="缺少getopts-pl"><a href="#缺少getopts-pl" class="headerlink" title="缺少getopts.pl"></a>缺少getopts.pl</h3><p>参考笔者文章<br><a href="http://qftm.github.io/2019/12/31/Solve-Perl-Cant-locate-getopts/">《Solve Perl Can’t locate getopts.pl》</a></p>
+<h3 id="找不到IP"><a href="#找不到IP" class="headerlink" title="找不到IP"></a>找不到IP</h3><p>配置guardian.conf，添加HostIpAddr字段<br>HostIpAddr 211.67.93.254 #接口IP</p>
+<h1 id="IPS测试"><a href="#IPS测试" class="headerlink" title="IPS测试"></a>IPS测试</h1><h2 id="外网攻击者对Web服务器进行攻击"><a href="#外网攻击者对Web服务器进行攻击" class="headerlink" title="外网攻击者对Web服务器进行攻击"></a>外网攻击者对Web服务器进行攻击</h2><p><img src="/2020/01/03/small-and-medium-sized-enterprise-ips-deployment/1594459-20200103004438257-1015582249.png" alt></p>
+<h2 id="IPS检测-amp-拦截"><a href="#IPS检测-amp-拦截" class="headerlink" title="IPS检测&amp;拦截"></a>IPS检测&amp;拦截</h2><h3 id="IPS检测"><a href="#IPS检测" class="headerlink" title="IPS检测"></a>IPS检测</h3><p><img src="/2020/01/03/small-and-medium-sized-enterprise-ips-deployment/1594459-20200103004503542-111005454.png" alt></p>
+<h3 id="IPS拦截"><a href="#IPS拦截" class="headerlink" title="IPS拦截"></a>IPS拦截</h3><p><img src="/2020/01/03/small-and-medium-sized-enterprise-ips-deployment/1594459-20200103004511919-62095058.png" alt></p>
+<p>由上可知，外部攻击者被IPS记录拦截限制访问</p>
+<p><img src="/2020/01/03/small-and-medium-sized-enterprise-ips-deployment/1594459-20200103004530740-1052042282.png" alt></p>
+<p><img src="/2020/01/03/small-and-medium-sized-enterprise-ips-deployment/1594459-20200103004541742-1938280567.png" alt></p>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        Author:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Qftm</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        Link:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://Qftm.github.io/2020/01/03/small-and-medium-sized-enterprise-ips-deployment/">http://Qftm.github.io/2020/01/03/small-and-medium-sized-enterprise-ips-deployment/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        Reprint policy:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    All articles in this blog are used except for special statements
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    reprint polocy. If reproduced, please indicate source
+                    <a href="/about" target="_blank">Qftm</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/IPS/">
+                                    <span class="chip bg-color">IPS</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+            <div class="card">
+                <a href="/2020/01/18/Information-Collection-Handbook/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/info-1.png" class="responsive-img" alt="Information Collection Handbook">
+                        
+                        <span class="card-title">Information Collection Handbook</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            只有不努力的黑客，没有攻不破的系统。在SRC漏洞挖掘或渗透测试中，信息收集占很大一部分，能收集到别人收集不到的资产，就能挖到别人挖不到的洞。
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-01-18
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/" class="post-category">
+                                    攻防渗透
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/">
+                        <span class="chip bg-color">信息收集</span>
+                    </a>
+                    
+                    <a href="/tags/Handbook/">
+                        <span class="chip bg-color">Handbook</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/01/01/small-and-medium-sized-enterprise-firewall-deployment/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/firewalld-1.jpg" class="responsive-img" alt="中小型企业级防火墙部署">
+                        
+                        <span class="card-title">中小型企业级防火墙部署</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            前言2020年第一篇文章，先祝大家新年快乐，2020年暴瘦、暴富~，新年第一天就在做项目QAQ，在这里分享项目的一部分，其它部分将在后面开源分享，欢迎大家一起交流分享
+防火墙防火墙是由软件和硬件组成的系统，它处于安全的网络(通常是内部局域网
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-01-01
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%AE%89%E5%85%A8%E5%BB%BA%E8%AE%BE/" class="post-category">
+                                    安全建设
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Firewalld/">
+                        <span class="chip bg-color">Firewalld</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + 'From: Qftm<br />'
+            + 'Author: Qftm<br />'
+            + 'Link: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2018</span>
+            <a href="/about" target="_blank">Qftm</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">370.8k</span>&nbsp;字
+            
+            
+            
+            
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+    <a href="https://github.com/Qftm" 
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:Qftmbin@gmail.com" 
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+    <a href="https://twitter.com/Qftmer" 
+        <i class="fab fa-twitter"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;Search</span>
+            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

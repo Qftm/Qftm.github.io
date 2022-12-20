@@ -1,0 +1,1158 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="XSS Stored 漏洞分析与测试, Qftm">
+    <meta name="description" content="Maybe a hacker">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>XSS Stored 漏洞分析与测试 | Qftm</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.1"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Qftm</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>Index</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>Tags</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>Categories</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>Archives</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-heartbeat" style="zoom: 0.6;"></i>
+      
+      <span>About</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>Friends</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="Search" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Qftm</div>
+        <div class="logo-desc">
+            
+            Maybe a hacker
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			Index
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			Tags
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			Categories
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			Archives
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-heartbeat"></i>
+			
+			About
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			Friends
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/bg.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">XSS Stored 漏洞分析与测试</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/DVWA/">
+                                <span class="chip bg-color">DVWA</span>
+                            </a>
+                        
+                            <a href="/tags/XSS/">
+                                <span class="chip bg-color">XSS</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Web%E5%AE%89%E5%85%A8/" class="post-category">
+                                Web安全
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    2018-11-04
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
+                    2022-03-15
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    2k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    8 Min
+                </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="dvwa存储型XSS"><a href="#dvwa存储型XSS" class="headerlink" title="dvwa存储型XSS"></a>dvwa存储型XSS</h1><p>存储型XSS：会把用户输入的数据“存储”在服务器端，一般出现在需要用户可以输入数据的地方，比如网站的留言板、评论等地方，当网站这些地方过滤不严格的时候，就会被黑客注入恶意攻击代码，存储在服务器端，每当用户加载该页面时，都会受到攻击，所以这种攻击行为也称为“持久型XSS(Persistent XSS)”。</p>
+<h1 id="漏洞测试"><a href="#漏洞测试" class="headerlink" title="漏洞测试"></a>漏洞测试</h1><h2 id="low级别"><a href="#low级别" class="headerlink" title="low级别"></a>low级别</h2><p><img src="/2018/11/04/XSS-Stored-test/20181104100832585.png" alt="img"></p>
+<p>在Name和Message输入框中分别输入一个String（admin）发现输入的数据会显示在当前页面中，同时可以知道数据提交是以POST请求的方式</p>
+<p>查看源码：</p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+
+<span class="token keyword">if</span><span class="token punctuation">(</span> <span class="token function">isset</span><span class="token punctuation">(</span> <span class="token variable">$_POST</span><span class="token punctuation">[</span> <span class="token string">'btnSign'</span> <span class="token punctuation">]</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// Get input</span>
+    <span class="token variable">$message</span> <span class="token operator">=</span> <span class="token function">trim</span><span class="token punctuation">(</span> <span class="token variable">$_POST</span><span class="token punctuation">[</span> <span class="token string">'mtxMessage'</span> <span class="token punctuation">]</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$name</span>    <span class="token operator">=</span> <span class="token function">trim</span><span class="token punctuation">(</span> <span class="token variable">$_POST</span><span class="token punctuation">[</span> <span class="token string">'txtName'</span> <span class="token punctuation">]</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// Sanitize message input</span>
+    <span class="token variable">$message</span> <span class="token operator">=</span> <span class="token function">stripslashes</span><span class="token punctuation">(</span> <span class="token variable">$message</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$message</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">is_object</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token function">mysqli_real_escape_string</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>  <span class="token variable">$message</span> <span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">trigger_error</span><span class="token punctuation">(</span><span class="token string">"[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work."</span><span class="token punctuation">,</span> <span class="token constant">E_USER_ERROR</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token string">""</span> <span class="token punctuation">:</span> <span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// Sanitize name input</span>
+    <span class="token variable">$name</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">is_object</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token function">mysqli_real_escape_string</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>  <span class="token variable">$name</span> <span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">trigger_error</span><span class="token punctuation">(</span><span class="token string">"[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work."</span><span class="token punctuation">,</span> <span class="token constant">E_USER_ERROR</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token string">""</span> <span class="token punctuation">:</span> <span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// Update database</span>
+    <span class="token variable">$query</span>  <span class="token operator">=</span> <span class="token string">"INSERT INTO guestbook ( comment, name ) VALUES ( '$message', '$name' );"</span><span class="token punctuation">;</span>
+    <span class="token variable">$result</span> <span class="token operator">=</span> <span class="token function">mysqli_query</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>  <span class="token variable">$query</span> <span class="token punctuation">)</span> <span class="token keyword">or</span> <span class="token keyword">die</span><span class="token punctuation">(</span> <span class="token string">'&lt;pre>'</span> <span class="token punctuation">.</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">is_object</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token function">mysqli_error</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token variable">$___mysqli_res</span> <span class="token operator">=</span> <span class="token function">mysqli_connect_error</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token variable">$___mysqli_res</span> <span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">.</span> <span class="token string">'&lt;/pre>'</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">//mysql_close();</span>
+<span class="token punctuation">}</span>
+
+<span class="token delimiter">?></span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>代码审计发现，并不存在Protect，trim()函数、stripslashes()函数、<code>mysqli_real_escape_string()</code>函数等不会对JS代码进行过滤</p>
+<pre class="line-numbers language-txt"><code class="language-txt">trim(string,charlist) 函数移除字符串两侧的空白字符或其他预定义字符。
+
+    string    必需。规定要检查的字符串。
+
+    charlist  可选。规定从字符串中删除哪些字符。如果被省略，则移除以下所有字符：    
+
+        "\0" - NULL
+        "\t" - 制表符
+        "\n" - 换行
+        "\x0B" - 垂直制表符
+        "\r" - 回车
+        " " - 空格
+
+########################################################################################
+
+stripslashes(string) 函数删除由 addslashes() 函数添加的反斜杠。
+
+    string    必需。规定要检查的字符串。
+
+    提示：该函数可用于清理从数据库中或者从 HTML 表单中取回的数据。
+
+########################################################################################
+
+addslashes(string) 函数返回在预定义字符之前添加反斜杠的字符串。
+
+    预定义字符是：
+
+        单引号（'）
+        双引号（"）
+        反斜杠（\）
+        NULL
+    string    必需。规定要转义的字符串。
+
+    提示：该函数可用于为存储在数据库中的字符串以及数据库查询语句准备字符串。
+
+########################################################################################
+
+mysql_real_escape_string(string,connection) 函数转义 SQL 语句中使用的字符串中的特殊字符。
+
+    下列字符受影响：
+
+        \x00
+        \n
+        \r
+        \
+        '
+        "
+        \x1a
+    如果成功，则该函数返回被转义的字符串。如果失败，则返回 false。
+
+    string    必需。规定要转义的字符串。
+    connection    可选。规定 MySQL 连接。如果未规定，则使用上一个连接。
+
+    提示：可使用本函数来预防数据库攻击。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>构造payload，执行最简单的XSS攻击</p>
+<pre class="line-numbers language-http"><code class="language-http">POST data
+txtName=admin&amp;mtxMessage=&lt;script>alert("_XSS_")&lt;/script>&amp;btnSign=Sign+Guestbook<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>恶意代码被存入服务端，每当用户打开该网页都会受到攻击</p>
+<p>服务端数据库文件已存入攻击者的恶意代码</p>
+<p><img src="/2018/11/04/XSS-Stored-test/20181104104221679.png" alt="img"></p>
+<p>进入该网页，触发恶意攻击</p>
+<p><img src="/2018/11/04/XSS-Stored-test/20181104103826575.png" alt="img"></p>
+<h2 id="medium-级别"><a href="#medium-级别" class="headerlink" title="medium 级别"></a>medium 级别</h2><pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+
+<span class="token keyword">if</span><span class="token punctuation">(</span> <span class="token function">isset</span><span class="token punctuation">(</span> <span class="token variable">$_POST</span><span class="token punctuation">[</span> <span class="token string">'btnSign'</span> <span class="token punctuation">]</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// Get input</span>
+    <span class="token variable">$message</span> <span class="token operator">=</span> <span class="token function">trim</span><span class="token punctuation">(</span> <span class="token variable">$_POST</span><span class="token punctuation">[</span> <span class="token string">'mtxMessage'</span> <span class="token punctuation">]</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$name</span>    <span class="token operator">=</span> <span class="token function">trim</span><span class="token punctuation">(</span> <span class="token variable">$_POST</span><span class="token punctuation">[</span> <span class="token string">'txtName'</span> <span class="token punctuation">]</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// Sanitize message input</span>
+    <span class="token variable">$message</span> <span class="token operator">=</span> <span class="token function">strip_tags</span><span class="token punctuation">(</span> <span class="token function">addslashes</span><span class="token punctuation">(</span> <span class="token variable">$message</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$message</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">is_object</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token function">mysqli_real_escape_string</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>  <span class="token variable">$message</span> <span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">trigger_error</span><span class="token punctuation">(</span><span class="token string">"[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work."</span><span class="token punctuation">,</span> <span class="token constant">E_USER_ERROR</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token string">""</span> <span class="token punctuation">:</span> <span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$message</span> <span class="token operator">=</span> <span class="token function">htmlspecialchars</span><span class="token punctuation">(</span> <span class="token variable">$message</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// Sanitize name input</span>
+    <span class="token variable">$name</span> <span class="token operator">=</span> <span class="token function">str_replace</span><span class="token punctuation">(</span> <span class="token string">'&lt;script>'</span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">,</span> <span class="token variable">$name</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$name</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">is_object</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token function">mysqli_real_escape_string</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>  <span class="token variable">$name</span> <span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">trigger_error</span><span class="token punctuation">(</span><span class="token string">"[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work."</span><span class="token punctuation">,</span> <span class="token constant">E_USER_ERROR</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token string">""</span> <span class="token punctuation">:</span> <span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// Update database</span>
+    <span class="token variable">$query</span>  <span class="token operator">=</span> <span class="token string">"INSERT INTO guestbook ( comment, name ) VALUES ( '$message', '$name' );"</span><span class="token punctuation">;</span>
+    <span class="token variable">$result</span> <span class="token operator">=</span> <span class="token function">mysqli_query</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>  <span class="token variable">$query</span> <span class="token punctuation">)</span> <span class="token keyword">or</span> <span class="token keyword">die</span><span class="token punctuation">(</span> <span class="token string">'&lt;pre>'</span> <span class="token punctuation">.</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">is_object</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token function">mysqli_error</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token variable">$___mysqli_res</span> <span class="token operator">=</span> <span class="token function">mysqli_connect_error</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token variable">$___mysqli_res</span> <span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">.</span> <span class="token string">'&lt;/pre>'</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">//mysql_close();</span>
+<span class="token punctuation">}</span>
+
+<span class="token delimiter">?></span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>经过代码审计，可以发现medium级别进行了Protect，对POST请求到的的内容进行过滤：</p>
+<p>str_replace()函数 对 Name data进行<code>&lt;script&gt;</code>标签匹配置空</p>
+<p>strip_tags()函数 对 message data进行标签匹配删除</p>
+<pre class="line-numbers language-txt"><code class="language-txt">str_replace(find,replace,string,count) 函数以其他字符替换字符串中的一些字符（区分大小写）。
+
+该函数必须遵循下列规则：
+
+如果搜索的字符串是数组，那么它将返回数组。
+如果搜索的字符串是数组，那么它将对数组中的每个元素进行查找和替换。
+如果同时需要对数组进行查找和替换，并且需要执行替换的元素少于查找到的元素的数量，那么多余元素将用空字符串进行替换
+如果查找的是数组，而替换的是字符串，那么替代字符串将对所有查找到的值起作用。
+注释：该函数区分大小写。请使用 str_ireplace() 函数执行不区分大小写的搜索。
+
+参数    描述
+find    必需。规定要查找的值。
+replace    必需。规定替换 find 中的值的值。
+string    必需。规定被搜索的字符串。
+count    可选。对替换数进行计数的变量。
+
+###########################################################################################
+
+strip_tags(string,allow) 函数剥去字符串中的 HTML、XML 以及 PHP 的标签。
+
+注释：该函数始终会剥离 HTML 注释。这点无法通过 allow 参数改变。
+
+参数    描述
+string    必需。规定要检查的字符串。
+allow    可选。规定允许的标签。这些标签不会被删除。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>分析可知要想利用XSS攻击，只有对Name data进行注入，利用<code>&lt;script&gt;</code>标签大小写进行绕过，但你会发现Name data length=10 受到限制</p>
+<p><img src="/2018/11/04/XSS-Stored-test/20181104110405624.png" alt="img"></p>
+<p>篡改数据，绕过length限制</p>
+<p><img src="/2018/11/04/XSS-Stored-test/20181104110752555.png" alt="img"></p>
+<p>构造payload</p>
+<pre class="line-numbers language-http"><code class="language-http">POST Name data
+txtName=%3CScript%3Ealert%281111%29%3C%2FscriPt%3E&amp;mtxMessage=admin&amp;btnSign=Sign+Guestbook<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>Name data的绕过</p>
+<p><img src="/2018/11/04/XSS-Stored-test/20181104111233555.png" alt="img"></p>
+<p>服务端数据库文件已存入攻击者的恶意代码</p>
+<p><img src="/2018/11/04/XSS-Stored-test/20181104111557718.png" alt="img"></p>
+<p>在这里也可以使用<code>&lt;img&gt;</code>标签进行绕过：<code>&lt;img src=# onerror=alert(&quot;_XSS_&quot;)&gt;</code></p>
+<h2 id="high-级别"><a href="#high-级别" class="headerlink" title="high 级别"></a>high 级别</h2><pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+
+<span class="token keyword">if</span><span class="token punctuation">(</span> <span class="token function">isset</span><span class="token punctuation">(</span> <span class="token variable">$_POST</span><span class="token punctuation">[</span> <span class="token string">'btnSign'</span> <span class="token punctuation">]</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// Get input</span>
+    <span class="token variable">$message</span> <span class="token operator">=</span> <span class="token function">trim</span><span class="token punctuation">(</span> <span class="token variable">$_POST</span><span class="token punctuation">[</span> <span class="token string">'mtxMessage'</span> <span class="token punctuation">]</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$name</span>    <span class="token operator">=</span> <span class="token function">trim</span><span class="token punctuation">(</span> <span class="token variable">$_POST</span><span class="token punctuation">[</span> <span class="token string">'txtName'</span> <span class="token punctuation">]</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// Sanitize message input</span>
+    <span class="token variable">$message</span> <span class="token operator">=</span> <span class="token function">strip_tags</span><span class="token punctuation">(</span> <span class="token function">addslashes</span><span class="token punctuation">(</span> <span class="token variable">$message</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$message</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">is_object</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token function">mysqli_real_escape_string</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>  <span class="token variable">$message</span> <span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">trigger_error</span><span class="token punctuation">(</span><span class="token string">"[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work."</span><span class="token punctuation">,</span> <span class="token constant">E_USER_ERROR</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token string">""</span> <span class="token punctuation">:</span> <span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$message</span> <span class="token operator">=</span> <span class="token function">htmlspecialchars</span><span class="token punctuation">(</span> <span class="token variable">$message</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// Sanitize name input</span>
+    <span class="token variable">$name</span> <span class="token operator">=</span> <span class="token function">preg_replace</span><span class="token punctuation">(</span> <span class="token string">'/&lt;(.*)s(.*)c(.*)r(.*)i(.*)p(.*)t/i'</span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">,</span> <span class="token variable">$name</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$name</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">is_object</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token function">mysqli_real_escape_string</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>  <span class="token variable">$name</span> <span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">trigger_error</span><span class="token punctuation">(</span><span class="token string">"[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work."</span><span class="token punctuation">,</span> <span class="token constant">E_USER_ERROR</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token string">""</span> <span class="token punctuation">:</span> <span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// Update database</span>
+    <span class="token variable">$query</span>  <span class="token operator">=</span> <span class="token string">"INSERT INTO guestbook ( comment, name ) VALUES ( '$message', '$name' );"</span><span class="token punctuation">;</span>
+    <span class="token variable">$result</span> <span class="token operator">=</span> <span class="token function">mysqli_query</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>  <span class="token variable">$query</span> <span class="token punctuation">)</span> <span class="token keyword">or</span> <span class="token keyword">die</span><span class="token punctuation">(</span> <span class="token string">'&lt;pre>'</span> <span class="token punctuation">.</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">is_object</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token function">mysqli_error</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token variable">$___mysqli_res</span> <span class="token operator">=</span> <span class="token function">mysqli_connect_error</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token variable">$___mysqli_res</span> <span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">.</span> <span class="token string">'&lt;/pre>'</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">//mysql_close();</span>
+<span class="token punctuation">}</span>
+
+<span class="token delimiter">?></span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>代码审计之后，发现high级别的Name data存在另外一种的Protect，利用preg_replace()函数进行匹配“&lt; s r i p t”等字符，将其置为空，此时Name data里面的<code>&lt;script&gt;</code>标签是不能使用的，不管是大小进行区分写都不可以进行绕过</p>
+<p>所以，就需要利用其它标签进行XSS攻击，此处可以利用 medium 级别 中提到的<code>&lt;img&gt;</code>标签进行绕过preg_replace()函数的Protect</p>
+<p>构造payload</p>
+<pre class="line-numbers language-http"><code class="language-http">POST Name data
+txtName=%3Cimg+src%3D%23+onerror%3Dalert%28%22_XSS_%22%29%3E&amp;mtxMessage=Hello+admin&amp;btnSign=Sign+Guestbook<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><code>&lt;img&gt;</code>标签成功绕过preg_replace()</p>
+<p><img src="/2018/11/04/XSS-Stored-test/20181104114808446.png" alt="img"></p>
+<p>服务端数据库文件已存入攻击者的恶意代码</p>
+<p><img src="/2018/11/04/XSS-Stored-test/20181104114917233.png" alt="img"></p>
+<h2 id="impossible-级别"><a href="#impossible-级别" class="headerlink" title="impossible 级别"></a>impossible 级别</h2><pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+
+<span class="token keyword">if</span><span class="token punctuation">(</span> <span class="token function">isset</span><span class="token punctuation">(</span> <span class="token variable">$_POST</span><span class="token punctuation">[</span> <span class="token string">'btnSign'</span> <span class="token punctuation">]</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// Check Anti-CSRF token</span>
+    <span class="token function">checkToken</span><span class="token punctuation">(</span> <span class="token variable">$_REQUEST</span><span class="token punctuation">[</span> <span class="token string">'user_token'</span> <span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token variable">$_SESSION</span><span class="token punctuation">[</span> <span class="token string">'session_token'</span> <span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">'index.php'</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// Get input</span>
+    <span class="token variable">$message</span> <span class="token operator">=</span> <span class="token function">trim</span><span class="token punctuation">(</span> <span class="token variable">$_POST</span><span class="token punctuation">[</span> <span class="token string">'mtxMessage'</span> <span class="token punctuation">]</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$name</span>    <span class="token operator">=</span> <span class="token function">trim</span><span class="token punctuation">(</span> <span class="token variable">$_POST</span><span class="token punctuation">[</span> <span class="token string">'txtName'</span> <span class="token punctuation">]</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// Sanitize message input</span>
+    <span class="token variable">$message</span> <span class="token operator">=</span> <span class="token function">stripslashes</span><span class="token punctuation">(</span> <span class="token variable">$message</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$message</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">is_object</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token function">mysqli_real_escape_string</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>  <span class="token variable">$message</span> <span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">trigger_error</span><span class="token punctuation">(</span><span class="token string">"[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work."</span><span class="token punctuation">,</span> <span class="token constant">E_USER_ERROR</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token string">""</span> <span class="token punctuation">:</span> <span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$message</span> <span class="token operator">=</span> <span class="token function">htmlspecialchars</span><span class="token punctuation">(</span> <span class="token variable">$message</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// Sanitize name input</span>
+    <span class="token variable">$name</span> <span class="token operator">=</span> <span class="token function">stripslashes</span><span class="token punctuation">(</span> <span class="token variable">$name</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$name</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">is_object</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token function">mysqli_real_escape_string</span><span class="token punctuation">(</span><span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token string">"___mysqli_ston"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>  <span class="token variable">$name</span> <span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">trigger_error</span><span class="token punctuation">(</span><span class="token string">"[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work."</span><span class="token punctuation">,</span> <span class="token constant">E_USER_ERROR</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token string">""</span> <span class="token punctuation">:</span> <span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$name</span> <span class="token operator">=</span> <span class="token function">htmlspecialchars</span><span class="token punctuation">(</span> <span class="token variable">$name</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// Update database</span>
+    <span class="token variable">$data</span> <span class="token operator">=</span> <span class="token variable">$db</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">prepare</span><span class="token punctuation">(</span> <span class="token string">'INSERT INTO guestbook ( comment, name ) VALUES ( :message, :name );'</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$data</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">bindParam</span><span class="token punctuation">(</span> <span class="token string">':message'</span><span class="token punctuation">,</span> <span class="token variable">$message</span><span class="token punctuation">,</span> <span class="token constant">PDO</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token constant">PARAM_STR</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$data</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">bindParam</span><span class="token punctuation">(</span> <span class="token string">':name'</span><span class="token punctuation">,</span> <span class="token variable">$name</span><span class="token punctuation">,</span> <span class="token constant">PDO</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token constant">PARAM_STR</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$data</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// Generate Anti-CSRF token</span>
+<span class="token function">generateSessionToken</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token delimiter">?></span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>impossible 级别的Protect不能被绕过，由于Name data和Message data都受到htmlspecialchars()函数的保护作用</p>
+<pre class="line-numbers language-txt"><code class="language-txt">htmlspecialchars() 函数把预定义的字符转换为 HTML 实体。
+预定义的字符是：
+
+& （和号）成为 &
+" （双引号）成为 "
+' （单引号）成为 '
+< （小于）成为 <
+> （大于）成为 >
+
+它的语法如下：
+htmlspecialchars(string,flags,character-set,double_encode)
+    其中第二个参数flags需要重要注意，很多开发者就是因为没有注意到这个参数导致使用htmlspecialchars()函数过滤XSS时被绕过。因为flags参数对于引号的编码如下：
+
+可用的引号类型：
+
+ENT_COMPAT - 默认。仅编码双引号。
+ENT_QUOTES - 编码双引号和单引号。
+ENT_NOQUOTES - 不编码任何引号。
+默认是只编码双引号的<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>因为输入的所有标签都被转义，所以此处不存在XSS攻击，但是要注意flags属性，使用不当过滤XSS时就会被绕过。</p>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        Author:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Qftm</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        Link:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://Qftm.github.io/2018/11/04/XSS-Stored-test/">http://Qftm.github.io/2018/11/04/XSS-Stored-test/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        Reprint policy:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    All articles in this blog are used except for special statements
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    reprint polocy. If reproduced, please indicate source
+                    <a href="/about" target="_blank">Qftm</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/DVWA/">
+                                    <span class="chip bg-color">DVWA</span>
+                                </a>
+                            
+                                <a href="/tags/XSS/">
+                                    <span class="chip bg-color">XSS</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+            <div class="card">
+                <a href="/2018/11/04/XSS-DOM-test/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/dvwa-xss-1.png" class="responsive-img" alt="XSS DOM 漏洞分析与测试">
+                        
+                        <span class="card-title">XSS DOM 漏洞分析与测试</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            dvwa DOM XSSDOM Based XSS：是基于DOM文档对象模型的操作，通过前端脚本修改页面的DOM节点形成的XSS，该操作不与服务器端进行交互，而且代码是可见的，从前端获取到DOM中的数据在本地执行，从效果上来说也是反射型XS
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2018-11-04
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Web%E5%AE%89%E5%85%A8/" class="post-category">
+                                    Web安全
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/DVWA/">
+                        <span class="chip bg-color">DVWA</span>
+                    </a>
+                    
+                    <a href="/tags/XSS/">
+                        <span class="chip bg-color">XSS</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2018/11/04/XSS-Reflected-test/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/dvwa-xss-3.png" class="responsive-img" alt="XSS Reflected 漏洞分析与测试">
+                        
+                        <span class="card-title">XSS Reflected 漏洞分析与测试</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            前言由于最近在做XSS方面的测试，于是找到了DVWA平台进行实验测试，通过这三篇文章让大家了解XSS方面的大概内容，这三篇文章只是把你领进XSS的大门，要想真正深入的学习XSS，你还需要去学习很多东西来提升自己。网站测试分为黑盒测试和白盒测
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2018-11-04
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Web%E5%AE%89%E5%85%A8/" class="post-category">
+                                    Web安全
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/DVWA/">
+                        <span class="chip bg-color">DVWA</span>
+                    </a>
+                    
+                    <a href="/tags/XSS/">
+                        <span class="chip bg-color">XSS</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + 'From: Qftm<br />'
+            + 'Author: Qftm<br />'
+            + 'Link: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2018</span>
+            <a href="/about" target="_blank">Qftm</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">370.8k</span>&nbsp;字
+            
+            
+            
+            
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+    <a href="https://github.com/Qftm" 
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:Qftmbin@gmail.com" 
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+    <a href="https://twitter.com/Qftmer" 
+        <i class="fab fa-twitter"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;Search</span>
+            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

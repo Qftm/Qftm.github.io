@@ -1,0 +1,2199 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Software Engineering Learning Handbook, Qftm">
+    <meta name="description" content="Maybe a hacker">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Software Engineering Learning Handbook | Qftm</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.1"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Qftm</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>Index</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>Tags</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>Categories</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>Archives</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-heartbeat" style="zoom: 0.6;"></i>
+      
+      <span>About</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>Friends</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="Search" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Qftm</div>
+        <div class="logo-desc">
+            
+            Maybe a hacker
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			Index
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			Tags
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			Categories
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			Archives
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-heartbeat"></i>
+			
+			About
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			Friends
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/bg.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Software Engineering Learning Handbook</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Handbook/">
+                                <span class="chip bg-color">Handbook</span>
+                            </a>
+                        
+                            <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">
+                                <span class="chip bg-color">软件工程</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" class="post-category">
+                                编程开发
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    2020-03-23
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
+                    2020-12-22
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    24.4k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    82 Min
+                </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="Software-Engineering-Learning-Handbook"><a href="#Software-Engineering-Learning-Handbook" class="headerlink" title="Software Engineering Learning Handbook"></a>Software Engineering Learning Handbook</h1><h2 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h2><pre><code> Author：Qftm
+ Data：2020/03/23
+ Blog：https://qftm.github.io/</code></pre><h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>无论是学习安全还是开发，软件工程都是必须要学习掌握的一项技能，于是就总结了这个学习手册。</p>
+<h1 id="Table-of-Contents"><a href="#Table-of-Contents" class="headerlink" title="Table of Contents"></a>Table of Contents</h1><ul>
+<li><a href="#概念">概念</a><ul>
+<li><a href="#软件工程的定义">软件工程的定义</a></li>
+<li><a href="#软件工程的研究内容">软件工程的研究内容</a></li>
+<li><a href="#软件工程的要素">软件工程的要素</a></li>
+</ul>
+</li>
+<li><a href="#基础知识">基础知识</a><ul>
+<li><a href="#软件生命周期划分">软件生命周期划分</a><ul>
+<li><a href="#软件生命周期">软件生命周期</a></li>
+<li><a href="#软件生命周期各阶段的基本任务">软件生命周期各阶段的基本任务</a><ul>
+<li><a href="#软件计划时期">软件计划时期</a></li>
+<li><a href="#软件开发时期">软件开发时期</a></li>
+<li><a href="#软件维护时期">软件维护时期</a></li>
+</ul>
+</li>
+<li><a href="#软件生命周期各阶段">软件生命周期各阶段</a></li>
+</ul>
+</li>
+<li><a href="#软件开发模型">软件开发模型</a><ul>
+<li><a href="#瀑布模型">瀑布模型</a></li>
+<li><a href="#增量模型">增量模型</a></li>
+<li><a href="#螺旋模型">螺旋模型</a></li>
+<li><a href="#喷泉模型">喷泉模型</a></li>
+<li><a href="#变换模型">变换模型</a></li>
+</ul>
+</li>
+<li><a href="#软件的质量因素">软件的质量因素</a></li>
+</ul>
+</li>
+<li><a href="#软件计划">软件计划</a><ul>
+<li><a href="#可行性研究">可行性研究</a></li>
+</ul>
+</li>
+<li><a href="#需求分析">需求分析</a><ul>
+<li><a href="#需求分析-1">需求分析</a><ul>
+<li><a href="#需求分析的定义">需求分析的定义</a></li>
+<li><a href="#需求分析的任务">需求分析的任务</a></li>
+<li><a href="#需求分析的步骤">需求分析的步骤</a></li>
+<li><a href="#优秀需求包括的内容">优秀需求包括的内容</a></li>
+<li><a href="#优秀需求具有的特性">优秀需求具有的特性</a></li>
+</ul>
+</li>
+<li><a href="#数据流图">数据流图</a><ul>
+<li><a href="#数据字典">数据字典</a></li>
+</ul>
+</li>
+<li><a href="#结构化分析方法">结构化分析方法</a><ul>
+<li><a href="#基本概念">基本概念</a></li>
+<li><a href="#自顶向下逐步求精思想">自顶向下逐步求精思想</a></li>
+<li><a href="#结构化分析步骤">结构化分析步骤</a></li>
+<li><a href="#结构化分析的特点">结构化分析的特点</a></li>
+<li><a href="#结构化分析方法分类">结构化分析方法分类</a></li>
+<li><a href="#结构化分析的主要过程">结构化分析的主要过程</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#总体设计">总体设计</a><ul>
+<li><a href="#总体设计-1">总体设计</a><ul>
+<li><a href="#任务">任务</a></li>
+<li><a href="#原理">原理</a></li>
+<li><a href="#步骤">步骤</a></li>
+<li><a href="#实施">实施</a></li>
+</ul>
+</li>
+<li><a href="#模块独立性">模块独立性</a></li>
+<li><a href="#启发式规则">启发式规则</a></li>
+<li><a href="#面向对象设计模式">面向对象设计模式</a></li>
+<li><a href="#用例模型分析">用例模型分析</a><ul>
+<li><a href="#用例建模相关概念">用例建模相关概念</a></li>
+<li><a href="#用例建模的步骤">用例建模的步骤</a></li>
+</ul>
+</li>
+<li><a href="#时序图">时序图</a><ul>
+<li><a href="#组成元素">组成元素</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#详细设计">详细设计</a><ul>
+<li><a href="#jackson设计方法">JACKSON设计方法</a><ul>
+<li><a href="#基本概念-1">基本概念</a></li>
+<li><a href="#三种控制结构">三种控制结构</a></li>
+<li><a href="#实施步骤">实施步骤</a></li>
+</ul>
+</li>
+<li><a href="#界面设计">界面设计</a><ul>
+<li><a href="#基本概念-2">基本概念</a></li>
+<li><a href="#设计过程">设计过程</a></li>
+<li><a href="#设计原则">设计原则</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#软件编码">软件编码</a><ul>
+<li><a href="#语言选择">语言选择</a><ul>
+<li><a href="#程序设计语言的特点">程序设计语言的特点</a></li>
+<li><a href="#程序设计语言的选择">程序设计语言的选择</a></li>
+</ul>
+</li>
+<li><a href="#编码风格与规范">编码风格与规范</a></li>
+</ul>
+</li>
+<li><a href="#软件测试">软件测试</a><ul>
+<li><a href="#软件测试原则与阶段划分">软件测试原则与阶段划分</a><ul>
+<li><a href="#测试原则">测试原则</a></li>
+<li><a href="#阶段划分">阶段划分</a><ul>
+<li><a href="#单元测试">单元测试</a></li>
+<li><a href="#集成测试">集成测试</a></li>
+<li><a href="#确认测试">确认测试</a></li>
+<li><a href="#系统测试">系统测试</a></li>
+<li><a href="#验收测试">验收测试</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#测试用例设计">测试用例设计</a><ul>
+<li><a href="#测试用例的定义">测试用例的定义</a></li>
+<li><a href="#测试用例的好处">测试用例的好处</a></li>
+<li><a href="#测试用例的基本原则">测试用例的基本原则</a></li>
+<li><a href="#测试用例的组织和跟踪">测试用例的组织和跟踪</a></li>
+<li><a href="#测试用例设计应注意的问题">测试用例设计应注意的问题</a></li>
+<li><a href="#如何评价测试用例的好坏">如何评价测试用例的好坏</a></li>
+</ul>
+</li>
+<li><a href="#白盒测试">白盒测试</a><ul>
+<li><a href="#概念-1">概念</a></li>
+<li><a href="#优缺点">优缺点</a></li>
+<li><a href="#依据">依据</a></li>
+<li><a href="#方法">方法</a></li>
+<li><a href="#静态与动态测试技术">静态与动态测试技术</a></li>
+</ul>
+</li>
+<li><a href="#白盒测试技术之逻辑覆盖法">白盒测试技术之逻辑覆盖法</a></li>
+<li><a href="#黑盒测试">黑盒测试</a><ul>
+<li><a href="#概念-2">概念</a></li>
+<li><a href="#优缺点-1">优缺点</a></li>
+<li><a href="#方法-1">方法</a></li>
+</ul>
+</li>
+<li><a href="#黑盒测试之因果图与决策表">黑盒测试之因果图与决策表</a><ul>
+<li><a href="#因果图">因果图</a></li>
+<li><a href="#决策表">决策表</a></li>
+</ul>
+</li>
+<li><a href="#面向对象软件测试">面向对象软件测试</a></li>
+<li><a href="#软件自动化测试">软件自动化测试</a></li>
+</ul>
+</li>
+<li><a href="#软件维护">软件维护</a><ul>
+<li><a href="#软件维护分类与可维护性">软件维护分类与可维护性</a></li>
+<li><a href="#维护实施">维护实施</a></li>
+</ul>
+</li>
+<li><a href="#软件工程管理">软件工程管理</a><ul>
+<li><a href="#能力成熟度模型">能力成熟度模型</a></li>
+<li><a href="#软件成本估算">软件成本估算</a></li>
+<li><a href="#风险管理">风险管理</a></li>
+<li><a href="#进度控制">进度控制</a></li>
+</ul>
+</li>
+<li><a href="#软件评价">软件评价</a><ul>
+<li><a href="#程序复杂性度量">程序复杂性度量</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><h2 id="软件工程的定义"><a href="#软件工程的定义" class="headerlink" title="软件工程的定义"></a>软件工程的定义</h2><ul>
+<li>IEEE83 </li>
+</ul>
+<p>软件工程是开发、运行、维护和修复软件的系统方法。</p>
+<ul>
+<li>IEEE93 </li>
+</ul>
+<p>将系统化的、规范的、可度量的方法应用于软件的开发、运行和维护的过程，即将工程化应用于软件研究中。</p>
+<ul>
+<li>软件工程</li>
+</ul>
+<p>软件工程是一门交叉学科,它用科学的理论指导标准的软件系统开发。单纯的代码编写是软件工程的前身,它只占用软件工程中很少的一段空间和时间。</p>
+<h2 id="软件工程的研究内容"><a href="#软件工程的研究内容" class="headerlink" title="软件工程的研究内容"></a>软件工程的研究内容</h2><p><img src="/2020/03/23/Software-Engineering-Learning-Handbook/image-20200323085621717.png" alt="image-20200323085621717"></p>
+<p>软件工程所包含的内容并不是一成不变的,随着人们对软件系统的研制开发和生产的理解不断地变化,应该用发展的眼光看待它。</p>
+<h2 id="软件工程的要素"><a href="#软件工程的要素" class="headerlink" title="软件工程的要素"></a>软件工程的要素</h2><p>三要素：方法、工具、过程。</p>
+<h1 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h1><h2 id="软件生命周期划分"><a href="#软件生命周期划分" class="headerlink" title="软件生命周期划分"></a>软件生命周期划分</h2><h3 id="软件生命周期"><a href="#软件生命周期" class="headerlink" title="软件生命周期"></a>软件生命周期</h3><p>软件所经历的需求分析、设计、编码、测试、运行和维护，直到被废弃这个漫长的时期。这个过程即称为软件生命周期,也称为软件的生存期。</p>
+<p>软件生存期的六个步骤，即可行性研究与计划、需求分析、总体设计、详细设计、编码实现、测试及使用维护。</p>
+<h3 id="软件生命周期各阶段的基本任务"><a href="#软件生命周期各阶段的基本任务" class="headerlink" title="软件生命周期各阶段的基本任务"></a>软件生命周期各阶段的基本任务</h3><h4 id="软件计划时期"><a href="#软件计划时期" class="headerlink" title="软件计划时期"></a>软件计划时期</h4><p>确定软件开发工程必须完成的总目标；确定工程的可行性；导出实现工程目标应该采用的策略及系统必须完成的功能；估计完成该项工程需要的资源和成本，并制定工程进度表。</p>
+<h4 id="软件开发时期"><a href="#软件开发时期" class="headerlink" title="软件开发时期"></a>软件开发时期</h4><p>具体设计和实现在前一个时期定义的软件</p>
+<h4 id="软件维护时期"><a href="#软件维护时期" class="headerlink" title="软件维护时期"></a>软件维护时期</h4><p>使软件持久地满足用户的需要</p>
+<h3 id="软件生命周期各阶段"><a href="#软件生命周期各阶段" class="headerlink" title="软件生命周期各阶段"></a>软件生命周期各阶段</h3><p><img src="/2020/03/23/Software-Engineering-Learning-Handbook/image-20200323090538711.png" alt="image-20200323090538711"></p>
+<p><strong>HIPO图</strong></p>
+<p>HIPO图（Hierarchy Plus Input/Processing/Output）是表示软件结构的一种图形工具，以模块分解的层次性以及模块内部输入、处理、输出三大基本部分为基础建立的。它由两部分组成：</p>
+<p>（1）H图（层次图）：描述软件总的模块层次结构</p>
+<p>（2）IPO图：描述每个模块输入、输出、处理功能及模块调用的详细情况，相当于为一个模块写的一份说明。</p>
+<p><strong>PDL</strong></p>
+<p>过程设计语言，它是一种用于描述模块算法设计和处理细节的语言。</p>
+<h2 id="软件开发模型"><a href="#软件开发模型" class="headerlink" title="软件开发模型"></a>软件开发模型</h2><p>软件开发模型是描述软件开发过程中各种活动如何执行的模型。它能直观表达软件开发<br>全过程,明确规定要完成的主要活动、任务和开发策略。</p>
+<p>目前典型的软件开发模型有：瀑布模型、增量模型、螺旋模型、喷泉模型和变换模型等。</p>
+<p>不同的开发方法：不同的开发方法有不同的软件过程模型。</p>
+<p>软件开发模型选择的原则：</p>
+<p>（1）需求明确，选择瀑布模型;</p>
+<p>（2）需求理解较差，需开发一个原型，选择演进模型;</p>
+<p>（3）软件开发有很大风险，选择螺旋模型;</p>
+<p>（4）软件开发各过程间相互集成，选择喷泉模型。</p>
+<h3 id="瀑布模型"><a href="#瀑布模型" class="headerlink" title="瀑布模型"></a>瀑布模型</h3><ul>
+<li>瀑布模型示意图</li>
+</ul>
+<p><img src="/2020/03/23/Software-Engineering-Learning-Handbook/image-20200323091300322.png" alt="image-20200323091300322"></p>
+<ul>
+<li>按照传统瀑布模型开发软件的特点</li>
+</ul>
+<p><img src="/2020/03/23/Software-Engineering-Learning-Handbook/image-20200323091421456.png" alt="image-20200323091421456"></p>
+<ul>
+<li>瀑布模型的优点</li>
+</ul>
+<p>（1）它提供了一个模版,模版使得分析、设计、编码、测试和维护的方法可以在该模版下有一个共同的指导。</p>
+<p>（2）虽然有不少缺陷,但比在软件开发中随意的状态要好得多。</p>
+<ul>
+<li>瀑布模型的缺点</li>
+</ul>
+<p>（1）这种模型的迭代是间接的，微小的变化很容易造成大的混乱。</p>
+<p>（2）经常情况下用户难以表达真正的需求，导致很难按照该模型给出的顺序进行</p>
+<p>（3）用户要等到开发周期的晚期才能看到程序运行的测试版本，而在这时若发现大的错误，可能引起灾难性的后果。</p>
+<p>（4）采用这种线性模型，经常在过程的开始和结束时，要等待其他成员完成后，才能进行下去，导致等待的时间过长。</p>
+<h3 id="增量模型"><a href="#增量模型" class="headerlink" title="增量模型"></a>增量模型</h3><ul>
+<li>增量模型示意图</li>
+</ul>
+<p><img src="/2020/03/23/Software-Engineering-Learning-Handbook/image-20200323093303933.png" alt="image-20200323093303933"></p>
+<ul>
+<li>增量模型优点</li>
+</ul>
+<p>（1）人员分配灵活，刚开始不用投入大量人力资源，当核心产品很受欢迎时，可增加人力实现下一个增量。</p>
+<p>（2）当配备的人员不能在设定期限内完成产品时，它提供了一种先推出核心产品的途径，这样就可以先发布部分功能给用户，对用户起到镇静剂的作用。</p>
+<p>（3）具有一定的市场。</p>
+<ul>
+<li>增量模型缺点</li>
+</ul>
+<p>自始自终开发者和用户纠缠在一起，直到完 全版本出来。</p>
+<h3 id="螺旋模型"><a href="#螺旋模型" class="headerlink" title="螺旋模型"></a>螺旋模型</h3><ul>
+<li>螺旋模型示意图</li>
+</ul>
+<p><img src="/2020/03/23/Software-Engineering-Learning-Handbook/image-20200323092319901.png" alt="image-20200323092319901"></p>
+<ul>
+<li>螺旋模型优点</li>
+</ul>
+<p>对于大型系统及软件的开发，这种模型是一个很好的方法。开发者和客户能够较好地对待和理解每一个演化<br>级别上的风险。</p>
+<ul>
+<li>螺旋模型缺点</li>
+</ul>
+<p>（1）需要相当的风险分析评估的技术，且成功就依赖于这种技术。</p>
+<p>（2）但是，若存在一个没有被发现的大风险，将会出现问题，甚至可能导致演化过程失去控制。</p>
+<h3 id="喷泉模型"><a href="#喷泉模型" class="headerlink" title="喷泉模型"></a>喷泉模型</h3><p>喷泉模型(fountain model)是一种以用户需求为动力以对象为驱动的模型，主要用于描述面向对象的软件开发过程。该模型认为软件开发过程自下而上周期的各阶段是相互迭代和无间隙的特性。</p>
+<ul>
+<li>喷泉模型示意图</li>
+</ul>
+<p><img src="/2020/03/23/Software-Engineering-Learning-Handbook/image-20200323092814589.png" alt="image-20200323092814589"></p>
+<ul>
+<li>喷泉模型优点</li>
+</ul>
+<p>喷泉模型的各个阶段没有明显的界限，开发人员可以同步进行开发。其优点是可以提高软件项目开发效率，节省开发时间，适应于面向对象的软件开发过程。</p>
+<ul>
+<li>喷泉模型缺点</li>
+</ul>
+<p>由于喷泉模型在各个开发阶段是重叠的，因此在开发过程中需要大量的开发人员，因此不利于项目的管理。此外这种模型要求严格管理文档，使得审核的难度加大，尤其是面对可能随时加入各种信息、需求与资料的情况。</p>
+<h3 id="变换模型"><a href="#变换模型" class="headerlink" title="变换模型"></a>变换模型</h3><p>变换模型是基于形式化规格说明语言及程序变换的软件开发模型，它采用形式化的软件开发方法对形式化的软件规格说明进行一系列自动或半自动的程序变换，最后映射为计算机系统能够接受的程序系统。</p>
+<ul>
+<li>变换模型示意图</li>
+</ul>
+<p><img src="/2020/03/23/Software-Engineering-Learning-Handbook/image-20200323093041893.png" alt="image-20200323093041893"></p>
+<ul>
+<li>基本思想</li>
+</ul>
+<p>（1）首先通过对问题的分析制定形式规范并生成一个函数型的“递归方程”</p>
+<p>（2）然后通过一系列保持正确性的源程序到源程序的变换，把函数型风格转换成过程型风格并进行数据结构和算法的求精，最终得到一个有效的面向过程的程序。</p>
+<p>（3）这种变换过程是一种严格的形式推导过程，所以只需对变换前的程序的规范加以验证，变换后的程序的正确性将由变换法则的正确性来保证。</p>
+<ul>
+<li>变换模型优点</li>
+</ul>
+<p>（1）形式化规约可直接作为程序验证的基础，可以尽早地发现和纠正错误(包括那些在其他情况下不能发现的错误)。</p>
+<p>（2）开发出来的软件具有很高的安全性和健壮性，特别适合安全部门门或者软件错误会造成经济损失的开发项目。</p>
+<ul>
+<li>变换模型缺点</li>
+</ul>
+<p>（1）开发费用高，而且需要的时间长。</p>
+<p>（2）不能将该模型作为对客户通信的机制，因为客户对这些数学语言一无所知。具有开发无缺陷软件的承诺</p>
+<h2 id="软件的质量因素"><a href="#软件的质量因素" class="headerlink" title="软件的质量因素"></a>软件的质量因素</h2><p>软件的质量因素主要包括：正确性、可靠性、性能效率、易用性、可理解性与简洁性、可复用性与可扩充性、<br>可维护性、可移植性。</p>
+<h1 id="软件计划"><a href="#软件计划" class="headerlink" title="软件计划"></a>软件计划</h1><h2 id="可行性研究"><a href="#可行性研究" class="headerlink" title="可行性研究"></a>可行性研究</h2><p>可行性研究的主要任务是“了解客户的要求及现实环境，从技术、经济和社会因素等三方面研究并论证本软件项目的可行性，编写可行性研究报告，制定初步项目开发计划。”</p>
+<ul>
+<li>可行性研究步骤</li>
+</ul>
+<p>可行性研究是一个严谨的、科学的论证过程，必须依据当前的技术。水平和系统分析人员的经验，按照一定定的步骤进行:</p>
+<p>（1）复查确认系统目标、规模</p>
+<p>分析人员对问题的提出者和相关人员进行调查访问，仔细阅读和分析有关材料，确保正在分析的问题是用户需要解决的问题，符合用户需求。</p>
+<p>（2）对现有系统进行物理建模</p>
+<p>分析人员实地考察现有系统，收集、研究和分析现有系统的文档资料并使用系统流程图描述现有系统的物理模型。</p>
+<p>（3）构建新系统的逻辑模型</p>
+<p>分析人员以现有系统的物理模型为参考，从头设计新系统的逻辑模型逻辑模型使用数据流图和数据字典进行描述。</p>
+<p>（4）重新定义问题</p>
+<p>（5）设计系统的解决方案</p>
+<p>分析人员应在短时间内对不同解决方案的系统架构、 技术框架、解题。方法等技术方面内容进行概要性的描述，同时还必须对每种解决方案进行简单的计划。</p>
+<p>（6）分析评价提出的解决方案</p>
+<p>对提出的解决方案分别进行技术可行性、经济可行性、社会可行性和操作可行性的分析，去掉不可行的解决方案，保留若干个可行的解决方案。</p>
+<p>（7）推荐可行的解决方案</p>
+<p>根据相关的客观条件和主观判断，从选择的解决方案中选择最佳的解决方案。</p>
+<p>（8）草拟开发计划</p>
+<p>（9）撰写可行性研究报告</p>
+<p>将可行性研究的任务、过程和结果按照固定格式写成可行性研究报告。</p>
+<ul>
+<li>可行性研究的内容</li>
+</ul>
+<p>（1）技术可行性</p>
+<p>（2）经济可行性</p>
+<p>（3）操作可行性</p>
+<p>（4）社会可行性(法律可行性)</p>
+<h1 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h1><h2 id="需求分析-1"><a href="#需求分析-1" class="headerlink" title="需求分析"></a>需求分析</h2><h3 id="需求分析的定义"><a href="#需求分析的定义" class="headerlink" title="需求分析的定义"></a>需求分析的定义</h3><p>需求是指目标软件的需求，即在最终交付给用户的软件中应该包含哪些功能、性能、安全、运行维护等方面的要求。需求由用户提出，软件工程师负责收集、整理用户对软件的需求，并积极听取用户对需求的各种建议，最后用形式化的方法将这些需求规范化地描述出来，形成“软件需求规格说明牛”( Software Requirement Specification，即SRS )</p>
+<h3 id="需求分析的任务"><a href="#需求分析的任务" class="headerlink" title="需求分析的任务"></a>需求分析的任务</h3><p>需求分析的基本任务，简而言之：准确地回答“系统必须做什么?”的问题。</p>
+<p>软件分析人员必须通过需求分析获取对目标系统的完整、准确、清晰、具体的要求，为后续软件的设计、实现、测试打下坚实的基础。</p>
+<ul>
+<li>需求分析的任务具体化</li>
+</ul>
+<p>其一，确定对系统的各种要求(功能、性能、接口、 数据等)， 并用准确的模型(数据流图、数据字典、E-R图、状态转换图等)将它们形式化地表达出来，建立对目标软件系统的分析模型;</p>
+<p>其二，把对软件的功能、性能及其它要求，规范地写入“软件需求规格说明书” ，以形成软件开发的阶段性成果，提交给后续的设计阶段。</p>
+<h3 id="需求分析的步骤"><a href="#需求分析的步骤" class="headerlink" title="需求分析的步骤"></a>需求分析的步骤</h3><p><img src="/2020/03/23/Software-Engineering-Learning-Handbook/image-20200323095037758.png" alt="image-20200323095037758"></p>
+<p>（1）分析系统的数据要求</p>
+<p>软件系统的本质是处理数据的过程。它接收外部世界提交的数据，并对其进行处理或变换,最后再把处理的结果输出给用户。所以，软件需求分析的起点是对目标软件的数据要求展开分析。结构化分析方法就是以分析数据为核心的软件工程方法学。</p>
+<p>（2）分析系统的逻辑，建立系统逻辑模型</p>
+<p>在获取对目标软件系统数据的清晰要求之后，软件设计人员就应该遵循软件所处应用环境的业务逻辑，着重分析构成软件的各个元素，逐步逐层地细化软件的功能，并对各功能的合理性进行客观地评估，最终以形式化的方式形成描述目标软件系统的逻辑模型。</p>
+<p>作为结构化分析方法的重要工具，其需求分析过程中的逻辑模型主要有数据流图、数据字典、加工处理和数据存储等。</p>
+<p>（3）修订开发计划</p>
+<p>在软件项目的最初阶段需要制定描述软件开发过程中的计划进度安排，该计划会对软件过程实施中的时间、人力、 物力等各种资源进行大致的分配，软件开发人员必须较好地遵循该计划展开软件的研发工作。而随着需求分析的深入，软件设计者对目标软件系统的构成会有一个更加清晰的认识(功能、性能的需求更清楚了)，从而能够更加准确地把握软件开发过程中的资源协调、分配、调度。</p>
+<p>（4）构造原型</p>
+<p>软件设计人员为了获取对软件系统的准确需求，就必须先开发出一个可以运行的原型系统，并由用户对其进行操作实践，期望用户给出对原型系统的评价，最终指引软件设计人员去快速、准确、完整地把握用户的需求。原型的开发并不是必要的。</p>
+<p>（5）验证软件的需求</p>
+<p>需求分析完成之后必须对其结果进行验证和评估，以保证其正确性。</p>
+<p>作为软件生命期的重要起始阶段，需求分析获取的软件需求描述是软件设计、程序编码及软件测试等后续阶段成功实施的关键保证，准确的需求可以有效地降低软件开发过程中的不确定性，减少需求变更的次数，从而有助软件开发的顺利实施。</p>
+<p>（6）编写软件需求规格说明书</p>
+<p>需求分析的最终成果是“需求规格说明书”，软件分析人员根据从用户处获取的对目标软件系统的原始需求，按标准的文档格式，运用数据流图、数据字典、加工描述等工具清晰、准确地描述出需求。它是软件分析人员与用户进行需求确认的桥梁，也是软件分析人员与软件设计人员进行设计沟通的渠道。</p>
+<h3 id="优秀需求包括的内容"><a href="#优秀需求包括的内容" class="headerlink" title="优秀需求包括的内容"></a>优秀需求包括的内容</h3><ul>
+<li>用户需求分类</li>
+</ul>
+<p>（1）功能性需求：定义了系统做什么(描述系统必须支持的功能和过程)</p>
+<p>（2）非功能性需求(技术需求) ：定义了 系统工作时的特性(描述操作环境和性能目标)</p>
+<ul>
+<li>用户需求主要包括以下几个方面</li>
+</ul>
+<p>功能、性能、环境、界面、用户或人的因素、文档、数据、资源、安全保密、软件成本消耗与开发进度、质量保证。</p>
+<p>（1）功能需求</p>
+<pre><code>系统做什么?
+系统何时做什么?
+系统何时及如何修改或升级?</code></pre><p>（2）性能需求</p>
+<pre><code>软件开发的技术性指标
+
+例如：存储容量限制、执行速度、相应时间、吞吐量</code></pre><p>（3）环境需求</p>
+<pre><code>硬件设备：机型、外设、接口、地点、分布、温度、湿度、磁场干扰等
+软件：操作系统、网络、数据库</code></pre><p>（4）界面需求</p>
+<pre><code>有来自其它系统的输入吗?
+到自其它系统的输出吗?
+对数据格式有规定吗?
+对数据存储介质有规定吗?</code></pre><p>（5）用户或人的因素</p>
+<pre><code>用户类型?
+各种用户熟练程度?
+需受何种训练?
+用户理解、使用系统的难度?
+用户错误操作系统的可能性?</code></pre><p>（6）文档需求</p>
+<pre><code>需哪些文档?
+文档针对哪些读者?</code></pre><p>（7）数据需求</p>
+<pre><code>输入、输出数据的格式?
+接收、发送数据的频率?
+数据的准确性和精度?
+数据流量?
+数据需保持的时间?</code></pre><p>（8）资源需求</p>
+<pre><code>软件运行时所需的数据、软件。
+内存空间等资源。
+软件开发、维护所需的人力、
+支撑软件、开发设备等。</code></pre><p>（9）安全保密要求</p>
+<pre><code>需对访问系统或系统信息加以控制吗?
+如何隔离用户之间的数据?
+用户程序如何与其它程序和操作系统隔离?
+系统备份要求?</code></pre><p>（10）软件成本消耗与开发进度需求</p>
+<pre><code>开发有规定的时间表吗?
+软硬件投资有无限制?</code></pre><p>（11）质量保证</p>
+<pre><code>系统的可靠性要求?
+系统必须监测和隔离错误吗?
+规定系统平均出错时间?
+出错后，重启系统允许的时间?
+系统变化如何反映到设计中?
+维护是否包括对系统的改进?
+系统的可移植性?</code></pre><h3 id="优秀需求具有的特性"><a href="#优秀需求具有的特性" class="headerlink" title="优秀需求具有的特性"></a>优秀需求具有的特性</h3><ul>
+<li>正确性</li>
+</ul>
+<p>需求规格说明书中的需求描述，首先必须是能正确代表用户提出的针对目标软件系统的合理要求，即需求与用户保持一致。</p>
+<ul>
+<li>无歧义性</li>
+</ul>
+<p>需求规格说明书中的需求表达应没有任何歧义，即对软件工程术语的语义解释是唯一的 、统一的。</p>
+<ul>
+<li>完整性</li>
+</ul>
+<p>需求同样必须是完整的，不能遗漏任何用户的合理需求。它应该包括功能、性能、运行、出错处理、接口等各种需求。</p>
+<ul>
+<li>可验证性</li>
+</ul>
+<p>可验证性是需求是否可行的表示，即在经济、技术、法律均可行的前提之下，每一条需求都可以得到验证和确认。</p>
+<ul>
+<li>一致性 </li>
+</ul>
+<p>需求描述在需求规格说明书中前后必须保持一致，各种命名应该统一。</p>
+<ul>
+<li>可理解性</li>
+</ul>
+<p>需求规格说明书应该清晰、可读、便于理解。它是软件开发者与用户、软件分析人员与软件设计、软件测试人员联系的纽带，应多使用图、表的直观形式来表达需求，提高软件需求的可理解性。</p>
+<ul>
+<li>可修改性</li>
+</ul>
+<p>需求描述在需求规格说明书中的组织，应该保证对其进行修改所引起的需求规格说明书的变更最小。</p>
+<ul>
+<li>可追踪性</li>
+</ul>
+<p>需求规格说明书必须将分析获取的需求与用户原始的需求准确地联系在一-起，即每一项需求都有自己的源头。</p>
+<h2 id="数据流图"><a href="#数据流图" class="headerlink" title="数据流图"></a>数据流图</h2><p>数据流图(Data Flow Diagram，DFD)，是结构化系统分析的最基本工具,它以图形的方式描绘数据在系统中流动和处理的过程。数据流图从数据传递和加工的角度,以图形的方式描绘信息流和数据从输入移动到输出的过程中所经受的变换,是一种功能模型。</p>
+<p>数据流图的基本元素或称符号包括以下四个：</p>
+<p><img src="/2020/03/23/Software-Engineering-Learning-Handbook/image-20200323100816995.png" alt="image-20200323100816995"></p>
+<h3 id="数据字典"><a href="#数据字典" class="headerlink" title="数据字典"></a>数据字典</h3><p>数据字典是关于数据的信息的集合，也就是对数据流图中包含的所有元素的定义的集合。它是系统中各类数据描述的集合，是进行详细的数据收集和数据分析所获得的主要成果。</p>
+<p>数据流图中出现的每一个数据流名，每一个数据存储名和每一个处理名或加工名在字典中都应有一条目给出这个名字的定义，同时，对这些条目的每一个组成部分(有时是数据项)在字典中也应有一个条目给出它们的定义。</p>
+<p>数据流图与数据字典的关系: 两者结合在一起才构成“系统说明书”。单独一套数据流图或一本数据字典都是没有任何意义的。</p>
+<p>（1）数据字典中有四种类型的条目定义</p>
+<ul>
+<li><p>数据流：明确描述其元素的组成</p>
+</li>
+<li><p>数据项：数据流分量</p>
+</li>
+<li><p>数据存储(或文件) ：重点描述数据的组成与组织关系</p>
+</li>
+<li><p>处理(或加工) ：重点描述其加工逻辑</p>
+</li>
+</ul>
+<p>（2）数据字典的作用：</p>
+<ul>
+<li><p>有助于开发人员与用户之间的通信，对数据有一致性理解</p>
+</li>
+<li><p>是开发数据库系统的非常有价值的第一步</p>
+</li>
+</ul>
+<h2 id="结构化分析方法"><a href="#结构化分析方法" class="headerlink" title="结构化分析方法"></a>结构化分析方法</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>结构化分析方法旨在减少分析活动中的错误，产生系统的逻辑模型，其分析的对象是结构化的功能说明，实施的原则是面向数据流，基于功能分解依靠人工审查测试进行验证。</p>
+<p>指导思想：自顶向下，逐步求精</p>
+<p>两个基本原则：抽象与分解</p>
+<h3 id="自顶向下逐步求精思想"><a href="#自顶向下逐步求精思想" class="headerlink" title="自顶向下逐步求精思想"></a>自顶向下逐步求精思想</h3><p>首先考虑问题最本质的方面,忽略细节,形成问题的高层概念，然后再逐层添加细节。在分析的过程中,通过分解,<br>形成不同的抽象级别,最高层的问题最抽象，称为顶层系统,最底层的最为具体,称为底层系统。</p>
+<p><img src="/2020/03/23/Software-Engineering-Learning-Handbook/image-20200323152738197.png" alt="image-20200323152738197"></p>
+<h3 id="结构化分析步骤"><a href="#结构化分析步骤" class="headerlink" title="结构化分析步骤"></a>结构化分析步骤</h3><p>结构化分析的任务是要弄清楚“做什么”，其分析步骤如下:</p>
+<p><img src="/2020/03/23/Software-Engineering-Learning-Handbook/image-20200323152308395.png" alt="image-20200323152308395"></p>
+<h3 id="结构化分析的特点"><a href="#结构化分析的特点" class="headerlink" title="结构化分析的特点"></a>结构化分析的特点</h3><pre><code>是最早的系统分析方法，使用时间也最长;
+应用最广，特别适合于数据处理;
+支持的工具最多，发展较为成熟;
+简单实用;
+适合于各种软件开发模型，尤其是最为直观的瀑布模型，易于掌握;
+成功率较高。</code></pre><h3 id="结构化分析方法分类"><a href="#结构化分析方法分类" class="headerlink" title="结构化分析方法分类"></a>结构化分析方法分类</h3><p>（1）正向需求分析方法</p>
+<p>核心思想：自顶向下，逐步细化,采用数据流图分层的来描述软件在不同抽象层次的逻辑表示。</p>
+<p>（2）逆向需求分析方法</p>
+<p>从数据流的输出端回溯，弄清楚以下问题:</p>
+<pre><code>输出数据的组成?
+输出数据的来源?
+此过程软件分析人员和用户不断交流分析，对正向需求分析得到的数据流图进行修正、补充。</code></pre><h3 id="结构化分析的主要过程"><a href="#结构化分析的主要过程" class="headerlink" title="结构化分析的主要过程"></a>结构化分析的主要过程</h3><pre><code>分析系统的数据要求
+建立逻辑模型
+修订开发计划
+构造原型
+验证软件的需求
+编写软件需求规格说明书</code></pre><h1 id="总体设计"><a href="#总体设计" class="headerlink" title="总体设计"></a>总体设计</h1><h2 id="总体设计-1"><a href="#总体设计-1" class="headerlink" title="总体设计"></a>总体设计</h2><h3 id="任务"><a href="#任务" class="headerlink" title="任务"></a>任务</h3><p>总体设计是决定系统“怎样做?”，即概要地说，系统应该如何实现。因此，总体设计从需求分析阶段的工作结果出发，明确可选的技术方案，做好划分软件结构的前期工作，然后划分出组成系统的物理元素，并进行软件的结构设计与数据设计，最后编写出本阶段的阶段性成果-总体设计文档。</p>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>（1）抽象</p>
+<ul>
+<li><p>简单的说，抽象就是抽取出事物的本质特性而暂时不考虑它们的细节。</p>
+</li>
+<li><p>抽象是自顶向下逐步求精的过程。软件工程过程的每一步都是对软件解法的抽象层次的一次精化。在降低了软件问题的抽象等级其实是提高了该问题的求精等级。</p>
+</li>
+<li><p>由于软件结构也是一个自顶向下的层次结构，因此在软件结构的设计过程中可遵循抽象原理，逐层设计软件的模块，最终形成用完整的层次结构描述的软件结构。</p>
+</li>
+</ul>
+<p>（2）模块化</p>
+<ul>
+<li><p>模块化，就是把程序划分成若千个模块，每个模块完成一个子功能，把这些模块综合起来组成一个整体，这种软件结构设计方法称为模块化设计方法，也称为结构化程序设计方法。</p>
+</li>
+<li><p>模块化的结果可以提高解题的效率,这也是分治法精神的一个体现，但是在划分模块的时候,应当特别注意避免模块性不足或超模块性。</p>
+</li>
+</ul>
+<p>（3）信息隐藏</p>
+<ul>
+<li><p>信息隐藏指的是一组独立的模块彼此间仅仅交换那些为了完成系统功能而必须交换的信息。其他信息则是不可存取的。</p>
+</li>
+<li><p>信息隐蔽的好处在由于疏忽而引起的错误，不太容易传播到软件的其它部分，尤其是在测试和维护期间。</p>
+</li>
+</ul>
+<p>（4）局部化</p>
+<p>是把一些关系密切的软件元素物理地放得彼此靠近一些。如：使用局部数据元素等。</p>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><p>（1）设想供选择的方案</p>
+<p>（2）选取合理的方案(包括系统流程图、组成系统的物理元素清单、成本/效益分析、实现这个系统的进度计划)</p>
+<p>（3）推荐最佳方案</p>
+<p>（4）功能分解</p>
+<p>（5）设计软件结构</p>
+<p>（6）数据库设计(需要的话)</p>
+<p>（7）制定测试计划</p>
+<p>（8）书写文档(包括系统说明、用户手册、测试计划、详细的实现计划、数据库设计结果等)</p>
+<p>（9）审查和复审</p>
+<h3 id="实施"><a href="#实施" class="headerlink" title="实施"></a>实施</h3><p>总体设计的主要任务是设计系统的物理方案和软件结构。</p>
+<ul>
+<li>实施过程的示意图</li>
+</ul>
+<p><img src="/2020/03/23/Software-Engineering-Learning-Handbook/image-20200323154238483.png" alt="image-20200323154238483"></p>
+<p>从图中可以看出：对于系统的物理方案，软件分析人员需要正确地辨别出系统可能存在的多种自动化边界划分方法。然后设想系统包含的物理元素，最后，结合系统流程图描绘出物理方案的模型。而对于软件结构，软件分析人员则需要分析需求分析阶段提交的数据流图，确定数据流图的类型，然后应用“映射规则”成功导出树形或层次结构的软件结构。</p>
+<p>其实施过程可以简单归纳如下:</p>
+<pre><code>设想供选的方案
+选取合理的方案
+推荐最佳的方案
+设计软件的结构</code></pre><h2 id="模块独立性"><a href="#模块独立性" class="headerlink" title="模块独立性"></a>模块独立性</h2><p>模块独立性是软件好设计的关键。模块独立的概念是模块化、抽象、信息隐蔽和局部化概念的直接结果。</p>
+<p>基本目标是一使得每个模块完成一个相对独立的子功能，并和其它模块之间的接口很简单。</p>
+<p>衡量模块独立性的两个标准：耦合和内聚。</p>
+<p>模块独立的两条理由：有效的模块化软件比较容易开发、独立的模块比较容易测试和维护。</p>
+<p>（1）耦合</p>
+<p>藕合一软件结构中各模块之间互相连接性能的一种度量。在软件设计中我们力争可能达到最低的耦合或说松散的耦合。</p>
+<p>模块间联系的大小，可从三个角度来考虑: </p>
+<ul>
+<li><p>方式：模块间联系是通过怎样的方式进行的;</p>
+</li>
+<li><p>作用：模块间共用的信息做什么用;</p>
+</li>
+<li><p>数量：模块间共同的信息有多少;</p>
+</li>
+</ul>
+<p>耦合程度由低到高的排列是:</p>
+<p>数据耦合，特征耦合，控制耦合，公共耦合，内容耦合</p>
+<p>使用原则: </p>
+<p>尽量使用数据耦合，少用控制耦合，限制公共环境耦合的范围，完全不用内容耦合。</p>
+<p>（2）内聚</p>
+<p>内聚一衡量一个模块内各 元素彼此结合的紧密程度。</p>
+<p>理想的内聚是一个模块只做一件事情。</p>
+<p>内聚与耦合是密切相关的一模块内的高内聚往往意味着模块间的松耦合。</p>
+<p>（3）模块独立性的本质</p>
+<p>模块独立性的本质就是设计高内聚、低耦合的软件结构。但需要强调的是，耦合和内聚是相互的，在提高模块内聚的同时也可能会降低模块间的耦合。我们可以根据具体情况，通过模块的分解和合并，来提高模块独立性。</p>
+<h2 id="启发式规则"><a href="#启发式规则" class="headerlink" title="启发式规则"></a>启发式规则</h2><p>在软件设计中除了有设计原理可以帮助软件设计人员设计出好的软件结构，还有大量在工程实践中由设计人员总结出来的设计方法和经验，这些方法和经验可能不具备通用性，但它们却是启发软件设计人员设计出好的软件结构的重要规则，并且随着时间的推移这些规则还会不断丰富和完善故在软件工程中把这些规则称为“启发式规则”。</p>
+<ul>
+<li>软件结构设计的启发式规则</li>
+</ul>
+<pre><code>(1)消除重复功能
+(2)改进软件结构，提高模块独立性
+(3)模块规模要适中
+(4)深度、宽度、扇出和扇入适中
+(5)将模块的影响限制在模块的控制范围内
+(6)降低模块接口的复杂性
+(7)设计单入口单出口的模块
+(8)模块功能可预测</code></pre><h2 id="面向对象设计模式"><a href="#面向对象设计模式" class="headerlink" title="面向对象设计模式"></a>面向对象设计模式</h2><p>面向对象设计的准则：模块化、抽象、信息隐藏、弱耦合、强内聚、可重用</p>
+<p>（1）弱耦合</p>
+<ul>
+<li>交互耦合</li>
+</ul>
+<p>如果对象之间的耦合通过消息连接来实现，则这种耦合就是交互耦合。为使交互耦合尽可能松散，应尽量降低消息连接的复杂程度，减少对象发送(或接收)的消息数。</p>
+<ul>
+<li>继承耦合</li>
+</ul>
+<p>继承是一般化类与特殊类之间耦合的一种形式。从本质上看，通过继承关系结合起来的基类和派生类，构成了系统中</p>
+<p>粒度更大的模块。因此，它们彼此之间应该结合得越紧密越好。</p>
+<p>在设计时应该使特殊类尽量多继承并使用其一般化类的属性和服务，从而更紧密地耦合到其一般化类。</p>
+<p>（2）强内聚</p>
+<ul>
+<li>服务内聚</li>
+</ul>
+<p>一个 服务应该完成一个且仅完成一个功能。</p>
+<ul>
+<li>类内聚</li>
+</ul>
+<p>设计类的原则是，一个类应该只有一个用途，它的属性和服务应该是高内聚的。类的属性和服务应该全都是完成该类对象的任务所必需的，其中不包含无用的属性或服务。</p>
+<ul>
+<li>一般–特殊内聚</li>
+</ul>
+<p>设计出的一般–特殊结构，应该符合多数人的概念，这种结构应该是对相应的领域知识的正确抽取。</p>
+<p>（3）可重用</p>
+<ul>
+<li><p>软件重用是提高软件开发生产率和目标系统质量的重要途径。重用基本上从设计阶段开始。</p>
+</li>
+<li><p>尽量使用已有的类(包括开发环境提供的类库，及以往开发类似系统时创建的类)</p>
+</li>
+<li><p>如果确实需要创建新类，则在设计这些新类的协议时，应该考虑将来的可重复使用性。</p>
+</li>
+</ul>
+<h2 id="用例模型分析"><a href="#用例模型分析" class="headerlink" title="用例模型分析"></a>用例模型分析</h2><h3 id="用例建模相关概念"><a href="#用例建模相关概念" class="headerlink" title="用例建模相关概念"></a>用例建模相关概念</h3><ul>
+<li><p>用例模型是系统既定功能及系统环境的模型，贯穿整个系统开发的一条主线。同一个用例模型即为需求工作流程的结果，可当作分析设计工作流程以及测试工作流程的输入使用。</p>
+</li>
+<li><p>构建一个软件系统最困难的部分是正确地确定要构建什么。其他任何工作都不如建立详细的技术需求困难，这包括提供给人、机器和其他软件系统的界面和接口。</p>
+</li>
+<li><p>系统分析员首先必须理解关联人员的需求，以及开发该系统的原因。才能成功地计划、分析、设计、构造和部署-一个信息系统，</p>
+</li>
+<li><p>用例建模是一种促进以使用为中心的开发方法。促进并鼓励了用户参与这是确保项目成功的主要关键因素之一。通过关注系统的用户，使分析员能够把重点放在系统如何使用，而不是系统如何构造上。</p>
+</li>
+</ul>
+<h3 id="用例建模的步骤"><a href="#用例建模的步骤" class="headerlink" title="用例建模的步骤"></a>用例建模的步骤</h3><ul>
+<li><p>第1步:确定业务参与者</p>
+</li>
+<li><p>第2步:确定业务需求用例</p>
+</li>
+<li><p>第3步:构造用例模型图</p>
+</li>
+<li><p>第4步:记录业务需求用例描述</p>
+</li>
+</ul>
+<h2 id="时序图"><a href="#时序图" class="headerlink" title="时序图"></a>时序图</h2><p>时序图，又名序列图、循序图、顺序图，是一种UML交互图。它通过描述对象之间发送消息的时间顺序显示多个对象之间的动态协作。</p>
+<p>时序图可以表示用例的行为顺序，当执行一个用例行为时，其中的每条消息对应一个类操作或状态机中引起转换的触发事件。</p>
+<h3 id="组成元素"><a href="#组成元素" class="headerlink" title="组成元素"></a>组成元素</h3><p>时序图中包括如下元素:角色，对象，生命线，控制焦点和消息。</p>
+<p>（1）角色(Actor)</p>
+<p>系统角色，可以是人或者其他系统，子系统。</p>
+<p>（2）对象(Object)</p>
+<p>对象代表时序图中的对象在交互中所扮演的角色，位于时序图顶部和对象代表</p>
+<p>对象一般包含以下三种命名方式:</p>
+<ul>
+<li><p>第一种方式包含对象名和类名。</p>
+</li>
+<li><p>第二种方式只显示类名不显示对象名，即为一个匿名对象。</p>
+</li>
+<li><p>第三种方式只显示对象名不显示类名。</p>
+</li>
+</ul>
+<p>（3）生命线(Lifeline)</p>
+<p>生命线代表时序图中的对象在一段时期内的存在。时序图中每个对象和底部中心都有一条垂直的虚线，这就是对象的生命线，对象间的消息存在于两条虚线间。</p>
+<p>（4）控制焦点(Activation)</p>
+<p>控制焦点代表时序图中的对象执行一项操作的时期，在时序图中每条生命线上的窄的矩形 代表活动期。</p>
+<p>（5）消息(Message)</p>
+<p>消息是定义交互和协作中交换信息的类，用于对实体间的通信内容建模，信息用于在实体间传递信息。允许实体请求其他的服务，类角色通过发送和接受信息进行通信。</p>
+<h1 id="详细设计"><a href="#详细设计" class="headerlink" title="详细设计"></a>详细设计</h1><h2 id="JACKSON设计方法"><a href="#JACKSON设计方法" class="headerlink" title="JACKSON设计方法"></a>JACKSON设计方法</h2><h3 id="基本概念-1"><a href="#基本概念-1" class="headerlink" title="基本概念"></a>基本概念</h3><p>Jackson程序设计方法是一种面向数据结构的设计方法，最终目标是得出对程序处理过程的描述。</p>
+<p>Jackson方法的基本精神是：以数据结构为基础建立模块的层次结构</p>
+<h3 id="三种控制结构"><a href="#三种控制结构" class="headerlink" title="三种控制结构"></a>三种控制结构</h3><p>（1）顺序结构</p>
+<p>顺序结构的数据由一个或多个数据元素组成，每个元素按确定次序出现一次。</p>
+<p><img src="/2020/03/23/Software-Engineering-Learning-Handbook/image-20200323165254147.png" alt="image-20200323165254147"></p>
+<p>图中描述的就是一个顺序结构, A由B、C、D三个元素顺序组成。注意，每个元素只出现一-次，出现的次序依次是B、C、D。</p>
+<p>（2）选择结构</p>
+<p>选择结构的数据包含两个或多个数据元素，每次使用这个数据时按一定条件从这些数据元素中选择一个。</p>
+<p><img src="/2020/03/23/Software-Engineering-Learning-Handbook/image-20200323165414606.png" alt="image-20200323165414606"></p>
+<p>图中描述的就是一个选择结构，根据条件A选择B、C、D中的某一个。注意，在BCD的右上角有小圆圈作为标记。</p>
+<p>（3）重复结构的数据</p>
+<p>重复结构的数据，根据使用时的条件由一个数据元素出现零次或多次构成。</p>
+<p><img src="/2020/03/23/Software-Engineering-Learning-Handbook/image-20200323165520971.png" alt="image-20200323165520971"></p>
+<p>图中描述的就是一个重复结构，A由B出现N次组成，在这里N是大于等于0的，注意，在B右上角有星号作为标记。</p>
+<p>Jackson图的优点在于很容易表示层次结构，是对结构进行自顶向下分解的有力工具;形象直观并且可读性好;既能表示数据结构也能表示程序结构。</p>
+<h3 id="实施步骤"><a href="#实施步骤" class="headerlink" title="实施步骤"></a>实施步骤</h3><p>（1）分析并确定输入数据和输出数据的逻辑结构，并用Jackson图描绘这些数据结构。</p>
+<p>（2）找出输入数据结构和输出数据结构中有对应关系的数据单元。所谓有对应关系是指有直接的因果关系，在程序中可以同时处理的数据单元(对于重复出现的数据单元必须重复的次序和次数都相同才可能有对应关系)。</p>
+<p>（3）从描绘数据结构的Jackson图导出描绘程序结构的Jackson图，需要分以下3步:</p>
+<ul>
+<li><p>为每对有对应关系的数据单元，按照它们在数据结构图中的层次在程序结构图的相应层次画一个处理框。(注意,如果这对数据单元在输入数据结构和输出数据结构中所处的层次不同，则和它们对应的处理框在程序结构图中所处的层次与它们中在数据结构图中层次低的那个对应) ;</p>
+</li>
+<li><p>根据输入数据结构中剩余的每个数据单元所处的层次，在程序结构图的相应层次分别为它们画上对应的处理框;</p>
+</li>
+<li><p>根据输出数据结构中剩余的每个数据单元所处的层次，在程序结构图的相应层次分别为它们画上对应的处理框。</p>
+</li>
+</ul>
+<p>（4）列出所有操作和条件(包括分支条件和循环结束条件)， 并且把它们分配到程序结构图的适当位置。</p>
+<p>（5）用伪码表示程序。</p>
+<h2 id="界面设计"><a href="#界面设计" class="headerlink" title="界面设计"></a>界面设计</h2><h3 id="基本概念-2"><a href="#基本概念-2" class="headerlink" title="基本概念"></a>基本概念</h3><p>人机界面通常也称为用户界面，人机界面研究已经从过去的从属地位上升为一个专门的领域，现在用户界面设计在系统软件设计中所占的比例越来越大，有时可能占总工作量的一半。</p>
+<p>界面设计主要包括三个方面：设计软件构件之间的接口、设计模块和其他非人的信息生产者和消费者的界面、设计人(如用户)和计算机间的界面。</p>
+<p>（1）界面设计主要考虑的问题</p>
+<p>一般来说有以下几个主要方面: </p>
+<pre><code>用户对人机界面的满意程度
+人机界面的标准化程度
+人机界面的适应性和协调性
+人机界面的应用条件
+人机界面的性能价格比</code></pre><p>（2）界面设计的评判标准</p>
+<p>用户界面应当具有可靠性、简单性、易学习性、易使用性和立即反馈性。这是用户评价界面设计的标准。</p>
+<ul>
+<li>可靠性</li>
+</ul>
+<p>用户界面应当提供可靠的、能有效减少用户出错的、容错性好的环境。一旦用户出错，应当能检测出错误、提供出错信息，给用户改正错误的机会。</p>
+<ul>
+<li>简单性</li>
+</ul>
+<pre><code>简单性能提高工作效率。用户界面的简单性包括
+输入、输出的简单性
+系统界面风格的一致性
+命令关键词的含义、命令的格式、提示信息、输入输出格式等的一致性
+用语通俗，语义一致</code></pre><ul>
+<li>易学习性和易使用性</li>
+</ul>
+<p>用户界面应提供多种学习和使用方式，界面美观，操作舒适，应能灵活地适用于所有的用户。</p>
+<ul>
+<li>立即反馈性</li>
+</ul>
+<p>用户界面对用户的所有输入都应立即做出反馈。快速反应，响应合理。</p>
+<h3 id="设计过程"><a href="#设计过程" class="headerlink" title="设计过程"></a>设计过程</h3><p>用户界面设计过程包括四种不同的框架: </p>
+<pre><code>用户、任务和环境分析及建模
+界面设计
+界面构造
+界面确认</code></pre><p>用户界面设计是一个迭代的过程，一般步骤如下</p>
+<pre><code>(1)先设计和实现用户界面原型。
+(2)用户试用该原型，向设计者提出对界面的评价。
+(3)设计者根据用户的意见修改设计并实现下一级原型。
+(4)不断进行下去，直到用户满意为止。</code></pre><h3 id="设计原则"><a href="#设计原则" class="headerlink" title="设计原则"></a>设计原则</h3><pre><code>分析用户类型
+应用程序和界面分离
+一致性
+尽量减少用户工作
+提供反馈
+出错处理和帮助功能
+增加可视化图形表示</code></pre><h1 id="软件编码"><a href="#软件编码" class="headerlink" title="软件编码"></a>软件编码</h1><h2 id="语言选择"><a href="#语言选择" class="headerlink" title="语言选择"></a>语言选择</h2><h3 id="程序设计语言的特点"><a href="#程序设计语言的特点" class="headerlink" title="程序设计语言的特点"></a>程序设计语言的特点</h3><pre><code>一致性
+歧义性
+简洁性
+编译效率
+源程序的可移植性
+源程序的可维护性
+开发工具的可用性</code></pre><h3 id="程序设计语言的选择"><a href="#程序设计语言的选择" class="headerlink" title="程序设计语言的选择"></a>程序设计语言的选择</h3><pre><code>根据系统用户的要求
+根据软件的执行环境( DOS,编译，软件工具等)
+根据应用领域：科学计算、数据处理、商业、人工智能等
+根据算法和计算的复杂性
+根据数据结构的复杂性
+根据软件开发人员的知识水平</code></pre><h2 id="编码风格与规范"><a href="#编码风格与规范" class="headerlink" title="编码风格与规范"></a>编码风格与规范</h2><p>编码风格是指在不影响程序正确性和效率的前提下，有效编排和合理组织程序的基本原则。</p>
+<p>一个具有良好编码风格的程序主要表现为可读性好、易测试、易维护。</p>
+<p>由于测试和维护阶段的费用在软件开发总成本中所占比例很大，因此程序设计风格的好坏直接影响着整个软件开发中成本耗费的多少。特别是在需要团队合作开发大型软件的时候，程序设计风格显得尤为重要。</p>
+<p>（1）源程序文档化</p>
+<p>为提高源程序的可读性和可维护性，需要对源代码进行文档化，即在程序中加入说明性注释信息。</p>
+<p>（2）标识符的命名及说明</p>
+<p>标识符的命名应注意以下几个问题:</p>
+<pre><code>选用具有实际含义的标识符
+为了便于程序的输入，标识符的名字不宜过长，通常不要超过八个字符
+为了便于区分，不同的标识符不要取过于相似的名字</code></pre><p>标识符的说明应注意以下几个问题:</p>
+<pre><code>应按照某种顺序分别对各种类型的变量进行集中说明。
+在使用一个说明语句对同一类型的多个变量进行说明时，应按照变量名中的字母顺序(a~Z)对其进行排列。</code></pre><p>（3）语句的构造及书写</p>
+<p>语句是构成程序的基本单位，语句的构造方式和书写格式对程序的可读性具有非常重要的决定作用。</p>
+<p>构造语句时应该注意以下几个问题:</p>
+<pre><code>1.语句应简单直接，避免使用华面不实的程序设计技巧。
+2.对复杂的表达式应加上必要的括号使表达更加清晰
+3.在条件表达式中应尽量不使用否定的逻辑表示。
+4.在程序中应尽量不使用强制转移语句GOTO。
+5.不要书写太复杂的条件，嵌套的重数也不宜过多
+6.为了缩短程序的代码，在程序中应尽可能地使用编译系统提供的标准函数。对于程序中需要重复出现的代码段，应将其定义成独立模块(函数或过程)实现。</code></pre><p>（4）输入和输出</p>
+<p>由于输入和输出是用户与程序之间进行交互的渠道，因此输入、输出的方式往往是用户衡量程序好坏的重要指标。为了使程序的输入、输出能便于用户的使用，在编写程序时应对输入和输出的设计格外注意。</p>
+<p>在运行程序时，原始数据的输入工作通常要由用户自已完成。为了用户能方便数据的输入，应注意以下几点:</p>
+<pre><code>1.输入方式应力求简单，尽可能减少用户的输入量
+2.交互式输入数据时应有必要的提示信息
+3.程序应对输入数据的合法性进行检查
+4.若用户输入某些数据后可能会产生严重后果，应给用户输出必要的提示并在必要的时候要求用户确认
+5.当需要输入一批数据时，不要以记数方式控制数据的输入个数，而应以特殊标记作为数据输入结束的标志
+6.应根据系统的特点和用户的习惯设计出令用户满意的输入方式</code></pre><p>用户需要通过程序的输出来获取处理结果。为了使用户能够清楚地看到需要的结果，设计数据输出方式时应注意以下几点:</p>
+<pre><code>1.输出数据的格式应清晰、美观。如对大量数据采用表格的形式输出，可以使用户一目了然。
+2.输出数据时要加上必要的提示信息。例如，表格的输出一定要带有表头，用以说明表格中各项数据的含义。</code></pre><h1 id="软件测试"><a href="#软件测试" class="headerlink" title="软件测试"></a>软件测试</h1><h2 id="软件测试原则与阶段划分"><a href="#软件测试原则与阶段划分" class="headerlink" title="软件测试原则与阶段划分"></a>软件测试原则与阶段划分</h2><h3 id="测试原则"><a href="#测试原则" class="headerlink" title="测试原则"></a>测试原则</h3><pre><code>1.测试用例应由输入数据和相应的预期输出结果两部分组成
+2.不是由程序的作者,而是由其他人来测试，可能会获得更好的结果
+3.全面检查每一个测试的结果
+4.不仅要为正确输入数据设计测试用例，还要为可能的不合理输入数据设计测试用例
+5.注意错误的集中现象,对发现错误多的程序模块要花更大的精力仔细测试
+6.回归测试是必须的，避免在修正错误时产生副作用
+7.保存所有的测试用例</code></pre><h3 id="阶段划分"><a href="#阶段划分" class="headerlink" title="阶段划分"></a>阶段划分</h3><p>软件测试的阶段主要分为五个阶段，每一个测试阶段都应包含:制定测试计划、设计测试用例、测试实施和测试结果的收集评估等。其中，测试计划应包括具体的测试步骤、工作量、进度安排和资源等。</p>
+<h4 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h4><ul>
+<li>单元测试的测试对象</li>
+</ul>
+<p>是经过软件设计并编码的一个个程序模块</p>
+<ul>
+<li>单元测试的主要依据</li>
+</ul>
+<p>是程序代码和详细设计文档</p>
+<ul>
+<li>单元测试的任务</li>
+</ul>
+<p>单元测试的任务主要包括模块接口测试、模块局部数据结构的测试、模块中所有独立路径的测试，模块中各条错误处理路径的测试和模块边界条件的测试</p>
+<ul>
+<li>一般情况下，在进行单元测试时都需要编写测试程序主要指驱动模块和桩模块</li>
+</ul>
+<p>驱动模块：作用是用来模拟被测模块的上级调用模块，相当于被测模块的主程序，用它接收测试用例的测试数据，把这些测试数据传送给被测模块，接收被测模块的测试结果并输出。</p>
+<p>桩模块：(也称为存根模块) 用来代替被测模块所调用的子模块。桩模块的作用是为被测模块提供所需要的信息，因此，桩模块越简单越好，它只需要提供所需的数据信息，并不需要模拟子模块的所有功能。</p>
+<p>PS：驱动模块和桩模块在提交产品时不需要提供</p>
+<h4 id="集成测试"><a href="#集成测试" class="headerlink" title="集成测试"></a>集成测试</h4><p>集成测试是在单元测试的基础上，按照系统设计要求把通过单元测试的单元模块逐步组装与测试，最后组装成一个完整的软件系统的测试过程。</p>
+<ul>
+<li>集成测试的主要依据</li>
+</ul>
+<p>是单元测试的单元及概要设计文档，旨在发现与接口有关的错误。</p>
+<ul>
+<li>集成测试的主要内容</li>
+</ul>
+<pre><code>数据通过接口时是否会丢失
+一个模块的功能对另一个模块是否产生了不利影响
+几个子功能组合起来是否实现主功能
+全局数据结构是否出现错误
+误差的不断积累是否达到不能接受的程度等</code></pre><ul>
+<li>集成测试有两种集成方式，即非渐增式集成方式和渐增式集成方式</li>
+</ul>
+<p>非渐增式集成方式：将经过单元测试的所有模块一次性全部组装起来，然后进行整体测试，最后得到所要求的<br>软件系统。</p>
+<p>渐增式集成方式：将经过单元测试的模块逐步组装成较大的系统，一边组装一边进行测试，以便发现模块间与接口有关的问题。渐增式集成可以分为自顶项向下集成和自底向上集成两种方法。</p>
+<h4 id="确认测试"><a href="#确认测试" class="headerlink" title="确认测试"></a>确认测试</h4><p>确认测试又称有效性测试，任务是验证软件的功能和性能及其他特性是否与用户的要求一致。对软件的功能和性能要求在软件需求规格说明书中已经明确规定，它包含的信息就是软件确认测试的基础。</p>
+<ul>
+<li>α测试</li>
+</ul>
+<p>是指软件开发公司组织内部人员模拟各类用户对即将面市软件产品(称为α版本)进行测试，试图发现错误并修正。经过α测试调整的软件产品称为β版本。</p>
+<ul>
+<li>β测试</li>
+</ul>
+<p>是指软件开发公司组织各方面的典型用户在日常工作中实际使用版本，并要求用户报告异常情况提出批评意见，然后软件开发公司再对版本进行改错和完善。</p>
+<h4 id="系统测试"><a href="#系统测试" class="headerlink" title="系统测试"></a>系统测试</h4><p>系统测试是将通过确认测试的软件，作为整个基于计算机系统的一个元素，与计算机硬件、外设某些支持软件、数据和人员等其他系统元素结合在一起，在实际运行(使用)环境下，对计算机系统进行一系列的组装测<br>试和确认测试。</p>
+<p>系统测试主要分为以下四个方面：</p>
+<ul>
+<li>恢复测试</li>
+</ul>
+<p>恢复测试主要检查系统的容错能力，当系统出错时，能否在指定的时间间隔内修正错误并重新启动系统。</p>
+<ul>
+<li>安全性测试</li>
+</ul>
+<p>系统的安全性测试是要检验在系统中已存在的系统安全性措施、保密性措施是否发挥作用，有无漏洞。</p>
+<ul>
+<li>强度测试</li>
+</ul>
+<p>强度测试是要检查在系统运行环境不正常到发生故障的时间内，系统可以运行到何种程度的测试。强度测试是在要求一个非正常数量、频率或容量资源方式下运行一个系统。</p>
+<ul>
+<li>性能测试</li>
+</ul>
+<p>性能测试就是测试软件在被组装进系统的环境下运行时的性能。性能测试应覆盖测试过程的每一步。</p>
+<h4 id="验收测试"><a href="#验收测试" class="headerlink" title="验收测试"></a>验收测试</h4><p>验收测试是软件开发结束后，软件产品投入实际应用以前进行的最后一次质量检验活动，是以用户为主，软件开发人员和质量保证人员也应参加的测试。</p>
+<ul>
+<li>用户验收测试</li>
+</ul>
+<p>可以分为两个大的部分：软件配置审核和可执行程序测试</p>
+<p>其大致顺序可分为：文档审核、源代码审核、配置脚本审核、测试程序或脚本审核、可执行程序测试。</p>
+<h2 id="测试用例设计"><a href="#测试用例设计" class="headerlink" title="测试用例设计"></a>测试用例设计</h2><h3 id="测试用例的定义"><a href="#测试用例的定义" class="headerlink" title="测试用例的定义"></a>测试用例的定义</h3><p>（1）测试用例是软件测试的核心是为特定目标开发的测试输入、执行条件和预期结果的集合。它把软件测试的行为活动做了一个科学化的组织归纳，是软件测试的最小单位。也是软件测试质量稳定的根本保障。</p>
+<p>（2）设计软件测试用例的目的，就是为了能将软件测试的行为转换为可管理的模式，使测试有组织性、步骤性和计划性的进行。</p>
+<p>测试用例是测试工作的指导，是软件测试的必须遵守的准则。由于穷尽测试是不可能的，因此必须要精心挑选出具有代表性或特殊性的测试数据来进行测试以提高测试效率。</p>
+<p>（3）如何以最少的人力。资源投入，在最短的时间内完成测试，发现软件系统的缺陷，保证软件的优良品质，则是软件公司探索和追求的目标。</p>
+<h3 id="测试用例的好处"><a href="#测试用例的好处" class="headerlink" title="测试用例的好处"></a>测试用例的好处</h3><p>（1）在开始实施测试之前设计好测试用例，可以避免盲目测试并提高测试效率</p>
+<p>（2）测试用例的使用令软件测试的实施重点突出、目的明确。</p>
+<p>（3）测试用例的复用技术会使软件测试更容易开展，在软件版本更新后只需修正少部分的测试用例便可展开测试工作，可以有效地降低工作强度，缩短项目周期。并随着测试用例的不断精化其效率也可以不断提高。</p>
+<h3 id="测试用例的基本原则"><a href="#测试用例的基本原则" class="headerlink" title="测试用例的基本原则"></a>测试用例的基本原则</h3><p>（1）测试用例应具有代表性</p>
+<p>能够代表并覆盖各种合理的和不合理、合法的和非法的、边界的和越界的、以及极限的输入数据、操作和环境设置等</p>
+<p>（2）测试结果应具有可判定性</p>
+<p>即测试执行结果的正确性是可判定的，每一个测试用例都应有相应的期望结果</p>
+<p>（3）测试结果应具有可再现性</p>
+<p>即对同样的测试用例，系统的执行结果应当是相同的。</p>
+<h3 id="测试用例的组织和跟踪"><a href="#测试用例的组织和跟踪" class="headerlink" title="测试用例的组织和跟踪"></a>测试用例的组织和跟踪</h3><p>在执行测试过程中，测试用例的组织和跟踪主要做好以下工作</p>
+<p>1、计划执行哪些测试用例？</p>
+<p>2、执行需要多少时间？</p>
+<p>3、一轮测试需要多少测试人员？</p>
+<p>4、能否记录哪些测试用例通过?哪些失败？</p>
+<p>5、当前测试是否按计划进行？</p>
+<p>6、上次执行测试用例时通过的百分比是多少？</p>
+<h3 id="测试用例设计应注意的问题"><a href="#测试用例设计应注意的问题" class="headerlink" title="测试用例设计应注意的问题"></a>测试用例设计应注意的问题</h3><p>（1）如何整理测试需求</p>
+<p>现阶段要“测什么“<br>一是对软件需求正确性的检查;<br>二是要保证软件需求的可测试性;</p>
+<p>（2）测试用例是否应该包含所有的细节</p>
+<p>这个回答是肯定的，因为测试需求的整理始于需求分析阶段，在软件的开发过程中，一旦需<br>求、设计或者应用程序中的某些细节发生了变化，那么同这部分内容相关的所有的测试用例<br>都需要修改。</p>
+<p>（3）测试用例是不是把所有的流程写出来就可以了?</p>
+<p>答案是否定的，因为测试用例并不是用来描述具体的实现的，而是着重描述处理问题的思路。在测试用例中应该用容易理解的自然语言清晰的来描述将要如何进行测试，而不是简单的把<br>在应用程序上如何操作的烦琐的步骤记录下来。把测试用例设计当成填写具体操作步骤的表格<br>是对测试用例最大的误解。</p>
+<p>（4）注意测试用例的补充</p>
+<p>有些缺陷的出现是出乎意料的，或者说是已有的测试需求和测试用例未能覆盖的。这部分缺<br>陷，也应当添加到测试需求中，并设计相应的测试用例，以便于下次版本迭代时进行参考。</p>
+<h3 id="如何评价测试用例的好坏"><a href="#如何评价测试用例的好坏" class="headerlink" title="如何评价测试用例的好坏"></a>如何评价测试用例的好坏</h3><p>（1）发现</p>
+<p>是否可以发现尚未发现的软件缺陷?</p>
+<p>（2）覆盖</p>
+<p>是否可以覆盖全部的测试需求?</p>
+<p>（3）易用性</p>
+<p>即是否可以花费很少的时间就可以理解测试用例中表达的测试思路，并可以很快的执行完这<br>个测试用例。</p>
+<p>（4）易维护性</p>
+<p>当开发过程中的某些因素影响了测试需求，测试用例的作者或其他测试设计人员，是否可以<br>花费很少的时间就完成定位并完成所有相关测试用例的工作</p>
+<h2 id="白盒测试"><a href="#白盒测试" class="headerlink" title="白盒测试"></a>白盒测试</h2><h3 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h3><p>白盒测试指的是基于软件的源代码，在已经知晓软件产品的内部工作过程的情况下，对程序的内部结构展开测试，重点关注程序的实现细节。</p>
+<p>白盒测试的针对性很强，测试效率很高，可以帮助用户了解测试的覆盖程度。</p>
+<p>它一般以单元或模块为基础，对程序代码进行分析或者利用部分工具协助发现变量未初始化、指针错误等问题。</p>
+<h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h3><p>（1）优点</p>
+<p><img src="/2020/03/23/Software-Engineering-Learning-Handbook/image-20200330171601985.png" alt="image-20200330171601985"></p>
+<p>（2）缺点</p>
+<p><img src="/2020/03/23/Software-Engineering-Learning-Handbook/image-20200330171631736.png" alt="image-20200330171631736"></p>
+<h3 id="依据"><a href="#依据" class="headerlink" title="依据"></a>依据</h3><p><img src="/2020/03/23/Software-Engineering-Learning-Handbook/image-20200330171807932.png" alt="image-20200330171807932"></p>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p>（1）路径测试</p>
+<p>也叫基路径覆盖测试，即选取足够多的测试数据，从程序的入口开始，使每条可能路径都至少执行一次。达到覆盖程序中所有可能的路径的目标。</p>
+<p>优点：基路径覆盖的覆盖率高。是经常使用的测试覆盖方法。</p>
+<p>缺点：基路径覆盖不一定能保证条件组合覆盖。</p>
+<p>（2）对循环的测试</p>
+<p>对循环的测试主要是关注循环造成的程序结构复杂度提高的问题，它遵循的基本测试原则是：在<br>循环的边界和运行界限执行循环体。因此，循环总是与边界值测试密切相关比如最大次数循环、<br>比最大次数多一次、少一次的循环。</p>
+<p>（4）数据流测试</p>
+<p>数据流测试的主要工作是以被测变量为中心，关注该变量的使用路径(指关于该变量的每条定义)，若该路径不存在定又或引用异常缺陷的风险。则该路径不需要测试，否则该路径需要重点测试。</p>
+<h3 id="静态与动态测试技术"><a href="#静态与动态测试技术" class="headerlink" title="静态与动态测试技术"></a>静态与动态测试技术</h3><ul>
+<li>静态白盒测试技术</li>
+</ul>
+<p>静态白盒测试技术是指不运行被测软件，只是通过研究软件的源代码和程序结构来检查程序代码、界面和文档中存在的错误。</p>
+<ul>
+<li>动态白盒测试技术</li>
+</ul>
+<p>动态白盒测试技术也称为结构化测试技术，是指通过分析其源代码和程序结构，并运行被测软件，输入相应的测试数据，检查输入结果是否符合预测结果。</p>
+<h2 id="白盒测试技术之逻辑覆盖法"><a href="#白盒测试技术之逻辑覆盖法" class="headerlink" title="白盒测试技术之逻辑覆盖法"></a>白盒测试技术之逻辑覆盖法</h2><p>逻辑覆盖测试是传统的白盒测试技术，是通过对程序内部的逻辑结构的遍历来实现以程序覆盖为基础的设计测试用例的技术。</p>
+<p>逻辑覆盖的关注点在于条件判定表达式本身的复杂度，对程序代码中所有的逻辑值均需要测试真值和假值的情况，它通过对程序逻辑结构的遍历表实现程序的覆盖。</p>
+<p><img src="/2020/03/23/Software-Engineering-Learning-Handbook/image-20200330173817738.png" alt="image-20200330173817738"></p>
+<p>语句覆盖一一选取足够多的测试数据，使被测程序中每个语句至少执行一次。</p>
+<p>判定覆盖一一不仅每个语句必须至少执行一次，而且每个判定的每种可能的结果都应该至少执行一次，也就是每个判定的每个分支都至少执行一次。</p>
+<p>条件覆盖一一不仅每个语句至少执行一次，而且使判定表达式中的每个条件都取到各种可能的结果。</p>
+<p>判定/条件覆盖一一选取足够多的测试数据，使得判定表达式中的每个条件都取到各种可能的值，而且每个判定表达式也都取到各种可能的结果。</p>
+<p>条件组合覆盖一一选取足够多的测试数据，使得判定表达式中条件的各种可能组合都至少出现一次。</p>
+<h2 id="黑盒测试"><a href="#黑盒测试" class="headerlink" title="黑盒测试"></a>黑盒测试</h2><h3 id="概念-2"><a href="#概念-2" class="headerlink" title="概念"></a>概念</h3><p>黑盒测试也称功能测试，它是通过测试来检测每个功能是否都能正常使用。在测试中，把程序看作一个不能打开的黑盒子，在完全不考虑程序内部结构和内部特性的情况下，在程序接口进行测试，它只检查程序功能是否按照需求规格说明书的规定正常使用，程序是否能适当地接收输入数据而产生正确的输出信息。</p>
+<p>黑盒测试着眼于程序外部结构，不考虑内都逻辑结构，主要针对软件界面和软件功能进行测试。</p>
+<h3 id="优缺点-1"><a href="#优缺点-1" class="headerlink" title="优缺点"></a>优缺点</h3><p>（1）优点</p>
+<ul>
+<li><p>有针对性地寻找问题，并且定位问题更准确。</p>
+</li>
+<li><p>黑盒测试可以证明产品是否达到用户要求的功能，符合用户的工作要求。</p>
+</li>
+<li><p>能重复执行相同的动作，测试工作中最枯燥的部分可交由机器完成。</p>
+</li>
+</ul>
+<p>（2）缺点</p>
+<ul>
+<li><p>需要充分了解产品用到的技术，测试人员需要具有较多经验。</p>
+</li>
+<li><p>在测试过程中很多是手工测试操作。</p>
+</li>
+<li><p>测试人员要负责大量文档、报表的编制和整理工作。</p>
+</li>
+</ul>
+<h3 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h3><p>（1）等价类划分法</p>
+<p>等价类划分法是一种黑盒测试技术，根据软件的需求说明来对输入的范围进行细分，然后再从分出的每一个区域内选取一个有代表性的测试数据。这个代表性的测试数据的作用就等价于其区域内的其他取值。等价类又可分为有效等价类和无效等价类。</p>
+<ul>
+<li>有效等价类</li>
+</ul>
+<p>是指符合《需求规格说明书》，合理地输入数据集合。</p>
+<ul>
+<li>无效等价类</li>
+</ul>
+<p>是指不符合《需求规格说明书》， 无意义地输入数据集合。</p>
+<ul>
+<li>划分等价类的原则</li>
+</ul>
+<pre><code>1、在输入条件规定了取值范围或值的个数的情况下，可确立一个有效等价类和两个无效等价类。
+
+2、在输入条件规定了输入值的集合或规定了“必须如何” 的条件的情况下，可确立一个有效等价类和一个无效等价类。
+
+3、在输入条件是一个布尔变量的情况下，可确定一个有效等价类和一个无效等价类。
+
+4、在规定了输入数据的一组值假定n个、，并且程序要对每一个输入值分别处理的情况下，可确立n个有效等价类和一个无效等价类。
+
+5、在规定了输入数据必须遵守的规则的情况下，可确立一个有效等价类符合规则、和若千个无效等
+价类从不同角度违反规则、
+
+6、在确定已划分的等价类中各元素在程序处理中的方式不同的情况下，应再将该等价类进一步地 划分为更小的等价类。</code></pre><ul>
+<li>等价类划分测试用例设计步骤</li>
+</ul>
+<p>划分输入条件、有效等价类和无效等价类时最重要的是在保证整个集合完备的情况下，将集合划分为互不相交的一组子集。</p>
+<pre><code>1、为每一个等价类规定一个唯一的编号
+
+2、设计一个新的测试用例，使其尽可能多地覆盖尚未被覆盖地有效等价类，重复这一步，直到所有的有效等价类都被覆盖为止。
+
+3、设计一个新的测试用例，使其仅覆盖一个尚未被覆盖的无效等价类，重复这一步，直到所有的无效等价类都被覆盖为止。</code></pre><p>（2）边界值分析法</p>
+<p>用于列出单元功能、输入、状态及控制的合法边界值和非法边界值，对数据进行测试，检查用户输入的信息、返回结果以及中间计算结果是否正确，补充等价划分的测试用例设计技术。</p>
+<p>边界值分析法比较简单仅用于考察正处于等价划分边界或在边界附近的状态，选择输入和输出等价类的边界，选取正好等于、刚刚大于或刚刚小于边界的值作为测试数据，而不是选取等价类中的典型值或任意值作为测试数据。</p>
+<p>边界值分析法是对等价类划分方法的补充不仅重视输入条件边界，而且也从输出域中导出测<br>试用例。是以边界情况的处理作为主要目标专门设计测试用例的方法。</p>
+<ul>
+<li>边界值的设计原则</li>
+</ul>
+<pre><code>1、如果输入条件规定了值的范围（或是规定了值的个数），则应取刚达到这个范围的边界的值，以及刚刚超越这个范围边界的值作为测试输入数据。
+
+2、如果输入条件规定了值的个数，则用最大个数、最小个数、比最小个数少一、比最大个数多一的数作为测试数据。
+
+3、如果程序的规定说明给出的输入域或输出域是有序集合，则应选取集合的第一个元素和最后一个元素作为测试用例。
+
+4、如果程序中使用了一个内部数据结构，则应当选择这个内部数据结构的边界上的值作为测试用例。
+
+5、分析规格说明，找出其他可能的边界条件。</code></pre><ul>
+<li>常见边界值</li>
+</ul>
+<p><img src="/2020/03/23/Software-Engineering-Learning-Handbook/image-20200330185615349.png" alt="image-20200330185615349"></p>
+<p>（3）错误推测方法的基本思想</p>
+<p>利用直觉和经验猜测出出错的可能类型，并列举出可能犯的错误或错误易发情况的清单，然后依据清单来编写测试用例。井且在阅读规格说明时联系程序员可能做的假设来确定测试用例。这种方法在很大程度上是凭对过去所做测试工作结果的分析以及对所揭示的缺陷的规律性做直觉的推测来发现缺陷。</p>
+<h2 id="黑盒测试之因果图与决策表"><a href="#黑盒测试之因果图与决策表" class="headerlink" title="黑盒测试之因果图与决策表"></a>黑盒测试之因果图与决策表</h2><h3 id="因果图"><a href="#因果图" class="headerlink" title="因果图"></a>因果图</h3><p>因果图法是一种适合于描述对于多种条件的组合、相应产生多个动作的形式的方法，利用图解法分析输入的各种组合情况，从而设计测试用例的方法，它适合于检查程序输入条件的各种组合情况，着重考虑输入条件的各种组合、输入条件之间的相互制约关系。</p>
+<p>采用因果图法能帮助我们按照一定的步骤选择一组高效的测试用例，同时，还能指出程序规范描述中存在的问题。</p>
+<p>因果图法最终生成的是判定表，适合于检查程序输入条件的各种组合情况。</p>
+<ul>
+<li>利用因果图导出测试用例的基本步骤</li>
+</ul>
+<p><img src="/2020/03/23/Software-Engineering-Learning-Handbook/image-20200331084420581.png" alt="image-20200331084420581"></p>
+<h3 id="决策表"><a href="#决策表" class="headerlink" title="决策表"></a>决策表</h3><p>决策表又称判定表，是分析和表达多逻辑条件下执行不同操作情况的工具，能够将复杂的问题按照各种可能的情况全部列举出来，简明并避免遗漏。</p>
+<p>决策表很适合于处理某些操作的实施依赖于多个逻辑条件的组合的情况，即针对不同逻辑条件的组合值，分别执行不同的操作。</p>
+<ul>
+<li>决策表通常由四部分组成</li>
+</ul>
+<p><img src="/2020/03/23/Software-Engineering-Learning-Handbook/image-20200331085517577.png" alt="image-20200331085517577"></p>
+<pre><code>条件桩:列出了问题得所有条件。通常认为列出的条件的次序无关紧要。
+
+动作桩:列出了问题规定可能采取的操作。这些操作的排列顺序没有约束。
+
+条件项:列出针对它左列条件的取值。在所有可能情况下的真假值。
+
+动作项:列出在条件项的各种取值情况下应该采取的动作。
+
+规则:任何一个条件组合的特定取值及其相应要执行的操作称为规则。</code></pre><ul>
+<li>决策表的建立步骤</li>
+</ul>
+<pre><code>1、列出所有的条件桩和动作桩
+
+2、确定规则的个数
+
+3、填入条件项
+
+4、填入动作项
+
+5、合并相似规则</code></pre><p>总的来说，黑盒测试是一种忽略软件内部工作过程和结构的功能测试。进行黑盒测试时，测试人员只需知道合法输入和预期输出，而无需知道程序实际如何得到期望输出的。这种测试方式表明测试数据选择和测试结构解释都属于软件的功能属性。黑盒测试的基本思想是需要跟踪那些测试已经被执行以及这些测试的输出，避免重复测试。</p>
+<p>黑盒测试有助于识别功能规格说明中有歧义和矛盾的内容。黑盒测试方法并非在任何情况下都需要使用，也不需要全部用上。当我们拿到一个系统准备开始测试时，应该从分析业务分析系统本身的功能和特性入手，灵活运用各种方法。</p>
+<h2 id="面向对象软件测试"><a href="#面向对象软件测试" class="headerlink" title="面向对象软件测试"></a>面向对象软件测试</h2><p>（1）面向对象的开发模型</p>
+<p>面向对象的开发模型突破了传统的瀑布模型</p>
+<p><img src="/2020/03/23/Software-Engineering-Learning-Handbook/image-20200331090404978.png" alt="image-20200331090404978"></p>
+<p>（2）面向对象的软件测试</p>
+<p><img src="/2020/03/23/Software-Engineering-Learning-Handbook/image-20200331090458690.png" alt="image-20200331090458690"></p>
+<p>前两者主要对分析和设计得到的文档进行测试，而OOPT则主要对编程风格和代码进行测试，<br>又可分为面向对象的单元测试(OOUT)、面向对象的集成测试(OOIT) 、面向对象的系统测试( OOST)。</p>
+<ul>
+<li>OOAT</li>
+</ul>
+<pre><code>对认定的对象的测试
+
+对认定的结构的测试
+
+对认定的主题的测试
+
+对定义的属性和实例关联的测试
+
+对定义的服务和消息关联的测试</code></pre><ul>
+<li>OODT</li>
+</ul>
+<pre><code>对认定的类的测试
+
+对构造的类层次结构的测试
+
+对类库的支持的测试</code></pre><ul>
+<li>OOPT</li>
+</ul>
+<p>在面向对象编程(OOP)阶段，忽略类功能实现的细则，将测试的目光集中在类功能的实现和相应的面向对象程序设计风格，主要体现为以下两个方面:</p>
+<pre><code>数据成员是否满足数据封装的要求。
+
+类是否实现了要求的功能。</code></pre><h2 id="软件自动化测试"><a href="#软件自动化测试" class="headerlink" title="软件自动化测试"></a>软件自动化测试</h2><p>（1）自动化测试的产生</p>
+<ul>
+<li><p>同样的测试需要重复执行多次</p>
+</li>
+<li><p>手工执行测试用例效率极低</p>
+</li>
+<li><p>人工执行测试容易犯错误</p>
+</li>
+<li><p>人工执行测试很难模拟大量数据或大量并发用户等应用场合</p>
+</li>
+</ul>
+<p>（2）自动化测试的定义</p>
+<p>自动化测试就是使用软件工具来代替手工进行的一系列动作。它具有良好的可操作性、可重复性和高效率等特点。</p>
+<p>自动化测试的目的是减轻手工测试的工作量，以达到节约资源(包括人力、物力等)，保证软件质量，缩短测试周期的效果。</p>
+<p>通常是使用脚本或者其他代码驱动应用程序，也可以通过直接命令完成自动化测试。</p>
+<p>自动化测试属于回归测试的范畴。</p>
+<p>（3）自动化测试的优点</p>
+<pre><code>1、对程序的回归测试更方便。
+2、可以运行更多更繁琐的测试，提高测试效率。
+3、可以执行手工测试困难或不可能进行的测试。
+4、更好地利用资源。
+5、测试具有一致性和可重复性。
+6、测试的复用性。
+7、可以让产品更快面向市场。
+8、降低风险,增加软件信任度。</code></pre><p>（4）自动化测试的局限性</p>
+<p><img src="/2020/03/23/Software-Engineering-Learning-Handbook/image-20200331092255259.png" alt="image-20200331092255259"></p>
+<p>（5）自动化测试的工具介绍</p>
+<p><img src="/2020/03/23/Software-Engineering-Learning-Handbook/image-20200331092512173.png" alt="image-20200331092512173"></p>
+<h1 id="软件维护"><a href="#软件维护" class="headerlink" title="软件维护"></a>软件维护</h1><p>软件维护主要是指根据需求变化或硬件环境的变化对应用程序进行部分或全部的修改，修改时应充分利用源程序。修改后要填写程序改登记表\需求变更登记表，并在需求\程序变更通知书上写明新旧程序的不同之处。</p>
+<h2 id="软件维护分类与可维护性"><a href="#软件维护分类与可维护性" class="headerlink" title="软件维护分类与可维护性"></a>软件维护分类与可维护性</h2><p>（1）软件维护的分类</p>
+<p>正确性维护、适应性维护、完善性维护、预防性维护</p>
+<ul>
+<li>正确性维护</li>
+</ul>
+<p>是指改正在系统开发阶段已发生而系统测试阶段尚未发现的错误。这方面的维护工作量要占整个维护工作量的17% - 21%。</p>
+<p>所发现的错误有的不太重要，不影响系统的正常运行，其维护工作可随时进行；而有的错误非常重要，甚至影响整个系统的正常运行，这类维护工作必须制定计划，进行修改,并且要进行复查和控制。</p>
+<ul>
+<li>适应性维护</li>
+</ul>
+<p>是指使用软件适应信息技术变化和管理需求变化而进行的修改。这方面的维护工作量占整个维护工作量的18% ~ 25%。</p>
+<p>导致适应性维护工作的产生的主要因素:</p>
+<pre><code>为改善系统硬件环境和运行环境而产生系统更新换代的需求;
+
+企业的外部市场环境和管理需求的不断变化也催生新的信息需求。</code></pre><p>进行适应性维护工作也要像系统开发一样, 有计划、有步骤地进行。</p>
+<ul>
+<li>完善性维护</li>
+</ul>
+<p>是指为扩充功能和改善性能而进行的修改,主要是指对已有的软件系统增加一些在系统分析和设计阶段中没有规定的功能与性能特征，而这些功能对完善系统功能是非常必要的。另外，还包括对处理效率和编写程序的改进，这方面的维护占整个维护工作的50% ~ 60%，比重较大。</p>
+<ul>
+<li>预防性维护</li>
+</ul>
+<p>为了改进应用软件的可靠性和可维护性，为了适应未来的软硬件环境的变化，应主动增加预防性的新的功能，以使应用系统适应各类变化而不被淘汰。这方面的维护工作量占整个维护工作量的4%左右。</p>
+<p>（2）可维护性</p>
+<p>软件可维护性的定义：软件能够被理解、校正、适应及增强功能的容易程度。</p>
+<p>软件的可维护性是软件开发阶段的关键目标。影响软件可维护性的因素较多，设计、编码及测试中的疏忽和低劣的软件配置，缺少文档等都对软件的可维护性产生不良影响</p>
+<p>软件可维护性可用下面七个质量特性来衡量，即可理解性、可测试性、可修改性、可靠性、可移植性、可使用性和效率。对于不同类型的维护，这七种特性的侧重点也是不相同。</p>
+<ul>
+<li>提高可维护性的方法</li>
+</ul>
+<pre><code>建立明确的软件质量目标.
+
+使用先进的软件开发技术和工具
+
+建立明确的质量保证
+
+选择可维护的编程语言
+
+改进程序的文档</code></pre><h2 id="维护实施"><a href="#维护实施" class="headerlink" title="维护实施"></a>维护实施</h2><p>（1）主要任务</p>
+<pre><code>维护组织机构
+
+维护报告</code></pre><ul>
+<li>维护组织机构</li>
+</ul>
+<p>对于大型软件系统，建立一个专门的维护组织机构是必需的。因为收集、保存、整理维护活动的文档资料的工作是必须随时要做的。</p>
+<p>在维护活动开始之前必须明确维护活动的审批制度。每个维护要求都要通过维护管理员转交给系统管理员去评价。系统管理员对维护申请做出评价后，由主管部门(人)决定是否进行软件修改。接到审批的维护申请报告后，将维护任务下达给指定的维护人员，并监控维护活动有条不紊地开展。合理的组织机构和精干的维护人员是保障维护活动利实施的基础。</p>
+<ul>
+<li>维护报告</li>
+</ul>
+<p>任何维护申请都应该按规范化的方式提出。通常要求用户填写维护申请表。表中必须完整地描述每个错误发生的环境，包括：输入数据、输出结果等有关信息。对于适应性或完善性的维护要求，还应该提出一份修改说明书，提出用户希望的修改。</p>
+<p>维护组织根据用户填写的维护申请表，组织有关人员认真分析,并根据分析结果制定软件修改报告，内容应包括:</p>
+<pre><code>维护要求的性质
+维护活动的优先顺序
+计算满足维护申请表中提出的软件变更所需要的工作量
+预计软件变更后的状况</code></pre><p>（2）维护阶段</p>
+<p><img src="/2020/03/23/Software-Engineering-Learning-Handbook/image-20200331100348384.png" alt="image-20200331100348384"></p>
+<ul>
+<li>文档重构</li>
+</ul>
+<p>建立文档是非常耗费时间的。系统正常运作，我们将保持现状。</p>
+<p>文档必须更新，但不需要对某应用全部重构文档，而是对系统中当前正在进行改变的那些部分建立完整文档。</p>
+<p>系统是业务关键的，而且必须完全地重构文档。</p>
+<ul>
+<li>逆向工程</li>
+</ul>
+<p>成功的逆向工程通过检查产品的实际样本导出一个或多个关于产品的设计和制造规约。</p>
+<p>软件的逆向工程是分析程序以在比源代码更高的抽象层次上创建程序的某种表示的过程。逆向工程是一个设计恢复过程，逆向工程工具从现存的程序中抽取数据、体系结构和过程的设计信息。</p>
+<ul>
+<li>代码重构</li>
+</ul>
+<p>为了完成该活动，用重构工具去分析源代码。标注出和结构化程序设计概念相关的部分，然后重构代码(此工作可以自动进行)。复审和测试生成的重构代码以保证没有引入异常和不规则。更新内部的代码文档。</p>
+<ul>
+<li>数据重构</li>
+</ul>
+<p>和代码重构不同，数据重构发生在相当低的抽象层次上，它是一种全范围的再工程活动。</p>
+<p>在大多数情况下，数据重构以逆向工程活动为开始，当前的数据体系结构被分解。必要时，定义数据模型，标识数据对象和属性并从质量的角度复审现存的数据结构。</p>
+<p>因为数据体系结构对程序体系结构及其中的算法有很强的影响，对数据的改变将总是会导致体系结构或代码层的改变。</p>
+<ul>
+<li>正向工程</li>
+</ul>
+<p>正向工程也称为革新或改造，不仅从现存软件恢复设计信息，而且使用该信息去改变或重构现存系统，以改善其整体质量,并且加入新功能或改善整体性能。</p>
+<h1 id="软件工程管理"><a href="#软件工程管理" class="headerlink" title="软件工程管理"></a>软件工程管理</h1><h2 id="能力成熟度模型"><a href="#能力成熟度模型" class="headerlink" title="能力成熟度模型"></a>能力成熟度模型</h2><p>（1）基本思想</p>
+<p>能力成熟度模型的基本思想认为：问题是由我们管理软件过程的方法不当引起的，所以新软件技术的运用并不会自动提高生产率和软件质量。</p>
+<p>能力成熟度模型有助于软件开发组织建立一个有规律的、成熟的软件过程。</p>
+<p>软件过程包括各种活动、技术和工具，因此，它实际上既包括了软件生产的技术方面又包括了管理方面。</p>
+<p>CMM策略力图改进软件过程的管理，而在技术方面的改进是其必然的结果。</p>
+<p>CMM是以增量方式逐步引入变化的。CMM明确地定义了5个不同的成熟度等级，一级最低，五级最高。一个软件开发组织可用一系列小的改良性步骤向更高的成熟度等级迈进。</p>
+<p>（2）能力成熟度模型的结构</p>
+<p><img src="/2020/03/23/Software-Engineering-Learning-Handbook/image-20200331102247705.png" alt="image-20200331102247705"></p>
+<p>CMM的结构</p>
+<p><img src="/2020/03/23/Software-Engineering-Learning-Handbook/image-20200331102437655.png" alt="image-20200331102437655"></p>
+<p>（3）能力成熟度等级</p>
+<p>CMM通过定义能力成熟度的五个等级，引导软件开发组织不断识别出其软件过程的缺陷，并指出应该做哪些改进。</p>
+<p>能力成熟度的五个等级从低到高是:初始级、可重复级、已定义级、已管理级和优化级。</p>
+<p><img src="/2020/03/23/Software-Engineering-Learning-Handbook/image-20200331101956860.png" alt="image-20200331101956860"></p>
+<h2 id="软件成本估算"><a href="#软件成本估算" class="headerlink" title="软件成本估算"></a>软件成本估算</h2><p>（1）软件工作量估算</p>
+<p>软件估算模型使用由经验导出的公式来预测软件开发的工作量，工作量是关于软件规模(LOC或FP)的函数，工作量的单位通常是人月(pm)。</p>
+<p>没有一个估算模型能够适用于所有类型的软件和开发环境。</p>
+<ul>
+<li>常见软件工作量估算模型</li>
+</ul>
+<pre><code>静态单变量模型
+动态多变量模型
+COCOMO模型</code></pre><p>（2）主要的成本因素</p>
+<ul>
+<li>产品因素</li>
+</ul>
+<pre><code>要求的软件可靠性(RELY)
+数据库规模(DATA)
+软件产品复杂程度(CPLX)</code></pre><ul>
+<li>计算机因素</li>
+</ul>
+<pre><code>执行时间的约束(TIME)
+存储约束(STOR)
+环境变更率(VIRT)
+计算机换向时间(TURN)</code></pre><ul>
+<li>人员因素</li>
+</ul>
+<pre><code>系统分析员的能力(ACAP)
+应用经验(AEXP)
+程序员的能力(PCAP)
+环境知识 (VEXP)
+语言知识(LEXP)</code></pre><ul>
+<li>项目因素</li>
+</ul>
+<pre><code>程序设计实践(MODP)
+软件工具(TOOL)
+进度约束(SCED)</code></pre><h2 id="风险管理"><a href="#风险管理" class="headerlink" title="风险管理"></a>风险管理</h2><p>（1）风险管理</p>
+<p>风险分析实际上就是贯穿在软件工程过程中的一系列风险管理步骤，包括以下方面:</p>
+<pre><code>风险识别
+风险估计
+风险管理策略
+风险解决
+风险监督</code></pre><p>风险通常是指由于当事者主观上不能控制的一此因素的影响，使得实际结果与当事者的事先估计有较大的背离而带来的经济损失。</p>
+<p>进行风险分析，有助于确定有关因素的变化对决策的影响程度，有助于确定投资方案或生产经营方案对某一特定因素变动的敏感性。了解在给定条件下的风险对这些因素的敏感程度，有助于正确地做出决策</p>
+<p>（2）风险分类</p>
+<ul>
+<li>按照风险的影响范围分类</li>
+</ul>
+<pre><code>项目风险
+技术风险
+商业风险</code></pre><ul>
+<li>按照风险的可预测性分类</li>
+</ul>
+<pre><code>已知风险
+可预测的风险
+不可预测的风险</code></pre><p>（3）风险识别常用方法</p>
+<pre><code>Delphi方法
+头脑风暴法
+风险条目检查表</code></pre><ul>
+<li>Delphi方法</li>
+</ul>
+<p>又称专家调查法，是获得多数专家一致意见的方法， 以便预测未来的开发问题。其过程如下:</p>
+<p>由项目风险小组选定与该项目有关的领域专家，并与这些适当数量的专家建立直接的联系，收集专家意见，然后加以综合整理，再匿名反馈给各位专家，再次征询意见。这样反复经过四至五轮，逐步使专家的意见趋向一致，作为最后预测和识别的根据。</p>
+<ul>
+<li>头脑风暴法</li>
+</ul>
+<p>就是以专家的创造性思维来获取未来信息的一种直观预测和识别方法。</p>
+<p>该方法一般是在一个专家小组内进行，通过专家会议，激发专家的创造性思维，产生“思维共振”和“组合效应”，以获取更多的未来信息，使预测和识别结果更准确。</p>
+<ul>
+<li>风险条目检查表</li>
+</ul>
+<p>风险条目检查表是最常用也是比较简单的风险识别方法。它是利用一组提问来帮助管理者了解项目在各个方面有哪些风险。在风险条目检查表中，列出了一些可能的与每一个风险因素有关的提问，使得风险管理者集中来识别常见的、已知的和可预测的风险。</p>
+<p>风险条目检查表一般根据风险要素进行编写，是以往项目经验的积累和总结。风险条目检查表可以以不同的方式组织，通过判定分析或假设分析，给出这些提问的回答，就可以帮助管理或计划人员估算风险的影响。</p>
+<p>（4）风险预测</p>
+<p>风险预测(也称为风险估算)主要从风险变成现实的可能性或概率，以及当风险变成现实时所造成的后果两个方面来评估每个风险。</p>
+<h2 id="进度控制"><a href="#进度控制" class="headerlink" title="进度控制"></a>进度控制</h2><p>项目管理者的目标是定义全部项目任务，识别出关键任务，跟踪关键任务的进度状况，以保证能及时发现拖延进度的情况。为了做到这一点，管理者必须制定一个足够详细的进度表，以便监督项目进度，并控制整个项目。</p>
+<p>软件项目的进度安排是一项活动，它通过把工作量分配给特定的软件工程任务，并规定完成各项任务的起、止日期，从而将估算的工作量分布于计划好的项目持续期内。</p>
+<p>下述的基本原则能够指导软件项目的进度安排:</p>
+<pre><code>1.划分
+2.相互依赖性
+3.时间分配
+4.工作量确认
+5.定义责任
+6.定义结果
+7.定义里程碑</code></pre><p>（1）Gantt(甘特)图</p>
+<p>Gantt图(甘特图)是历史悠久、应用广泛的进度计划工具。</p>
+<p>（2）工程网络</p>
+<p>工程网络是制定进度计划时另种常用的图形工具，它同样能描绘任务分解情况以及每项作业的开始时间和结束时间，此外，它还显示地描绘各个作业彼此间的依赖关系。因此，工程网络是系统分析和系统设计的强有力的工具。</p>
+<p>（3）估算进度</p>
+<p>画出工程网络之后，系统分析员就可以借助它的帮助估算工程进度了。为此需要在工程网络上<br>增加一些必要的信息。</p>
+<p>首先，把每个作业估计需要使用的时间写在表示该项作业的箭头上方。其次，为每个事件计算下述两个统计数字：最早时刻EET和最迟时刻LET。这两个数字将分别写在表示事件的圆圈的右上角和右下角。</p>
+<p>（4）关键路径</p>
+<p>关键路径上的事件(关键事件)必须准时发生，组成关键路径的作业(关键作业)的实际持续时间不能超过估计的持续时间，否则工程就不能准时结束。</p>
+<p>（5）机动时间</p>
+<p>不在关键路径上的作业有一定程度的机动余地一一实际开始时间可以比预定时间晚一些，或者实际持续时间可以比预计的持续时间长一些，而并不影响工程的结束时间。</p>
+<p>一个作业可以有的全部机动时间等于它的结束事件的最迟时刻减去它的开始事件的最早时刻，再减去这个作业的持续时间。</p>
+<pre><code>机动时间 =  (LET)结束 - (EET)开始 - 持续时间</code></pre><h1 id="软件评价"><a href="#软件评价" class="headerlink" title="软件评价"></a>软件评价</h1><h2 id="程序复杂性度量"><a href="#程序复杂性度量" class="headerlink" title="程序复杂性度量"></a>程序复杂性度量</h2><p>如何对详细设计阶段设计出的模块质量进行度量呢?</p>
+<p>有两种方法，一种是定性的度量方法，通过衡量模块独立性来实现，另一种是定量的方法，也就是我们今天要讲的McCabe方法和Halstead方法这两种度量方法。</p>
+<p>程序复杂性度量的意义在于，把程序的复杂度乘以适当的常数即可估算出软件中错误的数量以及软件开发需要用的工作量。</p>
+<p>（1）McCabe方法</p>
+<p>1、McCabe方法是根据程序流程图的结构复杂度对软件复杂度和质量进行度量。它把程序看成是有一个入口节点和一个出口节点的有向图，图中每个节点对应一个语句或一个顺序流程的程序代码块，弧对应于程序中的转移。这种图也称为程序流图。</p>
+<p>2、大家注意，这个程序流图并不是程序流程图。但它可以看作是一种简化了的程序流程图。在程序流图中，由于我们关心的只是程序的流程，而不关心各个处理框的细节，因此原来程序流程图中的各个处理框(包括语句框、判断框、输入/输出框等)都被简化为结点，一般用图圈表示，而原来程序流程图中的带有箭头的控制流变成了程序流图中的有向边。</p>
+<p>3、另外，程序流图仅仅用于描绘程序内部的控制流程，而完全不反映对数据的具体操作以及分支和循环结构中的判断条件。从而使画面更加简洁，便于实现对程序复杂度的实际度量。程序流图可以通过简化程序流程图得到，也可以由PAD图或其他详细设计表达工具变换获得。</p>
+<p>4、用McCabe方法度量得出的结果称为程序的环形复杂度，它等于强连通的程序流图中线性无关的有向环的个数。</p>
+<p>下面这个图表示把程序流程图映射成程序流图的方法:</p>
+<p><img src="/2020/03/23/Software-Engineering-Learning-Handbook/image-20200331153223986.png" alt="image-20200331153223986"></p>
+<p>左图中的每一个处理框,不论是输入、判断还是顺序语句，在右图中都唯一对应了一<br>个节点。在现实的操作中，我们往往会把多个连续的顺序语句节点只用一个节点表示,<br>原因很简单，因为连续顺序语句的多少不影响环形复杂度。</p>
+<ul>
+<li>McCabe方法的计算步骤</li>
+</ul>
+<p>1、将程序流程图退化成程序流图，即将程序流程图的每个处理框退化成一个节点，将控制流箭头退化成连接各节点的有向弧。</p>
+<p>2、在程序流图中，由程序出口到入口连接一条虚有向弧，使程序流图达到强连通。</p>
+<p>3、计算环形复杂度：<code>V(G) = m-n+1</code>，其中，V(G )是环形复杂度,，m是有向图G中的弧数，n是有向图G中的节点数。( 即:环形复杂度=弧数-节点数+强连通分量)例如，上图中节点数为11 ,弧数为13，因此环形复杂度为：<code>V(G) = 13-11+1= 3</code></p>
+<p>McCabe方法还有另外两种简单的方法计算环形复杂度：</p>
+<pre><code>1、环形复杂度=P+1，其中，P是程序流图中判定结点的数目。
+2、对于平面图，环形复杂度等于强连通的程序图在平面上围成的区域的个数。</code></pre><ul>
+<li>McCabe度量方法</li>
+</ul>
+<p><img src="/2020/03/23/Software-Engineering-Learning-Handbook/image-20200331154554287.png" alt="image-20200331154554287"></p>
+<ul>
+<li>McCabe度量方法存在的一些缺点</li>
+</ul>
+<p><img src="/2020/03/23/Software-Engineering-Learning-Handbook/image-20200331154823403.png" alt="image-20200331154823403"></p>
+<p>（2）Halstead方法</p>
+<p>Halstead方法是研究最完全且最著名的一种软件复杂度的复合度量理论。也称为文本复杂性度量，它根据程序中运算符和操作数的总数来度量程序的复杂程度。</p>
+<p>运算符是通常语法中的像<code>+ , - , &gt; , &lt; , if-then-else , while-do</code>等这样一些语法元素。</p>
+<p>操作数是指那些变量、常量等。至于注解、说明和其他的非执行语句并不计入在内。利用文<br>本复杂性度量方法可以预测出程序长度、程序量并能预测出程序中可能包含的错误个数等。</p>
+<ul>
+<li>Halstead度量方法</li>
+</ul>
+<p>1、设N1为程序中实际出现的运算符总个数，N2为程序中实际出现的操作数总个数，则程序长度N定义为：N=N1+N2</p>
+<p>2、详细设计完成之后，可以知道程序中使用的不同运算符(包括关键字)的个数n1，以及不同操作数(变量和常数)的个数n2。文本复杂性度量给出预测程序长度的公式如下:</p>
+<pre><code>H = n1*log2 n1 + n2*log2 n2</code></pre><p>多次验证都表明，预测的长度H与实际长度N非常接近。</p>
+<p>3、同时，该方法还给出了程序量的计算公式，设程序量为V，则:</p>
+<pre><code>V = N*log2 (n1 +n2)</code></pre><p>4、文本复杂性度量还给出了预测程序中包含错误的个数的公式</p>
+<pre><code>E = N*log2 (n1+ n2)/3000</code></pre><ul>
+<li>Halstead度量方法存在的一些缺点</li>
+</ul>
+<p>1、没有区别自己编写的程序与别人编写的程序。这是与实际经验是相违背的。</p>
+<p>2、没有考虑非执行语句。</p>
+<p>3、在允许混合运算的语言中，在计算时应考虑因数据类型而引起差异的情况。</p>
+<p>4、没有把不同类型的运算对象，运算符与不同的错误发生率联系起来，而是把它们同等看待。例如，对简单if语句与while语句就没有区别。</p>
+<p>5、没有注意调用的深度。应当对调用子程序的不同深度区别对待。</p>
+<p>6、忽视了嵌套结构(嵌套的循环语句、嵌套IF语句、括号结构等)。一般地，运算符的嵌套序列，总比具有相同数量的运算符和运算对象的非嵌套序列要复杂得多。</p>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        Author:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Qftm</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        Link:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://Qftm.github.io/2020/03/23/Software-Engineering-Learning-Handbook/">http://Qftm.github.io/2020/03/23/Software-Engineering-Learning-Handbook/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        Reprint policy:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    All articles in this blog are used except for special statements
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    reprint polocy. If reproduced, please indicate source
+                    <a href="/about" target="_blank">Qftm</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Handbook/">
+                                    <span class="chip bg-color">Handbook</span>
+                                </a>
+                            
+                                <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">
+                                    <span class="chip bg-color">软件工程</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+            <div class="card">
+                <a href="/2020/03/25/Linux-Network-Protocol-Stack/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/linux-1.png" class="responsive-img" alt="Linux Network Protocol Stack">
+                        
+                        <span class="card-title">Linux Network Protocol Stack</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            最近，发现网络协议栈这部分有缺陷，底层基础知识一点要熟练掌握。于是，打算开始深入学习理解Linux网络协议栈 23333！！！一切事物只有熟悉其底层原理，那么所有的问题都会迎刃而解。
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-25
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%AE%89%E5%85%A8%E5%BB%BA%E8%AE%BE/" class="post-category">
+                                    安全建设
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Linux/">
+                        <span class="chip bg-color">Linux</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%8D%8F%E8%AE%AE/">
+                        <span class="chip bg-color">协议</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/03/22/Socket-Learning-Handbook/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/socket-1.jpg" class="responsive-img" alt="Socket Programming Learning Handbook">
+                        
+                        <span class="card-title">Socket Programming Learning Handbook</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            由于最近在梳理网络协议栈这部分内容，所以花了一部分时间把以前所学的Socket知识重新整理总结了一下，总结这个学习手册也是方便自己以后的查看。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-22
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" class="post-category">
+                                    编程开发
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Handbook/">
+                        <span class="chip bg-color">Handbook</span>
+                    </a>
+                    
+                    <a href="/tags/Socket/">
+                        <span class="chip bg-color">Socket</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + 'From: Qftm<br />'
+            + 'Author: Qftm<br />'
+            + 'Link: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2018</span>
+            <a href="/about" target="_blank">Qftm</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">370.8k</span>&nbsp;字
+            
+            
+            
+            
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+    <a href="https://github.com/Qftm" 
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:Qftmbin@gmail.com" 
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+    <a href="https://twitter.com/Qftmer" 
+        <i class="fab fa-twitter"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;Search</span>
+            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

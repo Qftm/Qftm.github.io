@@ -1,0 +1,1130 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Symmetric Key Encryption DES, Qftm">
+    <meta name="description" content="Maybe a hacker">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Symmetric Key Encryption DES | Qftm</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.1"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Qftm</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>Index</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>Tags</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>Categories</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>Archives</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-heartbeat" style="zoom: 0.6;"></i>
+      
+      <span>About</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>Friends</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="Search" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Qftm</div>
+        <div class="logo-desc">
+            
+            Maybe a hacker
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			Index
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			Tags
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			Categories
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			Archives
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-heartbeat"></i>
+			
+			About
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			Friends
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/bg.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Symmetric Key Encryption DES</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/DES/">
+                                <span class="chip bg-color">DES</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" class="post-category">
+                                编程开发
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    2019-04-26
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
+                    2020-08-16
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    4.8k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    22 Min
+                </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="对称加密-Symmetric-Key-Encryption"><a href="#对称加密-Symmetric-Key-Encryption" class="headerlink" title="对称加密 (Symmetric Key Encryption)"></a>对称加密 (Symmetric Key Encryption)</h1><p>对称加密是最快速、最简单的一种加密方式，加密（encryption）与解密（decryption）用的是同样的密钥（secret key）。对称加密有很多种算法，由于它效率很高，所以被广泛使用在很多加密协议的核心当中。自1977年美国颁布DES（Data Encryption Standard）密码算法作为美国数据加密标准以来，对称密码体制迅速发展，得到了世界各国的关注和普遍应用。对称密码体制从工作方式上可以分为分组加密和序列密码两大类。</p>
+<p>对称加密算法的优点：算法公开、计算量小、加密速度快、加密效率高。</p>
+<p>对称加密算法的缺点：交易双方都使用同样钥匙，安全性得不到保证。此外，每对用户每次使用对称加密算法时，都需要使用其他人不知道的惟一钥匙，这会使得发收信双方所拥有的钥匙数量呈几何级数增长，密钥管理成为用户的负担。对称加密算法在分布式网络系统上使用较为困难，主要是因为密钥管理困难，使用成本较高。而与公开密钥加密算法比起来，对称加密算法能够提供加密和认证却缺乏了签名功能，使得使用范围有所缩小。</p>
+<p>对称加密通常使用的是相对较小的密钥，一般小于256 bit。因为密钥越大，加密越强，但加密与解密的过程越慢。</p>
+<h2 id="分组密码"><a href="#分组密码" class="headerlink" title="分组密码"></a>分组密码</h2><p>分组密码：也叫块加密(block cyphers)，一次加密明文中的一个块。是将明文按一定的位长分组，明文组经过加密运算得到密文组，密文组经过解密运算（加密运算的逆运算），还原成明文组，有 ECB、CBC、CFB、OFB 四种工作模式。</p>
+<h2 id="序列密码"><a href="#序列密码" class="headerlink" title="序列密码"></a>序列密码</h2><p>序列密码：也叫流加密(stream cyphers)，一次加密明文中的一个位。是指利用少量的密钥（制乱元素）通过某种复杂的运算（密码算法）产生大量的伪随机位流，用于对明文位流的加密。解密是指用同样的密钥和密码算法及与加密相同的伪随机位流，用以还原明文位流。</p>
+<h2 id="对称加密算法"><a href="#对称加密算法" class="headerlink" title="对称加密算法"></a>对称加密算法</h2><p><strong>常用对称加密算法包括 DES、3DES、AES</strong></p>
+<ul>
+<li>DES（Data Encryption Standard）：数据加密标准，速度较快，适用于加密大量数据的场合。</li>
+<li>3DES（Triple DES）：是基于DES，对一块数据用三个不同的密钥进行三次加密，强度更高。</li>
+<li>AES（Advanced Encryption Standard）：高级加密标准，是下一代的加密算法标准，速度快，安全级别高，支持128、192、256、512位密钥的加密。</li>
+</ul>
+<p><strong>算法特征</strong></p>
+<ul>
+<li><p>加密方和解密方使用同一个密钥。</p>
+</li>
+<li><p>加密解密的速度比较快，适合数据比较长时的使用。</p>
+</li>
+<li><p>密钥传输的过程不安全，且容易被破解，密钥管理也比较麻烦。</p>
+</li>
+</ul>
+<h1 id="对称加密算法-Des"><a href="#对称加密算法-Des" class="headerlink" title="对称加密算法 Des"></a>对称加密算法 Des</h1><h2 id="数据加密标准-Des"><a href="#数据加密标准-Des" class="headerlink" title="数据加密标准 Des"></a>数据加密标准 Des</h2><h3 id="Des-设计理念"><a href="#Des-设计理念" class="headerlink" title="Des 设计理念"></a>Des 设计理念</h3><p>Des 设计中使用了分组密码设计的两个原则：混淆(confusion)和扩散(diffusion)，其目的是抗击敌手对密码系统的统计分析。混淆是使密文的统计特性与密钥的取值之间的关系 尽可能复杂化，以使密钥和明文以及密文之间的依赖性对密码分析者来说是无法利用的。扩散的作用就是将每一位明文的影响尽可能迅速地作用到较多的输出密文位中，以便在大量的 密文中消除明文的统计结构，并且使每一位密钥的影响尽可能迅速地扩展到较多的密文位中，以防对密钥进行逐段破译。</p>
+<h2 id="Des-加密算法结构流程"><a href="#Des-加密算法结构流程" class="headerlink" title="Des 加密算法结构流程"></a>Des 加密算法结构流程</h2><p><img src="/2019/04/26/Symmetric-Key-Encryption-DES/1594459-20190423201119413-927572400.png" alt="img"></p>
+<h2 id="Des-加密算法电子编码本ECB模式流程"><a href="#Des-加密算法电子编码本ECB模式流程" class="headerlink" title="Des 加密算法电子编码本ECB模式流程"></a>Des 加密算法电子编码本ECB模式流程</h2><h3 id="ECB-模式-amp-性能"><a href="#ECB-模式-amp-性能" class="headerlink" title="ECB 模式 &amp; 性能"></a>ECB 模式 &amp; 性能</h3><p>ECB 模式是最简单的加密模式，明文消息被分成固定大小的块（分组），并且每个块被单独加密。每个块的加密和解密都是独立的，且使用相同的方法进行加密，所以可以进行并行计算，但是这种方法一旦有一个块被破解，使用相同的方法可以解密所有的明文数据，安全性比较差。适用于数据较少的情形，加密前需要把明文数据填充到块大小的整倍数。</p>
+<p><strong>ECB算法优点</strong>：</p>
+<p>简单、孤立，每个块单独运算。适合并行运算。传输错误一般只影响当前块。</p>
+<p><strong>ECB算法缺点</strong>：</p>
+<p>同明文输出同密文，可能导致明文攻击。</p>
+<h3 id="ECB-加密-amp-解密流程"><a href="#ECB-加密-amp-解密流程" class="headerlink" title="ECB 加密 &amp; 解密流程"></a>ECB 加密 &amp; 解密流程</h3><ul>
+<li>Encryption：</li>
+</ul>
+<p><img src="/2019/04/26/Symmetric-Key-Encryption-DES/1594459-20190324171614581-366182122.png" alt="img"></p>
+<ul>
+<li>Decryption：</li>
+</ul>
+<p><img src="/2019/04/26/Symmetric-Key-Encryption-DES/1594459-20190324171618967-605244121.png" alt="img"></p>
+<h2 id="Des-分组加密所需参数"><a href="#Des-分组加密所需参数" class="headerlink" title="Des 分组加密所需参数"></a>Des 分组加密所需参数</h2><p>（1）Key：64位主密钥</p>
+<p>（2）明文：64位的倍数</p>
+<p>（3）密文：64位的倍数</p>
+<p>（4）分组模式填充方式：PKCS5</p>
+<p>（5）分组密码工作模式：EBC模式</p>
+<h2 id="Des-加密过程"><a href="#Des-加密过程" class="headerlink" title="Des 加密过程"></a>Des 加密过程</h2><p>（1）初始置换（IP）</p>
+<p>根据初始置换表，对相应明文位置上的二进制进行置换操作，即把64 位的数据块的原第 58 位换到第一位，原第 50 位换到第二位.依此类推。目的在于打乱明文中各位的次序。</p>
+<p>（2）子密钥生成</p>
+<p>​              <img src="/2019/04/26/Symmetric-Key-Encryption-DES/1594459-20190423203317310-1372520822.png" alt="img"></p>
+<p>从用户处取得一个 64 位长的密钥key ，去除 64 位密钥中作为奇偶校验位的第 8、16、24、32、40、48、56、64 位，剩下的 56 位作为有效输入密钥。使用置换选择 1 对剩下的 56 位打乱，输出左 28 位 C 和右 28 位 D。两个部分都进行向左移位，移位后的两部分数据有两个作用。第一输出子密钥，每 i 轮两部分合在一起进行进行置换选择 2 得到迭代运算的第 i 个子密钥，第二作为下一轮子密钥运算。总共 16 轮运算（i=1,2,9,6 左移 1 位，其余 2 位）。</p>
+<p>（3）16 轮迭代运算 (Des 核心)</p>
+<p>​           <img src="/2019/04/26/Symmetric-Key-Encryption-DES/1594459-20190423203644459-1832859717.png" alt="img"></p>
+<p>首先将二进制分为两个 32 位的部分：left 和 right。保持 left 不变，根据扩展置换表把 right 由 32 位扩展成 48 位。把扩展后的 48 位 right 与第 i 次迭代生成的 48 位子密钥按位异或运算，形成一个新的 48 位的 right。然后与主密钥生成的 48 位子密钥异或操作，然后进行 S 盒代换，得到一个 32 位的二进制数据，将数据进行 P 盒置换后，与 left 进行异或操作，结果作为下一轮迭代运算的 right 部分。上一轮 right 部分作为下一轮运算的 left 部分。第 16 次迭代不交换两者的数值。</p>
+<p>（4）初始逆置换</p>
+<p>16轮迭代运算后，依据初始逆置换表，对相应位置的二进制数进行置换操作。最后得到密文。</p>
+<h2 id="Des-解密过程"><a href="#Des-解密过程" class="headerlink" title="Des 解密过程"></a>Des 解密过程</h2><p>Des 算法是对称的，既可用加密又可用于解密，只不过在16次迭代中使用的密钥次序正好相反。解密时，第一次迭代使用子密钥K16，依次类推。</p>
+<h2 id="分组密码工作方式"><a href="#分组密码工作方式" class="headerlink" title="分组密码工作方式"></a>分组密码工作方式</h2><p>ECB，将明文消息分成 n 个 m bit 组(m 通常为 64)，如果长度不是 m 整数倍，则在明文末尾进行填充 (本次实验采用PKCS5)</p>
+<h1 id="对称加密算法-Des-实现"><a href="#对称加密算法-Des-实现" class="headerlink" title="对称加密算法 Des 实现"></a>对称加密算法 Des 实现</h1><h2 id="语言-amp-环境"><a href="#语言-amp-环境" class="headerlink" title="语言 &amp; 环境"></a>语言 &amp; 环境</h2><p>（1）语言</p>
+<pre><code>Python</code></pre><p>（2）环境</p>
+<pre><code>Python版本：python 3.7
+
+Python工具：PyCharm Professional</code></pre><h2 id="操作流程"><a href="#操作流程" class="headerlink" title="操作流程"></a>操作流程</h2><p>（1）在 &lt; text.txt &gt; 文件中读取需要加密的文本</p>
+<p>（2）在 &lt; key.txt &gt; 文件中写入随机产生固定长度的Key</p>
+<p>（3）在 &lt; ciphertext.txt &gt; 文件中写入DES加密、Base64编码后的数据</p>
+<p>（4）在 &lt; plaintext.txt &gt; 文件中写入Base64解码、DES解密后的数据</p>
+<h2 id="主要代码"><a href="#主要代码" class="headerlink" title="主要代码"></a>主要代码</h2><p>（1）Main 函数</p>
+<pre><code>&gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; 
+ 1     if __name__ == &#39;__main__&#39;:
+ 2         key = getRandomString()
+ 3         with open(&#39;text.txt&#39;, &#39;r+&#39;) as fr:
+ 4             text = (fr.read())          # 从 &#39;text.txt&#39; 文件中读取加密文本
+ 5         D = Des()
+ 6         C = (base64.b64encode((D.encrypt(key, text, True)).encode(&quot;utf8&quot;))).decode()  # 加密
+ 7         C1 = (base64.b64decode(C)).decode()
+ 8         P = D.decrypt(key, C1, True)                # 解密
+ 9         with open(&#39;key.txt&#39;, &#39;w+&#39;) as fwk:          # 存储密钥
+10             fwk.write(key)
+11         with open(&#39;ciphertext.txt&#39;, &#39;w+&#39;) as fwc:   # 存储密文
+12             fwc.write(C)
+13         with open(&#39;plaintext.txt&#39;, &#39;w+&#39;) as fwp:    # 存储明文
+14             fwp.writelines(P)
+&lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; </code></pre><p> （2）Encryption</p>
+<pre><code>&gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt;
+1     def encrypt(self, key, text, padding):          # DES 加密函数
+2         return self.run(key, text, ENCRYPT, padding)
+&lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; </code></pre><p>（3）Decryption</p>
+<pre><code>&gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt;
+1     def decrypt(self, key, text, padding):          # DES 解密函数
+2         return self.run(key, text, DECRYPT, padding)
+&lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt;</code></pre><p>（4）字符串和比特数组之间相互转换</p>
+<pre><code>&gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; 
+ 1     def string_to_bit_array(text):             # 字符串--&gt;bit数组
+ 2         array = list()
+ 3         for char in text:
+ 4             binval = binvalue(char, 8)         # 获得每个字符的二进制
+ 5             array.extend([int(x) for x in list(binval)])
+ 6         return array
+ 7 
+ 8     def bit_array_to_string(array):            # bit数组--&gt;字符串
+ 9         res = &#39;&#39;.join([chr(int(y, 2)) for y in [&#39;&#39;.join([str(x) for x in bytes]) for bytes in nsplit(array, 8)]])
+10         return res
+&lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt;</code></pre><p>（5）二进制处理</p>
+<pre><code>&gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt;
+1     def binvalue(val, bitsize):              # 以给定大小的字符返回二进制值
+2         binval = bin(val)[2:] if isinstance(val, int) else bin(ord(val))[2:]
+3         if len(binval) &gt; bitsize:
+4             raise Exception(&quot;binary value larger than the expected size&quot;)
+5         while len(binval) &lt; bitsize:
+6             binval = &quot;0&quot; + binval
+7         return binval
+&lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt;</code></pre><p>（6）列表划分</p>
+<pre><code>&gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; 
+1     def nsplit(s, n):                     # 将列表拆分为大小为&#39;n&#39;的子列表
+2         return [s[k:k + n] for k in range(0, len(s), n)]
+&lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; </code></pre><p>（7）获取随机固定长度序列 Key</p>
+<pre><code>&gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; 
+1     def getRandomString(slen=8):        # 获得key的随机序列
+2         return &#39;&#39;.join(random.sample(string.ascii_letters + string.digits, slen))
+&lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; 
+
+</code></pre><p>（8）初始化 Des 类</p>
+<pre><code>&gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; 
+1     def __init__(self):
+2         self.password = None            # 存放初始key
+3         self.text = None                # 存放明文
+4         self.keys = list()              # 存放key值列表集合
+&lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; 
+
+</code></pre><p>（9）PKCS5 模式 数据填充</p>
+<pre><code>&gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt;
+1     def addPadding(self):  # PKCS5 进行数据填充,不管是否是BlockSize的整数倍都需要进行填充
+2         pad_len = 8 - (len(self.text) % 8)
+3         self.text += pad_len * chr(pad_len)
+&lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; 
+
+</code></pre><p>（10）数据填充移除</p>
+<pre><code>&gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt;
+1     def removePadding(self, data):                     # 删除纯文本的填充
+2         pad_len = ord(data[-1])
+3         return data[:-pad_len]
+&lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; 
+
+</code></pre><p>（11）获取 Key 值集合列表</p>
+<pre><code>&gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt;
+1     def generatekeys(self):                       # 统计计算所有key值的算法
+2         self.keys = []
+3         key = string_to_bit_array(self.password)
+4         key = self.permut(key, CP_1)              # 置换选择1 初始化key 64bit--&gt;56bit
+5         g, d = nsplit(key, 28)                    # 分片 (g-&gt;LEFT),(d-&gt;RIGHT)
+6         for i in range(16):                       # 16轮循环
+7             g, d = self.shift(g, d, SHIFT[i])       # (g-&gt;LEFT),(d-&gt;RIGHT)分别进行移位操作
+8             tmp = g + d                             # 合并 28bit+28bit--&gt;56bit
+9             self.keys.append(self.permut(tmp, CP_2))     # 置换选择2 56bit--&gt;48bit
+&lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; 
+
+</code></pre><p>（12）Key 值移位函数</p>
+<pre><code>&gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; 
+1     def shift(self, g, d, n):                     # 每轮key值产生所需的函数
+2         return g[n:] + g[:n], d[n:] + d[:n]
+&lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; 
+
+</code></pre><p>（13）基本置换 扩展置换 压缩置换</p>
+<pre><code>&gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; 
+1     def permut(self, block, table):              # 置换(本程序中充当基本置换、压缩置换的角色)
+2         return [block[x - 1] for x in table]
+3 
+4     def expand(self, block, table):              # 扩展置换
+5         return [block[x - 1] for x in table]
+&lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; 
+
+</code></pre><p>（14）自定义 XOR 函数</p>
+<pre><code>&gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; 
+1     def xor(self, t1, t2):                      # 应用xor并返回结果列表
+2         return [x ^ y for x, y in zip(t1, t2)]
+&lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; 
+
+</code></pre><p>（15）S 盒代换</p>
+<pre><code>&gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; 
+ 1     def substitute(self, d_e):                           # S盒代换
+ 2         subblocks = nsplit(d_e, 6)                       # 将位数组分割为6位的子列表
+ 3         result = list()
+ 4         for i in range(len(subblocks)):                  # 遍历子列表
+ 5             block = subblocks[i]
+ 6             row = int(str(block[0]) + str(block[5]), 2)  # 得到第一位和最后一个位表示的行
+ 7             column = int(&#39;&#39;.join([str(x) for x in block[1:][:-1]]), 2) #得到第二、三、四、五位表示的列
+ 8             val = S_BOX[i][row][column]                # 取为本轮分配的SBOX[i]中的值
+ 9             bin = binvalue(val, 4)                     # 将值转换为二进制
+10             result += [int(x) for x in bin]            # 将二进制值添加到结果列表中
+11         return result
+&lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt;
+
+</code></pre><p>（16）16轮运算核心</p>
+<pre><code>&gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; 
+ 1     for block in text_blocks:               # 遍历所有数据块
+ 2         block = string_to_bit_array(block)
+ 3         block = self.permut(block, IP)      # 数据块的初始置换
+ 4         g, d = nsplit(block, 32)            # 数据块分片 g(LEFT), d(RIGHT)
+ 5         tmp = None
+ 6         for i in range(16):                 # 16轮循环
+ 7             d_e = self.expand(d, E)         # d(RIGHT)的扩展 32bit--&gt;48bit
+ 8             if action == ENCRYPT:
+ 9                 tmp = self.xor(self.keys[i], d_e)
+10             else:
+11                 tmp = self.xor(self.keys[15 - i], d_e)  # 如果是解密的话先使用最后的key
+12             tmp = self.substitute(tmp)                  # S盒代换 48bit--&gt;32bit
+13             tmp = self.permut(tmp, P)                   # P盒置换
+14             tmp = self.xor(g, tmp)
+15             g = d
+16             d = tmp
+17         result += self.permut(d + g, IP_1)              # 数据块的初始逆置换
+18     final_res = bit_array_to_string(result)
+&lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; &lt; 
+
+</code></pre><h2 id="数据测试"><a href="#数据测试" class="headerlink" title="数据测试"></a>数据测试</h2><p>（1）测试结果</p>
+<p><img src="/2019/04/26/Symmetric-Key-Encryption-DES/1594459-20190426082415156-1784556582.png" alt="img"></p>
+<p>（2）在 &lt; text.txt &gt; 文件中读取需要加密的文本</p>
+<p><img src="/2019/04/26/Symmetric-Key-Encryption-DES/1594459-20190426083228358-1170023298.png" alt="img"></p>
+<p>（3）在 &lt; key.txt &gt; 文件中写入随机产生固定长度的Key</p>
+<p><img src="/2019/04/26/Symmetric-Key-Encryption-DES/1594459-20190426083344644-175946763.png" alt="img"></p>
+<p>（4）在 &lt; ciphertext.txt &gt; 文件中写入DES加密、Base64编码后的数据</p>
+<p><img src="/2019/04/26/Symmetric-Key-Encryption-DES/1594459-20190426083510282-1870252925.png" alt="img"></p>
+<p>（5）在 &lt; plaintext.txt &gt; 文件中写入Base64解码、DES解密后的数据</p>
+<p><img src="/2019/04/26/Symmetric-Key-Encryption-DES/1594459-20190426083620887-185547111.png" alt="img"></p>
+<h2 id="项目地址"><a href="#项目地址" class="headerlink" title="项目地址"></a>项目地址</h2><p><strong>项目地址</strong></p>
+<pre><code>https://github.com/Qftm/Symmetric_Key_Encryption_DES</code></pre>
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        Author:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Qftm</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        Link:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://Qftm.github.io/2019/04/26/Symmetric-Key-Encryption-DES/">http://Qftm.github.io/2019/04/26/Symmetric-Key-Encryption-DES/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        Reprint policy:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    All articles in this blog are used except for special statements
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    reprint polocy. If reproduced, please indicate source
+                    <a href="/about" target="_blank">Qftm</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/DES/">
+                                    <span class="chip bg-color">DES</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+            <div class="card">
+                <a href="/2019/05/12/Linux-DNS-server-configuration-and-management/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/dns-1.jpg" class="responsive-img" alt="Linux DNS 服务器配置与管理">
+                        
+                        <span class="card-title">Linux DNS 服务器配置与管理</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            环境介绍运行软件VMware Workstation Pro 14系统环境CentOS-7-x86_64-1810操作配置基础知识简介域名系统（英文：Domain Name System，缩写：DNS）是互联网的一项服务。它作为将域名和IP
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-05-12
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%AE%89%E5%85%A8%E5%BB%BA%E8%AE%BE/" class="post-category">
+                                    安全建设
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Linux/">
+                        <span class="chip bg-color">Linux</span>
+                    </a>
+                    
+                    <a href="/tags/DNS/">
+                        <span class="chip bg-color">DNS</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/03/26/cbc-byte-reverse-attack/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/cbc-1.png" class="responsive-img" alt="针对 CBC 字节反转攻击的研究与漏洞复现">
+                        
+                        <span class="card-title">针对 CBC 字节反转攻击的研究与漏洞复现</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            CBC 简介现代密码体制现代密码中的加密体制一般分为对称加密体制(Symmetric Key Encryption)和非对称加密体制(Asymmetric Key Encryption)。对称加密又分为分组加密和序列密码。
+分组密码
+分组密
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-03-26
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Web%E5%AE%89%E5%85%A8/" class="post-category">
+                                    Web安全
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/CBC/">
+                        <span class="chip bg-color">CBC</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + 'From: Qftm<br />'
+            + 'Author: Qftm<br />'
+            + 'Link: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2018</span>
+            <a href="/about" target="_blank">Qftm</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">370.8k</span>&nbsp;字
+            
+            
+            
+            
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+    <a href="https://github.com/Qftm" 
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:Qftmbin@gmail.com" 
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+    <a href="https://twitter.com/Qftmer" 
+        <i class="fab fa-twitter"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;Search</span>
+            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

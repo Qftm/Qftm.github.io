@@ -1,0 +1,1976 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="C Programming Language Data Structure Learning, Qftm">
+    <meta name="description" content="Maybe a hacker">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>C Programming Language Data Structure Learning | Qftm</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.1"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Qftm</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>Index</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>Tags</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>Categories</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>Archives</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-heartbeat" style="zoom: 0.6;"></i>
+      
+      <span>About</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>Friends</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="Search" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Qftm</div>
+        <div class="logo-desc">
+            
+            Maybe a hacker
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			Index
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			Tags
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			Categories
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			Archives
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-heartbeat"></i>
+			
+			About
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			Friends
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/bg.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">C Programming Language Data Structure Learning</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/C/">
+                                <span class="chip bg-color">C</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+                                <span class="chip bg-color">数据结构</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" class="post-category">
+                                编程开发
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    2018-11-25
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
+                    2020-08-16
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    5.2k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    24 Min
+                </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="C语言实现二叉树的创建-amp-遍历"><a href="#C语言实现二叉树的创建-amp-遍历" class="headerlink" title="C语言实现二叉树的创建&amp;遍历"></a>C语言实现二叉树的创建&amp;遍历</h1><h2 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a>算法思想</h2><p><strong>重点是递归的使用</strong></p>
+<p>利用扩展先序遍历序列创建二叉链表。</p>
+<p>采用类似先序遍历的递归算法，首先读入当前根结点的数据，如果是’.’则将当前树根置为空，否则申请一个新结点，存入当前根结点的数据，分别用当前根结点的左子域和右子域进行递归调用，创建左、右子树。</p>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><pre class="line-numbers language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h></span></span>
+
+<span class="token keyword">typedef</span> <span class="token keyword">char</span> DataType<span class="token punctuation">;</span>             <span class="token comment" spellcheck="true">//二叉链表结点的数据类型 </span>
+
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> Node               <span class="token comment" spellcheck="true">//定义二叉树的二叉链表结点结构 </span>
+<span class="token punctuation">{</span>
+    DataType data<span class="token punctuation">;</span>
+    <span class="token keyword">struct</span> Node <span class="token operator">*</span>LChild<span class="token punctuation">;</span>         <span class="token comment" spellcheck="true">//左子树 </span>
+    <span class="token keyword">struct</span> Node <span class="token operator">*</span>RChild<span class="token punctuation">;</span>         <span class="token comment" spellcheck="true">//右子树     </span>
+<span class="token punctuation">}</span>BiTNode<span class="token punctuation">,</span><span class="token operator">*</span>BiTree<span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">CreateBiTree</span><span class="token punctuation">(</span>BiTree <span class="token operator">*</span>bt<span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//创建二叉链表函数 </span>
+<span class="token keyword">void</span> <span class="token function">PreOrder</span><span class="token punctuation">(</span>BiTree root<span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment" spellcheck="true">//先序遍历二叉树</span>
+<span class="token keyword">void</span> <span class="token function">InOrder</span><span class="token punctuation">(</span>BiTree root<span class="token punctuation">)</span><span class="token punctuation">;</span>       <span class="token comment" spellcheck="true">//中序遍历二叉树</span>
+<span class="token keyword">void</span> <span class="token function">PostOrder</span><span class="token punctuation">(</span>BiTree root<span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment" spellcheck="true">//后序遍历二叉树</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    BiTree bt<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> choice<span class="token punctuation">;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>true<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>                   <span class="token comment" spellcheck="true">//二叉树操作选择菜单 </span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"*****************Please enter your choice*****************\n\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"                choice 1：创建二叉树\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"                choice 2：先序遍历二叉树\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"                choice 3：中序遍历二叉树\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"                choice 4：后序遍历二叉树\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"                choice 0：退出\n\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span><span class="token operator">&amp;</span>choice<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">switch</span><span class="token punctuation">(</span>choice<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">case</span> <span class="token number">1</span><span class="token punctuation">:</span> <span class="token function">CreateBiTree</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>bt<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token keyword">case</span> <span class="token number">2</span><span class="token punctuation">:</span> <span class="token function">PreOrder</span><span class="token punctuation">(</span>bt<span class="token punctuation">)</span><span class="token punctuation">;</span>             
+                      <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                       <span class="token keyword">break</span><span class="token punctuation">;</span>
+
+            <span class="token keyword">case</span> <span class="token number">3</span><span class="token punctuation">:</span> <span class="token function">InOrder</span><span class="token punctuation">(</span>bt<span class="token punctuation">)</span><span class="token punctuation">;</span>               
+                    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                       <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token keyword">case</span> <span class="token number">4</span><span class="token punctuation">:</span> <span class="token function">PostOrder</span><span class="token punctuation">(</span>bt<span class="token punctuation">)</span><span class="token punctuation">;</span>                
+                    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                       <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token keyword">case</span> <span class="token number">0</span><span class="token punctuation">:</span> <span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token keyword">default</span><span class="token punctuation">:</span>
+                <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"ERROR！！\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>        
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span> 
+<span class="token punctuation">}</span> 
+
+<span class="token keyword">void</span> <span class="token function">CreateBiTree</span><span class="token punctuation">(</span>BiTree <span class="token operator">*</span>bt<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">char</span> ch<span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Please enter data:"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">getchar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ch <span class="token operator">=</span> <span class="token function">getchar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>ch <span class="token operator">==</span> <span class="token string">'.'</span><span class="token punctuation">)</span>              <span class="token comment" spellcheck="true">//读入的数据是'.'则将当前树根置为空 </span>
+    <span class="token punctuation">{</span>
+        <span class="token operator">*</span>bt <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span>                      <span class="token comment" spellcheck="true">//读入正常数据,为当前树根分配地址空间 </span>
+    <span class="token punctuation">{</span>
+        <span class="token operator">*</span>bt <span class="token operator">=</span> <span class="token punctuation">(</span>BiTree<span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>BiTNode<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">(</span><span class="token operator">*</span>bt<span class="token punctuation">)</span><span class="token operator">-></span>data <span class="token operator">=</span> ch<span class="token punctuation">;</span>
+        <span class="token function">CreateBiTree</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token operator">*</span>bt<span class="token punctuation">)</span><span class="token operator">-></span>LChild<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//递归调用CreateBiTree()函数,处理左子树 </span>
+        <span class="token function">CreateBiTree</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token operator">*</span>bt<span class="token punctuation">)</span><span class="token operator">-></span>RChild<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//递归调用CreateBiTree()函数,处理右子树 </span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">PreOrder</span><span class="token punctuation">(</span>BiTree root<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">//先序遍历二叉树,root为指向二叉树根结点的指针 </span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>root<span class="token operator">!=</span><span class="token constant">NULL</span><span class="token punctuation">)</span>    
+    <span class="token punctuation">{</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%c "</span><span class="token punctuation">,</span>root<span class="token operator">-></span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment" spellcheck="true">//访问根结点 </span>
+        <span class="token function">PreOrder</span><span class="token punctuation">(</span>root<span class="token operator">-></span>LChild<span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">//先序遍历左子树 </span>
+        <span class="token function">PreOrder</span><span class="token punctuation">(</span>root<span class="token operator">-></span>RChild<span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">//先序遍历右子树</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">InOrder</span><span class="token punctuation">(</span>BiTree root<span class="token punctuation">)</span>    <span class="token comment" spellcheck="true">//中序遍历二叉树,root为指向二叉树根结点的指针</span>
+<span class="token punctuation">{</span> 
+    <span class="token keyword">if</span><span class="token punctuation">(</span>root<span class="token operator">!=</span><span class="token constant">NULL</span><span class="token punctuation">)</span>    
+    <span class="token punctuation">{</span>
+        <span class="token function">InOrder</span><span class="token punctuation">(</span>root<span class="token operator">-></span>LChild<span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment" spellcheck="true">//中序遍历左子树</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%c "</span><span class="token punctuation">,</span>root<span class="token operator">-></span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment" spellcheck="true">//访问根结点 </span>
+        <span class="token function">InOrder</span><span class="token punctuation">(</span>root<span class="token operator">-></span>RChild<span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment" spellcheck="true">//中序遍历右子树</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">PostOrder</span><span class="token punctuation">(</span>BiTree root<span class="token punctuation">)</span>     <span class="token comment" spellcheck="true">//中序遍历二叉树,root为指向二叉树根结点的指针</span>
+<span class="token punctuation">{</span> 
+    <span class="token keyword">if</span><span class="token punctuation">(</span>root<span class="token operator">!=</span><span class="token constant">NULL</span><span class="token punctuation">)</span>             
+    <span class="token punctuation">{</span>
+        <span class="token function">PostOrder</span><span class="token punctuation">(</span>root<span class="token operator">-></span>LChild<span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment" spellcheck="true">//后序遍历左子树</span>
+        <span class="token function">PostOrder</span><span class="token punctuation">(</span>root<span class="token operator">-></span>RChild<span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment" spellcheck="true">//后序遍历右子树</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%c "</span><span class="token punctuation">,</span>root<span class="token operator">-></span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment" spellcheck="true">//访问根结点 </span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="C语言实现二叉树中统计叶子结点的个数-amp-度为1-amp-度为2的结点个数"><a href="#C语言实现二叉树中统计叶子结点的个数-amp-度为1-amp-度为2的结点个数" class="headerlink" title="C语言实现二叉树中统计叶子结点的个数&amp;度为1&amp;度为2的结点个数"></a>C语言实现二叉树中统计叶子结点的个数&amp;度为1&amp;度为2的结点个数</h1><h2 id="算法思想-1"><a href="#算法思想-1" class="headerlink" title="算法思想"></a>算法思想</h2><p>统计二叉树中叶子结点的个数和度为1、度为2的结点个数，因此可以参照二叉树三种遍历算法（先序、中序、后序）中的任何一种去完成，只需将访问操作具体变为判断是否为叶子结点和度为1、度为2的结点及统计操作即可。</p>
+<h2 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h2><pre class="line-numbers language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h></span></span>
+
+<span class="token keyword">int</span> LeafCount<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> Degree1Count<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> Degree2Count<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+
+<span class="token keyword">typedef</span> <span class="token keyword">char</span> DataType<span class="token punctuation">;</span>             <span class="token comment" spellcheck="true">//二叉链表结点的数据类型 </span>
+
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> Node               <span class="token comment" spellcheck="true">//定义二叉树的二叉链表结点结构 </span>
+<span class="token punctuation">{</span>
+    DataType data<span class="token punctuation">;</span>
+    <span class="token keyword">struct</span> Node <span class="token operator">*</span>LChild<span class="token punctuation">;</span>         <span class="token comment" spellcheck="true">//左子树 </span>
+    <span class="token keyword">struct</span> Node <span class="token operator">*</span>RChild<span class="token punctuation">;</span>         <span class="token comment" spellcheck="true">//右子树     </span>
+<span class="token punctuation">}</span>BiTNode<span class="token punctuation">,</span><span class="token operator">*</span>BiTree<span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">CreateBiTree</span><span class="token punctuation">(</span>BiTree <span class="token operator">*</span>bt<span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//创建二叉链表函数 </span>
+<span class="token keyword">void</span> <span class="token function">PreOrder</span><span class="token punctuation">(</span>BiTree root<span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment" spellcheck="true">//先序遍历二叉树</span>
+<span class="token keyword">void</span> <span class="token function">InOrder</span><span class="token punctuation">(</span>BiTree root<span class="token punctuation">)</span><span class="token punctuation">;</span>       <span class="token comment" spellcheck="true">//中序遍历二叉树</span>
+<span class="token keyword">void</span> <span class="token function">PostOrder</span><span class="token punctuation">(</span>BiTree root<span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment" spellcheck="true">//后序遍历二叉树</span>
+<span class="token keyword">void</span> <span class="token function">Leaf</span><span class="token punctuation">(</span>BiTree root<span class="token punctuation">)</span><span class="token punctuation">;</span>          <span class="token comment" spellcheck="true">//统计叶子结点数目 </span>
+<span class="token keyword">void</span> <span class="token function">Degree1</span><span class="token punctuation">(</span>BiTree root<span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">//统计度为1的结点数目</span>
+<span class="token keyword">void</span> <span class="token function">Degree2</span><span class="token punctuation">(</span>BiTree root<span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">//统计度为2的结点数目</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    BiTree bt<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> choice<span class="token punctuation">;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>true<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>                   <span class="token comment" spellcheck="true">//二叉树操作选择菜单 </span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"*****************Please enter your choice*****************\n\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"                choice 1：创建二叉树\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"                choice 2：先序遍历二叉树\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"                choice 3：中序遍历二叉树\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"                choice 4：后序遍历二叉树\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"                choice 5：打印叶子结点数目\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"                choice 6：打印度为1的结点数目\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"                choice 7：打印度为2的结点数目\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"                choice 0：退出\n\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span><span class="token operator">&amp;</span>choice<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">switch</span><span class="token punctuation">(</span>choice<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">case</span> <span class="token number">1</span><span class="token punctuation">:</span> <span class="token function">CreateBiTree</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>bt<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token keyword">case</span> <span class="token number">2</span><span class="token punctuation">:</span> <span class="token function">PreOrder</span><span class="token punctuation">(</span>bt<span class="token punctuation">)</span><span class="token punctuation">;</span>             
+                      <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                       <span class="token keyword">break</span><span class="token punctuation">;</span>
+
+            <span class="token keyword">case</span> <span class="token number">3</span><span class="token punctuation">:</span> <span class="token function">InOrder</span><span class="token punctuation">(</span>bt<span class="token punctuation">)</span><span class="token punctuation">;</span>               
+                    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                       <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token keyword">case</span> <span class="token number">4</span><span class="token punctuation">:</span> <span class="token function">PostOrder</span><span class="token punctuation">(</span>bt<span class="token punctuation">)</span><span class="token punctuation">;</span>                
+                    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                       <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token keyword">case</span> <span class="token number">5</span><span class="token punctuation">:</span> <span class="token function">Leaf</span><span class="token punctuation">(</span>bt<span class="token punctuation">)</span><span class="token punctuation">;</span>             
+                      <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"该二叉树叶子结点的数目为：%d\n"</span><span class="token punctuation">,</span>LeafCount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                       <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token keyword">case</span> <span class="token number">6</span><span class="token punctuation">:</span> <span class="token function">Degree1</span><span class="token punctuation">(</span>bt<span class="token punctuation">)</span><span class="token punctuation">;</span>               
+                    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"该二叉树度为1的结点数目为：%d\n"</span><span class="token punctuation">,</span>Degree1Count<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                       <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token keyword">case</span> <span class="token number">7</span><span class="token punctuation">:</span> <span class="token function">Degree2</span><span class="token punctuation">(</span>bt<span class="token punctuation">)</span><span class="token punctuation">;</span>                
+                    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"该二叉树度为2的结点数目为：%d\n"</span><span class="token punctuation">,</span>Degree2Count<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                       <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token keyword">case</span> <span class="token number">0</span><span class="token punctuation">:</span> <span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token keyword">default</span><span class="token punctuation">:</span>
+                <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"ERROR！！\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>        
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span> 
+<span class="token punctuation">}</span> 
+
+<span class="token keyword">void</span> <span class="token function">CreateBiTree</span><span class="token punctuation">(</span>BiTree <span class="token operator">*</span>bt<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">char</span> ch<span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Please enter data:"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">getchar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ch <span class="token operator">=</span> <span class="token function">getchar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>ch <span class="token operator">==</span> <span class="token string">'.'</span><span class="token punctuation">)</span>              <span class="token comment" spellcheck="true">//读入的数据是'.'则将当前树根置为空 </span>
+    <span class="token punctuation">{</span>
+        <span class="token operator">*</span>bt <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span>                      <span class="token comment" spellcheck="true">//读入正常数据,为当前树根分配地址空间 </span>
+    <span class="token punctuation">{</span>
+        <span class="token operator">*</span>bt <span class="token operator">=</span> <span class="token punctuation">(</span>BiTree<span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>BiTNode<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">(</span><span class="token operator">*</span>bt<span class="token punctuation">)</span><span class="token operator">-></span>data <span class="token operator">=</span> ch<span class="token punctuation">;</span>
+        <span class="token function">CreateBiTree</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token operator">*</span>bt<span class="token punctuation">)</span><span class="token operator">-></span>LChild<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//递归调用CreateBiTree()函数,处理左子树 </span>
+        <span class="token function">CreateBiTree</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token operator">*</span>bt<span class="token punctuation">)</span><span class="token operator">-></span>RChild<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//递归调用CreateBiTree()函数,处理右子树 </span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">PreOrder</span><span class="token punctuation">(</span>BiTree root<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">//先序遍历二叉树,root为指向二叉树根结点的指针 </span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>root<span class="token operator">!=</span><span class="token constant">NULL</span><span class="token punctuation">)</span>    
+    <span class="token punctuation">{</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%c "</span><span class="token punctuation">,</span>root<span class="token operator">-></span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment" spellcheck="true">//访问根结点 </span>
+        <span class="token function">PreOrder</span><span class="token punctuation">(</span>root<span class="token operator">-></span>LChild<span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">//先序遍历左子树 </span>
+        <span class="token function">PreOrder</span><span class="token punctuation">(</span>root<span class="token operator">-></span>RChild<span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">//先序遍历右子树</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">InOrder</span><span class="token punctuation">(</span>BiTree root<span class="token punctuation">)</span>    <span class="token comment" spellcheck="true">//中序遍历二叉树,root为指向二叉树根结点的指针</span>
+<span class="token punctuation">{</span> 
+    <span class="token keyword">if</span><span class="token punctuation">(</span>root<span class="token operator">!=</span><span class="token constant">NULL</span><span class="token punctuation">)</span>    
+    <span class="token punctuation">{</span>
+        <span class="token function">InOrder</span><span class="token punctuation">(</span>root<span class="token operator">-></span>LChild<span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment" spellcheck="true">//中序遍历左子树</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%c "</span><span class="token punctuation">,</span>root<span class="token operator">-></span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment" spellcheck="true">//访问根结点 </span>
+        <span class="token function">InOrder</span><span class="token punctuation">(</span>root<span class="token operator">-></span>RChild<span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment" spellcheck="true">//中序遍历右子树</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">PostOrder</span><span class="token punctuation">(</span>BiTree root<span class="token punctuation">)</span>     <span class="token comment" spellcheck="true">//中序遍历二叉树,root为指向二叉树根结点的指针</span>
+<span class="token punctuation">{</span> 
+    <span class="token keyword">if</span><span class="token punctuation">(</span>root<span class="token operator">!=</span><span class="token constant">NULL</span><span class="token punctuation">)</span>             
+    <span class="token punctuation">{</span>
+        <span class="token function">PostOrder</span><span class="token punctuation">(</span>root<span class="token operator">-></span>LChild<span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment" spellcheck="true">//后序遍历左子树</span>
+        <span class="token function">PostOrder</span><span class="token punctuation">(</span>root<span class="token operator">-></span>RChild<span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment" spellcheck="true">//后序遍历右子树</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%c "</span><span class="token punctuation">,</span>root<span class="token operator">-></span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment" spellcheck="true">//访问根结点 </span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">Leaf</span><span class="token punctuation">(</span>BiTree root<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>root<span class="token operator">!=</span><span class="token constant">NULL</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">Leaf</span><span class="token punctuation">(</span>root<span class="token operator">-></span>LChild<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">Leaf</span><span class="token punctuation">(</span>root<span class="token operator">-></span>RChild<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>root<span class="token operator">-></span>LChild<span class="token operator">==</span><span class="token constant">NULL</span> <span class="token operator">&amp;&amp;</span> root<span class="token operator">-></span>RChild<span class="token operator">==</span><span class="token constant">NULL</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            LeafCount<span class="token operator">++</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//统计叶子结点数目</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> 
+
+<span class="token keyword">void</span> <span class="token function">Degree1</span><span class="token punctuation">(</span>BiTree root<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>root<span class="token operator">!=</span><span class="token constant">NULL</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">Degree1</span><span class="token punctuation">(</span>root<span class="token operator">-></span>LChild<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">Degree1</span><span class="token punctuation">(</span>root<span class="token operator">-></span>RChild<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token punctuation">(</span>root<span class="token operator">-></span>LChild<span class="token operator">==</span><span class="token constant">NULL</span> <span class="token operator">&amp;&amp;</span> root<span class="token operator">-></span>RChild<span class="token operator">!=</span><span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token operator">||</span><span class="token punctuation">(</span>root<span class="token operator">-></span>LChild<span class="token operator">!=</span><span class="token constant">NULL</span> <span class="token operator">&amp;&amp;</span> root<span class="token operator">-></span>RChild<span class="token operator">==</span><span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            Degree1Count<span class="token operator">++</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//统计度为1的结点数目</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> 
+
+<span class="token keyword">void</span> <span class="token function">Degree2</span><span class="token punctuation">(</span>BiTree root<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>root<span class="token operator">!=</span><span class="token constant">NULL</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">Degree2</span><span class="token punctuation">(</span>root<span class="token operator">-></span>LChild<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">Degree2</span><span class="token punctuation">(</span>root<span class="token operator">-></span>RChild<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>root<span class="token operator">-></span>LChild<span class="token operator">!=</span><span class="token constant">NULL</span> <span class="token operator">&amp;&amp;</span> root<span class="token operator">-></span>RChild<span class="token operator">!=</span><span class="token constant">NULL</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            Degree2Count<span class="token operator">++</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//统计度为2的结点数目</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="C语言实现循环队列的初始化-amp-进队-amp-出队-amp-读取队头元素-amp-判空"><a href="#C语言实现循环队列的初始化-amp-进队-amp-出队-amp-读取队头元素-amp-判空" class="headerlink" title="C语言实现循环队列的初始化&amp;进队&amp;出队&amp;读取队头元素&amp;判空"></a>C语言实现循环队列的初始化&amp;进队&amp;出队&amp;读取队头元素&amp;判空</h1><p>队列是另一种限定性的线性表，它只允许在表的一端插入元素，而在另一端删除元素，所以队列具有先进先出的特性。</p>
+<h2 id="算法思想-2"><a href="#算法思想-2" class="headerlink" title="算法思想"></a>算法思想</h2><h3 id="系统用到的抽象数据类型定义"><a href="#系统用到的抽象数据类型定义" class="headerlink" title="系统用到的抽象数据类型定义"></a>系统用到的抽象数据类型定义</h3><pre><code>ADT Queue{
+
+  数据元素：可以是任意类型的数据，但必须属于同一个数据对象。
+
+  数据关系：队列中数据元素之间是线性关系。
+
+  基本操作：
+    1. initQueue(&amp;Q)；       //循环队列初始化
+    2. enterQueue(&amp;Q);      //循环队列入队操作
+    3. deleteQueue(&amp;Q);     //循环队列出队操作
+    4. isEmpty(&amp;Q);         //判断队列是否为空
+    5. getHead(&amp;Q,&amp;x);      //读取队列的队头元素 ,指针x指向队头元素
+
+}ADT Queue;</code></pre><h3 id="系统中子程序及功能要求"><a href="#系统中子程序及功能要求" class="headerlink" title="系统中子程序及功能要求"></a>系统中子程序及功能要求</h3><ul>
+<li>void initQueue(SeqQueue *Q);</li>
+</ul>
+<p>操作前提：Q为未初始化的队列。</p>
+<p>操作结果：将Q初始化为一个空队列。    </p>
+<ul>
+<li>int enterQueue(SeqQueue *Q,int n); </li>
+</ul>
+<p>操作前提：队列Q已存在。</p>
+<p>操作结果：在队列Q的队尾插入n。操作成功，返回值为True，否则返回值为False。</p>
+<ul>
+<li>void deleteQueue(SeqQueue *Q);</li>
+</ul>
+<p>操作前提：队列Q已存在。</p>
+<p>操作结果：将队列Q的队头元素出队。操作成功，返回值为True，否则返回值为False。</p>
+<ul>
+<li>int isEmpty(SeqQueue *Q);</li>
+</ul>
+<p>操作前提：队列Q已存在。</p>
+<p>操作结果：若队列为空，则返回True,否则返回False。     </p>
+<ul>
+<li>int getHead(SeqQueue *Q,int *x); </li>
+</ul>
+<p>操作前提：队列Q已存在。</p>
+<p>操作结果：取队列Q的队头元素（该元素不出队），并用x带回其值。操作成功，返回值为True，否则返回值为False。</p>
+<h2 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现-1"></a>代码实现-1</h2><pre class="line-numbers language-C"><code class="language-C">/*顺序表实现循环队列的基本操作 (损失一个数组空间)*/ 
+
+#include<stdio.h>
+#include<stdlib.h> 
+
+#define Queue_Size 50           //队列的最大长度 
+#define True 1
+#define False 0
+
+typedef struct
+{          
+    int elem[Queue_Size];       //队列的元素空间 
+    int front;                  //头指针指示器 
+    int rear;                    //尾指针指示器 
+}SeqQueue;
+
+void initQueue(SeqQueue *Q);        //循环队列初始化 
+int enterQueue(SeqQueue *Q,int n);  //循环队列入队操作 
+void deleteQueue(SeqQueue *Q);      //循环队列出队操作 
+int isEmpty(SeqQueue *Q);           //判断队列是否为空 
+int getHead(SeqQueue *Q,int *x);   //读取队列的队头元素 ,指针x指向队头元素 
+
+int main()
+{
+    SeqQueue Q;
+    int choice,x;
+    while(true)           //循环队列操作选择菜单 
+    {
+        printf("*****************Please enter your choice*****************\n\n");
+        printf("                choice 1：Queue initialization\n");
+        printf("                choice 2：Into the queue\n");
+        printf("                choice 3：Out of the queue\n");
+        printf("                choice 4：Determine whether the queue is empty\n");
+        printf("                choice 5：Get queue head\n");
+        printf("                choice 0：exit\n\n");
+        scanf("%d",&choice);
+        switch(choice)
+        {
+            case 1:
+                initQueue(&Q);
+                break;
+            case 2:
+                int n;
+                printf("Please enter the number into the queue elements：");
+                scanf("%d",&n);     //读入存入的队列元素个数 
+                                              //三目运算符根据返回值判断元素是否进队成功 
+                (enterQueue(&Q,n)==1)?printf("%d个元素依次进队成功\n",n):printf("%d个元素依次进队失败\n",n);    
+                break;
+            case 3:
+                deleteQueue(&Q);
+                break;
+            case 4:            //三目运算符根据返回值判断队列是否为空 
+                (isEmpty(&Q)==1)?printf("An empty Queue\n"):printf("Not an empty Queue\n");
+                break;
+            case 5:              //三目运算符根据返回值判断队头元素是否读取成功  
+                (getHead(&Q,&x)==False)?printf("An empty Queue error!!!!\n"):printf("Get head successful，队头元素为：%d\n",x); 
+                 break; 
+            case 0:
+                exit(0);
+                break;
+            default:
+                printf("ERROR！！\n");
+                exit(0);
+                break;
+        }
+    }
+    return 0;
+}
+
+void initQueue(SeqQueue *Q)
+{   //将 *Q 初始化为一个空的循环队列 
+    Q->front=Q->rear=0;
+}
+
+int enterQueue(SeqQueue *Q,int n)
+{  //将元素n入队 
+    int n1,n2;    
+    printf("Please enter into the queue elements in turn:\n");  
+    for(n1=0;n1<n;n1++)           //循环输入元素进入队列 
+    {
+        if((Q->rear+1)%Queue_Size==Q->front) return False;   //尾指针加1追上头指针，标志队列已经满了 
+        scanf("%d",&n2);        
+        Q->elem[Q->rear]=n2;      //元素进队 
+        Q->rear=(Q->rear+1)%Queue_Size;                 //重新设置队尾指针                  
+    }
+    return True;          //操作成功 
+}
+
+void deleteQueue(SeqQueue *Q)
+{   //删除队列的队头元素 
+    int a;
+    if(Q->front==Q->rear)
+    {               //队列为空，删除失败 
+        printf("An empty Queue error!!!!\n");  
+    }
+    else
+    {
+        a=Q->elem[Q->front];           //删除前先读取队头元素 
+        Q->front=(Q->front+1)%Queue_Size;   //重新设置队头指针 
+        printf("队顶元素%d出队成功.\n",a);    //操作成功 
+    }  
+}
+
+int isEmpty(SeqQueue *Q)
+{
+    if(Q->front==Q->rear)
+    {               //判断队列为空,返回True 
+        return True;  
+    }
+    return False;  //否则返回False 
+}
+
+int getHead(SeqQueue *Q,int *x)
+{
+    if(Q->front==Q->rear)
+    {               //队列为空，读取失败 
+        return False;
+    }
+    else
+    {
+        *x=Q->elem[Q->front];  //操作成功 
+        return True;            
+    }  
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="代码实现-2"><a href="#代码实现-2" class="headerlink" title="代码实现-2"></a>代码实现-2</h2><pre class="line-numbers language-C"><code class="language-C">/*顺序表实现队列的一系列操作（设置flag标志不损失数组空间）*/ 
+
+#include<stdio.h>
+#include<stdlib.h>
+
+#define Queue_Size 50     //队列的最大长度 
+#define OK 1
+#define ERROR 0
+
+typedef struct
+{
+    int elem[Queue_Size];       //队列的元素空间 
+    int front;                  //头指针指示器 
+    int rear;                    //尾指针指示器 
+    int flag;                    //flag，判断队列是否为空的标志 
+}SeqQueue;
+
+/**********************各个子函数的定义*********************/
+void initQueue(SeqQueue *Q);        //循环队列初始化 
+int enterQueue(SeqQueue *Q,int n);  //循环队列入队操作 
+void deleteQueue(SeqQueue *Q);      //循环队列出队操作 
+int isEmpty(SeqQueue *Q);           //判断队列是否为空 
+int getHead(SeqQueue *Q,int *x);   //读取队列的队头元素 ,指针x指向队头元素 
+
+int main(){
+    SeqQueue Q;
+    int choice;
+    while(true)          //循环队列操作选择菜单 
+    {
+        printf("*****************Please enter your choice*****************\n\n");
+        printf("                choice 1：Queue initialization\n");
+        printf("                choice 2：Into the queue\n");
+        printf("                choice 3：Out of the queue\n");
+        printf("                choice 4：Determine whether the queue is empty\n");
+        printf("                choice 5：Get queue head\n");
+        printf("                choice 0：exit\n\n");
+         scanf("%d",&choice);
+        switch(choice)
+        {
+            case 1:
+                initQueue(&Q);
+                break;
+            case 2:
+                int n;
+                printf("Please enter the number into the queue elements：");
+                scanf("%d",&n);  //读入存入的队列元素个数 
+                                //三目运算符根据返回值判断元素是否进队成功 
+                (enterQueue(&Q,n)==1)?printf("%d个元素依次进队成功\n",n):printf("%d个元素依次进队失败\n",n);    
+                break;
+            case 3:
+                deleteQueue(&Q);
+                break;
+            case 4:            //三目运算符根据返回值判断队列是否为空 
+                (isEmpty(&Q)==1)?printf("An empty Queue\n"):printf("Not an empty Queue\n");
+                break;
+            case 5:              //三目运算符根据返回值判断队头元素是否读取成功  
+                int x;
+                (getHead(&Q,&x)==0)?printf("An empty Queue error!!!!\n"):printf("Get head successful，队头元素为：%d\n",x); 
+                 break;     
+            case 0:
+                exit(0);
+                break;
+            default:
+                printf("ERROR！！\n");
+                exit(0);
+                break;
+        }
+    }
+    return 0;
+}
+
+/**********************各个子函数功能的实现*********************/
+void initQueue(SeqQueue *Q)   
+{                            //将 *Q 初始化为一个空的循环队列 
+    Q->front=Q->rear=0;
+    Q->flag=0;
+}
+int enterQueue(SeqQueue *Q,int n)  //进队列 
+{    //将元素n入队
+    int n1,n2;
+    if((Q->front==Q->rear)&&(Q->flag==1)) return ERROR;   //标志队列已经满了 
+    printf("Please enter into the queue elements in turn:\n");  
+    for(n1=0;n1<n;n1++)    //循环输入元素进入队列 
+    {
+        scanf("%d",&n2);
+        Q->elem[Q->rear]=n2;
+        Q->rear=(Q->rear+1)%Queue_Size;                 //重新设置队尾指针
+        if(Q->front==Q->rear)        //此处有两种情况：1.元素没有全部进入队列，空间已经满了 2.元素全部进入队列，空间刚刚好好 
+        {
+            Q->flag=1;       //flag=1:队列空间存满 
+            return ERROR; 
+        }                 
+    }
+    return OK;
+} 
+void deleteQueue(SeqQueue *Q)
+{                               //删除队列的队头元素 
+    int a;
+    if((Q->front==Q->rear)&&(Q->flag==0))        //队列为空，删除失败 
+    {
+        printf("An empty Queue error!!!!\n");
+    }
+    else
+    {
+        a=Q->elem[Q->front];               //删除前先读取队头元素 
+        Q->front=(Q->front+1)%Queue_Size;  //重新设置队头指针 
+        printf("队顶元素%d出队成功.\n",a); //操作成功
+        if(Q->front==Q->rear) Q->flag=0;   //flag=0:队列中的元素全部出队 
+    }  
+}
+
+int isEmpty(SeqQueue *Q)
+{
+    if((Q->front==Q->rear)&&(Q->flag==0))
+    {               //判断队列为空,返回OK
+        return OK;  
+    }
+    return ERROR;  //否则返回ERROR 
+}
+
+int getHead(SeqQueue *Q,int *x)
+{
+    if((Q->front==Q->rear)&&(Q->flag==0))
+    {               //队列为空，读取失败 
+        return ERROR;
+    }
+    else
+    {
+        *x=Q->elem[Q->front];  //操作成功 
+        return OK;            
+    }  
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="C语言实现顺序栈的初始化-amp-进栈-amp-出栈-amp-读取栈顶元素"><a href="#C语言实现顺序栈的初始化-amp-进栈-amp-出栈-amp-读取栈顶元素" class="headerlink" title="C语言实现顺序栈的初始化&amp;进栈&amp;出栈&amp;读取栈顶元素"></a>C语言实现顺序栈的初始化&amp;进栈&amp;出栈&amp;读取栈顶元素</h1><h2 id="代码实现-2"><a href="#代码实现-2" class="headerlink" title="代码实现"></a>代码实现</h2><pre class="line-numbers language-C"><code class="language-C">/*顺序表实现栈的一系列操作*/ 
+
+#include<stdio.h>
+#include<stdlib.h> 
+
+#define Stack_Size 50             //设栈中元素个数为50 
+#define OK 1
+#define ERROR 0
+
+typedef struct                
+{
+    int elem[Stack_Size];          //用来存放栈中元素的一维数组 
+    int top;                       //用来存放栈顶元素的下标，top为 -1 表示空栈 
+}SeqStack;
+
+/**********************各个子函数的定义*********************/
+int initStack(SeqStack *S);         //初始化顺序栈 
+void push(SeqStack *S,int n);          //顺序栈进栈运算 
+void pop(SeqStack *S);                //顺序栈出栈运算 
+int getTop(SeqStack *S,int *s);     //读取栈顶元素 
+
+int main()
+{
+    SeqStack *S;
+    int choice;
+    while(true)
+    {
+        printf("*****************Please enter your choice*****************\n\n");
+        printf("                choice 1：Stack initialization\n");
+        printf("                choice 2：Into the stack\n");
+        printf("                choice 3：Out of the stack\n");
+        printf("                choice 4：Read the stack elements\n");
+        printf("                choice 0：exit\n\n");
+         scanf("%d",&choice);
+        switch(choice)
+        {
+            case 1:
+                (initStack(S)==1)?printf("initStck success.\n"):printf("initStack ERROR\n");
+                break;
+            case 2:
+                int n;
+                printf("Please enter the number into the stack elements：");
+                scanf("%d",&n);
+                push(S,n);
+                break;
+            case 3:
+                pop(S);
+                break;
+            case 4:
+                int* s;
+                (getTop(S,s)==1)? printf("栈顶元素是：%d.\n",*s):printf("An empty stack error!!!!\n"); //三目运算符
+                break;        
+            case 0:
+                exit(0);
+                break;
+            default:
+                printf("ERROR！！\n");
+                exit(0);
+                break;
+        }
+    }
+    return 0;
+} 
+
+/**********************各个子函数功能的实现*********************/
+int initStack(SeqStack *S)    //初始化顺序栈 
+{         
+    if(S!=NULL)
+    {
+        S->top=-1;             //置为空栈 
+        return OK;
+    }
+    else return ERROR;        //内存空间不足 
+}
+void push(SeqStack *S,int n)  //进栈 ，将元素压入栈中 
+{   
+    int n1,n2;
+    if(((S->top)+n)<=Stack_Size-1)   //压入栈中的元素不能超过栈的最大存储 
+    {  
+        printf("Please enter into the stack elements in turn:\n");  
+        for(n1=0;n1<n;n1++)
+        {
+            scanf("%d",&n2);
+            S->top++;                    //移动栈顶指针 
+            S->elem[S->top]=n2;
+        }
+        printf("%d个元素依次进栈成功\n",n);
+    }
+    else
+    {                    //栈空间不够 
+        printf("ERROR There is insufficient space on the stack.\n");            
+    }                 
+}
+void pop(SeqStack *S)
+{     //栈顶元素出栈 
+    int a;
+    if(S->top==-1)
+    {               //栈为空，操作失败 
+        printf("An empty stack error!!!!\n");
+    }
+    else
+    {
+        a=S->elem[S->top];
+        S->top--;
+        printf("栈顶元素%d出栈成功.\n",a);  //出栈成功 
+    }  
+
+}
+int getTop(SeqStack *S,int *s)   //获取栈顶元素 
+{    
+    if(S->top==-1)
+    {               //栈为空，操作失败 
+        return ERROR;
+    }
+    else
+    {
+        *s=S->elem[S->top];   //读取栈顶元素成功 
+        return OK;
+    }
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="C语言实现链栈的初始化-amp-进栈-amp-出栈-amp-读取栈顶元素"><a href="#C语言实现链栈的初始化-amp-进栈-amp-出栈-amp-读取栈顶元素" class="headerlink" title="C语言实现链栈的初始化&amp;进栈&amp;出栈&amp;读取栈顶元素"></a>C语言实现链栈的初始化&amp;进栈&amp;出栈&amp;读取栈顶元素</h1><h2 id="代码实现-3"><a href="#代码实现-3" class="headerlink" title="代码实现"></a>代码实现</h2><pre class="line-numbers language-C"><code class="language-C">/*链表实现栈的一系列操作*/
+
+#include<stdio.h>
+#include<stdlib.h> 
+
+#define OK 1
+#define ERROR 0
+
+typedef struct node
+{
+    int data;
+    struct node *next;
+}LinkStackNode,*LinkStack;
+
+/**********************各个子函数的定义*********************/
+void initStack(LinkStack *top);       //初始化链栈 
+int push(LinkStack top,int n);        //链栈进栈操作 
+void pop(LinkStack top);              //链栈出栈操作 
+int getTop(LinkStack top,int *s);     //读取链栈栈顶元素 
+
+int main()
+{
+    LinkStack top;
+    int choice;
+    while(true)
+    {
+        printf("*****************Please enter your choice*****************\n\n");
+        printf("                choice 1：Stack initialization\n");
+        printf("                choice 2：Into the stack\n");
+        printf("                choice 3：Out of the stack\n");
+        printf("                choice 4：Read the stack elements\n");
+        printf("                choice 0：exit\n\n");
+         scanf("%d",&choice);
+        switch(choice)
+        {
+            case 1:
+                initStack(&top);
+                break;
+            case 2:
+                int n;
+                printf("Please enter the number into the stack elements：");
+                scanf("%d",&n);
+                (push(top,n)==1)?printf("%d个元素依次进栈成功\n",n):printf("%d个元素依次进栈失败\n",n);    
+                break;
+            case 3:
+                pop(top);
+                break;
+            case 4:
+                int* s;
+                (getTop(top,s)==1)? printf("栈顶元素是：%d.\n",*s):printf("An empty stack error!!!!\n"); //三目运算符
+                break;        
+            case 0:
+                exit(0);
+                break;
+            default:
+                printf("ERROR！！\n");
+                exit(0);
+                break;
+        }
+    }
+    return 0;
+}
+
+/**********************各个子函数功能的实现*********************/
+void initStack(LinkStack *top)
+{   //初始化 
+    *top=(LinkStack)malloc(sizeof(LinkStackNode));  //带头结点的单链表 
+    (*top)->next=NULL; 
+} 
+
+int push(LinkStack top,int n)    //进栈 ，将元素压入栈中 
+{        
+    LinkStackNode *temp;
+    int n1,n2;
+    printf("Please enter into the stack elements in turn:\n");  
+    for(n1=0;n1<n;n1++)
+    {
+        scanf("%d",&n2);
+        temp=(LinkStackNode *)malloc(sizeof(LinkStackNode));  //结点申请空间 
+        if(temp==NULL) return ERROR;  //申请空间失败
+        temp->data=n2;
+        temp->next=top->next;          //采用头插法存储元素 
+        top->next=temp; 
+    }
+    return OK;
+}
+
+void pop(LinkStack top)          //栈顶元素出栈 
+{           
+    int a;
+    LinkStackNode *temp;
+    if(top->next==NULL)
+    {               //栈为空，出栈失败 
+        printf("An empty stack error!!!!\n");
+    }
+    else
+    {
+        temp=top->next;
+        a=temp->data;
+        top->next=temp->next;
+        free(temp);
+        printf("栈顶元素%d出栈成功.\n",a);  
+    }  
+}
+
+int getTop(LinkStack top,int *s)        //获读取栈顶元素 
+{    
+    if(top->next==NULL)              //栈为空，读取栈顶元素失败 
+    { 
+        return ERROR;
+    }
+    else
+    {
+        *s=(top->next)->data;           //读取栈顶元素，不出栈 
+        return OK;
+    }
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="C语言实现链队列的初始化-amp-进队-amp-出队"><a href="#C语言实现链队列的初始化-amp-进队-amp-出队" class="headerlink" title="C语言实现链队列的初始化&amp;进队&amp;出队"></a>C语言实现链队列的初始化&amp;进队&amp;出队</h1><h2 id="代码实现-4"><a href="#代码实现-4" class="headerlink" title="代码实现"></a>代码实现</h2><pre class="line-numbers language-C"><code class="language-C">/*链表实现队列的一系列操作*/ 
+
+#include<stdio.h>
+#include<stdlib.h> 
+
+#define OK 1
+#define ERROR 0
+
+typedef struct node
+{
+    int data;                            //数据域 
+    struct node *next;                  //指针域 
+}LinkQueueNode;
+typedef struct
+{
+    LinkQueueNode *front;              //头指针 
+    LinkQueueNode *rear;               //尾指针 
+}LinkQueue;
+
+/**********************各个子函数的定义*********************/
+void initQueue(LinkQueue *Q);          //链队列初始化       
+int enterQueue(LinkQueue *Q,int n);    //链队列入队操作 
+void deleteQueue(LinkQueue *Q);        //链队列出队操作 
+
+int main()
+{
+    LinkQueue Q;
+    int choice;
+    while(true)
+    {
+        printf("*****************Please enter your choice*****************\n\n");
+        printf("                choice 1：Queue initialization\n");
+        printf("                choice 2：Into the queue\n");
+        printf("                choice 3：Out of the queue\n");
+        printf("                choice 0：exit\n\n");
+         scanf("%d",&choice);
+        switch(choice)
+        {
+            case 1:
+                initQueue(&Q);
+                break;
+            case 2:
+                int n;
+                printf("Please enter the number into the queue elements：");
+                scanf("%d",&n);
+                (enterQueue(&Q,n)==1)?printf("%d个元素依次进队成功\n",n):printf("%d个元素依次进队失败\n",n);    
+                break;
+            case 3:
+                deleteQueue(&Q);
+                break;    
+            case 0:
+                exit(0);
+                break;
+            default:
+                printf("ERROR！！\n");
+                exit(0);
+                break;
+        }
+    }
+    return 0;
+}
+
+/**********************各个子函数功能的实现*********************/
+void initQueue(LinkQueue *Q)   
+{            //将 Q 初始化为一个空链队列 
+    Q->front=(LinkQueueNode *)malloc(sizeof(LinkQueueNode));
+    Q->rear=Q->front;
+    Q->front->next=NULL;
+}
+
+int enterQueue(LinkQueue *Q,int n)  //进队列 
+{
+    LinkQueueNode *temp;
+    int n1,n2;
+    printf("Please enter into the queue elements in turn:\n");  
+    for(n1=0;n1<n;n1++)
+    {
+        scanf("%d",&n2);
+        temp=(LinkQueueNode *)malloc(sizeof(LinkQueueNode));
+        if(temp==NULL) return ERROR;  //申请空间失败
+        temp->data=n2;
+        temp->next=NULL;
+        Q->rear->next=temp; 
+        Q->rear=temp;                 //队尾指针后移                    
+    }
+    return OK;
+}
+
+void deleteQueue(LinkQueue *Q)
+{
+    int a;
+    LinkQueueNode *temp;
+    if(Q->front==Q->rear)               //队为空，出栈失败 
+    {
+        printf("An empty Queue error!!!!\n");
+    }
+    else
+    {
+        temp=Q->front->next;
+        a=temp->data;
+        Q->front->next=temp->next;
+        if(Q->front==temp)           //如果队中只有一个元素X，则X出队后成为空队 
+        {
+            Q->rear=Q->front;
+        }
+        free(temp);                            //释放存储空间 
+        printf("队顶元素%d出队成功.\n",a);   
+    }  
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="C语言实现邻接矩阵创建无向图"><a href="#C语言实现邻接矩阵创建无向图" class="headerlink" title="C语言实现邻接矩阵创建无向图"></a>C语言实现邻接矩阵创建无向图</h1><h2 id="代码实现-5"><a href="#代码实现-5" class="headerlink" title="代码实现"></a>代码实现</h2><pre class="line-numbers language-C"><code class="language-C">/* '邻接矩阵' 实现无向图的创建、深度优先遍历*/
+#include <stdio.h>
+#include <stdlib.h> 
+
+#define MaxVex      100          //最多顶点个数
+#define INFINITY    32768        //表示极大值，即 ∞
+#define TRUE        1
+#define FALSE       0
+#define OK          1
+#define ERROR       0
+
+typedef char VertexType;    //假设顶点数据类型为字符类型
+typedef int  EdgeType;      //对于无权图，用1或0表示是否相邻，对带权图，则为权值类型 
+typedef struct
+{
+    VertexType vertex[MaxVex];            //顶点数组
+    EdgeType arcs[MaxVex][MaxVex];       //邻接矩阵
+    int    vexnum,arcnum;                //图中的顶点数和边数 
+}Graph;
+
+int visited[MaxVex];    //访问标志数组    
+
+/**********************各个子函数的定义*********************/
+void init(Graph *G);                    //初始化邻接矩阵 
+int LocateVertex(Graph *G,VertexType v);//求顶点位置函数
+int createUDG(Graph *G);                //创建一个无向图 
+void DepthFirstSearch(Graph G, int i);  //图的深度优先遍历
+void TraverseGraph(Graph G);
+
+/**************************主函数*************************/
+int main()
+{
+    Graph G;
+    int choice;
+    while(true)
+    {
+         printf("*****************Please enter your choice*****************\n\n");
+        printf("                choice 1：Initialization\n");
+        printf("                choice 2：Create Graph\n");
+                printf("                choice 3：Depth First Search\n");       
+        printf("                choice 0：exit\n\n");
+         scanf("%d",&choice);
+        switch(choice)
+        {
+            case 1:
+                init(&G);
+                break;
+            case 2:
+                (createUDG(&G)==1)?printf("Create Graph success.\n"):printf("Create Graph ERROR\n");
+                break;
+            case 3:
+                printf("图的深度优先遍历为: ");
+                TraverseGraph(G);
+                break;        
+            case 0:
+                exit(0);
+                break;
+            default:
+                printf("ERROR！！\n");
+                exit(0);
+                break;
+        }
+    }
+    return 0;
+} 
+
+/**********************各个子函数功能的实现*********************/
+void init(Graph *G)   //初始化邻接矩阵 
+{
+    int i,j;
+    printf("请输入图的顶点个数和边数："); 
+    scanf("%d %d",&(G->vexnum),&(G->arcnum));//输入图的顶点个数和边数 
+    for(i=0;i<G->vexnum;i++)              //初始化
+    {
+        for(j=0;j<G->vexnum;j++)
+        {
+            G->arcs[i][j]=INFINITY;
+        }
+    } 
+    printf("图的初始化成功\n"); 
+}
+
+int LocateVertex(Graph *G,VertexType v)  //查找并返回顶点的位置 
+{
+    int j=0,k;
+    for(k=0;k<G->vexnum;k++)
+    {
+        if(G->vertex[k]==v)
+        {
+            j=k;
+            break;
+        }
+    }
+    return j;    
+}
+
+int createUDG(Graph *G)  //创建一个无向图
+{
+    int i,j,k,weight;
+    VertexType v1,v2;
+    for(i=0;i<G->vexnum;i++)
+    {
+        printf("请输入图的第 %d 顶点：",i+1);
+        getchar();
+        scanf("%c",&(G->vertex[i]));     //输入图的顶点集 
+    } 
+    for(k=0;k<G->arcnum;k++)
+    {
+        printf("请分别输入图的第 %d 条边的两个顶点和权值",k+1);
+        getchar();
+        scanf("%c %c %d",&v1,&v2,&weight);//输入一条边的两个顶点、权值 
+        i=LocateVertex(G,v1);
+        j=LocateVertex(G,v2);
+        G->arcs[i][j]=weight;     //建立顶点之间的关系 
+        G->arcs[j][i]=weight;
+    } 
+    return OK;
+}
+
+void DepthFirstSearch(Graph G, int i)   //图的深度优先遍历
+{
+    int j;
+    visited[i] = TRUE;
+    printf("%c ",G.vertex[i]);  
+    for (j=0; j<G.vexnum; j++)
+    {
+        if (G.arcs[i][j]!=INFINITY  &&  !visited[j])
+            DepthFirstSearch(G,j);
+    }
+}
+
+void TraverseGraph(Graph G)
+{
+    int i;
+    for (i=0; i<G.vexnum; i++)   //初始化访问标志数组
+        visited[i] = FALSE;
+
+    for (i=0; i<G.vexnum; i++)//循环调用深度优先遍历连通子图的操作，若图G是连通图，则此调用只执行一次 
+    {
+        if (!visited[i])
+            DepthFirstSearch(G, i);
+    }
+    printf("\n");
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="代码测试"><a href="#代码测试" class="headerlink" title="代码测试"></a>代码测试</h2><p><img src="/2018/11/25/CDateStructLearning/image-20200408001227139.png" alt="image-20200408001227139"></p>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        Author:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Qftm</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        Link:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://Qftm.github.io/2018/11/25/CDateStructLearning/">http://Qftm.github.io/2018/11/25/CDateStructLearning/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        Reprint policy:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    All articles in this blog are used except for special statements
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    reprint polocy. If reproduced, please indicate source
+                    <a href="/about" target="_blank">Qftm</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/C/">
+                                    <span class="chip bg-color">C</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+                                    <span class="chip bg-color">数据结构</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+            <div class="card">
+                <a href="/2018/12/22/2018-The-3rd-nnctf-writeup/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/nnctf-1.png" class="responsive-img" alt="NNctf2018 Web WriteUp">
+                        
+                        <span class="card-title">NNctf2018 Web WriteUp</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            WEB1.超简单分值：100 类型：WEB 已解决
+题目：超简单的web题 http://gxnnctf.gxsosec.cn:12311/
+)
+代码审计
+&lt;?php
+$white_list = range(0,9);
+require
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2018-12-22
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/CTF/" class="post-category">
+                                    CTF
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/CTF/">
+                        <span class="chip bg-color">CTF</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2018/11/07/CSRF-Bug-Test/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/csrf-1.png" class="responsive-img" alt="CSRF 漏洞分析与测试">
+                        
+                        <span class="card-title">CSRF 漏洞分析与测试</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            CSRF简介CSRF中文名：跨站请求伪造，英文译为：Cross-site request forgery，CSRF攻击就是attacker（攻击者）利用victim（受害者）尚未失效的身份认证信息(cookie、session等)，以某种方
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2018-11-07
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Web%E5%AE%89%E5%85%A8/" class="post-category">
+                                    Web安全
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/CSRF/">
+                        <span class="chip bg-color">CSRF</span>
+                    </a>
+                    
+                    <a href="/tags/DVWA/">
+                        <span class="chip bg-color">DVWA</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + 'From: Qftm<br />'
+            + 'Author: Qftm<br />'
+            + 'Link: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2018</span>
+            <a href="/about" target="_blank">Qftm</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">370.8k</span>&nbsp;字
+            
+            
+            
+            
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+    <a href="https://github.com/Qftm" 
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:Qftmbin@gmail.com" 
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+    <a href="https://twitter.com/Qftmer" 
+        <i class="fab fa-twitter"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;Search</span>
+            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

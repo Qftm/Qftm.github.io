@@ -1,0 +1,998 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Android SQLite 数据库学习, Qftm">
+    <meta name="description" content="Maybe a hacker">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Android SQLite 数据库学习 | Qftm</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.1"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Qftm</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>Index</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>Tags</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>Categories</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>Archives</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-heartbeat" style="zoom: 0.6;"></i>
+      
+      <span>About</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>Friends</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="Search" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Qftm</div>
+        <div class="logo-desc">
+            
+            Maybe a hacker
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			Index
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			Tags
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			Categories
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			Archives
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-heartbeat"></i>
+			
+			About
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			Friends
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/bg.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Android SQLite 数据库学习</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/SQLite/">
+                                <span class="chip bg-color">SQLite</span>
+                            </a>
+                        
+                            <a href="/tags/Android/">
+                                <span class="chip bg-color">Android</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" class="post-category">
+                                编程开发
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    2019-02-13
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
+                    2020-12-22
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    2.2k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    8 Min
+                </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="SQLite-数据库简介"><a href="#SQLite-数据库简介" class="headerlink" title="SQLite 数据库简介"></a>SQLite 数据库简介</h1><p>　　SQLite 是一个轻量级数据库，它是D. Richard Hipp建立的公有领域项目，在2000年发布了第一个版本。它的设计目标是嵌入式的，而且占用资源非常低，在内存中只需要占用几百kB的存储空间，这也是Android移动设备采用SQLite数据库的重要原因之一。</p>
+<p>　　SQLite 是遵守ACID的关系型数据库管理系统。这里的ACID是指数据库事务正确执行的4个基本要素，即原子性(Atomicity)、致性 ( Consistency)、 隔离性( lolation). 持久性( Durabilily )。它能够支持Windows/Linux/UNIX等主流的操作系统，能够跟很多程序语言，例如Tcl、C#、PHP、 Java等相结合。比起Mysql、PostgreSQL 这两款开源数据库管理系统来讲，SQLite的处理速度更快。</p>
+<p>　　SQLite 没有服务器进程，它通过文件保存数据，该文件是跨平台的，可以放在其他平台中使用。并且在保存数据时，支持null(零) 、integer (整数)、real (浮点数字) 、text (字符串文本)和blob(二进制对象)5种数据类型。但实际上SQLite也接收varchar(n)、 char(n)、decimal(p,s)等数据类型，只不过在运算或保存时会转换成对应的5种数据类型。因此，可以将各种类型的数据保存到任何字段中，而不用关心字段声明的数据类型。</p>
+<h1 id="SQLite-数据库创建"><a href="#SQLite-数据库创建" class="headerlink" title="SQLite 数据库创建"></a>SQLite 数据库创建</h1><p>　　在Android系统中，创建SQLite数据库是非常简单的。Android系统推荐使用 SQLiteOpenHelper 的子类创建数据库，因此需要创建一个继承自SQLiteOpenHelper，并重写该类中的onCreate()方法和onUpgrade()方法即可。</p>
+<p>　　为什么要使用SQLiteOpenHelper的子类呢，因为SQLiteOpenHelper为抽象类(abstract)，必须使用其子类进行继承，同时还需要重写父类的抽象方法，onCreate()方法和onUpgrade()方法都是其父类中的抽象方法。</p>
+<pre><code> 1 public class MyHelper extends SQLiteOpenHelper {
+ 2     @Override
+ 3     private static String DATABASE_NAME = &quot;alan.db&quot;;
+ 4     private static int DATABASE_VERSION = 2;
+ 5     public MyHelper(Context context){
+ 6         super(context,DATABASE_NAME,null,DATABASE_VERSION);          //调用父类的构造方法
+ 7     }
+ 8 
+ 9     //数据库第一次被创建时调用该方法
+10     public void onCreate(SQLiteDatabase db){
+11         //初始化数据库的表结构，执行一条建表的SQL语句
+12         db.execSQL(&quot;CREATE TABLE IF NOT EXISTS person(_id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(20), price INTEGER);
+13 
+14     }
+15     //当数据库版本增加时调用
+16     public void onUpgrade(SQLiteDatabase db,int oldVersion,int newVersion){
+17     
+18     }
+19 }  </code></pre><pre><code>1 //SQLiteOpenHelper类的构造函数有四个参数
+2 //context代表上下文，name是数据库名字，factory是游标工厂，一般情况下为null值，version是数据库版本，软件在今后的升级中会用到。
+3 public SQLiteOpenHelper(Context context, String name, CursorFactory factory, int version) {
+4 　　this(context, name, factory, version, null);
+5 }</code></pre><h1 id="SQLite-数据库使用"><a href="#SQLite-数据库使用" class="headerlink" title="SQLite 数据库使用"></a>SQLite 数据库使用</h1><p>　　前面介绍了SQLite 数据库及如何创建数据库，接下来将针对SQLite数据库的增、删、改、查操作进行详细讲解。</p>
+<h2 id="SQLite-基本操作方法-一"><a href="#SQLite-基本操作方法-一" class="headerlink" title="SQLite 基本操作方法 一"></a>SQLite 基本操作方法 一</h2><h3 id="增加一条数据"><a href="#增加一条数据" class="headerlink" title="增加一条数据"></a>增加一条数据</h3><p>　　下面以 alan.db 数据库中的person表为例，介绍如何使用 SQLiteDatabase对象的insert()方法向表中插入一条数据，示例代码如下。</p>
+<pre><code>1 public void insert(String name, String price){
+2     SQLiteDatabase db = myHelper.getWritableDatabase(); //获取可写入的 SQLiteDatabase 对象
+3     ContentValues values = new ContentValues();   //创建 ContentValues 对象 
+4     values.put(&quot;name&quot;,name);          //将数据添加到ContentValues对象
+5     values.put(&quot;price&quot;,price);
+6     long id = db.insert(&quot;person&quot;,null,values); //插入一条数据到person表 
+7     db.close();   //关闭数据库   
+8 }</code></pre><p>　　在上述代码中，通过getWritableDatabase()方 法得到SQLiteDatabase对象，然后获得ContentValues对象并将数据添加到ContentValues对象中，最后调用inser()方法将数据插入到person表中。</p>
+<p>　　insert()方法接收3个参数，第一个参数是数据表的名称，第二个参数表示如果发现将要插入的行为空行时，会将这个列名的值设为null,第三个参数为ContentValues对象。ContentValues类类似于Map类，通过键值对的形式存入数据，这里的key表示插入数据的列名，value 表示要插入的数据。</p>
+<p>　　需要注意的是，使用完SQLiteDatabase对象后定要调用close()方法关闭，否则数据库连接会一直存在，不断消耗内存，当系统内存不足时将获取不到SQLiteDatabase对象，并且会报出数据库未关闭异常。</p>
+<h3 id="修改一条数据"><a href="#修改一条数据" class="headerlink" title="修改一条数据"></a>修改一条数据</h3><p>　　下面介绍如何使用SQLiteDatabase的update()方法修改person表中的数据，示例代码如下。</p>
+<pre><code>1 public int update(String name, string price) {
+2     SQLiteDatabase db = myHelper.getwritableDatabasel;
+3     ContentValues values = new ContentValues();
+4     values.put (&quot;price&quot;, price);
+5     int number = db.update(&quot;person&quot;,values,&quot;name =?&quot;,new String[]{name});
+6     db.close();
+7     return number;
+8 }</code></pre><p>　　在上述代码中，通过SQLiteDatebase对象db调用update()方法用来修改数据库中的数据，update()方法接收4个参数，第一个参数表示表名，第二个参数接收一个ContentValues对象，第三个参数可选择where语句，第四个参数表示whereClause语句中的占位参数列表，这些字符串会替换掉where条件中的 “ ? “。</p>
+<h3 id="删除一条数据"><a href="#删除一条数据" class="headerlink" title="删除一条数据"></a>删除一条数据</h3><p>　　下面介绍如何使用SQLiteDatabase的delete()方法修改person表中的数据，示例代码如下。</p>
+<pre><code>1  public int delete(long id) {
+2      SQLiteDatabase db = myHelper.getwritableDatabasel;
+3      int number = db.delete(&quot;person&quot;,_id =?,&quot;name =?&quot;,new String[]{id});
+4      db.close();
+5      return number;
+6  }</code></pre><p>　　从上述代码中可以看出，删除数据不同于增加和修改数据，因为删除数据不需要ContentValues来添加数据。</p>
+<h3 id="查询一条数据"><a href="#查询一条数据" class="headerlink" title="查询一条数据"></a>查询一条数据</h3><p>　　在进行数据查询时使用的是SQLiteDatabase的query0方法，该方法返回的是一个行数集合Cursor。 Cursor 是一个游标接口，提供了遍历查询结果的方法，如移动指针方法move(),获得列值方法getString()等，通过这些方法可以获取集合中的属性值以及序号等。</p>
+<p>　　需要注意的是，在使用完Cursor对象后，一定要及时关闭，否则会造成内存泄露。下面介绍如何使用SQLiteDatabase的query()方法查询数据，示例代码如下。</p>
+<pre><code>public boolean find(long id) {
+    SQLiteDatabase db = helper .getReadableDatabase ();//获取可读取的 SQLiteDatabase 对象
+Cursor cursor = db.query(&quot;person&quot;, null,“_id =?&quot;, new String[]{id}),null, null, null) ; boolean result = cursor.moveToNext () ; cursor.close(); // 关闭游标  db.close() ; return result; }</code></pre><pre><code> 1 //Cursor 中的的重要方法：
+ 2 
+ 3 c.move(int offset); //以当前位置为参考,移动到指定行  
+ 4 c.moveToFirst();    //移动到第一行  
+ 5 c.moveToLast();     //移动到最后一行  
+ 6 c.moveToPosition(int position); //移动到指定行  
+ 7 c.moveToPrevious(); //移动到前一行  
+ 8 c.moveToNext();     //移动到下一行  
+ 9 c.isFirst();        //是否指向第一条  
+10 c.isLast();     //是否指向最后一条  
+11 c.isBeforeFirst();  //是否指向第一条之前  
+12 c.isAfterLast();    //是否指向最后一条之后  
+13 c.isNull(int columnIndex);  //指定列是否为空(列基数为0)  
+14 c.isClosed();       //游标是否已关闭  
+15 c.getCount();       //总数据项数  
+16 c.getPosition();    //返回当前游标所指向的行数  
+17 c.getColumnIndex(String columnName);//返回某列名对应的列索引值，如果不存在返回-1  
+18 c.getString(int columnIndex);   //返回当前行指定列的值  
+19 c·getColumnIndexOrThrow(String columnName)   //从零开始返回指定列名称，如果不存在将抛出IllegalArgumentException 异常。
+20 c.close()  //关闭游标，释放资源</code></pre><p>　　在上述代码中，介绍了使用query()方法查询person表中的数据，query()方法接收7个参数，第一个参数表示表名称，第二个参数表示查询的列名，第三个参数接收查询条件子句，第四个参数接收查询子句对应的条件值，第五个参数表示分组方式，第六个参数接收having条件，即定义组的过滤器，第七个参数表示排序方式。</p>
+<h2 id="SQLite-基本操作方法-二"><a href="#SQLite-基本操作方法-二" class="headerlink" title="SQLite 基本操作方法 二"></a>SQLite 基本操作方法 二</h2><p>　　这种操作方法类似于执行SQL语句 (语法和SQL server类似)。</p>
+<h3 id="增加一条数据-1"><a href="#增加一条数据-1" class="headerlink" title="增加一条数据"></a>增加一条数据</h3><pre><code>db.execSQL(&quot;insert into perosn (name, price) values(?,?)&quot;,new String[]{name,price})</code></pre><h3 id="修改一条数据-1"><a href="#修改一条数据-1" class="headerlink" title="修改一条数据"></a>修改一条数据</h3><pre><code>db.execSQL(&quot;update person set price =? where name =?&quot;, new String[]{price,name});</code></pre><h3 id="删除一条数据-1"><a href="#删除一条数据-1" class="headerlink" title="删除一条数据"></a>删除一条数据</h3><pre><code>db.execSQL(&quot;delete from person where _id = ?&quot;,new String[]{id});</code></pre><h3 id="查询一条数据-1"><a href="#查询一条数据-1" class="headerlink" title="查询一条数据"></a>查询一条数据</h3><pre><code>Cursor cursor = db.rawQuery(&quot;select _id,name,price from person where id =?&quot;,new String[]{id});</code></pre><p>　　从上述代码可以看出，查询操作与增、删、改操作有所不同，前面三个操作都是通过execSQL()方法执行SQL语句，而查询操作使用的是rawQuery()方法。这是因为查询数据库会返回一个结果集Cursor，而execSQL()方法则没有返回值。</p>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        Author:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Qftm</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        Link:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://Qftm.github.io/2019/02/13/Android-SQLite-database-learning/">http://Qftm.github.io/2019/02/13/Android-SQLite-database-learning/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        Reprint policy:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    All articles in this blog are used except for special statements
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    reprint polocy. If reproduced, please indicate source
+                    <a href="/about" target="_blank">Qftm</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/SQLite/">
+                                    <span class="chip bg-color">SQLite</span>
+                                </a>
+                            
+                                <a href="/tags/Android/">
+                                    <span class="chip bg-color">Android</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+            <div class="card">
+                <a href="/2019/02/13/android-personal-mobile-phone-address-book-development/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/android-1.jpg" class="responsive-img" alt="Android 个人手机通讯录开发">
+                        
+                        <span class="card-title">Android 个人手机通讯录开发</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Android 个人手机通讯录开发数据存储SQLite 数据库开发工具Android StudioPhone Module 简介界面展示
+
+文件结构简单分析
+个人手机通讯录代码实现清单文件 (AndroidManifest.xml)&lt;
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-02-13
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" class="post-category">
+                                    编程开发
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Android/">
+                        <span class="chip bg-color">Android</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/01/27/android-program-structure/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/android-3.jpg" class="responsive-img" alt="Android 程序结构">
+                        
+                        <span class="card-title">Android 程序结构</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Android程序在创建时，Android Studio就为其构建了基本结构，设计者可以在此结构上开发应用程序，因此掌握Android程序结构是很有必要的。下面以HelloWorid程序为例，分析Android 程序结构：
+
+在图中，可以看
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-01-27
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" class="post-category">
+                                    编程开发
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Android/">
+                        <span class="chip bg-color">Android</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + 'From: Qftm<br />'
+            + 'Author: Qftm<br />'
+            + 'Link: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2018</span>
+            <a href="/about" target="_blank">Qftm</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">370.8k</span>&nbsp;字
+            
+            
+            
+            
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+    <a href="https://github.com/Qftm" 
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:Qftmbin@gmail.com" 
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+    <a href="https://twitter.com/Qftmer" 
+        <i class="fab fa-twitter"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;Search</span>
+            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

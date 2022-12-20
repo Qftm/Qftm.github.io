@@ -1,0 +1,1127 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Kali Rolling 2019 系统配置总结（Updateing）, Qftm">
+    <meta name="description" content="Maybe a hacker">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Kali Rolling 2019 系统配置总结（Updateing） | Qftm</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.1"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Qftm</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>Index</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>Tags</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>Categories</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>Archives</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-heartbeat" style="zoom: 0.6;"></i>
+      
+      <span>About</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>Friends</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="Search" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Qftm</div>
+        <div class="logo-desc">
+            
+            Maybe a hacker
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			Index
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			Tags
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			Categories
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			Archives
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-heartbeat"></i>
+			
+			About
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			Friends
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/banner/bg.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Kali Rolling 2019 系统配置总结（Updateing）</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Linux/">
+                                <span class="chip bg-color">Linux</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Others/" class="post-category">
+                                Others
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    2019-10-27
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
+                    2020-08-15
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    3.2k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    13 Min
+                </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>主系统<strong>Kali Linux</strong>确实好用，继《<a href="https://qftm.github.io/2018/07/04/Kali-Rolling-2018/">Kali Rolling 2018 系统配置</a>》之后，自己又全面详细的总结了关于Kali Linux系统安装后的配置，<strong>《Kali Rolling 2019 系统配置总结（Updateing）》</strong>相比<strong>《Kali Rolling 2018 系统配置》</strong>更加全面详细。希望，这篇文章能够帮助到喜欢Kali Linux的爱好者。</p>
+<h1 id="系统展示"><a href="#系统展示" class="headerlink" title="系统展示"></a>系统展示</h1><p><img src="/2019/10/27/Kali-Rolling-2019/1594459-20191122120151572-218154639.png" alt></p>
+<p><img src="/2019/10/27/Kali-Rolling-2019/1594459-20191122120421232-1729964386.png" alt></p>
+<h1 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h1><h2 id="系统镜像"><a href="#系统镜像" class="headerlink" title="系统镜像"></a>系统镜像</h2><p>最新版Kali Linux镜像</p>
+<pre><code>kali-linux-2019.3-amd64.iso</code></pre><p>使用Grub桌面引导，美化更加方便</p>
+<h2 id="启动盘"><a href="#启动盘" class="headerlink" title="启动盘"></a>启动盘</h2><pre><code>1、大于8G的U盘
+
+2、使用UEFI+GPT引导安装
+
+3、将下载的镜像直接解压到U盘中，默认EFI引导</code></pre><h2 id="主机"><a href="#主机" class="headerlink" title="主机"></a>主机</h2><pre><code>台式机或笔记本</code></pre><h2 id="系统BIOS设置"><a href="#系统BIOS设置" class="headerlink" title="系统BIOS设置"></a>系统BIOS设置</h2><pre><code>1、根据自己电脑品牌的不一样，按照各自的方法进入BIOS页面
+
+2、在BIOS页面中设置U盘启动
+
+3、保存后重启进行系统安装</code></pre><h1 id="添加用户"><a href="#添加用户" class="headerlink" title="添加用户"></a>添加用户</h1><h2 id="添加普通用户"><a href="#添加普通用户" class="headerlink" title="添加普通用户"></a>添加普通用户</h2><pre><code>useradd -m -G sudo,video,audio,cdrom -s /bin/bash Qftm</code></pre><p>把某个用户添加到组中:</p>
+<pre><code>sudo usermod -a 用户名 -G 组名</code></pre><p>递归更改目录/文件所属用户组： </p>
+<pre><code>sudo chgrp 用户名 -R MyDocuments/</code></pre><p>递归更改目录/文件拥有者：</p>
+<pre><code>sudo chown 用户名 -R MyDocuments/</code></pre><h1 id="软件升级与系统更新"><a href="#软件升级与系统更新" class="headerlink" title="软件升级与系统更新"></a>软件升级与系统更新</h1><h2 id="添加源"><a href="#添加源" class="headerlink" title="添加源"></a>添加源</h2><pre><code>vi /etc/apt/sources.list，比较好用的kali源
+#官方源
+deb http://http.kali.org/kali kali-rolling main non-free contrib
+deb-src http://http.kali.org/kali kali-rolling main non-free contrib
+
+#浙大
+deb http://mirrors.zju.edu.cn/kali kali-rolling main contrib non-free
+deb-src http://mirrors.zju.edu.cn/kali kali-rolling main contrib non-free
+
+#中科大
+deb http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib
+deb-src http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib
+
+#阿里Debian
+deb http://mirrors.aliyun.com/debian stable main contrib non-free</code></pre><h2 id="更新软件列表并更新软件"><a href="#更新软件列表并更新软件" class="headerlink" title="更新软件列表并更新软件"></a>更新软件列表并更新软件</h2><pre><code>apt-get update &amp; apt-get upgrade -y
+
+# 检测某个软件是否有更新
+apt list --upgradable|grep xxx
+
+# 更新软件
+apt install xxx
+
+# 升级所有软件
+apt-get upgrade</code></pre><ul>
+<li><strong>解决安装进程占用</strong></li>
+</ul>
+<p>在apt安装软件的时候可能会出现以下问题：</p>
+<pre><code>无法获得锁 /var/lib/apt/lists/lock - open (11: 资源暂时不可用)</code></pre><p>这是因为apt进程被占用了，解决方法也比较简单粗暴，直接删除掉lock锁文件即可：</p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">rm</span> /var/cache/apt/archives/lock
+<span class="token function">rm</span> /var/lib/dpkg/lock<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<ul>
+<li><strong>解决系统中文乱码</strong></li>
+</ul>
+<pre><code>apt update
+
+# 设置编码字体为：zh_CN.UTF-8 UTF-8
+dpkg-reconfigure locales
+
+# 安装中文字体
+apt install xfonts-intl-chinese
+apt install ttf-wqy-microhei
+
+# 重启
+reboot</code></pre><ul>
+<li><strong>解决VMware安装Kali Linux扩展桌面</strong></li>
+</ul>
+<p>Vmware安装的Kali Linux的话，得安装open-vm-tools，来优化使用体验:</p>
+<pre class="line-numbers language-bash"><code class="language-bash">apt update
+apt <span class="token function">install</span> open-vm-tools-desktop fuse
+
+<span class="token comment" spellcheck="true"># 安装完重启一下生效</span>
+<span class="token function">reboot</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="升级操作系统"><a href="#升级操作系统" class="headerlink" title="升级操作系统"></a>升级操作系统</h2><pre><code>apt-get dist-upgrade -y</code></pre><p>如果软件包更新过程中临时中断，可以使用修复命令：</p>
+<pre><code>dpkg --configure -a</code></pre><h2 id="内核头文件安装与清理"><a href="#内核头文件安装与清理" class="headerlink" title="内核头文件安装与清理"></a>内核头文件安装与清理</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><pre><code>apt-get install linux-headers-$( uname -r )</code></pre><h3 id="清理系统软件包和内核："><a href="#清理系统软件包和内核：" class="headerlink" title="清理系统软件包和内核："></a>清理系统软件包和内核：</h3><pre><code>uname –r 查看正在使用的内核
+dpkg --get-selections | grep linux</code></pre><p>删除不用的内核文件image、头文件headers：</p>
+<pre><code>apt-get purge 内核文件名 头文件名</code></pre><h2 id="系统清理"><a href="#系统清理" class="headerlink" title="系统清理"></a>系统清理</h2><pre><code>apt-get clean &amp;&amp; apt-get autoclean &amp;&amp; apt-get autoremove -y　　</code></pre><p>详解：</p>
+<pre><code>apt-get remove 软件名 　　#删除相应的软件,但保留配置文件
+apt-get purge 软件名 　　 #同时清除软件包和软件的配置文件
+apt-get clean 　　　　　　#删除软件包缓存（/var/cache/apt/archives）
+apt-get autoremove 　　　#自动清理无用的依赖包</code></pre><p>清理系统残存配置:</p>
+<pre><code>dpkg -l |grep ^rc|awk &#39;{print $2}&#39; |sudo xargs dpkg -P</code></pre><h1 id="安装常用软件"><a href="#安装常用软件" class="headerlink" title="安装常用软件"></a>安装常用软件</h1><h2 id="Sogou-install"><a href="#Sogou-install" class="headerlink" title="Sogou install"></a>Sogou install</h2><p>安装fcitx (输入法依赖于该工具，本质上是一个输入法管理工具)</p>
+<pre><code>apt install fcitx</code></pre><p>搜狗官网下载对应版本deb包 </p>
+<pre><code>http://pinyin.sogou.com/linux/</code></pre><p>安装搜狗输入法</p>
+<pre><code>dpkg -i sogoupinyin_2.1.0.0086_amd64.deb</code></pre><p>安装依赖</p>
+<pre><code>apt -f install</code></pre><p>终端重启统</p>
+<pre><code>reboot  //必须重启不重启输入法还是不可以使用</code></pre><h2 id="Sogou-uninstall"><a href="#Sogou-uninstall" class="headerlink" title="Sogou uninstall"></a>Sogou uninstall</h2><pre><code>dpkg -l so*
+dpkg -r sogoupinyin   //删除软件
+apt-get pugre sogoupinyin  //删除配置</code></pre><h2 id="Google-LatinIME"><a href="#Google-LatinIME" class="headerlink" title="Google LatinIME"></a>Google LatinIME</h2><pre><code>apt-get install fcitx fcitx-googlepinyin</code></pre><p>安装完毕后重启生效，打开Fcitx Configuration<br>点左下角那个“+” ，–&gt; 去掉”仅显示当前语言”的勾 –&gt; 找到“googlepinyin”并添加</p>
+<h2 id="Google-Chrome"><a href="#Google-Chrome" class="headerlink" title="Google Chrome"></a>Google Chrome</h2><p>首先，使用  wget 命令来下载最新版本的 Google Chrome 的 debian 安装包</p>
+<pre><code>wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb</code></pre><p>接着安装</p>
+<pre><code>dpkg -i Google.deb</code></pre><p>发现出错了，进行修复</p>
+<pre><code>apt-get -f install </code></pre><p>再接着安装就会成功了</p>
+<pre><code>dpkg -i Google.deb</code></pre><h2 id="Firefox-Browser"><a href="#Firefox-Browser" class="headerlink" title="Firefox  Browser"></a><strong>Firefox</strong>  Browser</h2><h3 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h3><p>系统本身自带不需要安装，默认为英文浏览器</p>
+<h3 id="汉化"><a href="#汉化" class="headerlink" title="汉化"></a>汉化</h3><p>打开终端，输入</p>
+<pre><code>vim　/etc/apt/sources.list</code></pre><p>终端下输入命令，等待即可</p>
+<pre><code>apt-get install iceweasel-l10n-zh-cn</code></pre><h2 id="Flameshot-for-screenshots"><a href="#Flameshot-for-screenshots" class="headerlink" title="Flameshot for screenshots"></a>Flameshot for screenshots</h2><pre><code>apt-get install flameshot //安装
+flameshot config  //配置
+flameshot gui  //运行</code></pre><p>也可以通过其自带AppStore安装</p>
+<p><img src="/2019/10/27/Kali-Rolling-2019/1594459-20191115180425865-2088552663.png" alt></p>
+<p>配置快捷键</p>
+<p><img src="/2019/10/27/Kali-Rolling-2019/1594459-20191115180049689-765811662.png" alt></p>
+<h2 id="VMware-for-virtual-machine"><a href="#VMware-for-virtual-machine" class="headerlink" title="VMware for virtual machine"></a>VMware for virtual machine</h2><p>官网下载链接：</p>
+<pre><code>http://www.vmware.com/products/workstation/workstation-evaluation.html</code></pre><p>赋予可执行权限，执行即可</p>
+<pre><code>chmod +x VMware-Workstation-Full-12.5.4-5192485.x86_64.bundle
+
+./VMware-Workstation-Full-12.5.4-5192485.x86_64.bundle</code></pre><p>如果是虚拟机 kali linux 的话，可以安装增强工具open-vm-tools-desktop便于物理机和虚拟机之间文件复制，屏幕适应。<br>如果之前不小心安装了vmware-tools，需要卸载</p>
+<pre><code>cd vmware-tools-distrib/bin
+./vmware-uninstall-tools.pl</code></pre><p>安装open-vm-tools-desktop</p>
+<pre><code>apt-get install open-vm-tools-desktop
+reboot</code></pre><p>但是kali如果需要使用虚拟机，还需要先安装内核头文件<br>apt-get install linux-headers-$( uname -r )<br>注意：如果你用：apt-get dist-upgrade 命令进行了升级，内核头也会发生变化，需要重新安装</p>
+<h2 id="PyCharm-for-python"><a href="#PyCharm-for-python" class="headerlink" title="PyCharm for python"></a>PyCharm for python</h2><p>官网下载</p>
+<pre><code>https://www.jetbrains.com/pycharm/download/</code></pre><p>解压安装，目录可以自己定制</p>
+<h3 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h3><p><strong>第一种方法</strong></p>
+<p>配置用户文件 ～/.bashrc</p>
+<pre><code> → Qftm ← :~/桌面# vim ~/.bashrc
+
+#pycharm path
+export PATH=/root/Qftm/Software/pycharm-community-2019.2.4/bin:$PATH
+
+ → Qftm ← :~/桌面# source ~/.bashrc
+
+ → Qftm ← :~/桌面# pycharm.sh</code></pre><p><strong>第二种方法</strong></p>
+<p>配置系统文件 /etc/profile</p>
+<h3 id="专业版破解"><a href="#专业版破解" class="headerlink" title="专业版破解"></a>专业版破解</h3><p>Activation code</p>
+<pre><code>http://pblog.rzepx.cn/activationcode</code></pre><h2 id="WPS"><a href="#WPS" class="headerlink" title="WPS"></a>WPS</h2><p>首先，去WPS的linux官网（<a href="http://community.wps.cn/download/），下载安装包，32位电脑下载32位，64位电脑下载64位，下载以.deb结尾的那一个。" target="_blank" rel="noopener">http://community.wps.cn/download/），下载安装包，32位电脑下载32位，64位电脑下载64位，下载以.deb结尾的那一个。</a><br>dpkg安装</p>
+<pre><code>dpkg -i wps-office_11.1.0.8865_amd64.deb</code></pre><p>安装完毕后，打开wps时，会提示缺少字体,下载相应字体（字体文件百度云盘链接地址：<a href="http://pan.baidu.com/s/1nuS5U5b" target="_blank" rel="noopener">http://pan.baidu.com/s/1nuS5U5b</a> 密码：p4vz），将解压出的wps-office文件夹复制到/usr/share/fonts/或者用户目录.fonts 即可。</p>
+<h2 id="Typora-for-markdown"><a href="#Typora-for-markdown" class="headerlink" title="Typora for markdown"></a>Typora for markdown</h2><h3 id="Typora官网"><a href="#Typora官网" class="headerlink" title="Typora官网"></a>Typora官网</h3><pre><code>https://typora.io/</code></pre><p>Typora是一种很好的MarkDown的编辑器，支持Linux、Mac、Windows不同平台</p>
+<h3 id="Linux下安装"><a href="#Linux下安装" class="headerlink" title="Linux下安装"></a>Linux下安装</h3><pre><code># or run:
+# sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys BA300B7755AFCFAE
+wget -qO - https://typora.io/linux/public-key.asc | sudo apt-key add -
+# add Typora&#39;s repository
+sudo add-apt-repository &#39;deb https://typora.io/linux ./&#39;
+sudo apt-get update
+# install typora
+sudo apt-get install typora</code></pre><h3 id="Typora设置默认换行符"><a href="#Typora设置默认换行符" class="headerlink" title="Typora设置默认换行符"></a>Typora设置默认换行符</h3><pre><code>Click-&gt;文件-&gt;偏好设置-&gt;编辑器-&gt;默认换行符</code></pre><h2 id="Sublime-Text"><a href="#Sublime-Text" class="headerlink" title="Sublime Text"></a>Sublime Text</h2><p> Install the GPG key: </p>
+<pre><code>wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -</code></pre><p>Ensure apt is set up to work with https sources:</p>
+<pre><code>sudo apt-get install apt-transport-https</code></pre><p>Select the channel to use:</p>
+<pre><code>Stable
+echo &quot;deb https://download.sublimetext.com/ apt/stable/&quot; | sudo tee /etc/apt/sources.list.d/sublime-text.list
+Dev
+echo &quot;deb https://download.sublimetext.com/ apt/dev/&quot; | sudo tee /etc/apt/sources.list.d/sublime-text.list</code></pre><p>Update apt sources and install Sublime Text</p>
+<pre><code>sudo apt-get update
+sudo apt-get install sublime-text</code></pre><p>可能出现的问题解决，打开之后用搜狗输入法不能输中文的解决办法</p>
+<p>更新并升级系统为最新 (较新的系统会解决很多可能出现的问题)</p>
+<pre><code>sudo apt-get update &amp;&amp; sudo apt-get upgrade</code></pre><p>克隆项目到本地 :</p>
+<pre><code>git clone https://github.com/lyfeyaj/sublime-text-imfix.git</code></pre><p>运行脚本 :</p>
+<pre><code>cd sublime-text-imfix &amp;&amp; ./sublime-imfix</code></pre><p>完成， 重新打开Sublime就会输中文了</p>
+<h2 id="QQ-Chat"><a href="#QQ-Chat" class="headerlink" title="QQ  Chat"></a>QQ  Chat</h2><h3 id="Appimage-下载"><a href="#Appimage-下载" class="headerlink" title="Appimage  下载"></a>Appimage  下载</h3><p>安装很简单只需要一个Appimage文件即可 </p>
+<p>下载网址</p>
+<pre><code>http://yun.tzmm.com.cn/index.php/s/XRbfi6aOIjv5gwj</code></pre><h3 id="AppImage-中文文档"><a href="#AppImage-中文文档" class="headerlink" title="AppImage 中文文档"></a>AppImage 中文文档</h3><pre><code>https://doc.appimage.cn/docs/home/</code></pre><p>自带wine运行环境，对中文字体进行了一些优化，目前还在优化中。打包人是AppImage的作者probono，一个德国人。</p>
+<h3 id="AppImage-使用方法"><a href="#AppImage-使用方法" class="headerlink" title="AppImage 使用方法"></a>AppImage 使用方法</h3><pre><code>chmod a+x QQ.Appimage
+./QQ.Appimage</code></pre><h3 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h3><p>打开QQ之后你可能会发现乱码</p>
+<p>终端查看编码</p>
+<pre><code>echo $LANG</code></pre><p>发现是有UTF-8的，但是QQ依然是乱码，猜测问题可能是字体不支持中文（apt-get upgrade之后的后遗症）</p>
+<p>解决</p>
+<pre><code>apt-get install ttf-wqy-microhei ttf-wqy-zenhei xfonts-wqy</code></pre><p>打开Fonts，在最后，有wenquanyi-xxxxx的这种，然后就可以恢复正常了</p>
+<p>最后，有一个缺点就是不能输中文 T_T ，查了查好像是，我自己装的输入法和QQ的输入法不一样。</p>
+<h1 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h1><h2 id="解决root权限下无法运行chrome"><a href="#解决root权限下无法运行chrome" class="headerlink" title="解决root权限下无法运行chrome"></a>解决root权限下无法运行chrome</h2><p>修改/usr/bin/google-chrome-stable文件：</p>
+<pre><code>exec -a &quot;$0&quot; &quot;$HERE/chrome&quot; &quot;$@&quot; --no-sandbox --user-data-dir</code></pre><h2 id="解决root权限下无法运行chromium"><a href="#解决root权限下无法运行chromium" class="headerlink" title="解决root权限下无法运行chromium"></a>解决root权限下无法运行chromium</h2><p>修改/usr/share/applications/chromium.desktop文件：</p>
+<pre><code>Exec=/usr/bin/chromium %U --no-sandbox --user-data-dir</code></pre><p>在系统语言为英文的情况下，设置启动chrome时显示为中文<br>修改/usr/bin/google-chrome-stable文件，添加一行即可</p>
+<pre><code>export LANGUAGE=zh-cn /opt/google/chrome/google-chrome %U</code></pre><h2 id="解决root权限下无法运行VLC"><a href="#解决root权限下无法运行VLC" class="headerlink" title="解决root权限下无法运行VLC"></a>解决root权限下无法运行VLC</h2><p>修改vlc的ELF文件,执行</p>
+<pre><code>vim /usr/bin/vlc</code></pre><p>找到geteuid,把这个字符串替换成getppid保存即可正常运行</p>
+<p><img src="/2019/10/27/Kali-Rolling-2019/1594459-20191115180506030-512756766.png" alt></p>
+<h2 id="解决root下安装Typora无法正常启动"><a href="#解决root下安装Typora无法正常启动" class="headerlink" title="解决root下安装Typora无法正常启动"></a>解决root下安装Typora无法正常启动</h2><h3 id="终端运行查看错误信息"><a href="#终端运行查看错误信息" class="headerlink" title="终端运行查看错误信息"></a>终端运行查看错误信息</h3><pre><code> → Qftm ← :~# typora 
+[15780:1117/104020.047895:FATAL:atom_main_delegate.cc(210)] Running as root without --no-sandbox is not supported. See https://crbug.com/638180.
+追踪与中断点陷阱
+ → Qftm ← :~# </code></pre><p>根据错提示和root下Google浏览器不能运行一样</p>
+<h3 id="修改其自身启动文件"><a href="#修改其自身启动文件" class="headerlink" title="修改其自身启动文件"></a>修改其自身启动文件</h3><pre><code>1、找到usr/share/application文件里的typora文件或图标，我这里是typora.desktop显示的是可编辑文件不是图标
+2、右键属性 用文本编辑器打开
+3、找到 Exec=typora %U 这一行
+4、修改成 Exec=typora %U --no-sandbox
+5、保存退出</code></pre><h1 id="系统美化"><a href="#系统美化" class="headerlink" title="系统美化"></a>系统美化</h1><h2 id="主题美化"><a href="#主题美化" class="headerlink" title="主题美化"></a>主题美化</h2><p>安装gnome-tweaks进行系统配置</p>
+<pre><code>/usr/share/themes -&gt; ~/.themes
+/usr/share/icons -&gt; ~/.icons </code></pre><p>ps:利用用户配置文件，可以防止系统坏掉，导致美化配置文件丢失<br><img src="/2019/10/27/Kali-Rolling-2019/1594459-20191116003321410-1882385666.png" alt><br>下面是自己的主题</p>
+<pre><code>gnome主题网站： gnome-look.org
+GTK主题
+（https://www.pling.com/s/Gnome）
+https://www.opendesktop.org/p/1263666/   
+Icons主题
+（https://www.gnome-look.org/browse/cat/132/order/latest/）
+https://www.gnome-look.org/s/Gnome/p/1309810
+Cursor主题
+（https://www.gnome-look.org/browse/cat/107/）
+https://www.opendesktop.org/p/999353/
+Gnome扩展
+https://extensions.gnome.org/
+
+McOS-themes GTK3
+https://www.pling.com/s/Gnome/p/1241688/
+https://www.pling.com/s/Gnome/p/1013714/</code></pre><h2 id="GRUB美化"><a href="#GRUB美化" class="headerlink" title="GRUB美化"></a>GRUB美化</h2><h3 id="时间更改"><a href="#时间更改" class="headerlink" title="时间更改"></a>时间更改</h3><pre><code>vim /etc/default/grub
+
+GRUB_TIMEOUT=8</code></pre><h3 id="引导更改"><a href="#引导更改" class="headerlink" title="引导更改"></a>引导更改</h3><p>自己的主题（Tela grub theme）（<a href="https://www.pling.com/s/Gnome/p/1307852/）" target="_blank" rel="noopener">https://www.pling.com/s/Gnome/p/1307852/）</a><br>下载之后运行install.sh</p>
+<h3 id="背景更改"><a href="#背景更改" class="headerlink" title="背景更改"></a>背景更改</h3><p>GRUB 在哪 4 个地方寻找启动背景图像：</p>
+<pre><code>在 /etc/default/grub 里的 GRUB_BACKGROUND 行
+在 /boot/grub/ 里找到的第一个图像（如果发现多张，将以字母顺序排序）
+在 /usr/share/desktop-base/grub_background.sh 中指定的
+在 /etc/grub.d/05_debian_theme 里 WALLPAPER 行列出的
+依次类推，找到之后下面不再继续</code></pre><h3 id="修改的5种方式"><a href="#修改的5种方式" class="headerlink" title="修改的5种方式"></a>修改的5种方式</h3><pre><code>方式一 替换图像
+替换/usr/share/images/desktop-base/desktop-grub.png 
+方式二 修改/etc/default/grub
+方式三 修改/boot/grub/
+方式四 修改/usr/share/desktop-base/grub_background.sh
+方式五 修改/etc/grub.d/05_debian_theme</code></pre><p>ps:Tela grub theme已内置命令修改背景</p>
+<h2 id="登录界面美化"><a href="#登录界面美化" class="headerlink" title="登录界面美化"></a>登录界面美化</h2><h3 id="安装slim显示器的登录主题"><a href="#安装slim显示器的登录主题" class="headerlink" title="安装slim显示器的登录主题"></a>安装slim显示器的登录主题</h3><p>安装slim</p>
+<pre><code>apt-get install slim</code></pre><p>将下好的主题mac复制到’/usr/share/slim/mac’，然后修改/etc/slim.conf配置文件，设置当前主题为mac<br>ps:slim主题太简单了，建议使用gdm</p>
+<h3 id="切换显示器"><a href="#切换显示器" class="headerlink" title="切换显示器"></a>切换显示器</h3><p>运行命令，选择要切换的显示器</p>
+<pre><code>dpkg-reconfigure slim //被换掉的显示器</code></pre><h2 id="终端美化"><a href="#终端美化" class="headerlink" title="终端美化"></a>终端美化</h2><h3 id="编辑用户终端配置文件"><a href="#编辑用户终端配置文件" class="headerlink" title="编辑用户终端配置文件"></a>编辑用户终端配置文件</h3><pre><code>vim ~/.bashrc</code></pre><h3 id="美化终端用户显示"><a href="#美化终端用户显示" class="headerlink" title="美化终端用户显示"></a>美化终端用户显示</h3><pre><code>export PS1=&#39;\[\033[01;31m\] → Qftm ← \[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ &#39;</code></pre><h3 id="美化终端开启显示"><a href="#美化终端开启显示" class="headerlink" title="美化终端开启显示"></a>美化终端开启显示</h3><pre><code>root@Qsec:~# apt-get install figlet
+root@Qsec:~# leafpad .bashrc
+在文件最后加入一行代码
+figlet  &quot;  Q f t m&quot;
+
+echo -ne &quot;${lightgreen}Today is:\t\t${red}&quot; `date`; echo &quot;&quot;     #显示当前时间
+echo -e &quot;${lightgreen}Kernel Information: \t${red}&quot; `uname -smr`   #显示系统信息</code></pre><h3 id="美化效果"><a href="#美化效果" class="headerlink" title="美化效果"></a>美化效果</h3><p><img src="/2019/10/27/Kali-Rolling-2019/1594459-20191122115014969-2020351945.png" alt></p>
+<h2 id="Gnome-extensions"><a href="#Gnome-extensions" class="headerlink" title="Gnome extensions"></a>Gnome extensions</h2><p>gnome提供了很多插件，用于丰富gnome功能，我们可以根据需要添加 <a href="https://extensions.gnome.org/" target="_blank" rel="noopener">gnome extensions</a>来拓展功能。但是插件装的太多，会比较卡。插件存放路径：<code>~/.local/share/gnome-shell/extensions/</code>。</p>
+<p>每次装完插件，我们可以按下<code>Alt+F2</code>— 输入<code>r</code>—回车 ，以此重启刷新gnome。</p>
+<p>下面一些插件：</p>
+<pre><code>Auto Move Windows 当应用创建窗口时自动移动到某个特定的工作空间
+EasyScreenCast屏幕录像，做演示时比较方便 （kali默认安装）
+Lock Keys 顶栏显示Numlock和Capslock的状态
+NetSpeed 顶栏显示网速，喜欢简洁的Simple net speed也非常不错
+system-monitor 顶栏显示CPU、内存、网速、温度、电池电量等信息，安装前需要解决依赖</code></pre>
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        Author:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Qftm</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        Link:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://Qftm.github.io/2019/10/27/Kali-Rolling-2019/">http://Qftm.github.io/2019/10/27/Kali-Rolling-2019/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        Reprint policy:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    All articles in this blog are used except for special statements
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    reprint polocy. If reproduced, please indicate source
+                    <a href="/about" target="_blank">Qftm</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Linux/">
+                                    <span class="chip bg-color">Linux</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+            <div class="card">
+                <a href="/2019/11/22/PhpStudyBackDoor2019/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/phpstudy-1.jpg" class="responsive-img" alt="PhpStudy BackDoor2019 深度分析">
+                        
+                        <span class="card-title">PhpStudy BackDoor2019 深度分析</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            关于《PhpStudy BackDoor》风波已经过去有一段时间了，由于，前段时间一直忙于其它事情QAQ，今天有时间对该事件重新回溯&amp;深度分析。
+严正声明：本文仅限于技术讨论与分享，严禁用于非法途径
+背景分析2019年9月20日，杭
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-11-22
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/" class="post-category">
+                                    代码审计
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%9C%A8%E9%A9%AC%E5%90%8E%E9%97%A8/">
+                        <span class="chip bg-color">木马后门</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/10/26/Joomla3.4.6-RCE-analyze/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/joomla-1.jpg" class="responsive-img" alt="Joomla3.4.6 RCE漏洞深度分析">
+                        
+                        <span class="card-title">Joomla3.4.6 RCE漏洞深度分析</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            0×00 背景10月9号国内几家安全媒体公布了Joomla RCE的漏洞预警，并且网上已公布漏洞利用EXP，影响版本包括Joomla 3.0.0 – 3.4.6。
+0×01 环境搭建Joomla是一套全球知名的内容管理系统。Joomla是使
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-10-26
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/" class="post-category">
+                                    代码审计
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/PHP/">
+                        <span class="chip bg-color">PHP</span>
+                    </a>
+                    
+                    <a href="/tags/Joomla/">
+                        <span class="chip bg-color">Joomla</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + 'From: Qftm<br />'
+            + 'Author: Qftm<br />'
+            + 'Link: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2018</span>
+            <a href="/about" target="_blank">Qftm</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">370.8k</span>&nbsp;字
+            
+            
+            
+            
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+    <a href="https://github.com/Qftm" 
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:Qftmbin@gmail.com" 
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+    <a href="https://twitter.com/Qftmer" 
+        <i class="fab fa-twitter"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;Search</span>
+            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
